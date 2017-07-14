@@ -74,7 +74,7 @@ protected:
 	scope::SCOPE_OVERLAY_T overlay;
 
 	/** The resource IDs of the channel color combo boxes */
-	static std::array<int32_t, 4> colorcombo_resources;
+	static std::array<uint32_t, 4> colorcombo_resources;
  
 protected:
 	/** Worker function which will run in the Active's thread.

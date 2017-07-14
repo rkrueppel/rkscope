@@ -31,7 +31,7 @@ bool FPGAIO6587::CheckIOModule(NiFpga_Session _session) {
 void FPGAIO6587::ClockFrequencySetup(const double& _clock_freq) {
 	uint8_t i = 1;
 	std::vector<uint8_t> n1(65, 1);
-	std::generate(std::begin(n1)+1, std::end(n1), [&]() { return i++*2; } );
+	std::generate(std::begin(n1)+1, std::end(n1), [&]() { return (uint8_t)(i++*2); } );
 	std::array<uint8_t, 6> hsdiv = { 11, 9, 7, 6, 5, 4 };
 	std::array<uint8_t, 9> regaddr = { 0x89, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0x89, 0x87 };
 	std::array<uint8_t, 9> writedata = { 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40 };
@@ -68,7 +68,7 @@ void FPGAIO6587::WriteOnboardClockFrequency(NiFpga_Session _session, const doubl
 	// Supported clock frequencies between 10 and 800 MHz (-> sampling frequencies 20-1600 MHz)
 	assert( (_clock_freq >= 10E6) && (_clock_freq <= 800E6) );
 
-	std::fill(std::begin(regndata), std::end(regndata), 0);
+	std::fill(std::begin(regndata), std::end(regndata), (uint8_t)0);
 	ClockFrequencySetup(_clock_freq);
 
 	// Write register data (calculated in ClockFrequencySetup to the IO module clock chip

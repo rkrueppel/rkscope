@@ -188,7 +188,7 @@ void ScannerVectorFrameSaw::FillZ() {
 	const uint32_t linesamples(tmp->XTotalPixels());
 	const Scaler<int16_t> scaletodevice(-daqparameters->outputs->range(), daqparameters->outputs->range());	// convert full device range to full range of int16_t
 	const int16_t fastzoutdev = scaletodevice(zparameters->PositionToVoltage(svparameters->fastz()));					// get the voltage corresponding to current ETL position in micron and scale to device
-	size_t cz, cz_init, step_size;
+	size_t cz = 0, cz_init = 0, step_size = 0;
 	// Decide vector storage locations and step_size based on Master/Slave
 	if (filltype == ScannerVectorFillTypeHelper::FullframeXYZP) {
 		cz = 2;	cz_init = 2; step_size = 4; 
@@ -216,7 +216,7 @@ void ScannerVectorFrameSaw::FillP() {
 	const double pockelsoutval = (tmp->pockels()-tmp->pockels.ll())/(tmp->pockels.ul()-tmp->pockels.ll())
 		*daqparameters->outputs->maxoutputpockels()+daqparameters->outputs->minoutputpockels();							// scale pockels value from displayed value (e.g. 0..1) to device value (e.g. 0..2)
 	const Scaler<int16_t> scaletodevice(-daqparameters->outputs->range(), daqparameters->outputs->range());		// convert full device range to full range of int16_t
-	size_t cp, cp_init, step_size;
+	size_t cp = 0, cp_init = 0, step_size = 0;
 	// Decide vector storage locations and step_size based on Master/Slave
 	if (filltype == ScannerVectorFillTypeHelper::FullframeXYZP) {
 		cp = 3;	cp_init = 3; step_size = 4; 

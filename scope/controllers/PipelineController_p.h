@@ -114,7 +114,7 @@ protected:
 			do {
 				// Map the chunk into the current_frame
 				// Attention: this blocks ScopeOverlay::Create in CChannelFrame since we need write access to the image here!
-				pixelmapper_result = pixel_mapper->LookupChunk(chunk, avgcount);
+				pixelmapper_result = pixel_mapper->LookupChunk(chunk, (uint16_t)avgcount);
 
 				// Set progress and frame properties
 				scope_controller.SingleFrameProgress[_area] += 100.0 * chunk->PerChannel() / totalframepixels;

@@ -46,7 +46,7 @@ public:
 	* speed up the update (do not have to wait until the complete buffer is empty/ready for writing into).
 	* @param[in] _xyzp the scannervector with xyzp data to write to device
 	* @param[in] _blocks in how many blocks should the scannervector be written (more blocks faster update, since smaller blocksize -> buffer for this is free earlier), see "DAQmx quick buffer update.vi" */
-	int32_t Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks = 1) override;
+	int32_t Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks = 1) override;
 
 };
 

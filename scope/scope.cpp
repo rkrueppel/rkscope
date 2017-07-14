@@ -87,12 +87,12 @@ int Run(HINSTANCE hInstance) {
 		wndMain.SetWindowText(revstr.c_str());
 
 		// Log startup scope stuff
-		std::wstring msg(L"This is Scope (Git commit ");
-		msg += CA2W(STR(LASTGITCOMMIT));
-		msg += L")";
-		logger.Log(msg, scope::log_info);
-		msg = L"Using configuration file " + filepath;
-		logger.Log(msg, scope::log_info);
+		std::wstring msg2(L"This is Scope (Git commit ");
+		msg2 += CA2W(STR(LASTGITCOMMIT));
+		msg2 += L")";
+		logger.Log(msg2, scope::log_info);
+		msg2 = L"Using configuration file " + filepath;
+		logger.Log(msg2, scope::log_info);
 
 		// Run the main message loop
 		nRet = theLoop.Run();

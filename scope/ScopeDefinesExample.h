@@ -65,6 +65,7 @@ from git) and adapt to your hardware. */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Default definitions
+#define SCOPE_DAQCHUNK_T						DaqChunk
 #define SCOPE_DAQCHUNKPTR_T						DaqChunkPtr
 #define SCOPE_RESONANCEPIXELMAPPER_T			PixelmapperFrameResonanceHW
 #define SCOPE_MULTIIMAGE_T						ScopeMultiImage
@@ -78,6 +79,8 @@ from git) and adapt to your hardware. */
 #ifdef SCOPE_USE_RESONANT_GALVO_SCANNER
 	#define SCOPE_SCANNERTYPE					ScannerTypeHelper::Mode::Resonance
 	#ifdef SCOPE_RESONANCE_SOFTWARE_MAPPING
+		#undef SCOPE_DAQCHUNK_T
+		#define SCOPE_DAQCHUNK_T				DaqChunkResonance
 		#undef SCOPE_DAQCHUNKPTR_T
 		#define SCOPE_DAQCHUNKPTR_T				DaqChunkResonancePtr
 		#undef SCOPE_MULTIIMAGE_T

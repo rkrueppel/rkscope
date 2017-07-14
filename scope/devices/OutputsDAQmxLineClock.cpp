@@ -79,7 +79,7 @@ void OutputsDAQmxLineClock::Stop(void) {
 	yzout_task.Stop();
 }
 
-int32_t OutputsDAQmxLineClock::Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks) {
+int32_t OutputsDAQmxLineClock::Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks) {
 	int32_t written = 0;
 
 	int32_t yblocksize = YTotalLines/_blocks;
@@ -122,7 +122,7 @@ ZeroOutputsDAQmxLineClock::ZeroOutputsDAQmxLineClock(const parameters::OutputsDA
 			, L"XPOut"
 			, -_params.range()
 			, _params.range());
-		task.WriteAnalogI16(std::make_shared<std::vector<int16_t>>(2,0)->data(), 1, true);
+		task.WriteAnalogI16(std::make_shared<std::vector<int16>>(2,(int16)0)->data(), 1, true);
 		task.WaitUntilDone(200);
 		task.Clear();
 		task.CreateTask();
@@ -130,7 +130,7 @@ ZeroOutputsDAQmxLineClock::ZeroOutputsDAQmxLineClock(const parameters::OutputsDA
 			, L"YZOut"
 			, -_params.range()
 			, _params.range());
-		task.WriteAnalogI16(std::make_shared<std::vector<int16_t>>(2,0)->data(), 1, true);
+		task.WriteAnalogI16(std::make_shared<std::vector<int16>>(2,(int16)0)->data(), 1, true);
 		task.WaitUntilDone(200);
 		task.Clear();
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }

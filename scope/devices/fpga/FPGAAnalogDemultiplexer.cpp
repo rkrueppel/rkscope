@@ -83,11 +83,11 @@ double FPGAAnalogDemultiplexer::SetLinetime(const uint32_t& _area, const double&
 }
 
 void FPGAAnalogDemultiplexer::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGAAnalogDemultiplexer::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGAAnalogDemultiplexer::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
@@ -97,19 +97,19 @@ void FPGAAnalogDemultiplexer::SetRequestedPixels(const uint32_t& _area, const ui
 
 void FPGAAnalogDemultiplexer::StartAcquisition() {
 	NiFpga_Bool alreadyrunning = false;
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, &alreadyrunning);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, &alreadyrunning);
 	
 	// Only clear fifos if not alreay running (e.g. by a previous StartAcquisition from another area!!) Leads to nasty bugs!
 	if ( !alreadyrunning ) {
 		ClearFIFOs();
 		SetChannelProps();
-		status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, true);
+		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, true);
 	}
 }
 
 void FPGAAnalogDemultiplexer::StopAcquisition() {
 	DBOUT(L"FPGAAnalogDemultiplexer::StopAcquisition");
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, false);
 }
 
 int32_t FPGAAnalogDemultiplexer::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -166,34 +166,34 @@ int32_t FPGAAnalogDemultiplexer::ReadPixels(DaqChunk& _chunk, const double& _tim
 }
 
 void FPGAAnalogDemultiplexer::SetChannelProps() {
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_BaselineU8Ch1, parameters->BaselineCh1());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_BaselineU8Ch2, parameters->BaselineCh2());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_CutoffU8Ch1, parameters->CutoffCh1());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_CutoffU8Ch2, parameters->CutoffCh2());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_BaselineU8Ch1, parameters->BaselineCh1());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_BaselineU8Ch2, parameters->BaselineCh2());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_CutoffU8Ch1, parameters->CutoffCh1());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_CutoffU8Ch2, parameters->CutoffCh2());
 	DBOUT(L"FPGAAnalogDemultiplexer::SetChannelProps baseline " << parameters->BaselineCh1() << L" " << parameters->BaselineCh2());
 }
 
 void FPGAAnalogDemultiplexer::CheckFPGADiagnosis() {
 	NiFpga_Bool b(0);
-	uint16_t ui = 0;
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_ToHostA1FIFOOverflow, &b);
+	
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_ToHostA1FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowA1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_ToHostA2FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_ToHostA2FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowA1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_InterloopFIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_InterloopFIFOOverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
 	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_InterloopFIFOtimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_IOModuleAIOverRange, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_IOModuleAIOverRange, &b);
 	parameters->diagnosis.AIOverRange = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
 }
 
 void FPGAAnalogDemultiplexer::ClearFIFOs() {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_ClearInterloopFIFO, 1);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_ClearInterloopFIFO, 1);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_ClearInterloopFIFO, 0);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_ClearInterloopFIFO, 0);
 
 	// Stop FIFOs (clears them)
 	for ( auto f : fifos )

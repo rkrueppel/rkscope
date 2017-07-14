@@ -12,7 +12,7 @@
 namespace scope {
 	namespace gui {
 
-std::array<int32_t, 4> CChannelFrame::colorcombo_resources = { IDC_COLORCOMBO1, IDC_COLORCOMBO2, IDC_COLORCOMBO3, IDC_COLORCOMBO4 };
+std::array<uint32_t, 4> CChannelFrame::colorcombo_resources = { IDC_COLORCOMBO1, IDC_COLORCOMBO2, IDC_COLORCOMBO3, IDC_COLORCOMBO4 };
 
 CChannelFrame::CChannelFrame(const uint32_t& _area)
 	: area(_area)

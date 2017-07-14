@@ -36,7 +36,7 @@ void ScannerVectorFrameResonanceHopper::UpdateVector() {
 }
 
 void ScannerVectorFrameResonanceHopper::FillY() {
-	uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
+	//uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
 	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->frameresonance.planes.size())?scope_controller.GuiParameters.areas[area]->frameresonance.planes.size():1;	
 
 	parameters::ScannerVectorFrameResonance* tmp = dynamic_cast<parameters::ScannerVectorFrameResonance*>(svparameters);
@@ -69,8 +69,8 @@ void ScannerVectorFrameResonanceHopper::FillY() {
 	const uint32_t yscanlines = 4*tmp->YScanLines()/2;
 	const uint32_t ytotallines = 4*tmp->YTotalLines()/2;
 
-	size_t cy = 0;
-/*	for(size_t n = 1; n  <= num_planes; n++)
+	/*size_t cy = 0;
+	for(size_t n = 1; n  <= num_planes; n++)
 	{
 		size_t cyy = ytotallines*(n-1);
 		// fill in YScanLines() with increasing values (scanning) in Y
@@ -86,7 +86,7 @@ void ScannerVectorFrameResonanceHopper::FillY() {
 }
 
 void ScannerVectorFrameResonanceHopper::FillZ() {
-	uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
+	//uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
 	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->frameresonance.planes.size())?scope_controller.GuiParameters.areas[area]->frameresonance.planes.size():1;	
 
 	parameters::ScannerVectorFrameResonance* tmp = dynamic_cast<parameters::ScannerVectorFrameResonance*>(svparameters);
@@ -95,7 +95,7 @@ void ScannerVectorFrameResonanceHopper::FillZ() {
 	const uint32_t totallines = tmp->YTotalLines()/2;
 	const Scaler<int16_t> scaletodevice(-daqparameters->outputs->range(), daqparameters->outputs->range());
 	const int16_t fastzoutdev = scaletodevice(zparameters->PositionToVoltage(svparameters->fastz()));		// get the voltage corresponding to current ETL position in micron and scale to device
-	double z1, z2,zretraceslope;
+	//double z1, z2,zretraceslope;
 	size_t cz, step_size; 
 	if (filltype == ScannerVectorFillTypeHelper::FullframeXYZP) {
 		cz = 1;	step_size = 4;
@@ -140,7 +140,7 @@ void ScannerVectorFrameResonanceHopper::FillZ() {
 
 void ScannerVectorFrameResonanceHopper::FillP() {
 
-	uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
+	//uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
 	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->frameresonance.planes.size())?scope_controller.GuiParameters.areas[area]->frameresonance.planes.size():1;	
 	parameters::ScannerVectorFrameResonance* tmp = dynamic_cast<parameters::ScannerVectorFrameResonance*>(svparameters);
 	const uint32_t cutofflines = tmp->YCutoffLines()/2;
@@ -150,7 +150,7 @@ void ScannerVectorFrameResonanceHopper::FillP() {
 	const int16_t fastzoutdev = scaletodevice(zparameters->PositionToVoltage(svparameters->fastz()));		// get the voltage corresponding to current ETL position in micron and scale to device
 	const int16_t pockelsdev = scaletodevice(tmp->pockels());
 
-	double z1, z2,zretraceslope;
+	//double z1, z2,zretraceslope;
 	size_t cz, step_size; 
 	if (filltype == ScannerVectorFillTypeHelper::FullframeXYZP) {
 		cz = 1;	step_size = 4;

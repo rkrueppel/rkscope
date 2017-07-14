@@ -6,10 +6,14 @@
 namespace scope {
 
 FPGAPhotonCounter::FPGAPhotonCounter()
-	: FPGAIO6587(NiFpga_PhotonCounterV2_IndicatorBool_Onboard_Clock_Ready, NiFpga_PhotonCounterV2_ControlU16_Onboard_Clock_Write_Data
-	, NiFpga_PhotonCounterV2_ControlBool_Onboard_Clock_Write , NiFpga_PhotonCounterV2_IndicatorBool_Xpoint_Switch_Ready
-	, NiFpga_PhotonCounterV2_ControlU8_ClockSource, NiFpga_PhotonCounterV2_ControlBool_Xpoint_Switch_Write, NiFpga_PhotonCounterV2_ControlBool_Commit
-	, NiFpga_PhotonCounterV2_ControlBool_Acq_Reset) {
+	: FPGAIO6587((uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_Onboard_Clock_Ready
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlU16_Onboard_Clock_Write_Data
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Onboard_Clock_Write
+	, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_Xpoint_Switch_Ready
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlU8_ClockSource
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Xpoint_Switch_Write
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Commit
+	, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Acq_Reset) {
 	status = NiFpga_Initialize();
 	char* const Bitfile = "devices\\fpga\\" NiFpga_PhotonCounterV2_Bitfile;
 
@@ -65,35 +69,35 @@ void FPGAPhotonCounter::Initialize(parameters::InputsFPGA* _parameters) {
 double FPGAPhotonCounter::SetPixeltime(const uint32_t& _area, const double& _pixeltime) {
 	// sampling rate is twice the IO modules frequency (because of dual data rate transfer)
 	uint16_t samplesperpixel = round2ui16(_pixeltime * 1E-6 * samplingrate);
-	status = NiFpga_WriteU16(session, NiFpga_PhotonCounterV2_ControlU16_Samplesperpixel, samplesperpixel);
-	status = NiFpga_WriteU16(session, NiFpga_PhotonCounterV2_ControlU16_SamplesperpixelAcq, samplesperpixel);
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_PhotonCounterV2_ControlU16_Samplesperpixel, samplesperpixel);
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_PhotonCounterV2_ControlU16_SamplesperpixelAcq, samplesperpixel);
 	return static_cast<double>(samplesperpixel)*1E6/samplingrate;
 }
 
 double FPGAPhotonCounter::SetLinetime(const uint32_t& _area, const double& _linetime) {
 	// sampling rate is twice the IO modules frequency (because of dual data rate transfer)
-	uint16_t samplesperline = round2ui32(_linetime * 1E-6 * samplingrate);
-	status = NiFpga_WriteU16(session, NiFpga_PhotonCounterV2_ControlU32_Samplesperline, samplesperline);
+	uint16_t samplesperline = round2ui16(_linetime * 1E-6 * samplingrate);
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_PhotonCounterV2_ControlU32_Samplesperline, samplesperline);
 	return static_cast<double>(samplesperline*1E6/samplingrate);
 }
 
 void FPGAPhotonCounter::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGAPhotonCounter::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGAPhotonCounter::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
-	status = NiFpga_WriteU32(session, NiFpga_PhotonCounterV2_ControlU32_Requestedpixels, _reqpixels);
+	status = NiFpga_WriteU32(session, (uint32_t)NiFpga_PhotonCounterV2_ControlU32_Requestedpixels, _reqpixels);
 }
 
 void FPGAPhotonCounter::StartAcquisition() {
 	if ( !initialized )
 		throw ScopeException("Initialize FPGAPhotonCounter before StartAcquisition!");
 	ClearFIFOs();
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_Acquire, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Acquire, true);
 }
 
 int32_t FPGAPhotonCounter::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -124,27 +128,27 @@ int32_t FPGAPhotonCounter::ReadPixels(DaqChunk& _chunk, const double& _timeout, 
 }
 
 void FPGAPhotonCounter::StopAcquisition() {
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Acquire, false);
 }
 
 void FPGAPhotonCounter::CheckFPGADiagnosis() {
 	NiFpga_Bool b;
-	status = NiFpga_ReadBool(session, NiFpga_PhotonCounterV2_IndicatorBool_ToHostFIFOOverflowCh1, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_ToHostFIFOOverflowCh1, &b);
 	parameters->diagnosis.ToHostOverflowCh1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_PhotonCounterV2_IndicatorBool_ToHostFIFOOverflowCh2, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_ToHostFIFOOverflowCh2, &b);
 	parameters->diagnosis.ToHostOverflowCh2 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_PhotonCounterV2_IndicatorBool_InterloopFIFOoverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_InterloopFIFOoverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_PhotonCounterV2_IndicatorBool_InterloopFIFOtimeout, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_InterloopFIFOtimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_PhotonCounterV2_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_PhotonCounterV2_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
 }
 
 void FPGAPhotonCounter::ClearFIFOs() {
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_ClearInterloopFIFOs, 1);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_ClearInterloopFIFOs, 1);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_ClearInterloopFIFOs, 0);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_ClearInterloopFIFOs, 0);
 	// Stop FIFOs (clears them)
 	for ( auto f : fifos )
 		status = NiFpga_StopFifo(session, f);
@@ -156,7 +160,7 @@ void FPGAPhotonCounter::ClearFIFOs() {
 }
 
 void FPGAPhotonCounter::SetCountMode(const bool& _mode) {
-	status = NiFpga_WriteBool(session, NiFpga_PhotonCounterV2_ControlBool_Countingmode, _mode);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Countingmode, _mode);
 }
 
 }

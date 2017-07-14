@@ -217,7 +217,7 @@ public:
 	* @param[in] _layout data layout to use
 	* - DAQmx_Val_GroupByChannel		by channel (AAAAABBBBBCCCCC)
 	* - DAQmx_Val_GroupByScanNumber		by sample (ABCABCABCABCABC) */
-	int32 WriteAnalogI16(const int16* _data, int32 _sampsperchan, bool _autostart = false, int32 _timeout = 2, bool32 _layout = DAQmx_Val_GroupByChannel);
+	int32 WriteAnalogI16(int16* _data, int32 _sampsperchan, bool _autostart = false, int32 _timeout = 2, bool32 _layout = DAQmx_Val_GroupByChannel);
 };
 
 /** Wraps a DAQmx Digital Output task. */

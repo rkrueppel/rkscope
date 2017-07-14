@@ -4,7 +4,7 @@
 namespace scope {
 
 StimulationVector::StimulationVector()
-	: vecptr(std::make_shared<std::vector<uint8_t>>(round2ui32(parameters.duration() * 10000), 0U)) {
+	: vecptr(std::make_shared<std::vector<uint8_t>>(round2ui8(parameters.duration() * 10000), (uint8_t)0)) {
 }
 
 void StimulationVector::UpdateVector() {
@@ -14,12 +14,12 @@ void StimulationVector::UpdateVector() {
 	uint32_t durationsamples = round2ui32(parameters.duration() * 10000);
 
 	vecptr->resize(durationsamples);
-	std::fill_n(vecptr->begin(), onsetsamples, 0U);						// Just to be safe
+	std::fill_n(vecptr->begin(), onsetsamples, (uint8_t)0);						// Just to be safe
 	std::vector<uint8_t>::iterator it(vecptr->begin() + onsetsamples);
 	do {
 		if ( (it + onsamples) > vecptr->end() )
 			break;
-		std::fill_n(it, onsamples, 2^8);
+		std::fill_n(it, onsamples, (uint8_t)(2^8));
 		it += onsamples;
 		if ( (it + offsamples) > vecptr->end() )
 			break;

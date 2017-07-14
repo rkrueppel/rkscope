@@ -10,6 +10,8 @@
 
 #pragma once
 
+#pragma warning(disable : 4100)
+
 /** @name Define version of various windows components. Change these values to use different versions
 * @{ */
 #define WINVER		0x0601

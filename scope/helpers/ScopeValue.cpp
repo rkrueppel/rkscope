@@ -76,7 +76,7 @@ void ScopeValue<double>::SetFromString(const std::wstring& str) {
 template<>
 void ScopeValue<uint8_t>::SetFromString(const std::wstring& str) {
 	uint16_t tmp = 0;		// Workaround, using uint8_t (which is unsigned char!) gives problems
-	Set( !(std::wstringstream(str) >> tmp) ? 0 : tmp );				// operator! returns failbit, if failbit==false return tmp
+	Set( !(std::wstringstream(str) >> tmp) ? (uint8_t)0 : (uint8_t)tmp );				// operator! returns failbit, if failbit==false return tmp
 }
 
 /** Specialization for uint16_t */

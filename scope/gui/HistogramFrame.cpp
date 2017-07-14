@@ -16,7 +16,7 @@ CHistogramFrame::CHistogramFrame(const uint32_t& _area, const uint32_t& _channel
 	, loghist(false)
 	, statusstr(L"")
 	, limitsstr(L"")
-	, view(area, channels, scope_controller.GuiParameters.areas[area]->histrange)
+	, view(area, channels, (uint16_t)scope_controller.GuiParameters.areas[area]->histrange)
 	, framecount(0) {
 }
 

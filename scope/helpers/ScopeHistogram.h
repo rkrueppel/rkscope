@@ -13,7 +13,7 @@ protected:
 	mutable std::mutex mutex;
 	
 	/** range of uint16 to do histogram of */
-	const uint16_t range;
+	uint16_t range;
 
 	/** size of each bin */
 	double binsize;

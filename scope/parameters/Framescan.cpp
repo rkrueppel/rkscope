@@ -700,7 +700,6 @@ void ScannerVectorFrameResonance::Save(wptree& pt) const {
 	waitafterenqueuestorage.AddToPropertyTree(pt);
 	waitafterenqueuedisplay.AddToPropertyTree(pt);
 
-	uint32_t ip = 0;
 	// Go through all complete planes
 	for ( const auto& p : planes ) {
 		p.position.AddToPropertyTree(pt);

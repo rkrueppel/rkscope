@@ -74,7 +74,7 @@ void FPGAIO5771::SetClockSource(NiFpga_Session _session, const uint8_t& _clock_s
 	// If PLL on, wait for lock
 	if ( (_clock_source == 1) || (_clock_source == 3) ) {
 		NiFpga_Bool locked = false;
-		uint32_t waitcounter = 0;
+		waitcounter = 0;
 
 		do {
 			iostatus = NiFpga_ReadBool(_session, pll_locked_indicator, &locked);

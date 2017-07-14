@@ -6,14 +6,14 @@
 namespace scope {
 
 FPGADigitalDemultiplexer::FPGADigitalDemultiplexer()
-	: FPGAIO6587(NiFpga_DigitalDemultiplexerV3_IndicatorBool_Onboard_Clock_Ready
-	, NiFpga_DigitalDemultiplexerV3_ControlU16_Onboard_Clock_Write_Data
-	, NiFpga_DigitalDemultiplexerV3_ControlBool_Onboard_Clock_Write
-	, NiFpga_DigitalDemultiplexerV3_IndicatorBool_Xpoint_Switch_Ready
-	, NiFpga_DigitalDemultiplexerV3_ControlU8_ClockSource
-	, NiFpga_DigitalDemultiplexerV3_ControlBool_Xpoint_Switch_Write
-	, NiFpga_DigitalDemultiplexerV3_ControlBool_Commit
-	, NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset)
+	: FPGAIO6587((uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_Onboard_Clock_Ready
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlU16_Onboard_Clock_Write_Data
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Onboard_Clock_Write
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_Xpoint_Switch_Ready
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlU8_ClockSource
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Xpoint_Switch_Write
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Commit
+	, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset)
 	, samplingrate(1E9) {
 	assert(SCOPE_NAREAS <= 2);
 	status = NiFpga_Initialize();
@@ -72,7 +72,7 @@ void FPGADigitalDemultiplexer::Initialize(parameters::InputsFPGA* _parameters) {
 		InitializeAcquisition(session);
 
 		// Set counting mode
-		status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Countmode, parameters->countmode());
+		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Countmode, parameters->countmode());
 
 		FPGAInterface::Initialize(_parameters);
 	}
@@ -99,11 +99,11 @@ double FPGADigitalDemultiplexer::SetLinetime(const uint32_t& _area, const double
 }
 
 void FPGADigitalDemultiplexer::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGADigitalDemultiplexer::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGADigitalDemultiplexer::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
@@ -112,23 +112,23 @@ void FPGADigitalDemultiplexer::SetRequestedPixels(const uint32_t& _area, const u
 
 void FPGADigitalDemultiplexer::StartAcquisition() {
 	NiFpga_Bool alreadyrunning = false;
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, &alreadyrunning);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, &alreadyrunning);
 	if ( !alreadyrunning ) {
 		ClearFIFOs();						// Only clear them if not alreay running (e.g. by a previous StartAcquisition from another area!!) Leads to nasty bugs!
-		status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, true);
+		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, true);
 	}
 }
 
 void FPGADigitalDemultiplexer::StopAcquisition() {
 	DBOUT(L"FPGADigitalDemultiplexer::StopAcquisition");
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acquire, false);
 }
 
 void FPGADigitalDemultiplexer::ResetAcquisition() {
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, true);
 	std::this_thread::sleep_for(std::chrono::milliseconds(200));
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
 }
 
 int32_t FPGADigitalDemultiplexer::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -165,29 +165,29 @@ int32_t FPGADigitalDemultiplexer::ReadPixels(DaqChunk& _chunk, const double& _ti
 void FPGADigitalDemultiplexer::CheckFPGADiagnosis() {
 	NiFpga_Bool b(0);
 	uint16_t ui = 0;
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA1Ch1, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA1Ch1, &b);
 	parameters->diagnosis.ToHostOverflowA1Ch1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA1Ch2, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA1Ch2, &b);
 	parameters->diagnosis.ToHostOverflowA1Ch2 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA2Ch1, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA2Ch1, &b);
 	parameters->diagnosis.ToHostOverflowA2Ch1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA2Ch2, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_ToHostFIFOOverflowA2Ch2, &b);
 	parameters->diagnosis.ToHostOverflowA2Ch2 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_InterloopFIFOoverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_InterloopFIFOoverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_InterloopFIFOtimeout, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_InterloopFIFOtimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadU16(session, NiFpga_DigitalDemultiplexerV3_IndicatorU16_LaserpulsesperpixelA1, &ui);
+	status = NiFpga_ReadU16(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorU16_LaserpulsesperpixelA1, &ui);
 	DBOUT(L"Laserpulsecount " << ui);
 	parameters->diagnosis.MeasuredLaserFreq = static_cast<double>(ui) / (pixeltimes[0] * 1E-6);
-	status = NiFpga_ReadBool(session, NiFpga_DigitalDemultiplexerV3_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
 }
 
 void FPGADigitalDemultiplexer::ClearFIFOs() {
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_ClearInterloopFIFO, 1);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_ClearInterloopFIFO, 1);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_ClearInterloopFIFO, 0);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_ClearInterloopFIFO, 0);
 
 	// Stop FIFOs (clears them)
 	for ( auto f : fifos )
@@ -201,7 +201,7 @@ void FPGADigitalDemultiplexer::ClearFIFOs() {
 }
 
 void FPGADigitalDemultiplexer::SetCountMode(const bool& _mode) {
-	status = NiFpga_WriteBool(session, NiFpga_DigitalDemultiplexerV3_ControlBool_Countmode, _mode);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Countmode, _mode);
 }
 
 }

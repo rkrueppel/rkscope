@@ -71,9 +71,9 @@ protected:
 protected:
 	/** Assign a HRESULT */
 	void Assign(const HRESULT& _hr) {
-		WORD code = HRESULT_CODE(_hr);
-		WORD facility = HRESULT_FACILITY(_hr);
-		DWORD severity = HRESULT_SEVERITY(_hr);
+		//WORD code = HRESULT_CODE(_hr);
+		//WORD facility = HRESULT_FACILITY(_hr);
+		//DWORD severity = HRESULT_SEVERITY(_hr);
 		if (!HResultChecker<ThrowException>::Check(hr = _hr))
 			throw hresult_exception(hr, function);
 	}

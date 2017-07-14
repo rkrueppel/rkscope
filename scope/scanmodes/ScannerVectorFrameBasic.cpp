@@ -74,11 +74,11 @@ void ScannerVectorFrameBasic::SetScannderdelay(const uint32_t& _scannerdelaysamp
 	lookup_rotation = _scannerdelaysamples;
 }
 
-const std::vector<int16_t>* ScannerVectorFrameBasic::GetInterleavedVector() const {
+std::vector<int16_t>* ScannerVectorFrameBasic::GetInterleavedVector() const {
 	return vecptr.get();
 }
 
-const std::vector<std::size_t>* ScannerVectorFrameBasic::GetLookupVector() const {
+std::vector<std::size_t>* ScannerVectorFrameBasic::GetLookupVector() const {
 	return lookup.get();
 }
 

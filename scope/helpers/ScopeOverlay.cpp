@@ -57,8 +57,8 @@ void ScopeOverlay::Create(ScopeMultiImageCPtr const _multi, const std::vector<Co
 
 void ScopeOverlay::ToD2Bitmap(ID2D1Bitmap* const _d2bitmap) const {
 	std::lock_guard<std::mutex> lock(mutex);
-	FLOAT h = _d2bitmap->GetSize().height;
-	FLOAT w = _d2bitmap->GetSize().width;
+	//FLOAT h = _d2bitmap->GetSize().height;
+	//FLOAT w = _d2bitmap->GetSize().width;
 	assert( (_d2bitmap->GetSize().height == lines) && (_d2bitmap->GetSize().width == linewidth) );
 	_d2bitmap->CopyFromMemory(&D2D1::RectU(0,0,linewidth,lines), overlay.data(), linewidth*4);			// stride is *4 because 4 bytes per pixel (BGRA)
 }

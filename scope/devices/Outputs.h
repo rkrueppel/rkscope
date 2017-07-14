@@ -29,7 +29,7 @@ public:
 	* , which are then repeated by the device.
 	* @param[in] _xyzp the scannervector with xyzp data to write to device
 	* @param[in] _blocks in how many blocks should the scannervector be written (more blocks faster update, since smaller blocksize -> buffer for this is free earlier), see "DAQmx quick buffer update.vi" */
-	virtual int32_t Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks = 1) { return 0; }
+	virtual int32_t Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks = 1) { return 0; }
 
 	/** Aborts a running Write by setting writeabort to true (which is checked on every block-write of Write) */
 	virtual void AbortWrite();

@@ -11,7 +11,7 @@ OutputsDAQmxResonance::OutputsDAQmxResonance(const uint32_t& _area, const parame
 	: Outputs(_area) {
 
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
-	size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
+	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
 
 	std::wstring commontrig = _params.commontrigger();
 
@@ -80,7 +80,7 @@ void OutputsDAQmxResonance::Stop() {
 	taskResonanceZoom.Stop();
 }
 
-int32_t OutputsDAQmxResonance::Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks) {
+int32_t OutputsDAQmxResonance::Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks) {
 	int32_t written = 0;
 	assert(_blocks!=0);
 	int32_t sizeperchannel = static_cast<int32_t>(_xyzp.size() / 4);			// number of samples in each output channel
@@ -129,7 +129,7 @@ ZeroOutputsDAQmxResonance::ZeroOutputsDAQmxResonance(const parameters::OutputsDA
 			, L"XYZPOut"
 			, -_params.range()
 			, _params.range());
-		task.WriteAnalogI16(std::make_shared<std::vector<int16_t>>(4,0)->data(), 1, true);
+		task.WriteAnalogI16(std::make_shared<std::vector<int16>>(4,(int16)0)->data(), 1, true);
 		task.WaitUntilDone(500);
 		task.Clear();
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }

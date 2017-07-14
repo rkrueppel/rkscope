@@ -128,7 +128,7 @@ void CDAQmxTask::ConfigureSampleTiming(const std::wstring& _src, const float64& 
 void CDAQmxTask::ConfigureReferenceClock(const std::wstring& _src, const float64& _rate) {
 	CheckError(DAQmxSetTimingAttribute(task_handle, DAQmx_RefClk_Rate, _rate));
 	CW2A char_src(_src.c_str());
-	CheckError(DAQmxSetTimingAttribute(task_handle, DAQmx_RefClk_Src, char_src));
+	CheckError(DAQmxSetTimingAttribute(task_handle, DAQmx_RefClk_Src, (LPCSTR)char_src));
 }
 
 void CDAQmxTask::ConfigureDigStartTrigger(const std::wstring& _src, const int32& _trigedge) {
@@ -255,7 +255,7 @@ void CDAQmxAnalogOutTask::WriteAnalogScalar(const float64& _value, bool _autosta
 		, _value, NULL));
 }
 
-int32 CDAQmxAnalogOutTask::WriteAnalogI16(const int16* _data, int32 _sampsperchan, bool _autostart, int32 _timeout, bool32 _layout) {
+int32 CDAQmxAnalogOutTask::WriteAnalogI16(int16* _data, int32 _sampsperchan, bool _autostart, int32 _timeout, bool32 _layout) {
 	int32 writtensamples = -1;
 	CheckError(DAQmxWriteBinaryI16(task_handle
 		, _sampsperchan
@@ -359,7 +359,7 @@ int32 CDAQmxAnalogInTask::ReadU16(std::vector<uint16_t>& _data, const int32& _sa
 }
 
 int32 CDAQmxAnalogInTask::ReadU16Dummy(std::vector<uint16_t>& _data, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
-	int32 readsamples = -1;
+	//int32 readsamples = -1;
 	_timedout = false;
 	uint16_t d = 0;
 	std::generate(std::begin(_data), std::end(_data), [&d]() { return d++; } ); // or random: return static_cast<uint16_t>(mtgen());

@@ -42,7 +42,7 @@ public:
 
 	void Stop() override;
 
-	int32_t Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks) override;
+	int32_t Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks) override;
 };
 
 /** Wraps hardware connection for zeroing signal output to scanners, fast z control, and pockels cell with NI-DAQmx. */

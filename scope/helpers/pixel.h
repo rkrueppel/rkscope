@@ -20,7 +20,7 @@ inline uint8_t to8hist_mod(const uint16_t& s, const uint16_t& l, const uint16_t&
 		return 0;
 	if ( s >= u )
 		return UINT8_MAX;
-	uint8_t ranged = ( (s-l) * 255 / (u-l));
+	uint8_t ranged = (uint8_t)( (s-l) * 255 / (u-l));
 	return ranged;
 }
 
@@ -30,7 +30,7 @@ inline uint8_t to8hist_mod2(const uint16_t& s, const uint16_t& l, const uint16_t
 		return 0;
 	if ( s >= u )
 		return UINT8_MAX;
-	uint8_t ranged = ( (s-l) * scaler);
+	uint8_t ranged = (uint8_t)( (s-l) * scaler);
 	return ranged;
 }
 

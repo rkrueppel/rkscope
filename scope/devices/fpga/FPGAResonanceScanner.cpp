@@ -66,8 +66,8 @@ double FPGAResonanceScanner::SetPixeltime(const uint32_t& _area, const double& _
 }
 
 double FPGAResonanceScanner::SetLinetime(const uint32_t& _area, const double& _linetime) {
-	uint16_t samplesperline = round2ui32(_linetime * 1E-6 * parameters->AcquisitionClockRate());
-	status = NiFpga_WriteU16(session, NiFpga_ResonanceScanner_ControlU32_Samplesperline, samplesperline);
+	uint16_t samplesperline = round2ui16(_linetime * 1E-6 * parameters->AcquisitionClockRate());
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_ResonanceScanner_ControlU32_Samplesperline, samplesperline);
 
 	DBOUT(L"FPGAResonanceScanner::SetPixeltime samples per line" << samplesperline);
 
@@ -75,21 +75,21 @@ double FPGAResonanceScanner::SetLinetime(const uint32_t& _area, const double& _l
 }
 
 void FPGAResonanceScanner::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGAResonanceScanner::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGAResonanceScanner::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
-	status = NiFpga_WriteU32(session, NiFpga_ResonanceScanner_ControlU32_Requestedpixels, _reqpixels);
+	status = NiFpga_WriteU32(session, (uint32_t)NiFpga_ResonanceScanner_ControlU32_Requestedpixels, _reqpixels);
 } 
 
 void FPGAResonanceScanner::StartAcquisition() {
 	ClearFIFOs();
 	SetChannelProps();
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_Acquire, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquire, true);
 }
 
 int32_t FPGAResonanceScanner::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -147,11 +147,11 @@ int32_t FPGAResonanceScanner::ReadPixels(DaqChunk& _chunk, const double& _timeou
 }
 
 void FPGAResonanceScanner::StopAcquisition() {
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquire, false);
 }
 
 void FPGAResonanceScanner::SetScannerdelay(const uint32_t& _scannerdelay) {
-	status = NiFpga_WriteU32(session, NiFpga_ResonanceScanner_ControlI16_Scannerdelay, _scannerdelay);
+	status = NiFpga_WriteU32(session, (uint32_t)NiFpga_ResonanceScanner_ControlI16_Scannerdelay, _scannerdelay);
 }
 
 void FPGAResonanceScanner::SetChannelProps() {
@@ -159,33 +159,33 @@ void FPGAResonanceScanner::SetChannelProps() {
 	//status = NiFpga_WriteI8(session, NiFpga_ResonanceScanner_ControlI8_BitshiftCh1, -1 * parameters->BitshiftCh1());
 	//status = NiFpga_WriteI8(session, NiFpga_ResonanceScanner_ControlI8_BitshiftCh2, -1 * parameters->BitshiftCh2());
 	
-	status = NiFpga_WriteU16(session, NiFpga_ResonanceScanner_ControlU16_Baselinex8Ch1, static_cast<uint16_t>(parameters->BaselineCh1()));
-	status = NiFpga_WriteU16(session, NiFpga_ResonanceScanner_ControlU16_Baselinex8Ch2, static_cast<uint16_t>(parameters->BaselineCh2()));
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_ResonanceScanner_ControlU16_Baselinex8Ch1, static_cast<uint16_t>(parameters->BaselineCh1()));
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_ResonanceScanner_ControlU16_Baselinex8Ch2, static_cast<uint16_t>(parameters->BaselineCh2()));
 
 	DBOUT(L"FPGAResonanceScanner::SetChannelProps " << parameters->BitshiftCh1() << L" " << parameters->BaselineCh1());
 }
 
 void FPGAResonanceScanner::CheckFPGADiagnosis() {
 	NiFpga_Bool b;
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_ToHostCh1FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_ToHostCh1FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowCh1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_ToHostCh2FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_ToHostCh2FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowCh2 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_InterloopFIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_InterloopFIFOOverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_InterloopFIFOTimeout, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_InterloopFIFOTimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_ResonanceScanner_IndicatorBool_IOModuleAIOverRange, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_ResonanceScanner_IndicatorBool_IOModuleAIOverRange, &b);
 	parameters->diagnosis.AIOverRange = (b!=0);
 }
 
 void FPGAResonanceScanner::ClearFIFOs() {
 	// Clear interloop fifo
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_ClearInterloopFIFO, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_ClearInterloopFIFO, true);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_ResonanceScanner_ControlBool_ClearInterloopFIFO, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_ClearInterloopFIFO, false);
 
 	// Stop to host FIFOs (clears them)
 	for ( auto f : fifos )

@@ -89,11 +89,11 @@ double FPGAAnalogDemultiplexerResonance::SetLinetime(const uint32_t& _area, cons
 }
 
 void FPGAAnalogDemultiplexerResonance::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGAAnalogDemultiplexerResonance::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGAAnalogDemultiplexerResonance::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
@@ -109,13 +109,13 @@ void FPGAAnalogDemultiplexerResonance::StartAcquisition() {
 	if ( !alreadyrunning ) {
 		ClearFIFOs();
 		SetChannelProps();
-		status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, true);
+		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, true);
 	}
 }
 
 void FPGAAnalogDemultiplexerResonance::StopAcquisition() {
 	DBOUT(L"FPGAAnalogDemultiplexerResonance::StopAcquisition");
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
 }
 
 int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -181,34 +181,34 @@ int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(DaqChunk& _chunk, const dou
 }
 
 void FPGAAnalogDemultiplexerResonance::SetChannelProps() {
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_BaselineU8Ch1, parameters->BaselineCh1());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_BaselineU8Ch2, parameters->BaselineCh2());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_CutoffU8Ch1, parameters->CutoffCh1());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_CutoffU8Ch2, parameters->CutoffCh2());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_BaselineU8Ch1, parameters->BaselineCh1());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_BaselineU8Ch2, parameters->BaselineCh2());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_CutoffU8Ch1, parameters->CutoffCh1());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_CutoffU8Ch2, parameters->CutoffCh2());
 	DBOUT(L"FPGAAnalogDemultiplexerResonance::SetChannelProps baseline " << parameters->BaselineCh1() << L" " << parameters->BaselineCh2());
 }
 
 void FPGAAnalogDemultiplexerResonance::CheckFPGADiagnosis() {
 	NiFpga_Bool b(0);
-	uint16_t ui = 0;
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_ToHostA1FIFOOverflow, &b);
+
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_ToHostA1FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowA1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_ToHostA2FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_ToHostA2FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowA1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_InterloopFIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_InterloopFIFOOverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_InterloopFIFOtimeout, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_InterloopFIFOtimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_IOModuleAIOverRange, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_IOModuleAIOverRange, &b);
 	parameters->diagnosis.AIOverRange = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
 }
 
 void FPGAAnalogDemultiplexerResonance::ClearFIFOs() {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_ClearInterloopFIFO, 1);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_ClearInterloopFIFO, 1);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_ClearInterloopFIFO, 0);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_ClearInterloopFIFO, 0);
 
 	// Stop FIFOs (clears them)
 	for ( auto f : fifos )

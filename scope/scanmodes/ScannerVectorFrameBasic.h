@@ -73,10 +73,10 @@ public:
 	* - FullframeXYZP: xyzp interleaved, total size is one complete frame
 	* - LineXPColumnYZ: xp interleaved and then yz interleaved, total size is one line plus one column
 	* - LineZP: zp interleaved, total size is one line */
-	virtual const std::vector<int16_t>* GetInterleavedVector() const;
+	virtual std::vector<int16_t>* GetInterleavedVector() const;
 
 	/** @return a reference to the lookup vector */
-	virtual const std::vector<size_t>* GetLookupVector() const;
+	virtual std::vector<size_t>* GetLookupVector() const;
 
 	/** @return a pointer to the scanner vector parameters */
 	virtual parameters::ScannerVectorFrameBasic* GetSVParameters() const;

@@ -57,7 +57,6 @@ HWND CScanSettingsSheet::Create(const HWND hWndParent, const int nStartPage, con
 	SetActivePage(nStartPage);
 
 	// Register the callback that is called by ScopeController upon scan mode changes
-	ScopeController scope_controller;
 	std::function<void(const uint32_t&, const ScannerVectorType&)> cb(std::bind(&CScanSettingsSheet::ChangeScanmode, this, std::placeholders::_1, std::placeholders::_2));
 	scope_controller.RegisterScanmodeCallback(cb);
 

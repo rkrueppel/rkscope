@@ -27,13 +27,13 @@ protected:
 	ScopeLogger scope_logger;
 
 	/** Vector of CChannelFrame observers */
-	std::array<std::vector<gui::CChannelFrame* const>, SCOPE_NAREAS> channelframes;
+	std::array<std::vector<gui::CChannelFrame*>, SCOPE_NAREAS> channelframes;
 
 	/** Mutex to protect access to that vector */
 	mutable std::array<std::mutex, SCOPE_NAREAS> channelframes_mutexe;
 
 	/** Vector of CHistogramFrame observers */
-	std::array<std::vector<gui::CHistogramFrame* const>, SCOPE_NAREAS> histogramframes;
+	std::array<std::vector<gui::CHistogramFrame*>, SCOPE_NAREAS> histogramframes;
 
 	/** Mutex to protect access to that vector */
 	mutable std::array<std::mutex, SCOPE_NAREAS> histogramframes_mutexe;
@@ -204,8 +204,8 @@ public:
 	void DetachFrame(gui::CChannelFrame* const _cframe) {
 		uint32_t area = _cframe->Area();
 		std::lock_guard<std::mutex> lock(channelframes_mutexe[area]);
-		std::vector<gui::CChannelFrame* const>::iterator found
-			= std::find_if(std::begin(channelframes[area]), std::end(channelframes[area]), [&](const gui::CChannelFrame* const f)
+		std::vector<gui::CChannelFrame*>::iterator found
+			= std::find_if(std::begin(channelframes[area]), std::end(channelframes[area]), [&](gui::CChannelFrame* const f)
 				{ return f->m_hWnd == _cframe->m_hWnd; } );
 		if ( found == std::end(channelframes[area]) )
 			throw std::exception("DisplayController::Impl::DetachChannelFrame no match");
@@ -235,8 +235,8 @@ public:
 	void DetachFrame(gui::CHistogramFrame* const  _hframe) {
 		uint32_t area = _hframe->Area();
 		std::lock_guard<std::mutex> lock(histogramframes_mutexe[area]);
-		std::vector<gui::CHistogramFrame* const>::iterator found 
-			= std::find_if(std::begin(histogramframes[area]), std::end(histogramframes[area]), [&](const gui::CHistogramFrame* const f)
+		std::vector<gui::CHistogramFrame*>::iterator found 
+			= std::find_if(std::begin(histogramframes[area]), std::end(histogramframes[area]), [&](gui::CHistogramFrame* const f)
 				{ return f->m_hWnd == _hframe->m_hWnd; } );
 		if ( found == std::end(histogramframes[area]) )
 			throw std::exception("DisplayController::Impl::DetachHistogramFrame no match");

@@ -36,7 +36,7 @@ public:
 	void Stop() override;
 
 	/** we also take a std::vector<int16_t> but for the slave area it has only samples for z&p ! */
-	int32_t Write(const std::vector<int16_t>& _xyzp, const uint32_t& _blocks) override;
+	int32_t Write(std::vector<int16_t>& _xyzp, const uint32_t& _blocks) override;
 };
 
 /** Wraps hardware connection for zeroing signal output to fast z control and pockels cell with NI-DAQmx. */

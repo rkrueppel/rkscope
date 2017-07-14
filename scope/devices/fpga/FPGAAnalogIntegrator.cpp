@@ -61,7 +61,7 @@ void FPGAAnalogIntegrator::Initialize(parameters::InputsFPGA* _parameters) {
 double FPGAAnalogIntegrator::SetPixeltime(const uint32_t& _area, const double& _pixeltime) {
 	// sampling rate of the NI 5771 is 1.5GHz
 	uint16_t samplesperpixel = round2ui16(_pixeltime * 1E-6 * 1.5E9);
-	status = NiFpga_WriteU16(session, NiFpga_AnalogIntegrator_NI5771_ControlU32_Samplesperpixel, samplesperpixel);
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlU32_Samplesperpixel, samplesperpixel);
 
 	DBOUT(L"FPGAAnalogIntegrator::SetPixeltime samples per pixel" << samplesperpixel);
 	// Since the AnalogIntegrator VI is working on arrays of 8 samples clockcycles has to be a multiple of 8
@@ -75,8 +75,8 @@ double FPGAAnalogIntegrator::SetPixeltime(const uint32_t& _area, const double& _
 
 double FPGAAnalogIntegrator::SetLinetime(const uint32_t& _area, const double& _linetime) {
 	// sampling rate of the NI 5771 is 1.5GHz
-	uint16_t samplesperline = round2ui32(_linetime * 1E-6 * 1.5E9);
-	status = NiFpga_WriteU16(session, NiFpga_AnalogIntegrator_NI5771_ControlU32_Samplesperline, samplesperline);
+	uint16_t samplesperline = round2ui16(_linetime * 1E-6 * 1.5E9);
+	status = NiFpga_WriteU16(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlU32_Samplesperline, samplesperline);
 
 	DBOUT(L"FPGAAnalogIntegrator::SetPixeltime samples per line" << samplesperline);
 	// Since the AnalogIntegrator VI is working on arrays of 8 samples clockcycles has to be a multiple of 8
@@ -89,21 +89,21 @@ double FPGAAnalogIntegrator::SetLinetime(const uint32_t& _area, const double& _l
 }
 
 void FPGAAnalogIntegrator::SetTriggering(const bool& _waitfortrigger) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_Waitfortrigger, _waitfortrigger);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Waitfortrigger, _waitfortrigger);
 }
 
 void FPGAAnalogIntegrator::SetContinuousAcquisition(const bool& _cont) {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquirecontinuously, _cont);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquirecontinuously, _cont);
 }
 
 void FPGAAnalogIntegrator::SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) {
-	status = NiFpga_WriteU32(session, NiFpga_AnalogIntegrator_NI5771_ControlU32_Requestedpixels, _reqpixels);
+	status = NiFpga_WriteU32(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlU32_Requestedpixels, _reqpixels);
 } 
 
 void FPGAAnalogIntegrator::StartAcquisition() {
 	ClearFIFOs();
 	SetChannelProps();
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
 }
 
 int32_t FPGAAnalogIntegrator::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
@@ -154,7 +154,7 @@ int32_t FPGAAnalogIntegrator::ReadPixels(DaqChunk& _chunk, const double& _timeou
 }
 
 void FPGAAnalogIntegrator::StopAcquisition() {
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, false);
 }
 
 void FPGAAnalogIntegrator::SetChannelProps() {
@@ -162,33 +162,33 @@ void FPGAAnalogIntegrator::SetChannelProps() {
 	//status = NiFpga_WriteI8(session, NiFpga_AnalogIntegrator_NI5771_ControlI8_BitshiftCh1, -1 * parameters->BitshiftCh1());
 	//status = NiFpga_WriteI8(session, NiFpga_AnalogIntegrator_NI5771_ControlI8_BitshiftCh2, -1 * parameters->BitshiftCh2());
 	// We subtract baseline from cumulated 8 samples, thus 8*
-	status = NiFpga_WriteU8(session, NiFpga_AnalogIntegrator_NI5771_ControlU8_Baselinex8Ch1, parameters->BaselineCh1());
-	status = NiFpga_WriteU8(session, NiFpga_AnalogIntegrator_NI5771_ControlU8_Baselinex8Ch2, parameters->BaselineCh2());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlU8_Baselinex8Ch1, parameters->BaselineCh1());
+	status = NiFpga_WriteU8(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlU8_Baselinex8Ch2, parameters->BaselineCh2());
 
 	DBOUT(L"FPGAAnalogIntegrator::SetChannelProps " << parameters->BitshiftCh1() << L" " << parameters->BaselineCh1());
 }
 
 void FPGAAnalogIntegrator::CheckFPGADiagnosis() {
 	NiFpga_Bool b;
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_ToHostCh1FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_ToHostCh1FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowCh1 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_ToHostCh2FIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_ToHostCh2FIFOOverflow, &b);
 	parameters->diagnosis.ToHostOverflowCh2 = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_InterloopFIFOOverflow, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_InterloopFIFOOverflow, &b);
 	parameters->diagnosis.InterloopOverflow = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_InterloopFIFOTimeout, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_InterloopFIFOTimeout, &b);
 	parameters->diagnosis.InterloopTimeout = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_Acquiring, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_Acquiring, &b);
 	parameters->diagnosis.Acquiring = (b!=0);
-	status = NiFpga_ReadBool(session, NiFpga_AnalogIntegrator_NI5771_IndicatorBool_IOModuleAIOverRange, &b);
+	status = NiFpga_ReadBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_IndicatorBool_IOModuleAIOverRange, &b);
 	parameters->diagnosis.AIOverRange = (b!=0);
 }
 
 void FPGAAnalogIntegrator::ClearFIFOs() {
 	// Clear interloop fifo
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_ClearInterloopFIFO, true);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_ClearInterloopFIFO, true);
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	status = NiFpga_WriteBool(session, NiFpga_AnalogIntegrator_NI5771_ControlBool_ClearInterloopFIFO, false);
+	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_ClearInterloopFIFO, false);
 
 	// Stop to host FIFOs (clears them)
 	for ( auto f : fifos )

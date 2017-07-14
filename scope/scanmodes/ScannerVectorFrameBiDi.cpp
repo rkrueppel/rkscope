@@ -159,7 +159,7 @@ void ScannerVectorFrameBiDi::FillY() {
 }
 
 void ScannerVectorFrameBiDi::FillZ() {
-	parameters::ScannerVectorFrameBiDi* tmp = dynamic_cast<parameters::ScannerVectorFrameBiDi*>(svparameters);
+	//parameters::ScannerVectorFrameBiDi* tmp = dynamic_cast<parameters::ScannerVectorFrameBiDi*>(svparameters);
 	const uint32_t framesamples(svparameters->TotalPixels());
 	const uint32_t linesamples(svparameters->XTotalPixels());
 	// convert full device range to full range of int16_t
