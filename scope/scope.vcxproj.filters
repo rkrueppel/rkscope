@@ -1,0 +1,1081 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3c0f5c1a-74c9-411a-a69e-b83dcfa1625d}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{ce453baf-12b0-4cce-ab9f-c61b0d616332}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{9f82b411-6b3f-4198-b9da-5cd1239b5316}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{603c4aab-2f17-483d-b280-c64f13a7b01b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scope control">
+      <UniqueIdentifier>{6f1a495c-075a-4d43-a4a7-161af29889b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scope components">
+      <UniqueIdentifier>{86e25388-1fb5-4fac-843c-3d271dc48b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scope data types">
+      <UniqueIdentifier>{0b2bfbc7-18d7-4add-b5a3-8e98bffb232b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct2D">
+      <UniqueIdentifier>{7f41a085-c3f0-4532-aa0d-79b37a20882f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices">
+      <UniqueIdentifier>{f3be59d8-7862-4617-a640-605ffbab392e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AboutDlg.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AreaChooseDlg.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ChannelFrame.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ChannelView.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ExperimentSettingsSheet.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\HistogramFrame.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\HistogramView.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LogFrame.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LogView.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MainDlgFrame.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MainDlgView.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ScanSettingsSheet.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\StackSettingsPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\StimulationSettingsPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\StorageSettingsPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\TimeSeriesSettingsPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\BaseController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\FPUController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\PipelineController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\ScopeController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\StorageController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\DisplayController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\Shutter.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\Active.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\ScopeLogger.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeValue.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeValueBase.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeOverlay.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeNumber.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeMultiImageEncoder.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeMultiImage.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeMultiHistogram.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeImage.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeHistogram.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeException.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\SyncQueues.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\helpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\pixel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeButton.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeButtonCtrl.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeCheckBoxCtrl.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeEditCtrl.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeSliderCtrl.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\NiFpga.c">
+      <Filter>Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\direct2d\D2ChannelRender.cpp">
+      <Filter>Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\direct2d\D2HistogramRender.cpp">
+      <Filter>Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\direct2d\d2wrap.cpp">
+      <Filter>Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\daqmx\DAQmxTask.cpp">
+      <Filter>Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeDatatypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MovementPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MovementSettingsSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPUControlPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\lut.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PresetNameDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameSaw.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameBasic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameBiDi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameSaw.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperBasic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ScanModesSettingsPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanBidiPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanHopperPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanSawPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeLEDCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\XYZControlPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAInterface.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO6587.cpp">
+      <Filter>Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYControl.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\DaqController.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControlGalil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYControlStanda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\GalilController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\Inputs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\InputsDAQmx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\InputsFPGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\StimulationsDAQmx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeUpDownCtrl.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeColorComboCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\SerialConnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\StimulationVector.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\SutterController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControlSutter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Framescan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Devices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Scope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\Outputs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeDefines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGADigitalDemultiplexerPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGADigitalDemultiplexer.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogIntegrator.cpp">
+      <Filter>Scope components</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO5771.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGANoiseOutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogIntegratorPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGANoiseOutputPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxSlave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\NoScanBasePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanBasePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAPhotonCounterPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAPhotonCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Windows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\BehaviorSettingsPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\GaterDAQmx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\DAQmxPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqChunkResonance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAResonanceScannerPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanResonancePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Storage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Runstates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeScanModeButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO5751.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceBiDi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\SwitchResonance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner_NI5771.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeOverlayResonanceSW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAResonanceScanner_NI5771Page.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Inputs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Outputs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Daq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeDatatypes.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AboutDlg.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AreaChooseDlg.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ChannelFrame.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ChannelView.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ExperimentSettingsSheet.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\HistogramFrame.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\HistogramView.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LogFrame.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LogView.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MainDlgFrame.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MainDlgView.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ScanSettingsSheet.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\StackSettingsPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\StimulationSettingsPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\StorageSettingsPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\TimeSeriesSettingsPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\BaseController_p.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\BaseController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\FPUController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\PipelineController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\PipelineController_p.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\StorageController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\StorageController_p.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\DisplayController_p.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\DisplayController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\Shutter.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\Active.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeLogger.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeString.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeValue.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeValueBase.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeOverlay.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeNumber.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeMultiImageEncoder.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeMultiImage.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeMultiHistogram.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeImage.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeHistogram.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeException.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\SyncQueues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\hresult_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\lut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\pixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqChunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Aero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeButton.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeButtonCtrl.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeCheckBoxCtrl.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeEditCtrl.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeSliderCtrl.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\FPGAException.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_ClockGenerator.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\direct2d\D2ChannelRender.h">
+      <Filter>Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\direct2d\D2HistogramRender.h">
+      <Filter>Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\direct2d\d2wrap.h">
+      <Filter>Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\daqmx\DAQmxTask.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MovementPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MovementSettingsSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPUControlPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeController_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Documentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PresetNameDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameSaw.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameBiDi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameSaw.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperBasic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ScanModesSettingsPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanBidiPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanHopperPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanSawPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeLEDCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\XYZControlPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAInterface.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO6587.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYControl.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\galil\Galil.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\DaqController.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\DaqController_p.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControlGalil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYControlStanda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\GalilController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeLogger_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\Inputs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\InputsDAQmx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\InputsFPGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\StimulationsDAQmx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeUpDownCtrl.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThirdParty\Aero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThirdParty\ToolbarHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThirdParty\ToolTipDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeColorComboCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeScrollbarCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\SerialConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\StimulationVector.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\SutterController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControlSutter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Framescan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Devices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Scope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\Outputs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxLineClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeProgressCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGADigitalDemultiplexerPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGADigitalDemultiplexer.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogIntegrator.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO5771.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGANoiseOutput.h">
+      <Filter>Scope components</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogIntegratorPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGANoiseOutputPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxSlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\NoScanBasePage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanBasePage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAPhotonCounterPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAPhotonCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeFOVDiagram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\BehaviorSettingsPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\GaterDAQmx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\DAQmxPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeDefinesExample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqChunkResonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAResonanceScannerPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanResonancePage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Storage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Runstates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeScanModeButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO5751.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceBiDi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceHopper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeDefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeControllerModes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\SwitchResonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner_NI5771.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeOverlayResonanceSW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput_PXIe7962R.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771_Resonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_DigitalDemultiplexerV3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_PhotonCounterV2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAResonanceScanner_NI5771Page.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Inputs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Outputs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Daq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="scope.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scopeDoc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scope.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrowdown.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrowup.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrowleft.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrowright.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00002.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ico00001.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ico00002.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00003.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_channelframe.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_histogramframe.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_mainframe.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_areas.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource.hm">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\led_green.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\led_red.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\histogram.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\view.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\logbook.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\led_green.png" />
+    <Image Include="res\Annotate_Default.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Annotate_Error.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\red.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\colorcombo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Annotate_Warning.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="version.txt" />
+  </ItemGroup>
+</Project>

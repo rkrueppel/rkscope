@@ -1,0 +1,4 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by scope.rc
+//
+#define HIDC_YTURN_EDIT                 0x80e10446    // IDD_FRAMESCAN_BIDI_PROPPAGE [English (United States)]

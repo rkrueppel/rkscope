@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B88360FD-1096-4016-961D-F64CD4E5F34C}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfAtl>false</UseOfAtl>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>Debug\</IntDir>
+    <OutDir>Debug\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>Debugx64\</IntDir>
+    <OutDir>Debugx64\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>Release\</IntDir>
+    <OutDir>Release\</OutDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>Releasex64\</IntDir>
+    <OutDir>Releasex64\</OutDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files\Boost\boost_1_53_0;C:\Program Files\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files %28x86%29\MicroSMC;C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm150 /Qvec-report:1 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <BrowseInformation>true</BrowseInformation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>FP10.OBJ;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\MicroSMC;C:\Program Files\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc;C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc;C:\Program Files\Boost\boost_1_52_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkStatus>
+      </LinkStatus>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>C:\Program Files\Windows Template Library\Include;C:\Program Files %28x86%29\Windows Template Library\Include;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>scope.h</HeaderFileName>
+      <InterfaceIdentifierFileName>scope_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>scope_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/scope.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Command>lastgitcommit.bat</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Get hash of last GIT commit</Message>
+    </PreBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files\MicroSMCx64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm132 %(AdditionalOptions)</AdditionalOptions>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\MicroSMCx64;C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\lib64\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkStatus>
+      </LinkStatus>
+      <OptimizeReferences>
+      </OptimizeReferences>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>scope.h</HeaderFileName>
+      <InterfaceIdentifierFileName>scope_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>scope_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/scope.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files\Boost\boost_1_53_0;C:\Program Files\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files %28x86%29\MicroSMC;C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalOptions>/Zm136 /Qvec-report:1 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Full</Optimization>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>FP10.OBJ;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\MicroSMC;C:\Program Files\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc;C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>scope.h</HeaderFileName>
+      <InterfaceIdentifierFileName>scope_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>scope_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/scope.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Command>lastgitcommit.bat</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Get hash of last GIT commit</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\Boost\boost_1_53_0;$(ProjectDir);C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\include;C:\Program Files\MicroSMCx64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalOptions>/Zm123 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>scope.h</HeaderFileName>
+      <InterfaceIdentifierFileName>scope_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>scope_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/scope.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp" />
+    <ClCompile Include="devices\fpga\FPGAIO5751.cpp" />
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp" />
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner_NI5771.cpp" />
+    <ClCompile Include="devices\OutputsDAQmxResonance.cpp" />
+    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp" />
+    <ClCompile Include="devices\SwitchResonance.cpp" />
+    <ClCompile Include="gui\FPGAResonanceScannerPage.cpp" />
+    <ClCompile Include="gui\FrameScanResonancePage.cpp" />
+    <ClCompile Include="helpers\DaqChunkResonance.cpp" />
+    <ClCompile Include="devices\fpga\FPGANoiseOutput.cpp" />
+    <ClCompile Include="devices\fpga\FPGAPhotonCounter.cpp" />
+    <ClCompile Include="devices\xyz\GalilController.cpp" />
+    <ClCompile Include="devices\xyz\SutterController.cpp" />
+    <ClCompile Include="devices\xyz\XYControlStanda.cpp" />
+    <ClCompile Include="devices\xyz\XYZControlGalil.cpp" />
+    <ClCompile Include="devices\xyz\XYZControlSutter.cpp" />
+    <ClCompile Include="devices\fpga\FPGAIO5771.cpp" />
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexer.cpp" />
+    <ClCompile Include="devices\GaterDAQmx.cpp" />
+    <ClCompile Include="gui\BehaviorSettingsPage.cpp" />
+    <ClCompile Include="gui\DAQmxPage.cpp" />
+    <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp" />
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp" />
+    <ClCompile Include="parameters\Daq.cpp" />
+    <ClCompile Include="parameters\Outputs.cpp" />
+    <ClCompile Include="parameters\Runstates.cpp" />
+    <ClCompile Include="parameters\Storage.cpp" />
+    <ClCompile Include="gui\FPGAResonanceScanner_NI5771Page.cpp" />
+    <ClCompile Include="parameters\Windows.cpp" />
+    <ClCompile Include="gui\NoScanBasePage.cpp" />
+    <ClCompile Include="gui\FPGANoiseOutputPage.cpp" />
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerPage.cpp" />
+    <ClCompile Include="gui\FPGAAnalogIntegratorPage.cpp" />
+    <ClCompile Include="gui\FPGADigitalDemultiplexerPage.cpp" />
+    <ClCompile Include="gui\FPGAPhotonCounterPage.cpp" />
+    <ClCompile Include="gui\FrameScanBidiPage.cpp" />
+    <ClCompile Include="gui\FrameScanHopperPage.cpp" />
+    <ClCompile Include="gui\FrameScanBasePage.cpp" />
+    <ClCompile Include="gui\FPUControlPage.cpp" />
+    <ClCompile Include="gui\MovementSettingsSheet.cpp" />
+    <ClCompile Include="gui\PresetNameDlg.cpp" />
+    <ClCompile Include="gui\ScanModesSettingsPage.cpp" />
+    <ClCompile Include="gui\XYZControlPage.cpp" />
+    <ClCompile Include="helpers\Active.cpp" />
+    <ClCompile Include="gui\AreaChooseDlg.cpp" />
+    <ClCompile Include="controllers\BaseController.cpp" />
+    <ClCompile Include="gui\direct2d\D2ChannelRender.cpp" />
+    <ClCompile Include="gui\direct2d\D2HistogramRender.cpp" />
+    <ClCompile Include="helpers\DaqChunk.cpp" />
+    <ClCompile Include="devices\daqmx\DAQmxTask.cpp" />
+    <ClCompile Include="controllers\DaqController.cpp" />
+    <ClCompile Include="gui\AboutDlg.cpp" />
+    <ClCompile Include="gui\ChannelFrame.cpp" />
+    <ClCompile Include="gui\ChannelView.cpp" />
+    <ClCompile Include="controllers\DisplayController.cpp" />
+    <ClCompile Include="devices\fpga\FPGAInterface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGADigitalDemultiplexer.cpp" />
+    <ClCompile Include="devices\fpga\FPGAIO6587.cpp" />
+    <ClCompile Include="devices\fpga\FPGAAnalogIntegrator.cpp" />
+    <ClCompile Include="devices\fpga\NiFpga.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="controllers\FPUController.cpp" />
+    <ClCompile Include="helpers\helpers.cpp" />
+    <ClCompile Include="gui\HistogramFrame.cpp" />
+    <ClCompile Include="gui\HistogramView.cpp" />
+    <ClCompile Include="gui\FrameScanSawPage.cpp" />
+    <ClCompile Include="gui\LogFrame.cpp" />
+    <ClCompile Include="gui\LogView.cpp" />
+    <ClCompile Include="gui\MainDlgFrame.cpp" />
+    <ClCompile Include="gui\MainDlgView.cpp" />
+    <ClCompile Include="gui\ScanSettingsSheet.cpp" />
+    <ClCompile Include="helpers\lut.cpp" />
+    <ClCompile Include="helpers\ScopeButton.cpp" />
+    <ClCompile Include="gui\controls\ScopeButtonCtrl.cpp" />
+    <ClCompile Include="gui\controls\ScopeCheckBoxCtrl.cpp" />
+    <ClCompile Include="helpers\ScopeException.cpp" />
+    <ClCompile Include="helpers\ScopeHistogram.cpp" />
+    <ClCompile Include="helpers\ScopeMultiHistogram.cpp" />
+    <ClCompile Include="helpers\ScopeMultiImageEncoder.cpp" />
+    <ClCompile Include="helpers\ScopeOverlay.cpp" />
+    <ClCompile Include="gui\controls\ScopeUpDownCtrl.cpp" />
+    <ClCompile Include="helpers\ScopeValue.cpp" />
+    <ClCompile Include="controllers\ScopeController.cpp" />
+    <ClCompile Include="gui\ExperimentSettingsSheet.cpp" />
+    <ClCompile Include="helpers\ScopeValueBase.cpp" />
+    <ClCompile Include="gui\StackSettingsPage.cpp" />
+    <ClCompile Include="gui\StimulationSettingsPage.cpp" />
+    <ClCompile Include="devices\StimulationVector.cpp" />
+    <ClCompile Include="gui\StorageSettingsPage.cpp" />
+    <ClCompile Include="gui\direct2d\d2wrap.cpp" />
+    <ClCompile Include="helpers\ScopeImage.cpp" />
+    <ClCompile Include="controllers\ScopeLogger.cpp" />
+    <ClCompile Include="helpers\ScopeMultiImage.cpp" />
+    <ClCompile Include="controllers\PipelineController.cpp" />
+    <ClCompile Include="helpers\pixel.cpp" />
+    <ClCompile Include="devices\OutputsDAQmx.cpp" />
+    <ClCompile Include="devices\Outputs.cpp" />
+    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp" />
+    <ClCompile Include="devices\OutputsDAQmxSlave.cpp" />
+    <ClCompile Include="parameters\Scope.cpp" />
+    <ClCompile Include="parameters\Devices.cpp" />
+    <ClCompile Include="parameters\Framescan.cpp" />
+    <ClCompile Include="parameters\Inputs.cpp" />
+    <ClCompile Include="parameters\Base.cpp" />
+    <ClCompile Include="parameters\Plane.cpp" />
+    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp" />
+    <ClCompile Include="scanmodes\PixelmapperBasic.cpp" />
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp" />
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp" />
+    <ClCompile Include="scanmodes\PixelmapperFrameSaw.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFrameSaw.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFrameBiDi.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFrameBasic.cpp" />
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceBiDi.cpp" />
+    <ClCompile Include="scope.cpp">
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</WholeProgramOptimization>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeEditCtrl.cpp" />
+    <ClCompile Include="gui\controls\ScopeSliderCtrl.cpp" />
+    <ClCompile Include="helpers\ScopeNumber.cpp" />
+    <ClCompile Include="gui\controls\ScopeColorComboCtrl.cpp" />
+    <ClCompile Include="ScopeDatatypes.cpp" />
+    <ClCompile Include="devices\Shutter.cpp" />
+    <ClCompile Include="gui\MovementPage.cpp" />
+    <ClCompile Include="gui\controls\ScopeLEDCtrl.cpp" />
+    <ClCompile Include="devices\InputsDAQmx.cpp" />
+    <ClCompile Include="devices\StimulationsDAQmx.cpp" />
+    <ClCompile Include="devices\Inputs.cpp" />
+    <ClCompile Include="devices\InputsFPGA.cpp" />
+    <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp" />
+    <ClCompile Include="devices\xyz\SerialConnection.cpp" />
+    <ClCompile Include="ScopeDefines.cpp" />
+    <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp" />
+    <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp" />
+    <ClCompile Include="helpers\ScopeScanModeButton.cpp" />
+    <ClCompile Include="helpers\ScopeOverlayResonanceSW.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="controllers\StorageController.cpp" />
+    <ClCompile Include="helpers\SyncQueues.cpp" />
+    <ClCompile Include="gui\TimeSeriesSettingsPage.cpp" />
+    <ClCompile Include="devices\xyz\XYControl.cpp" />
+    <ClCompile Include="devices\xyz\XYZControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="controllers\ScopeControllerModes.h" />
+    <ClInclude Include="controllers\ScopeController_p.h" />
+    <ClInclude Include="controllers\ScopeLogger_p.h" />
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h" />
+    <ClInclude Include="devices\fpga\FPGAIO5751.h" />
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner.h" />
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner_NI5771.h" />
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771.h" />
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771_Resonance.h" />
+    <ClInclude Include="devices\fpga\NiFpga_DigitalDemultiplexerV3.h" />
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput_PXIe7962R.h" />
+    <ClInclude Include="devices\fpga\NiFpga_PhotonCounterV2.h" />
+    <ClInclude Include="devices\OutputsDAQmxResonance.h" />
+    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h" />
+    <ClInclude Include="devices\SwitchResonance.h" />
+    <ClInclude Include="gui\FPGAResonanceScannerPage.h" />
+    <ClInclude Include="gui\FrameScanResonancePage.h" />
+    <ClInclude Include="helpers\DaqChunkResonance.h" />
+    <ClInclude Include="devices\fpga\FPGAPhotonCounter.h" />
+    <ClInclude Include="devices\xyz\GalilController.h" />
+    <ClInclude Include="devices\xyz\SutterController.h" />
+    <ClInclude Include="devices\xyz\XYControlStanda.h" />
+    <ClInclude Include="devices\xyz\XYZControlGalil.h" />
+    <ClInclude Include="devices\xyz\XYZControlSutter.h" />
+    <ClInclude Include="Documentation.h" />
+    <ClInclude Include="devices\fpga\FPGAIO5771.h" />
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexer.h" />
+    <ClInclude Include="devices\GaterDAQmx.h" />
+    <ClInclude Include="gui\BehaviorSettingsPage.h" />
+    <ClInclude Include="gui\DAQmxPage.h" />
+    <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h" />
+    <ClInclude Include="parameters\Daq.h" />
+    <ClInclude Include="parameters\Outputs.h" />
+    <ClInclude Include="parameters\Runstates.h" />
+    <ClInclude Include="parameters\Storage.h" />
+    <ClInclude Include="gui\FPGAResonanceScanner_NI5771Page.h" />
+    <ClInclude Include="parameters\Windows.h" />
+    <ClInclude Include="gui\NoScanBasePage.h" />
+    <ClInclude Include="gui\FPGANoiseOutputPage.h" />
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerPage.h" />
+    <ClInclude Include="gui\FPGAAnalogIntegratorPage.h" />
+    <ClInclude Include="gui\FPGADigitalDemultiplexerPage.h" />
+    <ClInclude Include="gui\FPGAPhotonCounterPage.h" />
+    <ClInclude Include="gui\FrameScanBidiPage.h" />
+    <ClInclude Include="gui\FrameScanHopperPage.h" />
+    <ClInclude Include="gui\FrameScanBasePage.h" />
+    <ClInclude Include="gui\FPUControlPage.h" />
+    <ClInclude Include="gui\MovementSettingsSheet.h" />
+    <ClInclude Include="gui\PresetNameDlg.h" />
+    <ClInclude Include="gui\ScanModesSettingsPage.h" />
+    <ClInclude Include="gui\ThirdParty\Aero.h" />
+    <ClInclude Include="gui\ThirdParty\ToolbarHelper.h" />
+    <ClInclude Include="gui\ThirdParty\ToolTipDialog.h" />
+    <ClInclude Include="gui\XYZControlPage.h" />
+    <ClInclude Include="helpers\Active.h" />
+    <ClInclude Include="gui\AreaChooseDlg.h" />
+    <ClInclude Include="controllers\BaseController.h" />
+    <ClInclude Include="controllers\BaseController_p.h" />
+    <ClInclude Include="gui\direct2d\D2ChannelRender.h" />
+    <ClInclude Include="gui\direct2d\D2HistogramRender.h" />
+    <ClInclude Include="helpers\DaqChunk.h" />
+    <ClInclude Include="controllers\DaqController_p.h" />
+    <ClInclude Include="devices\daqmx\DAQmxTask.h" />
+    <ClInclude Include="controllers\DaqController.h" />
+    <ClInclude Include="controllers\DisplayController.h" />
+    <ClInclude Include="controllers\DisplayController_p.h" />
+    <ClInclude Include="devices\fpga\FPGAIO6587.h" />
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput.h" />
+    <ClInclude Include="controllers\FPUController.h" />
+    <ClInclude Include="devices\xyz\galil\Galil.h" />
+    <ClInclude Include="gui\LogFrame.h" />
+    <ClInclude Include="gui\LogView.h" />
+    <ClInclude Include="controllers\PipelineController_p.h" />
+    <ClInclude Include="helpers\ScopeButton.h" />
+    <ClInclude Include="gui\controls\ScopeButtonCtrl.h" />
+    <ClInclude Include="devices\OutputsDAQmx.h" />
+    <ClInclude Include="devices\Outputs.h" />
+    <ClInclude Include="devices\OutputsDAQmxLineClock.h" />
+    <ClInclude Include="devices\OutputsDAQmxSlave.h" />
+    <ClInclude Include="parameters\Scope.h" />
+    <ClInclude Include="parameters\Devices.h" />
+    <ClInclude Include="parameters\Framescan.h" />
+    <ClInclude Include="parameters\Inputs.h" />
+    <ClInclude Include="parameters\Base.h" />
+    <ClInclude Include="parameters\Plane.h" />
+    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="scanmodes\PixelmapperBasic.h" />
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h" />
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFrameBiDi.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h" />
+    <ClInclude Include="gui\controls\ScopeColorComboCtrl.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceBiDi.h" />
+    <ClInclude Include="helpers\ScopeException.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceHopper.h" />
+    <ClInclude Include="ScopeDatatypes.h" />
+    <ClInclude Include="devices\fpga\FPGAInterface.h" />
+    <ClInclude Include="devices\fpga\FPGADigitalDemultiplexer.h" />
+    <ClInclude Include="devices\fpga\FPGANoiseOutput.h" />
+    <ClInclude Include="devices\fpga\FPGAAnalogIntegrator.h" />
+    <ClInclude Include="devices\fpga\NiFpga.h" />
+    <ClInclude Include="devices\fpga\NiFpga_ClockGenerator.h" />
+    <ClInclude Include="helpers\FPGAException.h" />
+    <ClInclude Include="gui\AboutDlg.h" />
+    <ClInclude Include="gui\ChannelFrame.h" />
+    <ClInclude Include="gui\ChannelView.h" />
+    <ClInclude Include="helpers\helpers.h" />
+    <ClInclude Include="gui\HistogramFrame.h" />
+    <ClInclude Include="gui\HistogramView.h" />
+    <ClInclude Include="gui\FrameScanSawPage.h" />
+    <ClInclude Include="gui\MainDlgFrame.h" />
+    <ClInclude Include="gui\MainDlgView.h" />
+    <ClInclude Include="gui\ScanSettingsSheet.h" />
+    <ClInclude Include="gui\ExperimentSettingsSheet.h" />
+    <ClInclude Include="gui\controls\ScopeCheckBoxCtrl.h" />
+    <ClInclude Include="helpers\ScopeHistogram.h" />
+    <ClInclude Include="helpers\ScopeMultiHistogram.h" />
+    <ClInclude Include="helpers\ScopeMultiImageEncoder.h" />
+    <ClInclude Include="helpers\ScopeOverlay.h" />
+    <ClInclude Include="gui\controls\ScopeUpDownCtrl.h" />
+    <ClInclude Include="helpers\ScopeValue.h" />
+    <ClInclude Include="helpers\ScopeValueBase.h" />
+    <ClInclude Include="gui\StackSettingsPage.h" />
+    <ClInclude Include="gui\StimulationSettingsPage.h" />
+    <ClInclude Include="devices\StimulationVector.h" />
+    <ClInclude Include="controllers\StorageController_p.h" />
+    <ClInclude Include="gui\StorageSettingsPage.h" />
+    <ClInclude Include="gui\Aero.h" />
+    <ClInclude Include="gui\direct2d\d2wrap.h" />
+    <ClInclude Include="helpers\hresult_exception.h" />
+    <ClInclude Include="helpers\SyncQueues.h" />
+    <ClInclude Include="helpers\ScopeImage.h" />
+    <ClInclude Include="controllers\ScopeLogger.h" />
+    <ClInclude Include="helpers\lut.h" />
+    <ClInclude Include="helpers\ScopeMultiImage.h" />
+    <ClInclude Include="controllers\PipelineController.h" />
+    <ClInclude Include="helpers\pixel.h" />
+    <ClInclude Include="scanmodes\ScannerVectorFrameSaw.h" />
+    <ClInclude Include="scanmodes\PixelmapperFrameSaw.h" />
+    <ClInclude Include="gui\controls\ScopeEditCtrl.h" />
+    <ClInclude Include="gui\controls\ScopeSliderCtrl.h" />
+    <ClInclude Include="helpers\ScopeString.h" />
+    <ClInclude Include="helpers\ScopeNumber.h" />
+    <ClInclude Include="controllers\ScopeController.h" />
+    <ClInclude Include="devices\Shutter.h" />
+    <ClInclude Include="gui\MovementPage.h" />
+    <ClInclude Include="gui\controls\ScopeLEDCtrl.h" />
+    <ClInclude Include="devices\InputsDAQmx.h" />
+    <ClInclude Include="devices\StimulationsDAQmx.h" />
+    <ClInclude Include="devices\Inputs.h" />
+    <ClInclude Include="devices\InputsFPGA.h" />
+    <ClInclude Include="gui\controls\ScopeScrollbarCtrl.h" />
+    <ClInclude Include="devices\xyz\SerialConnection.h" />
+    <ClInclude Include="gui\controls\ScopeProgressCtrl.h" />
+    <ClInclude Include="gui\controls\ScopeFOVDiagram.h" />
+    <ClInclude Include="ScopeDefines.h" />
+    <ClInclude Include="ScopeDefinesExample.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeScanModeButton.h" />
+    <ClInclude Include="helpers\ScopeOverlayResonanceSW.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="controllers\StorageController.h" />
+    <ClInclude Include="gui\TimeSeriesSettingsPage.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="devices\xyz\XYControl.h" />
+    <ClInclude Include="devices\xyz\XYZControl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="scope.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource.hm" />
+    <None Include="res\arrowdown.ico" />
+    <None Include="res\arrowleft.ico" />
+    <None Include="res\arrowright.ico" />
+    <None Include="res\arrowup.ico" />
+    <None Include="res\bitmap1.bmp" />
+    <None Include="res\bmp00001.bmp" />
+    <None Include="res\bmp00002.bmp" />
+    <None Include="res\bmp00003.bmp" />
+    <None Include="res\ico00001.ico" />
+    <None Include="res\ico00002.ico" />
+    <None Include="res\icon1.ico" />
+    <None Include="res\scope.ico" />
+    <None Include="res\scopeDoc.ico" />
+    <None Include="res\toolbar.bmp" />
+    <None Include="res\toolbar1.bmp" />
+    <None Include="res\toolbar_areas.bmp" />
+    <None Include="res\toolbar_channelframe.bmp" />
+    <None Include="res\toolbar_histogramframe.bmp" />
+    <None Include="res\toolbar_mainframe.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Annotate_Default.ico" />
+    <Image Include="res\Annotate_Error.ico" />
+    <Image Include="res\Annotate_Warning.ico" />
+    <Image Include="res\bitmap2.bmp" />
+    <Image Include="res\colorcombo.bmp" />
+    <Image Include="res\histogram.ico" />
+    <Image Include="res\led_green.bmp" />
+    <Image Include="res\led_green.png" />
+    <Image Include="res\led_red.bmp" />
+    <Image Include="res\logbook.ico" />
+    <Image Include="res\red.bmp" />
+    <Image Include="res\view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="version.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="scope.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
