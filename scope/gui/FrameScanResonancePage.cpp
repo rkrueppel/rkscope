@@ -43,8 +43,8 @@ BOOL CFrameScanResonancePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) 
 	planes_list.InsertColumn(1, L"FastZ", 0, 60);
 	planes_list.InsertColumn(2, L"Pockels", 0, 60);
 
-	if(!scope_controller.GuiParameters.areas[area]->frameresonance.planes.empty())
-		scope_controller.GuiParameters.areas[area]->frameresonance.planes.pop_back();
+	if(!scope_controller.GuiParameters.areas[area]->FrameResonance().planes.empty())
+		scope_controller.GuiParameters.areas[area]->FrameResonance().planes.pop_back();
 
 	// On initialization, set the first plane with the default FastZ  and Pockels values
 	parameters::PlaneProperties planes;
@@ -98,9 +98,9 @@ LRESULT CFrameScanResonancePage::OnResetPlane(WORD wNotifyCode, WORD wID, HWND h
 	scope_controller.GuiParameters.areas[area]->FrameResonance().planes.clear();
 	// Add the default plane
 	parameters::PlaneProperties planes;
-	planes.position = scope_controller.GuiParameters.areas[area]->frameresonance.fastz;
-	planes.pockels = scope_controller.GuiParameters.areas[area]->frameresonance.pockels;
-	scope_controller.GuiParameters.areas[area]->frameresonance.planes.push_back(planes);
+	planes.position = scope_controller.GuiParameters.areas[area]->FrameResonance().fastz;
+	planes.pockels = scope_controller.GuiParameters.areas[area]->FrameResonance().pockels;
+	scope_controller.GuiParameters.areas[area]->FrameResonance().planes.push_back(planes);
 
 	UpdatePlanesList();
 	return 0;
@@ -111,9 +111,9 @@ LRESULT CFrameScanResonancePage::OnPlanesSelect(int idCtrl, LPNMHDR pNMHDR, BOOL
 	if ( sel == -1 )
 		return 0;
 	parameters::PlaneProperties planes;
-	planes = scope_controller.GuiParameters.areas[area]->frameresonance.planes.at(sel);
-	scope_controller.GuiParameters.areas[area]->frameresonance.fastz = planes.position;
-	scope_controller.GuiParameters.areas[area]->frameresonance.pockels = planes.pockels;
+	planes = scope_controller.GuiParameters.areas[area]->FrameResonance().planes.at(sel);
+	scope_controller.GuiParameters.areas[area]->FrameResonance().fastz = planes.position;
+	scope_controller.GuiParameters.areas[area]->FrameResonance().pockels = planes.pockels;
 	return 0;
 }
 

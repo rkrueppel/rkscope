@@ -127,7 +127,7 @@ int32_t FPGAAnalogDemultiplexer::ReadPixels(DaqChunk& _chunk, const double& _tim
 	std::vector<uint64_t> u64data(_chunk.PerChannel());
 	
 	// Get the desired bitshift for each channel
-	std::vector<const uint8_t> bitshift(2);
+	std::vector<uint8_t> bitshift(2);
 	bitshift[0] = (_chunk.Area()==0)?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
 	bitshift[1] = (_chunk.Area()==0)?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
 

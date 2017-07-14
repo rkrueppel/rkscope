@@ -83,7 +83,7 @@ public:
 	* @return the future value */
 	virtual ControllerReturnStatus WaitForOne(const uint32_t& _a, const int32_t& _wait_time) {
 		if ( futures[_a].valid() ) {
-			std::future_status::future_status state(std::future_status::ready);
+			std::future_status state(std::future_status::ready);
 
 			// Wait (either indefinitely or _wait_time
 			if ( _wait_time == -1 )

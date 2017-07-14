@@ -23,7 +23,7 @@ protected:
 	bool done;
 
 	/** synchronized queue of worker functions/packaged tasks that are executed in the Active' thread (see lambda in constructor). */
-	SynchronizedQueue<const std::function<void(StopCondition* const sc)>> ptq;
+	SynchronizedQueue<std::function<void(StopCondition* const sc)>> ptq;
 
 	/** a thread in which Run runs */
 	std::thread thread;

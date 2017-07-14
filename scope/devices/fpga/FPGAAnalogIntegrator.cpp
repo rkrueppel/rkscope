@@ -118,7 +118,7 @@ int32_t FPGAAnalogIntegrator::ReadPixels(DaqChunk& _chunk, const double& _timeou
 	NiFpga_Status stat = NiFpga_Status_Success;
 
 	std::vector<uint32_t> u32data(_chunk.PerChannel());
-	std::vector<const uint8_t> bitshift(_chunk.NChannels());
+	std::vector<uint8_t> bitshift(_chunk.NChannels());
 	bitshift[0] = parameters->BitshiftCh1();
 	bitshift[1] = parameters->BitshiftCh2();
 

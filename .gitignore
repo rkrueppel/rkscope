@@ -10,9 +10,9 @@
 /fpga_labview/FPGA C APIs
 /scope/tools/exiftool.exe
 /scope/devices/xyz/galil/
-scope/version.h
-scope/ScopeDefines.h
-scope/version.txt
+/scope/version.h
+/scope/ScopeDefines.h
+/scope/version.txt
 
 # User-specific files
 *.suo
