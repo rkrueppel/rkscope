@@ -1,14 +1,10 @@
 #pragma once
 
 #include "controllers/ScopeLogger.h"
+#include "controllers/ScopeController.h"
 #include "MainDlgView.h"
 #include "ThirdParty/ToolbarHelper.h"
 #include "resource.h"
-
-// Forward declaration
-namespace scope {
-	class ScopeController;
-}
 
 namespace scope {
 	namespace gui {
@@ -39,7 +35,7 @@ protected:
 	CMainDlgView m_dlgView;
 
 	/** our ScopeController here */
-	scope::ScopeController scope_controller;
+	scope::ScopeController& scope_controller;
 
 	/** our ScopeLogger here */
 	scope::ScopeLogger scope_logger;
@@ -67,8 +63,9 @@ public:
 	/** the command bar. public for CToolBarHelper to compile. */
 	CCommandBarCtrl m_CmdBar;
 
-	CMainDlgFrame()
-		: firstpaint(true) {
+	CMainDlgFrame(scope::ScopeController& _scope_controller)
+		: firstpaint(true)
+		, scope_controller(_scope_controller) {
 	}
 
 	/** Used in CToolBarHelper to fill the dropdown menus */

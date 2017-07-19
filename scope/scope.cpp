@@ -74,7 +74,7 @@ int Run(HINSTANCE hInstance) {
 		DBOUT(L"Sizeof parameters::Scope " << sizeof(scope_controller.GuiParameters));
 
 		// Create the main window
-		scope::gui::CMainDlgFrame wndMain;
+		scope::gui::CMainDlgFrame wndMain(scope_controller);
 		RECT rec = {20,20,440,980};						// 262x403
 		if(wndMain.CreateEx(HWND(0), rec) == NULL)
 			throw (std::exception("Main window creation failed"));
