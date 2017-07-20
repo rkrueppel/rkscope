@@ -1,78 +1,69 @@
 #pragma once
 
-#include "helpers/helpers.h"
-
-// Forward declarations
-namespace scope {
-	namespace parameters {
-		class Scope;
-	}
-	enum ControllerReturnStatus;
-}
+#include "ScopeDatatypes.h"
+#include "parameters\Scope.h"
 
 namespace scope {
 
 /** Base class for all controllers.
-* @tparam N_ACTIVES the number of active threads
-* @tparam STATIC_PIMPL is the pimpl pointer static (if not we have to delete it in the destructor!), implementin the static pimpl (as a static local variable has to be done in derived classes, see e.g. ScopeController!)
 * @ingroup ScopeControl */
-template<uint32_t N_ACTIVES = 1, bool STATIC_PIMPL = false>
 class BaseController {
 
-public:
-	BaseController()
-		: pimpl(new Impl) {
-	}
-	
-	/** Deletes the pimpl unless it points to a static local variable */
-	virtual ~BaseController() {
-		if (!STATIC_PIMPL)
-			delete pimpl;
-	}
+protected:
+	/** number of possible active threads */
+	const uint32_t nactives;
 
-private:
-	/** disable copy */
-	BaseController(const BaseController& i);
+	/** futures from the asynchronous Run worker functions */
+	std::vector<std::shared_future<ControllerReturnStatus>> futures;
 
-	/** disable assignment */
-	BaseController operator=(const BaseController& i);
+	/** handed to the asynchronous Run worker functions */
+	std::vector<StopCondition> stops;
+
+	/** the Controller's own set of ScopeParameters */
+	parameters::Scope parameters;
 
 protected:
-	/** Hidden implementation class */
-	class Impl;
-
-	/** the pointer to the implementation */
-	Impl* const pimpl;
-
-	/** Constructor which can be used from derived classes to store their implementation class in BaseControllers pimpl.
-	* Stores a pimpl pointer in BaseController::Impl* pimpl (we use this to store pointers to derived Impl classes in the BaseControllers pimpl).
-	* @param[in] _pimpl a pimpl pointer */
-	explicit BaseController(Impl* const _pimpl)
-		: pimpl(_pimpl) {
-	}													
+	/** The worker function that will run asynchronously.
+	* @warning Every work function should regularly check the stop condition and should return on a boost::thread_interrupted exception.
+	* @return since this is only a dummy, always returns ControllerReturnStatus(error). */
+	virtual ControllerReturnStatus Run(StopCondition* const ac, const uint32_t& _n) {
+		DBOUT(L"BaseController::Run - this should not happen, the derived class' Run method should have been called\n");
+		while (!ac->IsSet())
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		ac->Set(false);
+		return ControllerReturnStatus(ControllerReturnStatus::error);			// If this ever gets executed, something went wrong...
+	}
 
 public:
-	/** @return a pointer to the hidden implementation */
-	Impl* Pimpl() const {
-		return pimpl;
-	}
+	BaseController(const uint32_t& _nactives);
 
-	/** Start the controller, calls BaseController::Impl::Start */
-	void Start(const parameters::Scope& _parameters) {
-		pimpl->Start(_parameters);
-	}
+	// Disable copy construction
+	BaseController(const BaseController& _other) = delete;
 
-	/** Stop the controller, calls BaseController::Impl::StopAll */
-	void StopAll() {
-		pimpl->StopAll();
-	}
+	// Disable assignment
+	BaseController operator=(const BaseController& _other) = delete;
 
-	/** Wait until the controller threads finished, calls BaseController::Impl::WaitForAll
-	* @param[in] _wait_time time to wait for finish in milliseconds */
-	ControllerReturnStatus WaitForAll(const int32_t& _wait_time = -1) {
-		return pimpl->WaitForAll(_wait_time);
-	}
+	/** Execute the Run worker functions asynchronously, give them a reference to a StopCondition and get their ControllerReturnStatus futures.
+	* @param[in] _params new set of ScopeParameters to use in the Controller (and its worker functions) */
+	virtual void Start(const parameters::Scope& _params);
 
+	/** Request one async worker function to stop by settings its StopCondition to true.
+	* @param[in] _a which async to stop */
+	virtual void StopOne(const uint32_t& _a);
+
+	/** Request all async worker function to stop. */
+	virtual void StopAll();
+
+	/** Waits for the future of one async worker function.
+	* @param[in] _a which async to wait for
+	* @param[in] _wait_time in milliseconds to wait for the worker function to return, if -1 wait indefinitely
+	* @return the future value */
+	virtual ControllerReturnStatus WaitForOne(const uint32_t& _a, const int32_t& _wait_time);
+
+	/** Wait for the futures of all async worker functions.
+	* @param[in] _wait_time time in milliseconds to wait for the async worker function to return, if -1 wait indefinitely
+	* @return the cumulated (or'ed) ControllerReturnStatus' from all async worker functions' futures */
+	virtual ControllerReturnStatus WaitForAll(const int32_t& _wait_time);
 };
 
 }

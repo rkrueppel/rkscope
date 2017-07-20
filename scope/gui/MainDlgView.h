@@ -15,7 +15,7 @@ class CMainDlgView
 
 protected:
 	/** Keep a ScopeController to connect GUI controls */
-	scope::ScopeController scope_controller;
+	scope::ScopeController& scope_controller;
 
 	/** the settings sheet with all the stuff */
 	CScanSettingsSheet m_sheetScanSettings;
@@ -39,7 +39,7 @@ public:
 	enum { IDD = IDD_MAINDIALOG };
 
 	/** Attach buttons to ScopeController */
-	CMainDlgView();
+	CMainDlgView(scope::ScopeController& _scope_controller);
 	~CMainDlgView();
 	
 	BEGIN_MSG_MAP(CScopeView)

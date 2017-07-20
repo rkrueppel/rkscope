@@ -4,8 +4,9 @@
 namespace scope {
 	namespace gui {
 
-CMainDlgView::CMainDlgView()
-	: m_ScanSingleButton(&scope_controller.StartSingleButton)
+CMainDlgView::CMainDlgView(scope::ScopeController& _scope_controller)
+	: scope_controller(_scope_controller)
+	, m_ScanSingleButton(&scope_controller.StartSingleButton)
 	, m_ScanLiveButton(&scope_controller.StartLiveButton)
 	, m_StopButton(&scope_controller.StopButton)
 	, m_QuitButton(&scope_controller.QuitButton)
@@ -13,7 +14,6 @@ CMainDlgView::CMainDlgView()
 
 CMainDlgView::~CMainDlgView() {
 	DBOUT(L"CMainDlgView::~CMainDlgView()\n");
-
 }
 
 BOOL CMainDlgView::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

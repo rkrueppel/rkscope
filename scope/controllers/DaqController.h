@@ -3,23 +3,6 @@
 #include "ScopeDefines.h"
 #include "BaseController.h"
 
-// Foward declarations
-template<class T> class SynchronizedQueue;
-template<class T> class ScopeMessage;
-namespace scope {
-	class DaqChunk;
-	typedef std::shared_ptr<DaqChunk> DaqChunkPtr;
-	class DaqChunkResonance;
-	typedef std::shared_ptr<DaqChunkResonance> DaqChunkResonancePtr;
-	namespace parameters {
-		class Scope;
-		class Area;
-	}
-	class ScannerVectorFrameBasic;
-	typedef std::shared_ptr<ScannerVectorFrameBasic> ScannerVectorFrameBasicPtr;
-	enum ControllerReturnStatus;
-}
-
 namespace scope {
 
 /** @ingroup ScopeControl
@@ -30,28 +13,17 @@ namespace scope {
 * => "You can execute two different analog inputs from two different boards from separate threads within the same program,
 * and they both run simultaneously without blocking" */
 class DaqController
-	: public BaseController<SCOPE_NAREAS> {
-
-protected:
-	/** Implementation class */
-	class Impl;
-
-protected:
-	/** disable copy */
-	DaqController(DaqController& other);
-	
-	/** disable assignment */
-	DaqController& operator=(DaqController& other);		
-
-	/** To implant a DaqController::Impl pointer into the BaseController's BaseController::Impl pointer */
-	explicit DaqController(Impl*);
-
-	/** @return pointer to the hidden implementation */
-	Impl* const Pimpl() const;
+	: public BaseController {
 
 public:
 	/** Connect queues and get scanner vector and parameters */
 	DaqController(std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>, SCOPE_NAREAS>* const _oqueues, const parameters::Scope& _parameters);
+
+	/** disable copy */
+	DaqController(DaqController& other) = delete;
+
+	/** disable assignment */
+	DaqController& operator=(DaqController& other) = delete;
 
 	/** Stops all */
 	~DaqController();
