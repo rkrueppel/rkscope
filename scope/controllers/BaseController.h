@@ -35,7 +35,7 @@ protected:
 	}
 
 public:
-	BaseController(const uint32_t& _nactives);
+	BaseController(const uint32_t& _nactives, const parameters::Scope& _parameters);
 
 	// Disable copy construction
 	BaseController(const BaseController& _other) = delete;

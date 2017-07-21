@@ -2,10 +2,11 @@
 #include "BaseController.h"
 
 namespace scope {
-	BaseController::BaseController(const uint32_t& _nactives)
+	BaseController::BaseController(const uint32_t& _nactives, const parameters::Scope& _parameter)
 		: nactives(_nactives)
 		, futures(_nactives)
-		, stops(_nactives) {
+		, stops(_nactives)
+		, paramters(_parameters) {
 		ATLASSERT(_nactives > 0);
 	}
 
