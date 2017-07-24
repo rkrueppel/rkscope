@@ -1,59 +1,68 @@
 #pragma once
 #include "ScopeDefines.h"
 #include "BaseController.h"
-#include "BaseController_p.h"
-
-// Forward declarations
-template<class T> class SynchronizedQueue;
-template<class T> class ScopeMessage;
-namespace scope {
-	class DaqChunk;
-	class DaqChunkResonance;
-	class ScannerVectorFrameBasic;
-	typedef std::shared_ptr<ScannerVectorFrameBasic> ScannerVectorFrameBasicPtr;
-	typedef std::shared_ptr<DaqChunk> DaqChunkPtr;
-	typedef std::shared_ptr<DaqChunkResonance> DaqChunkResonancePtr;
-	class ScopeMultiImage;
-	typedef std::shared_ptr<ScopeMultiImage> ScopeMultiImagePtr;
-	class ScopeMultiImageResonanceSW;
-	typedef std::shared_ptr<ScopeMultiImageResonanceSW> ScopeMultiImageResonanceSWPtr;
-	namespace parameters {
-		class Scope;
-	}
-	enum ControllerReturnStatus;
-}
+#include "helpers/SyncQueues.h"
+#include "parameters/Scope.h"
+#include "helpers/DaqChunk.h"
+#include "helpers/DaqChunkResonance.h"
+#include "helpers/ScopeMultiImage.h"
+#include "scanmodes/PixelmapperBasic.h"
+#include "scanmodes/ScannerVectorFrameBasic.h"
+#include "ScopeDatatypes.h"
 
 namespace scope {
 
 /** The PipelineController controls everything from pixels to complete images, i.e. pixel-mapping averaging and distributing to DisplayController and/or StorageController
 * @ingroup ScopeControl */
 class PipelineController
-	: public BaseController<SCOPE_NAREAS> {
+	: public BaseController {
 
 protected:
-	/** The hidden implementation class */
-	class Impl;
+	/** input queue from the DaqController */
+	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const input_queues;
 
+	/** output queue to the StorageController */
+	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const storage_queue;
+
+	/** output queue to the DisplayController */
+	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const display_queue;
+
+	/** array with the scanner vectors */
+	std::vector<ScannerVectorFrameBasicPtr> scannervecs;
+
+	/** protection for online updates during live scanning */
+	std::vector<std::mutex> online_update_mutexe;
+
+	/** trigger for online updates during live scanning */
+	std::vector<bool> online_updates;
+	
+	
 protected:
 	/** disable copy */
-	PipelineController(PipelineController& other);
+	PipelineController(PipelineController& other) = delete;
 
 	/** disable assignment */
-	PipelineController& operator=(PipelineController& other);
-
-	/** @return pointer to the hidden implementation */
-	Impl* const Pimpl() const;
+	PipelineController& operator=(PipelineController& other) = delete;
+	
+	/** Main function for running pixel mapping. It is executed asynchronously.
+	* For every area one Run function is executed (since PipelineController is derived from BaseController<SCOPE_NAREAS>). */
+	ControllerReturnStatus Run(StopCondition* const sc, const uint32_t& _area) override;
 
 public:
 	/** Connects queues and gets parameters */
-	PipelineController(std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>, SCOPE_NAREAS>* const _iqueues
+	PipelineController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
-		, const parameters::Scope& _parameters);
-	
+		);
+		
 	~PipelineController();
+	
+	void StopOne(const uint32_t& _a) override;
+	
+	/** Handles update of parameters during scanning */
+	void OnlineParameterUpdate(const parameters::Area& _areaparameters);
 
-	/** Sets a scanner vector. Only called on startup. Calls PipelineControllerImpl::SetScannerVector */
+	/** Sets the pointers to the scanner vector. Only called on startup. */
 	void SetScannerVector(const uint32_t& _area, ScannerVectorFrameBasicPtr _sv);
 };
 

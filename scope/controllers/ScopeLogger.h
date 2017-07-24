@@ -1,14 +1,9 @@
 #pragma once
 
-// Forward declarations
-namespace scope {
-	namespace gui {
-		class CLogFrame;
-	}
-	namespace parameters {
-		class Window;
-	}
-}
+#include "helpers/Active.h"
+#include "parameters/Scope.h"
+#include "ScopeDatatypes.h"
+#include "gui/LogFrame.h"
 
 namespace scope {
 
@@ -24,50 +19,84 @@ enum log_message_type {
 class ScopeLogger {
 
 protected:
-	/** the hidden implementation class */
-	class Impl;
+	/** Active object for running the loggings */
+	Active<ControllerReturnStatus> active;
 
-	/** pointer to the implementation */
-	Impl* const pimpl;
+	/** path string for log file */
+	std::wstring file_path;
+
+	/** true if file path set and files opened */
+	std::atomic<bool> filepath_set;
+
+	/** File with user comments and logging of performed scans etc */
+	std::wofstream userlogfile;
+
+	/** which message types to save to disk */
+	std::atomic<log_message_type> file_messages;
+
+	/** which message types to print out on debug console */
+	std::atomic<log_message_type> console_message;
+
+	/** which message types to print in log frame */
+	std::atomic<log_message_type> logframe_message;
+
+	/** pointer to the log window frame */
+	gui::CLogFrame* logframe;
+
+	/** the complete log text as a string */
+	std::wstring logbooktext;
+
+	/** a vector of all log entries done by scope */
+	std::list<std::wstring> logbookentries;
 
 protected:
-	/** Has the local static implementation object
-	* static local variable is in there */
-	Impl& GetImpl(const log_message_type& filem, const log_message_type& consolem, const log_message_type& logboxm);					
+	ScopeLogger();
 
-	/** @return pointer to the hidden implementation */
-	Impl* const Pimpl();
+	/** Writes message to debug console */
+	ControllerReturnStatus WriteToConsole(StopCondition* const sc, const std::wstring message);
+	
+	/** Writes message to the logbook window */
+	ControllerReturnStatus WriteToLogbox(StopCondition* const sc, const std::wstring message, const log_message_type msgtype);
+	
+	/** Updates the logbook window , writes complete logbook to disk, overwrites the old logbook on disk.
+	* Since user can edit logbook everywhere, we always have to (over)write everything */
+	ControllerReturnStatus FlushLogbox(StopCondition* const sc);
+		
+public:	
+		/** disable copy */
+	ScopeLogger(const ScopeLogger&) = delete;
 
-public:
-	/** Sets the pimpl from GetImpl */
-	ScopeLogger(const log_message_type& _filem = log_all
-		, const log_message_type& _consolem = log_all
-		, const log_message_type& _logboxm = log_all);
+	/** disable assignment */
+	ScopeLogger operator=(const ScopeLogger&) = delete;
+	
+	static ScopeLogger& GetInstance();
 
-	~ScopeLogger() {}
-
+	/** Sets which types of message will be logged to file, console, and logframe.*/
+	void SetLoggingTypes(const log_message_type& filem, const log_message_type& consolem, const log_message_type& logframem);
+	
 	/** Sets the filepath and creates logfile */
 	void SetFilepath(const std::wstring& _filepath = L"C:\\ScopeData");
 
-	/** Logs a message. Calls ScopeLoggerImpl::Log. */
+	/** Logs a message.*/
 	void Log(const std::wstring& message, const log_message_type& msgtype);
 
-	/** Attaches a CLogFrame as the logbook window. Calls ScopeLogger::Impl::AttachLogFrame. */
+	/** Attaches a CLogFrame as the logbook window.*/
 	void AttachLogFrame(gui::CLogFrame* const _logframe);
 
-	/** Saves log frame parameters into Window (for recreating windows on startup). Calls ScopeLogger::Impl::GetLogFrameWindow. */
+	/** Saves log frame parameters into Window (for recreating windows on startup).*/
 	HWND GetLogFrameWindow();
 
-	/** @return logbook already attached? Calls ScopeLogger::Impl::HasLogFrame.*/
+	/** @return logbook already attached?*/
 	bool HasLogFrame();
 
-	/** Gets the text in the logbook window and calls FlushLogbox. Calls ScopeLogger::Impl::GetUserLoggings. */
+	/** Gets the text in the logbook window and calls FlushLogbox.*/
 	void GetUserLoggings();
 
-	/** Detaches a CLogFrame. Calls ScopeLogger::Impl::DetachLogFrame. */
+	/** Detaches a CLogFrame.*/
 	void DetachLogFrame();
 
-	/** Calls ScopeLogger::Impl::Shutdown */
+	/** Shutdown the Active, called from Run in scope.cpp.
+	* avoids a dangling async thread from the ScopeLogger.*/
 	void Shutdown();
 };
 
