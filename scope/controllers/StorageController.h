@@ -61,7 +61,7 @@ protected:
 
 public:
 	/** Connect input queue and take parameters */
-	StorageController(SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue, const parameters::Scope& _parameters);
+	StorageController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue);
 	
 	/** Stop the controller and interrupt thread if necessary */
 	~StorageController();

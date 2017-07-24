@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "StorageController_p.h"
+#include "StorageController.h"
 
 namespace scope {
 
-StorageController::StorageController(const uint32_t& _nareas, const parameters::Scope& _parametersSynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
-	: BaseController(_nareas, _parameters)
+StorageController::StorageController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
+	: BaseController(_nactives, _parameters)
 	, input_queue(_iqueue)
 	, runcounter(0)
-	, filenames(_nareas)
-	, encoders(_nareas) {
+	, filenames(_nactives)
+	, encoders(_nactives) {
 }
 
 StorageController::~StorageController() {
@@ -16,20 +16,20 @@ StorageController::~StorageController() {
 	WaitForAll(-1);
 }
 
-void StorageController::StopOne(const uint32_t& _a) override {
+void StorageController::StopOne(const uint32_t& _a) {
 	BaseController::StopOne(_a);
 	ScopeMessage<SCOPE_MULTIIMAGEPTR_T> stopmsg(ScopeMessageTag::abort, nullptr);
 	input_queue->Enqueue(stopmsg);
 }
 
-ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uint32_t& _area) override {
+ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uint32_t& _area) {
 	DBOUT(L"StorageController::Run beginning\n");
 	ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 	uint32_t framearea = 0;
 	std::wstring foldername(L"");
-	std::vector<ScopeMultiImagePtr> current_frames(nareas);
+	std::vector<ScopeMultiImagePtr> current_frames(nactives);
 	const DaqMode requested_mode = parameters.requested_mode();
-	std::vector<uint32_t> requested_frames(nareas);
+	std::vector<uint32_t> requested_frames(nactives);
 	uint32_t a = 0;
 	std::generate(std::begin(requested_frames), std::end(requested_frames),
 		[&]() { return parameters.areas[a++]->daq.requested_frames(); } );
@@ -53,7 +53,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 	}
 	
 	bool reqEqual, framecountEqual;
-	std::vector<uint32_t> totalframecount(nareas, 0);
+	std::vector<uint32_t> totalframecount(nactives, 0);
 	InitializeEncoders(dosave, foldername);
 
 	// dequeue and save loop
@@ -83,7 +83,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 		framecountEqual = false;
 		const uint32_t maxframes = 3000000000 / ( current_frames[framearea]->Linewidth()*current_frames[framearea]->Lines()*16/8 );
 		// Preparation for the conditions below
-		for ( uint32_t i = 0; i < nareas; i++ ){
+		for ( uint32_t i = 0; i < nactives; i++ ){
 			reqEqual = reqEqual || ( requested_frames.at(i) == encoders.at(i)->Framecount() + totalframecount.at(i) );
 			framecountEqual = framecountEqual || ( encoders.at(i)->Framecount() == maxframes );
 		}
@@ -98,7 +98,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 
 		// Check if the old file has to be closed and a new one opened
 		if ( framecountEqual ) {
-			for ( uint32_t i = 0; i < nareas; i++ ) {
+			for ( uint32_t i = 0; i < nactives; i++ ) {
 				totalframecount.at(i)+= encoders.at(i)->Framecount();
 
 				// This calls encoders destructors, thus all files are closed and can be TIFF-fixed
@@ -126,7 +126,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 	if ( sc->IsSet() )
 		returnstatus = (ControllerReturnStatus)(returnstatus || ControllerReturnStatus::stopped);
 
-	ATLTRACE(L"StorageController::Impl::Run end\n");
+	ATLTRACE(L"StorageController::Run end\n");
 	return returnstatus;
 }
 
@@ -164,7 +164,7 @@ std::wstring StorageController::CreateFolder() {
 }
 
 void StorageController::InitializeEncoders(const bool& _dosave, const std::wstring& _foldername) {
-	for ( uint32_t a = 0 ; a < nareas ; a++ ) {
+	for ( uint32_t a = 0 ; a < nactives; a++ ) {
 		// Make a new multi image encoder for that area
 		encoders[a] = std::unique_ptr<ScopeMultiImageEncoder>(new ScopeMultiImageEncoder(_dosave, parameters.areas[a]->daq.inputs->channels(), parameters.storage.compresstiff()));
 		filenames[a].resize(parameters.areas[a]->daq.inputs->channels());
@@ -203,7 +203,7 @@ void StorageController::FixTIFFTags() {
 	}
 
 	// Go through all areas (run exiftool.exe once per area)
-	for ( uint32_t a = 0 ; a < nareas ; a++ ) {
+	for ( uint32_t a = 0 ; a < nactives; a++ ) {
 		std::wstringstream cmd;
 		cmd << cmdbase.str();
 		// Add timeseries stuff

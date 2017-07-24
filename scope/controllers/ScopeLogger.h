@@ -87,7 +87,7 @@ public:
 	HWND GetLogFrameWindow();
 
 	/** @return logbook already attached?*/
-	bool HasLogFrame();
+	bool HasLogFrame() const;
 
 	/** Gets the text in the logbook window and calls FlushLogbox.*/
 	void GetUserLoggings();
