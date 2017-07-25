@@ -67,10 +67,9 @@ int Run(HINSTANCE hInstance) {
 		
 		// Sometimes, in debug build an mutex access violation pops up around here, do some cosmetic variations in the code and recompile
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));				// Move this around on debug build mutex bug
-		scope::ScopeLogger logger;	
-		logger.SetFilepath(scope_controller.GuiParameters.storage.folder()+L"\\"+GetCurrentDateString());
+			
+		scope::ScopeLogger::GetInstance().SetFilepath(scope_controller.GuiParameters.storage.folder()+L"\\"+GetCurrentDateString());
 		
-
 		DBOUT(L"Sizeof parameters::Scope " << sizeof(scope_controller.GuiParameters));
 
 		// Create the main window
@@ -90,9 +89,9 @@ int Run(HINSTANCE hInstance) {
 		std::wstring msg2(L"This is Scope (Git commit ");
 		msg2 += CA2W(STR(LASTGITCOMMIT));
 		msg2 += L")";
-		logger.Log(msg2, scope::log_info);
+		scope::ScopeLogger::GetInstance().Log(msg2, scope::log_info);
 		msg2 = L"Using configuration file " + filepath;
-		logger.Log(msg2, scope::log_info);
+		scope::ScopeLogger::GetInstance().Log(msg2, scope::log_info);
 
 		// Run the main message loop
 		nRet = theLoop.Run();
@@ -103,8 +102,7 @@ int Run(HINSTANCE hInstance) {
 	}
 
 	_Module.RemoveMessageLoop();
-	scope::ScopeLogger log;
-	log.Shutdown();
+	scope::ScopeLogger::GetInstance().Shutdown();
 	return nRet;
 }
 

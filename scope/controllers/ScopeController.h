@@ -1,11 +1,35 @@
 #pragma once
+#include "ScopeControllerModes.h"
+#include "ScopeDefines.h"
+#include "version.h"
+#include "scanmodes/ScannerVectorFrameBasic.h"
+#include "scanmodes/ScannerVectorFrameSaw.h"
+#include "scanmodes/ScannerVectorFrameBiDi.h"
+#include "scanmodes/ScannerVectorFramePlaneHopper.h"
+#include "scanmodes/ScannerVectorFrameResonanceBiDi.h"
+#include "scanmodes/ScannerVectorFrameResonanceHopper.h"
+#include "helpers/ScopeMultiImage.h"
+#include "helpers/ScopeMultiImageResonanceSW.h"
+#include "DaqController.h"
+#include "PipelineController.h"
+#include "DisplayController.h"
+#include "StorageController.h"
+#include "helpers/ScopeException.h"
+#include "FPUController.h"
+#include "ScopeLogger.h"
+#include "gui/ChannelFrame.h"
+#include "gui/HistogramFrame.h"
+#include "devices/xyz/XYZControl.h"
+#include "devices/xyz/XYZControlGalil.h"
+#include "devices/xyz/XYZControlSutter.h"
+#include "devices/GaterDAQmx.h"
 #include "helpers/ScopeButton.h"
 #include "helpers/ScopeScanModeButton.h"
 #include "helpers/ScopeNumber.h"
 #include "parameters/Scope.h"
 #include "ScopeDatatypes.h"
+#include "ScopeControllerButtons.h"
 #include "BaseController.h"
-#include "BaseController_p.h"
 
 // We need the type of the FPGAStatus struct for FPGAFIFOStatus here
 #include "devices\fpga\FPGAPhotonCounter.h"
@@ -16,17 +40,6 @@
 #include "devices\fpga\FPGANoiseOutput.h"
 #include "devices\fpga\FPGAResonanceScanner.h"
 #include "devices\fpga\FPGAResonanceScanner_NI5771.h"
-
-// Forward declarations
-namespace scope {
-	template<class T> class ScopeDatatypeBase;
-	class ScannerVectorTypeHelper;
-	typedef ScopeDatatypeBase<ScannerVectorTypeHelper> ScannerVectorType;
-	namespace gui {
-		class CChannelFrame;
-		class CHistogramFrame;
-	}
-}
 
 namespace scope {
 
@@ -44,57 +57,63 @@ namespace scope {
 * since call of ScopeController.instance().version() in main (there only one thread exists yet)
 * ensures safe initialization. */
 class ScopeController
-	: public BaseController<1, true> {
+	: public BaseController {
 
 protected:
-	/** The hidden implementation class */
-	class Impl;
+	/** queues from the daqs to the pipelines */
+	std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>, SCOPE_NAREAS> daq_to_pipeline;
 
-	/** Hidden implementation class for basic mode stuff */
-	class ModeBasicImpl;
+	/** queue from the pipelines to the storage */
+	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_storage;
 
-	/** Hidden implementation class for live mode */
-	class ModeLiveImpl;
+	/** queue from the pipelines to the display */
+	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_display;
 
-protected:
+	/** Scanner vectors
+	* @{ */
+	/** The scanner vector for frame scanning */
+	std::array<ScannerVectorFrameBasicPtr, SCOPE_NAREAS> framescannervecs;
+	/** @} */
+
+	/** @name Dataflow controllers
+	* @{ */
+	DaqController theDaq;
+	PipelineController thePipeline;
+	StorageController theStorage;
+	DisplayController theDisplay;
+	/** @} */
+
+	/** thread-safe bool to signal a requested abort of a stack scan */
+	StopCondition repeat_abort;
+
+	/** for abortable waiting between timeseries repeats */
+	std::condition_variable waitbetweenrepeats_cond;
+
+	/** for abortable waiting between timeseries repeats */
+	std::mutex waitbetweenrepeats_mutex;
+
+	/** future for the online update thread */
+	std::future<void> onlineupdate_future;
+
+	/** set if an online update is currently running, to prevent to simultaneous online update threads */
+	std::atomic<bool> onlineupdate_running;
+
+	/** stores the time to run a scan */
+	DWORD time;
+
+	/** true after parameter set on program start is loaded */
+	ScopeNumber<bool> initialparametersloaded;
+
+	/** currently loaded config */
+	std::wstring currentconfigfile;
+
+	/** list of callbacks for scan mode switching */
+	std::vector<std::function<void(const uint32_t&, const ScannerVectorType&)>> scanmodecallbacks;
+
 	/*ScopeController(ScopeController& other);				// we need this copyable for std::bind to work...
 	ScopeController& operator=(ScopeController& other); */
 
-	/** static local variable for singleton is in there. */
-	Impl& GetImpl();
-
-	/** @return pointer to the static implementation object (from inside GetImpl). */
-	Impl* const Pimpl() const;
-
 public:
-	/** Keeps the buttons controlling FPU movements together. */
-	struct FPUButtons {
-		/** @name the cardinal movement directions and some other helpful buttons
-		* @{ */
-		ScopeButton LeftButton;
-		ScopeButton RightButton;
-		ScopeButton UpButton;
-		ScopeButton DownButton;
-		ScopeButton SetZeroButton;
-		/** @} */
-	};
-
-	/** Keeps the buttons controlling scan modes together. */
-	struct ScanModeButtons {
-		/** A map with buttons for all scan modes */
-		std::map<ScannerVectorTypeHelper::Mode, ScopeScanModeButton> map;
-
-		/** Fill the map */
-		ScanModeButtons() {
-			map.emplace(ScannerVectorTypeHelper::Mode::Bidirectional, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::Bidirectional));
-			map.emplace(ScannerVectorTypeHelper::Mode::LineStraight, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::LineStraight));
-			map.emplace(ScannerVectorTypeHelper::Mode::Planehopper, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::Planehopper));
-			map.emplace(ScannerVectorTypeHelper::Mode::ResonanceBiDi, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::ResonanceBiDi));
-			map.emplace(ScannerVectorTypeHelper::Mode::ResonanceHopper, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::ResonanceHopper));
-			map.emplace(ScannerVectorTypeHelper::Mode::Sawtooth, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::Sawtooth));
-		}
-	};
-
 	/** The complete pseudo-global parameter set of the microscope. GUI classes can connect e.g. CScopeEditCtrl to specific parameters and thus pass values
 	* to the ScopeController. At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
 	static parameters::Scope GuiParameters;
@@ -102,6 +121,12 @@ public:
 	/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
 	* by static ScopeButtons etc here) while scanning. */
 	static ScopeNumber<bool> ReadOnlyWhileScanning;
+
+	/** @name Hardware controllers
+	* @{ */
+	FPUController theFPUs;
+	SCOPE_XYZCONTROL_T theStage;
+	/** @} */
 
 	/** @name ScopeButtons
 	* GUI classes can connect CScopeButtonCtrl to these ScopeButtons via their scope_controller member and thus pass commands to the ScopeController.
@@ -147,6 +172,43 @@ public:
 	static std::array<ScanModeButtons, SCOPE_NAREAS> ScanMode;
 	/** @} */
 
+
+protected:
+	/** Logs the current scan (not live scans) */
+	void LogRun();
+
+	/** Starts all controllers with the current parameters */
+	void StartAllControllers();
+
+	/** Stops all controllers in the correct order and waits for them to finish. */
+	void StopAllControllers();
+
+	/** Waits for all controllers to intrinsically finish. Only good for nframes runmode */
+	void WaitForAllControllers();
+
+	/** Clear all queues between controllers */
+	void ClearAllQueues();
+
+	/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */
+	void SetScannerVectorParameters();
+
+	/** Worker function to control live scanning (basically only starting everything up) */
+	ControllerReturnStatus RunLive(StopCondition* const sc);
+
+	/** Worker function to control a single scan */
+	ControllerReturnStatus RunSingle(StopCondition* const sc);
+
+	/** Worker function to control a stack scan */
+	ControllerReturnStatus RunStack(StopCondition* const sc);
+
+	/** Worker function to control a timeseries scan */
+	ControllerReturnStatus RunTimeseries(StopCondition* const sc);
+
+	/** Worker function to control a behavior triggered scan */
+	ControllerReturnStatus RunBehavior(StopCondition* const sc);
+
+	/** Clears queues, resets run state, and reenables controls */
+	void ClearAfterStop();
 public:
 	/** Injects pimpl of ScopeController into BaseControllers pimpl (saves memory, since pointer is reused for the current pimpl) */
 	ScopeController(void);
@@ -161,8 +223,8 @@ public:
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;
 
-	/** Called by CMainDialogFrame::QuitApplication. Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).
-	* Calls ScopeController::ScopeControllerImpl::PrepareQuit */
+	/** Called by CMainDialogFrame::QuitApplication.
+	* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/
 	void PrepareQuit();
 
 	/** Load a complete ScopeParameters set from disk. Calls ScopeControllerImpl::LoadParameters.*/
