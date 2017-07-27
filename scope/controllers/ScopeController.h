@@ -174,6 +174,27 @@ public:
 
 
 protected:
+	/** (Re-)Initializes ScopeControllers own hardware components (XYControl/Stage, ZControl, and FPU stuff) */
+	void InitializeHardware();
+
+	/** Sets the state of the GUI buttons for FPU control (via the corresponding ScopeButtons). True = enabled, false = disabled.  */
+	void SetFPUButtonsState(const bool& state);
+
+	/** Sets the state of GUI controls (via the corresponding ScopeNumbers). True = read&write/enabled, false = readonly/disabled.
+	* Other GUI elements can connect to ReadOnlyWhileScanning. */
+	void SetGuiCtrlState();
+
+	/** Called via change of GuiParameters.areas[x].framesaw.scanvec.xres etc. */
+	void ResolutionChange(const uint32_t& _area);
+
+	/** Sets the type of scanning. Called via ScopeController ScanModeButtons.
+	* Calls the scanmode callbacks.
+	* Updates/recreates the scanvectors from a different type and sets them in theDaq and thePipeline */
+	void SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
+
+	/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */
+	void SetScannerVectorParameters();
+
 	/** Logs the current scan (not live scans) */
 	void LogRun();
 
@@ -188,9 +209,6 @@ protected:
 
 	/** Clear all queues between controllers */
 	void ClearAllQueues();
-
-	/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */
-	void SetScannerVectorParameters();
 
 	/** Worker function to control live scanning (basically only starting everything up) */
 	ControllerReturnStatus RunLive(StopCondition* const sc);
@@ -209,16 +227,18 @@ protected:
 
 	/** Clears queues, resets run state, and reenables controls */
 	void ClearAfterStop();
+
 public:
-	/** Injects pimpl of ScopeController into BaseControllers pimpl (saves memory, since pointer is reused for the current pimpl) */
+	/** Initializes and connects stuff */
 	ScopeController(void);
 
+	/** Stop whatever is running */
 	~ScopeController(void);
 
 	/** Print the current ScopeController version to debug console.
 	* This should be called before creation of the GUI, when only the main thread exists. Then the static member in GetImpl() is initialized and we
 	* do not have to worry about thread-safe singleton creation... */
-	void Version();
+	void Version() const;
 
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;
@@ -227,41 +247,77 @@ public:
 	* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/
 	void PrepareQuit();
 
-	/** Load a complete ScopeParameters set from disk. Calls ScopeControllerImpl::LoadParameters.*/
-	bool LoadParameters(const std::wstring& filepath);
+	/** Starts live scanning by running RunLive asynchronously */
+	void StartLive();
 
-	/** Store the current complete ScopeParameters set to disk. Calls ScopeControllerImpl::SaveParameters (non-const since we update parameters from GUI first).*/
-	bool SaveParameters(const std::wstring& filepath);
+	/** Start a stack scan by running RunStack asynchronously */
+	void StartStack();
 
-	/** Zeros galvo outputs. Calls ScopeControllerImpl::ZeroGalvoOutputs. */
+	/** Starts a single frame scan by running RunSingle asynchronously */
+	void StartSingle();
+
+	/** Starts a timeseries by running RunTimeseries asynchronously */
+	void StartTimeseries();
+
+	/** Starts a behavior triggered acquisition by running RunBehavior asynchronously */
+	void StartBehavior();
+
+	/** Stops whatever scanning is going on and clears the queues */
+	void Stop();
+
+	/** Updates area parameters and scanner vectors in the controllers from the GuiParameters set without stopping scanning */
+	void UpdateAreaParametersFromGui(const uint32_t& _area);
+
+	/** Loads current parameter set from disk
+	* @param[in] _filepath path and name of parameters on disk */
+	bool LoadParameters(const std::wstring& _filepath);
+
+	/** Saves the current parameter set to disk
+	* @param[in] _filepath path and name to save to */
+	bool SaveParameters(const std::wstring& _filepath);
+
+	/** Sets the current xyz stage position as zero */
+	void SetStageZero();
+
+	/** Sets the start stack position to the current z position */
+	void StackStartHere();
+
+	/** Sets the stop stack position to the current z position */
+	void StackStopHere();
+
+	/** Zeros galvo outputs.*/
 	void ZeroGalvoOutputs();
 
-	/** Opens/closes the shutter. Calls ScopeControllerImpl::OpenCloseShutter */
+	/** Opens/closes the shutter.*/
 	void OpenCloseShutter(const uint32_t& _area, const bool& _open);
 
-	/** Current state of the shutter. Calls ScopeControllerImpl::GetShutterState */
+	/** Current state of the shutter.*/
 	bool GetShutterState(const uint32_t& _area) const;
 
-	/** Turns the resonance scanner relay on and off. Calls ScopeControllerImpl::TurnOnOffSwitchResonance */
+	/** Turns the resonance scanner relay on and off.*/
 	void TurnOnOffSwitchResonance(const uint32_t& _area, const bool& _on);
 
-	/** Current state of the resonance scanner relay. Calls ScopeControllerImpl::GetShutterState */
+	/** Current state of the resonance scanner relay.*/
 	bool GetSwitchResonanceState(const uint32_t& _area) const;
 
 	/** @name Attaching/Detaching channels and histograms
 	* @{ */
+	/** Attach a CChannelFrame as observer */
 	void AttachFrame(gui::CChannelFrame* const cframe);
+	/** Detach an observing CChannelFrame */
 	void DetachFrame(gui::CChannelFrame* const cframe);
+	/** Attach a CHistogramFrame as observer */
 	void AttachFrame(gui::CHistogramFrame* const hframe);
+	/** @return true if at least one histogram already attached to theDisplay for that area. */
 	bool HistogramAlreadyAttached(const uint32_t& _area);
+	/** Detach an observing CHistogramFrame */
 	void DetachFrame(gui::CHistogramFrame* const hframe);
 	/** @} */
 
-	/** Saves current positions of windows by adding frames to WindowCollection of ScopeController::GuiParameters.
-	* Calls ScopeControllerImpl::SaveCurrentWindowPositions. */
+	/** Saves current positions of windows by adding frames to WindowCollection of ScopeController::GuiParameters.*/
 	void SaveCurrentWindowPositions();
 
-	/** Sets display limits for a certain area and channel. Calls ScopeControllerImpl::SetHistogramLimits.*/
+	/** Sets the color limits for displaying imgages, calls DisplayController::SetHistogramLimits */
 	void SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper);
 
 	/** Updates the number of resonance planes in scope controller **/
@@ -274,8 +330,7 @@ public:
 	void SelectPreset(const uint32_t& _area, const size_t& _n);
 
 	/** Registers a function to call when scanmode is changed.
-	* Usually CScanSettingsSheet registers for switching between FrameScan property pages.
-	* Calls ScopeControllerImpl::RegisterScanModeCallback */
+	* Usually CScanSettingsSheet registers for switching between FrameScan property pages.*/
 	void RegisterScanmodeCallback(std::function<void(const uint32_t&, const ScannerVectorType&)> _callback);
 };
 

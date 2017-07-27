@@ -521,9 +521,6 @@
     <ClInclude Include="gui\TimeSeriesSettingsPage.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="controllers\BaseController_p.h">
-      <Filter>Scope control</Filter>
-    </ClInclude>
     <ClInclude Include="controllers\BaseController.h">
       <Filter>Scope control</Filter>
     </ClInclude>
@@ -533,19 +530,10 @@
     <ClInclude Include="controllers\PipelineController.h">
       <Filter>Scope control</Filter>
     </ClInclude>
-    <ClInclude Include="controllers\PipelineController_p.h">
-      <Filter>Scope control</Filter>
-    </ClInclude>
     <ClInclude Include="controllers\ScopeController.h">
       <Filter>Scope control</Filter>
     </ClInclude>
     <ClInclude Include="controllers\StorageController.h">
-      <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\StorageController_p.h">
-      <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\DisplayController_p.h">
       <Filter>Scope control</Filter>
     </ClInclude>
     <ClInclude Include="controllers\DisplayController.h">
@@ -729,9 +717,6 @@
       <Filter>Devices</Filter>
     </ClInclude>
     <ClInclude Include="controllers\DaqController.h">
-      <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\DaqController_p.h">
       <Filter>Scope control</Filter>
     </ClInclude>
     <ClInclude Include="devices\xyz\XYZControlGalil.h">
