@@ -10,7 +10,7 @@
 #include "fpga\FPGANoiseOutput.h"
 #include "ScopeDefines.h"
 #include "helpers\helpers.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "parameters\Inputs.h"
 #include "parameters\Scope.h"
 #include "helpers\DaqChunk.h"

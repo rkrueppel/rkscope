@@ -4,14 +4,13 @@
 
 namespace scope {
 
-class ScopeControllerModeBasic
-	: public ScopeController {
+class ScopeControllerModeBasic {
 		
 };
 
 
 /** The implementation class of the ScopeController. */
-class ScopeController::ModeLiveImpl
+class ScopeControllerModeLive
 	: public ScopeControllerModeBasic {
 
 	/** Starts live scanning by running RunLive asynchronously */
@@ -30,13 +29,13 @@ class ScopeController::ModeLiveImpl
 	}
 
 	/** Worker function to control live scanning (basically only starting everything up) */
-	ControllerReturnStatus Run(StopCondition* const sc) {
+	/**ControllerReturnStatus Run(StopCondition* const sc) {
 		//ClearAllQueues();
 		//SetScannerVectorParameters();
 		DBOUT(L"ScopeController::RunLive()");
 		//StartAllControllers();
 		return ControllerReturnStatus::finished;
-	}
+	}*/
 
 	
 };

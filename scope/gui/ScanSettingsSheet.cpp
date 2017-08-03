@@ -6,7 +6,7 @@
 #include "FrameScanHopperPage.h"
 #include "FrameScanResonancePage.h"
 #include "FrameScanResonanceSlavePage.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 namespace scope {
 	namespace gui {

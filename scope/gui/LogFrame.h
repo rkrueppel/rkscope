@@ -11,9 +11,6 @@ class CLogFrame
 	: public CFrameWindowImpl<CLogFrame> {
 
 protected:
-	/** our ScopeLogger here */
-	scope::ScopeLogger scope_logger;
-
 	/** the view class inside the frame */
 	CLogView view;
 

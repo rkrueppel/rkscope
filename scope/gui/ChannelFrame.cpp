@@ -16,15 +16,15 @@ std::array<uint32_t, 4> CChannelFrame::colorcombo_resources = { IDC_COLORCOMBO1,
 
 CChannelFrame::CChannelFrame(const uint32_t& _area)
 	: area(_area)
-	, channels(scope_controller.GuiParameters.areas[_area]->daq.inputs->channels())
+	, channels(ScopeController::GuiParameters.areas[_area]->daq.inputs->channels())
 	, attached(false)
-	, current_frame(std::make_shared<scope::SCOPE_MULTIIMAGE_T>(_area, channels, scope_controller.GuiParameters.areas[_area]->Currentframe().yres(), scope_controller.GuiParameters.areas[_area]->Currentframe().xres()))
+	, current_frame(std::make_shared<scope::SCOPE_MULTIIMAGE_T>(_area, channels, ScopeController::GuiParameters.areas[_area]->Currentframe().yres(), scope_controller.GuiParameters.areas[_area]->Currentframe().xres()))
 	, framecountstr(L"Frame ")
 	, mousepos(D2D1::Point2F(0.0f, 0.0f))
 	, mouseposstr(L"(0, 0)")
 	, statusstr(L"Stopped")
 	, channel_colors(channels, None)
-	, overlay(scope_controller.GuiParameters.areas[_area]->Currentframe().yres(), scope_controller.GuiParameters.areas[_area]->Currentframe().xres()) {
+	, overlay(ScopeController::GuiParameters.areas[_area]->Currentframe().yres(), ScopeController::GuiParameters.areas[_area]->Currentframe().xres()) {
 }
 
 CChannelFrame::~CChannelFrame() {
@@ -292,7 +292,7 @@ void CChannelFrame::SetHistogramLimits(const uint32_t& _channel, const uint16_t&
 		LayOverAndRender(current_frame);
 }
 
-void CChannelFrame::UpdateStatus(const RunState& _rs) {
+void CChannelFrame::UpdateStatus(const scope::RunState& _rs) {
 	statusstr = _rs;
 	Send(std::bind(&CChannelFrame::RunUpdateStatusbar, this, std::placeholders::_1, current_frame));
 }

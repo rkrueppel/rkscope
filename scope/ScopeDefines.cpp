@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ScopeDefines.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "devices/Inputs.h"
 #include "devices/InputsDAQmx.h"
 #include "devices/InputsFPGA.h"

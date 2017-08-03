@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ScopeValueBase.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "ScopeException.h"
 
 namespace scope {

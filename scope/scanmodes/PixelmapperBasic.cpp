@@ -6,7 +6,7 @@
 #include "PixelmapperFrameResonanceSW.h"
 #include "PixelmapperFrameResonanceHW.h"
 #include "helpers/DaqChunk.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeMultiImage.h"
 
 namespace scope {

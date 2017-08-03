@@ -2,7 +2,7 @@
 #include "OutputsDAQmx.h"
 #include "parameters/Outputs.h"
 #include "parameters/Scope.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeException.h"
 
 namespace scope  {
@@ -105,7 +105,7 @@ ZeroOutputsDAQmx::ZeroOutputsDAQmx(const parameters::OutputsDAQmx& _params) {
 			, L"XYZPOut"
 			, -_params.range()
 			, _params.range());
-		task.WriteAnalogI16(std::make_shared<std::vector<int16>>(4,0)->data(), 1, true);
+		task.WriteAnalogI16(std::make_shared<std::vector<int16>>(4,(int16)0)->data(), 1, true);
 		task.WaitUntilDone(500);
 		task.Clear();
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }

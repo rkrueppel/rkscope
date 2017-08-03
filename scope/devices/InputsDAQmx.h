@@ -3,7 +3,7 @@
 #include "ScopeDefines.h"
 #include "Inputs.h"
 #include "devices/daqmx/DAQmxTask.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 // Forward declarations
 namespace scope {

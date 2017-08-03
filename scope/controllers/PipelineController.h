@@ -8,7 +8,7 @@
 #include "helpers/ScopeMultiImage.h"
 #include "scanmodes/PixelmapperBasic.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 namespace scope {
 

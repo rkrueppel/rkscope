@@ -9,7 +9,7 @@
 #include "helpers/ScopeException.h"
 #include "devices/StimulationVector.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/DaqChunk.h"
 #include "helpers/DaqChunkResonance.h"
 #include "devices/OutputsDAQmx.h"

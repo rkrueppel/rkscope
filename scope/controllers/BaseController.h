@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "parameters\Scope.h"
 
 namespace scope {

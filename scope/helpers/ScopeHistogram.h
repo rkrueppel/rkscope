@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ScopeImage.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 namespace scope {
 

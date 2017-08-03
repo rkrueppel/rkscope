@@ -6,7 +6,7 @@
 #include "parameters/Scope.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "gui/ChannelFrame.h"
 #include "gui/HistogramFrame.h"
 #include "ScopeLogger.h"

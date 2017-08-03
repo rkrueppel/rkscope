@@ -2,7 +2,7 @@
 #include "OutputsDAQmxResonance.h"
 #include "parameters/Outputs.h"
 #include "parameters/Scope.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeException.h"
 
 namespace scope  {

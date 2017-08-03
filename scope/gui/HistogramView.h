@@ -1,9 +1,8 @@
 #pragma once
 
 #include "direct2d/D2HistogramRender.h"
-#include "controllers/ScopeController.h"
 #include "controls/ScopeButtonCtrl.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "resource.h"
 
 // Forward declarations
@@ -33,9 +32,6 @@ protected:
 
 	/** what uin16_t histogram range is used */
 	uint16_t range;
-
-	/** the ScopeController kept handy here */
-	ScopeController scope_controller;
 
 	/** image corresponding to the currently displayed histogram */
 	SCOPE_MULTIIMAGECPTR_T current_frame;

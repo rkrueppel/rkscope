@@ -27,7 +27,7 @@
 #include "helpers/ScopeScanModeButton.h"
 #include "helpers/ScopeNumber.h"
 #include "parameters/Scope.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "ScopeControllerButtons.h"
 #include "BaseController.h"
 

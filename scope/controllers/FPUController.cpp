@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "FPUController.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 namespace scope {
 

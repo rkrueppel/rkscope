@@ -4,7 +4,7 @@
 #include <NIDAQmx.h>
 #pragma comment(lib, "NIDAQmx.lib")
 
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 
 /** This is basically a C++ wrapper around NI's %DAQmx C library. Contains all DAQmx related stuff. */
 namespace DAQmx {

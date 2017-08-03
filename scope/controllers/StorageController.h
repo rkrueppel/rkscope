@@ -5,7 +5,7 @@
 #include "helpers/helpers.h"
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
 #include "helpers/hresult_exception.h"

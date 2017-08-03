@@ -2,8 +2,7 @@
 
 #include "Outputs.h"
 #include "devices/daqmx/DAQmxTask.h"
-#include "ScopeDatatypes.h"
-#include "controllers/ScopeController.h"
+#include "helpers/ScopeDatatypes.h"
 
 // Forward declarations
 namespace scope {
@@ -25,9 +24,6 @@ protected:
 
 	/** The DAQmx task for the resenance scanner zoom factor */
 	DAQmx::CDAQmxDigitalOutTask taskResonanceZoom;
-
-	/** a ScopeController instance */
-	scope::ScopeController scope_controller;
 
 public:
 	/** Creates the task for scanner, pockels, and fast-z output with NI DAQmx.\n

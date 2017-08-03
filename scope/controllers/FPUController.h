@@ -1,8 +1,7 @@
 #pragma once
 
 #include "ScopeDefines.h"
-#include "ScopeController.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "devices/xyz/XYControlStanda.h"
 #include "devices/xyz/XYControl.h"
 
@@ -17,9 +16,6 @@ class FPUController {
 protected:
 	/** step size for a relative movement */
 	std::array<double, SCOPE_NAREAS> stepsizes;
-
-	/** our ScopeController */
-	ScopeController scope_controller;
 
 public:
 	/** for xy movement of FPU stages */

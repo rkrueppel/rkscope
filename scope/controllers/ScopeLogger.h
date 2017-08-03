@@ -2,7 +2,7 @@
 
 #include "helpers/Active.h"
 #include "parameters/Scope.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "gui/LogFrame.h"
 
 namespace scope {

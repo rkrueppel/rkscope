@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ScopeDefines.h"
-#include "controllers/ScopeController.h"
 #include "ChannelView.h"
+#include "helpers\ScopeDatatypes.h"
 #include "helpers/ScopeOverlay.h"
 #include "helpers/ScopeOverlayResonanceSW.h"
 #include "helpers/Active.h"
@@ -31,9 +31,6 @@ class CChannelFrame
 	, public Active<bool> {
 
 protected:
-	/** the ScopeController kept handy here */
-	scope::ScopeController scope_controller;
-	
 	/** area for this CChannelFrame */
 	const uint32_t area;
 	
@@ -181,7 +178,7 @@ public:
 	* these run in the DisplayController's Run thread
 	* @{ */
 	/** Updates the statusstr and send RunUpdateStatusbar to the Active object */
-	virtual void UpdateStatus(const RunState& _rs);
+	virtual void UpdateStatus(const scope::RunState& _rs);
 
 	/** Sets upper and lower limit of displayed colors for a channel */
 	virtual void SetHistogramLimits(const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper);

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "controllers/ScopeController.h"
-
 // Forward declarations
 namespace scope {
 template <class T> class ScopeNumber;
@@ -22,9 +20,6 @@ protected:
 
 	/** future for the async polling thread */
 	std::future<bool> fut;
-
-	/** our ScopeController here */
-	ScopeController scope_controller;
 
 	/** pointers to a ScopeNumber that is updated with the polled x and y positions */
 	std::array<ScopeNumber<double>*, 2> pos;

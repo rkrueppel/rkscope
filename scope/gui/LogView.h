@@ -14,10 +14,6 @@ class CLogView
 	: public CWindowImpl<CLogView, CRichEditCtrl, CLogViewTraits>
 	, public CRichEditCommands<CLogView> {
 
-protected:
-	/** our ScopeLogger here */
-	scope::ScopeLogger scope_logger;
-
 public:
 	DECLARE_WND_SUPERCLASS(NULL, CRichEditCtrl::GetWndClassName())
 

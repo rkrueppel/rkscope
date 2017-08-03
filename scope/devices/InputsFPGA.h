@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Inputs.h"
-#include "controllers/ScopeController.h"
+#include "fpga\FPGANoiseOutput.h"
 
 // Forward declarations
 namespace scope {
@@ -25,9 +25,6 @@ class InputsFPGA
 	: public Inputs {
 
 protected:
-		/** our ScopeController here */
-	ScopeController scope_controller;
-
 	/** how many laser pulses arrive per pixel, photon counts are normalized to the number of laser pulses */
 	double laserpulsesperpixel;
 

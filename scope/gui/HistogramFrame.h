@@ -1,8 +1,7 @@
 #pragma once
 #include "ScopeDefines.h"
 #include "HistogramView.h"
-#include "controllers/ScopeController.h"
-#include "ScopeDatatypes.h"
+#include "helpers/ScopeDatatypes.h"
 #include "helpers/Active.h"
 #include "ThirdParty/ToolbarHelper.h"
 #include "resource.h"
@@ -24,9 +23,6 @@ class CHistogramFrame
 protected:
 	/** Need to typedef this, otherwise problems with CHAIN_MSG_MAP macro... */
 	typedef CFrameWindowImpl<CHistogramFrame, CWindow, CHistogramFrameTraits> CHistogramFrameType;
-
-	/** our ScopeController here */
-	scope::ScopeController scope_controller;
 
 	/** which area is the histogram for */
 	const uint32_t area;
