@@ -17,11 +17,10 @@ class CBehaviorSettingsPage
 	, public CToolTipDialog<CBehaviorSettingsPage> {
 
 protected:
-	/** a scope controller */
-	scope::ScopeController scope_controller;
-
 	/** start behavior triggered scanning */
 	CScopeButtonCtrl start_behavior_button;
+
+	parameters::Behavior& behaviorparameters;
 
 	/** list box for all planes */
 	CListViewCtrl planes_list;
@@ -38,7 +37,7 @@ protected:
 public:
 	enum { IDD = IDD_BEHAVIOR_PROPPAGE };
 
-	CBehaviorSettingsPage(void);
+	CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters);
 
 	BEGIN_MSG_MAP_EX(CBehaviorSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

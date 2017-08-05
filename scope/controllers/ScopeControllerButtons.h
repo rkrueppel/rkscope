@@ -16,6 +16,21 @@ namespace scope {
 		/** @} */
 	};
 
+	struct RunButtons {
+		ScopeButton StartSingleButton;
+		ScopeButton StartLiveButton;
+		ScopeButton StartStackButton;
+		ScopeButton StartTimeseriesButton;
+		ScopeButton StartBehaviorButton;
+		ScopeButton StopButton;
+		ScopeButton QuitButton;
+	};
+
+	struct StackButtons {
+		ScopeButton StackStartHereButton;
+		ScopeButton StackStopHereButton;
+	};
+
 	/** Keeps the buttons controlling scan modes together. */
 	struct ScanModeButtons {
 		/** A map with buttons for all scan modes */

@@ -12,7 +12,8 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 		throw ScopeException("The first area must not be a slave area! Reconfigure!!!!");
 
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
-	size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
+	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
+	size_t num_planes = (_params.areas[area]->FrameResonance().planes.size()) ? _params.areas[area]->FrameResonance().planes.size() : 1;
 
 	std::wstring commontrig = _params.commontrigger();
 

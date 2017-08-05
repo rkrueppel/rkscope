@@ -4,41 +4,15 @@
 
 namespace scope {
 
-parameters::Scope ScopeController::GuiParameters;
-ScopeButton ScopeController::StartSingleButton;
-ScopeButton ScopeController::StartLiveButton;
-ScopeButton ScopeController::StartStackButton;
-ScopeButton ScopeController::StartTimeseriesButton;
-ScopeButton ScopeController::StartBehaviorButton;
-ScopeButton ScopeController::StopButton;
-ScopeButton ScopeController::QuitButton;
-ScopeButton ScopeController::StackStartHereButton;
-ScopeButton ScopeController::StackStopHereButton;
-std::array<ScopeNumber<double>, SCOPE_NAREAS> ScopeController::SingleFrameProgress;
-ScopeNumber<double> ScopeController::PlaneCounter(0.0, 0.0, 100.0, L"PlaneCounter");
-std::array<ScopeNumber<double>, SCOPE_NAREAS> ScopeController::FrameCounter;
-ScopeNumber<double> ScopeController::RepeatCounter(0.0, 0.0, 1000.0, L"RepeatCounter");
-ScopeNumber<double> ScopeController::TotalTime(0.0, 0.0, 10000.0, L"TotalTime");
-ScopeNumber<double> ScopeController::TrialCounter(0.0, 0.0, 10000.0, L"TrialCounter");
-ScopeButton ScopeController::StageZeroButton;
-ScopeNumber<bool> ScopeController::ReadOnlyWhileScanning(false, false, true, L"ReadOnlyWhileScanning");
-std::array<ScopeController::FPUButtons, SCOPE_NAREAS> ScopeController::FPU;
-std::array<ScopeController::ScanModeButtons, SCOPE_NAREAS> ScopeController::ScanMode;
+std::atomic<bool> ScopeController::instanciated(false);
 
-ScopeController::Impl& ScopeController::GetImpl() {
-	static Impl sImpl;
-	return sImpl;
-}
-
-ScopeController::Impl* const ScopeController::Pimpl() const {
-	return static_cast<Impl*>(BaseController<1, true>::Pimpl());
-}
-
-ScopeController::ScopeController()
+ScopeController::ScopeController(const uint32_t& _nareas)
 	: BaseController(1, parameters::Scope())
-	, daq_to_pipeline()
-	, pipeline_to_display()
+	, nareas(_nareas)
+	, daq_to_pipeline(_nareas)
 	, pipeline_to_storage()
+	, pipeline_to_display()
+	, framescannervecs(_nareas)
 	, theDaq(&daq_to_pipeline, parameters)
 	, thePipeline(&daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display, parameters)
 	, theStorage(&pipeline_to_storage, parameters)
@@ -47,46 +21,59 @@ ScopeController::ScopeController()
 	, onlineupdate_running(false)
 	, time(0)
 	, initialparametersloaded(false, false, true)
-	, currentconfigfile(L"NONE") {
-	// Connect static buttons in ScopeController to ScopeController::Impl functions
+	, currentconfigfile(L"NONE")
+	, readonlywhilescanning(false, false, true, L"ReadOnlyWhileScanning")
+	, singleframeprogress(_nareas)
+	, planecounter(0.0, 0.0, 100.0, L"PlaneCounter")
+	, framecounter(_nareas)
+	, repeatcounter(0.0, 0.0, 1000.0, L"RepeatCounter")
+	, trialcounter(0.0, 0.0, 10000.0, L"TotalTime")
+	, totaltime(0.0, 0.0, 10000.0, L"TrialCounter")
+	, fpubuttonsvec(_nareas)
+	, scanmodebuttonsvec(_nareas) {
+	
+	//Make sure that ScopeController is instanciated only once
+	std::assert(!instanciated);
+	
+	// Connect buttons to functions
 	// QuitButton is connected in CMainDlgFrame
-	StartSingleButton.Connect(std::bind(&Impl::StartSingle, this));
-	StartLiveButton.Connect(std::bind(&Impl::StartLive, this));
-	StartStackButton.Connect(std::bind(&Impl::StartStack, this));
-	StartTimeseriesButton.Connect(std::bind(&Impl::StartTimeseries, this));
-	StartBehaviorButton.Connect(std::bind(&Impl::StartBehavior, this));
-	StopButton.Connect(std::bind(&Impl::Stop, this));
+	StartSingleButton.Connect(std::bind(&StartSingle, this));
+	StartLiveButton.Connect(std::bind(&StartLive, this));
+	StartStackButton.Connect(std::bind(&StartStack, this));
+	StartTimeseriesButton.Connect(std::bind(&StartTimeseries, this));
+	StartBehaviorButton.Connect(std::bind(&StartBehavior, this));
+	StopButton.Connect(std::bind(&Stop, this));
 
 	// We cannot connect directly to XYZStage::SetZero because std::bind needs the class to be copyable (which it may  not)
-	StageZeroButton.Connect(std::bind(&Impl::SetStageZero, this));
+	StageZeroButton.Connect(std::bind(&SetStageZero, this));
 
-	StackStartHereButton.Connect(std::bind(&Impl::StackStartHere, this));
-	StackStopHereButton.Connect(std::bind(&Impl::StackStopHere, this));
+	StackStartHereButton.Connect(std::bind(&StackStartHere, this));
+	StackStopHereButton.Connect(std::bind(&StackStopHere, this));
 
-	for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+	for (uint32_t a = 0; a < nareas; a++) {
 		// Initially choose the first supported scannervector in the list
 		SetScanMode(a, *ScannerSupportedVectors::List().begin());
 
 		// Set counters to zero
-		FrameCounter[a] = 0;
-		SingleFrameProgress[a] = 0;
+		framecounter[a] = 0;
+		singleframeprogress[a] = 0;
 
 		// Connect the buttons for scan mode switching (if a master area)
 		if (!ThisIsSlaveArea(a)) {
 			for (auto& b : ScanMode[a].map)
-				b.second.Connect(std::bind(&Impl::SetScanMode, this, a, b.first));
+				b.second.Connect(std::bind(&SetScanMode, this, a, b.first));
 		}
 
 		// Connect all imaging parameters
 		for (auto& sv : GuiParameters.areas[a]->scannervectorframesmap) {
-			sv.second->ConnectOnlineUpdate(std::bind(&Impl::UpdateAreaParametersFromGui, this, a));
-			sv.second->ConnectResolutionChange(std::bind(&Impl::ResolutionChange, this, a));
+			sv.second->ConnectOnlineUpdate(std::bind(&UpdateAreaParametersFromGui, this, a));
+			sv.second->ConnectResolutionChange(std::bind(&ResolutionChange, this, a));
 		}
 
-		GuiParameters.areas[a]->daq.pixeltime.ConnectOther(std::bind(&Impl::UpdateAreaParametersFromGui, this, a));
-		GuiParameters.areas[a]->daq.scannerdelay.ConnectOther(std::bind(&Impl::UpdateAreaParametersFromGui, this, a));
-		GuiParameters.areas[a]->histrange.ConnectOther(std::bind(&Impl::UpdateAreaParametersFromGui, this, a));
-		//GuiParameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ScopeControllerImpl::ResolutionChange, this, a));
+		GuiParameters.areas[a]->daq.pixeltime.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
+		GuiParameters.areas[a]->daq.scannerdelay.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
+		GuiParameters.areas[a]->histrange.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
+		//GuiParameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
 
 		// Connect FPU XY movements inside the FPUController!!
 	}
@@ -174,7 +161,7 @@ void ScopeController::ClearAllQueues() {
 
 void ScopeController::SetScannerVectorParameters() {
 	DBOUT(L"ScopeControllerImpl::SetScannerVectorParameters");
-	for (uint32_t a = 0; a < SCOPE_NAREAS; a++)
+	for (uint32_t a = 0; a < nareas; a++)
 		framescannervecs[a]->SetParameters(&parameters.areas[a]->daq, &parameters.areas[a]->Currentframe(), &parameters.areas[a]->fpuzstage);
 }
 
@@ -227,7 +214,7 @@ ControllerReturnStatus ScopeController::RunStack(StopCondition* const sc) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		}
 		else if (parameters.stack.zdevicetype().t == ZDeviceHelper::FastZ) {
-			for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+			for (uint32_t a = 0; a < nareas; a++) {
 				parameters.areas[a]->Currentframe().fastz = parameters.stack.planes___[p][a].position();
 				// Also change GuiParameters so the users sees what is happening during stacking
 				GuiParameters.areas[a]->Currentframe().fastz = parameters.stack.planes___[p][a].position();
@@ -235,7 +222,7 @@ ControllerReturnStatus ScopeController::RunStack(StopCondition* const sc) {
 		}
 
 		// Set pockels to precalculated value
-		for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+		for (uint32_t a = 0; a < nareas; a++) {
 			parameters.areas[a]->Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
 			// Also change GuiParameters so the users sees what is happening during stacking
 			GuiParameters.areas[a]->Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
@@ -298,7 +285,7 @@ ControllerReturnStatus ScopeController::RunTimeseries(StopCondition* const sc) {
 
 		// Alternate planes if planes defined
 		if (parameters.timeseries.planes.size() != 0) {
-			for (uint32_t a = 0; a < SCOPE_NAREAS; a++)
+			for (uint32_t a = 0; a < nareas; a++)
 				parameters.areas[a]->Currentframe().fastz = parameters.timeseries.planes[t % parameters.timeseries.planes.size()][a].position();
 			SetScannerVectorParameters();
 		}
@@ -434,13 +421,13 @@ void ScopeController::StartSingle() {
 void ScopeController::StartTimeseries() {
 	if (parameters.run_state() == RunStateHelper::Mode::Stopped) {
 		// Same number of frames for all areas. However, this is non-ideal...
-		for (uint32_t a = 1; a < SCOPE_NAREAS; ++a)
+		for (uint32_t a = 1; a < nareas; ++a)
 			GuiParameters.timeseries.frames[a] = GuiParameters.timeseries.frames[0].Value();
 		GuiParameters.run_state.Set(RunStateHelper::Mode::RunningTimeseries);
 		GuiParameters.requested_mode.Set(DaqModeHelper::Mode::nframes);
 		GuiParameters.date.Set(GetCurrentDateString());
 		GuiParameters.time.Set(GetCurrentTimeString());
-		for (uint32_t a = 0; a < SCOPE_NAREAS; a++)
+		for (uint32_t a = 0; a < nareas; a++)
 			GuiParameters.areas[a]->daq.requested_frames = GuiParameters.timeseries.frames[a]();
 		parameters = GuiParameters;
 		SetGuiCtrlState();
@@ -562,7 +549,7 @@ void ScopeController::SetStageZero() {
 }
 
 void ScopeController::StackStartHere() {
-	for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+	for (uint32_t a = 0; a < nareas; a++) {
 		// If z stage every area has the same start position
 		if (GuiParameters.stack.zdevicetype() == ZDeviceHelper::ZStage)
 			GuiParameters.stack.startat[a].position = theStage.CurrentZPosition();
@@ -575,7 +562,7 @@ void ScopeController::StackStartHere() {
 }
 
 void ScopeController::StackStopHere() {
-	for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+	for (uint32_t a = 0; a < nareas; a++) {
 		// If z stage every area has the same start position
 		if (GuiParameters.stack.zdevicetype() == ZDeviceHelper::ZStage)
 			GuiParameters.stack.stopat[a].position = theStage.CurrentZPosition();
@@ -636,15 +623,15 @@ void ScopeController::SetGuiCtrlState() {
 	StartTimeseriesButton.Enable(buttonenabler);
 	StartBehaviorButton.Enable(buttonenabler);
 
-	for (uint32_t a = 0; a < SCOPE_NAREAS; a++) {
+	for (uint32_t a = 0; a < nareas; a++) {
 		// Only enable scan mode buttons for master area and only if the mode is supported by builtin scanners
 		if (!ThisIsSlaveArea(a)) {
-			for (auto& b : ScanMode[a].map)
+			for (auto& b : scanmodebuttonsvec[a].map)
 				b.second.Enable(buttonenabler && ScannerSupportedVectors::IsBuiltinSupported(b.first));
 		}
 		// Disable slave area's scan mode buttons
 		else {
-			for (auto& b : ScanMode[a].map)
+			for (auto& b : scanmodebuttonsvec[a].map)
 				b.second.Enable(false);
 		}
 	}

@@ -43,6 +43,26 @@
 
 namespace scope {
 
+struct ScopeControllerCounters {
+	/** Updated from PipelineController::Run */
+	std::vector<ScopeNumber<double>> singleframeprogress;
+
+	/** Updated from ScopeController::RunStack, connected to progress indicator in CStackSettingsPage */
+	ScopeNumber<double> planecounter;
+
+	/** Updated from PipelineController::Run, connected to progress indicator in CTimeSeriesSettingsPage or edit control in CBehaviorSettingsPage */
+	std::vector<ScopeNumber<double>> framecounter;
+
+	/** Updated from ScopeController::RunTimeseries, connected to progress indicator in CTimeSeriesSettingsPage */
+	ScopeNumber<double> repeatcounter;
+
+	/** Updated from ScopeController::RunBehavior, connected to edit control in CBehaviorSettingsPage */
+	ScopeNumber<double> trialcounter;
+
+	/** Updated from e.g. ScopeController::RunBehavior, connected to time indicator in CBehaviorSettingsPage */
+	ScopeNumber<double> totaltime;
+};
+
 /** @defgroup ScopeControl Controller classes
 * Classes controlling various aspects of data acquisition, generation, handling, displaying, storing, ...
 * All classes derive from BaseController, i.e. they have one or more threads inside and run their stuff inside these. */
@@ -60,8 +80,13 @@ class ScopeController
 	: public BaseController {
 
 protected:
+	/** static to make sure only there is only one instance */
+	static std::atomic<bool> instanciated;
+	
+	const uint32_t nareas;
+	
 	/** queues from the daqs to the pipelines */
-	std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>, SCOPE_NAREAS> daq_to_pipeline;
+	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>> daq_to_pipeline;
 
 	/** queue from the pipelines to the storage */
 	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_storage;
@@ -72,7 +97,7 @@ protected:
 	/** Scanner vectors
 	* @{ */
 	/** The scanner vector for frame scanning */
-	std::array<ScannerVectorFrameBasicPtr, SCOPE_NAREAS> framescannervecs;
+	std::vector<ScannerVectorFrameBasicPtr> framescannervecs;
 	/** @} */
 
 	/** @name Dataflow controllers
@@ -113,14 +138,16 @@ protected:
 	/*ScopeController(ScopeController& other);				// we need this copyable for std::bind to work...
 	ScopeController& operator=(ScopeController& other); */
 
-public:
 	/** The complete pseudo-global parameter set of the microscope. GUI classes can connect e.g. CScopeEditCtrl to specific parameters and thus pass values
 	* to the ScopeController. At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
-	static parameters::Scope GuiParameters;
+	parameters::Scope guiparameters;
+
+public:
+	parameters::Scope& GuiParameters() { return guiparameters; }
 
 	/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
 	* by static ScopeButtons etc here) while scanning. */
-	static ScopeNumber<bool> ReadOnlyWhileScanning;
+	ScopeNumber<bool> readonlywhilescanning;
 
 	/** @name Hardware controllers
 	* @{ */
@@ -134,43 +161,23 @@ public:
 	* I.e. ScopeButtons are mediators between the controls (CScopeButtonCtrl) and ScopeController functions to start certain stuff;
 	* if it weren't for the button state, CScopeButtonCtrl could directly connect to these functions...
 	* @{ */
-	static ScopeButton StartSingleButton;
-	static ScopeButton StartLiveButton;
-	static ScopeButton StartStackButton;
-	static ScopeButton StartTimeseriesButton;
-	static ScopeButton StartBehaviorButton;
-	static ScopeButton StopButton;
-	static ScopeButton QuitButton;
-	static ScopeButton StackStartHereButton;
-	static ScopeButton StackStopHereButton;
+	
+	RunButtons runbuttons;
 
-	/** Updated from PipelineControllerImpl::Run */
-	static std::array<ScopeNumber<double>, SCOPE_NAREAS> SingleFrameProgress;
-
-	/** Updated from ScopeControllerImpl::RunStack, connected to progress indicator in CStackSettingsPage */
-	static ScopeNumber<double> PlaneCounter;
-
-	/** Updated from PipelineControllerImpl::Run, connected to progress indicator in CTimeSeriesSettingsPage or edit control in CBehaviorSettingsPage */
-	static std::array<ScopeNumber<double>, SCOPE_NAREAS> FrameCounter;
-
-	/** Updated from ScopeControllerImpl::RunTimeseries, connected to progress indicator in CTimeSeriesSettingsPage */
-	static ScopeNumber<double> RepeatCounter;
-
-	/** Updated from ScopeControllerImpl::RunBehavior, connected to edit control in CBehaviorSettingsPage */
-	static ScopeNumber<double> TrialCounter;
-
-	/** Updated from e.g. ScopeControllerImpl::RunBehavior, connected to time indicator in CBehaviorSettingsPage */
-	static ScopeNumber<double> TotalTime;
+	StackButtons stackbuttons;
 
 	/** Button to zero main stage coordinates */
-	static ScopeButton StageZeroButton;
+	ScopeButton stagezerobutton;
 
 	/** Buttons for FPU nudge */
-	static std::array<FPUButtons, SCOPE_NAREAS> FPU;
+	std::vector<FPUButtons> fpubuttonsvec;
 
 	/** Buttons for switching the scan mode */
-	static std::array<ScanModeButtons, SCOPE_NAREAS> ScanMode;
+	std::vector<ScanModeButtons> scanmodevec;
 	/** @} */
+
+	/** The counters */
+	ScopeControllerCounters scopecontrollercounters;
 
 
 protected:
@@ -230,7 +237,7 @@ protected:
 
 public:
 	/** Initializes and connects stuff */
-	ScopeController(void);
+	ScopeController(const uint32_t& _nareas);
 
 	/** Stop whatever is running */
 	~ScopeController(void);
@@ -321,13 +328,13 @@ public:
 	void SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper);
 
 	/** Updates the number of resonance planes in scope controller **/
-	void UpdateResonancePlanes(const uint32_t& _area);
+	//void UpdateResonancePlanes(const uint32_t& _area);
 
 	/** Saves the current values as a preset with name _name. Calls ScopeControllerImpl::SavePreset. */
-	void SavePreset(const uint32_t& _area, const CString& _name);
+	//void SavePreset(const uint32_t& _area, const CString& _name);
 
 	/** Writes the parameters of the selected preset into daq and svframe. Calls ScopeControllerImpl::SelectPreset. */
-	void SelectPreset(const uint32_t& _area, const size_t& _n);
+	//void SelectPreset(const uint32_t& _area, const size_t& _n);
 
 	/** Registers a function to call when scanmode is changed.
 	* Usually CScanSettingsSheet registers for switching between FrameScan property pages.*/

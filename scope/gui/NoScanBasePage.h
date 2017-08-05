@@ -24,9 +24,6 @@ protected:
 	/** true after dialog is initialized */
 	bool initialized;
 
-	/** our ScopeController here */
-	ScopeController scope_controller;
-
 	/** for which area are the image settings */
 	const uint32_t area;
 

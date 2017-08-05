@@ -114,7 +114,7 @@ void DaqController::Start(const parameters::Scope& _params) {
 			outputs[a].reset(new SCOPE_SLAVEOUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(parameters.areas[a]->daq.outputs.get()), parameters));
 		else
 			outputs[a].reset(new SCOPE_OUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(parameters.areas[a]->daq.outputs.get()), parameters));
-		ScopeController scope_controller;
+		
 		inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(scope_controller.GuiParameters.areas[a]->daq.inputs.get()), parameters));
 	}
 

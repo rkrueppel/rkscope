@@ -16,7 +16,7 @@ protected:
 	bool created;
 
 	/** pointer to the underlying ScopeButton */
-	ScopeButton* scope_button;
+	ScopeButton& scope_button;
 
 	/** The connection object for the control state (connection to the scope_button) */
 	boost::signals2::connection stateconnection;
@@ -36,7 +36,7 @@ public:
 	END_MSG_MAP()
 
 	/** Gets a pointer to the ScopeButton and connects control enabled/disabled state if desired */
-	CScopeButtonCtrl(ScopeButton* _butt, const bool& _connectcontrolstate = true);
+	CScopeButtonCtrl(ScopeButton& _butt, const bool& _connectcontrolstate = true);
 
 	/** Disconnects control state */
 	~CScopeButtonCtrl();
@@ -56,7 +56,7 @@ public:
 
 	/** @name Handles connection to underlying ScopeButton
 	* @{ */
-	void Connect(ScopeButton* _butt, const bool& _connectcontrolstate = true);
+	void Connect(ScopeButton& _butt, const bool& _connectcontrolstate = true);
 	void Disconnect();
 	/** @} */
 

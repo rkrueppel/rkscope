@@ -22,9 +22,6 @@ protected:
 	/** Task for fast z/Pockels clocked by a pixel clock */
 	DAQmx::CDAQmxAnalogOutTask zpout_task;
 
-	/** a ScopeController instance */
-	scope::ScopeController scope_controller;
-
 public:
 	/** Create the task for pockels and fast z */
 	OutputsDAQmxResonanceSlave(const uint32_t& _area, const parameters::OutputsDAQmxResonanceSlave& _outputparams, const parameters::Scope& _params);

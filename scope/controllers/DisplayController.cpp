@@ -29,7 +29,7 @@ ControllerReturnStatus DisplayController::Run(StopCondition* const sc, const uin
 	uint32_t area = 0;
 	SCOPE_MULTIIMAGEPTR_T current_frame;
 	size_t num_planes = 1;
-	ScopeController scope_controller;
+	
 	ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 	std::vector<uint32_t> framecounts(nactives);
 	std::fill(std::begin(framecounts), std::end(framecounts), 0);

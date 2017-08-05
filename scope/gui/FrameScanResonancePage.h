@@ -16,8 +16,7 @@ class CFrameScanResonancePage
 	: public CFrameScanBasePage {
 
 protected:
-	/** a scope controller instance**/
-	scope::ScopeController scope_controller;
+	parameters::ScannerVectorFrameResonance& svresonanceparams;
 
 	/** cutoff fraction for y scanner */
 	CScopeEditCtrl<double> ycutoff_edit;		
@@ -34,11 +33,13 @@ protected:
 	/** list box for all planes */
 	CListViewCtrl planes_list;
 
+	const bool isslave;
+
 public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CFrameScanResonancePage(const uint32_t& _area);
+	CFrameScanResonancePage(const uint32_t& _area, parameters::ScannerVectorFrameResonance& _svresonanceparams, const bool _isslave);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanResonancePage)

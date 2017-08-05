@@ -4,12 +4,13 @@
 namespace scope {
 	namespace gui {
 
-CBehaviorSettingsPage::CBehaviorSettingsPage(void)
+CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters)
 	: CToolTipDialog(TTS_NOPREFIX)
-	, start_behavior_button(&scope_controller.StartBehaviorButton)
-	, framecount_edit(&scope_controller.FrameCounter[0])
-	, totaltime_edit(&scope_controller.TotalTime)
-	, trialcount_edit(&scope_controller.TrialCounter) {
+	, start_behavior_button(_runbuttons.StartBehaviorButton)
+	, behaviorparameters(_behaviorparameters)
+	, framecount_edit(_scopecontrollercounters.framecounter[0])
+	, totaltime_edit(_scopecontrollercounters.totaltime)
+	, trialcount_edit(_scopecontrollercounters.trialcounter) {
 }
 
 BOOL CBehaviorSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
@@ -44,7 +45,7 @@ LRESULT CBehaviorSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndC
 		planes[a].position = scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
 		planes[a].pockels = scope_controller.GuiParameters.areas[a]->Currentframe().pockels();
 	}
-	scope_controller.GuiParameters.behavior.planes.push_back(planes);
+	behaviorparameters.planes.push_back(planes);
 
 	UpdatePlanesList();
 
@@ -56,7 +57,7 @@ LRESULT CBehaviorSettingsPage::OnDeletePlane(WORD wNotifyCode, WORD wID, HWND hW
 	if ( sel == -1 )
 		return 0;
 	// Delete the selected plane from the vector
-	scope_controller.GuiParameters.behavior.planes.erase(sel + std::begin(scope_controller.GuiParameters.behavior.planes));
+	behaviorparameters.planes.erase(sel + std::begin(behaviorparameters.planes));
 	UpdatePlanesList();
 	return 0;
 }
@@ -65,7 +66,7 @@ void CBehaviorSettingsPage::UpdatePlanesList() {
 	uint32_t n = 0;
 	std::wostringstream stream;
 	planes_list.DeleteAllItems();
-	for ( const auto& pa : scope_controller.GuiParameters.behavior.planes ) {
+	for ( const auto& pa : behaviorparameters.planes ) {
 		stream.str(L"");
 		stream << L"Plane " << n;
 		planes_list.InsertItem(n, stream.str().c_str(), NULL);

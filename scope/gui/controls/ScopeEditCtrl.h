@@ -18,7 +18,7 @@ protected:
 	bool created;
 
 	/** pointer to underlying ScopeValue */
-	ScopeValue<ValT>* const scope_val;
+	ScopeValue<ValT>&  scope_val;
 
 	/** The connection object for the control state (connection to the scope_val rw state change) */
 	boost::signals2::connection stateconnection;
@@ -48,14 +48,14 @@ public:
 	* @param[in] _scopeval ScopeValue to which the edit control connects (taken by reference)
 	* @param[in] _connectback change edit control displayed value/text when ScopeValue is changed
 	* @param[in] _connectcontrolstate change edit control enabled/disabled state when read/write state of the ScopeValue is changed */
-	CScopeEditCtrl(ScopeValue<ValT>* _scopeval, const bool& _connectback = false, const bool& _connectcontrolstate = false)
+	CScopeEditCtrl(ScopeValue<ValT>& _scopeval, const bool& _connectback = false, const bool& _connectcontrolstate = false)
 		: created(false)
 		, scope_val(_scopeval)
 		, shiftstate(false){
 		if ( _connectback )
-			valueconnection = scope_val->ConnectGUI(std::bind(&CScopeEditCtrl<ValT>::UpdateControl, this));
+			valueconnection = scope_val.ConnectGUI(std::bind(&CScopeEditCtrl<ValT>::UpdateControl, this));
 		if ( _connectcontrolstate )
-			stateconnection = scope_val->ConnectState(std::bind(&CScopeEditCtrl<ValT>::SetState, this, std::placeholders::_1));
+			stateconnection = scope_val.ConnectState(std::bind(&CScopeEditCtrl<ValT>::SetState, this, std::placeholders::_1));
 	}
 
 	/** Disconnects everything */
@@ -121,8 +121,8 @@ public:
 
 	/** Worker for UpdateControl (explicit specialization for ScopeValue<CString> below). */
 	LRESULT OnUpdateControl(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
-		if ( scope_val != nullptr )
-			SetWindowText(scope_val->ToChar().c_str());
+		//if ( scope_val != nullptr )
+			SetWindowText(scope_val.ToChar().c_str());
 		return 0;
 	}
 	/** @} */
@@ -135,12 +135,12 @@ public:
 
 	/** Updates the ScopeValue from the string inside the control. */
 	void UpdateValue() {
-		if ( scope_val != nullptr ) {
+		//if ( scope_val != nullptr ) {
 			const int32_t length = GetWindowTextLength()+1;			// +1 since terminating \0 is not counter
 			std::vector<WCHAR> buff(length, L' ');
 			GetWindowText(buff.data(), length);					// empty control gives only a \0
-			scope_val->SetFromString(buff.data());
-		}
+			scope_val.SetFromString(buff.data());
+		//}
 	}
 
 	/** Sets the enabled/disabled state of the control */

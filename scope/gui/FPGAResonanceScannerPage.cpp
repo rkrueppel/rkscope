@@ -12,10 +12,10 @@ CFPGAResonanceScannerPage::CFPGAResonanceScannerPage(parameters::InputsFPGAReson
 	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
 	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE)
 	, aioverrange_led(&_parameters->diagnosis.AIOverRange)
-	, bitshiftch1_edit(&_parameters->BitshiftCh1)
-	, baselinech1_edit(&_parameters->BaselineCh1)
-	, bitshiftch2_edit(&_parameters->BitshiftCh2)
-	, baselinech2_edit(&_parameters->BaselineCh2) {
+	, bitshiftch1_edit(_parameters->BitshiftCh1)
+	, baselinech1_edit(_parameters->BaselineCh1)
+	, bitshiftch2_edit(_parameters->BitshiftCh2)
+	, baselinech2_edit(_parameters->BaselineCh2) {
 }
 
 BOOL CFPGAResonanceScannerPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
