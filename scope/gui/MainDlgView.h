@@ -7,6 +7,10 @@
 #include "resource.h"
 
 namespace scope {
+	class ScopeController;
+}
+
+namespace scope {
 	namespace gui {
 
 /** View class of the main dialog */
@@ -14,9 +18,6 @@ class CMainDlgView
 	: public CDialogImpl<CMainDlgView> {
 
 protected:
-	/** Keep a ScopeController to connect GUI controls */
-	scope::ScopeController& scope_controller;
-
 	/** the settings sheet with all the stuff */
 	CScanSettingsSheet m_sheetScanSettings;
 
@@ -39,7 +40,7 @@ public:
 	enum { IDD = IDD_MAINDIALOG };
 
 	/** Attach buttons to ScopeController */
-	CMainDlgView(scope::ScopeController& _scope_controller);
+	CMainDlgView(ScopeController& _scope_controller);
 	~CMainDlgView();
 	
 	BEGIN_MSG_MAP(CScopeView)

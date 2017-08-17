@@ -45,7 +45,7 @@ public:
 	/** @} */
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGAResonanceScannerNI5771Page(parameters::InputsFPGAAnalogIntegrator* const _parameters);
+	CFPGAResonanceScannerNI5771Page(parameters::InputsFPGAAnalogIntegrator& _parameters);
 
 	BEGIN_MSG_MAP(CFPGAResonanceScannerNI5771Page)
 		MSG_WM_INITDIALOG(OnInitDialog);

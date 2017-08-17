@@ -372,6 +372,22 @@ std::wstring ScopeController::CurrentConfigFile() const {
 	return currentconfigfile;
 }
 
+void ScopeController::CreateAndShowMainWindow() {
+	wndmain = std::make_unique<scope::gui::CMainDlgFrame>(new gui::CMainDlgFrame());
+	wndmain->SetScopeController(this);
+
+	RECT rec = { 20,20,440,980 };						// 262x403
+	if (wndmain->CreateEx(HWND(0), rec) == NULL)
+		throw (std::exception("Main window creation failed"));
+
+	wndmain->ShowWindow(SW_SHOWDEFAULT);
+
+	// Set main window title to current Scope git commit hash
+	std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
+	revstr = L"Scope (Git commit " + revstr + L")";
+	wndmain->SetWindowText(revstr.c_str());
+}
+
 void ScopeController::InitializeHardware() {
 	// Give GuiParameters by reference, so hardware has parameters and can connect to ScopeNumbers
 	theStage.Initialize(GuiParameters.stage);

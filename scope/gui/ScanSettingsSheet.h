@@ -22,9 +22,6 @@ class CScanSettingsSheet
 	: public CPropertySheetImpl<CScanSettingsSheet> {
 
 protected:
-	/** Our ScopeController here */
-	ScopeController scope_controller;
-
 	/** one imaging settings page for each area */
 	std::array<std::unique_ptr<CNoScanBasePage>, SCOPE_NAREAS> scanpages;
 

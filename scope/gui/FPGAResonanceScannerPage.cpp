@@ -6,10 +6,10 @@ namespace scope {
 	namespace gui {
 	
 CFPGAResonanceScannerPage::CFPGAResonanceScannerPage(parameters::InputsFPGAResonanceScanner* const _parameters)
-	: tohostoverflow1_led(&_parameters->diagnosis.ToHostOverflowCh1)
-	, tohostoverflow2_led(&_parameters->diagnosis.ToHostOverflowCh2)
-	, interloopoverflow_led(&_parameters->diagnosis.InterloopOverflow)
-	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
+	: tohostoverflow1_led(_parameters->diagnosis.ToHostOverflowCh1)
+	, tohostoverflow2_led(_parameters->diagnosis.ToHostOverflowCh2)
+	, interloopoverflow_led&_parameters->diagnosis.InterloopOverflow)
+	, interlooptimeout_led(_parameters->diagnosis.InterloopTimeout)
 	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE)
 	, aioverrange_led(&_parameters->diagnosis.AIOverRange)
 	, bitshiftch1_edit(_parameters->BitshiftCh1)

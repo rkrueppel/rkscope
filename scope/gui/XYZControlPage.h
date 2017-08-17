@@ -14,9 +14,6 @@ class CXYZControlPage :
 	public CPropertyPageImpl<CXYZControlPage> {
 
 protected:
-	/** Our ScopeController here */
-	ScopeController scope_controller;
-
 	/** edit for the stage's x position */
 	CScopeEditCtrl<double> xpos_edit;
 

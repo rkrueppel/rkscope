@@ -63,9 +63,12 @@ public:
 	/** the command bar. public for CToolBarHelper to compile. */
 	CCommandBarCtrl m_CmdBar;
 
-	CMainDlgFrame(scope::ScopeController& _scope_controller)
-		: firstpaint(true)
-		, scope_controller(_scope_controller) {
+	CMainDlgFrame()
+		: firstpaint(true) {
+	}
+
+	void SetScopeController(ScopeController& _scope_controller) {
+		scope_controller = _scope_controller;
 	}
 
 	/** Used in CToolBarHelper to fill the dropdown menus */

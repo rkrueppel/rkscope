@@ -17,9 +17,6 @@ protected:
 	/** true if window is initialized */
 	bool initialized;
 
-	/** keep a ScopeController to connect GUI controls */
-	scope::ScopeController scope_controller;
-
 	/** to start stack scan */
 	CScopeButtonCtrl start_stack_button;
 

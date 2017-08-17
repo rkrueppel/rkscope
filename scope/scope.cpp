@@ -56,7 +56,7 @@ int Run(HINSTANCE hInstance) {
 	if ( founddefault || (dlgret == IDOK) ) {
 		DBOUT(L"Filepath " << filepath.GetString());
 
-		scope::ScopeController scope_controller;
+		scope::ScopeController scope_controller(1);
 		scope_controller.Version();
 		// Loads initial parameter set into ScopeInterface's static GuiParameters
 		// Constructs the static ScopeController object, at this point there is only one thread (this one)
@@ -73,17 +73,7 @@ int Run(HINSTANCE hInstance) {
 		DBOUT(L"Sizeof parameters::Scope " << sizeof(scope_controller.GuiParameters));
 
 		// Create the main window
-		scope::gui::CMainDlgFrame wndMain(scope_controller);
-		RECT rec = {20,20,440,980};						// 262x403
-		if(wndMain.CreateEx(HWND(0), rec) == NULL)
-			throw (std::exception("Main window creation failed"));
-
-		wndMain.ShowWindow(SW_SHOWDEFAULT);
-
-		// Set main window title to current Scope git commit hash
-		std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
-		revstr = L"Scope (Git commit " + revstr + L")";
-		wndMain.SetWindowText(revstr.c_str());
+		scope_controller.CreateAndShowMainWindow();
 
 		// Log startup scope stuff
 		std::wstring msg2(L"This is Scope (Git commit ");

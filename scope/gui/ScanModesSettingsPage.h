@@ -12,9 +12,6 @@ class CScanModesSettingsPage :
 	public CPropertyPageImpl<CScanModesSettingsPage> {
 
 protected:
-	/** A ScopeController kept handy */
-	scope::ScopeController scope_controller;
-
 	/** List of all areas, selection updates radio buttons */
 	CListBox areas_list;
 

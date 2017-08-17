@@ -4,8 +4,8 @@
 namespace scope {
 	namespace gui {
 
-CDAQmxPage::CDAQmxPage(parameters::InputsDAQmx* const _parameters)
-	: daqmxversion_edit(&_parameters->diagnosis.daqmxversion) {
+CDAQmxPage::CDAQmxPage(parameters::InputsDAQmx& _parameters)
+	: daqmxversion_edit(_parameters.diagnosis.daqmxversion) {
 }
 
 BOOL CDAQmxPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

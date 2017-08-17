@@ -5,11 +5,11 @@ namespace scope {
 	namespace gui {
 
 CFPGANoiseOutputPage::CFPGANoiseOutputPage(parameters::InputsFPGANoiseOutput* const _parameters)
-	: tohostoverflowA1Ch1_led(&_parameters->diagnosis.ToHostOverflowA1Ch1)
-	, tohostoverflowA1Ch2_led(&_parameters->diagnosis.ToHostOverflowA1Ch2)
-	, tohostoverflowA2Ch1_led(&_parameters->diagnosis.ToHostOverflowA2Ch1)
-	, tohostoverflowA2Ch2_led(&_parameters->diagnosis.ToHostOverflowA2Ch2)
-	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE) {
+	: tohostoverflowA1Ch1_led(_parameters->diagnosis.ToHostOverflowA1Ch1)
+	, tohostoverflowA1Ch2_led(_parameters->diagnosis.ToHostOverflowA1Ch2)
+	, tohostoverflowA2Ch1_led(_parameters->diagnosis.ToHostOverflowA2Ch1)
+	, tohostoverflowA2Ch2_led(_parameters->diagnosis.ToHostOverflowA2Ch2)
+	, acquiring_led(_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE) {
 }
 
 BOOL CFPGANoiseOutputPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

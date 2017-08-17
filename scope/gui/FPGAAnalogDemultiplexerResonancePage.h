@@ -50,12 +50,11 @@ public:
 	/** @} */
 
 	/** histogram range set option for Area1 and Area2*/
-	ScopeController scope_controller;
 	CScopeEditCtrl<uint32_t> hist_range1_edit;
 	CScopeEditCtrl<uint32_t> hist_range2_edit;
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGAAnalogDemultiplexerResonancePage(parameters::InputsFPGAAnalogDemultiplexer* const _parameters);
+	CFPGAAnalogDemultiplexerResonancePage(parameters::InputsFPGAAnalogDemultiplexer& _parameters, ScopeNumber<uint32_t>& _histrangea0, ScopeNumber<uint32_t>& _histrangea1);
 
 	BEGIN_MSG_MAP(CFPGAAnalogDemultiplexerResonancePage)
 		MSG_WM_INITDIALOG(OnInitDialog);

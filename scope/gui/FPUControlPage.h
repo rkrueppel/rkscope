@@ -20,9 +20,6 @@ protected:
 	/** the page title */
 	std::wstring strtitle;
 
-	/** Our ScopeController here */
-	ScopeController scope_controller;
-
 	/** edit for the FPU stage's x position */
 	CScopeEditCtrl<double> xpos_edit;
 

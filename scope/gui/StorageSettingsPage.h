@@ -13,9 +13,6 @@ class CStorageSettingsPage :
 	public CPropertyPageImpl<CStorageSettingsPage> {
 
 protected:
-	/** scope controller */
-	scope::ScopeController scope_controller;
-
 	/** Checkbox for automatic save option */
 	CScopeCheckBoxCtrl autosave_checkbox;
 

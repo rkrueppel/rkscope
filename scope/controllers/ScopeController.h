@@ -8,6 +8,7 @@
 #include "scanmodes/ScannerVectorFramePlaneHopper.h"
 #include "scanmodes/ScannerVectorFrameResonanceBiDi.h"
 #include "scanmodes/ScannerVectorFrameResonanceHopper.h"
+#include "gui\MainDlgFrame.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
 #include "DaqController.h"
@@ -99,6 +100,8 @@ protected:
 	/** The scanner vector for frame scanning */
 	std::vector<ScannerVectorFrameBasicPtr> framescannervecs;
 	/** @} */
+
+	std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
 
 	/** @name Dataflow controllers
 	* @{ */
@@ -249,6 +252,8 @@ public:
 
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;
+
+	void CreateAndShowMainWindow();
 
 	/** Called by CMainDialogFrame::QuitApplication.
 	* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/

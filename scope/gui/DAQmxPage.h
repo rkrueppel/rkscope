@@ -22,7 +22,7 @@ public:
 	CScopeEditCtrl<std::wstring> daqmxversion_edit;
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CDAQmxPage(parameters::InputsDAQmx* const _parameters);
+	CDAQmxPage(parameters::InputsDAQmx& _parameters);
 
 	BEGIN_MSG_MAP(CDAQmxPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

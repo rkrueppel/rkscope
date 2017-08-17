@@ -13,9 +13,6 @@ class CStimulationSettingsPage :
 	public CPropertyPageImpl<CStimulationSettingsPage> {
 
 protected:
-	/** keep a ScopeController for connecting GUI controls */
-	scope::ScopeController scope_controller;
-
 	/** stimulation onset (in sec) */
 	CScopeEditCtrl<double> onset;
 

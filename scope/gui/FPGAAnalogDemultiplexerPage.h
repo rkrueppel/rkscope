@@ -50,7 +50,6 @@ public:
 	/** @} */
 
 	/** histogram range set option for Area1 and Area2*/
-	ScopeController scope_controller;
 	CScopeEditCtrl<uint32_t> hist_range1_edit;
 	CScopeEditCtrl<uint32_t> hist_range2_edit;
 

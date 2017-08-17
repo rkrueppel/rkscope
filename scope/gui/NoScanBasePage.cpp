@@ -19,7 +19,7 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t& _area, parameters::ScannerVecto
 	, fpuleft_button(&scope_controller.FPU[area].LeftButton)
 	, fpuright_button(&scope_controller.FPU[area].RightButton)
 	, fpuup_button(&scope_controller.FPU[area].UpButton)
-	, fpudown_button(&scope_controller.FPU[area].DownButton) {
+ 	, fpudown_button(&scope_controller.FPU[area].DownButton) {
 
 	std::wstringstream stream;
 	stream << L"Area " << area+1;

@@ -14,7 +14,7 @@ class CScopeLEDCtrl
 
 protected:
 	/** pointer to underlying ScopeNumber */
-	ScopeNumber<bool>* const scopebool;
+	ScopeNumber<bool>& scopebool;
 
 	/** The connection object for the control state (connection to the scopenum value change) */
 	boost::signals2::connection valueconnection;
@@ -36,7 +36,7 @@ protected:
 
 public:
 	/** Gets a pointer to the ScopeNumber<bool> and connects */
-	CScopeLEDCtrl(ScopeNumber<bool>* _scopebool, const uint32_t& _style = SCOPELED_WARNINGONTRUE);
+	CScopeLEDCtrl(ScopeNumber<bool>& _scopebool, const uint32_t& _style = SCOPELED_WARNINGONTRUE);
 
 	/** Disconnects */
 	~CScopeLEDCtrl();

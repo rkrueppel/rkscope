@@ -4,9 +4,14 @@
 #include "controls/ScopeCheckBoxCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
+#include "controllers/ScopeControllerButtons.h"
 #include "controllers/ScopeController.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"
+
+namespace scope {
+	struct ScopeControllerCounters;
+}
 
 namespace scope {
 	namespace gui {

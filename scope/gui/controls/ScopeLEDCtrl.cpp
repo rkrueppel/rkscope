@@ -11,7 +11,7 @@ CImageList CScopeLEDCtrl::imagegreen;
 CImageList CScopeLEDCtrl::imagered;
 CImageList CScopeLEDCtrl::imagewarning;
 
-CScopeLEDCtrl::CScopeLEDCtrl(ScopeNumber<bool>* _scopebool, const uint32_t& _style)
+CScopeLEDCtrl::CScopeLEDCtrl(ScopeNumber<bool>& _scopebool, const uint32_t& _style)
 	: scopebool(_scopebool)
 	, style(_style) {
 	// Create imagelists (only once)
@@ -33,7 +33,7 @@ CScopeLEDCtrl::CScopeLEDCtrl(ScopeNumber<bool>* _scopebool, const uint32_t& _sty
 		imagewarning.Create(18, 18, ILC_COLOR32, 0, 2);
 		imagewarning.AddIcon(icon);
 	}
-	valueconnection = scopebool->ConnectGUI(std::bind(&CScopeLEDCtrl::UpdateControl, this));
+	valueconnection = scopebool.ConnectGUI(std::bind(&CScopeLEDCtrl::UpdateControl, this));
 }
 
 CScopeLEDCtrl::~CScopeLEDCtrl() {
@@ -41,7 +41,7 @@ CScopeLEDCtrl::~CScopeLEDCtrl() {
 }
 
 void CScopeLEDCtrl::UpdateControl() {
-	if ( scopebool->Value() )
+	if ( scopebool.Value() )
 		SetTrue();
 	else
 		SetFalse();

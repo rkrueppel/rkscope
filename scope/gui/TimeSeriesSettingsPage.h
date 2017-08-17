@@ -17,9 +17,6 @@ class CTimeSeriesSettingsPage
 	, public CToolTipDialog<CTimeSeriesSettingsPage> {
 
 protected:
-	/** a scope controller */
-	scope::ScopeController scope_controller;
-
 	/** start timeseries scanning */
 	CScopeButtonCtrl start_timeseries_button;
 
