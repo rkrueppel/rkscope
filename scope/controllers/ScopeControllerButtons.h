@@ -8,27 +8,27 @@ namespace scope {
 	struct FPUButtons {
 		/** @name the cardinal movement directions and some other helpful buttons
 		* @{ */
-		ScopeButton LeftButton;
-		ScopeButton RightButton;
-		ScopeButton UpButton;
-		ScopeButton DownButton;
-		ScopeButton SetZeroButton;
+		ScopeButton left;
+		ScopeButton right;
+		ScopeButton up;
+		ScopeButton down;
+		ScopeButton setzero;
 		/** @} */
 	};
 
 	struct RunButtons {
-		ScopeButton StartSingleButton;
-		ScopeButton StartLiveButton;
-		ScopeButton StartStackButton;
-		ScopeButton StartTimeseriesButton;
-		ScopeButton StartBehaviorButton;
-		ScopeButton StopButton;
-		ScopeButton QuitButton;
+		ScopeButton startsingle;
+		ScopeButton startlive;
+		ScopeButton startstack;
+		ScopeButton starttimeseries;
+		ScopeButton startbehavior;
+		ScopeButton stop;
+		ScopeButton quit;
 	};
 
 	struct StackButtons {
-		ScopeButton StackStartHereButton;
-		ScopeButton StackStopHereButton;
+		ScopeButton starthere;
+		ScopeButton stophere;
 	};
 
 	/** Keeps the buttons controlling scan modes together. */

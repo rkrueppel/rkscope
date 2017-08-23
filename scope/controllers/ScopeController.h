@@ -8,7 +8,6 @@
 #include "scanmodes/ScannerVectorFramePlaneHopper.h"
 #include "scanmodes/ScannerVectorFrameResonanceBiDi.h"
 #include "scanmodes/ScannerVectorFrameResonanceHopper.h"
-#include "gui\MainDlgFrame.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
 #include "DaqController.h"
@@ -44,26 +43,6 @@
 
 namespace scope {
 
-struct ScopeControllerCounters {
-	/** Updated from PipelineController::Run */
-	std::vector<ScopeNumber<double>> singleframeprogress;
-
-	/** Updated from ScopeController::RunStack, connected to progress indicator in CStackSettingsPage */
-	ScopeNumber<double> planecounter;
-
-	/** Updated from PipelineController::Run, connected to progress indicator in CTimeSeriesSettingsPage or edit control in CBehaviorSettingsPage */
-	std::vector<ScopeNumber<double>> framecounter;
-
-	/** Updated from ScopeController::RunTimeseries, connected to progress indicator in CTimeSeriesSettingsPage */
-	ScopeNumber<double> repeatcounter;
-
-	/** Updated from ScopeController::RunBehavior, connected to edit control in CBehaviorSettingsPage */
-	ScopeNumber<double> trialcounter;
-
-	/** Updated from e.g. ScopeController::RunBehavior, connected to time indicator in CBehaviorSettingsPage */
-	ScopeNumber<double> totaltime;
-};
-
 /** @defgroup ScopeControl Controller classes
 * Classes controlling various aspects of data acquisition, generation, handling, displaying, storing, ...
 * All classes derive from BaseController, i.e. they have one or more threads inside and run their stuff inside these. */
@@ -81,34 +60,13 @@ class ScopeController
 	: public BaseController {
 
 protected:
-	/** static to make sure only there is only one instance */
-	static std::atomic<bool> instanciated;
 	
 	const uint32_t nareas;
 	
-	/** queues from the daqs to the pipelines */
-	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>> daq_to_pipeline;
-
-	/** queue from the pipelines to the storage */
-	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_storage;
-
-	/** queue from the pipelines to the display */
-	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_display;
-
 	/** Scanner vectors
 	* @{ */
 	/** The scanner vector for frame scanning */
 	std::vector<ScannerVectorFrameBasicPtr> framescannervecs;
-	/** @} */
-
-	std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
-
-	/** @name Dataflow controllers
-	* @{ */
-	DaqController theDaq;
-	PipelineController thePipeline;
-	StorageController theStorage;
-	DisplayController theDisplay;
 	/** @} */
 
 	/** thread-safe bool to signal a requested abort of a stack scan */
@@ -141,13 +99,7 @@ protected:
 	/*ScopeController(ScopeController& other);				// we need this copyable for std::bind to work...
 	ScopeController& operator=(ScopeController& other); */
 
-	/** The complete pseudo-global parameter set of the microscope. GUI classes can connect e.g. CScopeEditCtrl to specific parameters and thus pass values
-	* to the ScopeController. At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
-	parameters::Scope guiparameters;
-
 public:
-	parameters::Scope& GuiParameters() { return guiparameters; }
-
 	/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
 	* by static ScopeButtons etc here) while scanning. */
 	ScopeNumber<bool> readonlywhilescanning;
@@ -252,8 +204,6 @@ public:
 
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;
-
-	void CreateAndShowMainWindow();
 
 	/** Called by CMainDialogFrame::QuitApplication.
 	* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/
