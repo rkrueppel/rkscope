@@ -16,7 +16,7 @@ protected:
 	bool created;
 
 	/** pointer to underlying ScopeValue */
-	ScopeNumber<double>* const scopenum;
+	ScopeNumber<double>& scopenum;
 
 	/** The connection object for the control state (connection to the scopenum rw state change) */
 	boost::signals2::connection stateconnection;
@@ -51,7 +51,7 @@ public:
 	* @param[in] _largeincrement discrete increment of underlying ScopeNumber on click into scrollbar or set to 0 for 1/20th of scopenum range
 	* @param[in] _connectback change scrollbar value when ScopeNumber is changed
 	* @param[in] _connectcontrolstate change scrollbar enabled/disabled state when read/write state of the ScopeNumber is changed */
-	CScopeScrollbarCtrl(ScopeNumber<double>* _scopenum, const double& _smallincrement, const double& _largeincrement, const bool& _connectback = false, const bool& _connectcontrolstate = false);
+	CScopeScrollbarCtrl(ScopeNumber<double>& _scopenum, const double& _smallincrement, const double& _largeincrement, const bool& _connectback = false, const bool& _connectcontrolstate = false);
 
 	/** Disconnects everything */
 	~CScopeScrollbarCtrl();

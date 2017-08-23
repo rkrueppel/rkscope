@@ -6,15 +6,15 @@
 namespace scope {
 	namespace gui {
 
-CScopeScrollbarCtrl::CScopeScrollbarCtrl(ScopeNumber<double>* _scopenum, const double& _smallincrement, const double& _largeincrement, const bool& _connectback, const bool& _connectcontrolstate)
+CScopeScrollbarCtrl::CScopeScrollbarCtrl(ScopeNumber<double>& _scopenum, const double& _smallincrement, const double& _largeincrement, const bool& _connectback, const bool& _connectcontrolstate)
 	: created(false)
 	, scopenum(_scopenum)
-	, smallincrement((_smallincrement==0.0)?(scopenum->ul()-scopenum->ll()) / 100:_smallincrement)
-	, largeincrement((_largeincrement==0.0)?(scopenum->ul()-scopenum->ll()) / 20:_largeincrement) {
+	, smallincrement((_smallincrement==0.0)?(scopenum.ul()-scopenum.ll()) / 100:_smallincrement)
+	, largeincrement((_largeincrement==0.0)?(scopenum.ul()-scopenum.ll()) / 20:_largeincrement) {
 	if ( _connectback )
-		valueconnection = scopenum->ConnectGUI(std::bind(&CScopeScrollbarCtrl::UpdateControl, this));
+		valueconnection = scopenum.ConnectGUI(std::bind(&CScopeScrollbarCtrl::UpdateControl, this));
 	if ( _connectcontrolstate )
-		stateconnection = scopenum->ConnectState(std::bind(&CScopeScrollbarCtrl::SetState, this, std::placeholders::_1));
+		stateconnection = scopenum.ConnectState(std::bind(&CScopeScrollbarCtrl::SetState, this, std::placeholders::_1));
 }
 
 CScopeScrollbarCtrl::~CScopeScrollbarCtrl() {
@@ -36,17 +36,17 @@ void CScopeScrollbarCtrl::OnScroll(int nSBCode, short nPos, CScrollBar pScrollBa
 	// adjust scopenum on dragging the slider
 	// nPos 0 at top, but bottom should be 0, thus 100-nPos
 	if ( nSBCode == SB_THUMBPOSITION )
-		scopenum->Set(scopenum->ll() + static_cast<double>(100 - nPos) * (scopenum->ul()-scopenum->ll())/100 );
+		scopenum.Set(scopenum.ll() + static_cast<double>(100 - nPos) * (scopenum.ul()-scopenum.ll())/100 );
 	// on clicking on the arrows at the end of the scrollbar
 	if ( (nSBCode == SB_LINEUP) || (nSBCode == SB_LINELEFT) )
-		scopenum->Set(scopenum->Value() + smallincrement);
+		scopenum.Set(scopenum.Value() + smallincrement);
 	if ( (nSBCode == SB_LINEDOWN) || (nSBCode == SB_LINERIGHT) )
-		scopenum->Set(scopenum->Value() - smallincrement);
+		scopenum.Set(scopenum.Value() - smallincrement);
 	// and on clicking into scrollbar
 	if ( (nSBCode == SB_PAGEUP) ||  (nSBCode == SB_PAGELEFT) )
-		scopenum->Set(scopenum->Value() + largeincrement);
+		scopenum.Set(scopenum.Value() + largeincrement);
 	if ( (nSBCode == SB_PAGEDOWN) || (nSBCode == SB_PAGERIGHT) )
-		scopenum->Set(scopenum->Value() - largeincrement);
+		scopenum.Set(scopenum.Value() - largeincrement);
 }
 
 LRESULT CScopeScrollbarCtrl::OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
@@ -71,7 +71,7 @@ LRESULT CScopeScrollbarCtrl::OnKeyUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 LRESULT CScopeScrollbarCtrl::OnUpdateControl(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
 	// nPos 0 at top, but bottom should be 0, thus 100-
-	SetScrollPos(100 - round2i32( (scopenum->Value()-scopenum->ll()) / ((scopenum->ul()-scopenum->ll())/100) ) );
+	SetScrollPos(100 - round2i32( (scopenum.Value()-scopenum.ll()) / ((scopenum.ul()-scopenum.ll())/100) ) );
 	return 0;
 }
 
@@ -85,7 +85,7 @@ void CScopeScrollbarCtrl::SetState(const bool& state) {
 }
 
 void CScopeScrollbarCtrl::SetSmallIncrement(const double& incr) {
-	smallincrement = (incr==0.0)?(scopenum->ul()-scopenum->ll()) / 100:incr;
+	smallincrement = (incr==0.0)?(scopenum.ul()-scopenum.ll()) / 100:incr;
 }
 
 }

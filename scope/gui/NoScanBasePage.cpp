@@ -4,33 +4,49 @@
 namespace scope {
 	namespace gui {
 
-CNoScanBasePage::CNoScanBasePage(const uint32_t& _area, parameters::ScannerVectorFrameBasic& _scanvecparams)
+CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
+	, const bool& _isslave
+	// scope_controller.GuiParameters.areas[area]->isslave()
+	, ScopeNumber<double>& _pockels
+	, ScopeNumber<double>& _fastz
+	, ScopeNumber<double>& _pixeltime
+	, const double & _minpixeltime
+	, ScopeNumber<double>& _fpux
+	, ScopeNumber<double>& _fpuy
+	, FPUButtons & _fpubuttons
+	, ScopeNumber<bool>& _readonlywhilescanning
+)
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
 	, area(_area)
-	, pockels_scroll(&_scanvecparams.pockels, 0.01, 0.1, true, true)
-	, pockels_edit (&_scanvecparams.pockels, true, true)
-	, fastz_scroll(&_scanvecparams.fastz, 5, 50, true, true)
-	, fastz_edit(&_scanvecparams.fastz, true, true)
-	, pixeltime_edit(&scope_controller.GuiParameters.areas[area]->daq.pixeltime, true, true)
-	, pixeltime_scroll(&scope_controller.GuiParameters.areas[area]->daq.pixeltime, scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), true, true)
-	, fpux_edit(&scope_controller.GuiParameters.areas[area]->fpuxystage.xpos, true, true)
-	, fpuy_edit(&scope_controller.GuiParameters.areas[area]->fpuxystage.ypos, true, true)
-	, fpuleft_button(&scope_controller.FPU[area].LeftButton)
-	, fpuright_button(&scope_controller.FPU[area].RightButton)
-	, fpuup_button(&scope_controller.FPU[area].UpButton)
- 	, fpudown_button(&scope_controller.FPU[area].DownButton) {
+	, pockels_scroll(_pockels, 0.01, 0.1, true, true)
+	, pockels_edit(_pockels, true, true)
+	, fastz_scroll(_fastz, 5, 50, true, true)
+	, fastz_edit(_fastz, true, true)
+	// &scope_controller.GuiParameters.areas[area]->daq.pixeltime
+	, pixeltime_edit(_pixeltime, true, true)
+	// , pixeltime_scroll(_pixeltime, scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), true, true)
+	, pixeltime_scroll(_pixeltime, _minpixeltime, _minpixeltime, true, true)
+	, fpux_edit(_fpux, true, true)
+	// &scope_controller.GuiParameters.areas[area]->fpuxystage.ypos
+	, fpuy_edit(_fpuy, true, true)
+	// &scope_controller.FPU[area].LeftButton
+	, fpuleft_button(_fpubuttons.LeftButton)
+	, fpuright_button(_fpubuttons.RightButton)
+	, fpuup_button(_fpubuttons.UpButton)
+ 	, fpudown_button(_fpubuttons.DownButton) {
 
 	std::wstringstream stream;
 	stream << L"Area " << area+1;
-	if ( scope_controller.GuiParameters.areas[area]->isslave() )
+	if ( _isslave )
 		stream << L"S";
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
 
 	// For disabling save preset button and presets combo during scanning
-	rwstateconnection = scope_controller.ReadOnlyWhileScanning.ConnectGUI(std::bind(&CNoScanBasePage::SetReadOnlyWhileScanning, this));
+	rwstateconnection = _readonlywhilescanning.ConnectGUI(std::bind(&CNoScanBasePage::SetReadOnlyWhileScanning, this));
 }
+
 
 CNoScanBasePage::~CNoScanBasePage(void) {
 	// Disconnect

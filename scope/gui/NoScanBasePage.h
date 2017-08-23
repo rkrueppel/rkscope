@@ -7,12 +7,12 @@
 #include "controls/ScopeCheckBoxCtrl.h"
 #include "controls/ScopeUpDownCtrl.h"
 #include "controls/ScopeScrollbarCtrl.h"
-#include "controllers/ScopeController.h"
+#include "controllers/ScopeControllerButtons.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "resource.h"
 
 namespace scope {
-namespace gui {
+	namespace gui {
 
 /** Base class for all scanning and non-scanning scan property pages, i.e. for frame-scanning pages and for non-scanning slave area pages.
 * Uses CToolTipDialog for displaying help tooltips. Add strings with the same ID as a control for help to that control. */
@@ -74,7 +74,17 @@ public:
 	enum { IDD = IDD_NOSCAN_PROPPAGE };
 
 	/** We need a pointer to a basic ScannerVector (could be e.g. Saw really) but thus we can connect to (inherited) members */
-	CNoScanBasePage(const uint32_t& _area, parameters::ScannerVectorFrameBasic& _scanvecparams);
+	CNoScanBasePage(const uint32_t& _area
+		, const bool& _isslave
+		, ScopeNumber<double>& _pockels
+		, ScopeNumber<double>& _fastz
+		, ScopeNumber<double>& _pixeltime
+		, const double& _minpixeltime
+		, ScopeNumber<double>& _fpux
+		, ScopeNumber<double>& _fpuy
+		, FPUButtons& _fpubuttons
+		, ScopeNumber<bool>& _readonlywhilescanning
+	);
 
 	/** Disconnect from ScopeController::ReadOnlyWhileScanning */
 	virtual ~CNoScanBasePage(void);
@@ -87,12 +97,12 @@ public:
 
 	/** @name Called via Win32 messages
 	* @{ */
-	virtual BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam);
+	BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {}
 	/** @} */
 
 	/** @name Called from ScopeController */
 	/** Connected to ScopeController::ReadOnlyWhileScanning */
-	virtual void SetReadOnlyWhileScanning();
+	void SetReadOnlyWhileScanning() {}
 	/** @} */
 };
 

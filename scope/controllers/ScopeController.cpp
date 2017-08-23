@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ScopeController.h"
-#include "ScopeController_p.h"
 
 namespace scope {
 
