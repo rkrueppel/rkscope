@@ -25,7 +25,7 @@ CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area
 	, ScopeNumber<double>& _frametime
 	, ScopeNumber<double>& _linerate
 )
-	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning, _svresonanceparams, _average, _scannerdelay, _framereate, _frametime, _linerate)
+	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning, _svresonanceparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
 	, svresonanceparams(_svresonanceparams)
 	, ycutoff_edit(_svresonanceparams.ycutoff, true, true)
 	, yretrace_edit(_svresonanceparams.yretrace, true, true)

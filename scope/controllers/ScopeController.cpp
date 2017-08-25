@@ -346,13 +346,6 @@ std::wstring ScopeController::CurrentConfigFile() const {
 }
 
 
-
-void ScopeController::InitializeHardware() {
-	// Give guiparameters by reference, so hardware has parameters and can connect to ScopeNumbers
-	theStage.Initialize(guiparameters.stage);
-	theFPUs.Initialize(guiparameters);
-}
-
 void ScopeController::StartLive() {
 	if (parameters.run_state() == RunStateHelper::Mode::Stopped) {
 		guiparameters.requested_mode.Set(DaqModeHelper::Mode::continuous);
@@ -495,22 +488,7 @@ void ScopeController::UpdateAreaParametersFromGui(const uint32_t& _area) {
 	}
 }
 
-bool ScopeController::LoadParameters(const std::wstring& _filepath) {
-	currentconfigfile = _filepath.substr(_filepath.find_last_of(L'\\') + 1, std::wstring::npos);
-	guiparameters.Load(_filepath);
-	parameters = guiparameters;
-	if (initialparametersloaded() == false) {
-		InitializeHardware();
-		initialparametersloaded = true;
-	}
-	return true;
-}
 
-bool ScopeController::SaveParameters(const std::wstring& _filepath) {
-	parameters = guiparameters;
-	parameters.Save(_filepath);
-	return true;
-}
 
 void ScopeController::SaveCurrentWindowPositions() {
 	// This gets parameters::Windows of CChannelFrames and CHistogramFrames that are attached to the display controller

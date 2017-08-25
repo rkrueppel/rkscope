@@ -14,13 +14,23 @@ namespace scope {
 		, thePipeline(_nareas, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display, parameters)
 		, theStorage(_nareas, &pipeline_to_storage, parameters)
 		, theDisplay(_nareas, &pipeline_to_display, parameters)
+		, theFPUs(_nareas)
+		, theStage()
+		, theController()
 	{
 		//Make sure that TheScope is instanciated only once
 		std::assert(!instanciated);
 		instanciated = true;
 
-		// Loads initial parameter set into ScopeInterface's static GuiParameters
-		theController.LoadParameters(_initialparameterspath);
+		// Loads initial parameters
+		LoadParameters(_initialparameterspath);
+		
+		// Now initialize the hardware with the loaded parameters
+		// Give guiparameters by reference, so hardware has parameters and can connect to ScopeNumbers
+		theStage.Initialize(guiparameters.stage);
+		theFPUs.Initialize(guiparameters);
+		
+		theFPUS.ConnectButtons(theController.fpubuttonsvec);
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
@@ -44,5 +54,18 @@ namespace scope {
 		std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
 		revstr = L"Scope (Last Git commit " + revstr + L")";
 		DBOUT(revstr.c_str());
+	}
+	
+	bool TheScope::LoadParameters(const std::wstring& _filepath) {
+		currentconfigfile = _filepath.substr(_filepath.find_last_of(L'\\') + 1, std::wstring::npos);
+		guiparameters.Load(_filepath);
+		parameters = guiparameters;
+		return true;
+	}
+
+	bool TheScope::SaveParameters(const std::wstring& _filepath) {
+		parameters = guiparameters;
+		parameters.Save(_filepath);
+		return true;
 	}
 }

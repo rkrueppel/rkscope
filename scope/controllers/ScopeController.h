@@ -89,12 +89,6 @@ protected:
 	/** stores the time to run a scan */
 	DWORD time;
 
-	/** true after parameter set on program start is loaded */
-	ScopeNumber<bool> initialparametersloaded;
-
-	/** currently loaded config */
-	std::wstring currentconfigfile;
-
 	/** list of callbacks for scan mode switching */
 	std::vector<std::function<void(const uint32_t&, const ScannerVectorType&)>> scanmodecallbacks;
 
@@ -105,12 +99,6 @@ public:
 	/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
 	* by static ScopeButtons etc here) while scanning. */
 	ScopeNumber<bool> readonlywhilescanning;
-
-	/** @name Hardware controllers
-	* @{ */
-	FPUController theFPUs;
-	SCOPE_XYZCONTROL_T theStage;
-	/** @} */
 
 	/** @name ScopeButtons
 	* GUI classes can connect CScopeButtonCtrl to these ScopeButtons via their scope_controller member and thus pass commands to the ScopeController.
@@ -138,9 +126,6 @@ public:
 
 
 protected:
-	/** (Re-)Initializes ScopeControllers own hardware components (XYControl/Stage, ZControl, and FPU stuff) */
-	void InitializeHardware();
-
 	/** Sets the state of the GUI buttons for FPU control (via the corresponding ScopeButtons). True = enabled, false = disabled.  */
 	void SetFPUButtonsState(const bool& state);
 
@@ -198,9 +183,7 @@ public:
 
 	/** Stop whatever is running */
 	~ScopeController(void);
-
 	
-
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;
 
@@ -228,14 +211,6 @@ public:
 
 	/** Updates area parameters and scanner vectors in the controllers from the GuiParameters set without stopping scanning */
 	void UpdateAreaParametersFromGui(const uint32_t& _area);
-
-	/** Loads current parameter set from disk
-	* @param[in] _filepath path and name of parameters on disk */
-	bool LoadParameters(const std::wstring& _filepath);
-
-	/** Saves the current parameter set to disk
-	* @param[in] _filepath path and name to save to */
-	bool SaveParameters(const std::wstring& _filepath);
 
 	/** Sets the current xyz stage position as zero */
 	void SetStageZero();

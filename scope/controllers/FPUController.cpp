@@ -4,23 +4,33 @@
 
 namespace scope {
 
-FPUController::FPUController() {
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
-		theXYStages[a] = std::unique_ptr<SCOPE_FPUXYCONTROL_T>(new SCOPE_FPUXYCONTROL_T());
+FPUController::FPUController(const uint32_t& _nareas)
+	: nareas(_nareas)
+	, stepsizes(_nareas, 0.0)
+	, theXYStages(0)
+{
+	for ( uint32_t a = 0 ; a < _nareas ; a++ ) {
+		theXYStages.emplace_back(std::make_unique<SCOPE_FPUXYCONTROL_T>());
 		stepsizes[a] = scope_controller.GuiParameters.areas[a]->fpuxystage.buttonstepsize();
 		scope_controller.GuiParameters.areas[a]->fpuxystage.xpos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
 		scope_controller.GuiParameters.areas[a]->fpuxystage.ypos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
-		scope_controller.FPU[a].LeftButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(left)));
-		scope_controller.FPU[a].RightButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(right)));
-		scope_controller.FPU[a].UpButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(up)));
-		scope_controller.FPU[a].DownButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(down)));
-		scope_controller.FPU[a].SetZeroButton.Connect(std::bind(&FPUController::SetXYZero, this, a));
 	}
 }
 
 void FPUController::Initialize(const parameters::Scope& _params) {
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
+	for ( uint32_t a = 0 ; a < nareas ; a++ )
 		theXYStages[a]->Initialize(_params.areas[a]->fpuxystage);	
+}
+
+void FPUController::ConnectButtons(std::vector<FPUButtons> _fpubuttonsvec) {
+	std::assert(nareas == _fpubuttonsvec.size());
+	for ( uint32_t a = 0 ; a < nareas ; a++ ) {
+		_fpubuttonsvec[a].LeftButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(left)));
+		_fpubuttonsvec[a].RightButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(right)));
+		_fpubuttonsvec[a].UpButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(up)));
+		_fpubuttonsvec[a].DownButton.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(down)));
+		_fpubuttonsvec[a].SetZeroButton.Connect(std::bind(&FPUController::SetXYZero, this, a));
+	}
 }
 
 void FPUController::MoveAbsolute(const uint32_t& _area) {
