@@ -8,12 +8,15 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area)
-	: CFrameScanBasePage(_area, scope_controller.GuiParameters.areas[_area]->FrameHopper()) {
+CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, const bool& _isslave, parameters::ScannerVectorFramePlaneHopper& _scanvecparams)
+	: CFrameScanBasePage(_area, _scanvecparams)
+	//scope_controller.GuiParameters.areas[area]->isslave()
+	, isslave(_isslave)
+	, hoppervecparams(_scanvecparams) {
 	
 	// Overwrite base class enum { IDD = ... }
 	// Use different dialog resources depending if this area is a slave area (only Pockels and ETL sliders) or a master area (full control complement)
-	if ( scope_controller.GuiParameters.areas[area]->isslave() )
+	if ( isslave )
 		m_psp.pszTemplate = MAKEINTRESOURCE(IDD_FRAMESCAN_SLAVE_PROPPAGE);
 	else
 		m_psp.pszTemplate = MAKEINTRESOURCE(IDD_FRAMESCAN_HOPPER_PROPPAGE);
@@ -39,20 +42,20 @@ BOOL CFrameScanHopperPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 void CFrameScanHopperPage::UpdatePlanesList() {
 	planes_list.DeleteAllItems();
 	CString tmp;
-	for ( uint32_t p = 0 ; p < scope_controller.GuiParameters.areas[area]->FrameHopper().planes.size() ; p++ ) {
+	for ( uint32_t p = 0 ; p < hoppervecparams.planes.size() ; p++ ) {
 		planes_list.InsertItem(p, L"Slice", 0);
 		tmp.Format(L"%d", p);
 		planes_list.SetItemText(p, 0, tmp);							// Slice no
-		tmp.Format(L"%.1f", scope_controller.GuiParameters.areas[area]->FrameHopper().planes[p].position());
+		tmp.Format(L"%.1f", hoppervecparams.planes[p].position());
 		planes_list.SetItemText(p, 1, tmp);							// fast z position
-		tmp.Format(L"%.2f", scope_controller.GuiParameters.areas[area]->FrameHopper().planes[p].pockels());
+		tmp.Format(L"%.2f", hoppervecparams.planes[p].pockels());
 		planes_list.SetItemText(p, 2, tmp);							// pockels
 	}
 }
 
 LRESULT CFrameScanHopperPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled) {
-	parameters::PlaneProperties plane(scope_controller.GuiParameters.areas[area]->FrameHopper().fastz(), scope_controller.GuiParameters.areas[area]->FrameHopper().pockels());
-	scope_controller.GuiParameters.areas[area]->FrameHopper().planes.push_back(plane);
+	parameters::PlaneProperties plane(hoppervecparams.fastz(), hoppervecparams.pockels());
+	hoppervecparams.planes.push_back(plane);
 
 	UpdatePlanesList();
 
@@ -65,7 +68,7 @@ LRESULT CFrameScanHopperPage::OnDeletePlane(WORD wNotifyCode, WORD wID, HWND hWn
 		return 0;
 
 	// Delete the selected plane from the vector
-	scope_controller.GuiParameters.areas[area]->FrameHopper().planes.erase(sel + std::begin(scope_controller.GuiParameters.areas[area]->FrameHopper().planes));
+	hoppervecparams.planes.erase(sel + std::begin(hoppervecparams.planes));
 	UpdatePlanesList();
 
 	return 0;

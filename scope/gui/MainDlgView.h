@@ -6,9 +6,6 @@
 #include "controls/ScopeButtonCtrl.h"
 #include "resource.h"
 
-namespace scope {
-	class ScopeController;
-}
 
 namespace scope {
 	namespace gui {

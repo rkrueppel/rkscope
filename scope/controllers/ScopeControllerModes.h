@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ScopeController.h"
+#include "parameters/Scope.h"
 
 namespace scope {
 
@@ -9,7 +10,7 @@ class ScopeControllerModeBase {
 		parameters::Scope& myparameters;
 		
 	public:
-		ScopeControllerModeBase(parametes::Scope& _myparameters)
+		ScopeControllerModeBase(parameters::Scope& _myparameters)
 			: myparameters(_myparameters)
 		{
 				
@@ -25,7 +26,7 @@ class ScopeControllerModeLive
 	: public ScopeControllerModeBase {
 
 	public:
-		ScopeControllerModeLive(parametes::Scope& _myparameters)
+		ScopeControllerModeLive(parameters::Scope& _myparameters)
 			: ScopeControllerModeBase(_myparameters)
 		{
 				

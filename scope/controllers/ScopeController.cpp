@@ -339,12 +339,7 @@ void ScopeController::PrepareQuit() {
 	SetGuiCtrlState();
 }
 
-void ScopeController::Version() const {
-	// Extract last commit date
-	std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
-	revstr = L"Scope (Last Git commit " + revstr + L")";
-	DBOUT(revstr.c_str());
-}
+
 
 std::wstring ScopeController::CurrentConfigFile() const {
 	return currentconfigfile;

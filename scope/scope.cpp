@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "resource.h"
-#include "gui/MainDlgFrame.h"
-#include "controllers/ScopeController.h"
+#include "TheScope.h"
 #include "controllers/ScopeLogger.h"
 #include "version.h"
 
@@ -56,24 +55,20 @@ int Run(HINSTANCE hInstance) {
 	if ( founddefault || (dlgret == IDOK) ) {
 		DBOUT(L"Filepath " << filepath.GetString());
 
-		scope::ScopeController scope_controller(1);
-		scope_controller.Version();
-		// Loads initial parameter set into ScopeInterface's static GuiParameters
-		// Constructs the static ScopeController object, at this point there is only one thread (this one)
-		// that accesses ScopeController (important this instance() is not threadsafe)
-		scope_controller.LoadParameters(std::wstring(filepath.GetString()));
+		scope::TheScope myscope(1, std::wstring(filepath.GetString()));
+		myscope.Version();
 		
 		// Set the loggers folder to the storage folder configured in the xml file
 		
 		// Sometimes, in debug build an mutex access violation pops up around here, do some cosmetic variations in the code and recompile
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));				// Move this around on debug build mutex bug
 			
-		scope::ScopeLogger::GetInstance().SetFilepath(scope_controller.GuiParameters.storage.folder()+L"\\"+GetCurrentDateString());
+		scope::ScopeLogger::GetInstance().SetFilepath(myscope.GuiParameters.storage.folder()+L"\\"+GetCurrentDateString());
 		
-		DBOUT(L"Sizeof parameters::Scope " << sizeof(scope_controller.GuiParameters));
+		DBOUT(L"Sizeof parameters::Scope " << sizeof(myscope.GuiParameters));
 
 		// Create the main window
-		scope_controller.CreateAndShowMainWindow();
+		myscope.CreateAndShowMainWindow();
 
 		// Log startup scope stuff
 		std::wstring msg2(L"This is Scope (Git commit ");

@@ -1,11 +1,11 @@
 #include "StdAfx.h"
 #include "TheScope.h"
 
+std::atomic<bool> scope::TheScope::instanciated(false);
+
 namespace scope {
 	
-	std::atomic<bool> TheScope::instanciated(false);
-	
-	TheScope::TheScope(const uint32_t& _nareas)
+	TheScope::TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath)
 		: nareas(_nareas)
 		, daq_to_pipeline(_nareas)
 		, pipeline_to_storage()
@@ -18,6 +18,9 @@ namespace scope {
 		//Make sure that TheScope is instanciated only once
 		std::assert(!instanciated);
 		instanciated = true;
+
+		// Loads initial parameter set into ScopeInterface's static GuiParameters
+		theController.LoadParameters(_initialparameterspath);
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
@@ -34,5 +37,12 @@ namespace scope {
 		std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
 		revstr = L"Scope (Git commit " + revstr + L")";
 		wndmain->SetWindowText(revstr.c_str());
+	}
+
+	void TheScope::Version() const {
+		// Extract last commit date
+		std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
+		revstr = L"Scope (Last Git commit " + revstr + L")";
+		DBOUT(revstr.c_str());
 	}
 }

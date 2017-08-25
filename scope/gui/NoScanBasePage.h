@@ -27,6 +27,8 @@ protected:
 	/** for which area are the image settings */
 	const uint32_t area;
 
+	const bool isslave;
+
 	/** string for settings page title */
 	std::wstring strtitle;
 
@@ -97,12 +99,12 @@ public:
 
 	/** @name Called via Win32 messages
 	* @{ */
-	BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {}
+	BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam);
 	/** @} */
 
 	/** @name Called from ScopeController */
 	/** Connected to ScopeController::ReadOnlyWhileScanning */
-	void SetReadOnlyWhileScanning() {}
+	virtual void SetReadOnlyWhileScanning() {}
 	/** @} */
 };
 

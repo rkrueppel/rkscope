@@ -5,17 +5,17 @@
 namespace scope {
 	namespace gui {
 	
-CFPGAAnalogIntegratorPage::CFPGAAnalogIntegratorPage(parameters::InputsFPGAAnalogIntegrator* const _parameters)
-	: tohostoverflow1_led(&_parameters->diagnosis.ToHostOverflowCh1)
-	, tohostoverflow2_led(&_parameters->diagnosis.ToHostOverflowCh2)
-	, interloopoverflow_led(&_parameters->diagnosis.InterloopOverflow)
-	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
-	, acquiring_led(_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE)
-	, aioverrange_led(_parameters->diagnosis.AIOverRange)
-	, bitshiftch1_edit(_parameters->BitshiftCh1)
-	, baselinech1_edit(_parameters->BaselineCh1)
-	, bitshiftch2_edit(_parameters->BitshiftCh2)
-	, baselinech2_edit(_parameters->BaselineCh2) {
+CFPGAAnalogIntegratorPage::CFPGAAnalogIntegratorPage(parameters::InputsFPGAAnalogIntegrator& _parameters)
+	: tohostoverflow1_led(_parameters.diagnosis.ToHostOverflowCh1)
+	, tohostoverflow2_led(_parameters.diagnosis.ToHostOverflowCh2)
+	, interloopoverflow_led(_parameters.diagnosis.InterloopOverflow)
+	, interlooptimeout_led(_parameters.diagnosis.InterloopTimeout)
+	, acquiring_led(_parameters.diagnosis.Acquiring, SCOPELED_OKONTRUE)
+	, aioverrange_led(_parameters.diagnosis.AIOverRange)
+	, bitshiftch1_edit(_parameters.BitshiftCh1)
+	, baselinech1_edit(_parameters.BaselineCh1)
+	, bitshiftch2_edit(_parameters.BitshiftCh2)
+	, baselinech2_edit(_parameters.BaselineCh2) {
 }
 
 BOOL CFPGAAnalogIntegratorPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

@@ -4,15 +4,15 @@
 namespace scope {
 	namespace gui {
 
-CFPGADigitalDemultiplexerPage::CFPGADigitalDemultiplexerPage(parameters::InputsFPGADigitalDemultiplexer* const _parameters)
-	: tohostoverflowA1Ch1_led(&_parameters->diagnosis.ToHostOverflowA1Ch1)
-	, tohostoverflowA1Ch2_led(&_parameters->diagnosis.ToHostOverflowA1Ch2)
-	, tohostoverflowA2Ch1_led(&_parameters->diagnosis.ToHostOverflowA2Ch1)
-	, tohostoverflowA2Ch2_led(&_parameters->diagnosis.ToHostOverflowA2Ch2)
-	, interloopoverflow_led(&_parameters->diagnosis.InterloopOverflow)
-	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
-	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE)
-	, laserfreq_edit(&_parameters->diagnosis.MeasuredLaserFreq) {
+CFPGADigitalDemultiplexerPage::CFPGADigitalDemultiplexerPage(parameters::InputsFPGADigitalDemultiplexer& _parameters)
+	: tohostoverflowA1Ch1_led(_parameters.diagnosis.ToHostOverflowA1Ch1)
+	, tohostoverflowA1Ch2_led(_parameters.diagnosis.ToHostOverflowA1Ch2)
+	, tohostoverflowA2Ch1_led(_parameters.diagnosis.ToHostOverflowA2Ch1)
+	, tohostoverflowA2Ch2_led(_parameters.diagnosis.ToHostOverflowA2Ch2)
+	, interloopoverflow_led(_parameters.diagnosis.InterloopOverflow)
+	, interlooptimeout_led(_parameters.diagnosis.InterloopTimeout)
+	, acquiring_led(_parameters.diagnosis.Acquiring, SCOPELED_OKONTRUE)
+	, laserfreq_edit(_parameters.diagnosis.MeasuredLaserFreq) {
 }
 
 BOOL CFPGADigitalDemultiplexerPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

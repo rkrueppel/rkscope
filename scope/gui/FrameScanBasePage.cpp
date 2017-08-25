@@ -5,25 +5,42 @@
 namespace scope {
 namespace gui {
 
-CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area, parameters::ScannerVectorFrameBasic& _scanvecparams)
-	: CNoScanBasePage(_area, _scanvecparams)
-	, zoom_edit(&_scanvecparams.zoom, true, true)
-	, zoom_scroll(&_scanvecparams.zoom, 0.1, 1, true, true)
-	, xres_edit(&_scanvecparams.xres, true, true)
-	, yres_edit(&_scanvecparams.yres, true, true)
-	, xaspectratio_edit(&_scanvecparams.xaspectratio, true, true)
-	, yaspectratio_edit(&_scanvecparams.yaspectratio, true, true)
-	, averages_edit(&scope_controller.GuiParameters.areas[area]->daq.averages, true, true)
-	, scannerdelay_edit(&scope_controller.GuiParameters.areas[area]->daq.scannerdelay, true, true)
-	, xoffset_edit(&_scanvecparams.xoffset, true, true)
-	, yoffset_edit(&_scanvecparams.yoffset, true, true)
-	, framerate_edit(&scope_controller.GuiParameters.areas[area]->framerate, true, true)
-	, frametime_edit(&scope_controller.GuiParameters.areas[area]->frametime, true, true)
-	, linerate_edit(&scope_controller.GuiParameters.areas[area]->linerate, true, true)
-	, diagram(area, &scope_controller.GuiParameters) {
+CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area
+	, const bool& _isslave
+	, ScopeNumber<double>& _pockels
+	, ScopeNumber<double>& _fastz
+	, ScopeNumber<double>& _pixeltime
+	, const double& _minpixeltime
+	, ScopeNumber<double>& _fpux
+	, ScopeNumber<double>& _fpuy
+	, FPUButtons& _fpubuttons
+	, ScopeNumber<bool>& _readonlywhilescanning
+	, parameters::ScannerVectorFrameBasic& _scanvecparams
+	, ScopeNumber<uint32_t>& _averages
+	, ScopeNumber<double>& _scannerdelay
+	, ScopeNumber<double>& _framerate
+	, ScopeNumber<double>& _frametime
+	, ScopeNumber<double>& _linerate
+	)
+	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning)
+	, zoom_edit(_scanvecparams.zoom, true, true)
+	, zoom_scroll(_scanvecparams.zoom, 0.1, 1, true, true)
+	, xres_edit(_scanvecparams.xres, true, true)
+	, yres_edit(_scanvecparams.yres, true, true)
+	, xaspectratio_edit(_scanvecparams.xaspectratio, true, true)
+	, yaspectratio_edit(_scanvecparams.yaspectratio, true, true)
+	, averages_edit(_averages, true, true)
+	, scannerdelay_edit(_scannerdelay, true, true)
+	, xoffset_edit(_scanvecparams.xoffset, true, true)
+	, yoffset_edit(_scanvecparams.yoffset, true, true)
+	, framerate_edit(_framerate, true, true)
+	, frametime_edit(_frametime, true, true)
+	, linerate_edit(_linerate, true, true)
+	//, diagram(area, &scope_controller.GuiParameters)
+{
 	
 	// For disabling save preset button and presets combo during scanning
-	rwstateconnection = scope_controller.ReadOnlyWhileScanning.ConnectGUI(std::bind(&CFrameScanBasePage::SetReadOnlyWhileScanning, this));
+	rwstateconnection = _readonlywhilescanning.ConnectGUI(std::bind(&CFrameScanBasePage::SetReadOnlyWhileScanning, this));
 }
 
 CFrameScanBasePage::~CFrameScanBasePage() {
@@ -53,7 +70,7 @@ BOOL CFrameScanBasePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 	frametime_edit.AttachToDlgItem(GetDlgItem(IDC_FRAMETIME));
 	linerate_edit.AttachToDlgItem(GetDlgItem(IDC_LINERATE));
 
-	diagram.AttachToDlgItem(GetDlgItem(IDC_FPUDIAGRAM));
+	//diagram.AttachToDlgItem(GetDlgItem(IDC_FPUDIAGRAM));
 
 	// Set before by CNoScanBasePage::OnInitDialog
 	initialized = initialized && true;

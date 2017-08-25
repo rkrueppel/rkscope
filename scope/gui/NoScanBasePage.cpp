@@ -19,6 +19,7 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
 	, area(_area)
+	, isslave(_isslave)
 	, pockels_scroll(_pockels, 0.01, 0.1, true, true)
 	, pockels_edit(_pockels, true, true)
 	, fastz_scroll(_fastz, 5, 50, true, true)
@@ -31,14 +32,14 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	// &scope_controller.GuiParameters.areas[area]->fpuxystage.ypos
 	, fpuy_edit(_fpuy, true, true)
 	// &scope_controller.FPU[area].LeftButton
-	, fpuleft_button(_fpubuttons.LeftButton)
-	, fpuright_button(_fpubuttons.RightButton)
-	, fpuup_button(_fpubuttons.UpButton)
- 	, fpudown_button(_fpubuttons.DownButton) {
+	, fpuleft_button(_fpubuttons.left)
+	, fpuright_button(_fpubuttons.right)
+	, fpuup_button(_fpubuttons.up)
+ 	, fpudown_button(_fpubuttons.down) {
 
 	std::wstringstream stream;
 	stream << L"Area " << area+1;
-	if ( _isslave )
+	if ( isslave )
 		stream << L"S";
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
@@ -92,11 +93,6 @@ BOOL CNoScanBasePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 
 	return 0;
 }
-
-void CNoScanBasePage::SetReadOnlyWhileScanning() {
-	// Nothing to do here...
-}
-
 
 }
 

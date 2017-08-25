@@ -37,7 +37,7 @@ public:
 	/** @} */
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGAPhotonCounterPage(parameters::InputsFPGAPhotonCounter* const _parameters);
+	CFPGAPhotonCounterPage(parameters::InputsFPGAPhotonCounter& _parameters);
 
 	BEGIN_MSG_MAP(CFPGAPhotonCounterPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

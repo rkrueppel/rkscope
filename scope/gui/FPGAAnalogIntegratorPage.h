@@ -45,7 +45,7 @@ public:
 	/** @} */
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGAAnalogIntegratorPage(parameters::InputsFPGAAnalogIntegrator* const _parameters);
+	CFPGAAnalogIntegratorPage(parameters::InputsFPGAAnalogIntegrator& _parameters);
 
 	BEGIN_MSG_MAP(CFPGAAnalogIntegratorPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

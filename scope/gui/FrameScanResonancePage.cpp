@@ -8,14 +8,30 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::ScannerVectorFrameResonance& _svresonanceparams, const bool _isslave)
-	: CFrameScanBasePage(_area, _svresonanceparams)
+CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area
+	, const bool& _isslave
+	, ScopeNumber<double>& _pockels
+	, ScopeNumber<double>& _fastz
+	, ScopeNumber<double>& _pixeltime
+	, const double& _minpixeltime
+	, ScopeNumber<double>& _fpux
+	, ScopeNumber<double>& _fpuy
+	, FPUButtons& _fpubuttons
+	, ScopeNumber<bool>& _readonlywhilescanning
+	, parameters::ScannerVectorFrameResonance& _svresonanceparams
+	, ScopeNumber<uint32_t>& _averages
+	, ScopeNumber<double>& _scannerdelay
+	, ScopeNumber<double>& _framerate
+	, ScopeNumber<double>& _frametime
+	, ScopeNumber<double>& _linerate
+)
+	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning, _svresonanceparams, _average, _scannerdelay, _framereate, _frametime, _linerate)
 	, svresonanceparams(_svresonanceparams)
 	, ycutoff_edit(_svresonanceparams.ycutoff, true, true)
 	, yretrace_edit(_svresonanceparams.yretrace, true, true)
 	, waitstorage_edit(_svresonanceparams.waitafterenqueuestorage, true, true)
 	, waitdisplay_edit(_svresonanceparams.waitafterenqueuedisplay, true, true)
-	, isslave(_isslave) {
+{
 
 	zoom_scroll.SetSmallIncrement(1);
 

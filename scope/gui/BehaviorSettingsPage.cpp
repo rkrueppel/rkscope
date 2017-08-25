@@ -9,7 +9,7 @@ CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons
 	, parameters::Behavior& _behaviorparameters
 )
 	: CToolTipDialog(TTS_NOPREFIX)
-	, start_behavior_button(_runbuttons.StartBehaviorButton)
+	, start_behavior_button(_runbuttons.startbehavior)
 	, behaviorparameters(_behaviorparameters)
 	, framecount_edit(_scopecontrollercounters.framecounter[0])
 	, totaltime_edit(_scopecontrollercounters.totaltime)

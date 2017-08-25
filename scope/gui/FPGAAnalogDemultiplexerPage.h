@@ -54,7 +54,7 @@ public:
 	CScopeEditCtrl<uint32_t> hist_range2_edit;
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGAAnalogDemultiplexerPage(parameters::InputsFPGAAnalogDemultiplexer* const _parameters);
+	CFPGAAnalogDemultiplexerPage(parameters::InputsFPGAAnalogDemultiplexer& _parameters, ScopeValue<uint32_t>& _histrange1, ScopeValue<uint32_t>& _histrange2);
 
 	BEGIN_MSG_MAP(CFPGAAnalogDemultiplexerPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

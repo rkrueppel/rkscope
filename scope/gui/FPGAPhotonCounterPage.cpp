@@ -5,13 +5,13 @@
 namespace scope {
 	namespace gui {
 	
-CFPGAPhotonCounterPage::CFPGAPhotonCounterPage(parameters::InputsFPGAPhotonCounter* const _parameters)
+CFPGAPhotonCounterPage::CFPGAPhotonCounterPage(parameters::InputsFPGAPhotonCounter& _parameters)
 	: myFPGA(nullptr)
-	, tohostoverflow1_led(&_parameters->diagnosis.ToHostOverflowCh1)
-	, tohostoverflow2_led(&_parameters->diagnosis.ToHostOverflowCh2)
-	, interloopoverflow_led(&_parameters->diagnosis.InterloopOverflow)
-	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
-	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE) {
+	, tohostoverflow1_led(_parameters.diagnosis.ToHostOverflowCh1)
+	, tohostoverflow2_led(_parameters.diagnosis.ToHostOverflowCh2)
+	, interloopoverflow_led(_parameters.diagnosis.InterloopOverflow)
+	, interlooptimeout_led(_parameters.diagnosis.InterloopTimeout)
+	, acquiring_led(_parameters.diagnosis.Acquiring, SCOPELED_OKONTRUE) {
 }
 
 BOOL CFPGAPhotonCounterPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

@@ -34,7 +34,7 @@ public:
 	CScopeEditCtrl<double> laserfreq_edit;
 
 	/** Connect to the FIFOStatus ScopeNumbers */
-	CFPGADigitalDemultiplexerPage(parameters::InputsFPGADigitalDemultiplexer* const _parameters);
+	CFPGADigitalDemultiplexerPage(parameters::InputsFPGADigitalDemultiplexer& _parameters);
 
 	BEGIN_MSG_MAP(CFPGADigitalDemultiplexerPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

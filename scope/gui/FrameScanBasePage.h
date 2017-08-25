@@ -73,14 +73,29 @@ protected:
 	CScopeEditCtrl<double> linerate_edit;
 
 	/** diagram displaying FOV positions */
-	CScopeFOVDiagram diagram;
+	//CScopeFOVDiagram diagram;
 
 public:
 	/** Dialog resource ID, do not forget to overwrite in derived class constructor! */
 	enum { IDD = IDD_FRAMESCAN_SAW_PROPPAGE };
 
-	/** We need a pointer to a basic ScannerVector (could be e.g. Saw really) but thus we can connect to (inherited) members */
-	CFrameScanBasePage(const uint32_t& _area, parameters::ScannerVectorFrameBasic& _scanvecparams);
+	CFrameScanBasePage(const uint32_t& _area
+		, const bool& _isslave
+		, ScopeNumber<double>& _pockels
+		, ScopeNumber<double>& _fastz
+		, ScopeNumber<double>& _pixeltime
+		, const double& _minpixeltime
+		, ScopeNumber<double>& _fpux
+		, ScopeNumber<double>& _fpuy
+		, FPUButtons& _fpubuttons
+		, ScopeNumber<bool>& _readonlywhilescanning
+		, parameters::ScannerVectorFrameBasic& _scanvecparams
+		, ScopeNumber<uint32_t>& _averages
+		, ScopeNumber<double>& _scannerdelay
+		, ScopeNumber<double>& _framerate
+		, ScopeNumber<double>& _frametime
+		, ScopeNumber<double>& _linerate
+	);
 
 	/** Disconnect from ScopeController::ReadOnlyWhileScanning */
 	virtual ~CFrameScanBasePage();
@@ -96,7 +111,7 @@ public:
 
 	/** @name Called via Win32 messages
 	* @{ */
-	virtual BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam);
+	BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam);
 
 	virtual LRESULT OnPresetSave(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	virtual LRESULT OnPresetDelete(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);

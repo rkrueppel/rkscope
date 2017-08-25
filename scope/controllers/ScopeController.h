@@ -1,7 +1,10 @@
 #pragma once
-#include "ScopeControllerModes.h"
 #include "ScopeDefines.h"
 #include "version.h"
+#include "BaseController.h"
+#include "ScopeControllerModes.h"
+#include "ScopeControllerCounters.h"
+#include "ScopeControllerButtons.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "scanmodes/ScannerVectorFrameSaw.h"
 #include "scanmodes/ScannerVectorFrameBiDi.h"
@@ -28,8 +31,7 @@
 #include "helpers/ScopeNumber.h"
 #include "parameters/Scope.h"
 #include "helpers/ScopeDatatypes.h"
-#include "ScopeControllerButtons.h"
-#include "BaseController.h"
+
 
 // We need the type of the FPGAStatus struct for FPGAFIFOStatus here
 #include "devices\fpga\FPGAPhotonCounter.h"
@@ -197,10 +199,7 @@ public:
 	/** Stop whatever is running */
 	~ScopeController(void);
 
-	/** Print the current ScopeController version to debug console.
-	* This should be called before creation of the GUI, when only the main thread exists. Then the static member in GetImpl() is initialized and we
-	* do not have to worry about thread-safe singleton creation... */
-	void Version() const;
+	
 
 	/** @return the currently loaded config file */
 	std::wstring CurrentConfigFile() const;

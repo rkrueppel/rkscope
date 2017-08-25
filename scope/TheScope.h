@@ -49,7 +49,7 @@ namespace scope {
 			parameters::Scope guiparameters;
 			
 		public:
-			TheScope(const uint32_t& _nareas);
+			TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath);
 			
 			// Disable copy construction
 			TheScope(const TheScope& _other) = delete;
@@ -58,5 +58,10 @@ namespace scope {
 			TheScope operator=(const TheScope& _other) = delete;
 		
 			void CreateAndShowMainWindow();
+
+			/** Print the current ScopeController version to debug console.
+			* This should be called before creation of the GUI, when only the main thread exists. Then the static member in GetImpl() is initialized and we
+			* do not have to worry about thread-safe singleton creation... */
+			void Version() const;
 	};
 }

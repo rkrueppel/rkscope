@@ -16,6 +16,8 @@ class CFrameScanBidiPage
 	: public CFrameScanBasePage {
 
 protected:
+	const bool isslave;
+
 	/** turn fraction for x scanner */
 	CScopeEditCtrl<double> xturn_edit;
 
@@ -29,7 +31,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CFrameScanBidiPage(const uint32_t& _area);
+	CFrameScanBidiPage(const uint32_t& _area, const bool& _isslave, parameters::ScannerVectorFrameBiDi& _scanvecparams);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanBidiPage)

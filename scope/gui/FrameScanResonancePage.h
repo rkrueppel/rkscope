@@ -33,13 +33,26 @@ protected:
 	/** list box for all planes */
 	CListViewCtrl planes_list;
 
-	const bool isslave;
-
 public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CFrameScanResonancePage(const uint32_t& _area, parameters::ScannerVectorFrameResonance& _svresonanceparams, const bool _isslave);
+	CFrameScanResonancePage(const uint32_t& _area
+		, const bool& _isslave
+		, ScopeNumber<double>& _pockels
+		, ScopeNumber<double>& _fastz
+		, ScopeNumber<double>& _pixeltime
+		, const double& _minpixeltime
+		, ScopeNumber<double>& _fpux
+		, ScopeNumber<double>& _fpuy
+		, FPUButtons& _fpubuttons
+		, ScopeNumber<bool>& _readonlywhilescanning
+		, parameters::ScannerVectorFrameResonance& _svresonanceparams
+		, ScopeNumber<uint32_t>& _averages
+		, ScopeNumber<double>& _scannerdelay
+		, ScopeNumber<double>& _framerate
+		, ScopeNumber<double>& _frametime
+		, ScopeNumber<double>& _linerate);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanResonancePage)

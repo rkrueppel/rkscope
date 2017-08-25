@@ -4,23 +4,27 @@
 namespace scope {
 	namespace gui {
 
-CFPGAAnalogDemultiplexerPage::CFPGAAnalogDemultiplexerPage(parameters::InputsFPGAAnalogDemultiplexer* const _parameters)
-	: tohostoverflowA1_led(&_parameters->diagnosis.ToHostOverflowA1)
-	, tohostoverflowA2_led(&_parameters->diagnosis.ToHostOverflowA2)
-	, interloopoverflow_led(&_parameters->diagnosis.InterloopOverflow)
-	, interlooptimeout_led(&_parameters->diagnosis.InterloopTimeout)
-	, acquiring_led(&_parameters->diagnosis.Acquiring, SCOPELED_OKONTRUE)
-	, aioverrange_led(&_parameters->diagnosis.AIOverRange)
-	, baselinech1_edit(&_parameters->BaselineCh1)
-	, baselinech2_edit(&_parameters->BaselineCh2)
-	, cutoffch1_edit(&_parameters->CutoffCh1)
-	, cutoffch2_edit(&_parameters->CutoffCh2)
-	, bitshiftch1a1_edit(&_parameters->BitshiftA1Ch1)
-	, bitshiftch2a1_edit(&_parameters->BitshiftA1Ch2)
-	, bitshiftch1a2_edit(&_parameters->BitshiftA2Ch1)
-	, bitshiftch2a2_edit(&_parameters->BitshiftA2Ch2) 
-	, hist_range1_edit(&scope_controller.GuiParameters.areas[0]->histrange) 
-	, hist_range2_edit(&scope_controller.GuiParameters.areas[1]->histrange) 
+CFPGAAnalogDemultiplexerPage::CFPGAAnalogDemultiplexerPage(
+		parameters::InputsFPGAAnalogDemultiplexer& _parameters
+		, ScopeValue<uint32_t>& _histrange1
+		, ScopeValue<uint32_t>& _histrange2
+	)
+	: tohostoverflowA1_led(_parameters.diagnosis.ToHostOverflowA1)
+	, tohostoverflowA2_led(_parameters.diagnosis.ToHostOverflowA2)
+	, interloopoverflow_led(_parameters.diagnosis.InterloopOverflow)
+	, interlooptimeout_led(_parameters.diagnosis.InterloopTimeout)
+	, acquiring_led(_parameters.diagnosis.Acquiring, SCOPELED_OKONTRUE)
+	, aioverrange_led(_parameters.diagnosis.AIOverRange)
+	, baselinech1_edit(_parameters.BaselineCh1)
+	, baselinech2_edit(_parameters.BaselineCh2)
+	, cutoffch1_edit(_parameters.CutoffCh1)
+	, cutoffch2_edit(_parameters.CutoffCh2)
+	, bitshiftch1a1_edit(_parameters.BitshiftA1Ch1)
+	, bitshiftch2a1_edit(_parameters.BitshiftA1Ch2)
+	, bitshiftch1a2_edit(_parameters.BitshiftA2Ch1)
+	, bitshiftch2a2_edit(_parameters.BitshiftA2Ch2) 
+	, hist_range1_edit(_histrange1) 
+	, hist_range2_edit(_histrange2)
 	{
 }
 
