@@ -12,7 +12,6 @@ ScopeController::ScopeController(const uint32_t& _nareas)
 	, onlineupdate_running(false)
 	, time(0)
 	, initialparametersloaded(false, false, true)
-	, currentconfigfile(L"NONE")
 	, readonlywhilescanning(false, false, true, L"ReadOnlyWhileScanning")
 	, fpubuttonsvec(_nareas)
 	, scanmodebuttonsvec(_nareas) {
@@ -30,7 +29,9 @@ ScopeController::ScopeController(const uint32_t& _nareas)
 	stackbuttons.stophere.Connect(std::bind(&StackStopHere, this));
 	
 	// We cannot connect directly to XYZStage::SetZero because std::bind needs the class to be copyable (which it may  not)
-	stagezerobutton.Connect(std::bind(&SetStageZero, this));
+	miscbuttons.zerostage.Connect(std::bind(&SetStageZero, this));
+	
+	miscbuttons.zerogalvos.Connect(std::bind(&ZeroGalvoOutpus, this));
 
 	for (uint32_t a = 0; a < nareas; a++) {
 		// Initially choose the first supported scannervector in the list
@@ -38,7 +39,7 @@ ScopeController::ScopeController(const uint32_t& _nareas)
 
 		// Connect the buttons for scan mode switching (if a master area)
 		if (!ThisIsSlaveArea(a)) {
-			for (auto& b : ScanMode[a].map)
+			for (auto& b : scanmodebuttonsvec[a].map)
 				b.second.Connect(std::bind(&SetScanMode, this, a, b.first));
 		}
 
@@ -339,13 +340,6 @@ void ScopeController::PrepareQuit() {
 	SetGuiCtrlState();
 }
 
-
-
-std::wstring ScopeController::CurrentConfigFile() const {
-	return currentconfigfile;
-}
-
-
 void ScopeController::StartLive() {
 	if (parameters.run_state() == RunStateHelper::Mode::Stopped) {
 		guiparameters.requested_mode.Set(DaqModeHelper::Mode::continuous);
@@ -488,15 +482,6 @@ void ScopeController::UpdateAreaParametersFromGui(const uint32_t& _area) {
 	}
 }
 
-
-
-void ScopeController::SaveCurrentWindowPositions() {
-	// This gets parameters::Windows of CChannelFrames and CHistogramFrames that are attached to the display controller
-	guiparameters.frames = theDisplay.GetWindowCollection();
-
-	guiparameters.frames.AddWindow(L"CLogFrame", 0, ScopeLogger::GetInstance().GetLogFrameWindow());
-}
-
 void ScopeController::SetStageZero() {
 	theStage.SetZero();
 }
@@ -593,36 +578,8 @@ void ScopeController::SetGuiCtrlState() {
 	stackbuttons.stophere.Enable(buttonenabler || (parameters.run_state() == RunStateHelper::Mode::RunningContinuous));
 }
 
-void ScopeController::AttachFrame(gui::CChannelFrame* const cframe) {
-	theDisplay.AttachFrame(cframe);
-}
-
-
-void ScopeController::DetachFrame(gui::CChannelFrame* const cframe) {
-	theDisplay.DetachFrame(cframe);
-}
-
-
-void ScopeController::AttachFrame(gui::CHistogramFrame* const hframe) {
-	theDisplay.AttachFrame(hframe);
-}
-
-
-bool ScopeController::HistogramAlreadyAttached(const uint32_t& _area) {
-	return theDisplay.HistogramAlreadyAttached(_area);
-}
-
-
-void ScopeController::DetachFrame(gui::CHistogramFrame* const hframe) {
-	theDisplay.DetachFrame(hframe);
-}
-
 void ScopeController::ResolutionChange(const uint32_t& _area) {
 	theDisplay.ResolutionChange(*guiparameters.areas[_area]);
-}
-
-void ScopeController::SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper) {
-	theDisplay.SetHistogramLimits(_area, _channel, _lower, _upper);
 }
 
 void ScopeController::SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {

@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 #include "ChannelView.h"
-#include "../controllers/ScopeLogger.h"
-#include "../controllers/ScopeController.h"
 
 namespace scope {
 	namespace gui {

@@ -12,6 +12,8 @@ class CScanModesSettingsPage :
 	public CPropertyPageImpl<CScanModesSettingsPage> {
 
 protected:
+	std::vector<ScanModeButtons>& scanmodebuttonsvec;
+
 	/** List of all areas, selection updates radio buttons */
 	CListBox areas_list;
 

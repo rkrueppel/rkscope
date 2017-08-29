@@ -13,9 +13,19 @@ namespace scope {
 std::array<UINT, 4> CMainDlgFrame::viewareas_ids = { ID_NEWVIEW_AREA1, ID_NEWVIEW_AREA2, ID_NEWVIEW_AREA3, ID_NEWVIEW_AREA4};
 std::array<UINT, 4> CMainDlgFrame::histogramareas_ids = { ID_NEWHISTOGRAM_AREA1, ID_NEWHISTOGRAM_AREA2, ID_NEWHISTOGRAM_AREA3, ID_NEWHISTOGRAM_AREA4};
 
+CMainDlgFrame::CMainDlgFrame(scope::ScopeController& _scope_controller, scope::DisplayController& _display_controller, scope::parameters::Scope& _guiparameters)
+	: firstpaint(true)
+	, scope_controller(_scope_controller)
+	, display_controller(_display_controller)
+	, currentconfigfile(L"")
+	, guiparameters(_guiparameters)
+	, m_dlgView(_scope_controller.runbuttons) {
+}
+
+
 void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const RECT& _rect) {
 	RECT rect(_rect);					// We need non-const here
-	CChannelFrame* pChild = new CChannelFrame(_area);
+	CChannelFrame* pChild = new CChannelFrame(_area, guiparameters.areas[_area], guiparameters.areas[_area]->daq.inputs->channels(), display_controller);
 	// set the CMainDlgFrame as parent, so the childs receives WM_DESTROY when the parent gets destroyed (correct cleanup this way!!)
 	pChild->CreateEx(m_hWnd, rect);
 	pChild->ShowWindow(SW_SHOWDEFAULT);
@@ -24,9 +34,9 @@ void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const RECT& _rect) {
 void CMainDlgFrame::NewHistogramFrame(const uint32_t& _area, const RECT& _rect) {
 	// Do not open histogram we alread have a histogram for that area (since calculation is done inside an Active
 	// in CHistogramFrame this would mean twice the same calculation etc
-	if ( !scope_controller.HistogramAlreadyAttached(_area) ) {
+	if ( !display_controller.HistogramAlreadyAttached(_area) ) {
 		RECT rect(_rect);					// We need non-const here
-		CHistogramFrame* pChild = new CHistogramFrame(_area, scope_controller.GuiParameters.areas[_area]->daq.inputs->channels());
+		CHistogramFrame* pChild = new CHistogramFrame(_area, guiparameters.areas[_area]->daq.inputs->channels());
 		// set the CMainDlgFrame as parent, so the childs get destroyed when the parent gets WM_DESTROY (correct cleanup this way!!)
 		pChild->CreateEx(m_hWnd, rect);
 		pChild->ShowWindow(SW_SHOWDEFAULT);
@@ -44,7 +54,7 @@ void CMainDlgFrame::NewLogFrame(const RECT& _rect) {
 }
 
 void CMainDlgFrame::RecreateWindows() {
-	for ( const auto& w : scope_controller.GuiParameters.frames.collection ) {
+	for ( const auto& w : guiparameters.frames.collection ) {
 		RECT rect;
 		rect.top = w.top;
 		rect.left = w.left;
@@ -69,7 +79,7 @@ BOOL CMainDlgFrame::OnIdle() {
 	// this is called way too often, memory check therefore implemented differently, with OnTimer
 
 	// Update scope run state status
-	std::wstring str2(scope_controller.GuiParameters.run_state());
+	std::wstring str2(guiparameters.run_state());
 	UISetText(0, str2.c_str());
 
 	// Update shutter status in menu
@@ -103,7 +113,7 @@ void CMainDlgFrame::PrepareToolBarMenu(UINT nMenuID, HMENU hMenu) {
 			stream << L"Area " << a+1;
 			// Disable the menu entry if we alread have a histogram for that area (since calculation is done inside an Active
 			// in CHistogramFrame this would mean twice the same calculation etc
-			if ( scope_controller.HistogramAlreadyAttached(a) )
+			if ( display_controller.HistogramAlreadyAttached(a) )
 				menu.InsertMenu(0, MF_STRING | MF_GRAYED, histogramareas_ids[a], stream.str().c_str());
 			else
 				menu.InsertMenu(0, MF_STRING, histogramareas_ids[a], stream.str().c_str());
@@ -153,7 +163,7 @@ LRESULT CMainDlgFrame::OnCreate(LPCREATESTRUCT lParam) {
 	UISetText(0, L"Stopped");
 	m_wndStatusBar.SetPaneText(0, L"Stopped");
 	UISetText(1, L"Memory");
-	UISetText(2, scope_controller.CurrentConfigFile().c_str());
+	UISetText(2, currentconfigfile.c_str());
 	UIUpdateStatusBar();
 	
 	// Progress bar inside status bar (in case this is needed sometime...)
@@ -188,9 +198,6 @@ LRESULT CMainDlgFrame::OnCreate(LPCREATESTRUCT lParam) {
 	RECT rec = {10,10,280,350};
 	HWND wnd = m_dlgView.Create(m_hWnd);
 	::SetWindowPos(wnd,HWND_BOTTOM,0,53,430,939,NULL);
-
-	// Connect the quit button
-	scope_controller.QuitButton.Connect(std::bind(&CMainDlgFrame::QuitApplication, this));
 
 	// Set timer to 1000ms to regularly check and display memory consumption (see OnTimer)
 	SetTimer(1, 1000);
@@ -292,7 +299,10 @@ LRESULT CMainDlgFrame::OnShutterOpen(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*
 }
 
 LRESULT CMainDlgFrame::OnSaveWindowPositions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
-	scope_controller.SaveCurrentWindowPositions();
+	// This gets parameters::Windows of CChannelFrames and CHistogramFrames that are attached to the display controller
+	guiparameters.frames = display_controller.GetWindowCollection();
+	guiparameters.frames.AddWindow(L"CLogFrame", 0, ScopeLogger::GetInstance().GetLogFrameWindow());
+	
 	return 0;
 }
 
@@ -313,10 +323,11 @@ LRESULT CMainDlgFrame::OnLoadParameters(WORD /*wNotifyCode*/, WORD /*wID*/, HWND
 
 	// Crashes without GetDesktopWindow (see here: http://comments.gmane.org/gmane.comp.windows.wtl/16780), CMainDlgFrame is probably not a top level window?!
 	if ( IDOK == dlg.DoModal(::GetDesktopWindow()) ) {
-		CString filepath;
+		CString filepath(L"");
 		dlg.GetFilePath(filepath);
 		DBOUT(L"Filepath " << filepath.GetString());
-		scope_controller.LoadParameters(std::wstring(filepath.GetString()));
+		guiparameters.Load(std::wstring(filepath.GetString()));
+		currentconfigfile = filepath.substr(filepath.find_last_of(L'\\') + 1, std::wstring::npos);
 	}
 
 	psiFolder->Release();
@@ -339,7 +350,7 @@ LRESULT CMainDlgFrame::OnSaveParameters(WORD /*wNotifyCode*/, WORD /*wID*/, HWND
 	CString filepath;
 	dlg.GetFilePath(filepath);
 	DBOUT(L"Filepath " << filepath.GetString());
-	scope_controller.SaveParameters(std::wstring(filepath.GetString()));
+	guiparameters.Save(std::wstring(filepath.GetString()));
 
 	psiFolder->Release();
 	return 0;

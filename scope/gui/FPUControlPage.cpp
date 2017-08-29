@@ -4,15 +4,16 @@
 namespace scope {
 	namespace gui {
 
-CFPUControlPage::CFPUControlPage(const uint32_t& _area)
-	: area(_area)
+CFPUControlPage::CFPUControlPage(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey)
+	: area(_areaparams.area)
+	, areaparams(_areaparams)
 	, strtitle(L"")
-	, xpos_edit(&scope_controller.GuiParameters.areas[area]->fpuxystage.xpos, true)
-	, ypos_edit(&scope_controller.GuiParameters.areas[area]->fpuxystage.ypos, true)
-	, etlcalibrationfile_edit(&scope_controller.GuiParameters.areas[area]->fpuzstage.calibrationfile, true)
-	, setxyzero_button(&scope_controller.FPU[area].SetZeroButton)
-	, fpustageinfos_edit(&scope_controller.GuiParameters.areas[area]->fpuxystage.stageinfo, true)
-	, diagram(area, &scope_controller.GuiParameters) {
+	, xpos_edit(_areaparams.fpuxystage.xpos, true)
+	, ypos_edit(_areaparams.fpuxystage.ypos, true)
+	, etlcalibrationfile_edit(_areaparams.fpuzstage.calibrationfile, true)
+	, setxyzero_button(scope_controller.fpubuttonsvec[area].setzero)
+	, fpustageinfos_edit(_areaparams.fpuxystage.stageinfo, true)
+	, diagram(_areaparams, _masterfovsizex, _masterfovsizey) {
 	std::wstringstream stream;
 	stream << L"Area " << area+1;
 	strtitle = stream.str();
@@ -45,7 +46,7 @@ LRESULT CFPUControlPage::OnCalibrationFileButton(WORD wNotifyCode, WORD wID, HWN
 		dlg.GetFilePath(filepath);
 		std::wstring strfilepath(filepath.GetString());
 		DBOUT(L"Fast Z calibration file loaded from " << strfilepath);
-		scope_controller.GuiParameters.areas[area]->fpuzstage.LoadCalibration(strfilepath);
+		_areaparams.fpuzstage.LoadCalibration(strfilepath);
 	}
 	return 0;
 }

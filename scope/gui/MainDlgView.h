@@ -1,6 +1,6 @@
 #pragma once
 
-#include "controllers/ScopeController.h"
+#include "controllers/ScopeControllerButtons.h"
 #include "ScanSettingsSheet.h"
 #include "ExperimentSettingsSheet.h"
 #include "controls/ScopeButtonCtrl.h"
@@ -37,7 +37,7 @@ public:
 	enum { IDD = IDD_MAINDIALOG };
 
 	/** Attach buttons to ScopeController */
-	CMainDlgView(ScopeController& _scope_controller);
+	CMainDlgView(scope::RunButtons& _runbuttons);
 	~CMainDlgView();
 	
 	BEGIN_MSG_MAP(CScopeView)

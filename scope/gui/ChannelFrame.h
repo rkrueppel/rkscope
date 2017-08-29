@@ -7,6 +7,7 @@
 #include "helpers/ScopeOverlayResonanceSW.h"
 #include "helpers/Active.h"
 #include "ThirdParty/ToolbarHelper.h"
+#include "controllers/DisplayController.h"
 #include "resource.h"
 
 // Forward declarations
@@ -34,8 +35,13 @@ protected:
 	/** area for this CChannelFrame */
 	const uint32_t area;
 	
+	parameters::Area& areaparams;
+	
 	/** number of channels in this area */												
 	const uint32_t channels;
+	
+	/** Reference to the display controller to which CChannelFrame is an observer. */
+	DisplayController& display_controller;
 	
 	/** are we attached to ScopeController? */											
 	bool attached;
@@ -99,7 +105,7 @@ public:
 	
 	/** Initialize everything
 	* @param[in] _area which the CChannelFrame is for */
-	CChannelFrame(const uint32_t& _area);
+	CChannelFrame(const uint32_t& _area, parameters::Area& _areaparams, const uint32_t& _channels, DisplayController& _display_controller);
 
 	/** Detach if not yet happened and quit */
 	~CChannelFrame();

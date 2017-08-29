@@ -15,9 +15,6 @@ namespace scope {
 			static std::atomic<bool> instanciated;
 	
 			const uint32_t nareas;
-
-			/** currently loaded config */
-			std::wstring currentconfigfile;
 			
 			std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
 			
@@ -66,13 +63,5 @@ namespace scope {
 			* This should be called before creation of the GUI, when only the main thread exists. Then the static member in GetImpl() is initialized and we
 			* do not have to worry about thread-safe singleton creation... */
 			void Version() const;
-			
-			/** Loads current parameter set from disk
-			* @param[in] _filepath path and name of parameters on disk */
-			bool LoadParameters(const std::wstring& _filepath);
-
-			/** Saves the current parameter set to disk
-			* @param[in] _filepath path and name to save to */
-			bool SaveParameters(const std::wstring& _filepath);
 	};
 }

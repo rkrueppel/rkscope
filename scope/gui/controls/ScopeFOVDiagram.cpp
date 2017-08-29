@@ -6,15 +6,18 @@
 namespace scope {
 	namespace gui {
 
-CScopeFOVDiagram::CScopeFOVDiagram(const uint32_t& _area, const parameters::Scope* _params)
-	: area(_area)
-	, params(_params) {
-	connections.push_back(params->areas[area]->fpuxystage.xpos.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
-	connections.push_back(params->areas[area]->fpuxystage.ypos.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
-	connections.push_back(params->areas[area]->micronperpixelx.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
-	connections.push_back(params->areas[area]->micronperpixely.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
-	connections.push_back(params->areas[area]->Currentframe().xoffset.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
-	connections.push_back(params->areas[area]->Currentframe().yoffset.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+CScopeFOVDiagram::CScopeFOVDiagram(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey)
+	: area(_areaparams.area)
+	, areaparams(_areaparams)
+	//params->masterfovsizex();
+	, totalfovx(_masterfovsizex)
+	, totalfovy(_masterfovsizey) {
+	connections.push_back(areaparams.fpuxystage.xpos.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+	connections.push_back(areaparams.fpuxystage.ypos.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+	connections.push_back(areaparams.micronperpixelx.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+	connections.push_back(areaparams.micronperpixely.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+	connections.push_back(areaparams.Currentframe().xoffset.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
+	connections.push_back(areaparams.Currentframe().yoffset.ConnectGUI(std::bind(&CScopeFOVDiagram::UpdateDiagram, this)));
 }
 
 CScopeFOVDiagram::~CScopeFOVDiagram() {
@@ -42,18 +45,14 @@ void CScopeFOVDiagram::DrawItem(LPDRAWITEMSTRUCT lpdis) {
 	// Paint background black
 	dc.FillSolidRect ( &lpdis->rcItem, RGB(0,0,0) );
 
-	// total fov for zoom 1
-	const double totalfovx = params->masterfovsizex();
-	const double totalfovy = params->masterfovsizey();
-
 	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
 		// current fov
-		const double zoomedfovx = params->areas[a]->micronperpixelx() * params->areas[a]->Currentframe().xres();
-		const double zoomedfovy = params->areas[a]->micronperpixely() * params->areas[a]->Currentframe().yres();
+		const double zoomedfovx = areaparams.micronperpixelx() * areaparams.Currentframe().xres();
+		const double zoomedfovy = areaparams.micronperpixely() * areaparams.Currentframe().yres();
 	
 		// center of zoomed fov in totalfov, add FPU movement offset and scanner offset
-		const double zoomedx = params->areas[a]->fpuxystage.xpos() + params->areas[a]->XOffsetInMicron();
-		const double zoomedy = params->areas[a]->fpuxystage.ypos() + params->areas[a]->YOffsetInMicron();
+		const double zoomedx = areaparams.fpuxystage.xpos() + areaparams.XOffsetInMicron();
+		const double zoomedy = areaparams.fpuxystage.ypos() + areaparams.YOffsetInMicron();
 		const double scalerx = (lpdis->rcItem.right-lpdis->rcItem.left)/totalfovx;
 		const double scalery = (lpdis->rcItem.bottom-lpdis->rcItem.top)/totalfovy;
 	

@@ -14,17 +14,21 @@ namespace scope {
 
 std::array<uint32_t, 4> CChannelFrame::colorcombo_resources = { IDC_COLORCOMBO1, IDC_COLORCOMBO2, IDC_COLORCOMBO3, IDC_COLORCOMBO4 };
 
-CChannelFrame::CChannelFrame(const uint32_t& _area)
+CChannelFrame::CChannelFrame(const uint32_t& _area, parameters::Area& _areaparams, const uint32_t& _channels, DisplayController& _display_controller)
 	: area(_area)
-	, channels(ScopeController::GuiParameters.areas[_area]->daq.inputs->channels())
+	// ScopeController::GuiParameters.areas[_area]->
+	, areaparams(_areaparams)
+	// ScopeController::GuiParameters.areas[_area]->daq.inputs->channels()
+	, channels(_channels)
+	, display_controller(_display_controller)
 	, attached(false)
-	, current_frame(std::make_shared<scope::SCOPE_MULTIIMAGE_T>(_area, channels, ScopeController::GuiParameters.areas[_area]->Currentframe().yres(), scope_controller.GuiParameters.areas[_area]->Currentframe().xres()))
+	, current_frame(std::make_shared<scope::SCOPE_MULTIIMAGE_T>(_area, _channels, _areaparams.Currentframe().yres(), areaparams.Currentframe().xres()))
 	, framecountstr(L"Frame ")
 	, mousepos(D2D1::Point2F(0.0f, 0.0f))
 	, mouseposstr(L"(0, 0)")
 	, statusstr(L"Stopped")
 	, channel_colors(channels, None)
-	, overlay(ScopeController::GuiParameters.areas[_area]->Currentframe().yres(), ScopeController::GuiParameters.areas[_area]->Currentframe().xres()) {
+	, overlay(_areaparams.Currentframe().yres(), _areaparams.Currentframe().xres()) {
 }
 
 CChannelFrame::~CChannelFrame() {
@@ -32,7 +36,7 @@ CChannelFrame::~CChannelFrame() {
 	// an invalid pointer in the DisplayController
 	if ( attached ) {
 		try {
-			scope_controller.DetachFrame(this);
+			display_controller.DetachFrame(this);
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 		attached = false;
 	}
@@ -49,7 +53,7 @@ void CChannelFrame::OnDestroy() {
 	// try-catch, since DetachFrame could throw if DisplayControllerImpl::DetachFrame(gui::CChannelFrame* const) does
 	// not find this CChannelFrame in its list
 	try {
-		scope_controller.DetachFrame(this);
+		display_controller.DetachFrame(this);
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 	attached = false;
 }
@@ -110,10 +114,10 @@ bool CChannelFrame::RunUpdateStatusbar(StopCondition* const sc, scope::SCOPE_MUL
 void CChannelFrame::UpdateScaleText() {
 	std::wostringstream stream;
 	stream << std::setprecision(1) << std::fixed;
-	stream << L"FOV " << std::setw(2) << scope_controller.GuiParameters.areas[area]->micronperpixelx() * scope_controller.GuiParameters.areas[area]->Currentframe().xres();
-	stream << L"µm x " << std::setw(2) << scope_controller.GuiParameters.areas[area]->micronperpixely()*scope_controller.GuiParameters.areas[area]->Currentframe().yres();
-	stream << L"µm (Offset " << std::setw(2) << scope_controller.GuiParameters.areas[area]->XOffsetInMicron();
-	stream << L"µm, " << std::setw(2) << scope_controller.GuiParameters.areas[area]->YOffsetInMicron() << L"µm)";
+	stream << L"FOV " << std::setw(2) << areaparams.micronperpixelx() * areaparams.Currentframe().xres();
+	stream << L"µm x " << std::setw(2) << areaparams.micronperpixely()* areaparams.Currentframe().yres();
+	stream << L"µm (Offset " << std::setw(2) << areaparams.XOffsetInMicron();
+	stream << L"µm, " << std::setw(2) << areaparams.YOffsetInMicron() << L"µm)";
 	view.UpdateScaleText(stream.str());
 }
 
@@ -173,12 +177,12 @@ int CChannelFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	stream << L"Image (Area " << area+1 << L")";
 	SetWindowText(stream.str().c_str());
 
-	scope_controller.AttachFrame(this);
+	display_controller.AttachFrame(this);
 	attached = true;
 
 	RECT Rect;					// Size correctly, regardless what parent window said
 	GetWindowRect(&Rect);
-	const double AspectRatio = static_cast<double>(scope_controller.GuiParameters.areas[area]->Currentframe().xres()) / static_cast<double>(scope_controller.GuiParameters.areas[area]->Currentframe().yres());
+	const double AspectRatio = static_cast<double>(areaparams.Currentframe().xres()) / static_cast<double>(areaparams.Currentframe().yres());
 	const double width = Rect.right-Rect.left;				// Do no subtract 20 or 92 here, since GetWindowRect is without borders!
 	const double height = Rect.bottom - Rect.top;
 	const int32_t targetHeight = round2i32(width / AspectRatio)+92;		// But add here, since MoveWindow wants total window size
@@ -186,10 +190,10 @@ int CChannelFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	MoveWindow(Rect.left, Rect.top, targetWidth, targetHeight);
 
 	// Resize the bitmap in CChannelView's D2ChannelRender (because it is initially 0x0)
-	view.ResizeContent(scope_controller.GuiParameters.areas[area]->Currentframe().xres(), scope_controller.GuiParameters.areas[area]->Currentframe().yres());
+	view.ResizeContent(areaparams.Currentframe().xres(), areaparams.Currentframe().yres());
 
 	// Demagnify large frames
-	if ( scope_controller.GuiParameters.areas[area]->Currentframe().xres() >= 1024 )
+	if ( areaparams.Currentframe().xres() >= 1024 )
 		OnHalfSize(0, 0, NULL);
 	else
 		OnSameSize(0, 0, NULL);
@@ -216,8 +220,8 @@ void CChannelFrame::OnToolBarCombo(HWND hWndCombo, UINT nID, int nSel, LPCTSTR l
 void CChannelFrame::OnSizing(UINT fwSide, LPRECT pRect) {
 	const double width = pRect->right - pRect->left - 20;
 	const double height = pRect->bottom - pRect->top - 92;
-	const double AspectRatio = static_cast<double>(scope_controller.GuiParameters.areas[area]->Currentframe().xres()) 
-		/ static_cast<double>(scope_controller.GuiParameters.areas[area]->Currentframe().yres());
+	const double AspectRatio = static_cast<double>(areaparams.Currentframe().xres()) 
+		/ static_cast<double>(areaparams.Currentframe().yres());
 	if (fwSide == WMSZ_LEFT || fwSide == WMSZ_RIGHT || fwSide == WMSZ_RIGHT + WMSZ_BOTTOM || fwSide == WMSZ_LEFT + WMSZ_BOTTOM ) { 
       const int targetHeight = round2ui32(width / AspectRatio) + 92;	// Here we have to add the 92 again
       pRect->bottom = pRect->top + targetHeight; 
@@ -241,46 +245,46 @@ LRESULT CChannelFrame::OnUpdateMousePixel(UINT uMsg, WPARAM wParam, LPARAM lPara
 
 BOOL CChannelFrame::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
 	if ( nFlags == MK_CONTROL )
-		scope_controller.GuiParameters.areas[area]->Currentframe().pockels += (zDelta/120) * 0.1;
+		areaparams.Currentframe().pockels += (zDelta/120) * 0.1;
 
 	if ( nFlags == NULL ) {
-		const double oldzoom = scope_controller.GuiParameters.areas[area]->Currentframe().zoom();
-		scope_controller.GuiParameters.areas[area]->Currentframe().zoom.Set(oldzoom + (zDelta/120)*0.1, true, false);			// Wait with update until offset set
-		scope_controller.GuiParameters.areas[area]->Currentframe().CoerceOffset();											// Force new offset limits
+		const double oldzoom = areaparams.Currentframe().zoom();
+		areaparams.Currentframe().zoom.Set(oldzoom + (zDelta/120)*0.1, true, false);			// Wait with update until offset set
+		areaparams.Currentframe().CoerceOffset();											// Force new offset limits
 
-		const double offx = (2* mousepos.x / current_frame->Linewidth() - 1) / scope_controller.GuiParameters.areas[area]->Currentframe().zoom();
-		const double offy = (2* mousepos.y / current_frame->Lines() - 1) / scope_controller.GuiParameters.areas[area]->Currentframe().zoom();
-		scope_controller.GuiParameters.areas[area]->Currentframe().xoffset.Set(offx, true, false);
-		scope_controller.GuiParameters.areas[area]->Currentframe().yoffset.Set(offy, true, true);								// Now request update
+		const double offx = (2* mousepos.x / current_frame->Linewidth() - 1) / areaparams.Currentframe().zoom();
+		const double offy = (2* mousepos.y / current_frame->Lines() - 1) / areaparams.Currentframe().zoom();
+		areaparams.Currentframe().xoffset.Set(offx, true, false);
+		areaparams.Currentframe().yoffset.Set(offy, true, true);								// Now request update
 	}
 
 	return false;
 }
 
 void CChannelFrame::OnSameSize(UINT uCode, int nID, HWND hwncCtrl) {
-	ResizeClient(scope_controller.GuiParameters.areas[area]->Currentframe().xres() + 20
-		, scope_controller.GuiParameters.areas[area]->Currentframe().yres() + 92);
+	ResizeClient(areaparams.Currentframe().xres() + 20
+		, areaparams.Currentframe().yres() + 92);
 	UncheckScaleButtons();
 	toolbar.CheckButton(IDC_SAMESIZE);
 }
 
 void CChannelFrame::OnDoubleSize(UINT uCode, int nID, HWND hwncCtrl) {
-	ResizeClient(scope_controller.GuiParameters.areas[area]->Currentframe().xres()*2 + 20
-		, scope_controller.GuiParameters.areas[area]->Currentframe().yres()*2 + 92);
+	ResizeClient(areaparams.Currentframe().xres()*2 + 20
+		, areaparams.Currentframe().yres()*2 + 92);
 	UncheckScaleButtons();
 	toolbar.CheckButton(IDC_DOUBLESIZE);
 }
 
 void CChannelFrame::OnHalfSize(UINT uCode, int nID, HWND hwncCtrl) {
-	ResizeClient(static_cast<int>(scope_controller.GuiParameters.areas[area]->Currentframe().xres()*0.5) + 20
-		, static_cast<int>(scope_controller.GuiParameters.areas[area]->Currentframe().yres()*0.5) + 92);
+	ResizeClient(static_cast<int>(areaparams.Currentframe().xres()*0.5) + 20
+		, static_cast<int>(areaparams.Currentframe().yres()*0.5) + 92);
 	UncheckScaleButtons();
 	toolbar.CheckButton(IDC_HALFSIZE);
 }
 
 void CChannelFrame::OnMultSize(size_t xres_mult, size_t yres_mult) {
-	ResizeClient(scope_controller.GuiParameters.areas[area]->Currentframe().xres()*xres_mult + 20,
-		scope_controller.GuiParameters.areas[area]->Currentframe().yres()*yres_mult + 92);
+	ResizeClient(areaparams.Currentframe().xres()*xres_mult + 20,
+		areaparams.Currentframe().yres()*yres_mult + 92);
 }
 
 void CChannelFrame::SetHistogramLimits(const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper) {

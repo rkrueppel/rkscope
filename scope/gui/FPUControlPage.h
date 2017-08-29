@@ -16,6 +16,8 @@ class CFPUControlPage :
 protected:
 	/** the area the FPU serves */
 	const uint32_t area;
+	
+	parameters::Area& areaparams;
 
 	/** the page title */
 	std::wstring strtitle;
@@ -44,7 +46,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by scope_controller) the dialog control will
 	* be updated accordingly */
-	CFPUControlPage(const uint32_t& _area);
+	CFPUControlPage(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey);
 
 	BEGIN_MSG_MAP_EX(CFPUControlPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

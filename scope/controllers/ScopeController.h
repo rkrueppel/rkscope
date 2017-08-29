@@ -111,14 +111,13 @@ public:
 
 	StackButtons stackbuttons;
 
-	/** Button to zero main stage coordinates */
-	ScopeButton stagezerobutton;
+	MiscButtons miscbuttons;
 
 	/** Buttons for FPU nudge */
 	std::vector<FPUButtons> fpubuttonsvec;
 
 	/** Buttons for switching the scan mode */
-	std::vector<ScanModeButtons> scanmodevec;
+	std::vector<ScanModeButtons> scanmodebuttonsvec;
 	/** @} */
 
 	/** The counters */
@@ -184,9 +183,6 @@ public:
 	/** Stop whatever is running */
 	~ScopeController(void);
 	
-	/** @return the currently loaded config file */
-	std::wstring CurrentConfigFile() const;
-
 	/** Called by CMainDialogFrame::QuitApplication.
 	* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/
 	void PrepareQuit();
@@ -235,26 +231,6 @@ public:
 
 	/** Current state of the resonance scanner relay.*/
 	bool GetSwitchResonanceState(const uint32_t& _area) const;
-
-	/** @name Attaching/Detaching channels and histograms
-	* @{ */
-	/** Attach a CChannelFrame as observer */
-	void AttachFrame(gui::CChannelFrame* const cframe);
-	/** Detach an observing CChannelFrame */
-	void DetachFrame(gui::CChannelFrame* const cframe);
-	/** Attach a CHistogramFrame as observer */
-	void AttachFrame(gui::CHistogramFrame* const hframe);
-	/** @return true if at least one histogram already attached to theDisplay for that area. */
-	bool HistogramAlreadyAttached(const uint32_t& _area);
-	/** Detach an observing CHistogramFrame */
-	void DetachFrame(gui::CHistogramFrame* const hframe);
-	/** @} */
-
-	/** Saves current positions of windows by adding frames to WindowCollection of ScopeController::GuiParameters.*/
-	void SaveCurrentWindowPositions();
-
-	/** Sets the color limits for displaying imgages, calls DisplayController::SetHistogramLimits */
-	void SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper);
 
 	/** Updates the number of resonance planes in scope controller **/
 	//void UpdateResonancePlanes(const uint32_t& _area);

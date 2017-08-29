@@ -34,8 +34,7 @@ namespace scope {
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
-		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(new gui::CMainDlgFrame());
-		wndmain->SetScopeController(this);
+		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(new gui::CMainDlgFrame(theController, theDisplay, guiparameters));
 
 		RECT rec = { 20,20,440,980 };						// 262x403
 		if (wndmain->CreateEx(HWND(0), rec) == NULL)
@@ -47,6 +46,10 @@ namespace scope {
 		std::wstring revstr = CA2W(STR(LASTGITCOMMIT));
 		revstr = L"Scope (Git commit " + revstr + L")";
 		wndmain->SetWindowText(revstr.c_str());
+		
+		// Connect the quit button
+		theController.runbuttons.quit.Connect(std::bind(&CMainDlgFrame::QuitApplication, wndmain));
+		
 	}
 
 	void TheScope::Version() const {
@@ -55,17 +58,5 @@ namespace scope {
 		revstr = L"Scope (Last Git commit " + revstr + L")";
 		DBOUT(revstr.c_str());
 	}
-	
-	bool TheScope::LoadParameters(const std::wstring& _filepath) {
-		currentconfigfile = _filepath.substr(_filepath.find_last_of(L'\\') + 1, std::wstring::npos);
-		guiparameters.Load(_filepath);
-		parameters = guiparameters;
-		return true;
-	}
 
-	bool TheScope::SaveParameters(const std::wstring& _filepath) {
-		parameters = guiparameters;
-		parameters.Save(_filepath);
-		return true;
-	}
 }

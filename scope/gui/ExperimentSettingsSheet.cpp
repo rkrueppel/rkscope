@@ -3,6 +3,12 @@
 
 namespace scope {
 	namespace gui {
+		
+CExperimentSettingsSheet::CExperimentSettingsSheet(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters)
+	: behaviorpage(_runbuttons, _scopecontrollercounters, _behaviorparameters)
+{
+	
+}
 
 HWND CExperimentSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {
 	ATLASSERT(m_hWnd == NULL);

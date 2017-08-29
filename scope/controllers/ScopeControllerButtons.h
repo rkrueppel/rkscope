@@ -30,6 +30,11 @@ namespace scope {
 		ScopeButton starthere;
 		ScopeButton stophere;
 	};
+	
+	struct MiscButtons {
+		ScopeButton zerostage;
+		ScopeButton zerogalvos;
+	};
 
 	/** Keeps the buttons controlling scan modes together. */
 	struct ScanModeButtons {

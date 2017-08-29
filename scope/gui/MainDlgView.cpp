@@ -4,12 +4,11 @@
 namespace scope {
 	namespace gui {
 
-CMainDlgView::CMainDlgView(scope::ScopeController& _scope_controller)
-	: scope_controller(_scope_controller)
-	, m_ScanSingleButton(&scope_controller.StartSingleButton)
-	, m_ScanLiveButton(&scope_controller.StartLiveButton)
-	, m_StopButton(&scope_controller.StopButton)
-	, m_QuitButton(&scope_controller.QuitButton)
+CMainDlgView::CMainDlgView(scope::RunButtons& _runbuttons)
+	: m_ScanSingleButton(_runbutton.startsingle)
+	, m_ScanLiveButton(_runbutton.startlive)
+	, m_StopButton(_runbutton.stop)
+	, m_QuitButton(_runbutton.quit)
 {}
 
 CMainDlgView::~CMainDlgView() {

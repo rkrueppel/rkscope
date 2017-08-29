@@ -36,6 +36,12 @@ protected:
 
 	/** our ScopeController here */
 	scope::ScopeController& scope_controller;
+	
+	scope::DisplayController& display_controller;
+	
+	std::wstring currentconfigfile;
+	
+	scope::parameters::Scope& guiparameters;
 
 	/** ids for the new view toolbar dropdown menu items. See PrepareToolBarMenu. */
 	static std::array<UINT, 4> viewareas_ids;
@@ -60,15 +66,7 @@ public:
 	/** the command bar. public for CToolBarHelper to compile. */
 	CCommandBarCtrl m_CmdBar;
 
-	CMainDlgFrame(scope::ScopeController& _scope_controller)
-		: firstpaint(true)
-		, scope_controller(_scope_controller)
-		, m_dlgView(_scope_controller) {
-	}
-
-	void SetScopeController(ScopeController& _scope_controller) {
-		
-	}
+	CMainDlgFrame(scope::ScopeController& _scope_controller, scope::DisplayController& _display_controller, scope::parameters::Scope& _guiparameters);
 
 	/** Used in CToolBarHelper to fill the dropdown menus */
 	virtual void PrepareToolBarMenu(UINT nMenuID, HMENU hMenu);

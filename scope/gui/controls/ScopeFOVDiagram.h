@@ -20,7 +20,13 @@ protected:
 	const uint32_t area;
 
 	/** Pointer to the scope parameters to use for calculations */
-	const parameters::Scope* const params;
+	parameters::Area& areaparams;
+	
+	/** total fov x size for zoom 1 */
+	const double totalfovx;
+	
+	/** total fov y size for zoom 1 */
+	const double totalfovy;
 
 	/** Stores connections to ScopeValues that are then disconnected on destruction */
 	std::vector<boost::signals2::connection> connections;
@@ -28,7 +34,7 @@ protected:
 public:
 	/** @param[in] _area for which area's FOV is this (this area's FOV will be drawn white, the others gray)
 	* @param[in] _params pointer to the parameters to use for FOV calculations */
-	CScopeFOVDiagram(const uint32_t& _area, const parameters::Scope* _params);
+	CScopeFOVDiagram(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey);
 	
 	~CScopeFOVDiagram();
 

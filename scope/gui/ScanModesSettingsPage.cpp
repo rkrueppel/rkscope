@@ -5,13 +5,14 @@
 namespace scope {
 	namespace gui {
 
-CScanModesSettingsPage::CScanModesSettingsPage()
-	: framesaw_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::Sawtooth))
-	, framebidi_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::Bidirectional))
-	, framehopper_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::Planehopper))
-	, frameresonancebidi_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::ResonanceBiDi))
-	, frameresonancehopper_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::ResonanceHopper))
-	, linestraight_radio(&scope_controller.ScanMode[0].map.at(ScannerVectorTypeHelper::LineStraight)) {
+CScanModesSettingsPage::CScanModesSettingsPage(std::vector<ScanModeButtons>& _scanmodebuttonsvec)
+	: scanmodebuttonsvec(__scanmodebuttonsvec)
+	, framesaw_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Sawtooth))
+	, framebidi_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Bidirectional))
+	, framehopper_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Planehopper))
+	, frameresonancebidi_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::ResonanceBiDi))
+	, frameresonancehopper_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::ResonanceHopper))
+	, linestraight_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::LineStraight)) {
 	// start with buttons connected to area 0
 }
 
@@ -62,17 +63,17 @@ LRESULT CScanModesSettingsPage::OnAreaChange(WORD, WORD, HWND, BOOL&) {
 	linestraight_radio.Disconnect();
 
 	// Connect to selected area's ScanMode buttons and uncheck all
-	framesaw_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::Sawtooth));
+	framesaw_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Sawtooth));
 	framesaw_radio.SetCheck(BST_UNCHECKED);
-	framebidi_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::Bidirectional));
+	framebidi_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Bidirectional));
 	framebidi_radio.SetCheck(BST_UNCHECKED);
-	framehopper_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::Planehopper));
+	framehopper_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Planehopper));
 	framehopper_radio.SetCheck(BST_UNCHECKED);
-	frameresonancebidi_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::ResonanceBiDi));
+	frameresonancebidi_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::ResonanceBiDi));
 	frameresonancebidi_radio.SetCheck(BST_UNCHECKED);
-	frameresonancehopper_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::ResonanceHopper));
+	frameresonancehopper_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::ResonanceHopper));
 	frameresonancehopper_radio.SetCheck(BST_UNCHECKED);
-	linestraight_radio.Connect(&scope_controller.ScanMode[sel].map.at(ScannerVectorTypeHelper::LineStraight));
+	linestraight_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::LineStraight));
 	linestraight_radio.SetCheck(BST_UNCHECKED);
 
 	SetChecks(sel);
