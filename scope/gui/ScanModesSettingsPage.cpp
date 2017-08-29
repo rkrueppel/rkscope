@@ -6,7 +6,7 @@ namespace scope {
 	namespace gui {
 
 CScanModesSettingsPage::CScanModesSettingsPage(std::vector<ScanModeButtons>& _scanmodebuttonsvec)
-	: scanmodebuttonsvec(__scanmodebuttonsvec)
+	: scanmodebuttonsvec(_scanmodebuttonsvec)
 	, framesaw_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Sawtooth))
 	, framebidi_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Bidirectional))
 	, framehopper_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Planehopper))

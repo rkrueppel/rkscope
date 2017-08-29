@@ -7,13 +7,13 @@
 #include "helpers/ScopeOverlayResonanceSW.h"
 #include "helpers/Active.h"
 #include "ThirdParty/ToolbarHelper.h"
-#include "controllers/DisplayController.h"
 #include "resource.h"
 
 // Forward declarations
 class ColorProps;
 class D2ChannelRender;
 namespace scope {
+	class DisplayController;
 	class ColorProps;
 	class SCOPE_MULTIIMAGE_T;
 	typedef std::shared_ptr<const SCOPE_MULTIIMAGE_T> SCOPE_MULTIIMAGECPTR_T;
@@ -35,13 +35,13 @@ protected:
 	/** area for this CChannelFrame */
 	const uint32_t area;
 	
-	parameters::Area& areaparams;
+	scope::parameters::Area& areaparams;
 	
 	/** number of channels in this area */												
 	const uint32_t channels;
 	
 	/** Reference to the display controller to which CChannelFrame is an observer. */
-	DisplayController& display_controller;
+	scope::DisplayController& display_controller;
 	
 	/** are we attached to ScopeController? */											
 	bool attached;

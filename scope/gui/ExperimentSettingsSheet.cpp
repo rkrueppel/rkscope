@@ -4,8 +4,18 @@
 namespace scope {
 	namespace gui {
 		
-CExperimentSettingsSheet::CExperimentSettingsSheet(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters)
-	: behaviorpage(_runbuttons, _scopecontrollercounters, _behaviorparameters)
+CExperimentSettingsSheet::CExperimentSettingsSheet(std::vector<ScanModeButtons>& _scanmodebuttonsvec
+	, parameters::Stack& _stackparams
+	, RunButtons& _runbuttons
+	, StackButtons& _stackbuttons
+	, ScopeControllerCounters& _counters
+	, parameters::Timeseries& _timeseriesparams
+	, parameters::Behavior& _behaviorparams
+	)
+	: scanmode(_scanmodebuttonsvec)
+	, stack(_stackparams, _stackbuttons, _counters)
+	, timeseries(_timeseriesparams, _runbuttons, _counters)
+	, behavior(_runbuttons, _counters, _behaviorparams)
 {
 	
 }

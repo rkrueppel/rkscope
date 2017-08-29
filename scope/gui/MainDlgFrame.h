@@ -1,7 +1,8 @@
 #pragma once
 
-#include "controllers/ScopeLogger.h"
+#include "parameters/Scope.h"
 #include "controllers/ScopeController.h"
+#include "controllers/DisplayController.h"
 #include "MainDlgView.h"
 #include "ThirdParty/ToolbarHelper.h"
 #include "resource.h"

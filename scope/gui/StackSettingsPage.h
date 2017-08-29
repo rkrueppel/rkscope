@@ -1,6 +1,8 @@
 #pragma once
 
-#include "controllers/ScopeController.h"
+#include "controllers/ScopeControllerButtons.h"
+#include "controllers/ScopeControllerCounter.h"
+#include "parameters/Runstates.h"
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
@@ -16,6 +18,8 @@ class CStackSettingsPage :
 protected:
 	/** true if window is initialized */
 	bool initialized;
+	
+	parameters::Stack& stackparams;
 
 	/** to start stack scan */
 	CScopeButtonCtrl start_stack_button;
@@ -59,7 +63,7 @@ protected:
 public:
 	enum { IDD = IDD_STACK_PROPPAGE };
 
-	CStackSettingsPage(void);
+	CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeControllerCounters& _counters);
 
 	BEGIN_MSG_MAP_EX(CStackSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

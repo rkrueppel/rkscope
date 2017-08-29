@@ -292,7 +292,7 @@ void CChannelFrame::SetHistogramLimits(const uint32_t& _channel, const uint16_t&
 	channel_colors.at(_channel).SetUpperLimit(_upper);
 
 	// Force rerender if we are not scanning (otherwise LayOverAndRender is called from DisplayControllerImpl::Run anyway)
-	if ( scope_controller.GuiParameters.run_state() == RunStateHelper::Stopped )
+	//if ( scope_controller.GuiParameters.run_state() == RunStateHelper::Stopped )
 		LayOverAndRender(current_frame);
 }
 

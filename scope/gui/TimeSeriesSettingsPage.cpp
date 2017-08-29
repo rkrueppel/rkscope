@@ -4,18 +4,19 @@
 namespace scope {
 	namespace gui {
 
-CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(void)
+CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeControllerCounters& _counters)
 	: CToolTipDialog(TTS_NOPREFIX)
-	, start_timeseries_button(&scope_controller.StartTimeseriesButton)
-	, frames_edit(&scope_controller.GuiParameters.timeseries.frames[0], true, true)
-	, frames_progress(&scope_controller.FrameCounter[0])
-	, firsttriggered_check(&scope_controller.GuiParameters.timeseries.triggered, true, true)
-	, alltriggered_check(&scope_controller.GuiParameters.timeseries.alltriggered, true, true)
-	, totaltime_edit(&scope_controller.GuiParameters.timeseries.totaltimes[0], true, true)
-	, repeats_edit(&scope_controller.GuiParameters.timeseries.repeats, true, true)
-	, repeats_progress(&scope_controller.RepeatCounter)
-	, betweenrepeats_edit(&scope_controller.GuiParameters.timeseries.betweenrepeats, true, true)
-	, overalltime_edit(&scope_controller.GuiParameters.timeseries.overalltime, true, true) {
+	, timeseriesparams(_timeseriesparams)
+	, start_timeseries_button(_runbuttons.starttimeseries)
+	, frames_edit(_timeseriesparams.frames[0], true, true)
+	, frames_progress(_counters.framecounter[0])
+	, firsttriggered_check(_timeseriesparams.triggered, true, true)
+	, alltriggered_check(_timeseriesparams.alltriggered, true, true)
+	, totaltime_edit(_timeseriesparams.totaltimes[0], true, true)
+	, repeats_edit(_timeseriesparams.repeats, true, true)
+	, repeats_progress(_counters.repeatcounter)
+	, betweenrepeats_edit(_timeseriesparams.betweenrepeats, true, true)
+	, overalltime_edit(_timeseriesparams.overalltime, true, true) {
 }
 
 BOOL CTimeSeriesSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
@@ -54,7 +55,7 @@ LRESULT CTimeSeriesSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWn
 		planes[a].position = scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
 		planes[a].pockels = scope_controller.GuiParameters.areas[a]->Currentframe().pockels();
 	}
-	scope_controller.GuiParameters.timeseries.planes.push_back(planes);
+	timeseriesparams.planes.push_back(planes);
 
 	UpdatePlanesList();
 
@@ -66,7 +67,7 @@ LRESULT CTimeSeriesSettingsPage::OnDeletePlane(WORD wNotifyCode, WORD wID, HWND 
 	if ( sel == -1 )
 		return 0;
 	// Delete the selected plane from the vector
-	scope_controller.GuiParameters.timeseries.planes.erase(sel + std::begin(scope_controller.GuiParameters.timeseries.planes));
+	timeseriesparams.planes.erase(sel + std::begin(timeseriesparams.planes));
 	UpdatePlanesList();
 	return 0;
 }
@@ -75,7 +76,7 @@ void CTimeSeriesSettingsPage::UpdatePlanesList() {
 	uint32_t n = 0;
 	CString tmp(L"");
 	planes_list.DeleteAllItems();
-	for ( auto& pa : scope_controller.GuiParameters.timeseries.planes ) {
+	for ( auto& pa : timeseriesparams.planes ) {
 		tmp.Format(L"Plane %d", n);
 		planes_list.InsertItem(n, tmp, NULL);
 		tmp.Format(L"%d", n);

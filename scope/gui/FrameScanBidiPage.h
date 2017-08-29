@@ -31,7 +31,22 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CFrameScanBidiPage(const uint32_t& _area, const bool& _isslave, parameters::ScannerVectorFrameBiDi& _scanvecparams);
+	CFrameScanBidiPage(const uint32_t& _area
+		, const bool& _isslave
+		, ScopeNumber<double>& _pockels
+		, ScopeNumber<double>& _fastz
+		, ScopeNumber<double>& _pixeltime
+		, const double& _minpixeltime
+		, ScopeNumber<double>& _fpux
+		, ScopeNumber<double>& _fpuy
+		, FPUButtons& _fpubuttons
+		, ScopeNumber<bool>& _readonlywhilescanning
+		, ScopeNumber<uint32_t>& _averages
+		, ScopeNumber<double>& _scannerdelay
+		, ScopeNumber<double>& _framerate
+		, ScopeNumber<double>& _frametime
+		, ScopeNumber<double>& _linerate
+		, parameters::ScannerVectorFrameBiDi& _scanvecparams);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanBidiPage)

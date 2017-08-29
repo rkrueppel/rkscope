@@ -1,6 +1,6 @@
 #pragma once
 
-#include "controllers/ScopeController.h"
+#include "controllers/ScopeControllerButtons.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "resource.h"
 
@@ -40,7 +40,7 @@ public:
 		REFLECT_NOTIFICATIONS()
 	END_MSG_MAP()
 
-	CScanModesSettingsPage();
+	CScanModesSettingsPage(std::vector<ScanModeButtons>& _scanmodebuttonsvec);
 
 	/** @name Called via Win32 messages
 	* @{ */

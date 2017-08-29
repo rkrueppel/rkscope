@@ -13,24 +13,26 @@ class CExperimentSettingsSheet
 	: public CPropertySheetImpl<CExperimentSettingsSheet> {
 
 protected:
-	struct pages {
-		/** Page for selecting different scan modes */
-		CScanModesSettingsPage scanmode;
+	/** Page for selecting different scan modes */
+	CScanModesSettingsPage scanmode;
 
-		/** Page for stack stuff */
-		CStackSettingsPage stack;
+	/** Page for stack stuff */
+	CStackSettingsPage stack;
 
-		/** Page for timeseries stuff */
-		CTimeSeriesSettingsPage timeseries;
+	/** Page for timeseries stuff */
+	CTimeSeriesSettingsPage timeseries;
 
-		/** Page for behavior triggered acquisition stuff */
-		CBehaviorSettingsPage behavior;
-	}
-
-	
+	/** Page for behavior triggered acquisition stuff */
+	CBehaviorSettingsPage behavior;
 
 public:
-	CExperimentSettingsSheet();
+	CExperimentSettingsSheet(std::vector<ScanModeButtons>& _scanmodebuttonsvec
+	, parameters::Stack& _stackparams
+	, RunButtons& _runbuttons
+	, StackButtons& _stackbuttons
+	, ScopeControllerCounters& _counters
+	, parameters::Timeseries& _timeseriesparams
+	, parameters::Behavior& _behaviorparams);
 
 	BEGIN_MSG_MAP(CUserSettingsSheet)	  
 		NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)

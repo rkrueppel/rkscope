@@ -17,6 +17,8 @@ class CTimeSeriesSettingsPage
 	, public CToolTipDialog<CTimeSeriesSettingsPage> {
 
 protected:
+	parameters::Timeseries& timeseriesparams;
+
 	/** start timeseries scanning */
 	CScopeButtonCtrl start_timeseries_button;
 
@@ -56,7 +58,7 @@ protected:
 public:
 	enum { IDD = IDD_TIMESERIES_PROPPAGE };
 
-	CTimeSeriesSettingsPage(void);
+	CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeControllerCounters& _counters);
 
 	BEGIN_MSG_MAP_EX(CTimeSeriesSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

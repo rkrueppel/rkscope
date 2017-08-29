@@ -4,15 +4,16 @@
 namespace scope {
 	namespace gui {
 
-CStackSettingsPage::CStackSettingsPage(void)
+CStackSettingsPage::CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeControllerCounters& _counters)
 	: initialized(false)
-	, start_stack_button(&scope_controller.StartStackButton)
-	, startat_edit(&scope_controller.GuiParameters.stack.startat[0].position, true, true)
-	, stopat_edit(&scope_controller.GuiParameters.stack.stopat[0].position, true, true)
-	, spacing_edit(&scope_controller.GuiParameters.stack.spacing, true, true)
-	, starthere_button(&scope_controller.StackStartHereButton)
-	, stophere_button(&scope_controller.StackStopHereButton)
-	, stack_progress(&scope_controller.PlaneCounter)
+	, stackparams(_stackparams)
+	, start_stack_button(_runbuttons.startstack)
+	, startat_edit(_stackparams.startat[0].position, true, true)
+	, stopat_edit(_stackparams.stopat[0].position, true, true)
+	, spacing_edit(_stackparams.spacing, true, true)
+	, starthere_button(_stackbuttons.starthere)
+	, stophere_button(_stackbuttons.stophere)
+	, stack_progress(_counters.planecounter)
 	, zdevicetype(ZDeviceHelper::ZStage) {
 	scope_controller.ReadOnlyWhileScanning.ConnectGUI(std::bind(&CStackSettingsPage::OnChangedRunState, this));
 }
@@ -32,7 +33,7 @@ BOOL CStackSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 	
 	zstage_button.SetCheck(BM_SETCHECK);
 	zdevicetype = ZDeviceHelper::ZStage;
-	scope_controller.GuiParameters.stack.zdevicetype = zdevicetype;
+	stackparams.zdevicetype = zdevicetype;
 
 	planes_list.Attach(GetDlgItem(IDC_SLICES_LIST));
 	planes_list.InsertColumn(0, L"Slice", 0, 35);
@@ -56,7 +57,7 @@ LRESULT CStackSettingsPage::OnZControlRadio(WORD /*wNotifyCode*/, WORD wID, HWND
 		zdevicetype = ZDeviceHelper::ZStage;
 	if ( fastz_button.GetCheck() == BST_CHECKED )
 		zdevicetype = ZDeviceHelper::FastZ;
-	scope_controller.GuiParameters.stack.zdevicetype = zdevicetype;
+	stackparams.zdevicetype = zdevicetype;
 	UpdatePlanesList();
 	return 0;
 }
@@ -70,7 +71,7 @@ void CStackSettingsPage::UpdatePlanesList() {
 	planes_list.DeleteAllItems();
 	std::wostringstream stream;
 
-	for ( uint32_t p = 0 ; p < scope_controller.GuiParameters.stack.planes___.size() ; p++ ) {
+	for ( uint32_t p = 0 ; p < stackparams.planes___.size() ; p++ ) {
 		planes_list.InsertItem(p, L"Plane", NULL);
 		
 		// Plane no
@@ -80,7 +81,7 @@ void CStackSettingsPage::UpdatePlanesList() {
 
 		// Stage z Position. Always the same for all areas, either variable or fixed to current position (if etl zstacking)
 		if ( zdevicetype == ZDeviceHelper::ZStage )
-			stream << std::setprecision(0) << scope_controller.GuiParameters.stack.planes___[p][0].position();
+			stream << std::setprecision(0) << stackparams.planes___[p][0].position();
 		else
 			stream << std::setprecision(0) << scope_controller.GuiParameters.stage.zpos();
 		planes_list.SetItemText(p, 1, stream.str().c_str());
@@ -88,19 +89,19 @@ void CStackSettingsPage::UpdatePlanesList() {
 
 		// Fast z position and pockels for each area
 		for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
-			stream << std::setprecision(2) << scope_controller.GuiParameters.stack.planes___[p][a].pockels();
+			stream << std::setprecision(2) << stackparams.planes___[p][a].pockels();
 			planes_list.SetItemText(p, 2+2*a, stream.str().c_str());
 			stream.str(L"");
 			// Etl z position. Either variable or fixed to current positions (if stage z stacking)
 			if ( zdevicetype == ZDeviceHelper::FastZ )
-				stream << std::setprecision(0) << scope_controller.GuiParameters.stack.planes___[p][a].position();
+				stream << std::setprecision(0) << stackparams.planes___[p][a].position();
 			else
 				stream << std::setprecision(0) <<  scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
 			planes_list.SetItemText(p, 3+2*a, stream.str().c_str());
 			stream.str(L"");
 		}
 	}
-	double l = (scope_controller.GuiParameters.stack.Lambda(0)==0)?0:abs(1/scope_controller.GuiParameters.stack.Lambda(0));
+	double l = (stackparams.Lambda(0)==0)?0:abs(1/stackparams.Lambda(0));
 	stream << L"Lambda " << std::setprecision(1) << l << L" µm";
 	lambda_static.SetWindowText(stream.str().c_str());
 }
