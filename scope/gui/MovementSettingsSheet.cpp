@@ -7,7 +7,7 @@ namespace scope {
 CMovementSettingsSheet::CMovementSettingsSheet(void) {
 	uint32_t area = 0;
 	std::generate(std::begin(fpupages), std::end(fpupages), [&]() {
-		return std::unique_ptr<CFPUControlPage>(new CFPUControlPage(area++)); } );
+		return std::make_unique<CFPUControlPage>(area++); } );
 }
 
 HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {

@@ -3,7 +3,8 @@
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeFOVDiagram.h"
-#include "controllers/ScopeController.h"
+#include "controllers/ScopeControllerButtons.h"
+#include "parameters\Scope.h"
 #include "resource.h"
 
 namespace scope {
@@ -46,7 +47,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by scope_controller) the dialog control will
 	* be updated accordingly */
-	CFPUControlPage(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey);
+	CFPUControlPage(parameters::Area& _areaparams, std::vector<FPUButtons>& _fpubuttonsvec, const double& _masterfovsizex, const double& _masterfovsizey);
 
 	BEGIN_MSG_MAP_EX(CFPUControlPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

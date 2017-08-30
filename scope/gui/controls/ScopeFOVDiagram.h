@@ -1,11 +1,5 @@
 #pragma once
-
-// Forward declaration
-namespace scope {
-	namespace parameters {
-		class Scope;
-	}
-}
+#include "parameters\Scope.h"
 
 namespace scope {
 	namespace gui {
