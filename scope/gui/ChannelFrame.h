@@ -6,6 +6,7 @@
 #include "helpers/ScopeOverlay.h"
 #include "helpers/ScopeOverlayResonanceSW.h"
 #include "helpers/Active.h"
+#include "parameters/Scope.h"
 #include "ThirdParty/ToolbarHelper.h"
 #include "resource.h"
 

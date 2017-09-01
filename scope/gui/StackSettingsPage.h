@@ -1,7 +1,7 @@
 #pragma once
 
 #include "controllers/ScopeControllerButtons.h"
-#include "controllers/ScopeControllerCounter.h"
+#include "controllers/ScopeControllerCounters.h"
 #include "parameters/Runstates.h"
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
