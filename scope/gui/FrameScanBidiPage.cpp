@@ -18,12 +18,13 @@ CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
 	, ScopeNumber<bool>& _readonlywhilescanning
+	, parameters::ScannerVectorFrameBiDi& _scanvecparams
 	, ScopeNumber<uint32_t>& _averages
 	, ScopeNumber<double>& _scannerdelay
 	, ScopeNumber<double>& _framerate
 	, ScopeNumber<double>& _frametime
 	, ScopeNumber<double>& _linerate
-	, parameters::ScannerVectorFrameBiDi& _scanvecparams)
+	)
 	//scope_controller.GuiParameters.areas[area]->isslave()
 	// scope_controller.GuiParameters.areas[_area]->FrameBiDi()
 	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning

@@ -11,9 +11,6 @@ using namespace boost::property_tree;
 
 ScannerVectorFrameBasic::Preset::Preset()
 	: name(L"None", L"Name")
-	, pixeltime(10, 0.4, 15, L"Pixeltime_us")
-	, scannerdelay(0, -1000, 1000, L"Scannerdelay_us")
-	, averages(1, 1, 32, L"Averages")
 	, xres(256, 16, 10000, L"XResolution_Pixel")
 	, yres(256, 16, 10000, L"YResolution_Pixel")
 	, xaspectratio(1, 0.0001, 10000, L"XAspectRatio")
@@ -23,9 +20,6 @@ ScannerVectorFrameBasic::Preset::Preset()
 
 void ScannerVectorFrameBasic::Preset::Load(const wptree& pt)  {
 	name.SetFromPropertyTree(pt);
-	pixeltime.SetFromPropertyTree(pt);
-	scannerdelay.SetFromPropertyTree(pt);
-	averages.SetFromPropertyTree(pt);
 	xres.SetFromPropertyTree(pt);
 	yres.SetFromPropertyTree(pt);
 	xaspectratio.SetFromPropertyTree(pt);
@@ -35,9 +29,6 @@ void ScannerVectorFrameBasic::Preset::Load(const wptree& pt)  {
 
 void ScannerVectorFrameBasic::Preset::Save(wptree& pt) const {
 	name.AddToPropertyTree(pt);
-	pixeltime.AddToPropertyTree(pt);
-	scannerdelay.AddToPropertyTree(pt);
-	averages.AddToPropertyTree(pt);
 	xres.AddToPropertyTree(pt);
 	yres.AddToPropertyTree(pt);
 	xaspectratio.AddToPropertyTree(pt);

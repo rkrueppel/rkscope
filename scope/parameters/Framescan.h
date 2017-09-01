@@ -50,16 +50,7 @@ public:
 	class Preset {
 	public:
 		/** name of the preset */
-		ScopeString name;														
-	
-		/** pixel dwell time in microseconds, this is also the analog out sampling interval */
-		ScopeNumber<double> pixeltime;									
-	
-		/** compensate, by waiting, that scanners lag behind the command voltage */
-		ScopeNumber<double> scannerdelay;										
-	
-		/** number of images to average */
-		ScopeNumber<uint32_t> averages;											
+		ScopeString name;																								
 	
 		/** x resolution of the image (linewidth) */
 		ScopeNumber<uint32_t> xres;												

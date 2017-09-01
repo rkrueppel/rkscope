@@ -5,7 +5,6 @@
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeCheckBoxCtrl.h"
-#include "controllers/ScopeController.h"
 #include "resource.h"
 
 namespace scope {
@@ -16,13 +15,23 @@ class CFrameScanResonanceSlavePage
 	: public CNoScanBasePage {
 
 protected:
-	scope::ScopeController scope_controller;
-
 	/** list box for all planes */
 	CListViewCtrl planes_list;
+	
+	parameters::ScannerVectorFrameResonance& svresonanceparams;
 
 public:
-	CFrameScanResonanceSlavePage(const uint32_t& _area);
+	CFrameScanResonanceSlavePage(const uint32_t& _area
+	, const bool& _isslave
+	, ScopeNumber<double>& _pockels
+	, ScopeNumber<double>& _fastz
+	, ScopeNumber<double>& _pixeltime
+	, const double& _minpixeltime
+	, ScopeNumber<double>& _fpux
+	, ScopeNumber<double>& _fpuy
+	, FPUButtons& _fpubuttons
+	, ScopeNumber<bool>& _readonlywhilescanning
+	, parameters::ScannerVectorFrameResonance& _svresonanceparams);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanResonanceSlavePage)
