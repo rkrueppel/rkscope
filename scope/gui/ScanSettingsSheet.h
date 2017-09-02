@@ -22,8 +22,10 @@ class CScanSettingsSheet
 	: public CPropertySheetImpl<CScanSettingsSheet> {
 
 protected:
+	const uint32_t nareas;
+
 	/** one imaging settings page for each area */
-	std::array<std::unique_ptr<CNoScanBasePage>, SCOPE_NAREAS> scanpages;
+	std::vector<std::unique_ptr<CNoScanBasePage>> scanpages;
 
 	/** the storage settings page */
 	CStorageSettingsPage storagesettingspage;
@@ -39,7 +41,7 @@ protected:
 
 public:
 	/** Generates CImageSettingsPages for every area */
-	CScanSettingsSheet();
+	CScanSettingsSheet(const uint32_t& _nareas);
 
 	BEGIN_MSG_MAP(CScanSettingsSheet)	  
 		NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)

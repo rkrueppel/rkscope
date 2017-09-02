@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-CNoScanBasePage::CNoScanBasePage(const uint32_t & _area,
+CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	, const bool& _isslave
 	// scope_controller.GuiParameters.areas[area]->isslave()
 	, ScopeNumber<double>& _pockels

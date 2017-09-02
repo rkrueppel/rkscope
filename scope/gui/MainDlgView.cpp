@@ -5,10 +5,10 @@ namespace scope {
 	namespace gui {
 
 CMainDlgView::CMainDlgView(scope::RunButtons& _runbuttons)
-	: m_ScanSingleButton(_runbutton.startsingle)
-	, m_ScanLiveButton(_runbutton.startlive)
-	, m_StopButton(_runbutton.stop)
-	, m_QuitButton(_runbutton.quit)
+	: m_ScanSingleButton(_runbuttons.startsingle)
+	, m_ScanLiveButton(_runbuttons.startlive)
+	, m_StopButton(_runbuttons.stop)
+	, m_QuitButton(_runbuttons.quit)
 {}
 
 CMainDlgView::~CMainDlgView() {

@@ -11,16 +11,17 @@
 namespace scope {
 	namespace gui {
 
-CScanSettingsSheet::CScanSettingsSheet()
-	: inputsinfospage(dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(scope_controller.GuiParameters.areas[0]->daq.inputs.get())){
+CScanSettingsSheet::CScanSettingsSheet(const uint32_t& _nareas)
+	: nareas(_nareas)
+	, inputsinfospage(dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(scope_controller.GuiParameters.areas[0]->daq.inputs.get())){
 
 	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
 		if ( scope_controller.GuiParameters.areas[a]->isslave() )
-			scanpages[a] = std::unique_ptr<CNoScanBasePage>(new CNoScanBasePage(a, scope_controller.GuiParameters.areas[a]->Currentframe()));
+			scanpages.emplace_back(std::make_unique<CNoScanBasePage>(a, scope_controller.GuiParameters.areas[a]->Currentframe()));
 			//	scanpages[a] = std::unique_ptr<CNoScanBasePage>(new CNoScanBasePage(a, scope_controller.GuiParameters.areas[a]->frameresonance));
 			//else
 		else
-			scanpages[a] = std::unique_ptr<CFrameScanSawPage>(new CFrameScanSawPage(a));
+			scanpages.emplace_back(std::make_unique<CFrameScanSawPage>(a));
 	}
 }
 

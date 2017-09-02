@@ -25,7 +25,7 @@ CMainDlgFrame::CMainDlgFrame(scope::ScopeController& _scope_controller, scope::D
 
 void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const RECT& _rect) {
 	RECT rect(_rect);					// We need non-const here
-	CChannelFrame* pChild = new CChannelFrame(_area, guiparameters.areas[_area], guiparameters.areas[_area]->daq.inputs->channels(), display_controller);
+	CChannelFrame* pChild = new CChannelFrame(_area, *guiparameters.areas[_area], guiparameters.areas[_area]->daq.inputs->channels(), display_controller);
 	// set the CMainDlgFrame as parent, so the childs receives WM_DESTROY when the parent gets destroyed (correct cleanup this way!!)
 	pChild->CreateEx(m_hWnd, rect);
 	pChild->ShowWindow(SW_SHOWDEFAULT);
@@ -44,7 +44,7 @@ void CMainDlgFrame::NewHistogramFrame(const uint32_t& _area, const RECT& _rect) 
 }
 
 void CMainDlgFrame::NewLogFrame(const RECT& _rect) {
-	if ( !scope_logger.HasLogFrame() ) {
+	if ( !ScopeLogger::GetInstance().HasLogFrame() ) {
 		RECT rect(_rect);				// We need non-const here
 		CLogFrame* logchild = new CLogFrame;
 		// set the CMainDlgFrame as parent, so the childs get destroyed when the parent gets destroyed (correct cleanup this way!!)
