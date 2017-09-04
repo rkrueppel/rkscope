@@ -22,7 +22,7 @@
 #include "parameters/Outputs.h"
 
 namespace scope {
-	
+
 bool ThisIsSlaveArea(const uint32_t& _a) {
 #ifdef SCOPE_NBEAM_SETUP
 	return _a != 0;

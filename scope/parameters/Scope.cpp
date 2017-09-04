@@ -23,31 +23,31 @@ Scope::Scope(const uint32_t& _nareas)
 	, masterfovsizex(3000.0, 1.0, 20000.0, L"MasterFOVSizeX_um")
 	, masterfovsizey(3000.0, 1.0, 20000.0, L"MasterFOVSizeY_um")
 	, run_state(RunStateHelper::Stopped, L"RunState")
-	, requested_mode(DaqModeHelper::continuous, L"RequestedMode") {
+	, requested_mode(DaqModeHelper::continuous, L"RequestedMode")
+{
 	date.Set(GetCurrentDateString());
 	time.Set(GetCurrentTimeString());
 	
 	scannertype.SetRWState(false);
-	/*uint32_t a = 0;
+	
+	uint32_t a = 0;
 	std::generate_n(std::back_inserter(areas), nareas, [&a, this]() {
-		parameters::Area A(a, false, ThisIsSlaveArea(a)?nullptr:&areas[0]);
+		parameters::Area A(a, false, ThisIsSlaveArea(a)?&areas[0]:nullptr);
 		a++;
 		return A;
-	});*/
-
-	for ( uint32_t a = 0 ; a < nareas() ; a++ ) {
-		// All area masters or first area is master the rest slaves
-		if (ThisIsSlaveArea(a))
-			areas.emplace_back(parameters::Area(a, true, &areas[0]));
-		else
-			areas.emplace_back(parameters::Area(a, false, nullptr));
-
-		areas[a].framerate.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-		areas[a].daq.averages.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-		areas[a].histrange.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-		timeseries.frames[a].ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-		timeseries.totaltimes[a].ConnectOther(std::bind(&Scope::UpdateFramesFromTotaltime, this));
+	});
+	
+	for(auto& ar : areas) {
+		ar.framerate.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+		ar.daq.averages.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+		ar.histrange.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
 	}
+	
+	for (auto& fr : timeseries.frames )
+		fr.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+	
+	for (auto& tt : timeseries.totaltimes )
+		tt.ConnectOther(std::bind(&Scope::UpdateFramesFromTotaltime, this));
 
 	timeseries.repeats.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
 	timeseries.betweenrepeats.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
@@ -55,11 +55,13 @@ Scope::Scope(const uint32_t& _nareas)
 }
 
 Scope::Scope(const Scope& _scope)
-	: date(_scope.date)
+	: nareas(_scope.nareas)
+	, date(_scope.date)
 	, time(_scope.time)
 	, scopecommit(_scope.scopecommit)
 	, comment(_scope.comment)
 	, scannertype(_scope.scannertype)
+	, areas(_scope.areas)
 	, storage(_scope.storage)
 	, stack(_scope.stack)
 	, timeseries(_scope.timeseries)
@@ -76,22 +78,14 @@ Scope::Scope(const Scope& _scope)
 
 	scannertype.SetRWState(false);
 
-	// Deep copy of Areas
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
-		// First areas are masters the rest slaves (if SCOPE_NBEAM_SLAVES > 0)
-		if ( ThisIsSlaveArea(a) ) {
-			areas[a].reset(new Area(*_scope.areas[a].get()));
-			// Fix the pointer to the master area!!!!!
-			areas[a]->SetMasterArea(areas[0].get());
-		}
-		else {
-			areas[a].reset(new Area(*_scope.areas[a].get()));
-			areas[a]->SetMasterArea(nullptr);
-		}
-	}
+	// Fix the pointer to the master area!!!!!
+	uint32_t i = 0;
+	for (auto& ar : areas)
+		ar.SetMasterArea(ThisIsSlaveArea(i++)?&areas[0]:nullptr);
 }
 
 Scope& Scope::operator=(const Scope& _scope) {
+	nareas = _scope.nareas();
 	date = _scope.date();
 	time = _scope.time();
 	scopecommit = _scope.scopecommit();
@@ -99,19 +93,11 @@ Scope& Scope::operator=(const Scope& _scope) {
 
 	ATLASSERT (scannertype() == _scope.scannertype());	// Otherwise something is seriously wrong
 
-	// Deep copy of Areas
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
-		// First areas are masters the rest slaves (if SCOPE_NBEAM_SLAVES > 0)
-		if ( ThisIsSlaveArea(a) ) {
-			areas[a].reset(new Area(*_scope.areas[a].get()));
-			// Fix the pointer to the master area!!!!!
-			areas[a]->SetMasterArea(areas[0].get());
-		}
-		else {
-			areas[a].reset(new Area(*_scope.areas[a].get()));
-			areas[a]->SetMasterArea(nullptr);
-		}
-	}
+	areas = _scope.areas();
+	// Fix the pointer to the master area!!!!!
+	uint32_t i = 0;
+	for (auto& ar : areas)
+		ar.SetMasterArea(ThisIsSlaveArea(i++)?&areas[0]:nullptr);
 
 	storage = _scope.storage;
 	stack = _scope.stack;
@@ -132,7 +118,7 @@ Scope& Scope::operator=(const Scope& _scope) {
 
 void Scope::UpdateTotaltimeFromFrames() {
 	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-		timeseries.totaltimes[a].Set(1/areas[a]->framerate()*areas[ThisAreaOrMasterArea(a)]->daq.averages()*timeseries.frames[a](), true, false);
+		timeseries.totaltimes[a].Set(1/areas[a].framerate()*areas[ThisAreaOrMasterArea(a)].daq.averages()*timeseries.frames[a](), true, false);
 
 	// Time between repeats (start to start) can be minimally duration of one timeseries (+0.1s for overhead)
 	double maxduration = *std::max_element(std::begin(timeseries.totaltimes), std::end(timeseries.totaltimes));
@@ -143,7 +129,7 @@ void Scope::UpdateTotaltimeFromFrames() {
 
 void Scope::UpdateFramesFromTotaltime() {
 	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-		timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a]->framerate()/areas[ThisAreaOrMasterArea(a)]->daq.averages()));
+		timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a].framerate()/areas[ThisAreaOrMasterArea(a)]->daq.averages()));
 }
 
 void Scope::Load(const std::wstring& filename) {
@@ -157,6 +143,7 @@ void Scope::Load(const std::wstring& filename) {
 
 		CW2A tmp(filename.c_str());
 		read_xml(std::string(tmp), pt, 0, utf8_locale);
+		nareas.SetFromPropertyTree(pt.get_child(L"scope"));
 		date.SetFromPropertyTree(pt.get_child(L"scope"));
 		time.SetFromPropertyTree(pt.get_child(L"scope"));
 		// Do not load scopecommit
@@ -178,8 +165,9 @@ void Scope::Load(const std::wstring& filename) {
 		stage.Load(pt.get_child(L"scope.stage"));
 		stimulation.Load(pt.get_child(L"scope.stimulation"));
 		frames.Load(pt.get_child(L"scope.frames"));
-		for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-			areas[a]->Load(pt.get_child(boost::str(boost::wformat(L"scope.area%d") % a)));
+		uint32_t i = 0;
+		for (auto ar : areas)
+			ar.Load(pt.get_child(boost::str(boost::wformat(L"scope.area%d") % i++)));
 	}
 	catch (...) { ScopeExceptionHandler(__FUNCTION__, true, true); }
 }
@@ -187,7 +175,7 @@ void Scope::Load(const std::wstring& filename) {
 void Scope::Save(const std::wstring& filename) const {
 	wptree pt;
 	wptree ptroot;
-	std::array<wptree, SCOPE_NAREAS> ptareas;
+	std::vector<wptree> ptareas(areas.size());
 	wptree ptstorage;
 	wptree ptstack;
 	wptree pttimeseries;
@@ -198,6 +186,7 @@ void Scope::Save(const std::wstring& filename) const {
 	wptree ptframes;
 
 	try {
+		nareas.AddToPropertyTree(ptroot);
 		date.AddToPropertyTree(ptroot);
 		time.AddToPropertyTree(ptroot);
 		scopecommit.AddToPropertyTree(ptroot);
@@ -208,7 +197,7 @@ void Scope::Save(const std::wstring& filename) const {
 		masterfovsizex.AddToPropertyTree(ptroot);
 		masterfovsizey.AddToPropertyTree(ptroot);
 		pt.add_child(L"scope", ptroot);
-		for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+		for ( uint32_t a = 0 ; a < areas.size() ; a++ ) {
 			areas[a]->Save(ptareas[a]);
 			pt.add_child(boost::str(boost::wformat(L"scope.area%d") % a), ptareas[a]);
 		}
@@ -238,8 +227,8 @@ void Scope::Save(const std::wstring& filename) const {
 }
 
 void Scope::SetReadOnlyWhileScanning(const RunState& _runstate) {
-	for ( auto& a : areas )
-		a->SetReadOnlyWhileScanning(_runstate);
+	for ( auto& ar : areas )
+		ar.SetReadOnlyWhileScanning(_runstate);
 	storage.SetReadOnlyWhileScanning(_runstate);
 	stack.SetReadOnlyWhileScanning(_runstate);
 	timeseries.SetReadOnlyWhileScanning(_runstate);

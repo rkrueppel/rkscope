@@ -235,7 +235,21 @@ from git) and adapt to your hardware. */
 namespace scope {
 
 /** @return true if area _a is a slave area */
+template<class C> bool ThisIsSlaveArea(const C& c, const C::iterator& i) {
+	#ifdef SCOPE_NBEAM_SETUP
+		return i != std::begin(c);
+	#else
+		return false;
+	#endif
+}
+
+/** @return true if area _a is a slave area */
 bool ThisIsSlaveArea(const uint32_t& _a);
+
+/** @return the master area 0 (if nbeam setup) or the area _a */
+template<class C> C::iterator ThisAreaOrMasterArea(const C& c, const C::iterator& i) {
+	return ThisIsSlaveArea(c, i)?std::begin(c):i;
+}
 
 /** @return the master area 0 (if nbeam setup) or the area _a */
 uint32_t ThisAreaOrMasterArea(const uint32_t& _a);
