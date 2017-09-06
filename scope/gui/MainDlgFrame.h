@@ -176,6 +176,8 @@ public:
 	* { */
 	/** Calls ScopeController::PrepareQuit and sends close message and subsequently quits the whole application */
 	void QuitApplication();
+	
+	void ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
 	/** } */
 };
 

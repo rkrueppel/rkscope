@@ -12,6 +12,7 @@
 #include "FPGAResonanceScanner_NI5771Page.h"
 #include "FPGAAnalogDemultiplexerPage.h"
 #include "FPGAAnalogDemultiplexerResonancePage.h"
+#include "parameters/Area.h"
 
 
 namespace scope {
@@ -24,6 +25,12 @@ class CScanSettingsSheet
 protected:
 	const uint32_t nareas;
 
+	std::vector<Area>& areas;
+	
+	FPUButtons& fpubuttons;
+	
+	ScopeNumber<bool>& readonlywhilescanning;
+	
 	/** one imaging settings page for each area */
 	std::vector<std::unique_ptr<CNoScanBasePage>> scanpages;
 
@@ -41,7 +48,7 @@ protected:
 
 public:
 	/** Generates CImageSettingsPages for every area */
-	CScanSettingsSheet(const uint32_t& _nareas);
+	CScanSettingsSheet(const uint32_t& _nareas, std::vector<Area>& _areas);
 
 	BEGIN_MSG_MAP(CScanSettingsSheet)	  
 		NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)
@@ -63,7 +70,7 @@ public:
 	LRESULT OnSelChange(WPARAM wParam, LPNMHDR pnmHdr, BOOL & bHandled);
 	/** @} */
 
-	/** @name Called from ScopeControllerImpl
+	/** @name Called from TheScope
 	* @{ */
 	/** Change the imaging settings page according to the choosen scan mode */
 	void ChangeScanmode(const uint32_t& _area, const ScannerVectorType& _type);

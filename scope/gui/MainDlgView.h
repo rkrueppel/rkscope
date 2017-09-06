@@ -53,6 +53,8 @@ public:
 	/** Replace placeholders with property sheets (for scan settings and experiment settings) */
 	BOOL OnInitDialog(CWindow wndFocus, LPARAM lInitParam);
 	/** @} */
+	
+	void ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
 public:
 //	LRESULT OnBnClickedScanSingle(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 };

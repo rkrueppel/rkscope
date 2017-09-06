@@ -45,4 +45,8 @@ BOOL CMainDlgView::PreTranslateMessage(MSG* pMsg) {
 	return FALSE;
 }
 
+void CMainDlgView::ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
+	m_sheetExperimentSettings.ChangeScanMode(_area, _mode);
+}
+
 	}}

@@ -377,4 +377,8 @@ LRESULT CMainDlgFrame::OnSaveDefaultParameters(WORD /*wNotifyCode*/, WORD /*wID*
 	return 0;
 }
 
+void CMainDlgFrame::ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
+	m_dlgView.ChangeScanMode(_area, _mode);
+}
+
 }}

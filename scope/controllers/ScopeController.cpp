@@ -4,9 +4,10 @@
 namespace scope {
 
 
-ScopeController::ScopeController(const uint32_t& _nareas)
-	: BaseController(1, parameters::Scope())
+ScopeController::ScopeController(const uint32_t& _nareas, parameters::Scope& _guiparameters)
+	: BaseController(1, _guiparameters)
 	, nareas(_nareas)
+	, guiparameters(_guiparameters)
 	, framescannervecs(_nareas)
 	, repeat_abort(false)
 	, onlineupdate_running(false)
@@ -15,49 +16,6 @@ ScopeController::ScopeController(const uint32_t& _nareas)
 	, readonlywhilescanning(false, false, true, L"ReadOnlyWhileScanning")
 	, fpubuttonsvec(_nareas)
 	, scanmodebuttonsvec(_nareas) {
-	
-	// Connect buttons to functions
-	// QuitButton is connected in CMainDlgFrame
-	runbuttons.startsingle.Connect(std::bind(&StartSingle, this));
-	runbuttons.startlive.Connect(std::bind(&StartLive, this));
-	runbuttons.startstack.Connect(std::bind(&StartStack, this));
-	runbuttons.starttimeseries.Connect(std::bind(&StartTimeseries, this));
-	runbuttons.startbehavior.Connect(std::bind(&StartBehavior, this));
-	runbuttons.stop.Connect(std::bind(&Stop, this));
-
-	stackbuttons.starthere.Connect(std::bind(&StackStartHere, this));
-	stackbuttons.stophere.Connect(std::bind(&StackStopHere, this));
-	
-	// We cannot connect directly to XYZStage::SetZero because std::bind needs the class to be copyable (which it may  not)
-	miscbuttons.zerostage.Connect(std::bind(&SetStageZero, this));
-	
-	miscbuttons.zerogalvos.Connect(std::bind(&ZeroGalvoOutpus, this));
-
-	for (uint32_t a = 0; a < nareas; a++) {
-		// Initially choose the first supported scannervector in the list
-		SetScanMode(a, *ScannerSupportedVectors::List().begin());
-
-		// Connect the buttons for scan mode switching (if a master area)
-		if (!ThisIsSlaveArea(a)) {
-			for (auto& b : scanmodebuttonsvec[a].map)
-				b.second.Connect(std::bind(&SetScanMode, this, a, b.first));
-		}
-
-		// Connect all imaging parameters
-		for (auto& sv : guiparameters.areas[a]->scannervectorframesmap) {
-			sv.second->ConnectOnlineUpdate(std::bind(&UpdateAreaParametersFromGui, this, a));
-			sv.second->ConnectResolutionChange(std::bind(&ResolutionChange, this, a));
-		}
-
-		guiparameters.areas[a]->daq.pixeltime.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
-		guiparameters.areas[a]->daq.scannerdelay.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
-		guiparameters.areas[a]->histrange.ConnectOther(std::bind(&UpdateAreaParametersFromGui, this, a));
-		//guiparameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
-
-		// Connect FPU XY movements inside the FPUController!!
-	}
-
-	SetGuiCtrlState();
 }
 
 ScopeController::~ScopeController() {
@@ -141,7 +99,7 @@ void ScopeController::ClearAllQueues() {
 void ScopeController::SetScannerVectorParameters() {
 	DBOUT(L"ScopeControllerImpl::SetScannerVectorParameters");
 	for (uint32_t a = 0; a < nareas; a++)
-		framescannervecs[a]->SetParameters(&parameters.areas[a]->daq, &parameters.areas[a]->Currentframe(), &parameters.areas[a]->fpuzstage);
+		framescannervecs[a]->SetParameters(&parameters.areas[a].daq, &parameters.areas[a].Currentframe(), &parameters.areas[a]-fpuzstage);
 }
 
 ControllerReturnStatus ScopeController::RunLive(StopCondition* const sc) {
@@ -169,7 +127,7 @@ ControllerReturnStatus ScopeController::RunStack(StopCondition* const sc) {
 
 	// We do the same number of planes in each area (if fast z and not that many planes in range in one area, Pockels was set to zero in parameters::stack::UpdatePlanes)
 	for (auto& a : parameters.areas)
-		a->daq.requested_frames = parameters.stack.planes___.size();
+		a.daq.requested_frames = parameters.stack.planes___.size();
 
 	// StorageController and DisplayController saves/displays the number of slices in each area
 	theStorage.Start(parameters);
@@ -178,7 +136,7 @@ ControllerReturnStatus ScopeController::RunStack(StopCondition* const sc) {
 	// At every slice Daq and PipelineController expect 1 frame (they calculate averages themselves)
 	//  do not manipulate guiparameters here, otherwise we have a problem on restarting the stack
 	for (auto& ap : parameters.areas)
-		ap->daq.requested_frames = 1;
+		ap.daq.requested_frames = 1;
 
 	// Set scale for the progress indicator
 	PlaneCounter.SetWithLimits(0, 0, parameters.stack.planes___.size());
@@ -194,17 +152,17 @@ ControllerReturnStatus ScopeController::RunStack(StopCondition* const sc) {
 		}
 		else if (parameters.stack.zdevicetype().t == ZDeviceHelper::FastZ) {
 			for (uint32_t a = 0; a < nareas; a++) {
-				parameters.areas[a]->Currentframe().fastz = parameters.stack.planes___[p][a].position();
+				parameters.areas[a].Currentframe().fastz = parameters.stack.planes___[p][a].position();
 				// Also change guiparameters so the users sees what is happening during stacking
-				guiparameters.areas[a]->Currentframe().fastz = parameters.stack.planes___[p][a].position();
+				guiparameters.areas[a].Currentframe().fastz = parameters.stack.planes___[p][a].position();
 			}
 		}
 
 		// Set pockels to precalculated value
 		for (uint32_t a = 0; a < nareas; a++) {
-			parameters.areas[a]->Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
+			parameters.areas[a].Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
 			// Also change guiparameters so the users sees what is happening during stacking
-			guiparameters.areas[a]->Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
+			guiparameters.areas[a].Currentframe().pockels = parameters.stack.planes___[p][a].pockels();
 		}
 
 		// Calculate scanner vectors
@@ -265,7 +223,7 @@ ControllerReturnStatus ScopeController::RunTimeseries(StopCondition* const sc) {
 		// Alternate planes if planes defined
 		if (parameters.timeseries.planes.size() != 0) {
 			for (uint32_t a = 0; a < nareas; a++)
-				parameters.areas[a]->Currentframe().fastz = parameters.timeseries.planes[t % parameters.timeseries.planes.size()][a].position();
+				parameters.areas[a].Currentframe().fastz = parameters.timeseries.planes[t % parameters.timeseries.planes.size()][a].position();
 			SetScannerVectorParameters();
 		}
 
@@ -390,7 +348,7 @@ void ScopeController::StartTimeseries() {
 		guiparameters.date.Set(GetCurrentDateString());
 		guiparameters.time.Set(GetCurrentTimeString());
 		for (uint32_t a = 0; a < nareas; a++)
-			guiparameters.areas[a]->daq.requested_frames = guiparameters.timeseries.frames[a]();
+			guiparameters.areas[a].daq.requested_frames = guiparameters.timeseries.frames[a]();
 		parameters = guiparameters;
 		SetGuiCtrlState();
 		stops[0].Set(false);
@@ -437,7 +395,7 @@ void ScopeController::Stop() {
 	DBOUT(L"ScopeController::stop end()\n");
 }
 
-void ScopeController::UpdateAreaParametersFromGui(const uint32_t& _area) {
+void ScopeController::OnlineUpdate(const uint32_t& _area) {
 	DBOUT(L"ScopeController::update_parameters_from_gui()\n");
 	if (parameters.run_state() == RunStateHelper::Mode::Stopped)
 		return;
@@ -461,17 +419,17 @@ void ScopeController::UpdateAreaParametersFromGui(const uint32_t& _area) {
 			DBOUT(L"ScopeController::UpdateAreaParametersFromGui starting new online update");
 			onlineupdate_running = true;
 			try {
-				*parameters.areas[_area] = *guiparameters.areas[_area];
-				DBOUT(L"ScopeController::UpdateAreaParametersFromGui guioffset " << guiparameters.areas[_area]->Currentframe().xoffset() << L" " << guiparameters.areas[_area]->Currentframe().yoffset());
+				parameters.areas[_area] = guiparameters.areas[_area];
+				DBOUT(L"ScopeController::UpdateAreaParametersFromGui guioffset " << guiparameters.areas[_area].Currentframe().xoffset() << L" " << guiparameters.areas[_area].Currentframe().yoffset());
 				// This is the expensive step, the recalculation of the scannervector
-				framescannervecs[_area]->SetParameters(&parameters.areas[_area]->daq, &parameters.areas[_area]->Currentframe(), &parameters.areas[_area]->fpuzstage);
+				framescannervecs[_area].SetParameters(&parameters.areas[_area].daq, &parameters.areas[_area].Currentframe(), &parameters.areas[_area].fpuzstage);
 
 				// Fix for online pockel cell update: somehow in this function the currentframe is always framesaw, so I added an if statement to go straight for frameresonance parameters in the resonance scanmode (Karlis)
 				//framescannervecs[_area]->SetParameters(&parameters.areas[_area]->daq, SCOPE_USE_RESONANCESCANNER?&parameters.areas[_area]->frameresonance:parameters.areas[_area]->currentframe, &parameters.areas[_area]->fpuzstage);
 				// This returns only after the updated scannervec is written to the device buffer or the whole update write is aborted
-				theDaq.OnlineParameterUpdate(*parameters.areas[_area]);
+				theDaq.OnlineParameterUpdate(parameters.areas[_area]);
 
-				theDisplay.ResolutionChange(*parameters.areas[_area]);
+				theDisplay.ResolutionChange(parameters.areas[_area]);
 			}
 			catch (...) {
 				ScopeExceptionHandler(__FUNCTION__);
@@ -482,126 +440,6 @@ void ScopeController::UpdateAreaParametersFromGui(const uint32_t& _area) {
 	}
 }
 
-void ScopeController::SetStageZero() {
-	theStage.SetZero();
-}
 
-void ScopeController::StackStartHere() {
-	for (uint32_t a = 0; a < nareas; a++) {
-		// If z stage every area has the same start position
-		if (guiparameters.stack.zdevicetype() == ZDeviceHelper::ZStage)
-			guiparameters.stack.startat[a].position = theStage.CurrentZPosition();
-		// If fast z then each area can have different positions
-		else
-			guiparameters.stack.startat[a].position = guiparameters.areas[a]->Currentframe().fastz();
-
-		guiparameters.stack.startat[a].pockels = guiparameters.areas[a]->Currentframe().pockels();
-	}
-}
-
-void ScopeController::StackStopHere() {
-	for (uint32_t a = 0; a < nareas; a++) {
-		// If z stage every area has the same start position
-		if (guiparameters.stack.zdevicetype() == ZDeviceHelper::ZStage)
-			guiparameters.stack.stopat[a].position = theStage.CurrentZPosition();
-		// If fast z then each area can have different positions
-		else
-			guiparameters.stack.stopat[a].position = guiparameters.areas[a]->Currentframe().fastz();
-
-		guiparameters.stack.stopat[a].pockels = guiparameters.areas[a]->Currentframe().pockels();
-	}
-}
-
-void ScopeController::ZeroGalvoOutputs() {
-	if (parameters.run_state() == RunStateHelper::Mode::Stopped) {
-		DBOUT(L"Zeroing galvo outputs\n");
-		theDaq.ZeroGalvoOutputs();
-	}
-}
-
-void ScopeController::OpenCloseShutter(const uint32_t& _area, const bool& _open) {
-	theDaq.OpenCloseShutter(_area, _open);
-}
-
-bool ScopeController::GetShutterState(const uint32_t& _area) const {
-	return theDaq.GetShutterState(_area);
-}
-
-void ScopeController::TurnOnOffSwitchResonance(const uint32_t& _area, const bool& _on) {
-	theDaq.TurnOnOffSwitchResonance(_area, _on);
-}
-
-/** @return current state of the first resonance scanner relay  */
-bool ScopeController::GetSwitchResonanceState(const uint32_t& _area) const {
-	return theDaq.GetSwitchResonanceState(_area);
-}
-
-void ScopeController::SetFPUButtonsState(const bool& state) {
-	for (auto& b : FPU) {
-		b.LeftButton.Enable(state);
-		b.RightButton.Enable(state);
-		b.UpButton.Enable(state);
-		b.DownButton.Enable(state);
-	}
-}
-
-void ScopeController::SetGuiCtrlState() {
-	// Signal other GUI elements (e.g. preset combo box in CFrameScanPage, see CFrameScanPage::SetReadOnlyWhileScanning)
-	ReadOnlyWhileScanning.Set((parameters.run_state() == RunStateHelper::Mode::Stopped) ? false : true);
-
-	// This takes care of all the parameters
-	guiparameters.SetReadOnlyWhileScanning(parameters.run_state());
-
-	// Now we set the state of all buttons
-	const bool buttonenabler = (parameters.run_state() == RunStateHelper::Mode::Stopped) ? true : false;
-
-	runbutton.startsingle.Enable(buttonenabler);
-	runbutton.startlive.Enable(buttonenabler);
-	runbutton.startstack.Enable(buttonenabler);
-	runbutton.starttimeseries.Enable(buttonenabler);
-	runbutton.startbehavior.Enable(buttonenabler);
-
-	for (uint32_t a = 0; a < nareas; a++) {
-		// Only enable scan mode buttons for master area and only if the mode is supported by builtin scanners
-		if (!ThisIsSlaveArea(a)) {
-			for (auto& b : scanmodebuttonsvec[a].map)
-				b.second.Enable(buttonenabler && ScannerSupportedVectors::IsBuiltinSupported(b.first));
-		}
-		// Disable slave area's scan mode buttons
-		else {
-			for (auto& b : scanmodebuttonsvec[a].map)
-				b.second.Enable(false);
-		}
-	}
-	// Leave these enabled during live scanning
-	stackbuttons.starthere.Enable(buttonenabler || (parameters.run_state() == RunStateHelper::Mode::RunningContinuous));
-	stackbuttons.stophere.Enable(buttonenabler || (parameters.run_state() == RunStateHelper::Mode::RunningContinuous));
-}
-
-void ScopeController::ResolutionChange(const uint32_t& _area) {
-	theDisplay.ResolutionChange(*guiparameters.areas[_area]);
-}
-
-void ScopeController::SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
-	// Make sure the choosen mode/scannervector is supported by the built-in scannertype
-	if (ScannerSupportedVectors::IsBuiltinSupported(_mode)) {
-		// Triggers update of areas.currentframe (connected to areas.ChangeScanMode)
-		guiparameters.areas[_area]->scanmode = _mode;
-		parameters = guiparameters;
-		ScannerVectorFillType filltype = (parameters.areas[_area]->isslave()) ? SCOPE_SLAVEFRAMEVECTORFILL : SCOPE_MASTERFRAMEVECTORFILL;
-		framescannervecs[_area] = ScannerVectorFrameBasic::Factory(parameters.areas[_area]->scanmode(), filltype);
-		theDaq.SetScannerVector(_area, framescannervecs[_area]);
-		thePipeline.SetScannerVector(_area, framescannervecs[_area]);
-		for (auto& c : scanmodecallbacks)
-			c(_area, parameters.areas[_area]->scanmode());
-	}
-	else {
-		throw ScopeException("Choosen ScanMode is not supported by built-in scanner type");
-	}
-}
-
-void ScopeController::RegisterScanmodeCallback(std::function<void(const uint32_t&, const ScannerVectorType&)> _callback) {
-	scanmodecallbacks.push_back(_callback);
-}
 
 }

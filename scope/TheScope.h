@@ -1,11 +1,15 @@
 #pragma once
 
 #include "gui\MainDlgFrame.h"
+#include "helpers\SyncQueues.h"
+#include "helpers\helpers.h"
+#include "helpers\ScopeMultiImage.h"
 #include "controllers/ScopeController.h"
 #include "controllers/DaqController.h"
 #include "controllers/PipelineController.h"
 #include "controllers/DisplayController.h"
 #include "controllers/StorageController.h"
+#include "TheScopeButtons.h"
 
 namespace scope {
 	
@@ -48,6 +52,33 @@ namespace scope {
 			* At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
 			parameters::Scope guiparameters;
 			
+			/** @name ScopeButtons
+			* GUI classes can connect CScopeButtonCtrl to these ScopeButtons via their scope_controller member and thus pass commands to the ScopeController.
+			* At the same time, the status of the WTL buttons can be controlled by the ScopeController (e.g. disable while scanning).
+			* I.e. ScopeButtons are mediators between the controls (CScopeButtonCtrl) and ScopeController functions to start certain stuff;
+			* if it weren't for the button state, CScopeButtonCtrl could directly connect to these functions...
+			* @{ */
+			
+			RunButtons runbuttons;
+
+			StackButtons stackbuttons;
+
+			MiscButtons miscbuttons;
+
+			/** Buttons for FPU nudge */
+			std::vector<FPUButtons> fpubuttonsvec;
+
+			/** Buttons for switching the scan mode */
+			std::vector<ScanModeButtons> scanmodebuttonsvec;
+			/** @} */
+			
+			/** list of callbacks for scan mode switching */
+			std::vector<std::function<void(const uint32_t&, const ScannerVectorType&)>> scanmodecallbacks;
+			
+			/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
+			* by static ScopeButtons etc here) while scanning. */
+			ScopeNumber<bool> readonlywhilescanning;
+			
 		public:
 			TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath);
 			
@@ -63,5 +94,48 @@ namespace scope {
 			* This should be called before creation of the GUI, when only the main thread exists. Then the static member in GetImpl() is initialized and we
 			* do not have to worry about thread-safe singleton creation... */
 			void Version() const;
+			
+			/** Sets the current xyz stage position as zero */
+			void SetStageZero();
+
+			/** Sets the start stack position to the current z position */
+			void StackStartHere();
+
+			/** Sets the stop stack position to the current z position */
+			void StackStopHere();
+
+			/** Zeros galvo outputs.*/
+			void ZeroGalvoOutputs();
+			
+			/** Opens/closes the shutter.*/
+			void OpenCloseShutter(const uint32_t& _area, const bool& _open);
+
+			/** Current state of the shutter.*/
+			bool GetShutterState(const uint32_t& _area) const;
+
+			/** Turns the resonance scanner relay on and off.*/
+			void TurnOnOffSwitchResonance(const uint32_t& _area, const bool& _on);
+
+			/** Current state of the resonance scanner relay.*/
+			bool GetSwitchResonanceState(const uint32_t& _area) const;
+			
+			/** Sets the state of the GUI buttons for FPU control (via the corresponding ScopeButtons). True = enabled, false = disabled.  */
+			void SetFPUButtonsState(const bool& state);
+
+			/** Sets the state of GUI controls (via the corresponding ScopeNumbers). True = read&write/enabled, false = readonly/disabled.
+			* Other GUI elements can connect to ReadOnlyWhileScanning. */
+			void SetGuiCtrlState();
+
+			/** Called via change of GuiParameters.areas[x].framesaw.scanvec.xres etc. */
+			void ResolutionChange(const uint32_t& _area);
+
+			/** Sets the type of scanning. Called via ScopeController ScanModeButtons.
+			* Calls the scanmode callbacks.
+			* Updates/recreates the scanvectors from a different type and sets them in theDaq and thePipeline */
+			void SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
+			
+			/** Registers a function to call when scanmode is changed.
+			* Usually CScanSettingsSheet registers for switching between FrameScan property pages.*/
+			void RegisterScanmodeCallback(std::function<void(const uint32_t&, const ScannerVectorType&)> _callback);
 	};
 }
