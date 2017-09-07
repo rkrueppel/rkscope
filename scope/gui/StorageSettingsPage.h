@@ -2,8 +2,8 @@
 
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeCheckBoxCtrl.h"
-#include "../controllers/ScopeController.h"
-#include "../resource.h"
+#include "parameters/Storage.h"
+#include "resource.h"
 
 namespace scope {
 	namespace gui {
@@ -13,6 +13,9 @@ class CStorageSettingsPage :
 	public CPropertyPageImpl<CStorageSettingsPage> {
 
 protected:
+	/** Reference to TheScope's gui parameter */
+	ScopeString& folder;
+
 	/** Checkbox for automatic save option */
 	CScopeCheckBoxCtrl autosave_checkbox;
 
@@ -32,7 +35,7 @@ protected:
 public:
 	enum { IDD = IDD_STORAGE_PROPPAGE };
 
-	CStorageSettingsPage();
+	CStorageSettingsPage(parameters::Storage& _storageparams);
 
 	BEGIN_MSG_MAP(CStorageSettingsPage)
 		MSG_WM_INITDIALOG(OnInitDialog);

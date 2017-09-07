@@ -51,6 +51,8 @@ public:
 
 	LRESULT OnSelChange(WPARAM wParam, LPNMHDR pnmHdr, BOOL & bHandled);
 	/** @} */
+	
+	void SetReadOnlyWhileScanning(const bool& _ro);
 };
 
 }}

@@ -178,6 +178,9 @@ public:
 	void QuitApplication();
 	
 	void ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
+	
+	/** Set controls that are not coupled to ScopeNumbers etc. (e.g. presets combo box) to read only while scanning */
+	void SetReadOnlyWhileScanning(const bool& _ro);
 	/** } */
 };
 

@@ -69,6 +69,8 @@ protected:
 
 	/** mutexe for the condition variables */
 	std::vector<std::mutex> online_update_done_mutexe;
+	
+	parameters::Scope params;
 
 
 public:

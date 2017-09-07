@@ -14,7 +14,6 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons & _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 )
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
@@ -43,15 +42,6 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 		stream << L"S";
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
-
-	// For disabling save preset button and presets combo during scanning
-	rwstateconnection = _readonlywhilescanning.ConnectGUI(std::bind(&CNoScanBasePage::SetReadOnlyWhileScanning, this));
-}
-
-
-CNoScanBasePage::~CNoScanBasePage(void) {
-	// Disconnect
-	rwstateconnection.disconnect();
 }
 
 BOOL CNoScanBasePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

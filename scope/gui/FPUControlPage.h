@@ -15,9 +15,7 @@ class CFPUControlPage :
 	public CPropertyPageImpl<CFPUControlPage> {
 
 protected:
-	/** the area the FPU serves */
-	const uint32_t area;
-	
+	/** Reference to TheScope's area parameters for the area this page serves */
 	parameters::Area& areaparams;
 
 	/** the page title */

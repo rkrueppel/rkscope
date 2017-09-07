@@ -2,7 +2,7 @@
 
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeCheckBoxCtrl.h"
-#include "controllers/ScopeController.h"
+#include "parameters/Stimulation.h"
 #include "resource.h"
 
 namespace scope {
@@ -13,6 +13,9 @@ class CStimulationSettingsPage :
 	public CPropertyPageImpl<CStimulationSettingsPage> {
 
 protected:
+	/** Reference to TheScope's gui parameter stimulation enable */
+	ScopeNumber<bool>& stimenable;
+	
 	/** stimulation onset (in sec) */
 	CScopeEditCtrl<double> onset;
 
@@ -35,7 +38,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CStimulationSettingsPage(void);
+	CStimulationSettingsPage(parameters::Stimulation& _stimparams);
 
 	BEGIN_MSG_MAP_EX(CStimulationSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

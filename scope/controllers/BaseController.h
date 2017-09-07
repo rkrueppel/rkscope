@@ -1,8 +1,7 @@
 #pragma once
 
 #include "helpers/ScopeDatatypes.h"
-#include "parameters\Scope.h"
-
+ 
 namespace scope {
 
 /** Base class for all controllers.
@@ -19,9 +18,6 @@ protected:
 	/** handed to the asynchronous Run worker functions */
 	std::vector<StopCondition> stops;
 
-	/** the Controller's own set of ScopeParameters */
-	parameters::Scope parameters;
-
 protected:
 	/** The worker function that will run asynchronously.
 	* @warning Every work function should regularly check the stop condition and should return on a boost::thread_interrupted exception.
@@ -35,7 +31,7 @@ protected:
 	}
 
 public:
-	BaseController(const uint32_t& _nactives, const parameters::Scope& _parameters);
+	BaseController(const uint32_t& _nactives);
 
 	// Disable copy construction
 	BaseController(const BaseController& _other) = delete;
@@ -43,9 +39,8 @@ public:
 	// Disable assignment
 	BaseController operator=(const BaseController& _other) = delete;
 
-	/** Execute the Run worker functions asynchronously, give them a reference to a StopCondition and get their ControllerReturnStatus futures.
-	* @param[in] _params new set of ScopeParameters to use in the Controller (and its worker functions) */
-	virtual void Start(const parameters::Scope& _params);
+	/** Execute the Run worker functions asynchronously, give them a reference to a StopCondition and get their ControllerReturnStatus futures. */
+	virtual void Start();
 
 	/** Request one async worker function to stop by settings its StopCondition to true.
 	* @param[in] _a which async to stop */

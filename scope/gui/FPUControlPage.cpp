@@ -5,8 +5,7 @@ namespace scope {
 	namespace gui {
 
 CFPUControlPage::CFPUControlPage(parameters::Area& _areaparams, std::vector<FPUButtons>& _fpubuttonsvec, const double& _masterfovsizex, const double& _masterfovsizey)
-	: area(_areaparams.area)
-	, areaparams(_areaparams)
+	: areaparams(_areaparams)
 	, strtitle(L"")
 	, xpos_edit(_areaparams.fpuxystage.xpos, true)
 	, ypos_edit(_areaparams.fpuxystage.ypos, true)
@@ -15,7 +14,7 @@ CFPUControlPage::CFPUControlPage(parameters::Area& _areaparams, std::vector<FPUB
 	, fpustageinfos_edit(_areaparams.fpuxystage.stageinfo, true)
 	, diagram(_areaparams, _masterfovsizex, _masterfovsizey) {
 	std::wstringstream stream;
-	stream << L"Area " << area+1;
+	stream << L"Area " << _areaparams.area()+1;
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
 }

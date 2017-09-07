@@ -5,19 +5,21 @@
 namespace scope {
 	namespace gui {
 
-CStimulationSettingsPage::CStimulationSettingsPage(void)
-	: onset(&scope_controller.GuiParameters.stimulation.onset, true)
-	, duration(&scope_controller.GuiParameters.stimulation.duration, true)
-	, ontime(&scope_controller.GuiParameters.stimulation.ontime, true)
-	, offtime(&scope_controller.GuiParameters.stimulation.offtime, true)
-	, enabled(&scope_controller.GuiParameters.stimulation.enable, true) {
-	scope_controller.GuiParameters.stimulation.enable.ConnectOther(std::bind(&CStimulationSettingsPage::EnableDisableControls, this));
+CStimulationSettingsPage::CStimulationSettingsPage(parameters::Stimulation& _stimparams)
+	: stimenable(_stimparams.enable)
+	, onset(_stimparams.onset, true)
+	, duration(_stimparams.duration, true)
+	, ontime(_stimparams.ontime, true)
+	, offtime(_stimparams.offtime, true)
+	, enabled(_stimparams.enable, true)
+{
+	stimenable.ConnectOther(std::bind(&CStimulationSettingsPage::EnableDisableControls, this));
 }
 
 void CStimulationSettingsPage::EnableDisableControls() {
 	DBOUT(L"CStimulationSettings::EnableDisableControls\n");
 	// Attention: ReadOnly ist !Enable
-	bool state = scope_controller.GuiParameters.stimulation.enable();
+	const bool state = stimenable();
 	onset.SetState(state);
 	duration.SetState(state);
 	ontime.SetState(state);

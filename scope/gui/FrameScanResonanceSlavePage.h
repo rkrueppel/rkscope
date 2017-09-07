@@ -30,7 +30,6 @@ public:
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 	, parameters::ScannerVectorFrameResonance& _svresonanceparams);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)

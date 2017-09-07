@@ -148,7 +148,7 @@ void ScannerVectorFrameBasic::SetReadOnlyWhileScanning(const RunState& _runstate
 }
 
 std::unique_ptr<ScannerVectorFrameBasic::Preset> ScannerVectorFrameBasic::MakePreset() const {
-	return std::unique_ptr<ScannerVectorFrameBasic::Preset>(new ScannerVectorFrameBasic::Preset());
+	return std::make_unique<ScannerVectorFrameBasic::Preset>();
 }
 
 void ScannerVectorFrameBasic::DeletePreset(const std::wstring& _name) {
@@ -310,11 +310,11 @@ void ScannerVectorFrameSaw::SetReadOnlyWhileScanning(const RunState& _runstate) 
 }
 
 std::unique_ptr<ScannerVectorFrameBasic::Preset> ScannerVectorFrameSaw::MakePreset() const {
-	return std::unique_ptr<ScannerVectorFrameBasic::Preset>(new ScannerVectorFrameSaw::Preset());
+	return std::make_unique<ScannerVectorFrameBasic::Preset>();
 }
 
 void ScannerVectorFrameSaw::SaveToPreset(const std::wstring& _name, const Daq& _daq) {
-	std::shared_ptr<Preset> p = std::make_shared<Preset>();
+	auto p = std::make_shared<Preset>();
 	p->name = _name;
 	p->pixeltime = _daq.pixeltime();
 	p->scannerdelay = _daq.scannerdelay();
@@ -430,11 +430,11 @@ void ScannerVectorFrameBiDi::SetReadOnlyWhileScanning(const RunState& _runstate)
 }
 
 std::unique_ptr<ScannerVectorFrameBasic::Preset> ScannerVectorFrameBiDi::MakePreset() const {
-	return std::unique_ptr<ScannerVectorFrameBasic::Preset>(new ScannerVectorFrameBiDi::Preset());
+	return std::make_unique<ScannerVectorFrameBasic::Preset>();
 }
 
 void ScannerVectorFrameBiDi::SaveToPreset(const std::wstring& _name, const Daq& _daq) {
-	std::shared_ptr<Preset> p = std::make_shared<Preset>();
+	auto p = std::make_shared<Preset>();
 	p->name = _name;
 	p->pixeltime = _daq.pixeltime();
 	p->scannerdelay = _daq.scannerdelay();
@@ -548,11 +548,11 @@ void ScannerVectorFramePlaneHopper::SetReadOnlyWhileScanning(const RunState& _ru
 }
 
 std::unique_ptr<ScannerVectorFrameBasic::Preset> ScannerVectorFramePlaneHopper::MakePreset() const {
-	return std::unique_ptr<ScannerVectorFrameBasic::Preset>(new ScannerVectorFramePlaneHopper::Preset());
+	return std::make_unique<ScannerVectorFrameBasic::Preset>();
 }
 
 void ScannerVectorFramePlaneHopper::SaveToPreset(const std::wstring& _name, const Daq& _daq) {
-	std::shared_ptr<Preset> p = std::make_shared<Preset>();
+	auto p = std::make_shared<Preset>();
 	p->name = _name;
 	p->pixeltime = _daq.pixeltime();
 	p->scannerdelay = _daq.scannerdelay();
@@ -709,11 +709,11 @@ void ScannerVectorFrameResonance::SetReadOnlyWhileScanning(const RunState& _runs
 }
 
 std::unique_ptr<ScannerVectorFrameBasic::Preset> ScannerVectorFrameResonance::MakePreset() const {
-	return std::unique_ptr<ScannerVectorFrameBasic::Preset>(new ScannerVectorFrameResonance::Preset());
+	return std::make_unique<ScannerVectorFrameBasic::Preset>();
 }
 
 void ScannerVectorFrameResonance::SaveToPreset(const std::wstring& _name, const Daq& _daq) {
-	std::shared_ptr<Preset> p = std::make_shared<Preset>();
+	auto p = std::make_shared<Preset>();
 	p->name = _name;
 	p->pixeltime = _daq.pixeltime();
 	p->scannerdelay = _daq.scannerdelay();

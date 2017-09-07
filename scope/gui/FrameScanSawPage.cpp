@@ -17,7 +17,6 @@ CFrameScanSawPage::CFrameScanSawPage(const uint32_t& _area
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 	, parameters::ScannerVectorFrameSaw& _scanvecframesawparams
 	, ScopeNumber<uint32_t>& _averages
 	, ScopeNumber<double>& _scannerdelay
@@ -26,7 +25,7 @@ CFrameScanSawPage::CFrameScanSawPage(const uint32_t& _area
 	, ScopeNumber<double>& _linerate
 	)
 	// scope_controller.GuiParameters.areas[_area]->FrameSaw()
-	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning, _scanvecframesawparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
+	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _scanvecframesawparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
 	, xcutoff_edit(_scanvecframesawparams.xcutoff, true, true)
 	, ycutoff_edit(_scanvecframesawparams.ycutoff, true, true)
 	, xretrace_edit(_scanvecframesawparams.xretrace, true, true)

@@ -13,6 +13,9 @@
 #include "FPGAAnalogDemultiplexerPage.h"
 #include "FPGAAnalogDemultiplexerResonancePage.h"
 #include "parameters/Area.h"
+#include "parameters/Devices.h"
+#include "parameters/Storage.h"
+#include "parameters/Stimulation.h"
 
 
 namespace scope {
@@ -25,9 +28,9 @@ class CScanSettingsSheet
 protected:
 	const uint32_t nareas;
 
-	std::vector<Area>& areas;
+	std::vector<parameters::Area>& areaparamsvec;
 	
-	FPUButtons& fpubuttons;
+	std::vector<FPUButtons>& fpubuttonsvec;
 	
 	ScopeNumber<bool>& readonlywhilescanning;
 	
@@ -47,8 +50,18 @@ protected:
 	SCOPE_INPUTSINFOPAGE_T inputsinfospage;
 
 public:
-	/** Generates CImageSettingsPages for every area */
-	CScanSettingsSheet(const uint32_t& _nareas, std::vector<Area>& _areas);
+	
+	CScanSettingsSheet(const uint32_t& _nareas
+		, std::vector<parameters::Area>& _areaparamsvec
+		, std::vector<FPUButtons>& _fpubuttonsvec
+		, const double& _masterfovsizex
+		, const double& _masterfovsizey
+		, parameters::Storage& _storageparams
+		, parameters::Stimulation& _stimulationparams
+		, parameters::Stage& _stageparams
+		, ZeroButtons& _zerobuttons
+		, ScopeNumber<bool>& _readonlywhilescanning
+	);
 
 	BEGIN_MSG_MAP(CScanSettingsSheet)	  
 		NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)
@@ -74,6 +87,8 @@ public:
 	* @{ */
 	/** Change the imaging settings page according to the choosen scan mode */
 	void ChangeScanmode(const uint32_t& _area, const ScannerVectorType& _type);
+	
+	void SetReadOnlyWhileScanning(const bool& _ro);
 	/** @} */
 };
 

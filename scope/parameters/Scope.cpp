@@ -166,7 +166,7 @@ void Scope::Load(const std::wstring& filename) {
 		stimulation.Load(pt.get_child(L"scope.stimulation"));
 		frames.Load(pt.get_child(L"scope.frames"));
 		uint32_t i = 0;
-		for (auto ar : areas)
+		for (auto& ar : areas)
 			ar.Load(pt.get_child(boost::str(boost::wformat(L"scope.area%d") % i++)));
 	}
 	catch (...) { ScopeExceptionHandler(__FUNCTION__, true, true); }
@@ -198,7 +198,7 @@ void Scope::Save(const std::wstring& filename) const {
 		masterfovsizey.AddToPropertyTree(ptroot);
 		pt.add_child(L"scope", ptroot);
 		for ( uint32_t a = 0 ; a < areas.size() ; a++ ) {
-			areas[a]->Save(ptareas[a]);
+			areas[a].Save(ptareas[a]);
 			pt.add_child(boost::str(boost::wformat(L"scope.area%d") % a), ptareas[a]);
 		}
 		storage.Save(ptstorage);

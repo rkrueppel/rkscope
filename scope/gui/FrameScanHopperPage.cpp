@@ -17,7 +17,6 @@ CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 	, parameters::ScannerVectorFramePlaneHopper& _scanvecframehopperparams
 	, ScopeNumber<uint32_t>& _averages
 	, ScopeNumber<double>& _scannerdelay
@@ -25,7 +24,7 @@ CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area
 	, ScopeNumber<double>& _frametime
 	, ScopeNumber<double>& _linerate
 )
-	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning, _scanvecframehopperparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
+	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _scanvecframehopperparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
 	//scope_controller.GuiParameters.areas[area]->isslave()
 	, hoppervecparams(_scanvecframehopperparams)
 {

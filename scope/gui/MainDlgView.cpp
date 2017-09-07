@@ -49,4 +49,9 @@ void CMainDlgView::ChangeScanMode(const uint32_t& _area, const ScannerVectorType
 	m_sheetExperimentSettings.ChangeScanMode(_area, _mode);
 }
 
+void CMainDlgView::SetReadOnlyWhileScanning(const bool& _ro) {
+	m_sheetExperimentSettings.SetReadOnlyWhileScanning(_ro);
+	m_sheetScanSettings.SetReadOnlyWhileScanning(_ro);
+}
+
 	}}

@@ -17,10 +17,9 @@ CFrameScanResonanceSlavePage::CFrameScanResonanceSlavePage(const uint32_t& _area
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 	, parameters::ScannerVectorFrameResonance& _svresonanceparams
 )
-	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning)
+	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons)
 	, svresonanceparams(_svresonanceparams)
 {
 

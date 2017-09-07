@@ -80,12 +80,14 @@ int Run(HINSTANCE hInstance) {
 
 		// Run the main message loop
 		nRet = theLoop.Run();
+		
+		myscope.PrepareQuit();
 	}
 	// if we did not only display a message box and exit
 	else {
 		::MessageBox(NULL, L"No default parameter file found and no parameter file choosen!", L"Choose wisely next time", MB_OK | MB_ICONWARNING | MB_TASKMODAL | MB_SETFOREGROUND | MB_TOPMOST);
 	}
-
+	
 	_Module.RemoveMessageLoop();
 	scope::ScopeLogger::GetInstance().Shutdown();
 	return nRet;

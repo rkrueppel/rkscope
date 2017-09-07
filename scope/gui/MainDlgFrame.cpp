@@ -91,7 +91,7 @@ BOOL CMainDlgFrame::OnIdle() {
 }
 
 void CMainDlgFrame::QuitApplication() {
-	scope_controller.PrepareQuit();
+	//scope_controller.PrepareQuit();
 	PostMessage(WM_CLOSE);
 }
 
@@ -379,6 +379,10 @@ LRESULT CMainDlgFrame::OnSaveDefaultParameters(WORD /*wNotifyCode*/, WORD /*wID*
 
 void CMainDlgFrame::ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
 	m_dlgView.ChangeScanMode(_area, _mode);
+}
+
+void CMainDlgFrame::SetReadOnlyWhileScanning(const bool& _ro) {
+	m_dlgView.SetReadOnlyWhileScanning(_ro);
 }
 
 }}

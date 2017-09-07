@@ -11,44 +11,58 @@
 namespace scope {
 	namespace gui {
 
-CScanSettingsSheet::CScanSettingsSheet(const uint32_t& _nareas, std::vector<Area>& _areas, FPUButtons& _fpubuttons, ScopeNumber<bool>& _readonlywhilescanning)
+CScanSettingsSheet::CScanSettingsSheet(
+	const uint32_t& _nareas
+	, std::vector<parameters::Area>& _areaparamsvec
+	, std::vector<FPUButtons>& _fpubuttonsvec
+	, const double& _masterfovsizex
+	, const double& _masterfovsizey
+	, parameters::Storage& _storageparams
+	, parameters::Stimulation& _stimulationparams
+	, parameters::Stage& _stageparams
+	, ZeroButtons& _zerobuttons
+	, ScopeNumber<bool>& _readonlywhilescanning
+)
 	: nareas(_nareas)
-	, areas(_areas)
-	, fpubuttons(_fpubuttons)
+	, areaparamsvec(_areaparamsvec)
+	, fpubuttonsvec(_fpubuttonsvec)
 	, readonlywhilescanning(_readonlywhilescanning)
-	, inputsinfospage(dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(_areas[0].daq.inputs.get())){
-
+	, storagesettingspage(_storageparams)
+	, stimulationsettingspage(_stimulationparams)
+	, movementpage(_areaparamsvec, _fpubuttonsvec, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
+	, inputsinfospage(dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(_areaparamsvec[0].daq.inputs.get()))
+{
 	int32_t a = -1;
-	std::generate_n(std::back_inserter(scanpages), nareas, [&a, &areas]() {
+	std::generate_n(std::back_inserter(scanpages), nareas, [&a, &areaparamsvec]() {
 		a++;
-		if areas[a].isslave()
+		if areaparamsvec[a].isslave()
 			return std::make_unique<CNoScanBasePage>(a
-				, areas[a].isslave()
-				, areas[a].Currentframe().pockels
-				, areas[a].Currentframe().fastz
-				, areas[a].daq.pixeltime
-				, areas[a].daq.inputs->minpixeltime(), 
-				, areas[a].fpuxystage.xpos
-				, areas[a].fpuxystage.ypos
-				, fpubuttons
+				, areaparamsvec[a].isslave()
+				, areaparamsvec[a].Currentframe().pockels
+				, areaparamsvec[a].Currentframe().fastz
+				, areaparamsvec[a].daq.pixeltime
+				, areaparamsvec[a].daq.inputs->minpixeltime(), 
+				, areaparamsvec[a].fpuxystage.xpos
+				, areaparamsvec[a].fpuxystage.ypos
+				, fpubuttonsvec[a]
 				, readonlywhilescanning);
 		else
 			return std::make_unique<CFrameScanSawPage>(a
-				, areas[a].isslave()
-				, areas[a].Currentframe().pockels
-				, areas[a].Currentframe().fastz
-				, areas[a].daq.pixeltime
-				, areas[a].daq.inputs->minpixeltime()
-				, areas[a].fpuxystage.xpos
-				, areas[a].fpuxystage.ypos
-				, fpubuttons
+				, areaparamsvec[a].isslave()
+				, areaparamsvec[a].Currentframe().pockels
+				, areaparamsvec[a].Currentframe().fastz
+				, areaparamsvec[a].daq.pixeltime
+				, areaparamsvec[a].daq.inputs->minpixeltime()
+				, areaparamsvec[a].fpuxystage.xpos
+				, areaparamsvec[a].fpuxystage.ypos
+				, fpubuttonsvec[a]
 				, readonlywhilescanning
-				, areas[a].ScannerVectorFrameSaw()
-				, areas[a].daq.averages
-				, areas[a].daq.scannerdelay
-				, areas[a].framerate
-				, areas[a].frametime
-				, areas[a].linerate);
+				, areaparamsvec[a].ScannerVectorFrameSaw()
+				, areaparamsvec[a].daq.averages
+				, areaparamsvec[a].daq.scannerdelay
+				, areaparamsvec[a].framerate
+				, areaparamsvec[a].frametime
+				, areaparamsvec[a].linerate);
 	});
 	
 }
@@ -136,99 +150,99 @@ void CScanSettingsSheet::ChangeScanmode(const uint32_t& _area, const ScannerVect
 			switch( _type.t ) {
 				case ScannerVectorTypeHelper::Sawtooth:
 					scanpages[a] = std::make_unique<CFrameScanSawPage>(a
-						, areas[a].isslave()
-						, areas[a].ScannerVectorFrameSaw().pockels
-						, areas[a].ScannerVectorFrameSaw().fastz
-						, areas[a].daq.pixeltime
-						, areas[a].daq.inputs->minpixeltime()
-						, areas[a].fpuxystage.xpos
-						, areas[a].fpuxystage.ypos
-						, fpubuttons
-						, readonlywhilescanning
-						, areas[a].ScannerVectorFrameSaw()
-						, areas[a].daq.averages
-						, areas[a].daq.scannerdelay
-						, areas[a].framerate
-						, areas[a].frametime
-						, areas[a].linerate);
+						, areaparamsvec[a].isslave()
+						, areaparamsvec[a].ScannerVectorFrameSaw().pockels
+						, areaparamsvec[a].ScannerVectorFrameSaw().fastz
+						, areaparamsvec[a].daq.pixeltime
+						, areaparamsvec[a].daq.inputs->minpixeltime()
+						, areaparamsvec[a].fpuxystage.xpos
+						, areaparamsvec[a].fpuxystage.ypos
+						, fpubuttonsvec[a]
+						, areaparamsvec[a].ScannerVectorFrameSaw()
+						, areaparamsvec[a].daq.averages
+						, areaparamsvec[a].daq.scannerdelay
+						, areaparamsvec[a].framerate
+						, areaparamsvec[a].frametime
+						, areaparamsvec[a].linerate);
 					break;
 				case ScannerVectorTypeHelper::Bidirectional:
 					scanpages[a] = std::make_unique<CFrameScanBidiPage>(a
-						, areas[a].isslave()
-						, areas[a].ScannerVectorFrameSaw().pockels
-						, areas[a].ScannerVectorFrameSaw().fastz
-						, areas[a].daq.pixeltime
-						, areas[a].daq.inputs->minpixeltime()
-						, areas[a].fpuxystage.xpos
-						, areas[a].fpuxystage.ypos
-						, fpubuttons
-						, readonlywhilescanning
-						, areas[a].ScannerVectorFrameBiDi()
-						, areas[a].daq.averages
-						, areas[a].daq.scannerdelay
-						, areas[a].framerate
-						, areas[a].frametime
-						, areas[a].linerate);
+						, areaparamsvec[a].isslave()
+						, areaparamsvec[a].ScannerVectorFrameSaw().pockels
+						, areaparamsvec[a].ScannerVectorFrameSaw().fastz
+						, areaparamsvec[a].daq.pixeltime
+						, areaparamsvec[a].daq.inputs->minpixeltime()
+						, areaparamsvec[a].fpuxystage.xpos
+						, areaparamsvec[a].fpuxystage.ypos
+						, fpubuttonsvec[a]
+						, areaparamsvec[a].ScannerVectorFrameBiDi()
+						, areaparamsvec[a].daq.averages
+						, areaparamsvec[a].daq.scannerdelay
+						, areaparamsvec[a].framerate
+						, areaparamsvec[a].frametime
+						, areaparamsvec[a].linerate);
 					break;
 				case ScannerVectorTypeHelper::Planehopper:
 					scanpages[a] = std::make_unique<CFrameScanHopperPage>(a
-						, areas[a].isslave()
-						, areas[a].ScannerVectorFrameSaw().pockels
-						, areas[a].ScannerVectorFrameSaw().fastz
-						, areas[a].daq.pixeltime
-						, areas[a].daq.inputs->minpixeltime()
-						, areas[a].fpuxystage.xpos
-						, areas[a].fpuxystage.ypos
-						, fpubuttons
-						, readonlywhilescanning
-						, areas[a].ScannerVectorFrameHopper()
-						, areas[a].daq.averages
-						, areas[a].daq.scannerdelay
-						, areas[a].framerate
-						, areas[a].frametime
-						, areas[a].linerate);
+						, areaparamsvec[a].isslave()
+						, areaparamsvec[a].ScannerVectorFrameSaw().pockels
+						, areaparamsvec[a].ScannerVectorFrameSaw().fastz
+						, areaparamsvec[a].daq.pixeltime
+						, areaparamsvec[a].daq.inputs->minpixeltime()
+						, areaparamsvec[a].fpuxystage.xpos
+						, areaparamsvec[a].fpuxystage.ypos
+						, fpubuttonsvec[a]
+						, areaparamsvec[a].ScannerVectorFrameHopper()
+						, areaparamsvec[a].daq.averages
+						, areaparamsvec[a].daq.scannerdelay
+						, areaparamsvec[a].framerate
+						, areaparamsvec[a].frametime
+						, areaparamsvec[a].linerate);
 					break;
 				case ScannerVectorTypeHelper::ResonanceBiDi:
 					scanpages[a] = std::make_unique<CFrameScanResonancePage>(a
-						, areas[a].isslave()
-						, areas[a].ScannerVectorFrameSaw().pockels
-						, areas[a].ScannerVectorFrameSaw().fastz
-						, areas[a].daq.pixeltime
-						, areas[a].daq.inputs->minpixeltime()
-						, areas[a].fpuxystage.xpos
-						, areas[a].fpuxystage.ypos
-						, fpubuttons
-						, readonlywhilescanning
-						, areas[a].ScannerVectorFrameResonance()
-						, areas[a].daq.averages
-						, areas[a].daq.scannerdelay
-						, areas[a].framerate
-						, areas[a].frametime
-						, areas[a].linerate);
+						, areaparamsvec[a].isslave()
+						, areaparamsvec[a].ScannerVectorFrameSaw().pockels
+						, areaparamsvec[a].ScannerVectorFrameSaw().fastz
+						, areaparamsvec[a].daq.pixeltime
+						, areaparamsvec[a].daq.inputs->minpixeltime()
+						, areaparamsvec[a].fpuxystage.xpos
+						, areaparamsvec[a].fpuxystage.ypos
+						, fpubuttonsvec[a]
+						, areaparamsvec[a].ScannerVectorFrameResonance()
+						, areaparamsvec[a].daq.averages
+						, areaparamsvec[a].daq.scannerdelay
+						, areaparamsvec[a].framerate
+						, areaparamsvec[a].frametime
+						, areaparamsvec[a].linerate);
 					break;
 				case ScannerVectorTypeHelper::ResonanceHopper:
 					scanpages[a] = std::make_unique<CFrameScanResonancePage>(a
-						, areas[a].isslave()
-						, areas[a].ScannerVectorFrameSaw().pockels
-						, areas[a].ScannerVectorFrameSaw().fastz
-						, areas[a].daq.pixeltime
-						, areas[a].daq.inputs->minpixeltime()
-						, areas[a].fpuxystage.xpos
-						, areas[a].fpuxystage.ypos
-						, fpubuttons
-						, readonlywhilescanning
-						, areas[a].ScannerVectorFrameResonance()
-						, areas[a].daq.averages
-						, areas[a].daq.scannerdelay
-						, areas[a].framerate
-						, areas[a].frametime
-						, areas[a].linerate);
+						, areaparamsvec[a].isslave()
+						, areaparamsvec[a].ScannerVectorFrameSaw().pockels
+						, areaparamsvec[a].ScannerVectorFrameSaw().fastz
+						, areaparamsvec[a].daq.pixeltime
+						, areaparamsvec[a].daq.inputs->minpixeltime()
+						, areaparamsvec[a].fpuxystage.xpos
+						, areaparamsvec[a].fpuxystage.ypos
+						, fpubuttonsvec[a]
+						, areaparamsvec[a].ScannerVectorFrameResonance()
+						, areaparamsvec[a].daq.averages
+						, areaparamsvec[a].daq.scannerdelay
+						, areaparamsvec[a].framerate
+						, areaparamsvec[a].frametime
+						, areaparamsvec[a].linerate);
 					break;
 				}
 		//}
 		InsertPage(a, *scanpages[a]);
 	}
 	SetActivePage(_area);
+}
+
+void CScanSettingsSheet::SetReadOnlyWhileScanning(const bool& _ro) {
+	for(auto& sp : scanpages)
+		sp.SetReadOnlyWhileScanning(_ro);
 }
 
 }}

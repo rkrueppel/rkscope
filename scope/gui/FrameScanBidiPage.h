@@ -40,7 +40,6 @@ public:
 		, ScopeNumber<double>& _fpux
 		, ScopeNumber<double>& _fpuy
 		, FPUButtons& _fpubuttons
-		, ScopeNumber<bool>& _readonlywhilescanning
 		, parameters::ScannerVectorFrameBiDi& _scanvecparams
 		, ScopeNumber<uint32_t>& _averages
 		, ScopeNumber<double>& _scannerdelay

@@ -72,13 +72,6 @@ namespace scope {
 			std::vector<ScanModeButtons> scanmodebuttonsvec;
 			/** @} */
 			
-			/** list of callbacks for scan mode switching */
-			std::vector<std::function<void(const uint32_t&, const ScannerVectorType&)>> scanmodecallbacks;
-			
-			/** Set to true while scanning, GUI elements can connect to this to disable buttons and controls (that are not matched
-			* by static ScopeButtons etc here) while scanning. */
-			ScopeNumber<bool> readonlywhilescanning;
-			
 		public:
 			TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath);
 			
@@ -122,20 +115,17 @@ namespace scope {
 			/** Sets the state of the GUI buttons for FPU control (via the corresponding ScopeButtons). True = enabled, false = disabled.  */
 			void SetFPUButtonsState(const bool& state);
 
-			/** Sets the state of GUI controls (via the corresponding ScopeNumbers). True = read&write/enabled, false = readonly/disabled.
-			* Other GUI elements can connect to ReadOnlyWhileScanning. */
+			/** Sets the state of GUI controls (via the corresponding ScopeNumbers). True = read&write/enabled, false = readonly/disabled. */
 			void SetGuiCtrlState();
 
 			/** Called via change of GuiParameters.areas[x].framesaw.scanvec.xres etc. */
 			void ResolutionChange(const uint32_t& _area);
 
-			/** Sets the type of scanning. Called via ScopeController ScanModeButtons.
-			* Calls the scanmode callbacks.
+			/** Sets the type of scanning. Called ScanModeButtons.
 			* Updates/recreates the scanvectors from a different type and sets them in theDaq and thePipeline */
 			void SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
 			
-			/** Registers a function to call when scanmode is changed.
-			* Usually CScanSettingsSheet registers for switching between FrameScan property pages.*/
-			void RegisterScanmodeCallback(std::function<void(const uint32_t&, const ScannerVectorType&)> _callback);
+			void PrepareQuit();
+
 	};
 }

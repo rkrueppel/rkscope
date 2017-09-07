@@ -1,18 +1,17 @@
 #include "StdAfx.h"
 #include "BaseController.h"
-
+ 
 namespace scope {
-	BaseController::BaseController(const uint32_t& _nactives, const parameters::Scope& _parameter)
+	BaseController::BaseController(const uint32_t& _nactives)
 		: nactives(_nactives)
 		, futures(_nactives)
 		, stops(_nactives)
-		, paramters(_parameters) {
+	{
 		ATLASSERT(_nactives > 0);
 	}
 
-	void BaseController::Start(const parameters::Scope& _params) {
+	void BaseController::Start() {
 		DBOUT(L"BaseController::Start\n");
-		parameters = _params;
 		for (uint32_t a = 0; a < nactives; a++) {
 			stops[a].Set(false);
 			// Let "Run" run asynchronously and get its future

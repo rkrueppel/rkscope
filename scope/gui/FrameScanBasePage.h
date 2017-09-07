@@ -88,7 +88,6 @@ public:
 		, ScopeNumber<double>& _fpux
 		, ScopeNumber<double>& _fpuy
 		, FPUButtons& _fpubuttons
-		, ScopeNumber<bool>& _readonlywhilescanning
 		, parameters::ScannerVectorFrameBasic& _scanvecparams
 		, ScopeNumber<uint32_t>& _averages
 		, ScopeNumber<double>& _scannerdelay
@@ -120,7 +119,7 @@ public:
 
 	/** @name Called from ScopeController */
 	/** Connected to ScopeController::ReadOnlyWhileScanning */
-	void SetReadOnlyWhileScanning() override;
+	void SetReadOnlyWhileScanning(const bool& _ro) override;
 	/** @} */
 
 	/** @name Called internally

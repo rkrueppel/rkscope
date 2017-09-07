@@ -4,12 +4,13 @@
 namespace scope {
 	namespace gui {
 
-CStorageSettingsPage::CStorageSettingsPage()
-	: folder_edit(&scope_controller.GuiParameters.storage.folder, true, true)
-	, autosave_checkbox(&scope_controller.GuiParameters.storage.autosave, true, true)
-	, savelive_checkbox(&scope_controller.GuiParameters.storage.savelive, true, true)
-	, usetifftags_checkbox(&scope_controller.GuiParameters.storage.usetifftags, true, true)
-	, compresstiff_checkbox(&scope_controller.GuiParameters.storage.compresstiff, true, true) {
+CStorageSettingsPage::CStorageSettingsPage(parameters::Storage& _storageparams)
+	: folder(_storageparams.folder)
+	, folder_edit(_storageparams.folder, true, true)
+	, autosave_checkbox(_storageparams.autosave, true, true)
+	, savelive_checkbox(_storageparams.savelive, true, true)
+	, usetifftags_checkbox(_storageparams.usetifftags, true, true)
+	, compresstiff_checkbox(_storageparams.compresstiff, true, true) {
 }
 
 BOOL CStorageSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
@@ -28,7 +29,7 @@ LRESULT CStorageSettingsPage::OnFolderButton(WORD wNotifyCode, WORD wID, HWND hW
 
 	// Open folder dialog and save result into GuiParameters
 	if ( dlgFolder.DoModal() == IDOK )
-		scope_controller.GuiParameters.storage.folder = std::wstring(dlgFolder.m_szFolderPath);
+		folder = std::wstring(dlgFolder.m_szFolderPath);
 
 	return 0;
 }

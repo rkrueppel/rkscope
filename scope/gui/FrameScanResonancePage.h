@@ -46,7 +46,6 @@ public:
 		, ScopeNumber<double>& _fpux
 		, ScopeNumber<double>& _fpuy
 		, FPUButtons& _fpubuttons
-		, ScopeNumber<bool>& _readonlywhilescanning
 		, parameters::ScannerVectorFrameResonance& _svresonanceparams
 		, ScopeNumber<uint32_t>& _averages
 		, ScopeNumber<double>& _scannerdelay

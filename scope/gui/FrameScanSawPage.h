@@ -41,7 +41,6 @@ public:
 		, ScopeNumber<double>& _fpux
 		, ScopeNumber<double>& _fpuy
 		, FPUButtons& _fpubuttons
-		, ScopeNumber<bool>& _readonlywhilescanning
 		, parameters::ScannerVectorFrameSaw& _scanvecframesawparams
 		, ScopeNumber<uint32_t>& _averages
 		, ScopeNumber<double>& _scannerdelay
@@ -49,8 +48,6 @@ public:
 		, ScopeNumber<double>& _frametime
 		, ScopeNumber<double>& _linerate
 	);
-
-	~CFrameScanSawPage() { }
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanSawPage)

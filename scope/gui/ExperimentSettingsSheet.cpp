@@ -11,7 +11,7 @@ CExperimentSettingsSheet::CExperimentSettingsSheet(std::vector<ScanModeButtons>&
 	, ScopeControllerCounters& _counters
 	, parameters::Timeseries& _timeseriesparams
 	, parameters::Behavior& _behaviorparams
-	)
+)
 	: scanmode(_scanmodebuttonsvec)
 	, stack(_stackparams, _stackbuttons, _counters)
 	, timeseries(_timeseriesparams, _runbuttons, _counters)
@@ -80,6 +80,13 @@ int CALLBACK CExperimentSettingsSheet::PropSheetCallback(HWND hWnd, UINT uMsg, L
 
 LRESULT CExperimentSettingsSheet::OnSelChange(WPARAM wParam, LPNMHDR pnmHdr, BOOL & bHandled) {
 	return DefWindowProc(WM_NOTIFY, wParam, (LPARAM)pnmHdr);
+}
+
+void CExperimentSettingsSheet::SetReadOnlyWhileScanning(const bool& _ro) {
+		/*scanmode.SetReadOnlyWhileScanning(_ro);
+		stack.SetReadOnlyWhileScanning(_ro);
+		timeseries.SetReadOnlyWhileScanning(_ro);
+		behavior.SetReadOnlyWhileScanning(_ro);*/
 }
 
 }}

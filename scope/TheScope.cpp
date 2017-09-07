@@ -16,12 +16,12 @@ namespace scope {
 		, theDisplay(_nareas, &pipeline_to_display, parameters)
 		, theFPUs(_nareas)
 		, theStage()
-		, theController()
+		, theController(theDaq, thePipeline, theStorage, theDisplay, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
 	{
 		//Make sure that TheScope is instanciated only once
 		std::assert(!instanciated);
 		instanciated = true;
-
+	
 		// Loads initial parameters
 		LoadParameters(_initialparameterspath);
 		
@@ -167,7 +167,7 @@ namespace scope {
 	
 	void TheScope::SetGuiCtrlState() {
 		// Signal other GUI elements (e.g. preset combo box in CFrameScanPage, see CFrameScanPage::SetReadOnlyWhileScanning)
-		ReadOnlyWhileScanning.Set((parameters.run_state() == RunStateHelper::Mode::Stopped) ? false : true);
+		wndmain.SetReadOnlyWhileScanning((parameters.run_state() == RunStateHelper::Mode::Stopped) ? false : true);
 
 		// This takes care of all the parameters
 		guiparameters.SetReadOnlyWhileScanning(parameters.run_state());
@@ -214,16 +214,21 @@ namespace scope {
 			thePipeline.SetScannerVector(_area, framescannervecs[_area]);
 			
 			wndmain.ChangeScanMode(_area, _mode);
-			//for (auto& c : scanmodecallbacks)
-			//	c(_area, parameters.areas[_area].scanmode());
 		}
 		else {
 			throw ScopeException("Choosen ScanMode is not supported by built-in scanner type");
 		}
 	}
 	
-	void TheScope::RegisterScanmodeCallback(std::function<void(const uint32_t&, const ScannerVectorType&)> _callback) {
-		scanmodecallbacks.push_back(_callback);
+	void TheScope::PrepareQuit() {
+		// MainDlgWindows already destroyed when this is called from wWinMain in scope.cpp
+		//SetFPUButtonsState(false);
+		//StopButton.Enable(false);
+		theStage.StopPolling();
+		for (const auto& s : theFPUs.theXYStages)
+			s->StopPolling();
+		Stop();
+		//SetGuiCtrlState();
 	}
 
 }

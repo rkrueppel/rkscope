@@ -17,10 +17,7 @@
 #include "DisplayController.h"
 #include "StorageController.h"
 #include "helpers/ScopeException.h"
-#include "FPUController.h"
 #include "ScopeLogger.h"
-#include "gui/ChannelFrame.h"
-#include "gui/HistogramFrame.h"
 #include "devices/xyz/XYZControl.h"
 #include "devices/xyz/XYZControlGalil.h"
 #include "devices/xyz/XYZControlSutter.h"
@@ -60,7 +57,26 @@ namespace scope {
 		private:
 			const uint32_t nareas;
 			
+			/** Reference to TheScope's gui parameters */
 			parameters::Scope &guiparameters;
+			
+			/** The ScopeControllers own parameter set, gets overwritten on Start by guiparameters while some values are adjusted/calculated for the actual Run */
+			parameters::Scope ctrlparameters;
+			
+			/** @name References to the dataflow controllers
+			* @{ */
+			DaqController& theDaq;
+			PipelineController& thePipeline;
+			StorageController& theStorage;
+			DisplayController& theDisplay;
+			/** @} */
+			
+			/** @name References to the queues between the dataflow controller 
+			* @{ */
+			std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& daq_to_pipeline;
+			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_storage;
+			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_display;
+			/** @} */
 			
 			/** Scanner vectors
 			* @{ */
@@ -92,8 +108,7 @@ namespace scope {
 			/** The counters */
 			ScopeControllerCounters scopecontrollercounters;
 
-
-		protected:
+		private:
 			/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */
 			void SetScannerVectorParameters();
 
@@ -132,7 +147,16 @@ namespace scope {
 
 		public:
 			/** Initializes and connects stuff */
-			ScopeController(const uint32_t& _nareas, parameters::Scope& _guiparameters);
+			ScopeController(const uint32_t& _nareas
+				, parameters::Scope& _guiparameters
+				, DaqController& _theDaq
+				, PipelineController& _thePipeline
+				, StorageController& _theStorage
+				, DisplayController& _theDisplay
+				, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& _daq_to_pipeline
+				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_storage
+				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_display
+			);
 
 			/** Stop whatever is running */
 			~ScopeController(void);

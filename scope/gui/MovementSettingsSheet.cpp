@@ -4,10 +4,19 @@
 namespace scope {
 	namespace gui {
 
-CMovementSettingsSheet::CMovementSettingsSheet(void) {
-	uint32_t area = 0;
-	std::generate(std::begin(fpupages), std::end(fpupages), [&]() {
-		return std::make_unique<CFPUControlPage>(area++); } );
+CMovementSettingsSheet::CMovementSettingsSheet(
+	std::vector<parameters::Area>& _areaparamsvec
+	, std::vector<FPUButtons>& _fpubuttonsvec
+	, const double& _masterfovsizex
+	, const double& _masterfovsizey
+	, parameters::Stage& _stageparams
+	, ZeroButtons& _zerobuttons
+)
+	: xyzcontrolpage(_stageparams, _zerobuttons)
+{
+	uint32_t a = 0;
+	std::generate_n(std::back_inserter(fpupages), _areaparamsvec.size(), [&]() {
+		return CFPUControlPage(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey); } );
 }
 
 HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {
@@ -15,7 +24,7 @@ HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage,
 
 	AddPage(xyzcontrolpage);
 	for ( auto& fpucp : fpupages )
-		AddPage(*fpucp);
+		AddPage(fpucp);
 
 	m_psh.dwFlags	    = PSH_NOAPPLYNOW | PSH_MODELESS | PSH_USECALLBACK;
 	m_psh.hwndParent	= hWndParent;

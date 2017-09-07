@@ -32,9 +32,6 @@ protected:
 	/** string for settings page title */
 	std::wstring strtitle;
 
-	/** Connection object to the ScopeController::ReadOnlyWhileScanning for setting controls RW state */ 
-	boost::signals2::connection rwstateconnection;
-
 	/** pockels cell scrollbar control */
 	CScopeScrollbarCtrl pockels_scroll;
 
@@ -85,11 +82,7 @@ public:
 		, ScopeNumber<double>& _fpux
 		, ScopeNumber<double>& _fpuy
 		, FPUButtons& _fpubuttons
-		, ScopeNumber<bool>& _readonlywhilescanning
 	);
-
-	/** Disconnect from ScopeController::ReadOnlyWhileScanning */
-	virtual ~CNoScanBasePage(void);
 
 	BEGIN_MSG_MAP_EX(CNoScanBasePage)	
 		MSG_WM_INITDIALOG(OnInitDialog);
@@ -104,7 +97,7 @@ public:
 
 	/** @name Called from ScopeController */
 	/** Connected to ScopeController::ReadOnlyWhileScanning */
-	virtual void SetReadOnlyWhileScanning() {}
+	virtual void SetReadOnlyWhileScanning(const bool& _ro) {}
 	/** @} */
 };
 

@@ -2,6 +2,9 @@
 
 #include "XYZControlPage.h"
 #include "FPUControlPage.h"
+#include "parameters/Area.h"
+#include "parameters/Devices.h"
+#include "TheScopeButtons.h"
 
 namespace scope {
 	namespace gui {
@@ -16,11 +19,17 @@ protected:
 	CXYZControlPage xyzcontrolpage;
 
 	/** settings pages for each FPU */
-	std::array<std::unique_ptr<CFPUControlPage>, SCOPE_NAREAS> fpupages;
+	std::vector<CFPUControlPage> fpupages;
 
 public:
-	/** Creates the CFPUControlPages (they do not have a default constructor, so we need pointers and construct them here) */
-	CMovementSettingsSheet(void);
+	/** Creates the CFPUControlPages */
+	CMovementSettingsSheet(
+		std::vector<parameters::Area>& _areaparamsvec
+		, std::vector<FPUButtons>& _fpubuttonsvec
+		, const double& _masterfovsizex
+		, const double& _masterfovsizey
+		, parameters::Stage& _stageparams
+		, ZeroButtons& _zerobuttons);
 
 	BEGIN_MSG_MAP(CMovementSettingsSheet)	  
 		NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)

@@ -14,7 +14,6 @@ CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area
 	, ScopeNumber<double>& _fpux
 	, ScopeNumber<double>& _fpuy
 	, FPUButtons& _fpubuttons
-	, ScopeNumber<bool>& _readonlywhilescanning
 	, parameters::ScannerVectorFrameBasic& _scanvecparams
 	, ScopeNumber<uint32_t>& _averages
 	, ScopeNumber<double>& _scannerdelay
@@ -22,7 +21,7 @@ CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area
 	, ScopeNumber<double>& _frametime
 	, ScopeNumber<double>& _linerate
 	)
-	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _readonlywhilescanning)
+	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons)
 	, zoom_edit(_scanvecparams.zoom, true, true)
 	, zoom_scroll(_scanvecparams.zoom, 0.1, 1, true, true)
 	, xres_edit(_scanvecparams.xres, true, true)
@@ -39,13 +38,6 @@ CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area
 	//, diagram(area, &scope_controller.GuiParameters)
 {
 	
-	// For disabling save preset button and presets combo during scanning
-	rwstateconnection = _readonlywhilescanning.ConnectGUI(std::bind(&CFrameScanBasePage::SetReadOnlyWhileScanning, this));
-}
-
-CFrameScanBasePage::~CFrameScanBasePage() {
-	// Disconnect
-	rwstateconnection.disconnect();
 }
 
 BOOL CFrameScanBasePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
@@ -112,15 +104,14 @@ LRESULT CFrameScanBasePage::OnPresetSelection(WORD wNotifyCode, WORD wID, HWND h
 	return 0;
 }
 
-void CFrameScanBasePage::SetReadOnlyWhileScanning() {
+void CFrameScanBasePage::SetReadOnlyWhileScanning(const bool& _ro) {
 	// Do not call window procedures on non-initialized dialog
 	if ( initialized ) {
 		// Check if to disable or to enable now
 		// Since the other controls are connected to GuiParameters they are taken care of automatically
-		BOOL enabler = (scope_controller.ReadOnlyWhileScanning()==true)?FALSE:TRUE;
-		presets_combo.EnableWindow(enabler);
-		savepreset_button.EnableWindow(enabler);
-		deletepreset_button.EnableWindow(enabler);
+		presets_combo.EnableWindow(!_ro);
+		savepreset_button.EnableWindow(!_ro);
+		deletepreset_button.EnableWindow(!_ro);
 	}
 }
 

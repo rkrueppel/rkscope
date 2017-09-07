@@ -2,7 +2,8 @@
 
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
-#include "controllers/ScopeController.h"
+#include "parameters/Devices.h"
+#include "TheScopeButtons.h"
 #include "controls\ScopeColorComboCtrl.h"
 #include "resource.h"
 
@@ -32,7 +33,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by scope_controller) the dialog control will
 	* be updated accordingly */
-	CXYZControlPage(void);
+	CXYZControlPage(parameters::Stage& _stageparams, ZeroButtons& _zerobuttons);
 
 	BEGIN_MSG_MAP_EX(CXYZControlPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

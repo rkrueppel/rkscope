@@ -82,10 +82,10 @@ public:
 	ScannerVectorFrameBasic();
 
 	/** Create function for factory */
-	static std::unique_ptr<ScannerVectorFrameBasic> Create() { return std::unique_ptr<ScannerVectorFrameBasic>(new ScannerVectorFrameBasic()); }
+	static std::unique_ptr<ScannerVectorFrameBasic> Create() { return std::make_unique<ScannerVectorFrameBasic>(); }
 
 	/** Create copy function for factory */
-	static std::unique_ptr<ScannerVectorFrameBasic> Create(const ScannerVectorFrameBasic& _o) { return std::unique_ptr<ScannerVectorFrameBasic>(new ScannerVectorFrameBasic(_o)); }
+	static std::unique_ptr<ScannerVectorFrameBasic> Create(const ScannerVectorFrameBasic& _o) { return std::make_unique<ScannerVectorFrameBasic>(_o); }
 
 	/** Factory method to generate parameter sets for different scan types and put them into a ScannerVectorFrameBasic pointer. */
 	static std::unique_ptr<ScannerVectorFrameBasic> Factory(const ScannerVectorType& _type, const ScannerVectorFrameBasic* const _o = nullptr);

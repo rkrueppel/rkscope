@@ -5,21 +5,24 @@ namespace scope {
 
 DaqController::DaqController(const uint32_t& _nactives
 	, const parameters::Scope& _parameters
-	, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _oqueues)
-	: BaseController(_nactives, _parameters)
+	, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _oqueues
+)
+	: BaseController(_nactives)
+	, params(_parameters)
 	, output_queues(_oqueues)
 	, stimulation(nullptr)
 	, shutters(_nactives)
 	, switches(_nactives)
 	, chunksizes(_nactives, 16000)
-	, online_update_done_flag(_nactives, false) {
+	, online_update_done_flag(_nactives, false)
+{
 
 	uint32_t a = 0;
 	for (auto& sh : shutters)
-		sh.Initialize(parameters.areas[a++]->daq.shutterline());
+		sh.Initialize(params.areas[a++].daq.shutterline());
 	a = 0;
 	for (auto& sw : switches)
-		sw.Initialize(parameters.areas[a++]->daq.switchresonanceline());
+		sw.Initialize(params.areas[a++].daq.switchresonanceline());
 
 	ZeroGalvoOutputs();
 }
@@ -36,7 +39,7 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 	DBOUT(L"DaqController::Run area " << _area << L" beginning");
 	ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 
-	const DaqMode requested_mode = parameters.requested_mode();
+	const DaqMode requested_mode = params.requested_mode();
 	uint32_t chunksize = inputs[_area]->StandardChunkSize();
 	const uint32_t requested_samples = inputs[_area]->RequestedSamples();
 	uint32_t readsamples = 0;
@@ -52,7 +55,7 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 		}
 
 		// Create a new chunk...
-		auto chunk = std::make_shared<SCOPE_DAQCHUNK_T>(chunksize, parameters.areas[_area]->daq.inputs->channels(), _area);
+		auto chunk = std::make_shared<SCOPE_DAQCHUNK_T>(chunksize, params.areas[_area].daq.inputs->channels(), _area);
 
 		// With this loop we can interrupt a thread that is waiting here for a trigger (see FiberMRI program)
 		// or which waits for samples (which never come because of an error)
@@ -106,22 +109,22 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 void DaqController::Start(const parameters::Scope& _params) {
 	DBOUT(L"DaqController:::Start");
 
-	parameters = _params;
+	params = _params;
 	// Reset outputs and inputs (configures tasks etc. inside them)
 	for (uint32_t a = 0; a < nactives; a++) {
 		// Choose output type depending on that area being a slave area
-		if (parameters.areas[a]->isslave())
-			outputs[a].reset(new SCOPE_SLAVEOUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(parameters.areas[a]->daq.outputs.get()), parameters));
+		if (params.areas[a].isslave())
+			outputs[a].reset(new SCOPE_SLAVEOUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(params.areas[a].daq.outputs.get()), params));
 		else
-			outputs[a].reset(new SCOPE_OUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(parameters.areas[a]->daq.outputs.get()), parameters));
+			outputs[a].reset(new SCOPE_OUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(params.areas[a].daq.outputs.get()), params));
 		
-		inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(scope_controller.GuiParameters.areas[a]->daq.inputs.get()), parameters));
+		inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(params.areas[a].daq.inputs.get()), params));
 	}
 
 	// Calculate and write stimulationvector to device
-	if (parameters.stimulation.enable()) {
-		stimulation.reset(new SCOPE_STIMULATIONS_T(parameters));
-		stimvec.SetParameters(parameters.stimulation);
+	if (params.stimulation.enable()) {
+		stimulation.reset(new SCOPE_STIMULATIONS_T(params));
+		stimvec.SetParameters(params.stimulation);
 		stimulation->Write(stimvec.GetVector());
 		stimulation->Start();
 	}
@@ -157,7 +160,7 @@ void DaqController::Start(const parameters::Scope& _params) {
 	};
 
 	// start inputs or outputs first
-	if (parameters.startinputsfirst()) {
+	if (params.startinputsfirst()) {
 		start_inputs();
 		start_outputs();
 	}
@@ -179,14 +182,14 @@ void DaqController::OnlineParameterUpdate(const parameters::Area& _areaparameter
 	uint32_t area = _areaparameters.area();
 
 	// update parameters
-	*parameters.areas[area] = _areaparameters;
+	params.areas[area] = _areaparameters;
 	// Note: scannervector was updated already from ScopeControllerImpl
 
 	// Lock now so starting an async Worker is only possible if a putative previous wait on that lock finished
 	std::unique_lock<std::mutex> lock(online_update_done_mutexe[area]);
 
 	// If we are scanning live do async online update. Always catch the async future since the futures destructor waits (see http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3451.pdf)
-	if (parameters.requested_mode() == DaqModeHelper::continuous)
+	if (params.requested_mode() == DaqModeHelper::continuous)
 		auto f = std::async(std::bind(&WorkerOnlineParameterUpdate, this, area));
 
 	// wait until online update is done or aborted in async WorkerOnlineParameterUpdate
@@ -199,7 +202,7 @@ void DaqController::WorkerOnlineParameterUpdate(const uint32_t _area) {
 	auto scannervec = scannervecs[_area]->GetInterleavedVector();
 
 	// Number of blocks => around 4 blocks per second frame time
-	uint32_t blocks = round2ui32(4.0 * parameters.areas[_area]->FrameTime());
+	uint32_t blocks = round2ui32(4.0 * params.areas[_area].FrameTime());
 
 	DBOUT(L"WorkerOnlineParameterUpdate blocks" << blocks);
 	online_update_done_flag[_area] = false;
@@ -232,10 +235,10 @@ void DaqController::ZeroGalvoOutputs() {
 
 	// Do the zero outputs tasks
 	for (const auto& ap : parameters.areas) {
-		if (ap->isslave())
-			SCOPE_ZEROOUTPUTSSLAVE_T zero(*dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ap->daq.outputs.get()));
+		if (ap.isslave())
+			SCOPE_ZEROOUTPUTSSLAVE_T zero(*dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ap.daq.outputs.get()));
 		else
-			SCOPE_ZEROOUTPUTS_T zero(*dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ap->daq.outputs.get()));
+			SCOPE_ZEROOUTPUTS_T zero(*dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ap.daq.outputs.get()));
 	}
 }
 

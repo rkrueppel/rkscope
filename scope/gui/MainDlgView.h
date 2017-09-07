@@ -55,6 +55,9 @@ public:
 	/** @} */
 	
 	void ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
+	
+	/** Set controls that are not coupled to ScopeNumbers etc. (e.g. presets combo box) to read only while scanning */
+	void SetReadOnlyWhileScanning(const bool& _ro);
 public:
 //	LRESULT OnBnClickedScanSingle(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 };
