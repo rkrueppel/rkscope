@@ -8,7 +8,7 @@ DaqController::DaqController(const uint32_t& _nactives
 	, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _oqueues
 )
 	: BaseController(_nactives)
-	, params(_parameters)
+	, ctrlparams(_parameters)
 	, output_queues(_oqueues)
 	, stimulation(nullptr)
 	, shutters(_nactives)
@@ -19,10 +19,10 @@ DaqController::DaqController(const uint32_t& _nactives
 
 	uint32_t a = 0;
 	for (auto& sh : shutters)
-		sh.Initialize(params.areas[a++].daq.shutterline());
+		sh.Initialize(ctrlparams.areas[a++].daq.shutterline());
 	a = 0;
 	for (auto& sw : switches)
-		sw.Initialize(params.areas[a++].daq.switchresonanceline());
+		sw.Initialize(ctrlparams.areas[a++].daq.switchresonanceline());
 
 	ZeroGalvoOutputs();
 }
@@ -39,7 +39,7 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 	DBOUT(L"DaqController::Run area " << _area << L" beginning");
 	ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 
-	const DaqMode requested_mode = params.requested_mode();
+	const DaqMode requested_mode = ctrlparams.requested_mode();
 	uint32_t chunksize = inputs[_area]->StandardChunkSize();
 	const uint32_t requested_samples = inputs[_area]->RequestedSamples();
 	uint32_t readsamples = 0;
@@ -55,7 +55,7 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 		}
 
 		// Create a new chunk...
-		auto chunk = std::make_shared<SCOPE_DAQCHUNK_T>(chunksize, params.areas[_area].daq.inputs->channels(), _area);
+		auto chunk = std::make_shared<SCOPE_DAQCHUNK_T>(chunksize, ctrlparams.areas[_area].daq.inputs->channels(), _area);
 
 		// With this loop we can interrupt a thread that is waiting here for a trigger (see FiberMRI program)
 		// or which waits for samples (which never come because of an error)
@@ -109,22 +109,22 @@ ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_
 void DaqController::Start(const parameters::Scope& _params) {
 	DBOUT(L"DaqController:::Start");
 
-	params = _params;
+	ctrlparams = _params;
 	// Reset outputs and inputs (configures tasks etc. inside them)
 	for (uint32_t a = 0; a < nactives; a++) {
 		// Choose output type depending on that area being a slave area
-		if (params.areas[a].isslave())
-			outputs[a].reset(new SCOPE_SLAVEOUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(params.areas[a].daq.outputs.get()), params));
+		if (ctrlparams.areas[a].isslave())
+			outputs[a] = std::make_unique<SCOPE_SLAVEOUTPUTS_T>(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
 		else
-			outputs[a].reset(new SCOPE_OUTPUTS_T(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(params.areas[a].daq.outputs.get()), params));
+			outputs[a] = std::make_unique<SCOPE_OUTPUTS_T>(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
 		
-		inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(params.areas[a].daq.inputs.get()), params));
+		inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(ctrlparams.areas[a].daq.inputs.get()), ctrlparams));
 	}
 
 	// Calculate and write stimulationvector to device
-	if (params.stimulation.enable()) {
-		stimulation.reset(new SCOPE_STIMULATIONS_T(params));
-		stimvec.SetParameters(params.stimulation);
+	if (ctrlparams.stimulation.enable()) {
+		stimulation = std::make_unique<SCOPE_STIMULATIONS_T>(ctrlparams);
+		stimvec.SetParameters(ctrlparams.stimulation);
 		stimulation->Write(stimvec.GetVector());
 		stimulation->Start();
 	}
@@ -160,7 +160,7 @@ void DaqController::Start(const parameters::Scope& _params) {
 	};
 
 	// start inputs or outputs first
-	if (params.startinputsfirst()) {
+	if (ctrlparams.startinputsfirst()) {
 		start_inputs();
 		start_outputs();
 	}
@@ -182,14 +182,14 @@ void DaqController::OnlineParameterUpdate(const parameters::Area& _areaparameter
 	uint32_t area = _areaparameters.area();
 
 	// update parameters
-	params.areas[area] = _areaparameters;
+	ctrlparams.areas[area] = _areaparameters;
 	// Note: scannervector was updated already from ScopeControllerImpl
 
 	// Lock now so starting an async Worker is only possible if a putative previous wait on that lock finished
 	std::unique_lock<std::mutex> lock(online_update_done_mutexe[area]);
 
 	// If we are scanning live do async online update. Always catch the async future since the futures destructor waits (see http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3451.pdf)
-	if (params.requested_mode() == DaqModeHelper::continuous)
+	if (ctrlparams.requested_mode() == DaqModeHelper::continuous)
 		auto f = std::async(std::bind(&WorkerOnlineParameterUpdate, this, area));
 
 	// wait until online update is done or aborted in async WorkerOnlineParameterUpdate
@@ -234,7 +234,7 @@ void DaqController::ZeroGalvoOutputs() {
 	stimulation.reset(nullptr);
 
 	// Do the zero outputs tasks
-	for (const auto& ap : parameters.areas) {
+	for (const auto& ap : ctrlparams.areas) {
 		if (ap.isslave())
 			SCOPE_ZEROOUTPUTSSLAVE_T zero(*dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ap.daq.outputs.get()));
 		else

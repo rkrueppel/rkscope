@@ -5,6 +5,18 @@ std::atomic<bool> scope::TheScope::instanciated(false);
 
 namespace scope {
 	
+	bool ThisIsSlaveArea(const uint32_t& _a) {
+		#ifdef SCOPE_NBEAM_SETUP
+			return _a != 0;
+		#else
+			return false;
+		#endif
+	}
+
+	uint32_t ThisAreaOrMasterArea(const uint32_t& _a) {
+		return ThisIsSlaveArea(_a)?0:_a;
+	}
+	
 	TheScope::TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath)
 		: nareas(_nareas)
 		, daq_to_pipeline(_nareas)
@@ -181,6 +193,11 @@ namespace scope {
 		runbuttons.starttimeseries.Enable(buttonenabler);
 		runbuttons.startbehavior.Enable(buttonenabler);
 
+		/*for (auto& smb : scanmodebuttonsvec)
+			for (auto& b : smb.map)
+				b.second.Enable
+		*/	
+			
 		for (uint32_t a = 0; a < nareas; a++) {
 			// Only enable scan mode buttons for master area and only if the mode is supported by builtin scanners
 			if (!ThisIsSlaveArea(a)) {

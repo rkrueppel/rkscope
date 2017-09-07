@@ -4,7 +4,7 @@
 #include "controls/ScopeCheckBoxCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
-#include "controllers/ScopeControllerButtons.h"
+#include "TheScopeButtons.h"
 #include "controllers/ScopeController.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"

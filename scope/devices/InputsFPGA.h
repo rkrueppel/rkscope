@@ -33,12 +33,12 @@ private:
 	InputsFPGA(const InputsFPGA& i);
 
 	/** disable assignment */
-	InputsFPGA operator=(const InputsFPGA& i);
+	InputsFPGA operator=(const InputsFPGA& i) = delete;
 
 public:
 	/** @post _params.areas[a].daq.pixeltime is set to the pixeltime coerced by the FPGA. Since the FPGA provides the sample
 	* clock for the DAQmx output via PXI_Trig1, this is merely cosmetic. */
-	InputsFPGA(const uint32_t& _area, parameters::InputsFPGA* _inputparams, const parameters::Scope& _params);
+	InputsFPGA(const uint32_t& _area, parameters::InputsFPGA* _inputparams, parameters::Scope& _params);
 
 	~InputsFPGA();
 

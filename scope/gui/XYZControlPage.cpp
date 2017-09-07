@@ -4,11 +4,11 @@
 namespace scope {
 	namespace gui {
 
-CXYZControlPage::CXYZControlPage(parameters::Stage& _stageparams, ZeroButtons& _zerobuttons)
+CXYZControlPage::CXYZControlPage(parameters::SCOPE_XYZCONTROL_T& _stageparams, ZeroButtons& _zerobuttons)
 	: xpos_edit(_stageparams.xpos, true)
 	, ypos_edit(_stageparams.ypos, true)
 	, zpos_edit(_stageparams.zpos, true)
-	, setzero_button(ZeroButtons.stage) {
+	, setzero_button(_zerobuttons.stage) {
 }
 
 BOOL CXYZControlPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

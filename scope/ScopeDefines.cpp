@@ -23,18 +23,6 @@
 
 namespace scope {
 
-bool ThisIsSlaveArea(const uint32_t& _a) {
-#ifdef SCOPE_NBEAM_SETUP
-	return _a != 0;
-#else
-	return false;
-#endif
-}
-
-uint32_t ThisAreaOrMasterArea(const uint32_t& _a) {
-	return ThisIsSlaveArea(_a)?0:_a;
-}
-
 void CheckScopeDefines() {
 	static_assert( (SCOPE_SCANNERTYPE == ScannerTypeHelper::Mode::Regular) || (SCOPE_SCANNERTYPE == ScannerTypeHelper::Mode::Resonance), "Only regular and resonance scanner type supported right now");
 

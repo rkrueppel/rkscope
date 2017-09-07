@@ -8,15 +8,15 @@ namespace scope {
 
 OutputsDAQmxLineClock::OutputsDAQmxLineClock(const uint32_t& _area, const parameters::OutputsDAQmxLineClock& _outputparams, const parameters::Scope& _params)
 	: Outputs(_area)
-	, XTotalPixels(_params.areas[area]->Currentframe().XTotalPixels())
-	, YTotalLines(_params.areas[area]->Currentframe().YTotalLines()) {
+	, XTotalPixels(_params.areas[area].Currentframe().XTotalPixels())
+	, YTotalLines(_params.areas[area].Currentframe().YTotalLines()) {
 
 	std::wstring commontrig = _params.commontrigger();
 
 	xpout_task.CreateTask();
 	xpout_task.CreateAOVoltageChannel(_outputparams.xpout(), L"XPOutput", -_outputparams.range(), _outputparams.range());
 
-	double pixelrate = 1/(_params.areas[area]->daq.pixeltime()*1E-6);
+	double pixelrate = 1/(_params.areas[area].daq.pixeltime()*1E-6);
 	std::wstring xpclockstring = DAQmx::ClockString(_outputparams.pixel_timing(), _outputparams.pixel_externalclocksource());
 
 	xpout_task.ConfigureSampleTiming(xpclockstring, pixelrate, XTotalPixels, DAQmx_Val_ContSamps, DAQmx_Val_Rising);
@@ -43,7 +43,7 @@ OutputsDAQmxLineClock::OutputsDAQmxLineClock(const uint32_t& _area, const parame
 
 	std::wstring yzclockstring = DAQmx::ClockString(_outputparams.line_timing(), _outputparams.line_externalclocksource());
 
-	yzout_task.ConfigureSampleTiming(yzclockstring, _params.areas[area]->linerate(), YTotalLines, DAQmx_Val_ContSamps, DAQmx_Val_Rising);
+	yzout_task.ConfigureSampleTiming(yzclockstring, _params.areas[area].linerate(), YTotalLines, DAQmx_Val_ContSamps, DAQmx_Val_Rising);
 
 	if ( DaqTimingHelper::Mode::ReferenceClock ==_outputparams.line_timing() )
 		yzout_task.ConfigureReferenceClock(_outputparams.line_referenceclocksource(), _outputparams.line_referenceclockrate());

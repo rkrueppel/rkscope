@@ -22,13 +22,13 @@ OutputsDAQmxSlave::OutputsDAQmxSlave(const uint32_t& _area, const parameters::Ou
 		, _outputparams.range());
 
 	// Calculate pixelrate and number of pixels to generate
-	double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(area)]->daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
+	double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(area)].daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
 	
 	// Slave outputs only one line (repeated)
-	int32_t pixelsperchan = _params.areas[area]->Currentframe().XTotalPixels();
+	int32_t pixelsperchan = _params.areas[area].Currentframe().XTotalPixels();
 
 	if ( _params.requested_mode() == DaqModeHelper::nframes )
-		pixelsperchan = _params.areas[area]->Currentframe().TotalPixels() * _params.areas[area]->daq.requested_frames() * _params.areas[area]->daq.averages();
+		pixelsperchan = _params.areas[area].Currentframe().TotalPixels() * _params.areas[area].daq.requested_frames() * _params.areas[area].daq.averages();
 
 	// Configure timing (if using ReferenceClock timing ClockString gives "")
 	zpout_task.ConfigureSampleTiming(DAQmx::ClockString(_outputparams.timing(), _outputparams.externalclocksource())
@@ -38,7 +38,7 @@ OutputsDAQmxSlave::OutputsDAQmxSlave(const uint32_t& _area, const parameters::Ou
 	if ( DaqTimingHelper::Mode::ReferenceClock ==_outputparams.timing() )
 		zpout_task.ConfigureReferenceClock(_outputparams.referenceclocksource(), _outputparams.referenceclockrate());
 
-	zpout_task.ConfigureBuffer(_params.areas[area]->Currentframe().XTotalPixels());
+	zpout_task.ConfigureBuffer(_params.areas[area].Currentframe().XTotalPixels());
 
 	// Regenerate frame samples if we are in nframes mode
 	if ( _params.requested_mode() == DaqModeHelper::nframes )

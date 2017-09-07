@@ -146,7 +146,6 @@ namespace scope {
 			void ClearAfterStop();
 
 		public:
-			/** Initializes and connects stuff */
 			ScopeController(const uint32_t& _nareas
 				, parameters::Scope& _guiparameters
 				, DaqController& _theDaq

@@ -13,7 +13,7 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
 	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
-	size_t num_planes = (_params.areas[area]->FrameResonance().planes.size()) ? _params.areas[area]->FrameResonance().planes.size() : 1;
+	size_t num_planes = (_params.areas[area].FrameResonance().planes.size()) ? _params.areas[area].FrameResonance().planes.size() : 1;
 
 	std::wstring commontrig = _params.commontrigger();
 
@@ -24,13 +24,13 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 		, _outputparams.range());
 
 	// Calculate pixelrate and number of pixels to generate
-	double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(area)]->daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
+	double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(area)].daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
 	
 	// Slave outputs the whole thing (as opposed to a non resonance slave)
-	int32_t pixelsperchan = _params.areas[area]->FrameResonance().TotalPixels();
+	int32_t pixelsperchan = _params.areas[area].FrameResonance().TotalPixels();
 	
 	if ( _params.requested_mode() == DaqModeHelper::nframes )
-		pixelsperchan = _params.areas[area]->FrameResonance().TotalPixels() * _params.areas[area]->daq.requested_frames();
+		pixelsperchan = _params.areas[area].FrameResonance().TotalPixels() * _params.areas[area].daq.requested_frames();
 
 	// Configure timing (if using ReferenceClock timing ClockString gives "")
 	zpout_task.ConfigureSampleTiming(DAQmx::ClockString(_outputparams.timing(), _outputparams.externalclocksource())
@@ -40,7 +40,7 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 	if ( DaqTimingHelper::Mode::ReferenceClock ==_outputparams.timing() )
 		zpout_task.ConfigureReferenceClock(_outputparams.referenceclocksource(), _outputparams.referenceclockrate());
 
-	zpout_task.ConfigureBuffer(num_planes*_params.areas[area]->FrameResonance().YTotalLines()/2);
+	zpout_task.ConfigureBuffer(num_planes*_params.areas[area].FrameResonance().YTotalLines()/2);
 
 	// Regenerate frame samples if we are in nframes mode
 	if ( _params.requested_mode() == DaqModeHelper::nframes )

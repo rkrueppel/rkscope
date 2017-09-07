@@ -3,8 +3,8 @@
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeFOVDiagram.h"
-#include "controllers/ScopeControllerButtons.h"
-#include "parameters\Scope.h"
+#include "TheScopeButtons.h"
+#include "parameters\Area.h"
 #include "resource.h"
 
 namespace scope {

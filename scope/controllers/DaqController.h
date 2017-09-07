@@ -70,7 +70,7 @@ protected:
 	/** mutexe for the condition variables */
 	std::vector<std::mutex> online_update_done_mutexe;
 	
-	parameters::Scope params;
+	parameters::Scope ctrlparams;
 
 
 public:
@@ -96,7 +96,7 @@ public:
 	* sets timing and triggering. Writes ScannerVector and StimulationVector, opens the shutters, turns on the resonance scanner switches, starts all tasks,
 	* starts all Run methods asynchronously and gets their futures.
 	* @param[in] _params ScopeParameter set to work with */
-	void Start(const parameters::Scope& _params) override;
+	void Start(const parameters::Scope& _params);
 
 	/** Handles update of parameters during scanning
 	* @post online update is done or aborted */

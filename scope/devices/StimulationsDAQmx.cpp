@@ -12,10 +12,10 @@ StimulationsDAQmx::StimulationsDAQmx(const parameters::Scope& _params) {
 		task.CreateDOChannel(_params.stimulation.channel, L"DigStimOut");
 		int32 samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
 		// Calculate pixelrate and number of pixels to generate
-		double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(0)]->daq.pixeltime()*1E-6);
-		int32_t pixelsperchan = _params.areas[ThisAreaOrMasterArea(0)]->Currentframe().TotalPixels();;
+		double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(0)].daq.pixeltime()*1E-6);
+		int32_t pixelsperchan = _params.areas[ThisAreaOrMasterArea(0)].Currentframe().TotalPixels();;
 		if ( _params.requested_mode() == DaqModeHelper::nframes )
-			pixelsperchan = _params.areas[ThisAreaOrMasterArea(0)]->Currentframe().TotalPixels() * _params.areas[ThisAreaOrMasterArea(0)]->daq.requested_frames() * _params.areas[ThisAreaOrMasterArea(0)]->daq.averages();
+			pixelsperchan = _params.areas[ThisAreaOrMasterArea(0)].Currentframe().TotalPixels() * _params.areas[ThisAreaOrMasterArea(0)].daq.requested_frames() * _params.areas[ThisAreaOrMasterArea(0)].daq.averages();
 
 		// Synchronize stimulation to the first output task
 		task.ConfigureSampleTiming(_params.stimulation.timingsource(), pixelrate, pixelsperchan, samplingtype);

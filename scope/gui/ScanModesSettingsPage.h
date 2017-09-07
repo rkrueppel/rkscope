@@ -1,6 +1,6 @@
 #pragma once
 
-#include "controllers/ScopeControllerButtons.h"
+#include "TheScopeButtons.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "resource.h"
 

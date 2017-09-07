@@ -43,11 +43,11 @@ LRESULT CBehaviorSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndC
 	DBOUT(L"CBehaviorSettingsPage::OnAddPlane");
 
 	// Get plane information for every area and add to timeseries plane vectors
-	std::array<parameters::PlaneProperties, SCOPE_NAREAS> planes;
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+	std::vector<parameters::PlaneProperties> planes;
+	/*for ( uint32_t a = 0 ; a < nareas ; a++ ) {
 		//planes[a].position = scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
 		//planes[a].pockels = scope_controller.GuiParameters.areas[a]->Currentframe().pockels();
-	}
+	}*/
 	behaviorparameters.planes.push_back(planes);
 
 	UpdatePlanesList();

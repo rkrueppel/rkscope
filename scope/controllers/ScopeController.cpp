@@ -357,6 +357,7 @@ namespace scope {
 			guiparameters.time.Set(GetCurrentTimeString());
 			for (uint32_t a = 0; a < nareas; a++)
 				guiparameters.areas[a].daq.requested_frames = guiparameters.timeseries.frames[a]();
+			
 			ctrlparameters = guiparameters;
 			SetGuiCtrlState();
 			stops[0].Set(false);

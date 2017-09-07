@@ -9,14 +9,15 @@ CMovementSettingsSheet::CMovementSettingsSheet(
 	, std::vector<FPUButtons>& _fpubuttonsvec
 	, const double& _masterfovsizex
 	, const double& _masterfovsizey
-	, parameters::Stage& _stageparams
+	, parameters::SCOPE_XYZCONTROL_T& _stageparams
 	, ZeroButtons& _zerobuttons
 )
 	: xyzcontrolpage(_stageparams, _zerobuttons)
 {
-	uint32_t a = 0;
-	std::generate_n(std::back_inserter(fpupages), _areaparamsvec.size(), [&]() {
-		return CFPUControlPage(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey); } );
+	for (uint32_t a = 0; a < _areaparamsvec.size() ; a++) 
+		fpupages.emplace_back(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey);
+	//std::generate_n(std::back_inserter(fpupages), _areaparamsvec.size(), [&]() {
+	//	return CFPUControlPage(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey); } );
 }
 
 HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {

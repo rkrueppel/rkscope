@@ -76,7 +76,7 @@ LRESULT CFrameScanBasePage::OnPresetSave(WORD wNotifyCode, WORD wID, HWND hWndCt
 	std::shared_ptr<std::wstring> strname = std::make_shared<std::wstring>(L"PresetName");
 	CPresetNameDlg dlg(strname);
 	if ( dlg.DoModal(::GetActiveWindow()) == 0 ) {
-		scope_controller.GuiParameters.areas[area]->SaveToPreset(*strname);
+		//scope_controller.GuiParameters.areas[area]->SaveToPreset(*strname);
 		FillPresetCombo();
 		presets_combo.SelectString(0, strname->c_str());
 	}
@@ -88,7 +88,7 @@ LRESULT CFrameScanBasePage::OnPresetDelete(WORD wNotifyCode, WORD wID, HWND hWnd
 	if ( sel > 0 ) {
 		std::vector<wchar_t> buff(presets_combo.GetLBTextLen(sel)+1, L' ');			// +1 since GetLBTextLen does not count terminating \0 ... sigh...
 		presets_combo.GetLBText(sel, buff.data());
-		scope_controller.GuiParameters.areas[area]->DeletePreset(std::wstring(buff.begin(), buff.end()-1));
+		//scope_controller.GuiParameters.areas[area]->DeletePreset(std::wstring(buff.begin(), buff.end()-1));
 		FillPresetCombo();
 	}
 	return 0;
@@ -99,7 +99,7 @@ LRESULT CFrameScanBasePage::OnPresetSelection(WORD wNotifyCode, WORD wID, HWND h
 	if ( sel > 0 ) {
 		std::vector<wchar_t> buff(presets_combo.GetLBTextLen(sel)+1, L' ');			// +1 since GetLBTextLen does not count terminating \0 ... sigh...
 		presets_combo.GetLBText(sel, buff.data());
-		scope_controller.GuiParameters.areas[area]->LoadFromPreset(std::wstring(buff.begin(), buff.end()-1));
+		//scope_controller.GuiParameters.areas[area]->LoadFromPreset(std::wstring(buff.begin(), buff.end()-1));
 	}
 	return 0;
 }

@@ -7,7 +7,7 @@
 #include "controls/ScopeCheckBoxCtrl.h"
 #include "controls/ScopeUpDownCtrl.h"
 #include "controls/ScopeScrollbarCtrl.h"
-#include "controllers/ScopeControllerButtons.h"
+#include "TheScopeButtons.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "resource.h"
 
