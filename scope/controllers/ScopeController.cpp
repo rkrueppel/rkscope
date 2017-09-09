@@ -6,6 +6,7 @@ namespace scope {
 
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
+		, ScopeCounters& _counters
 		, DaqController& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
@@ -18,6 +19,7 @@ namespace scope {
 		, nareas(_nareas)
 		, guiparameters(_guiparameters)
 		, ctrlparameters(_guiparameters)
+		, counters(_counters)
 		, theDaq(_theDaq)
 		, thePipeline(_thePipeline)
 		, theStorage(_theStorage)

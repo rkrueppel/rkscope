@@ -2,15 +2,14 @@
 
 #include "ScopeDefines.h"
 #include "helpers/ScopeDatatypes.h"
+#include "parameters/Area.h"
 #include "devices/xyz/XYControlStanda.h"
 #include "devices/xyz/XYControl.h"
-#include "controllers/ScopeControllerButtons.h"
+#include "TheScopeButtons.h"
 
 namespace scope {
 
 /** The FPUController. Basically encapsulates the FPU's XYStages. ETLs are controlled as fast z axis' from DaqControllerImpl via OutputsDAQmx.
-* We need FPUController to be copyable, but since the devices like XYControl are noncopyable (due to mutex protected hardware access), we have
-* them in here as shared_ptrs.
 * @ingroup ScopeControl */
 class FPUController {
 
@@ -19,19 +18,19 @@ private:
 	
 	/** step size for a relative movement */
 	std::vector<double> stepsizes;
-
-public:
+	
+	/** Reference to TheScope's gui parameters */
+	std::vector<parameters::Area>& guiareaparamsvec;
+	
 	/** for xy movement of FPU stages */
-	std::vector<std::unique_ptr<SCOPE_FPUXYCONTROL_T>> theXYStages;
+	std::vector<SCOPE_FPUXYCONTROL_T> theXYStages;
 
 public:
 	/** Create XYControls and ETLs and connect buttons. */
-	FPUController(const uint32_t& _nareas);
+	FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec);
 
 	/** Initialize the FPU's hardware. */
-	void Initialize(const parameters::Scope& _params);
-	
-	void ConnectButtons(std::vector<FPUButtons>& _fpubuttonsvec);
+	void Initialize();
 
 	/** Move to an absolute position given by the scope_controller's GuiParameters
 	* @param[in] _area which FPU to move */

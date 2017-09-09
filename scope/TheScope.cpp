@@ -19,16 +19,19 @@ namespace scope {
 	
 	TheScope::TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath)
 		: nareas(_nareas)
+		, fpubuttonsvec(_nareas)
+		, scanmodebuttonsvec(_nareas)
+		, counters(_nareas)
 		, daq_to_pipeline(_nareas)
 		, pipeline_to_storage()
 		, pipeline_to_display()
-		, theDaq(_nareas, &daq_to_pipeline, parameters)
-		, thePipeline(_nareas, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display, parameters)
-		, theStorage(_nareas, &pipeline_to_storage, parameters)
-		, theDisplay(_nareas, &pipeline_to_display, parameters)
-		, theFPUs(_nareas)
+		, theDaq(_nareas, guiparameters, &daq_to_pipeline)
+		, thePipeline(_nareas, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
+		, theStorage(_nareas, guiparameters, &pipeline_to_storage)
+		, theDisplay(_nareas, guiparameters, &pipeline_to_display)
+		, theFPUs(_nareas, guiparameters.areas, fpubuttonsvec)
 		, theStage()
-		, theController(theDaq, thePipeline, theStorage, theDisplay, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
+		, theController(_nareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
 	{
 		//Make sure that TheScope is instanciated only once
 		std::assert(!instanciated);
@@ -40,9 +43,11 @@ namespace scope {
 		// Now initialize the hardware with the loaded parameters
 		// Give guiparameters by reference, so hardware has parameters and can connect to ScopeNumbers
 		theStage.Initialize(guiparameters.stage);
-		theFPUs.Initialize(guiparameters);
 		
-		theFPUS.ConnectButtons(theController.fpubuttonsvec);
+		// FPUController already has the reference to guiparameters (see initializer list above)
+		theFPUs.Initialize();
+		
+		theFPUS.ConnectButtons(fpubuttonsvec);
 		
 		// Connect buttons to functions
 		// QuitButton is connected in CMainDlgFrame

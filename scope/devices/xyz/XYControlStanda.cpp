@@ -10,8 +10,9 @@
 
 namespace scope {
 
-XYControlStanda::XYControlStanda()
-	: speed(10.0)
+XYControlStanda::XYControlStanda(parameters::XYControlStanda& _params)
+	: XYControl(_params)
+	, speed(10.0)
 	, microsteps_per_micron(3.226) {
 }
 
@@ -28,17 +29,17 @@ XYControlStanda::~XYControlStanda(void) {
 	catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 }
 
-void XYControlStanda::Initialize(parameters::XYControlStanda& _params) {
+void XYControlStanda::Initialize() {
 	try {
 		std::lock_guard<std::mutex> lock(mutex);
 		CheckError(USMC_Init(devices));
-		ScopeLogger scope_logger;
+
 		std::stringstream msg;
 		msg << "XYControlStanda connected\r\n";
 		for ( uint32_t i = 0 ; i < devices.NOD ; i++ )
 			msg << "Device " << i << " - " << devices.Serial[i] << " - " << devices.Version[i] << "\r\n";
 		CA2W tmp(msg.str().c_str());
-		scope_logger.Log(std::wstring(tmp), log_info);
+		ScopeLogger::GetInstance().Log(std::wstring(tmp), log_info);
 		
 		//assert(devices.NOD == SCOPE_NAREAS);
 		
@@ -51,10 +52,10 @@ void XYControlStanda::Initialize(parameters::XYControlStanda& _params) {
 			InitAxis(dev[d]);
 
 		// call base class Initialize, which connects ScopeValues, sets initialized to true, and starts the polling thread
-		XYControl::Initialize(_params);
+		XYControl::Initialize();
 
 		std::wstring msg2(L"Initialized XYControlStanda");
-		scope_logger.Log(msg2, log_info);
+		ScopeLogger::GetInstance().Log(msg2, log_info);
 	}
 	catch (...) {
 		initialized = false;
@@ -123,7 +124,7 @@ void XYControlStanda::UpdatePositionValues() {
 		// Convert from current position (in microsteps, 1/8 step) to micrometers and truncate to one digit
 		double micron = round(static_cast<double>(state.CurPos)/microsteps_per_micron * 10.0) / 10.0;
 		// Use Set with "call other signal" false, thus MoveAbsolute is not called as consequence (that would lead to circular calls...)
-		pos[d]->Set(micron, true, false);
+		pos[d].Set(micron, true, false);
 	}
 }
 

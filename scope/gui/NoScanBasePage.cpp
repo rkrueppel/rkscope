@@ -6,7 +6,6 @@ namespace scope {
 
 CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	, const bool& _isslave
-	// scope_controller.GuiParameters.areas[area]->isslave()
 	, ScopeNumber<double>& _pockels
 	, ScopeNumber<double>& _fastz
 	, ScopeNumber<double>& _pixeltime
@@ -23,14 +22,10 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
 	, pockels_edit(_pockels, true, true)
 	, fastz_scroll(_fastz, 5, 50, true, true)
 	, fastz_edit(_fastz, true, true)
-	// &scope_controller.GuiParameters.areas[area]->daq.pixeltime
 	, pixeltime_edit(_pixeltime, true, true)
-	// , pixeltime_scroll(_pixeltime, scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), scope_controller.GuiParameters.areas[area]->daq.inputs->MinimumPixeltime(), true, true)
 	, pixeltime_scroll(_pixeltime, _minpixeltime, _minpixeltime, true, true)
 	, fpux_edit(_fpux, true, true)
-	// &scope_controller.GuiParameters.areas[area]->fpuxystage.ypos
 	, fpuy_edit(_fpuy, true, true)
-	// &scope_controller.FPU[area].LeftButton
 	, fpuleft_button(_fpubuttons.left)
 	, fpuright_button(_fpubuttons.right)
 	, fpuup_button(_fpubuttons.up)

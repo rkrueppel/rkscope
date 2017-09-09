@@ -9,7 +9,11 @@
 #include "controllers/PipelineController.h"
 #include "controllers/DisplayController.h"
 #include "controllers/StorageController.h"
+#include "devices/xyz/XYZControl.h"
+#include "devices/xyz/XYZControlGalil.h"
+#include "devices/xyz/XYZControlSutter.h"
 #include "TheScopeButtons.h"
+#include "TheScopeCounters.h"
 
 namespace scope {
 	
@@ -42,6 +46,36 @@ namespace scope {
 			
 			std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
 			
+			/** The complete pseudo-global parameter set of the microscope. GUI classes can connect e.g. CScopeEditCtrl to specific parameters and thus pass values.
+			* At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
+			parameters::Scope guiparameters;
+			
+			/** @name ScopeButtons
+			* GUI classes can connect CScopeButtonCtrl to these ScopeButtons via their scope_controller member and thus pass commands to the ScopeController.
+			* At the same time, the status of the WTL buttons can be controlled by the ScopeController (e.g. disable while scanning).
+			* I.e. ScopeButtons are mediators between the controls (CScopeButtonCtrl) and ScopeController functions to start certain stuff;
+			* if it weren't for the button state, CScopeButtonCtrl could directly connect to these functions...
+			* @{ */
+			
+			/** Buttons to start the different run modes (live, timeseries, ...) */
+			RunButtons runbuttons;
+
+			/** Buttons to set stack start and end */
+			StackButtons stackbuttons;
+
+			/** Buttons for zeroing stage and galvos */
+			ZeroButtons zerobuttons;
+
+			/** Buttons for FPU nudge */
+			std::vector<FPUButtons> fpubuttonsvec;
+
+			/** Buttons for switching the scan mode */
+			std::vector<ScanModeButtons> scanmodebuttonsvec;
+			/** @} */
+			
+			/** The counters and progress' */
+			ScopeCounters counters;
+			
 			/** queues from the daqs to the pipelines */
 			std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>> daq_to_pipeline;
 
@@ -67,30 +101,6 @@ namespace scope {
 			
 			/** The ScopeController */
 			ScopeController theController;
-			
-			/** The complete pseudo-global parameter set of the microscope. GUI classes can connect e.g. CScopeEditCtrl to specific parameters and thus pass values.
-			* At the same time, the status of the controls can be controlled by the ScopeController (e.g. disable while scanning). */
-			parameters::Scope guiparameters;
-			
-			/** @name ScopeButtons
-			* GUI classes can connect CScopeButtonCtrl to these ScopeButtons via their scope_controller member and thus pass commands to the ScopeController.
-			* At the same time, the status of the WTL buttons can be controlled by the ScopeController (e.g. disable while scanning).
-			* I.e. ScopeButtons are mediators between the controls (CScopeButtonCtrl) and ScopeController functions to start certain stuff;
-			* if it weren't for the button state, CScopeButtonCtrl could directly connect to these functions...
-			* @{ */
-			
-			RunButtons runbuttons;
-
-			StackButtons stackbuttons;
-
-			MiscButtons miscbuttons;
-
-			/** Buttons for FPU nudge */
-			std::vector<FPUButtons> fpubuttonsvec;
-
-			/** Buttons for switching the scan mode */
-			std::vector<ScanModeButtons> scanmodebuttonsvec;
-			/** @} */
 			
 		public:
 			TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath);

@@ -11,7 +11,7 @@ OutputsDAQmxResonance::OutputsDAQmxResonance(const uint32_t& _area, const parame
 	: Outputs(_area) {
 
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
-	//size_t num_planes = (scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size())?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
+	//size_t num_planes = (params.areas[area].FrameResonance().planes.size())?params.areas[area].FrameResonance().planes.size():1;
 
 	std::wstring commontrig = _params.commontrigger();
 

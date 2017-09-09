@@ -5,20 +5,25 @@
 
 namespace scope {
 
-XYControl::XYControl()
-	: initialized(false)
-	, pollinterval(1000) {
+XYControl::XYControl(parameters::XYControl& _params)
+	: params(_params)
+	, initialized(false)
+	, pos{{_params.xpos, _params.ypos}}
+	, pollinterval(round2ui32(_params.pollinterval()))
+{
+
 }
 
 XYControl::~XYControl() {
 	StopPolling();
 }
 
-void XYControl::Initialize(parameters::XYControl& _params) {
-	pos[0] = &_params.xpos;
-	pos[1] = &_params.ypos;
+void XYControl::Initialize() {
+	// Update pollinterval after initial parameters are loaded in TheScope
 	pollinterval = round2ui32(_params.pollinterval());
+	
 	initialized = true;
+	
 	// Polling more frequently most definitely will lead to problems...
 	if ( pollinterval > 100 ) {
 		// we need to call from the this pointer to call the most derived version of StartPolling

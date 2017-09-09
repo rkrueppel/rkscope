@@ -3,6 +3,7 @@
 #include "BaseController.h"
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
+#include "TheScopeCounters.h"
 #include "helpers/DaqChunk.h"
 #include "helpers/DaqChunkResonance.h"
 #include "helpers/ScopeMultiImage.h"
@@ -18,6 +19,12 @@ class PipelineController
 	: public BaseController {
 
 protected:
+	/** Reference to TheScope's gui parameters */
+	parameters::Scope& guiparameters;
+	
+	/** Reference to TheScope's counters */
+	ScopeCounters& counters;
+	
 	/** input queue from the DaqController */
 	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const input_queues;
 
@@ -50,10 +57,13 @@ protected:
 
 public:
 	/** Connects queues and gets parameters */
-	PipelineController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
+	PipelineController(const uint32_t& _nactives
+		, parameters::Scope& _guiparameters
+		, ScopeCounters& _counters
+		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
-		);
+	);
 		
 	~PipelineController();
 	

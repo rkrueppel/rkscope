@@ -3,16 +3,24 @@
 
 namespace scope {
 
-PipelineController::PipelineController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
+PipelineController::PipelineController(
+	const uint32_t& _nactives
+	, const parameters::Scope& _guiparameters
+	, ScopeCounters& _counters
+	, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
 	, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
-	, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue)
-	: BaseController(_nactives, _parameters)
+	, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
+)
+	: BaseController(_nactives)
+	, guiparameters(_guiparameters)
+	, counters(_counters)
 	, input_queues(_iqueues)
 	, storage_queue(_squeue)
 	, display_queue(_dqueue)
 	, scannervecs(_nactives)
 	, online_update_mutexe(_nactives)
-	, online_updates(_nactives) {
+	, online_updates(_nactives)
+{
 	DBOUT(L"PipelineController::PipelineController");
 }
 
@@ -25,33 +33,33 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 	ATLTRACE(L"PipelineController::Run beginning\n");
 	uint32_t framecount = 0;
 	uint32_t avgcount = 0;
-	ScopeController scope_controller;
+
 	std::unique_lock<std::mutex> online_update_lock(online_update_mutexe[_area], std::defer_lock);
 	online_updates[_area] = false;
 	ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 	PixelmapperResult pixelmapper_result(Error);
 
-	const uint32_t downsampling = (parameters.areas[_area]->daq.inputs->oversampling())?round2ui32(parameters.areas[_area]->daq.pixeltime() / parameters.areas[_area]->daq.inputs->MinimumPixeltime()):1;
+	const uint32_t downsampling = (guiparameters.areas[_area].daq.inputs->oversampling())?round2ui32(guiparameters.areas[_area].daq.pixeltime() / guiparameters.areas[_area].daq.inputs->MinimumPixeltime()):1;
 	// Get some values as locals, avoid the mutexed access to parameters later on (really necessary??)
-	const DaqMode requested_mode = parameters.requested_mode();
-	const uint32_t requested_frames = parameters.areas[_area]->daq.requested_frames();
-	const uint32_t requested_averages = parameters.areas[ThisAreaOrMasterArea(_area)]->daq.averages();
-	const double totalframepixels = parameters.areas[_area]->Currentframe().XTotalPixels()*parameters.areas[_area]->Currentframe().YTotalLines();
+	const DaqMode requested_mode = guiparameters.requested_mode();
+	const uint32_t requested_frames = guiparameters.areas[_area].daq.requested_frames();
+	const uint32_t requested_averages = guiparameters.areas[ThisAreaOrMasterArea(_area)].daq.averages();
+	const double totalframepixels = guiparameters.areas[_area].Currentframe().XTotalPixels() * guiparameters.areas[_area].Currentframe().YTotalLines();
 
 	//size_t num_planes = 1;
 	//if ( SCOPE_USE_RESONANCESCANNER )
-	//	num_planes = scope_controller.GuiParameters.areas[_area]->frameresonance.planes.size()?scope_controller.GuiParameters.areas[_area]->frameresonance.planes.size():1;
+	//	num_planes = guiparameters.areas[_area].frameresonance.planes.size()?guiparameters.areas[_area].frameresonance.planes.size():1;
 
 	// Make the first multiimage
 	SCOPE_MULTIIMAGEPTR_T current_frame = std::make_shared<SCOPE_MULTIIMAGE_T>(_area
-		, parameters.areas[_area]->daq.inputs->channels()
-		, parameters.areas[_area]->Currentframe().yres()	// * num_planes
-		, parameters.areas[_area]->Currentframe().xres());
+		, guiparameters.areas[_area].daq.inputs->channels()
+		, guiparameters.areas[_area].Currentframe().yres()	// * num_planes
+		, guiparameters.areas[_area].Currentframe().xres());
 	SCOPE_MULTIIMAGEPTR_T next_frame = current_frame; //std::make_shared<ScopeMultiImage>(_area, channels, yres, xres);
 	current_frame->SetAvgMax(requested_averages);
-	//current_frame->InitializeCurrentLineData(5*parameters.areas[_area]->currentframe->XTotalPixels());
+	//current_frame->InitializeCurrentLineData(5*guiparameters.areas[_area]->currentframe->XTotalPixels());
 
-	std::unique_ptr<PixelmapperBasic> pixel_mapper(PixelmapperBasic::Factory(SCOPE_SCANNERTYPE, parameters.areas[_area]->scanmode()));
+	std::unique_ptr<PixelmapperBasic> pixel_mapper(PixelmapperBasic::Factory(SCOPE_SCANNERTYPE, guiparameters.areas[_area]->scanmode()));
 	pixel_mapper->SetLookupVector(scannervecs[_area]->GetLookupVector());
 	pixel_mapper->SetParameters(scannervecs[_area]->GetSVParameters());
 	pixel_mapper->SetCurrentFrame(current_frame);
@@ -60,16 +68,16 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 	ScopeMultiImagePtr next_averaged_frame;
 	if ( SCOPE_USE_RESONANCESCANNER ) {
 		current_averaged_frame = std::make_shared<ScopeMultiImage>(_area
-			, parameters.areas[_area]->daq.inputs->channels()
-			, parameters.areas[_area]->currentframe->yres()*num_planes
-			, parameters.areas[_area]->currentframe->xres());
+			, guiparameters.areas[_area].daq.inputs->channels()
+			, guiparameters.areas[_area].currentframe->yres()*num_planes
+			, guiparameters.areas[_area].currentframe->xres());
 		next_averaged_frame = current_averaged_frame;
 		current_averaged_frame->SetAvgMax(requested_averages);
 		dynamic_cast<PixelmapperFrameResonance*>(pixel_mapper.get())->SetCurrentAveragedFrame(current_averaged_frame);
 	}*/
 
-	scope_controller.FrameCounter[_area].SetWithLimits(0, 0, requested_frames);
-	scope_controller.SingleFrameProgress[_area].SetWithLimits(0, 0, 100);
+	counters.framecounter[_area].SetWithLimits(0, 0, requested_frames);
+	counters.singleframeprogress[_area].SetWithLimits(0, 0, 100);
 
 	// Dequeue and pixelmap loop
 	while ( !sc->IsSet() ) {
@@ -93,8 +101,8 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 			pixelmapper_result = pixel_mapper->LookupChunk(chunk, (uint16_t)avgcount);
 
 			// Set progress and frame properties
-			scope_controller.SingleFrameProgress[_area] += 100.0 * chunk->PerChannel() / totalframepixels;
-			current_frame->SetPercentComplete(scope_controller.SingleFrameProgress[_area].Value());
+			counters.singleframeprogress[_area] += 100.0 * chunk->PerChannel() / totalframepixels;
+			current_frame->SetPercentComplete(counters.singleframeprogress[_area].Value());
 			current_frame->SetAvgCount(avgcount+1);
 			current_frame->SetImageNumber(framecount+1);
 
@@ -105,7 +113,7 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 			// If one frame is mapped completely...
 			if ( (pixelmapper_result & FrameComplete) != 0 ) {						
 				current_frame->SetCompleteFrame(true);
-				scope_controller.SingleFrameProgress[_area] = 0.0;
+				counters.singleframeprogress[_area] = 0.0;
 				
 				// If all the averages for one frame have been done...
 				if ( ++avgcount == requested_averages ) {							
@@ -120,7 +128,7 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 
 					// Increase frame counters
 					framecount++;
-					scope_controller.FrameCounter[_area] += 1;
+					counters.framecounter[_area] += 1;
 
 					// Set frame properties
 					next_frame->SetCompleteAvg(false);
@@ -180,8 +188,8 @@ void PipelineController::StopOne(const uint32_t& _a) {
 void PipelineController::OnlineParameterUpdate(const parameters::Area& _areaparameters) {
 	const uint32_t area = _areaparameters.area();
 	std::lock_guard<std::mutex> lock(online_update_mutexe[area]);		// lock, thus worker thread waits and we can safely update parameters
-	// update parameters
-	*parameters.areas[area] = _areaparameters;
+	// update parameters not needed since we have a reference to TheScope's guiparameters
+	//*parameters.areas[area] = _areaparameters;
 	online_updates[area] = true;	
 }
 

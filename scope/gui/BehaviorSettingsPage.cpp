@@ -5,15 +5,17 @@ namespace scope {
 	namespace gui {
 
 CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons
-	, ScopeControllerCounters& _scopecontrollercounters
+	, ScopeCounters& _scopecounters
 	, parameters::Behavior& _behaviorparameters
+	, std::vector<parameters::Area>& _areaparamsvec
 )
 	: CToolTipDialog(TTS_NOPREFIX)
 	, start_behavior_button(_runbuttons.startbehavior)
 	, behaviorparameters(_behaviorparameters)
-	, framecount_edit(_scopecontrollercounters.framecounter[0])
-	, totaltime_edit(_scopecontrollercounters.totaltime)
-	, trialcount_edit(_scopecontrollercounters.trialcounter) {
+	, areaparamsvec(_areaparamsvec)
+	, framecount_edit(_scopecounters.framecounter[0])
+	, totaltime_edit(_scopecounters.totaltime)
+	, trialcount_edit(_scopecounters.trialcounter) {
 }
 
 BOOL CBehaviorSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
@@ -43,11 +45,11 @@ LRESULT CBehaviorSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndC
 	DBOUT(L"CBehaviorSettingsPage::OnAddPlane");
 
 	// Get plane information for every area and add to timeseries plane vectors
-	std::vector<parameters::PlaneProperties> planes;
-	/*for ( uint32_t a = 0 ; a < nareas ; a++ ) {
-		//planes[a].position = scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
-		//planes[a].pockels = scope_controller.GuiParameters.areas[a]->Currentframe().pockels();
-	}*/
+	std::vector<parameters::PlaneProperties> planes(nareas);
+	for ( uint32_t a = 0 ; a < nareas ; a++ ) {
+		planes[a].position = areaparamsvec[a]->Currentframe().fastz();
+		planes[a].pockels = areaparamsvec[a]->Currentframe().pockels();
+	}
 	behaviorparameters.planes.push_back(planes);
 
 	UpdatePlanesList();

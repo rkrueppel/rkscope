@@ -5,7 +5,9 @@
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
 #include "TheScopeButtons.h"
-#include "controllers/ScopeController.h"
+#include "TheScopeCounters.h"
+#include "parameters/Runstates.h"
+#include "parameters/Area.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"
 
@@ -25,7 +27,11 @@ protected:
 	/** start behavior triggered scanning */
 	CScopeButtonCtrl start_behavior_button;
 
+	/** Reference to TheScope's guiparameters */
 	parameters::Behavior& behaviorparameters;
+	
+	/** Reference to TheScope's guiparameters */
+	std::vector<parameters::Area>& areaparamsvec;
 
 	/** list box for all planes */
 	CListViewCtrl planes_list;
@@ -42,7 +48,7 @@ protected:
 public:
 	enum { IDD = IDD_BEHAVIOR_PROPPAGE };
 
-	CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters);
+	CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters, std::vector<parameters::Area>& _areaparamsvec);
 
 	BEGIN_MSG_MAP_EX(CBehaviorSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

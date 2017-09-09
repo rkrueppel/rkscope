@@ -2,8 +2,12 @@
 #include "ScopeDefines.h"
 #include "version.h"
 #include "BaseController.h"
-#include "ScopeControllerModes.h"
-#include "ScopeControllerCounters.h"
+#include "parameters/Scope.h"
+#include "TheScopeCounters.h"
+#include "DaqController.h"
+#include "PipelineController.h"
+#include "DisplayController.h"
+#include "StorageController.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "scanmodes/ScannerVectorFrameSaw.h"
 #include "scanmodes/ScannerVectorFrameBiDi.h"
@@ -12,18 +16,10 @@
 #include "scanmodes/ScannerVectorFrameResonanceHopper.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
-#include "DaqController.h"
-#include "PipelineController.h"
-#include "DisplayController.h"
-#include "StorageController.h"
 #include "helpers/ScopeException.h"
 #include "ScopeLogger.h"
-#include "devices/xyz/XYZControl.h"
-#include "devices/xyz/XYZControlGalil.h"
-#include "devices/xyz/XYZControlSutter.h"
 #include "devices/GaterDAQmx.h"
 #include "helpers/ScopeNumber.h"
-#include "parameters/Scope.h"
 #include "helpers/ScopeDatatypes.h"
 
 // We need the type of the FPGAStatus struct for FPGAFIFOStatus here
@@ -58,10 +54,13 @@ namespace scope {
 			const uint32_t nareas;
 			
 			/** Reference to TheScope's gui parameters */
-			parameters::Scope &guiparameters;
+			parameters::Scope& guiparameters;
 			
 			/** The ScopeControllers own parameter set, gets overwritten on Start by guiparameters while some values are adjusted/calculated for the actual Run */
 			parameters::Scope ctrlparameters;
+			
+			/** Reference to TheScope's counters */
+			ScopeCounters& counters;
 			
 			/** @name References to the dataflow controllers
 			* @{ */
@@ -105,9 +104,6 @@ namespace scope {
 			/*ScopeController(ScopeController& other);				// we need this copyable for std::bind to work...
 			ScopeController& operator=(ScopeController& other); */
 
-			/** The counters */
-			ScopeControllerCounters scopecontrollercounters;
-
 		private:
 			/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */
 			void SetScannerVectorParameters();
@@ -148,6 +144,7 @@ namespace scope {
 		public:
 			ScopeController(const uint32_t& _nareas
 				, parameters::Scope& _guiparameters
+				, ScopeCounters& _counters
 				, DaqController& _theDaq
 				, PipelineController& _thePipeline
 				, StorageController& _theStorage
