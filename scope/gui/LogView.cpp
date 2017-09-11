@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "LogView.h"
+#include "controllers\ScopeLogger.h"
 
 namespace scope {
 	namespace gui {
@@ -27,7 +28,7 @@ LRESULT CLogView::OnChar(UINT uMsg, WPARAM wParam,LPARAM lParam, BOOL& bHandled)
 	switch (wParam) {
 	case '\t': // tab
 	case '\r': //Carriage return
-		scope_logger.GetUserLoggings();
+		ScopeLogger::GetInstance().GetUserLoggings();
 		return 0;
 	}
 	return DefWindowProc(uMsg, wParam, lParam);

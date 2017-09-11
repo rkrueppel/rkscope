@@ -14,7 +14,7 @@ class CStimulationSettingsPage :
 
 protected:
 	/** Reference to TheScope's gui parameter stimulation enable */
-	ScopeNumber<bool>& stimenable;
+	ScopeValue<bool>& stimenable;
 	
 	/** stimulation onset (in sec) */
 	CScopeEditCtrl<double> onset;

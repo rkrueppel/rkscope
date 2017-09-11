@@ -1,7 +1,7 @@
 #pragma once
 
-#include "controllers/ScopeControllerButtons.h"
-#include "controllers/ScopeControllerCounters.h"
+#include "TheScopeButtons.h"
+#include "TheScopeCounters.h"
 #include "parameters/Runstates.h"
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
@@ -63,7 +63,7 @@ protected:
 public:
 	enum { IDD = IDD_STACK_PROPPAGE };
 
-	CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeControllerCounters& _counters);
+	CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeCounters& _counters);
 
 	BEGIN_MSG_MAP_EX(CStackSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

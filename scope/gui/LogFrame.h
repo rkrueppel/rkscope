@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../controllers/ScopeLogger.h"
 #include "LogView.h"
 
 namespace scope {

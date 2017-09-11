@@ -66,7 +66,7 @@ protected:
 
 public:
 	/** Initialize everything */
-	CHistogramView(const uint32_t& _area, const uint32_t& _channels, uint16_t _range);
+	CHistogramView(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range);
 
 	/** Set background brush to -1, avoids erasure of background (similar effect as OnEraseBkgnd below...) */
 	DECLARE_WND_CLASS_EX(nullptr, CS_HREDRAW | CS_VREDRAW, -1);

@@ -14,7 +14,7 @@ CFPUControlPage::CFPUControlPage(const uint32_t& _area, std::vector<parameters::
 	, fpustageinfos_edit(_areaparamsvec[_area].fpuxystage.stageinfo, true)
 	, diagram(_area, _areaparamsvec, _masterfovsizex, _masterfovsizey) {
 	std::wstringstream stream;
-	stream << L"Area " << _areaparams.area()+1;
+	stream << L"Area " << _area+1;
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
 }

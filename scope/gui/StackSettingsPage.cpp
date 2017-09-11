@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-CStackSettingsPage::CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeControllerCounters& _counters)
+CStackSettingsPage::CStackSettingsPage(parameters::Stack& _stackparams, RunButtons& _runbuttons, StackButtons& _stackbuttons, ScopeCounters& _counters)
 	: initialized(false)
 	, stackparams(_stackparams)
 	, start_stack_button(_runbuttons.startstack)
@@ -15,7 +15,7 @@ CStackSettingsPage::CStackSettingsPage(parameters::Stack& _stackparams, RunButto
 	, stophere_button(_stackbuttons.stophere)
 	, stack_progress(_counters.planecounter)
 	, zdevicetype(ZDeviceHelper::ZStage) {
-	scope_controller.ReadOnlyWhileScanning.ConnectGUI(std::bind(&CStackSettingsPage::OnChangedRunState, this));
+	//scope_controller.ReadOnlyWhileScanning.ConnectGUI(std::bind(&CStackSettingsPage::OnChangedRunState, this));
 }
 
 BOOL CStackSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

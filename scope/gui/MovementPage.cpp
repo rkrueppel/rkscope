@@ -10,7 +10,7 @@ namespace scope {
 			, std::vector<FPUButtons>& _fpubuttonsvec
 			, const double& _masterfovsizex
 			, const double& _masterfovsizey
-			, parameters::Stage& _stageparams
+			, parameters::XYControl& _stageparams
 			, ZeroButtons& _zerobuttons
 		)
 			: settings_sheet(_areaparamsvec, _fpubuttonsvec, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)

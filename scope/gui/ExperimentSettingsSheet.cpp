@@ -13,7 +13,7 @@ CExperimentSettingsSheet::CExperimentSettingsSheet(std::vector<ScanModeButtons>&
 	, parameters::Behavior& _behaviorparams
 )
 	: scanmode(_scanmodebuttonsvec)
-	, stack(_stackparams, _stackbuttons, _counters)
+	, stack(_stackparams, _runbuttons, _stackbuttons, _counters)
 	, timeseries(_timeseriesparams, _runbuttons, _counters)
 	, behavior(_runbuttons, _counters, _behaviorparams)
 {
@@ -24,10 +24,10 @@ HWND CExperimentSettingsSheet::Create(const HWND hWndParent, const int nStartPag
 	ATLASSERT(m_hWnd == NULL);
 
 	// Add pages to the property sheet 
-	AddPage(pageScanModesSettings);
-	AddPage(pageStackSettings);
-	AddPage(pageTimeSeriesSettings);
-	AddPage(pageBehaviorSettings);
+	AddPage(scanmode);
+	AddPage(stack);
+	AddPage(timeseries);
+	AddPage(behavior);
 
 	// and do some magic to make it work
 	m_psh.dwFlags	    = PSH_NOAPPLYNOW | PSH_MODELESS | PSH_USECALLBACK;

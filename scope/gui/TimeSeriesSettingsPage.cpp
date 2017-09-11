@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeControllerCounters& _counters)
+CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters)
 	: CToolTipDialog(TTS_NOPREFIX)
 	, timeseriesparams(_timeseriesparams)
 	, start_timeseries_button(_runbuttons.starttimeseries)
@@ -50,8 +50,8 @@ LRESULT CTimeSeriesSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWn
 	DBOUT(L"CTimeSeriesSettingsPage::OnAddPlane");
 
 	// Get plane information for every area and add to timeseries plane vectors
-	std::array<parameters::PlaneProperties, SCOPE_NAREAS> planes;
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+	std::vector<parameters::PlaneProperties> nareas;
+	for ( uint32_t a = 0 ; a < nareas; a++ ) {
 		planes[a].position = scope_controller.GuiParameters.areas[a]->Currentframe().fastz();
 		planes[a].pockels = scope_controller.GuiParameters.areas[a]->Currentframe().pockels();
 	}

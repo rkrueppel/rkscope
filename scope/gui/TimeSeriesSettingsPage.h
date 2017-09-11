@@ -4,7 +4,9 @@
 #include "controls/ScopeCheckBoxCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
-#include "controllers/ScopeController.h"
+#include "TheScopeButtons.h"
+#include "TheScopeCounters.h"
+#include "parameters\Runstates.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"
 
@@ -58,7 +60,7 @@ protected:
 public:
 	enum { IDD = IDD_TIMESERIES_PROPPAGE };
 
-	CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeControllerCounters& _counters);
+	CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters);
 
 	BEGIN_MSG_MAP_EX(CTimeSeriesSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

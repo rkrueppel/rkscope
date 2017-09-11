@@ -1,6 +1,6 @@
 #pragma once
 
-#include "controllers/ScopeControllerButtons.h"
+#include "TheScopeButtons.h"
 #include "ScanSettingsSheet.h"
 #include "ExperimentSettingsSheet.h"
 #include "controls/ScopeButtonCtrl.h"

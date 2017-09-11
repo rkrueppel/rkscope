@@ -58,7 +58,7 @@ public:
 		, const double& _masterfovsizey
 		, parameters::Storage& _storageparams
 		, parameters::Stimulation& _stimulationparams
-		, parameters::Stage& _stageparams
+		, parameters::XYControl& _stageparams
 		, ZeroButtons& _zerobuttons
 		, ScopeNumber<bool>& _readonlywhilescanning
 	);

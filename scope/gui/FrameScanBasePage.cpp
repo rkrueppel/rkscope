@@ -108,8 +108,8 @@ void CFrameScanBasePage::FillPresetCombo() {
 	presets_combo.AddString(L"Custom...");
 	
 	// load the presets' names into the combo box
-	for ( const auto& p : scope_controller.GuiParameters.areas[area]->Currentframe().presets )
-		presets_combo.AddString(p->name().c_str());
+	//for ( const auto& p : scope_controller.GuiParameters.areas[area]->Currentframe().presets )
+	//	presets_combo.AddString(p->name().c_str());
 
 	// select the first preset (the custom one)
 	presets_combo.SetCurSel(0);

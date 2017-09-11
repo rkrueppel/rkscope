@@ -19,7 +19,7 @@ CScanSettingsSheet::CScanSettingsSheet(
 	, const double& _masterfovsizey
 	, parameters::Storage& _storageparams
 	, parameters::Stimulation& _stimulationparams
-	, parameters::Stage& _stageparams
+	, parameters::XYControl& _stageparams
 	, ZeroButtons& _zerobuttons
 	, ScopeNumber<bool>& _readonlywhilescanning
 )
@@ -30,12 +30,12 @@ CScanSettingsSheet::CScanSettingsSheet(
 	, storagesettingspage(_storageparams)
 	, stimulationsettingspage(_stimulationparams)
 	, movementpage(_areaparamsvec, _fpubuttonsvec, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
-	, inputsinfospage(dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(_areaparamsvec[0].daq.inputs.get()))
+	, inputsinfospage(*dynamic_cast<parameters::SCOPE_INPUTS_PARAMETERS_T*>(_areaparamsvec[0].daq.inputs.get()))
 {
 	int32_t a = -1;
-	std::generate_n(std::back_inserter(scanpages), nareas, [&a, &areaparamsvec]() {
+	std::generate_n(std::back_inserter(scanpages), nareas, [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
 		a++;
-		if areaparamsvec[a].isslave()
+		if (areaparamsvec[a].isslave())
 			return std::make_unique<CNoScanBasePage>(a, areaparamsvec[a] , fpubuttonsvec[a]);
 		else
 			return std::make_unique<CFrameScanSawPage>(a, areaparamsvec[a] , fpubuttonsvec[a]);

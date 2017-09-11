@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "LogFrame.h"
+#include "controllers\ScopeLogger.h"
 
 namespace scope {
 	namespace gui {
@@ -12,7 +13,7 @@ CLogFrame::~CLogFrame() {
 	// If we land here through an exception, OnDestroy is eventually not called thus we need to detach here to avoid
 	// an invalid pointer in the DisplayController
 	if ( attached ) {
-		scope_logger.DetachLogFrame();
+		ScopeLogger::GetInstance().DetachLogFrame();
 		attached = false;
 	}
 }
@@ -22,14 +23,14 @@ int CLogFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	SetWindowText(L"Logbook");
 
-	scope_logger.AttachLogFrame(this);
+	ScopeLogger::GetInstance().AttachLogFrame(this);
 	attached = true;
 	return 1;
 }
 
 void CLogFrame::OnDestroy() {
 	// We have to detach here, because after OnDestroy the HWND is not valid anymore
-	scope_logger.DetachLogFrame();
+	ScopeLogger::GetInstance().DetachLogFrame();
 	attached = false;
 }
 

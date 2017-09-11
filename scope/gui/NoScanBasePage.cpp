@@ -14,7 +14,7 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::Area& _area
 	, fastz_scroll(_areaparams.Currentframe().fastz, 5, 50, true, true)
 	, fastz_edit(_areaparams.Currentframe().fastz, true, true)
 	, pixeltime_edit(_areaparams.daq.pixeltime, true, true)
-	, pixeltime_scroll(_areaparams.daq.pixeltime, _areaparams.daq.inputs->minpixeltime(), _areaparams.daq.inputs->minpixeltime(), true, true)
+	, pixeltime_scroll(_areaparams.daq.pixeltime, _areaparams.daq.inputs->MinimumPixeltime(), _areaparams.daq.inputs->MinimumPixeltime(), true, true)
 	, fpux_edit(_areaparams.fpuxystage.xpos, true, true)
 	, fpuy_edit(_areaparams.fpuxystage.ypos, true, true)
 	, fpuleft_button(_fpubuttons.left)

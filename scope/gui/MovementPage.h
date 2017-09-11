@@ -25,7 +25,7 @@ public:
 		, std::vector<FPUButtons>& _fpubuttonsvec
 		, const double& _masterfovsizex
 		, const double& _masterfovsizey
-		, parameters::Stage& _stageparams
+		, parameters::XYControl& _stageparams
 		, ZeroButtons& _zerobuttons);
 
 	BEGIN_MSG_MAP_EX(CMovementPage)	

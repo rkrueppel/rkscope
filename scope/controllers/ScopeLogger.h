@@ -41,7 +41,7 @@ protected:
 	std::atomic<log_message_type> logframe_message;
 
 	/** pointer to the log window frame */
-	gui::CLogFrame* logframe;
+	scope::gui::CLogFrame* logframe;
 
 	/** the complete log text as a string */
 	std::wstring logbooktext;

@@ -83,7 +83,7 @@ LRESULT CScanModesSettingsPage::OnAreaChange(WORD, WORD, HWND, BOOL&) {
 
 void CScanModesSettingsPage::SetChecks(const uint32_t& _a) {
 	// Copy the settings of the current area from the master area
-	scope_controller.GuiParameters.areas[_a]->scanmode() = scope_controller.GuiParameters.areas[0]->scanmode();
+/*	scope_controller.GuiParameters.areas[_a]->scanmode() = scope_controller.GuiParameters.areas[0]->scanmode();
 
 	// Check the one that corresponds to the scan mode of this area (if the scan mode is supported by the built-in scanners is checked inside Scope_Controller::SetScanMode()
 	switch ( scope_controller.GuiParameters.areas[_a]->scanmode().t ) {
@@ -105,7 +105,7 @@ void CScanModesSettingsPage::SetChecks(const uint32_t& _a) {
 		case ScannerVectorTypeHelper::LineStraight:
 			linestraight_radio.SetCheck(BST_CHECKED);
 			break;
-	}
+	}*/
 }
 
 
