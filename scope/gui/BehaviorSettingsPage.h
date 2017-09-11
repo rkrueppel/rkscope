@@ -48,7 +48,7 @@ protected:
 public:
 	enum { IDD = IDD_BEHAVIOR_PROPPAGE };
 
-	CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeControllerCounters& _scopecontrollercounters, parameters::Behavior& _behaviorparameters, std::vector<parameters::Area>& _areaparamsvec);
+	CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeCounters& _scopecounters, parameters::Behavior& _behaviorparameters, std::vector<parameters::Area>& _areaparamsvec);
 
 	BEGIN_MSG_MAP_EX(CBehaviorSettingsPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

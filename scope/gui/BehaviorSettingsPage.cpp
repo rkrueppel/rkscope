@@ -45,10 +45,10 @@ LRESULT CBehaviorSettingsPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndC
 	DBOUT(L"CBehaviorSettingsPage::OnAddPlane");
 
 	// Get plane information for every area and add to timeseries plane vectors
-	std::vector<parameters::PlaneProperties> planes(nareas);
-	for ( uint32_t a = 0 ; a < nareas ; a++ ) {
-		planes[a].position = areaparamsvec[a]->Currentframe().fastz();
-		planes[a].pockels = areaparamsvec[a]->Currentframe().pockels();
+	std::vector<parameters::PlaneProperties> planes(areaparamsvec.size());
+	for ( uint32_t a = 0 ; a < areaparamsvec.size() ; a++ ) {
+		planes[a].position = areaparamsvec[a].Currentframe().fastz();
+		planes[a].pockels = areaparamsvec[a].Currentframe().pockels();
 	}
 	behaviorparameters.planes.push_back(planes);
 
