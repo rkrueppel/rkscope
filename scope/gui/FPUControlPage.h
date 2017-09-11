@@ -44,8 +44,8 @@ public:
 
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by scope_controller) the dialog control will
-	* be updated accordingly */
-	CFPUControlPage(parameters::Area& _areaparams, std::vector<FPUButtons>& _fpubuttonsvec, const double& _masterfovsizex, const double& _masterfovsizey);
+	* be updated accordingly. The FOVDiagram shows all areas and thus needs information about all areas. */
+	CFPUControlPage(const uint32_t& _area, std::vector<parameters::Area>& _areaparamsvec, FPUButtons& _fpubuttons, const double& _masterfovsizex, const double& _masterfovsizey);
 
 	BEGIN_MSG_MAP_EX(CFPUControlPage)	
 		MSG_WM_INITDIALOG(OnInitDialog);

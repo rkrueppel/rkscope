@@ -8,29 +8,13 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double& _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons& _fpubuttons
-	, parameters::ScannerVectorFrameBiDi& _scanvecparams
-	, ScopeNumber<uint32_t>& _averages
-	, ScopeNumber<double>& _scannerdelay
-	, ScopeNumber<double>& _framerate
-	, ScopeNumber<double>& _frametime
-	, ScopeNumber<double>& _linerate
-	)
+CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
 	//scope_controller.GuiParameters.areas[area]->isslave()
 	// scope_controller.GuiParameters.areas[_area]->FrameBiDi()
-	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _scanvecparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
-	, isslave(_isslave)
-	, xturn_edit(_scanvecparams.xturnfraction, true, true)
-	, ycutoff_edit(_scanvecparams.ycutoff, true, true)
-	, yretrace_edit(_scanvecparams.yretrace, true, true) {
+	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
+	, xturn_edit(_areaparams.FrameBiDi().xturnfraction, true, true)
+	, ycutoff_edit(_areaparams.FrameBiDi().ycutoff, true, true)
+	, yretrace_edit(_areaparams.FrameBiDi().yretrace, true, true) {
 
 	// Overwrite base class enum { IDD = ... }
 	// Use different dialog resources depending if this area is a slave area (only Pockels and ETL sliders) or a master area (full control complement)

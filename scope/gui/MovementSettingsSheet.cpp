@@ -15,9 +15,7 @@ CMovementSettingsSheet::CMovementSettingsSheet(
 	: xyzcontrolpage(_stageparams, _zerobuttons)
 {
 	for (uint32_t a = 0; a < _areaparamsvec.size() ; a++) 
-		fpupages.emplace_back(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey);
-	//std::generate_n(std::back_inserter(fpupages), _areaparamsvec.size(), [&]() {
-	//	return CFPUControlPage(_areaparamsvec[a++], _fpubuttonsvec, _masterfovsizex, _masterfovsizey); } );
+		fpupages.emplace_back(a, _areaparamsvec, _fpubuttonsvec[a], _masterfovsizex, _masterfovsizey);
 }
 
 HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {

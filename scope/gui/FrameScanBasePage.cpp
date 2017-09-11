@@ -5,36 +5,21 @@
 namespace scope {
 namespace gui {
 
-CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double& _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons& _fpubuttons
-	, parameters::ScannerVectorFrameBasic& _scanvecparams
-	, ScopeNumber<uint32_t>& _averages
-	, ScopeNumber<double>& _scannerdelay
-	, ScopeNumber<double>& _framerate
-	, ScopeNumber<double>& _frametime
-	, ScopeNumber<double>& _linerate
-	)
-	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons)
-	, zoom_edit(_scanvecparams.zoom, true, true)
-	, zoom_scroll(_scanvecparams.zoom, 0.1, 1, true, true)
-	, xres_edit(_scanvecparams.xres, true, true)
-	, yres_edit(_scanvecparams.yres, true, true)
-	, xaspectratio_edit(_scanvecparams.xaspectratio, true, true)
-	, yaspectratio_edit(_scanvecparams.yaspectratio, true, true)
-	, averages_edit(_averages, true, true)
-	, scannerdelay_edit(_scannerdelay, true, true)
-	, xoffset_edit(_scanvecparams.xoffset, true, true)
-	, yoffset_edit(_scanvecparams.yoffset, true, true)
-	, framerate_edit(_framerate, true, true)
-	, frametime_edit(_frametime, true, true)
-	, linerate_edit(_linerate, true, true)
+CFrameScanBasePage::CFrameScanBasePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+	: CNoScanBasePage(_area, _areaparams, _fpubuttons)
+	, zoom_edit(_areaparams.FrameSaw().zoom, true, true)
+	, zoom_scroll(_areaparams.FrameSaw().zoom, 0.1, 1, true, true)
+	, xres_edit(_areaparams.FrameSaw().xres, true, true)
+	, yres_edit(_areaparams.FrameSaw().yres, true, true)
+	, xaspectratio_edit(_areaparams.FrameSaw().xaspectratio, true, true)
+	, yaspectratio_edit(_areaparams.FrameSaw().yaspectratio, true, true)
+	, averages_edit(_areaparams.daq.averages, true, true)
+	, scannerdelay_edit(_areaparams.daq.scannerdelay, true, true)
+	, xoffset_edit(_areaparams.FrameSaw().xoffset, true, true)
+	, yoffset_edit(_areaparams.FrameSaw().yoffset, true, true)
+	, framerate_edit(_areaparams.framerate, true, true)
+	, frametime_edit(_areaparams.frametime, true, true)
+	, linerate_edit(_areaparams.linerate, true, true)
 	//, diagram(area, &scope_controller.GuiParameters)
 {
 	

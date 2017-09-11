@@ -10,6 +10,8 @@
 #include "controls/ScopeScrollbarCtrl.h"
 #include "controls/ScopeFOVDiagram.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
+#include "parameters/Area.h"
+#include "TheScopeButtons.h"
 #include "resource.h"
 
 namespace scope {
@@ -79,22 +81,7 @@ public:
 	/** Dialog resource ID, do not forget to overwrite in derived class constructor! */
 	enum { IDD = IDD_FRAMESCAN_SAW_PROPPAGE };
 
-	CFrameScanBasePage(const uint32_t& _area
-		, const bool& _isslave
-		, ScopeNumber<double>& _pockels
-		, ScopeNumber<double>& _fastz
-		, ScopeNumber<double>& _pixeltime
-		, const double& _minpixeltime
-		, ScopeNumber<double>& _fpux
-		, ScopeNumber<double>& _fpuy
-		, FPUButtons& _fpubuttons
-		, parameters::ScannerVectorFrameBasic& _scanvecparams
-		, ScopeNumber<uint32_t>& _averages
-		, ScopeNumber<double>& _scannerdelay
-		, ScopeNumber<double>& _framerate
-		, ScopeNumber<double>& _frametime
-		, ScopeNumber<double>& _linerate
-	);
+	CFrameScanBasePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
 
 	/** Disconnect from ScopeController::ReadOnlyWhileScanning */
 	virtual ~CFrameScanBasePage();

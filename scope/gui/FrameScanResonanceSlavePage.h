@@ -5,6 +5,7 @@
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeCheckBoxCtrl.h"
+#include "parameters/Framescan.h"
 #include "resource.h"
 
 namespace scope {
@@ -21,16 +22,7 @@ protected:
 	parameters::ScannerVectorFrameResonance& svresonanceparams;
 
 public:
-	CFrameScanResonanceSlavePage(const uint32_t& _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double& _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons& _fpubuttons
-	, parameters::ScannerVectorFrameResonance& _svresonanceparams);
+	CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanResonanceSlavePage)

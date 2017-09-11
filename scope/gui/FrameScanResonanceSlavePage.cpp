@@ -8,19 +8,9 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonanceSlavePage::CFrameScanResonanceSlavePage(const uint32_t& _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double& _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons& _fpubuttons
-	, parameters::ScannerVectorFrameResonance& _svresonanceparams
-)
-	: CNoScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons)
-	, svresonanceparams(_svresonanceparams)
+CFrameScanResonanceSlavePage::CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+	: CNoScanBasePage(_area, _areaparams, _fpubuttons)
+	, svresonanceparams(_areaparams.FrameResonance())
 {
 
 		m_psp.pszTemplate = MAKEINTRESOURCE(IDD_FRAMESCAN_RESONANCE_SLAVE_PROPPAGE);
@@ -58,7 +48,7 @@ LRESULT CFrameScanResonanceSlavePage::OnAddPlane(WORD wNotifyCode, WORD wID, HWN
 	planes.position = svresonanceparams.fastz;
 	planes.pockels = svresonanceparams.pockels;
 	svresonanceparams.planes.push_back(planes);
-	scope_controller.UpdateResonancePlanes(area);
+	//scope_controller.UpdateResonancePlanes(area);
 	UpdatePlanesList();
 	return 0;
 }
@@ -84,7 +74,7 @@ LRESULT CFrameScanResonanceSlavePage::OnEditPlane(WORD wNotifyCode, WORD wID, HW
 	planes.pockels = svresonanceparams.pockels;
 	// Update the selected plane
 	svresonanceparams.planes.at(sel) = planes;	
-	scope_controller.UpdateResonancePlanes(area);
+	//scope_controller.UpdateResonancePlanes(area);
 	UpdatePlanesList();
 	return 0;
 }

@@ -93,13 +93,13 @@ public:
 	* Also sets state of shift key */
     LRESULT OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
 		switch (wParam) {
-		case VK_RETURN:
-		case VK_TAB:
-			UpdateValue();
-			::PostMessage(GetParent(), WM_NEXTDLGCTL, shiftstate, 0L);
-			return FALSE;
-		case VK_SHIFT:
-			shiftstate = true;
+			case VK_RETURN:
+			case VK_TAB:
+				UpdateValue();
+				::PostMessage(GetParent(), WM_NEXTDLGCTL, shiftstate, 0L);
+				return FALSE;
+			case VK_SHIFT:
+				shiftstate = true;
 		}
 		return DefWindowProc(uMsg, wParam, lParam);
 	}
@@ -107,8 +107,8 @@ public:
 	/** Resets state of shift key */
 	LRESULT OnKeyUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
 		switch (wParam) {
-		case VK_SHIFT:
-			shiftstate = false;
+			case VK_SHIFT:
+				shiftstate = false;
 		}
 		return DefWindowProc(uMsg, wParam, lParam);
 	}
@@ -121,8 +121,7 @@ public:
 
 	/** Worker for UpdateControl (explicit specialization for ScopeValue<CString> below). */
 	LRESULT OnUpdateControl(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
-		//if ( scope_val != nullptr )
-			SetWindowText(scope_val.ToChar().c_str());
+		SetWindowText(scope_val.ToChar().c_str());
 		return 0;
 	}
 	/** @} */

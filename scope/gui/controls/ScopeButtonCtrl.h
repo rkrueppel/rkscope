@@ -21,9 +21,6 @@ protected:
 	/** The connection object for the control state (connection to the scope_button) */
 	boost::signals2::connection stateconnection;
 
-	/** protect connection managment */
-	mutable std::mutex mutex;
-
 	/** stores state of shift key */
 	bool shiftstate;
 

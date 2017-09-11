@@ -8,7 +8,7 @@
 namespace scope {
 	namespace gui {
 
-CHistogramView::CHistogramView(const uint32_t& _area, const uint32_t& _channels, uint16_t _range)
+CHistogramView::CHistogramView(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range)
 	: area(_area)
 	, channels(_channels)
 	, range(_range)

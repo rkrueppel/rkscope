@@ -9,14 +9,14 @@
 namespace scope {
 	namespace gui {
 
-CHistogramFrame::CHistogramFrame(const uint32_t& _area, const uint32_t& _channels)
+CHistogramFrame::CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range)
 	: area(_area)
 	, channels(_channels)
 	, attached(false)
 	, loghist(false)
 	, statusstr(L"")
 	, limitsstr(L"")
-	, view(area, channels, (uint16_t)scope_controller.GuiParameters.areas[area]->histrange)
+	, view(area, channels, _range)
 	, framecount(0) {
 }
 

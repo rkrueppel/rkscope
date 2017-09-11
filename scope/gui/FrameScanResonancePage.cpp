@@ -8,28 +8,13 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double& _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons& _fpubuttons
-	, parameters::ScannerVectorFrameResonance& _svresonanceparams
-	, ScopeNumber<uint32_t>& _averages
-	, ScopeNumber<double>& _scannerdelay
-	, ScopeNumber<double>& _framerate
-	, ScopeNumber<double>& _frametime
-	, ScopeNumber<double>& _linerate
-)
-	: CFrameScanBasePage(_area, _isslave, _pockels, _fastz, _pixeltime, _minpixeltime, _fpux, _fpuy, _fpubuttons, _svresonanceparams, _averages, _scannerdelay, _framerate, _frametime, _linerate)
-	, svresonanceparams(_svresonanceparams)
-	, ycutoff_edit(_svresonanceparams.ycutoff, true, true)
-	, yretrace_edit(_svresonanceparams.yretrace, true, true)
-	, waitstorage_edit(_svresonanceparams.waitafterenqueuestorage, true, true)
-	, waitdisplay_edit(_svresonanceparams.waitafterenqueuedisplay, true, true)
+CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
+	, svresonanceparams(_areaparams.FrameResonance())
+	, ycutoff_edit(_areaparams.FrameResonance().ycutoff, true, true)
+	, yretrace_edit(_areaparams.FrameResonance().yretrace, true, true)
+	, waitstorage_edit(_areaparams.FrameResonance().waitafterenqueuestorage, true, true)
+	, waitdisplay_edit(_areaparams.FrameResonance().waitafterenqueuedisplay, true, true)
 {
 
 	zoom_scroll.SetSmallIncrement(1);
@@ -106,7 +91,7 @@ LRESULT CFrameScanResonancePage::OnEditPlane(WORD wNotifyCode, WORD wID, HWND hW
 	planes.pockels = svresonanceparams.pockels;
 	// Update the selected plane
 	svresonanceparams.planes.at(sel) = planes;
-	scope_controller.UpdateResonancePlanes(area);
+	//scope_controller.UpdateResonancePlanes(area);
 	UpdatePlanesList();
 	return 0;
 }

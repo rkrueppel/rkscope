@@ -28,7 +28,7 @@ protected:
 public:
 	/** @param[in] _area for which area's FOV is this (this area's FOV will be drawn white, the others gray)
 	* @param[in] _params pointer to the parameters to use for FOV calculations */
-	CScopeFOVDiagram(parameters::Area& _areaparams, const double& _masterfovsizex, const double& _masterfovsizey);
+	CScopeFOVDiagram(const uint32_t& _area, std::vector<parameters::Area>& _areaparamsvec, const double& _masterfovsizex, const double& _masterfovsizey);
 	
 	~CScopeFOVDiagram();
 

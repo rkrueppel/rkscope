@@ -4,15 +4,15 @@
 namespace scope {
 	namespace gui {
 
-CFPUControlPage::CFPUControlPage(parameters::Area& _areaparams, std::vector<FPUButtons>& _fpubuttonsvec, const double& _masterfovsizex, const double& _masterfovsizey)
-	: areaparams(_areaparams)
+CFPUControlPage::CFPUControlPage(const uint32_t& _area, std::vector<parameters::Area>& _areaparamsvec, FPUButtons& _fpubuttons, const double& _masterfovsizex, const double& _masterfovsizey)
+	: areaparams(_areaparamsvec[_area])
 	, strtitle(L"")
-	, xpos_edit(_areaparams.fpuxystage.xpos, true)
-	, ypos_edit(_areaparams.fpuxystage.ypos, true)
-	, etlcalibrationfile_edit(_areaparams.fpuzstage.calibrationfile, true)
-	, setxyzero_button(_fpubuttonsvec[_areaparams.area].setzero)
-	, fpustageinfos_edit(_areaparams.fpuxystage.stageinfo, true)
-	, diagram(_areaparams, _masterfovsizex, _masterfovsizey) {
+	, xpos_edit(_areaparamsvec[_area].fpuxystage.xpos, true)
+	, ypos_edit(_areaparamsvec[_area].fpuxystage.ypos, true)
+	, etlcalibrationfile_edit(_areaparamsvec[_area].fpuzstage.calibrationfile, true)
+	, setxyzero_button(_fpubuttons.setzero)
+	, fpustageinfos_edit(_areaparamsvec[_area].fpuxystage.stageinfo, true)
+	, diagram(_area, _areaparamsvec, _masterfovsizex, _masterfovsizey) {
 	std::wstringstream stream;
 	stream << L"Area " << _areaparams.area()+1;
 	strtitle = stream.str();

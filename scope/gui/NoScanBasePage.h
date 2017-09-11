@@ -8,6 +8,7 @@
 #include "controls/ScopeUpDownCtrl.h"
 #include "controls/ScopeScrollbarCtrl.h"
 #include "TheScopeButtons.h"
+#include "parameters/Area.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "resource.h"
 
@@ -74,13 +75,7 @@ public:
 
 	/** We need a pointer to a basic ScannerVector (could be e.g. Saw really) but thus we can connect to (inherited) members */
 	CNoScanBasePage(const uint32_t& _area
-		, const bool& _isslave
-		, ScopeNumber<double>& _pockels
-		, ScopeNumber<double>& _fastz
-		, ScopeNumber<double>& _pixeltime
-		, const double& _minpixeltime
-		, ScopeNumber<double>& _fpux
-		, ScopeNumber<double>& _fpuy
+		, parameters::Area& _areaparams
 		, FPUButtons& _fpubuttons
 	);
 

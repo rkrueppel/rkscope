@@ -71,7 +71,7 @@ public:
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_HISTOGRAM)
 
 	/** Simple constructor */
-	CHistogramFrame(const uint32_t& _area, const uint32_t& _channels);
+	CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range);
 
 	/** Detaches if not yet happened and quits */
 	~CHistogramFrame();

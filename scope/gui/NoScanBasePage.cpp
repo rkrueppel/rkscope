@@ -4,28 +4,19 @@
 namespace scope {
 	namespace gui {
 
-CNoScanBasePage::CNoScanBasePage(const uint32_t & _area
-	, const bool& _isslave
-	, ScopeNumber<double>& _pockels
-	, ScopeNumber<double>& _fastz
-	, ScopeNumber<double>& _pixeltime
-	, const double & _minpixeltime
-	, ScopeNumber<double>& _fpux
-	, ScopeNumber<double>& _fpuy
-	, FPUButtons & _fpubuttons
-)
+CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::Area& _areaparams, FPUButtons & _fpubuttons)
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
 	, area(_area)
-	, isslave(_isslave)
-	, pockels_scroll(_pockels, 0.01, 0.1, true, true)
-	, pockels_edit(_pockels, true, true)
-	, fastz_scroll(_fastz, 5, 50, true, true)
-	, fastz_edit(_fastz, true, true)
-	, pixeltime_edit(_pixeltime, true, true)
-	, pixeltime_scroll(_pixeltime, _minpixeltime, _minpixeltime, true, true)
-	, fpux_edit(_fpux, true, true)
-	, fpuy_edit(_fpuy, true, true)
+	, isslave(_areaparams.isslave())
+	, pockels_scroll(_areaparams.Currentframe().pockels, 0.01, 0.1, true, true)
+	, pockels_edit(_areaparams.Currentframe().pockels, true, true)
+	, fastz_scroll(_areaparams.Currentframe().fastz, 5, 50, true, true)
+	, fastz_edit(_areaparams.Currentframe().fastz, true, true)
+	, pixeltime_edit(_areaparams.daq.pixeltime, true, true)
+	, pixeltime_scroll(_areaparams.daq.pixeltime, _areaparams.daq.inputs->minpixeltime(), _areaparams.daq.inputs->minpixeltime(), true, true)
+	, fpux_edit(_areaparams.fpuxystage.xpos, true, true)
+	, fpuy_edit(_areaparams.fpuxystage.ypos, true, true)
 	, fpuleft_button(_fpubuttons.left)
 	, fpuright_button(_fpubuttons.right)
 	, fpuup_button(_fpubuttons.up)
