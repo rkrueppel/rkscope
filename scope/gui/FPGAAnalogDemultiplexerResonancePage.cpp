@@ -21,9 +21,8 @@ CFPGAAnalogDemultiplexerResonancePage::CFPGAAnalogDemultiplexerResonancePage(par
 	, bitshiftch2a2_edit(_parameters.BitshiftA2Ch2)
 	, hist_range1_edit(_histrangea0)
 	, hist_range2_edit(_histrangea1)
-	//, hist_range1_edit(&scope_controller.GuiParameters.areas[0]->histrange) 
-	//, hist_range2_edit(&scope_controller.GuiParameters.areas[1]->histrange) 
-	{
+{
+	
 }
 
 BOOL CFPGAAnalogDemultiplexerResonancePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {

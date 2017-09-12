@@ -9,7 +9,6 @@ namespace scope {
 	namespace gui {
 
 		CFrameScanSawPage::CFrameScanSawPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
-			// scope_controller.GuiParameters.areas[_area]->FrameSaw()
 			: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
 			, xcutoff_edit(_areaparams.FrameSaw().xcutoff, true, true)
 			, ycutoff_edit(_areaparams.FrameSaw().ycutoff, true, true)

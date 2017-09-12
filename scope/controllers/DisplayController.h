@@ -29,9 +29,6 @@ protected:
 	/** Input queue with multi images from the PipelineController */
 	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const input_queue;
 	
-	/** a ScopeLogger kept handy here */
-	ScopeLogger scope_logger;
-
 	/** Vector of CChannelFrame observers */
 	std::vector<std::vector<gui::CChannelFrame*>> channelframes;
 

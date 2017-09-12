@@ -36,6 +36,9 @@ void CMainDlgFrame::NewHistogramFrame(const uint32_t& _area, const RECT& _rect) 
 	// in CHistogramFrame this would mean twice the same calculation etc
 	if ( !display_controller.HistogramAlreadyAttached(_area) ) {
 		RECT rect(_rect);					// We need non-const here
+		std::function<void(gui::CHistogramFrame& _hframe)> attachfunc = std::bind(&DisplayController::AttachFrame, display_controller, std::placeholders::_1);
+		std::function<void(gui::CHistogramFrame& _hframe)> detachfunc = std::bind(&DisplayController::DetachFrame, display_controller, std::placeholders::_1);
+		
 		CHistogramFrame* pChild = new CHistogramFrame(_area, guiparameters.areas[_area]->daq.inputs->channels(), (uint16_t)guiparameters.areas[_area]->histrange());
 		// set the CMainDlgFrame as parent, so the childs get destroyed when the parent gets WM_DESTROY (correct cleanup this way!!)
 		pChild->CreateEx(m_hWnd, rect);

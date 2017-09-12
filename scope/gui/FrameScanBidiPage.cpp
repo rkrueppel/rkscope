@@ -9,8 +9,6 @@ namespace scope {
 	namespace gui {
 
 CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
-	//scope_controller.GuiParameters.areas[area]->isslave()
-	// scope_controller.GuiParameters.areas[_area]->FrameBiDi()
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
 	, xturn_edit(_areaparams.FrameBiDi().xturnfraction, true, true)
 	, ycutoff_edit(_areaparams.FrameBiDi().ycutoff, true, true)

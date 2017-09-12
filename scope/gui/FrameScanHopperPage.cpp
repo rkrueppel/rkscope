@@ -10,7 +10,6 @@ namespace scope {
 
 CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-	//scope_controller.GuiParameters.areas[area]->isslave()
 	, hoppervecparams(_areaparams.FrameHopper())
 {
 	// Overwrite base class enum { IDD = ... }
