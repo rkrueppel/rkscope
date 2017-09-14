@@ -6,6 +6,8 @@
 #include "BehaviorSettingsPage.h"
 #include "TheScopeButtons.h"
 #include "TheScopeCounters.h"
+#include "parameters\Area.h"
+#include "parameters\Runstates.h"
 
 namespace scope {
 	namespace gui {
@@ -36,7 +38,7 @@ namespace scope {
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, parameters::SCOPE_XYZCONTROL_T& _stageparams
-			, std::vector<Area>& _areaparamsvec);
+			, std::vector<parameters::Area>& _areaparamsvec);
 
 			BEGIN_MSG_MAP(CUserSettingsSheet)	  
 				NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)

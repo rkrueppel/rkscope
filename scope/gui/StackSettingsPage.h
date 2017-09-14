@@ -6,6 +6,8 @@
 #include "controls/ScopeEditCtrl.h"
 #include "controls/ScopeButtonCtrl.h"
 #include "controls/ScopeProgressCtrl.h"
+#include "parameters\Devices.h"
+#include "parameters\Area.h"
 #include "resource.h"
 
 namespace scope {

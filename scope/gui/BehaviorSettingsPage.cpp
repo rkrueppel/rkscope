@@ -25,8 +25,8 @@ namespace scope {
 			totaltime_edit.AttachToDlgItem(GetDlgItem(IDC_TOTALTIME_EDIT));
 			trialcount_edit.AttachToDlgItem(GetDlgItem(IDC_TRIALS_EDIT));
 			
-			addplane_button.AttachToDlgItem(GetDlgItem(IDC_ADDPLANE_BUTTON));
-			deleteplane_button.AttachToDlgItem(GetDlgItem(IDC_DELETEPLANE_BUTTON));
+			addplane_button.Attach(GetDlgItem(IDC_ADDPLANE_BUTTON));
+			deleteplane_button.Attach(GetDlgItem(IDC_DELETEPLANE_BUTTON));
 
 			planes_list.Attach(GetDlgItem(IDC_PLANES_LIST));
 			planes_list.InsertColumn(0, L"Plane", 0, 40);

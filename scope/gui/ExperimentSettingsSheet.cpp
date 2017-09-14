@@ -12,12 +12,12 @@ namespace scope {
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, parameters::SCOPE_XYZCONTROL_T& _stageparams
-			, std::vector<Area>& _areaparamsvec
+			, std::vector<parameters::Area>& _areaparamsvec
 		)
 			: scanmode(_scanmodebuttonsvec)
 			, stack(_stackparams, _runbuttons, _stackbuttons, _counters, _stageparams, _areaparamsvec)
 			, timeseries(_timeseriesparams, _runbuttons, _counters, _areaparamsvec)
-			, behavior(_runbuttons, _counters, _behaviorparams)
+			, behavior(_runbuttons, _counters, _behaviorparams, _areaparamsvec)
 		{
 			
 		}
@@ -88,7 +88,7 @@ namespace scope {
 				stack.SetReadOnlyWhileScanning(_ro);
 				scanmode.SetReadOnlyWhileScanning(_ro);
 				timeseries.SetReadOnlyWhileScanning(_ro);
-				behavior.SetReadOnlyWhileScanning(_ro);*/
+				behavior.SetReadOnlyWhileScanning(_ro);
 		}
 
 	}

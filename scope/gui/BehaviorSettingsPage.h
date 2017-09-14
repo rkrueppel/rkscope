@@ -7,7 +7,7 @@
 #include "TheScopeButtons.h"
 #include "TheScopeCounters.h"
 #include "parameters/Area.h"
-#incldue "parameters/Runstates.h"
+#include "parameters/Runstates.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"
 

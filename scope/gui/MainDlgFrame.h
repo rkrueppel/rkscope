@@ -2,6 +2,7 @@
 
 #include "parameters/Scope.h"
 #include "controllers/ScopeController.h"
+#include "controllers\DaqController.h"
 #include "controllers/DisplayController.h"
 #include "TheScopeButtons.h"
 #include "TheScopeCounters.h"
@@ -38,6 +39,8 @@ namespace scope {
 			CMainDlgView m_dlgView;
 
 			scope::ScopeController& scope_controller;
+
+			scope::DaqController& daq_controller;
 			
 			scope::DisplayController& display_controller;
 			
@@ -71,6 +74,7 @@ namespace scope {
 
 			CMainDlgFrame(
 				scope::ScopeController& _scope_controller
+				, scope::DaqController& _daq_controller
 				, scope::DisplayController& _display_controller
 				, scope::parameters::Scope& _guiparameters
 				, RunButtons& _runbuttons

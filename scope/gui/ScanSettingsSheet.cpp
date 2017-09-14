@@ -147,7 +147,7 @@ namespace scope {
 		}
 
 		void CScanSettingsSheet::SetReadOnlyWhileScanning(const bool& _ro) {
-			for(auto sp : scanpages)
+			for(auto& sp : scanpages)
 				sp->SetReadOnlyWhileScanning(_ro);
 		}
 

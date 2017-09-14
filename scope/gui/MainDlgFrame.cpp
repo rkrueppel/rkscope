@@ -15,6 +15,7 @@ namespace scope {
 
 		CMainDlgFrame::CMainDlgFrame(
 			scope::ScopeController& _scope_controller
+			, scope::DaqController& _daq_controller
 			, scope::DisplayController& _display_controller
 			, scope::parameters::Scope& _guiparameters
 			, RunButtons& _runbuttons
@@ -24,6 +25,7 @@ namespace scope {
 		)
 			: firstpaint(true)
 			, scope_controller(_scope_controller)
+			, daq_controller(_daq_controller)
 			, display_controller(_display_controller)
 			, currentconfigfile(L"")
 			, guiparameters(_guiparameters)
@@ -93,7 +95,7 @@ namespace scope {
 			UISetText(0, str2.c_str());
 
 			// Update shutter status in menu
-			UISetCheck(ID_TOOLS_SHUTTEROPEN, scope_controller.GetShutterState(0));
+			UISetCheck(ID_TOOLS_SHUTTEROPEN, daq_controller.GetShutterState(0));
 
 			UIUpdateStatusBar();
 			UIUpdateToolBar();
@@ -296,7 +298,7 @@ namespace scope {
 		}
 
 		LRESULT CMainDlgFrame::OnZeroGalvoOutputs(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
-			scope_controller.ZeroGalvoOutputs();
+			daq_controller.ZeroGalvoOutputs();
 			return 0;
 		}
 
@@ -304,7 +306,7 @@ namespace scope {
 			static bool bOpen = false;
 			bOpen = !bOpen;
 			UISetCheck(ID_TOOLS_SHUTTEROPEN, bOpen);
-			scope_controller.OpenCloseShutter(0, bOpen);
+			daq_controller.OpenCloseShutter(0, bOpen);
 			return 0;
 		}
 
@@ -381,8 +383,8 @@ namespace scope {
 				dlg.GetFilePath(filepath);
 				DBOUT(L"Filepath " << filepath.GetString());
 				// These are initialized via the default constructor
-				scope::parameters::Scope parameters;
-				parameters.Save(std::wstring(filepath.GetString()));
+				scope::parameters::Scope defparams(guiparameters.nareas());
+				defparams.Save(std::wstring(filepath.GetString()));
 			}
 			return 0;
 		}
