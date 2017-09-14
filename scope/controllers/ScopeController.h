@@ -76,12 +76,6 @@ namespace scope {
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_storage;
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_display;
 			/** @} */
-			
-			/** Scanner vectors
-			* @{ */
-			/** The scanner vector for frame scanning */
-			std::vector<ScannerVectorFrameBasicPtr> framescannervecs;
-			/** @} */
 
 			/** thread-safe bool to signal a requested abort of a stack scan */
 			StopCondition repeat_abort;
@@ -101,8 +95,12 @@ namespace scope {
 			/** stores the time to run a scan */
 			DWORD time;
 
-			/*ScopeController(ScopeController& other);				// we need this copyable for std::bind to work...
-			ScopeController& operator=(ScopeController& other); */
+		public:
+			/** Scanner vectors
+			* @{ */
+			/** The scanner vector for frame scanning */
+			std::vector<ScannerVectorFrameBasicPtr> framescannervecs;
+			/** @} */
 
 		private:
 			/** Set parameters for scanner vectors, since these are shared_ptr in DaqControllerDAQmx and PipelineController they get updated there too */

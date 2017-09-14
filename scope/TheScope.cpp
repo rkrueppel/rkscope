@@ -70,18 +70,19 @@ namespace scope {
 			// Initially choose the first supported scannervector in the list
 			SetScanMode(a, *ScannerSupportedVectors::List().begin());
 
-			// Connect the buttons for scan mode switching (if a master area)
+			// Connect the buttons for scan mode switching (if a master area) to TheScope::SetScanMode
 			if (!ThisIsSlaveArea(a)) {
 				for (auto& b : scanmodebuttonsvec[a].map)
 					b.second.Connect(std::bind(&SetScanMode, this, a, b.first));
 			}
 
-			// Connect all imaging parameters
+			// Connect update functions in TheScope to update functions inside the ScannerVectors
 			for (auto& sv : guiparameters.areas[a].scannervectorframesmap) {
 				sv.second->ConnectOnlineUpdate(std::bind(&ScopeController::OnlineUpdate, theController, a));
 				sv.second->ConnectResolutionChange(std::bind(&ResolutionChange, this, a));
 			}
-
+			
+			// Connect update functions in TheScope to some parameters outside the ScannerVectors
 			guiparameters.areas[a].daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
 			guiparameters.areas[a].daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
 			guiparameters.areas[a].histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
@@ -94,7 +95,7 @@ namespace scope {
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
-		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(new gui::CMainDlgFrame(theController, theDisplay, guiparameters));
+		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(theController, theDisplay, guiparameters, runbuttons, scanmodebuttonsvec, stackbuttons, counters);
 
 		RECT rec = { 20,20,440,980 };						// 262x403
 		if (wndmain->CreateEx(HWND(0), rec) == NULL)
@@ -230,10 +231,11 @@ namespace scope {
 			// Triggers update of areas.currentframe (connected to areas.ChangeScanMode)
 			guiparameters.areas[_area].scanmode = _mode;
 			parameters = guiparameters;
+			// Get fresh ScannerVector for that scan mode
 			ScannerVectorFillType filltype = (parameters.areas[_area].isslave()) ? SCOPE_SLAVEFRAMEVECTORFILL : SCOPE_MASTERFRAMEVECTORFILL;
-			framescannervecs[_area] = ScannerVectorFrameBasic::Factory(parameters.areas[_area].scanmode(), filltype);
-			theDaq.SetScannerVector(_area, framescannervecs[_area]);
-			thePipeline.SetScannerVector(_area, framescannervecs[_area]);
+			scope_controller.framescannervecs[_area] = ScannerVectorFrameBasic::Factory(parameters.areas[_area].scanmode(), filltype);
+			theDaq.SetScannerVector(_area, scope_controller.framescannervecs[_area]);
+			thePipeline.SetScannerVector(_area, scope_controller.framescannervecs[_area]);
 			
 			wndmain.ChangeScanMode(_area, _mode);
 		}

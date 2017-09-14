@@ -34,7 +34,7 @@ BOOL CScanModesSettingsPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 	linestraight_radio.Enable(ScannerSupportedVectors::IsBuiltinSupported(ScannerVectorTypeHelper::LineStraight));
 
 	// Add areas to list box and select area 0
-	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+	for ( uint32_t a = 0 ; a < scanmodebuttonsvec.size() ; a++ ) {
 		std::wostringstream stream;
 		stream << L"Area " << a+1;
 		areas_list.AddString(stream.str().c_str());
@@ -52,7 +52,8 @@ LRESULT CScanModesSettingsPage::OnAreaChange(WORD, WORD, HWND, BOOL&) {
 	
 	if ( sel == LB_ERR )
 		return 0;
-	assert( (sel >= 0) && (sel < SCOPE_NAREAS) );
+	
+	assert( (sel >= 0) && (sel < scanmodbuttonsvec.size()) );
 
 	// Disconnect from old areas ScanMode buttons
 	framesaw_radio.Disconnect();
