@@ -6,7 +6,7 @@
 #include "controls/ScopeProgressCtrl.h"
 #include "TheScopeButtons.h"
 #include "TheScopeCounters.h"
-#include "parameters/Timeseries.h"
+#include "parameters/Runstates.h"
 #include "parameters/Area.h"
 #include "ThirdParty/ToolTipDialog.h"
 #include "resource.h"

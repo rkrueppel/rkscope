@@ -16,7 +16,7 @@ protected:
 	bool created;
 
 	/** Pointer to the underlying ScopeNumber */
-	ScopeNumber<double>* const scopenum;
+	ScopeNumber<double>& const scopenum;
 
 	/** The connection object for the control state (connection to the scopenum value change) */
 	boost::signals2::connection valueconnection;
@@ -30,7 +30,7 @@ public:
 
 	/** Gets a pointer to the ScopeNumber<double>, and connects
 	* @param[in] _scopenum ScopeNumber to which the progress bar connects */
-	CScopeProgressCtrl(ScopeNumber<double>* _scopenum);
+	CScopeProgressCtrl(ScopeNumber<double>& _scopenum);
 
 	/** Disconnects */
 	~CScopeProgressCtrl();

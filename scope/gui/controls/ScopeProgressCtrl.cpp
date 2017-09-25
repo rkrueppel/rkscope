@@ -6,10 +6,10 @@ namespace scope {
 	namespace gui {
 
 
-CScopeProgressCtrl::CScopeProgressCtrl(ScopeNumber<double>* _scopenum)
+CScopeProgressCtrl::CScopeProgressCtrl(ScopeNumber<double>& _scopenum)
 	: created(false)
 	, scopenum(_scopenum) {
-	valueconnection = scopenum->ConnectGUI(std::bind(&CScopeProgressCtrl::UpdateControl, this));
+	valueconnection = scopenum.ConnectGUI(std::bind(&CScopeProgressCtrl::UpdateControl, this));
 }
 
 CScopeProgressCtrl::~CScopeProgressCtrl() {
@@ -28,7 +28,7 @@ BOOL CScopeProgressCtrl::AttachToDlgItem(HWND hWnd) {
 
 LRESULT CScopeProgressCtrl::OnUpdateControl(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) {
 	// Progress bar goes from 0 to 100
-	SetPos( round2i32(scopenum->Value()/(scopenum->ul()-scopenum->ll()) * 100.0) );
+	SetPos( round2i32(scopenum.Value()/(scopenum.ul()-scopenum.ll()) * 100.0) );
 	return 0;
 }
 
