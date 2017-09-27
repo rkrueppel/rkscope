@@ -84,6 +84,10 @@ namespace scope {
 			return DefWindowProc(WM_NOTIFY, wParam, (LPARAM)pnmHdr);
 		}
 
+		void CExperimentSettingsSheet::ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
+
+		}
+
 		void CExperimentSettingsSheet::SetReadOnlyWhileScanning(const bool& _ro) {
 				stack.SetReadOnlyWhileScanning(_ro);
 				scanmode.SetReadOnlyWhileScanning(_ro);

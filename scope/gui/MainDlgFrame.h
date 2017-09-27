@@ -78,8 +78,10 @@ namespace scope {
 				, scope::DisplayController& _display_controller
 				, scope::parameters::Scope& _guiparameters
 				, RunButtons& _runbuttons
+				, std::vector<FPUButtons>& _fpubuttonsvec
 				, std::vector<ScanModeButtons>& _scanmodebuttonsvec
 				, StackButtons& _stackbuttons
+				, ZeroButtons& _zerobuttons
 				, ScopeCounters& _counters);
 
 			/** Used in CToolBarHelper to fill the dropdown menus */

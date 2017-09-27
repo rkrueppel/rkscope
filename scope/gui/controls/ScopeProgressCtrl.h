@@ -16,7 +16,7 @@ protected:
 	bool created;
 
 	/** Pointer to the underlying ScopeNumber */
-	ScopeNumber<double>& const scopenum;
+	ScopeNumber<double>& scopenum;
 
 	/** The connection object for the control state (connection to the scopenum value change) */
 	boost::signals2::connection valueconnection;

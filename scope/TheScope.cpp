@@ -95,7 +95,7 @@ namespace scope {
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
-		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(theController, theDisplay, guiparameters, runbuttons, scanmodebuttonsvec, stackbuttons, counters);
+		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(theController, theDisplay, guiparameters, runbuttons, fpubuttonsvec, scanmodebuttonsvec, stackbuttons, zerobuttons, counters);
 
 		RECT rec = { 20,20,440,980 };						// 262x403
 		if (wndmain->CreateEx(HWND(0), rec) == NULL)

@@ -57,6 +57,8 @@ namespace scope {
 
 			LRESULT OnSelChange(WPARAM wParam, LPNMHDR pnmHdr, BOOL & bHandled);
 			/** @} */
+
+			void ChangeScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
 			
 			void SetReadOnlyWhileScanning(const bool& _ro);
 		};

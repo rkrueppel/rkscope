@@ -9,14 +9,15 @@
 namespace scope {
 	namespace gui {
 
-CHistogramFrame::CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range)
+CHistogramFrame::CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range, DisplayController& _display_controller)
 	: area(_area)
 	, channels(_channels)
+	, display_controller(_display_controller)
 	, attached(false)
 	, loghist(false)
 	, statusstr(L"")
 	, limitsstr(L"")
-	, view(area, channels, _range)
+	, view(area, channels, _range, _display_controller)
 	, framecount(0) {
 }
 
@@ -25,7 +26,7 @@ CHistogramFrame::~CHistogramFrame() {
 	// an invalid pointer in the DisplayController
 	if ( attached ) {
 		try {
-			scope_controller.DetachFrame(this);
+			display_controller.DetachFrame(this);
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 		attached = false;
 	}
@@ -92,7 +93,7 @@ int CHistogramFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	stream << L"Histogram (Area " << area+1 << L")";
 	SetWindowText(stream.str().c_str());
 
-	scope_controller.AttachFrame(this);
+	display_controller.AttachFrame(this);
 	attached = true;
 
 	return 1;
@@ -100,7 +101,7 @@ int CHistogramFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 void CHistogramFrame::OnDestroy() {
 	try {
-		scope_controller.DetachFrame(this);
+		display_controller.DetachFrame(this);
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 	attached = false;
 }

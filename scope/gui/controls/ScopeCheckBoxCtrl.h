@@ -15,8 +15,8 @@ protected:
 	/** true after window creation */
 	bool created;
 
-	/** pointer to underlying ScopeValue */
-	ScopeValue<bool>* const scope_val;
+	/** ref to underlying ScopeValue */
+	ScopeValue<bool>& scope_val;
 
 	/** stores state of shift key */
 	bool shiftstate;
@@ -40,7 +40,7 @@ public:
 	* @param[in] _scopeval ScopeValue<bool> to which the check box control connects (taken by reference)
 	* @param[in] _connectback change check box check when ScopeValue is changed
 	* @param[in] _connectcontrolstate change check box enabled/disabled state when read/write state of the ScopeValue is changed */
-	CScopeCheckBoxCtrl(ScopeValue<bool>* _scopeval, const bool& _connectback = false, const bool& _connectcontrolstate = false);
+	CScopeCheckBoxCtrl(ScopeValue<bool>& _scopeval, const bool& _connectback = false, const bool& _connectcontrolstate = false);
 
 	/** Disconnects */
 	~CScopeCheckBoxCtrl();

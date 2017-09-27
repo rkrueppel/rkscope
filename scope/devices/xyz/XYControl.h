@@ -1,5 +1,7 @@
 #pragma once
 
+#include "helpers\helpers.h"
+
 // Forward declarations
 namespace scope {
 template <class T> class ScopeNumber;

@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-		CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters, std::vector<Area>& _areaparamsvec)
+		CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters, std::vector<parameters::Area>& _areaparamsvec)
 			: CToolTipDialog(TTS_NOPREFIX)
 			, initialized(false)
 			, timeseriesparams(_timeseriesparams)
@@ -33,8 +33,8 @@ namespace scope {
 			betweenrepeats_edit.AttachToDlgItem(GetDlgItem(IDC_BETWEENREPEATS_EDIT));
 			overalltime_edit.AttachToDlgItem(GetDlgItem(IDC_OVERALLTIME_EDIT));
 			
-			addplane_button.AttachToDlgItem(GetDlgItem(IDC_ADDPLANE_BUTTON));
-			deleteplane_button.AttachToDlgItem(GetDlgItem(IDC_DELETEPLANE_BUTTON));
+			addplane_button.Attach(GetDlgItem(IDC_ADDPLANE_BUTTON));
+			deleteplane_button.Attach(GetDlgItem(IDC_DELETEPLANE_BUTTON));
 
 			planes_list.Attach(GetDlgItem(IDC_PLANES_LIST));
 			planes_list.InsertColumn(0, L"Plane", 0, 40);

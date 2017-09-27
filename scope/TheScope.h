@@ -9,6 +9,7 @@
 #include "controllers/PipelineController.h"
 #include "controllers/DisplayController.h"
 #include "controllers/StorageController.h"
+#include "controllers\FPUController.h"
 #include "devices/xyz/XYZControl.h"
 #include "devices/xyz/XYZControlGalil.h"
 #include "devices/xyz/XYZControlSutter.h"

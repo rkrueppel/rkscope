@@ -3,6 +3,7 @@
 #include "HistogramView.h"
 #include "helpers/ScopeDatatypes.h"
 #include "helpers/Active.h"
+#include "controllers\DisplayController.h"
 #include "ThirdParty/ToolbarHelper.h"
 #include "resource.h"
 
@@ -29,6 +30,9 @@ protected:
 
 	/** number of channels for this area */
 	const uint32_t channels;
+	
+	/** Reference to TheScope's DisplayController */
+	DisplayController& display_controller;
 
 	/** are we attached to ScopeController? */
 	bool attached;
@@ -71,7 +75,7 @@ public:
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_HISTOGRAM)
 
 	/** Simple constructor */
-	CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range);
+	CHistogramFrame(const uint32_t& _area, const uint32_t& _channels, const uint16_t& _range, DisplayController& _display_controller);
 
 	/** Detaches if not yet happened and quits */
 	~CHistogramFrame();

@@ -58,8 +58,7 @@ void __ScopeExceptionHandlerHelper(const std::string& _msg, const bool& _log, co
 	}
 
 	if ( _log ) {
-		ScopeLogger scope_logger;
-		scope_logger.Log(std::wstring(CA2W(_msg.c_str())), log_error);
+		ScopeLogger::GetInstance().Log(std::wstring(CA2W(_msg.c_str())), log_error);
 	}
 
 	if ( _showmessagebox )
@@ -72,8 +71,7 @@ void __ScopeExceptionHandlerHelperW(const std::wstring& _msg, const bool& _log, 
 	}
 
 	if ( _log ) {
-		ScopeLogger scope_logger;
-		scope_logger.Log(_msg, log_error);
+		ScopeLogger::GetInstance().Log(_msg, log_error);
 	}
 
 	if ( _showmessagebox )

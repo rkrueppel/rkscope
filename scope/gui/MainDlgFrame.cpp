@@ -19,8 +19,10 @@ namespace scope {
 			, scope::DisplayController& _display_controller
 			, scope::parameters::Scope& _guiparameters
 			, RunButtons& _runbuttons
+			, std::vector<FPUButtons>& _fpubuttonsvec
 			, std::vector<ScanModeButtons>& _scanmodebuttonsvec
 			, StackButtons& _stackbuttons
+			, ZeroButtons& _zerobuttons
 			, ScopeCounters& _counters
 		)
 			: firstpaint(true)
@@ -29,13 +31,14 @@ namespace scope {
 			, display_controller(_display_controller)
 			, currentconfigfile(L"")
 			, guiparameters(_guiparameters)
-			, m_dlgView(_runbuttons, _guiparameters, _scanmodebuttonsvec, _stackbuttons, _counters)
+			, m_dlgView(_runbuttons, _fpubuttonsvec, _guiparameters, _scanmodebuttonsvec, _stackbuttons, _zerobuttons, _counters)
 		{
 		}
 
 
 		void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const RECT& _rect) {
 			RECT rect(_rect);					// We need non-const here
+			
 			CChannelFrame* pChild = new CChannelFrame(_area, guiparameters.areas[_area], guiparameters.areas[_area].daq.inputs->channels(), display_controller);
 			// set the CMainDlgFrame as parent, so the childs receives WM_DESTROY when the parent gets destroyed (correct cleanup this way!!)
 			pChild->CreateEx(m_hWnd, rect);
@@ -339,7 +342,7 @@ namespace scope {
 				dlg.GetFilePath(filepath);
 				DBOUT(L"Filepath " << filepath.GetString());
 				guiparameters.Load(std::wstring(filepath.GetString()));
-				currentconfigfile = filepath.substr(filepath.find_last_of(L'\\') + 1, std::wstring::npos);
+				currentconfigfile = filepath.Right(filepath.ReverseFind(L'\\') + 1);
 			}
 
 			psiFolder->Release();

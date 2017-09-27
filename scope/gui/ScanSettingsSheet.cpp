@@ -19,14 +19,12 @@ namespace scope {
 			, const double& _masterfovsizey
 			, parameters::Storage& _storageparams
 			, parameters::Stimulation& _stimulationparams
-			, parameters::XYControl& _stageparams
+			, parameters::SCOPE_XYZCONTROL_T& _stageparams
 			, ZeroButtons& _zerobuttons
-			, ScopeNumber<bool>& _readonlywhilescanning
 		)
 			: nareas(_nareas)
 			, areaparamsvec(_areaparamsvec)
 			, fpubuttonsvec(_fpubuttonsvec)
-			, readonlywhilescanning(_readonlywhilescanning)
 			, storagesettingspage(_storageparams)
 			, stimulationsettingspage(_stimulationparams)
 			, movementpage(_areaparamsvec, _fpubuttonsvec, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
