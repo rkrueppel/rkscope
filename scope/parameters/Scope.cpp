@@ -96,7 +96,7 @@ Scope& Scope::operator=(const Scope& _scope) {
 
 	ATLASSERT (scannertype() == _scope.scannertype());	// Otherwise something is seriously wrong
 
-	areas = _scope.areas();
+	areas = _scope.areas;
 	// Fix the pointer to the master area!!!!!
 	uint32_t i = 0;
 	for (auto& ar : areas)
@@ -132,7 +132,7 @@ void Scope::UpdateTotaltimeFromFrames() {
 
 void Scope::UpdateFramesFromTotaltime() {
 	for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-		timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a].framerate()/areas[ThisAreaOrMasterArea(a)]->daq.averages()));
+		timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a].framerate()/areas[ThisAreaOrMasterArea(a)].daq.averages()));
 }
 
 void Scope::Load(const std::wstring& filename) {

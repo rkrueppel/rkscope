@@ -8,7 +8,7 @@ namespace scope {
 XYControl::XYControl(parameters::XYControl& _params)
 	: params(_params)
 	, initialized(false)
-	, pos{{_params.xpos, _params.ypos}}
+	, pos{{&_params.xpos, &_params.ypos}}
 	, pollinterval(round2ui32(_params.pollinterval()))
 {
 
@@ -20,7 +20,7 @@ XYControl::~XYControl() {
 
 void XYControl::Initialize() {
 	// Update pollinterval after initial parameters are loaded in TheScope
-	pollinterval = round2ui32(_params.pollinterval());
+	pollinterval = round2ui32(params.pollinterval());
 	
 	initialized = true;
 	

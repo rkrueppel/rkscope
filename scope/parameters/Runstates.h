@@ -21,7 +21,7 @@ namespace scope {
 			public:
 				Stack(const uint32_t& _nareas);
 				
-				const uint32_t nareas;
+				uint32_t nareas;
 
 				/** Start plane, measured with the zdevicetype */
 				std::vector<PlaneProperties> startat;
@@ -33,7 +33,7 @@ namespace scope {
 				ScopeNumber<double> spacing;
 
 				/** Vector with properties for every plane */
-				std::vector<std::array<PlaneProperties, SCOPE_NAREAS>> planes___;
+				std::vector<std::vector<PlaneProperties>> planes___;
 				
 				/** type of z device to use */
 				ScopeValue<ZDevice> zdevicetype;
@@ -68,7 +68,7 @@ namespace scope {
 			public:
 				Timeseries(const uint32_t& _nareas);
 				
-				const uint32_t areas;
+				uint32_t nareas;
 
 				/** number of frames in timeseries for each area */
 				std::vector<ScopeNumber<uint32_t>> frames;
@@ -112,7 +112,7 @@ namespace scope {
 			public:
 				Behavior(const uint32_t& _nareas);
 				
-				const uint32_t nareas;
+				uint32_t nareas;
 
 				/** Which mode to use */
 				ScopeValue<BehaviorMode> mode;

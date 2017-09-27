@@ -1,6 +1,7 @@
 #pragma once
 
 #include "helpers\helpers.h"
+#include  "parameters\Devices.h"
 
 // Forward declarations
 namespace scope {
@@ -23,6 +24,8 @@ protected:
 	/** future for the async polling thread */
 	std::future<bool> fut;
 
+	parameters::XYControl& params;
+
 	/** pointers to a ScopeNumber that is updated with the polled x and y positions */
 	std::array<ScopeNumber<double>*, 2> pos;
 
@@ -31,13 +34,13 @@ protected:
 
 protected:
 	/** disable copy */
-	XYControl(XYControl&);
+	XYControl(scope::XYControl&) = delete;
 
 	/** disable assignment */
-	XYControl operator=(XYControl);
+	XYControl operator=(XYControl) = delete;
 
 public:
-	XYControl();
+	XYControl(parameters::XYControl& _params);
 
 	/** If pollthread was started, request stop and wait for finish */
 	~XYControl();
@@ -46,7 +49,7 @@ public:
 	* Call StartPolling to start the polling thread, since StartPolling is virtual we always call the
 	* most derived version of it (which should be overwritten to start the derived RunPolling).
 	* If pollinterval is zero we do not start the polling thread. */
-	virtual void Initialize(parameters::XYControl& _params);
+	virtual void Initialize();
 
 	/** Start the worker function in the pollthread */
 	virtual void StartPolling();
