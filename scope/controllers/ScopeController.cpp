@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ScopeController.h"
+#include "devices\xyz\XYZControl.h"
 
 namespace scope {
 
@@ -14,11 +15,12 @@ namespace scope {
 		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& _daq_to_pipeline
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_storage
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_display
+		, SCOPE_XYZCONTROL_T& _theStage
 	)
 		: BaseController(1)
 		, nareas(_nareas)
 		, guiparameters(_guiparameters)
-		, ctrlparameters(_guiparameters)
+		, ctrlparams(_guiparameters)
 		, counters(_counters)
 		, theDaq(_theDaq)
 		, thePipeline(_thePipeline)
@@ -27,14 +29,11 @@ namespace scope {
 		, daq_to_pipeline(_daq_to_pipeline)
 		, pipeline_to_storage(_pipeline_to_storage)
 		, pipeline_to_display(_pipeline_to_display)
+		, theStage(_theStage)
 		, framescannervecs(_nareas)
 		, repeat_abort(false)
 		, onlineupdate_running(false)
 		, time(0)
-		, initialparametersloaded(false, false, true)
-		, readonlywhilescanning(false, false, true, L"ReadOnlyWhileScanning")
-		, fpubuttonsvec(_nareas)
-		, scanmodebuttonsvec(_nareas)
 	{
 	}
 
@@ -45,11 +44,11 @@ namespace scope {
 	}
 
 	void ScopeController::LogRun() {
-		if (ctrlparameters.storage.autosave()) {
+		if (ctrlparams.storage.autosave()) {
 			std::wstring msg(L"");
-			switch (ctrlparameters.run_state().t) {
+			switch (ctrlparams.run_state().t) {
 				case RunStateHelper::RunningContinuous:
-					if (ctrlparameters.storage.savelive())
+					if (ctrlparams.storage.savelive())
 						msg += L"Live scan (saving)";
 					break;
 				case RunStateHelper::RunningSingle:
@@ -71,10 +70,10 @@ namespace scope {
 
 	void ScopeController::StartAllControllers() {
 		time = ::timeGetTime();
-		theDisplay.Start(ctrlparameters);
-		theStorage.Start(ctrlparameters);
-		thePipeline.Start(ctrlparameters);
-		theDaq.Start(ctrlparameters);
+		theDisplay.Start();
+		theStorage.Start();
+		thePipeline.Start();
+		theDaq.Start(ctrlparams);
 	}
 
 	void ScopeController::StopAllControllers() {
@@ -103,10 +102,10 @@ namespace scope {
 	}
 
 	void ScopeController::WaitForAllControllers() {
-		theDisplay.WaitForAll();
-		theStorage.WaitForAll();
-		thePipeline.WaitForAll();
-		theDaq.WaitForAll();
+		theDisplay.WaitForAll(400);
+		theStorage.WaitForAll(400);
+		thePipeline.WaitForAll(400);
+		theDaq.WaitForAll(400);
 	}
 
 	void ScopeController::ClearAllQueues() {
@@ -119,7 +118,7 @@ namespace scope {
 	void ScopeController::SetScannerVectorParameters() {
 		DBOUT(L"ScopeControllerImpl::SetScannerVectorParameters");
 		for (uint32_t a = 0; a < nareas; a++)
-			framescannervecs[a]->SetParameters(&ctrlparameters.areas[a].daq, &ctrlparameters.areas[a].Currentframe(), &ctrlparameters.areas[a]-fpuzstage);
+			framescannervecs[a]->SetParameters(&ctrlparams.areas[a].daq, &ctrlparams.areas[a].Currentframe(), &ctrlparams.areas[a].fpuzstage);
 	}
 
 	ControllerReturnStatus ScopeController::RunLive(StopCondition* const sc) {
@@ -146,69 +145,69 @@ namespace scope {
 		SetScannerVectorParameters();
 
 		// We do the same number of planes in each area (if fast z and not that many planes in range in one area, Pockels was set to zero in parameters::stack::UpdatePlanes)
-		for (auto& a : ctrlparameters.areas)
-			a.daq.requested_frames = ctrlparameters.stack.planes___.size();
+		for (auto& a : ctrlparams.areas)
+			a.daq.requested_frames = ctrlparams.stack.planes___.size();
 
 		// StorageController and DisplayController saves/displays the number of slices in each area
-		theStorage.Start(ctrlparameters);
-		theDisplay.Start(ctrlparameters);
+		theStorage.Start();
+		theDisplay.Start();
 
 		// At every slice Daq and PipelineController expect 1 frame (they calculate averages themselves)
 		//  do not manipulate guiparameters here, otherwise we have a problem on restarting the stack
-		for (auto& ap : ctrlparameters.areas)
+		for (auto& ap : ctrlparams.areas)
 			ap.daq.requested_frames = 1;
 
 		// Set scale for the progress indicator
-		PlaneCounter.SetWithLimits(0, 0, ctrlparameters.stack.planes___.size());
+		counters.planecounter.SetWithLimits(0, 0, ctrlparams.stack.planes___.size());
 
 		// Go through all the precalculated planes
-		for (uint32_t p = 0; p < ctrlparameters.stack.planes___.size(); p++) {
+		for (uint32_t p = 0; p < ctrlparams.stack.planes___.size(); p++) {
 
 			// Move to precalculated position (stage position is the same for all areas, no of slices thus also the same)
-			if (ctrlparameters.stack.zdevicetype().t == ZDeviceHelper::ZStage) {
-				theStage.MoveAbsolute(theStage.CurrentXPosition(), theStage.CurrentYPosition(), ctrlparameters.stack.planes___[p][0].position());
+			if (ctrlparams.stack.zdevicetype().t == ZDeviceHelper::ZStage) {
+				theStage.MoveAbsolute(theStage.CurrentXPosition(), theStage.CurrentYPosition(), ctrlparams.stack.planes___[p][0].position());
 				// Wait one second for movement to complete
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
-			else if (ctrlparameters.stack.zdevicetype().t == ZDeviceHelper::FastZ) {
+			else if (ctrlparams.stack.zdevicetype().t == ZDeviceHelper::FastZ) {
 				for (uint32_t a = 0; a < nareas; a++) {
-					ctrlparameters.areas[a].Currentframe().fastz = ctrlparameters.stack.planes___[p][a].position();
+					ctrlparams.areas[a].Currentframe().fastz = ctrlparams.stack.planes___[p][a].position();
 					// Also change guiparameters so the users sees what is happening during stacking
-					guiparameters.areas[a].Currentframe().fastz = ctrlparameters.stack.planes___[p][a].position();
+					guiparameters.areas[a].Currentframe().fastz = ctrlparams.stack.planes___[p][a].position();
 				}
 			}
 
 			// Set pockels to precalculated value
 			for (uint32_t a = 0; a < nareas; a++) {
-				ctrlparameters.areas[a].Currentframe().pockels = ctrlparameters.stack.planes___[p][a].pockels();
+				ctrlparams.areas[a].Currentframe().pockels = ctrlparams.stack.planes___[p][a].pockels();
 				// Also change guiparameters so the users sees what is happening during stacking
-				guiparameters.areas[a].Currentframe().pockels = ctrlparameters.stack.planes___[p][a].pockels();
+				guiparameters.areas[a].Currentframe().pockels = ctrlparams.stack.planes___[p][a].pockels();
 			}
 
 			// Calculate scanner vectors
 			SetScannerVectorParameters();
 
 			// Start
-			theDaq.Start(ctrlparameters);
-			thePipeline.Start(ctrlparameters);
+			theDaq.Start(ctrlparams);
+			thePipeline.Start();
 
 			// and wait for them to end
-			theDaq.WaitForAll();
-			thePipeline.WaitForAll();
+			theDaq.WaitForAll(400);
+			thePipeline.WaitForAll(400);
 
 			// Stop the stack if abort requested
 			if (repeat_abort.IsSet())
 				break;
 
 			// Advance progress indicator
-			PlaneCounter = p + 1;
+			counters.planecounter = p + 1;
 		}
 
-		theDisplay.WaitForAll();
-		theStorage.WaitForAll();
+		theDisplay.WaitForAll(400);
+		theStorage.WaitForAll(400);
 		ClearAfterStop();
 
-		PlaneCounter = 0;
+		counters.planecounter = 0;
 
 		return ControllerReturnStatus::finished;
 	}
@@ -219,11 +218,11 @@ namespace scope {
 		SetScannerVectorParameters();
 
 		// Set repeat counter limits (for progress bar display)
-		RepeatCounter.SetWithLimits(1, 1, ctrlparameters.timeseries.repeats());
+		counters.repeatcounter.SetWithLimits(1, 1, ctrlparams.timeseries.repeats());
 
 		// Go through all repeats
-		for (uint32_t t = 0; t < ctrlparameters.timeseries.repeats(); t++) {
-			RepeatCounter = t + 1;
+		for (uint32_t t = 0; t < ctrlparams.timeseries.repeats(); t++) {
+			counters.repeatcounter = t + 1;
 
 			ClearAllQueues();
 
@@ -232,7 +231,7 @@ namespace scope {
 
 			// Start waiting, wait from beginning of timeseries until beginning of next one
 			std::unique_lock<std::mutex> lock(waitbetweenrepeats_mutex);
-			std::chrono::milliseconds waittime(static_cast<long>(1000 * ctrlparameters.timeseries.betweenrepeats()));
+			std::chrono::milliseconds waittime(static_cast<long>(1000 * ctrlparams.timeseries.betweenrepeats()));
 			// Waits or is notified before by a call to Stop
 			waitbetweenrepeats_cond.wait_for(lock, waittime);
 
@@ -241,15 +240,15 @@ namespace scope {
 			WaitForAllControllers();
 
 			// Alternate planes if planes defined
-			if (ctrlparameters.timeseries.planes.size() != 0) {
+			if (ctrlparams.timeseries.planes.size() != 0) {
 				for (uint32_t a = 0; a < nareas; a++)
-					ctrlparameters.areas[a].Currentframe().fastz = ctrlparameters.timeseries.planes[t % ctrlparameters.timeseries.planes.size()][a].position();
+					ctrlparams.areas[a].Currentframe().fastz = ctrlparams.timeseries.planes[t % ctrlparams.timeseries.planes.size()][a].position();
 				SetScannerVectorParameters();
 			}
 
 			// Break if abort condition set (from Stop)
 			if (repeat_abort.IsSet()) {
-				RepeatCounter = 1;
+				counters.repeatcounter = 1;
 				break;
 			}
 		}
@@ -264,25 +263,25 @@ namespace scope {
 		SetScannerVectorParameters();
 		uint32_t trials = 0;
 		DWORD starttime = ::timeGetTime();
-		GaterDAQmx gater(ctrlparameters.behavior.gateline(), sc);
+		GaterDAQmx gater(ctrlparams.behavior.gateline(), sc);
 
 		// Set trial counter limits
-		TrialCounter.SetWithLimits(0.0, 0.0, ctrlparameters.behavior.unlimited_repeats() ? 10000.0 : ctrlparameters.behavior.repeats());
+		counters.trialcounter.SetWithLimits(0.0, 0.0, ctrlparams.behavior.unlimited_repeats() ? 10000.0 : ctrlparams.behavior.repeats());
 
 		// Record trials until StopCondition set or requested number of trials is reached
-		while (!sc->IsSet() || ctrlparameters.behavior.unlimited_repeats() || trials < ctrlparameters.behavior.repeats()) {
+		while (!sc->IsSet() || ctrlparams.behavior.unlimited_repeats() || trials < ctrlparams.behavior.repeats()) {
 			// Wait for high signal then start acquisition, on StopCondition break from loop
 			if (!gater.WaitFor(true))
 				break;
 
 			//Band-Aid Jerry - Forced Behavior Acquisition to run in Live Scan Mode with Live saving enabled
-			ctrlparameters.time.Set(GetCurrentTimeString());
-			ctrlparameters.run_state = RunStateHelper::RunningContinuous;
-			ctrlparameters.storage.savelive = true;
+			ctrlparams.time.Set(GetCurrentTimeString());
+			ctrlparams.run_state = RunStateHelper::RunningContinuous;
+			ctrlparams.storage.savelive = true;
 
 			StartAllControllers();
 			// Update time
-			TotalTime = static_cast<double>(::timeGetTime() - starttime) / 1000;
+			counters.totaltime = static_cast<double>(::timeGetTime() - starttime) / 1000;
 
 			// Wait for low signal and then stop acquisition, on StopCondition break from loop
 			if (!gater.WaitFor(false))
@@ -291,8 +290,8 @@ namespace scope {
 			ClearAllQueues();
 			// Update counters and time
 			trials++;
-			TrialCounter = trials;
-			TotalTime = static_cast<double>(::timeGetTime() - starttime) / 1000;
+			counters.trialcounter = trials;
+			counters.totaltime = static_cast<double>(::timeGetTime() - starttime) / 1000;
 		}
 
 		ClearAfterStop();
@@ -303,53 +302,53 @@ namespace scope {
 		DBOUT(L"ScopeController::CleanAfterStop");
 		ClearAllQueues();
 		repeat_abort.Set(false);
-		ctrlparameters.run_state = RunStateHelper::Stopped;
+		ctrlparams.run_state = RunStateHelper::Stopped;
 		guiparameters.run_state = RunStateHelper::Stopped;
-		SetGuiCtrlState();
+		//SetGuiCtrlState();
 	}
 
 	void ScopeController::StartLive() {
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped) {
 			guiparameters.requested_mode.Set(DaqModeHelper::Mode::continuous);
 			guiparameters.run_state.Set(RunStateHelper::Mode::RunningContinuous);
 			guiparameters.date.Set(GetCurrentDateString());
 			guiparameters.time.Set(GetCurrentTimeString());
-			ctrlparameters = guiparameters;
-			SetGuiCtrlState();
+			ctrlparams = guiparameters;
+			//SetGuiCtrlState();
 			stops[0].Set(false);
-			futures[0] = std::async(std::bind(&RunLive, this, &stops[0]));
+			futures[0] = std::async(std::bind(&ScopeController::RunLive, this, &stops[0]));
 			futures[0].wait();				// Wait here, because RunLive should quickly return
 		}
 	}
 
 	void ScopeController::StartStack() {
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped) {
 			guiparameters.requested_mode.Set(DaqModeHelper::Mode::nframes);
 			guiparameters.date.Set(GetCurrentDateString());
 			guiparameters.time.Set(GetCurrentTimeString());
 			guiparameters.run_state.Set(RunStateHelper::Mode::RunningStack);
-			ctrlparameters = guiparameters;
-			SetGuiCtrlState();
+			ctrlparams = guiparameters;
+			//SetGuiCtrlState();
 			stops[0].Set(false);
-			futures[0] = std::async(std::bind(&RunStack, this, &stops[0]));
+			futures[0] = std::async(std::bind(&ScopeController::RunStack, this, &stops[0]));
 		}
 	}
 
 	void ScopeController::StartSingle() {
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped) {
 			guiparameters.requested_mode.Set(DaqModeHelper::Mode::nframes);
 			guiparameters.run_state.Set(RunStateHelper::Mode::RunningSingle);
 			guiparameters.date.Set(GetCurrentDateString());
 			guiparameters.time.Set(GetCurrentTimeString());
-			ctrlparameters = guiparameters;
-			SetGuiCtrlState();
+			ctrlparams = guiparameters;
+			//SetGuiCtrlState();
 			stops[0].Set(false);
-			futures[0] = std::async(std::bind(&RunSingle, this, &stops[0]));
+			futures[0] = std::async(std::bind(&ScopeController::RunSingle, this, &stops[0]));
 		}
 	}
 
 	void ScopeController::StartTimeseries() {
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped) {
 			// Same number of frames for all areas. However, this is non-ideal...
 			for (uint32_t a = 1; a < nareas; ++a)
 				guiparameters.timeseries.frames[a] = guiparameters.timeseries.frames[0].Value();
@@ -360,23 +359,23 @@ namespace scope {
 			for (uint32_t a = 0; a < nareas; a++)
 				guiparameters.areas[a].daq.requested_frames = guiparameters.timeseries.frames[a]();
 			
-			ctrlparameters = guiparameters;
-			SetGuiCtrlState();
+			ctrlparams = guiparameters;
+			//SetGuiCtrlState();
 			stops[0].Set(false);
-			futures[0] = std::async(std::bind(&RunTimeseries, this, &stops[0]));
+			futures[0] = std::async(std::bind(&ScopeController::RunTimeseries, this, &stops[0]));
 		}
 	}
 
 	void ScopeController::StartBehavior() {
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped) {
 			guiparameters.run_state.Set(RunStateHelper::Mode::RunningBehavior);
 			guiparameters.requested_mode.Set(DaqModeHelper::Mode::continuous);
 			guiparameters.date.Set(GetCurrentDateString());
 			guiparameters.time.Set(GetCurrentTimeString());
-			ctrlparameters = guiparameters;
-			SetGuiCtrlState();
+			ctrlparams = guiparameters;
+			//SetGuiCtrlState();
 			stops[0].Set(false);
-			futures[0] = std::async(std::bind(&RunBehavior, this, &stops[0]));
+			futures[0] = std::async(std::bind(&ScopeController::RunBehavior, this, &stops[0]));
 		}
 	}
 
@@ -384,21 +383,21 @@ namespace scope {
 		DBOUT(L"ScopeController::stop()\n");
 		stops[0].Set();
 
-		if ((ctrlparameters.run_state() == RunStateHelper::RunningStack) || (ctrlparameters.run_state() == RunStateHelper::Mode::RunningTimeseries))
+		if ((ctrlparams.run_state() == RunStateHelper::RunningStack) || (ctrlparams.run_state() == RunStateHelper::Mode::RunningTimeseries))
 			repeat_abort.Set(true);
 
 		// Notify the condition variable waiting betweenrepeats in RunTimeseries
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::RunningTimeseries)
+		if (ctrlparams.run_state() == RunStateHelper::Mode::RunningTimeseries)
 			waitbetweenrepeats_cond.notify_one();
 
-		if (ctrlparameters.run_state() != RunStateHelper::Mode::Stopped) {
+		if (ctrlparams.run_state() != RunStateHelper::Mode::Stopped) {
 			// If we currently running an online update, wait until it is ready before stopping controllers!
 			if (onlineupdate_future.valid())
 				onlineupdate_future.get();
 
 			StopAllControllers();
 			// If we ran live we have to call the ClearAfterStop here (since RunLive does not wait for scanning to finish. How could it...)
-			if (static_cast<RunState>(ctrlparameters.run_state()) == RunStateHelper::Mode::RunningContinuous) {
+			if (static_cast<RunState>(ctrlparams.run_state()) == RunStateHelper::Mode::RunningContinuous) {
 				ClearAfterStop();
 			}
 			//futures[0].wait();
@@ -408,7 +407,7 @@ namespace scope {
 
 	void ScopeController::OnlineUpdate(const uint32_t& _area) {
 		DBOUT(L"ScopeController::update_parameters_from_gui()\n");
-		if (ctrlparameters.run_state() == RunStateHelper::Mode::Stopped)
+		if (ctrlparams.run_state() == RunStateHelper::Mode::Stopped)
 			return;
 
 		// Check if online update is commencing right now, abort it (i.e. abort Outputs::Write in DaqController, since this is
@@ -430,17 +429,17 @@ namespace scope {
 				DBOUT(L"ScopeController::UpdateAreaParametersFromGui starting new online update");
 				onlineupdate_running = true;
 				try {
-					ctrlparameters.areas[_area] = guiparameters.areas[_area];
+					ctrlparams.areas[_area] = guiparameters.areas[_area];
 					DBOUT(L"ScopeController::UpdateAreaParametersFromGui guioffset " << guiparameters.areas[_area].Currentframe().xoffset() << L" " << guiparameters.areas[_area].Currentframe().yoffset());
 					// This is the expensive step, the recalculation of the scannervector
-					framescannervecs[_area].SetParameters(&ctrlparameters.areas[_area].daq, &ctrlparameters.areas[_area].Currentframe(), &ctrlparameters.areas[_area].fpuzstage);
+					framescannervecs[_area]->SetParameters(&ctrlparams.areas[_area].daq, &ctrlparams.areas[_area].Currentframe(), &ctrlparams.areas[_area].fpuzstage);
 
 					// Fix for online pockel cell update: somehow in this function the currentframe is always framesaw, so I added an if statement to go straight for frameresonance parameters in the resonance scanmode (Karlis)
 					//framescannervecs[_area]->SetParameters(&parameters.areas[_area]->daq, SCOPE_USE_RESONANCESCANNER?&parameters.areas[_area]->frameresonance:parameters.areas[_area]->currentframe, &parameters.areas[_area]->fpuzstage);
 					// This returns only after the updated scannervec is written to the device buffer or the whole update write is aborted
-					theDaq.OnlineParameterUpdate(ctrlparameters.areas[_area]);
+					theDaq.OnlineParameterUpdate(ctrlparams.areas[_area]);
 
-					theDisplay.ResolutionChange(ctrlparameters.areas[_area]);
+					theDisplay.ResolutionChange(ctrlparams.areas[_area]);
 				}
 				catch (...) {
 					ScopeExceptionHandler(__FUNCTION__);

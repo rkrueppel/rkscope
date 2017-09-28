@@ -5,7 +5,7 @@ namespace scope {
 
 PipelineController::PipelineController(
 	const uint32_t& _nactives
-	, const parameters::Scope& _guiparameters
+	, parameters::Scope& _guiparameters
 	, ScopeCounters& _counters
 	, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
 	, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
@@ -59,7 +59,7 @@ ControllerReturnStatus PipelineController::Run(StopCondition* const sc, const ui
 	current_frame->SetAvgMax(requested_averages);
 	//current_frame->InitializeCurrentLineData(5*guiparameters.areas[_area]->currentframe->XTotalPixels());
 
-	std::unique_ptr<PixelmapperBasic> pixel_mapper(PixelmapperBasic::Factory(SCOPE_SCANNERTYPE, guiparameters.areas[_area]->scanmode()));
+	std::unique_ptr<PixelmapperBasic> pixel_mapper(PixelmapperBasic::Factory(SCOPE_SCANNERTYPE, guiparameters.areas[_area].scanmode()));
 	pixel_mapper->SetLookupVector(scannervecs[_area]->GetLookupVector());
 	pixel_mapper->SetParameters(scannervecs[_area]->GetSVParameters());
 	pixel_mapper->SetCurrentFrame(current_frame);

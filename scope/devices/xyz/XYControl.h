@@ -32,15 +32,16 @@ protected:
 	/** interval (in milliseconds) to poll device */
 	uint32_t pollinterval;
 
-protected:
+public:
+	XYControl(parameters::XYControl& _params);
+
+	XYControl(scope::XYControl&&) = default;
+
 	/** disable copy */
 	XYControl(scope::XYControl&) = delete;
 
 	/** disable assignment */
 	XYControl operator=(XYControl) = delete;
-
-public:
-	XYControl(parameters::XYControl& _params);
 
 	/** If pollthread was started, request stop and wait for finish */
 	~XYControl();

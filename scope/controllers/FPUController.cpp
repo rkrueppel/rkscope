@@ -8,13 +8,12 @@ FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Ar
 	: nareas(_nareas)
 	, guiareaparamsvec(_guiareaparamsvec)
 	, stepsizes(_nareas, 0.0)
-	, (_nareas)
 {
-	theXYStages.reserve(nareas);
+	//theXYStages.reserve(nareas);
 	for ( uint32_t a = 0 ; a < _nareas ; a++ ) {
-		theXYStages.emplace_back(SCOPE_FPUXYCONTROL_T(guiareaparamsvec[a].fpuxystage));
+		theXYStages.emplace_back(guiareaparamsvec[a].fpuxystage);
 		
-		stepsizes[a] = guiparameters.areas[a].fpuxystage.buttonstepsize();
+		stepsizes[a] = guiareaparamsvec[a].fpuxystage.buttonstepsize();
 		
 		guiareaparamsvec[a].fpuxystage.xpos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
 		guiareaparamsvec[a].fpuxystage.ypos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
@@ -31,7 +30,7 @@ void FPUController::Initialize() {
 	// This is called from TheScope after loading the initial parameter set
 	// Only then should the stages be initialized (who knows if the default constructed parameters do harm to the stage)
 	for ( uint32_t a = 0 ; a < nareas ; a++ )
-		theXYStages[a].Initialize(guiareaparamsvec[a].fpuxystage);	
+		theXYStages[a].Initialize();	
 }
 
 void FPUController::MoveAbsolute(const uint32_t& _area) {

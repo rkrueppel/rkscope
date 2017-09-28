@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "BaseController.h"
+#include "helpers\ScopeException.h"
  
 namespace scope {
 	BaseController::BaseController(const uint32_t& _nactives)
@@ -15,7 +16,7 @@ namespace scope {
 		for (uint32_t a = 0; a < nactives; a++) {
 			stops[a].Set(false);
 			// Let "Run" run asynchronously and get its future
-			futures[a] = std::async(std::bind(&Run, this, &stops[a], a));
+			futures[a] = std::async(std::bind(&BaseController::Run, this, &stops[a], a));
 		}
 	}
 

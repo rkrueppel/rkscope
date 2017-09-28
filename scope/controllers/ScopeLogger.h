@@ -67,6 +67,8 @@ namespace scope {
 
 			/** disable assignment */
 			ScopeLogger operator=(const ScopeLogger&) = delete;
+
+			~ScopeLogger();
 			
 			static ScopeLogger& GetInstance();
 

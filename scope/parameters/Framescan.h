@@ -52,6 +52,12 @@ public:
 		/** name of the preset */
 		ScopeString name;																								
 	
+		ScopeNumber<double> pixeltime;
+
+		ScopeNumber<double> scannerdelay;
+
+		ScopeNumber<uint32_t> averages;
+
 		/** x resolution of the image (linewidth) */
 		ScopeNumber<uint32_t> xres;												
 	

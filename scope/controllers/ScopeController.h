@@ -19,6 +19,7 @@
 #include "helpers/ScopeException.h"
 #include "ScopeLogger.h"
 #include "devices/GaterDAQmx.h"
+//#include "devices/xyz/XYZControl.h"
 #include "helpers/ScopeNumber.h"
 #include "helpers/ScopeDatatypes.h"
 
@@ -31,6 +32,10 @@
 #include "devices\fpga\FPGANoiseOutput.h"
 #include "devices\fpga\FPGAResonanceScanner.h"
 #include "devices\fpga\FPGAResonanceScanner_NI5771.h"
+
+namespace scope {
+	class XYZControl;
+}
 
 namespace scope {
 
@@ -57,7 +62,7 @@ namespace scope {
 			parameters::Scope& guiparameters;
 			
 			/** The ScopeControllers own parameter set, gets overwritten on Start by guiparameters while some values are adjusted/calculated for the actual Run */
-			parameters::Scope ctrlparameters;
+			parameters::Scope ctrlparams;
 			
 			/** Reference to TheScope's counters */
 			ScopeCounters& counters;
@@ -76,6 +81,9 @@ namespace scope {
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_storage;
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_display;
 			/** @} */
+
+			/** Ref to TheScope's stage */
+			scope::SCOPE_XYZCONTROL_T& theStage;
 
 			/** thread-safe bool to signal a requested abort of a stack scan */
 			StopCondition repeat_abort;
@@ -150,15 +158,12 @@ namespace scope {
 				, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& _daq_to_pipeline
 				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_storage
 				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_display
+				, SCOPE_XYZCONTROL_T& _theStage
 			);
 
 			/** Stop whatever is running */
 			~ScopeController(void);
 			
-			/** Called by CMainDialogFrame::QuitApplication.
-			* Stops running threads etc, avoids destruction of these when the static pimpl gets destructed (probably very late or undefined).*/
-			void PrepareQuit();
-
 			/** Starts live scanning by running RunLive asynchronously */
 			void StartLive();
 

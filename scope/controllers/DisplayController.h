@@ -45,6 +45,8 @@ namespace scope {
 			/** Mutex to protect access to that vector */
 			mutable std::vector<std::mutex> histogramframes_mutexe;
 
+			parameters::Scope ctrlparams;
+
 			/** disable copy */
 			DisplayController(DisplayController& other) = delete;
 

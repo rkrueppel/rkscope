@@ -23,7 +23,7 @@ namespace scope {
 	}
 
 	ScopeLogger& ScopeLogger::GetInstance() {
-		static ScopeLogger sl();
+		static ScopeLogger sl;
 		return sl;
 	}
 
@@ -94,14 +94,14 @@ namespace scope {
 		std::wostringstream logmsg;
 		logmsg << st.wHour << L":" << std::setfill(L'0') << std::setw(2) << st.wMinute << L"::" << st.wSecond << L" - ";
 		logmsg << message;
-		active.Send(std::bind(&WriteToConsole, this, std::placeholders::_1, logmsg.str()));
+		active.Send(std::bind(&ScopeLogger::WriteToConsole, this, std::placeholders::_1, logmsg.str()));
 		// Writing to disk (FlushLogBox) is called in WriteToLogbox because user entries in LogView need also to be written to disk
-		active.Send(std::bind(&WriteToLogbox, this, std::placeholders::_1, logmsg.str(), msgtype));
+		active.Send(std::bind(&ScopeLogger::WriteToLogbox, this, std::placeholders::_1, logmsg.str(), msgtype));
 	}
 
 	void ScopeLogger::AttachLogFrame(gui::CLogFrame* const _logframe) {
 		logframe = _logframe;
-		active.Send(std::bind(&FlushLogbox, this, std::placeholders::_1));
+		active.Send(std::bind(&ScopeLogger::FlushLogbox, this, std::placeholders::_1));
 	}
 
 	HWND ScopeLogger::GetLogFrameWindow() {
@@ -118,7 +118,7 @@ namespace scope {
 	void ScopeLogger::GetUserLoggings() {
 		if ( logframe != nullptr )
 			logbooktext = logframe->GetLogText();
-		active.Send(std::bind(&FlushLogbox, this, std::placeholders::_1));
+		active.Send(std::bind(&ScopeLogger::FlushLogbox, this, std::placeholders::_1));
 	}
 
 	void ScopeLogger::DetachLogFrame() {

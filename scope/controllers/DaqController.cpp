@@ -14,7 +14,6 @@ DaqController::DaqController(const uint32_t& _nactives
 	, shutters(_nactives)
 	, switches(_nactives)
 	, chunksizes(_nactives, 16000)
-	, online_update_done_flag(_nactives, false)
 {
 
 	uint32_t a = 0;
@@ -23,6 +22,9 @@ DaqController::DaqController(const uint32_t& _nactives
 	a = 0;
 	for (auto& sw : switches)
 		sw.Initialize(ctrlparams.areas[a++].daq.switchresonanceline());
+
+	for (a = 0; a < SCOPE_NAREAS; a++)
+		online_update_done_flag[a] = false;
 
 	ZeroGalvoOutputs();
 }
@@ -174,7 +176,7 @@ void DaqController::Start(const parameters::Scope& _params) {
 		// Reset the stop condition
 		stops[a].Set(false);
 		// Get the async's future
-		futures[a] = std::async(std::bind(&Run, this, &stops[a], a));
+		futures[a] = std::async(std::bind(&DaqController::Run, this, &stops[a], a));
 	}
 }
 
@@ -190,7 +192,7 @@ void DaqController::OnlineParameterUpdate(const parameters::Area& _areaparameter
 
 	// If we are scanning live do async online update. Always catch the async future since the futures destructor waits (see http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3451.pdf)
 	if (ctrlparams.requested_mode() == DaqModeHelper::continuous)
-		auto f = std::async(std::bind(&WorkerOnlineParameterUpdate, this, area));
+		auto f = std::async(std::bind(&DaqController::WorkerOnlineParameterUpdate, this, area));
 
 	// wait until online update is done or aborted in async WorkerOnlineParameterUpdate
 	while (!online_update_done_flag[area])
@@ -202,7 +204,7 @@ void DaqController::WorkerOnlineParameterUpdate(const uint32_t _area) {
 	auto scannervec = scannervecs[_area]->GetInterleavedVector();
 
 	// Number of blocks => around 4 blocks per second frame time
-	uint32_t blocks = round2ui32(4.0 * params.areas[_area].FrameTime());
+	uint32_t blocks = round2ui32(4.0 * ctrlparams.areas[_area].FrameTime());
 
 	DBOUT(L"WorkerOnlineParameterUpdate blocks" << blocks);
 	online_update_done_flag[_area] = false;

@@ -3,8 +3,9 @@
 
 namespace scope {
 
-StorageController::StorageController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
-	: BaseController(_nactives, _parameters)
+StorageController::StorageController(const uint32_t& _nactives, parameters::Scope& _ctrlparams, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
+	: BaseController(_nactives)
+	, ctrlparams(_ctrlparams)
 	, input_queue(_iqueue)
 	, runcounter(0)
 	, filenames(_nactives)
@@ -28,23 +29,23 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 	uint32_t framearea = 0;
 	std::wstring foldername(L"");
 	std::vector<ScopeMultiImagePtr> current_frames(nactives);
-	const DaqMode requested_mode = parameters.requested_mode();
+	const DaqMode requested_mode = ctrlparams.requested_mode();
 	std::vector<uint32_t> requested_frames(nactives);
 	uint32_t a = 0;
 	std::generate(std::begin(requested_frames), std::end(requested_frames),
-		[&]() { return parameters.areas[a++]->daq.requested_frames(); } );
+		[&]() { return ctrlparams.areas[a++].daq.requested_frames(); } );
 	// Checks if we should really do saving
-	bool dosave(parameters.storage.autosave()
+	bool dosave(ctrlparams.storage.autosave()
 		&& ( (requested_mode == DaqModeHelper::nframes)
-			|| ((requested_mode == DaqModeHelper::continuous) && parameters.storage.savelive()) ) );
+			|| ((requested_mode == DaqModeHelper::continuous) && ctrlparams.storage.savelive()) ) );
 
 	// If saving desired create folder and encoders
 	try {
 		if ( dosave ) {
 			foldername = CreateFolder();
-			// Save ScopeParameters in xml if desired
-			if ( parameters.storage.saveparameters() )
-				parameters.Save(foldername + L"parameters.xml");
+			// Save Scopectrlparams in xml if desired
+			if ( ctrlparams.storage.saveparameters() )
+				ctrlparams.Save(foldername + L"ctrlparams.xml");
 			++runcounter;
 		}
 	} catch (...) {
@@ -72,7 +73,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 		current_frames[framearea] = msg.cargo;
 
 		// otherwise something is seriously wrong:
-		assert(parameters.areas[framearea]->daq.inputs->channels() == current_frames[framearea]->Channels());
+		assert(ctrlparams.areas[framearea].daq.inputs->channels() == current_frames[framearea]->Channels());
 
 		// Create new frame on disk (Frames are only actually saved if encoder was created with dosave=true)
 		encoders[framearea]->NewFrame();
@@ -106,7 +107,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 					e.reset(nullptr);
 
 				// Fix the tiff tags if wanted
-				if ( dosave && parameters.storage.usetifftags() )
+				if ( dosave && ctrlparams.storage.usetifftags() )
 					FixTIFFTags();
 
 				runcounter++;
@@ -120,7 +121,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 		e.reset(nullptr);
 
 	// Fix the tiff tags if wanted
-	if ( dosave && parameters.storage.usetifftags() )
+	if ( dosave && ctrlparams.storage.usetifftags() )
 		FixTIFFTags();
 
 	if ( sc->IsSet() )
@@ -133,7 +134,7 @@ ControllerReturnStatus StorageController::Run(StopCondition* const sc, const uin
 std::wstring StorageController::CreateFolder() {
 	// Make suffic depending on run state
 	std::wstring runmode(L"");
-	switch ( parameters.run_state().t ) {
+	switch ( ctrlparams.run_state().t ) {
 	case RunStateHelper::RunningContinuous:
 		runmode = L"_Live";
 		break;
@@ -149,10 +150,10 @@ std::wstring StorageController::CreateFolder() {
 	}
 
 	std::wstringstream foldername;
-	foldername << parameters.storage.folder() << parameters.date() << L"\\" << parameters.time() << runmode << L"\\";
+	foldername << ctrlparams.storage.folder() << ctrlparams.date() << L"\\" << ctrlparams.time() << runmode << L"\\";
 
 	std::wstring msg = L"Saving into " + foldername.str();
-	scope_logger.Log(msg, log_info);
+	ScopeLogger::GetInstance().Log(msg, log_info);
 
 	// Create directory
 	if ( SHCreateDirectoryEx(NULL, foldername.str().c_str(), NULL) == ERROR_SUCCESS )
@@ -166,12 +167,12 @@ std::wstring StorageController::CreateFolder() {
 void StorageController::InitializeEncoders(const bool& _dosave, const std::wstring& _foldername) {
 	for ( uint32_t a = 0 ; a < nactives; a++ ) {
 		// Make a new multi image encoder for that area
-		encoders[a] = std::unique_ptr<ScopeMultiImageEncoder>(new ScopeMultiImageEncoder(_dosave, parameters.areas[a]->daq.inputs->channels(), parameters.storage.compresstiff()));
-		filenames[a].resize(parameters.areas[a]->daq.inputs->channels());
+		encoders[a] = std::unique_ptr<ScopeMultiImageEncoder>(new ScopeMultiImageEncoder(_dosave, ctrlparams.areas[a].daq.inputs->channels(), ctrlparams.storage.compresstiff()));
+		filenames[a].resize(ctrlparams.areas[a].daq.inputs->channels());
 		// Construct the filenames for all channels
-		for ( uint32_t c = 0 ; c < parameters.areas[a]->daq.inputs->channels() ; c++ ) {
+		for ( uint32_t c = 0 ; c < ctrlparams.areas[a].daq.inputs->channels() ; c++ ) {
 			std::wstringstream stream;
-			stream << _foldername << parameters.storage.basename() << L"_A" << a << L"_Ch" << c << L"_ " << std::setfill(L'0') << std::setw(4) << runcounter << L".tif";
+			stream << _foldername << ctrlparams.storage.basename() << L"_A" << a << L"_Ch" << c << L"_ " << std::setfill(L'0') << std::setw(4) << runcounter << L".tif";
 			filenames[a][c] = stream.str();
 		}
 		// Give the filenames to the encoder
@@ -192,9 +193,9 @@ void StorageController::FixTIFFTags() {
 	// Build command line string for exiftool.exe
 	std::wstringstream cmdbase;
 	cmdbase << L"-delete_original -overwrite_original_in_place -ResolutionUnit=None -Software=\"Proudly recorded with Scope\" ";
-	switch ( parameters.run_state().t ) {
+	switch ( ctrlparams.run_state().t ) {
 		case RunStateHelper::RunningStack:
-			cmdbase << L"-ImageDescription=\"ImageJ=1.47m\nunit=um\nspacing=" << parameters.stack.spacing() << L"\" ";
+			cmdbase << L"-ImageDescription=\"ImageJ=1.47m\nunit=um\nspacing=" << ctrlparams.stack.spacing() << L"\" ";
 			break;
 		case RunStateHelper::RunningTimeseries:
 			break;
@@ -207,16 +208,16 @@ void StorageController::FixTIFFTags() {
 		std::wstringstream cmd;
 		cmd << cmdbase.str();
 		// Add timeseries stuff
-		if ( parameters.run_state() == RunStateHelper::RunningTimeseries ) {
-			cmd << L"-ImageDescription=\"ImageJ=1.47m\nunit=um\nfinterval=" << parameters.timeseries.totaltimes[a]()/parameters.timeseries.frames[a]();
-			cmd << L"\nframes=" << parameters.timeseries.frames[a]() << L"\" ";
+		if ( ctrlparams.run_state() == RunStateHelper::RunningTimeseries ) {
+			cmd << L"-ImageDescription=\"ImageJ=1.47m\nunit=um\nfinterval=" << ctrlparams.timeseries.totaltimes[a]()/ctrlparams.timeseries.frames[a]();
+			cmd << L"\nframes=" << ctrlparams.timeseries.frames[a]() << L"\" ";
 		}
 
 		// Add µm resolution
-		cmd << L"-XResolution=" << 1/parameters.areas[a]->micronperpixelx() << L" -YResolution=" << 1/parameters.areas[a]->micronperpixely() << L" ";
+		cmd << L"-XResolution=" << 1/ctrlparams.areas[a].micronperpixelx() << L" -YResolution=" << 1/ctrlparams.areas[a].micronperpixely() << L" ";
 
 		// Add the filenames
-		for ( uint32_t c = 0 ; c < parameters.areas[a]->daq.inputs->channels() ; c++ )
+		for ( uint32_t c = 0 ; c < ctrlparams.areas[a].daq.inputs->channels() ; c++ )
 			cmd << L"\"" << filenames[a][c] << L"\" ";
 
 		// Run exiftool.exe
@@ -226,7 +227,7 @@ void StorageController::FixTIFFTags() {
 		if ( 0 == CreateProcess(L"tools/exiftool.exe", wincmd.data(), NULL, NULL, FALSE, BELOW_NORMAL_PRIORITY_CLASS | CREATE_NO_WINDOW, NULL, NULL, &si, &pi) ) {
 			std::wstringstream errstr;
 			errstr << L"exiftool.exe did not start with error " << GetLastError();
-			scope_logger.Log(errstr.str(), log_error);
+			ScopeLogger::GetInstance().Log(errstr.str(), log_error);
 			return;
 		}
 
@@ -235,7 +236,7 @@ void StorageController::FixTIFFTags() {
 		if ( WAIT_OBJECT_0 != procret ) {
 			std::wstringstream errstr;
 			errstr << L"Waiting for exiftool failed with error " << procret;
-			scope_logger.Log(errstr.str(), log_error);
+			ScopeLogger::GetInstance().Log(errstr.str(), log_error);
 			return;
 		}
 
@@ -244,7 +245,7 @@ void StorageController::FixTIFFTags() {
 		if (0 == CloseHandle(pi.hThread) ) {
 			std::wstringstream errstr;
 			errstr << L"exiftool.exe did not finish correctly, error " << GetLastError();
-			scope_logger.Log(errstr.str(), log_error);
+			ScopeLogger::GetInstance().Log(errstr.str(), log_error);
 			return;
 		}
 	}

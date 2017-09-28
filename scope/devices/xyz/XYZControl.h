@@ -31,10 +31,10 @@ protected:
 
 protected:
 	/** disable copy */
-	XYZControl(XYZControl&);
+	XYZControl(XYZControl&) = delete;
 
 	/** disable assignment */
-	XYZControl operator=(XYZControl);
+	XYZControl operator=(XYZControl) = delete;
 
 public:
 	XYZControl();

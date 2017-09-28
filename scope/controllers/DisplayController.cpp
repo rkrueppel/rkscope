@@ -5,12 +5,13 @@
 namespace scope {
 
 	DisplayController::DisplayController(const uint32_t& _nactives, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue, const parameters::Scope& _parameters)
-		: BaseController(_nactives, _parameters)
+		: BaseController(_nactives)
 		, input_queue(_iqueue)
 		, channelframes(_nactives)
 		, channelframes_mutexe(_nactives)
 		, histogramframes(_nactives)
-		, histogramframes_mutexe(_nactives) {
+		, histogramframes_mutexe(_nactives)
+		, ctrlparams(_parameters) {
 	}
 
 	/** Stops and interrupts thread if necessary*/
@@ -35,20 +36,20 @@ namespace scope {
 		std::vector<uint32_t> framecounts(nactives);
 		std::fill(std::begin(framecounts), std::end(framecounts), 0);
 		// avoid the mutexed access to parameters later on
-		DaqMode requested_mode = parameters.requested_mode();
+		DaqMode requested_mode = ctrlparams.requested_mode();
 		std::vector<uint32_t> requested_frames(nactives);
 
 		// Initialize (deferred) locks
 		std::vector<std::unique_lock<std::mutex>> channelframes_locks(nactives);
 		std::vector<std::unique_lock<std::mutex>> histogramframes_locks(nactives);
 		for ( uint32_t a = 0 ; a < nactives ; a++ ) {
-			requested_frames[a] =  parameters.areas[a]->daq.requested_frames();
+			requested_frames[a] = ctrlparams.areas[a].daq.requested_frames();
 			channelframes_locks[a] = std::unique_lock<std::mutex>(channelframes_mutexe[a],std::defer_lock);
 			histogramframes_locks[a] = std::unique_lock<std::mutex>(histogramframes_mutexe[a],std::defer_lock);
 		}
 
 		// Send current run state to channel frames
-		UpdateStatusInFrames(parameters.run_state());
+		UpdateStatusInFrames(ctrlparams.run_state());
 
 		// Dequeue and distribute loop
 		while ( !sc->IsSet() ) {
@@ -129,10 +130,10 @@ namespace scope {
 
 
 	void DisplayController::ResolutionChange(const parameters::Area& _ap) {
-		*parameters.areas[_ap.area()] = _ap;			// Update so that we have the current resolution in here
+		ctrlparams.areas[_ap.area()] = _ap;			// Update so that we have the current resolution in here
 		// Clear the queue, so we don't have frames with the (now) wrong resolution
 		input_queue->Clear();
-		DBOUT(L"DisplayController::ResolutionChange to " << parameters.areas[_ap.area()]->Currentframe().xres() << L" " << parameters.areas[_ap.area()]->Currentframe().yres());
+		DBOUT(L"DisplayController::ResolutionChange to " << ctrlparams.areas[_ap.area()].Currentframe().xres() << L" " << ctrlparams.areas[_ap.area()].Currentframe().yres());
 	}
 
 	void DisplayController::SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper) {
@@ -145,7 +146,7 @@ namespace scope {
 		uint32_t area = _cframe->Area();
 		std::lock_guard<std::mutex> lock(channelframes_mutexe[area]);
 		channelframes[area].push_back(_cframe);
-		_cframe->UpdateStatus(parameters.run_state());
+		_cframe->UpdateStatus(ctrlparams.run_state());
 	}
 
 	void DisplayController::DetachFrame(gui::CChannelFrame* const _cframe) {
@@ -164,7 +165,7 @@ namespace scope {
 		uint32_t area = _hframe->Area();
 		std::lock_guard<std::mutex> lock(histogramframes_mutexe[area]);
 		histogramframes[area].push_back(_hframe);
-		_hframe->UpdateStatus(parameters.run_state());
+		_hframe->UpdateStatus(ctrlparams.run_state());
 	}
 
 	bool DisplayController::HistogramAlreadyAttached(const uint32_t& _area) const {

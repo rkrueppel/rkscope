@@ -35,8 +35,7 @@ protected:
 	/** the encoders (encapsulating the WIC stuff) */
 	std::vector<std::unique_ptr<ScopeMultiImageEncoder>> encoders;
 
-	/** the logger kept handy */
-	ScopeLogger scope_logger;
+	parameters::Scope& ctrlparams;
 	
 protected:
 	/** disable copy */
@@ -61,7 +60,7 @@ protected:
 
 public:
 	/** Connect input queue and take parameters */
-	StorageController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue);
+	StorageController(const uint32_t& _nactives, parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue);
 	
 	/** Stop the controller and interrupt thread if necessary */
 	~StorageController();
