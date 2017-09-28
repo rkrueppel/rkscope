@@ -14,6 +14,14 @@ XYControl::XYControl(parameters::XYControl& _params)
 
 }
 
+XYControl::XYControl(scope::XYControl& _xyc)
+	: params(_xyc.params)
+	, initialized(false)
+	, pos{ { &_xyc.params.xpos, &_xyc.params.ypos } }
+	, pollinterval(round2ui32(_xyc.params.pollinterval()))
+{
+}
+
 XYControl::~XYControl() {
 	StopPolling();
 }

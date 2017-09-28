@@ -14,7 +14,7 @@ protected:
 	const uint32_t area;
 
 	/** Pointer to the scope parameters to use for calculations */
-	parameters::Area& areaparams;
+	std::vector<parameters::Area>& areaparamsvec;
 	
 	/** total fov x size for zoom 1 */
 	const double totalfovx;

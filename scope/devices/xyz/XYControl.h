@@ -38,7 +38,7 @@ public:
 	XYControl(scope::XYControl&&) = default;
 
 	/** disable copy */
-	XYControl(scope::XYControl&) = delete;
+	XYControl(scope::XYControl&);
 
 	/** disable assignment */
 	XYControl operator=(XYControl) = delete;
