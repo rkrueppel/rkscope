@@ -51,7 +51,7 @@ namespace scope {
 			if ( !display_controller.HistogramAlreadyAttached(_area) ) {
 				RECT rect(_rect);					// We need non-const here
 				
-				CHistogramFrame* pChild = new CHistogramFrame(_area, guiparameters.areas[_area].daq.inputs->channels(), guiparameters.areas[_area].histrange, display_controller);
+				CHistogramFrame* pChild = new CHistogramFrame(_area, guiparameters.areas[_area].daq.inputs->channels(), (uint16_t)guiparameters.areas[_area].histrange, display_controller);
 				// set the CMainDlgFrame as parent, so the childs get destroyed when the parent gets WM_DESTROY (correct cleanup this way!!)
 				pChild->CreateEx(m_hWnd, rect);
 				pChild->ShowWindow(SW_SHOWDEFAULT);

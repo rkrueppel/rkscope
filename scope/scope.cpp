@@ -63,9 +63,7 @@ int Run(HINSTANCE hInstance) {
 		// Sometimes, in debug build an mutex access violation pops up around here, do some cosmetic variations in the code and recompile
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));				// Move this around on debug build mutex bug
 			
-		scope::ScopeLogger::GetInstance().SetFilepath(myscope.GuiParameters.storage.folder()+L"\\"+GetCurrentDateString());
-		
-		DBOUT(L"Sizeof parameters::Scope " << sizeof(myscope.GuiParameters));
+		scope::ScopeLogger::GetInstance().SetFilepath(myscope.GetStorageFolder()+L"\\"+GetCurrentDateString());
 
 		// Create the main window
 		myscope.CreateAndShowMainWindow();

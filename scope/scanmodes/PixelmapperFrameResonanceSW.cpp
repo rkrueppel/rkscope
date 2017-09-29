@@ -41,10 +41,8 @@ PixelmapperResult PixelmapperFrameResonanceSW::LookupChunk(DaqChunkResonancePtr 
 	DaqChunkResonance::iterator chunkit;
 	DaqChunkResonance::iteratorSync syncit;
 	
-	ScopeController scope_controller;
-
 	const uint32_t area = current_frame->Area();
-	const size_t num_planes = scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size()?scope_controller.GuiParameters.areas[area]->FrameResonance().planes.size():1;
+	const size_t num_planes = tmp->planes.size()? tmp->planes.size():1;
 	const uint32_t maxlines = ytotallines*num_planes;
 	const uint32_t maximagepixels = totalimagepixels*num_planes; // 65536*np
 

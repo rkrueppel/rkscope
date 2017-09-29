@@ -60,7 +60,8 @@ void ScopeOverlay::ToD2Bitmap(ID2D1Bitmap* const _d2bitmap) const {
 	//FLOAT h = _d2bitmap->GetSize().height;
 	//FLOAT w = _d2bitmap->GetSize().width;
 	assert( (_d2bitmap->GetSize().height == lines) && (_d2bitmap->GetSize().width == linewidth) );
-	_d2bitmap->CopyFromMemory(&D2D1::RectU(0,0,linewidth,lines), overlay.data(), linewidth*4);			// stride is *4 because 4 bytes per pixel (BGRA)
+	auto r = D2D1::RectU(0, 0, linewidth, lines);
+	_d2bitmap->CopyFromMemory(&r, overlay.data(), linewidth*4);			// stride is *4 because 4 bytes per pixel (BGRA)
 }
 
 void ScopeOverlay::Resize(const uint32_t& _lines, const uint32_t& _linewidth) {

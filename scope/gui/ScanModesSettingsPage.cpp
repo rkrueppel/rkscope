@@ -53,7 +53,7 @@ LRESULT CScanModesSettingsPage::OnAreaChange(WORD, WORD, HWND, BOOL&) {
 	if ( sel == LB_ERR )
 		return 0;
 	
-	assert( (sel >= 0) && (sel < scanmodebuttonsvec.size()) );
+	assert( (sel >= 0) && ((uint32_t)sel < scanmodebuttonsvec.size()) );
 
 	// Disconnect from old areas ScanMode buttons
 	framesaw_radio.Disconnect();

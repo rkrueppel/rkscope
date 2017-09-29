@@ -31,7 +31,7 @@ namespace scope {
 	bool ThisIsSlaveArea(const uint32_t& _a);
 
 	/** @return the master area 0 (if nbeam setup) or the area _a */
-	template<class C> C::iterator ThisAreaOrMasterArea(const C& c, const typename C::iterator& i) {
+	template<class C> typename C::iterator ThisAreaOrMasterArea(const C& c, const typename C::iterator& i) {
 		return ThisIsSlaveArea(c, i)?std::begin(c):i;
 	}
 
@@ -155,6 +155,8 @@ namespace scope {
 			/** Sets the type of scanning. Called ScanModeButtons.
 			* Updates/recreates the scanvectors from a different type and sets them in theDaq and thePipeline */
 			void SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode);
+
+			std::wstring GetStorageFolder() { return guiparameters.storage.folder(); }
 			
 			void PrepareQuit();
 

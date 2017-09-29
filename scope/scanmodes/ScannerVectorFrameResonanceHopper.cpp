@@ -12,7 +12,7 @@ namespace scope {
 	void ScannerVectorFrameResonanceHopper::UpdateVector() {
 		parameters::ScannerVectorFrameResonanceHopper* tmp = dynamic_cast<parameters::ScannerVectorFrameResonanceHopper*>(svparameters);
 		uint32_t area = (filltype == ScannerVectorFillTypeHelper::FullframeXYZP)?0:1;
-		size_t num_planes = (tmp.planes.size())?tmp.planes.size():1;
+		size_t num_planes = (tmp->planes.size())?tmp->planes.size():1;
 		
 		switch ( filltype ) {
 			case ScannerVectorFillTypeHelper::FullframeXYZP:

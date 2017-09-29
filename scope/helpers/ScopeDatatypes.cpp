@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "helpers/ScopeDatatypes.h"
+#include "ScopeDatatypes.h"
 #include "ScopeDefines.h"
 
 namespace scope {

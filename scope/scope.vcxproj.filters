@@ -186,9 +186,6 @@
     <ClCompile Include="devices\daqmx\DAQmxTask.cpp">
       <Filter>Devices</Filter>
     </ClCompile>
-    <ClCompile Include="ScopeDatatypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gui\MovementPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -461,6 +458,9 @@
     </ClCompile>
     <ClCompile Include="parameters\Daq.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeDatatypes.cpp">
+      <Filter>Scope data types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

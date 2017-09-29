@@ -11,7 +11,7 @@ FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Ar
 {
 	//theXYStages.reserve(nareas);
 	for ( uint32_t a = 0 ; a < _nareas ; a++ ) {
-		theXYStages.emplace_back(guiareaparamsvec[a].fpuxystage);
+		theXYStages.emplace_back(std::make_unique<SCOPE_FPUXYCONTROL_T>(guiareaparamsvec[a].fpuxystage));
 		
 		stepsizes[a] = guiareaparamsvec[a].fpuxystage.buttonstepsize();
 		
@@ -29,38 +29,38 @@ FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Ar
 void FPUController::Initialize() {
 	// This is called from TheScope after loading the initial parameter set
 	// Only then should the stages be initialized (who knows if the default constructed parameters do harm to the stage)
-	for ( uint32_t a = 0 ; a < nareas ; a++ )
-		theXYStages[a].Initialize();	
+	for ( auto& xy : theXYStages )
+		xy->Initialize();
 }
 
 void FPUController::MoveAbsolute(const uint32_t& _area) {
 	DBOUT(L"FPUController::MoveAbsolute");
 	const double newx = guiareaparamsvec[_area].fpuxystage.xpos();
 	const double newy = guiareaparamsvec[_area].fpuxystage.ypos();
-	theXYStages[_area].MoveAbsolute(newx, newy);
+	theXYStages[_area]->MoveAbsolute(newx, newy);
 }
 
 void FPUController::MoveRelative(const uint32_t& _area, const FPUMoveDirection& _dir) {
 	DBOUT(L"FPUController::MoveRelative direction " << _dir);
 	switch (_dir) {
 		case left:
-			theXYStages[_area].MoveRelative(-stepsizes[_area], 0);
+			theXYStages[_area]->MoveRelative(-stepsizes[_area], 0);
 			break;
 		case right:
-			theXYStages[_area].MoveRelative(stepsizes[_area], 0);
+			theXYStages[_area]->MoveRelative(stepsizes[_area], 0);
 			break;
 		case up:
-			theXYStages[_area].MoveRelative(0, -stepsizes[_area]);
+			theXYStages[_area]->MoveRelative(0, -stepsizes[_area]);
 			break;
 		case down:
-			theXYStages[_area].MoveRelative(0, stepsizes[_area]);
+			theXYStages[_area]->MoveRelative(0, stepsizes[_area]);
 	}
 }
 
 void FPUController::SetXYZero(const uint32_t& _area) {
 	int ret = ::MessageBox(NULL, L"Do you really want to set the current FPU stage position as zero?", L"Are you sure?", MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2 | MB_TASKMODAL | MB_SETFOREGROUND | MB_TOPMOST);
 	if ( ret == IDYES )
-		theXYStages[_area].SetZero();
+		theXYStages[_area]->SetZero();
 }
 
 }

@@ -23,7 +23,7 @@ private:
 	std::vector<parameters::Area>& guiareaparamsvec;
 	
 	/** for xy movement of FPU stages */
-	std::vector<SCOPE_FPUXYCONTROL_T> theXYStages;
+	std::vector<std::unique_ptr<SCOPE_FPUXYCONTROL_T>> theXYStages;
 
 public:
 	/** Create XYControls and ETLs and connect buttons. */
