@@ -4,7 +4,7 @@
 
 namespace scope {
 
-	DisplayController::DisplayController(const uint32_t& _nactives, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue, const parameters::Scope& _parameters)
+	DisplayController::DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
 		: BaseController(_nactives)
 		, input_queue(_iqueue)
 		, channelframes(_nactives)

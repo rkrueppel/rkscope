@@ -21,11 +21,11 @@ private:
 	
 	/** Reference to TheScope's gui parameters */
 	std::vector<parameters::Area>& guiareaparamsvec;
-	
+
+public:
 	/** for xy movement of FPU stages */
 	std::vector<std::unique_ptr<SCOPE_FPUXYCONTROL_T>> theXYStages;
 
-public:
 	/** Create XYControls and ETLs and connect buttons. */
 	FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec);
 

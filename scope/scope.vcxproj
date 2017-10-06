@@ -305,11 +305,14 @@
     <ClCompile Include="devices\GaterDAQmx.cpp" />
     <ClCompile Include="gui\BehaviorSettingsPage.cpp" />
     <ClCompile Include="gui\DAQmxPage.cpp" />
+    <ClCompile Include="helpers\ScopeDatatypes.cpp" />
     <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp" />
     <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp" />
+    <ClCompile Include="parameters\Area.cpp" />
     <ClCompile Include="parameters\Daq.cpp" />
     <ClCompile Include="parameters\Outputs.cpp" />
     <ClCompile Include="parameters\Runstates.cpp" />
+    <ClCompile Include="parameters\Stimulation.cpp" />
     <ClCompile Include="parameters\Storage.cpp" />
     <ClCompile Include="gui\FPGAResonanceScanner_NI5771Page.cpp" />
     <ClCompile Include="parameters\Windows.cpp" />
@@ -419,7 +422,6 @@
     <ClCompile Include="gui\controls\ScopeSliderCtrl.cpp" />
     <ClCompile Include="helpers\ScopeNumber.cpp" />
     <ClCompile Include="gui\controls\ScopeColorComboCtrl.cpp" />
-    <ClCompile Include="ScopeDatatypes.cpp" />
     <ClCompile Include="devices\Shutter.cpp" />
     <ClCompile Include="gui\MovementPage.cpp" />
     <ClCompile Include="gui\controls\ScopeLEDCtrl.cpp" />
@@ -445,6 +447,7 @@
     <ClCompile Include="gui\TimeSeriesSettingsPage.cpp" />
     <ClCompile Include="devices\xyz\XYControl.cpp" />
     <ClCompile Include="devices\xyz\XYZControl.cpp" />
+    <ClCompile Include="TheScope.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controllers\ScopeControllerModes.h" />
@@ -477,6 +480,7 @@
     <ClInclude Include="devices\GaterDAQmx.h" />
     <ClInclude Include="gui\BehaviorSettingsPage.h" />
     <ClInclude Include="gui\DAQmxPage.h" />
+    <ClInclude Include="helpers\ScopeDatatypes.h" />
     <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />
     <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h" />
     <ClInclude Include="parameters\Daq.h" />

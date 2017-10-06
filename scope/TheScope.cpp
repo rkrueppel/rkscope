@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "TheScope.h"
+#include "parameters\Area.h"
 
 std::atomic<bool> scope::TheScope::instanciated(false);
 
@@ -19,6 +20,7 @@ namespace scope {
 	
 	TheScope::TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath)
 		: nareas(_nareas)
+		, guiparameters(_nareas)
 		, fpubuttonsvec(_nareas)
 		, scanmodebuttonsvec(_nareas)
 		, counters(_nareas)
@@ -31,14 +33,14 @@ namespace scope {
 		, theDisplay(_nareas, guiparameters, &pipeline_to_display)
 		, theFPUs(_nareas, guiparameters.areas, fpubuttonsvec)
 		, theStage()
-		, theController(_nareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
+		, theController(_nareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
 	{
 		//Make sure that TheScope is instanciated only once
-		std::assert(!instanciated);
+		assert(!instanciated);
 		instanciated = true;
 	
 		// Loads initial parameters
-		LoadParameters(_initialparameterspath);
+		guiparameters.Load(_initialparameterpath);
 		
 		// Now initialize the hardware with the loaded parameters
 		// Give guiparameters by reference, so hardware has parameters and can connect to ScopeNumbers
@@ -46,8 +48,6 @@ namespace scope {
 		
 		// FPUController already has the reference to guiparameters (see initializer list above)
 		theFPUs.Initialize();
-		
-		theFPUS.ConnectButtons(fpubuttonsvec);
 		
 		// Connect buttons to functions
 		// QuitButton is connected in CMainDlgFrame
@@ -58,13 +58,13 @@ namespace scope {
 		runbuttons.startbehavior.Connect(std::bind(&ScopeController::StartBehavior, &theController));
 		runbuttons.stop.Connect(std::bind(&ScopeController::Stop, &theController));
 
-		stackbuttons.starthere.Connect(std::bind(&StackStartHere, this));
-		stackbuttons.stophere.Connect(std::bind(&StackStopHere, this));
+		stackbuttons.starthere.Connect(std::bind(&TheScope::StackStartHere, this));
+		stackbuttons.stophere.Connect(std::bind(&TheScope::StackStopHere, this));
 		
 		// We cannot connect directly to XYZStage::SetZero because std::bind needs the class to be copyable (which it may  not)
-		miscbuttons.zerostage.Connect(std::bind(&SetStageZero, this));
+		zerobuttons.stage.Connect(std::bind(&TheScope::SetStageZero, this));
 		
-		miscbuttons.zerogalvos.Connect(std::bind(&ZeroGalvoOutpus, this));
+		zerobuttons.galvos.Connect(std::bind(&TheScope::ZeroGalvoOutputs, this));
 		
 		for (uint32_t a = 0; a < nareas; a++) {
 			// Initially choose the first supported scannervector in the list
@@ -73,19 +73,19 @@ namespace scope {
 			// Connect the buttons for scan mode switching (if a master area) to TheScope::SetScanMode
 			if (!ThisIsSlaveArea(a)) {
 				for (auto& b : scanmodebuttonsvec[a].map)
-					b.second.Connect(std::bind(&SetScanMode, this, a, b.first));
+					b.second.Connect(std::bind(&TheScope::SetScanMode, this, a, b.first));
 			}
 
 			// Connect update functions in TheScope to update functions inside the ScannerVectors
 			for (auto& sv : guiparameters.areas[a].scannervectorframesmap) {
-				sv.second->ConnectOnlineUpdate(std::bind(&ScopeController::OnlineUpdate, theController, a));
-				sv.second->ConnectResolutionChange(std::bind(&ResolutionChange, this, a));
+				sv.second->ConnectOnlineUpdate(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+				sv.second->ConnectResolutionChange(std::bind(&TheScope::ResolutionChange, this, a));
 			}
 			
 			// Connect update functions in TheScope to some parameters outside the ScannerVectors
-			guiparameters.areas[a].daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
-			guiparameters.areas[a].daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
-			guiparameters.areas[a].histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, theController, a));
+			guiparameters.areas[a].daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+			guiparameters.areas[a].daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+			guiparameters.areas[a].histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
 			//guiparameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
 
 			// Connect FPU XY movements inside the FPUController!!
@@ -95,7 +95,7 @@ namespace scope {
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
-		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(theController, theDisplay, guiparameters, runbuttons, fpubuttonsvec, scanmodebuttonsvec, stackbuttons, zerobuttons, counters);
+		wndmain = std::make_unique<scope::gui::CMainDlgFrame>(theController, theDaq, theDisplay, guiparameters, runbuttons, fpubuttonsvec, scanmodebuttonsvec, stackbuttons, zerobuttons, counters);
 
 		RECT rec = { 20,20,440,980 };						// 262x403
 		if (wndmain->CreateEx(HWND(0), rec) == NULL)
@@ -109,8 +109,7 @@ namespace scope {
 		wndmain->SetWindowText(revstr.c_str());
 		
 		// Connect the quit button
-		theController.runbuttons.quit.Connect(std::bind(&CMainDlgFrame::QuitApplication, wndmain));
-		
+		runbuttons.quit.Connect(std::bind(&gui::CMainDlgFrame::QuitApplication, wndmain.get()));
 	}
 
 	void TheScope::Version() const {
@@ -127,9 +126,9 @@ namespace scope {
 				guiparameters.stack.startat[a].position = theStage.CurrentZPosition();
 			// If fast z then each area can have different positions
 			else
-				guiparameters.stack.startat[a].position = guiparameters.areas[a]->Currentframe().fastz();
+				guiparameters.stack.startat[a].position = guiparameters.areas[a].Currentframe().fastz();
 
-			guiparameters.stack.startat[a].pockels = guiparameters.areas[a]->Currentframe().pockels();
+			guiparameters.stack.startat[a].pockels = guiparameters.areas[a].Currentframe().pockels();
 		}
 	}
 
@@ -140,9 +139,9 @@ namespace scope {
 				guiparameters.stack.stopat[a].position = theStage.CurrentZPosition();
 			// If fast z then each area can have different positions
 			else
-				guiparameters.stack.stopat[a].position = guiparameters.areas[a]->Currentframe().fastz();
+				guiparameters.stack.stopat[a].position = guiparameters.areas[a].Currentframe().fastz();
 
-			guiparameters.stack.stopat[a].pockels = guiparameters.areas[a]->Currentframe().pockels();
+			guiparameters.stack.stopat[a].pockels = guiparameters.areas[a].Currentframe().pockels();
 		}
 	}
 	
@@ -151,7 +150,7 @@ namespace scope {
 	}
 
 	void TheScope::ZeroGalvoOutputs() {
-		if (parameters.run_state() == RunStateHelper::Mode::Stopped) {
+		if (guiparameters.run_state() == RunStateHelper::Mode::Stopped) {
 			DBOUT(L"Zeroing galvo outputs\n");
 			theDaq.ZeroGalvoOutputs();
 		}
@@ -185,13 +184,13 @@ namespace scope {
 	
 	void TheScope::SetGuiCtrlState() {
 		// Signal other GUI elements (e.g. preset combo box in CFrameScanPage, see CFrameScanPage::SetReadOnlyWhileScanning)
-		wndmain.SetReadOnlyWhileScanning((parameters.run_state() == RunStateHelper::Mode::Stopped) ? false : true);
+		wndmain->SetReadOnlyWhileScanning((guiparameters.run_state() == RunStateHelper::Mode::Stopped) ? false : true);
 
 		// This takes care of all the parameters
-		guiparameters.SetReadOnlyWhileScanning(parameters.run_state());
+		guiparameters.SetReadOnlyWhileScanning(guiparameters.run_state());
 
 		// Now we set the state of all buttons
-		const bool buttonenabler = (parameters.run_state() == RunStateHelper::Mode::Stopped) ? true : false;
+		const bool buttonenabler = (guiparameters.run_state() == RunStateHelper::Mode::Stopped) ? true : false;
 
 		runbuttons.startsingle.Enable(buttonenabler);
 		runbuttons.startlive.Enable(buttonenabler);
@@ -217,8 +216,8 @@ namespace scope {
 			}
 		}
 		// Leave these enabled during live scanning
-		stackbuttons.starthere.Enable(buttonenabler || (parameters.run_state() == RunStateHelper::Mode::RunningContinuous));
-		stackbuttons.stophere.Enable(buttonenabler || (parameters.run_state() == RunStateHelper::Mode::RunningContinuous));
+		stackbuttons.starthere.Enable(buttonenabler || (guiparameters.run_state() == RunStateHelper::Mode::RunningContinuous));
+		stackbuttons.stophere.Enable(buttonenabler || (guiparameters.run_state() == RunStateHelper::Mode::RunningContinuous));
 	}
 	
 	void TheScope::ResolutionChange(const uint32_t& _area) {
@@ -230,14 +229,14 @@ namespace scope {
 		if (ScannerSupportedVectors::IsBuiltinSupported(_mode)) {
 			// Triggers update of areas.currentframe (connected to areas.ChangeScanMode)
 			guiparameters.areas[_area].scanmode = _mode;
-			parameters = guiparameters;
+			//parameters = guiparameters;
 			// Get fresh ScannerVector for that scan mode
-			ScannerVectorFillType filltype = (parameters.areas[_area].isslave()) ? SCOPE_SLAVEFRAMEVECTORFILL : SCOPE_MASTERFRAMEVECTORFILL;
-			scope_controller.framescannervecs[_area] = ScannerVectorFrameBasic::Factory(parameters.areas[_area].scanmode(), filltype);
-			theDaq.SetScannerVector(_area, scope_controller.framescannervecs[_area]);
-			thePipeline.SetScannerVector(_area, scope_controller.framescannervecs[_area]);
+			ScannerVectorFillType filltype = (guiparameters.areas[_area].isslave()) ? SCOPE_SLAVEFRAMEVECTORFILL : SCOPE_MASTERFRAMEVECTORFILL;
+			theController.framescannervecs[_area] = ScannerVectorFrameBasic::Factory(guiparameters.areas[_area].scanmode(), filltype);
+			theDaq.SetScannerVector(_area, theController.framescannervecs[_area]);
+			thePipeline.SetScannerVector(_area, theController.framescannervecs[_area]);
 			
-			wndmain.ChangeScanMode(_area, _mode);
+			wndmain->ChangeScanMode(_area, _mode);
 		}
 		else {
 			throw ScopeException("Choosen ScanMode is not supported by built-in scanner type");
@@ -251,7 +250,7 @@ namespace scope {
 		theStage.StopPolling();
 		for (const auto& s : theFPUs.theXYStages)
 			s->StopPolling();
-		Stop();
+		theController.Stop();
 		//SetGuiCtrlState();
 	}
 

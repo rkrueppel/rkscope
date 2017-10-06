@@ -84,7 +84,7 @@ namespace gui {
 			CFrameScanBasePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
 
 			/** Disconnect from ScopeController::ReadOnlyWhileScanning */
-			virtual ~CFrameScanBasePage();
+			virtual ~CFrameScanBasePage() {};
 
 			BEGIN_MSG_MAP_EX(CFrameScanBasePage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

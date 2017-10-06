@@ -459,8 +459,17 @@
     <ClCompile Include="parameters\Daq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScopeDatatypes.cpp">
+    <ClCompile Include="helpers\ScopeDatatypes.cpp">
       <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="TheScope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Area.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Stimulation.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -955,6 +964,9 @@
     </ClInclude>
     <ClInclude Include="parameters\Daq.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeDatatypes.h">
+      <Filter>Scope data types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

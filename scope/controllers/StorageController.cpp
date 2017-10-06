@@ -226,7 +226,7 @@ void StorageController::FixTIFFTags() {
 		std::vector<wchar_t> wincmd(cmdstr.begin(), cmdstr.end());
 		if ( 0 == CreateProcess(L"tools/exiftool.exe", wincmd.data(), NULL, NULL, FALSE, BELOW_NORMAL_PRIORITY_CLASS | CREATE_NO_WINDOW, NULL, NULL, &si, &pi) ) {
 			std::wstringstream errstr;
-			errstr << L"exiftool.exe did not start with error " << GetLastError();
+			errstr << L"exiftool.exe did not start with error "; // << GetLastError();
 			ScopeLogger::GetInstance().Log(errstr.str(), log_error);
 			return;
 		}
@@ -244,7 +244,7 @@ void StorageController::FixTIFFTags() {
 		CloseHandle(pi.hProcess);
 		if (0 == CloseHandle(pi.hThread) ) {
 			std::wstringstream errstr;
-			errstr << L"exiftool.exe did not finish correctly, error " << GetLastError();
+			errstr << L"exiftool.exe did not finish correctly, error "; // << GetLastError();
 			ScopeLogger::GetInstance().Log(errstr.str(), log_error);
 			return;
 		}

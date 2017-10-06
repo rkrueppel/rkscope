@@ -70,7 +70,7 @@ namespace scope {
 
 		public:
 			/** Connect queue and get parameters */
-			DisplayController(const uint32_t& _nactives, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue, const parameters::Scope& _parameters);
+			DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue);
 			
 			~DisplayController();
 
