@@ -14,6 +14,11 @@ DaqController::DaqController(const uint32_t& _nactives
 	, shutters(_nactives)
 	, switches(_nactives)
 	, chunksizes(_nactives, 16000)
+	, scannervecs(SCOPE_NAREAS)
+	, inputs(SCOPE_NAREAS)
+	, outputs(SCOPE_NAREAS)
+	, online_update_done(SCOPE_NAREAS)
+	, online_update_done_mutexe(SCOPE_NAREAS)
 {
 
 	uint32_t a = 0;

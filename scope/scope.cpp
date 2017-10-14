@@ -84,6 +84,23 @@ int Run(HINSTANCE hInstance) {
 	// if we did not only display a message box and exit
 	else {
 		::MessageBox(NULL, L"No default parameter file found and no parameter file choosen!", L"Choose wisely next time", MB_OK | MB_ICONWARNING | MB_TASKMODAL | MB_SETFOREGROUND | MB_TOPMOST);
+		// Open dialog to for file saving
+		COMDLG_FILTERSPEC fileTypes[] = { { L"XML parameter file", L"*.xml" } };
+		CShellFileSaveDialog dlg(NULL, FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST | FOS_OVERWRITEPROMPT | FOS_FILEMUSTEXIST, L"xml", fileTypes, 1);
+		dlg.GetPtr()->SetTitle(L"Select parameter file");
+		IShellItem *psiFolder;
+		SHCreateItemFromParsingName(L"C:\\Temp\\", NULL, IID_PPV_ARGS(&psiFolder));
+		dlg.GetPtr()->SetFolder(psiFolder);
+
+		// Crashes without GetDesktopWindow (see here: http://comments.gmane.org/gmane.comp.windows.wtl/16780), CMainDlgFrame is probably not a top level window?!
+		if (IDOK == dlg.DoModal(::GetDesktopWindow())) {
+			CString filepath;
+			dlg.GetFilePath(filepath);
+			DBOUT(L"Filepath " << filepath.GetString());
+			// These are initialized via the default constructor
+			scope::parameters::Scope defparams(SCOPE_NAREAS);
+			defparams.Save(std::wstring(filepath.GetString()));
+		}
 	}
 	
 	_Module.RemoveMessageLoop();

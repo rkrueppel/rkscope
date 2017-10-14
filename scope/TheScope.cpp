@@ -91,7 +91,6 @@ namespace scope {
 			// Connect FPU XY movements inside the FPUController!!
 		}
 
-		SetGuiCtrlState();
 	}
 	
 	void TheScope::CreateAndShowMainWindow() {
@@ -110,6 +109,8 @@ namespace scope {
 		
 		// Connect the quit button
 		runbuttons.quit.Connect(std::bind(&gui::CMainDlgFrame::QuitApplication, wndmain.get()));
+
+		SetGuiCtrlState();
 	}
 
 	void TheScope::Version() const {
