@@ -68,17 +68,17 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			std::vector<FPUButtons> fpubuttonsvec;
+			std::array<FPUButtons, SCOPE_NAREAS> fpubuttonsvec;
 
 			/** Buttons for switching the scan mode */
-			std::vector<ScanModeButtons> scanmodebuttonsvec;
+			std::array<ScanModeButtons, SCOPE_NAREAS> scanmodebuttonsvec;
 			/** @} */
 			
-			/** The counters and progress' */
-			ScopeCounters counters;
+			/** The counters and progresses */
+			ScopeCounters<SCOPE_NAREAS> counters;
 			
 			/** queues from the daqs to the pipelines */
-			std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>> daq_to_pipeline;
+			std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS> daq_to_pipeline;
 
 			/** queue from the pipelines to the storage */
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_storage;

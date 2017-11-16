@@ -43,7 +43,6 @@ protected:
 	/** trigger for online updates during live scanning */
 	std::vector<bool> online_updates;
 	
-	
 protected:
 	/** disable copy */
 	PipelineController(PipelineController& other) = delete;
@@ -51,8 +50,7 @@ protected:
 	/** disable assignment */
 	PipelineController& operator=(PipelineController& other) = delete;
 	
-	/** Main function for running pixel mapping. It is executed asynchronously.
-	* For every area one Run function is executed (since PipelineController is derived from BaseController<SCOPE_NAREAS>). */
+	/** Main function for running pixel mapping. It is executed asynchronously. */
 	ControllerReturnStatus Run(StopCondition* const sc, const uint32_t& _area) override;
 
 public:

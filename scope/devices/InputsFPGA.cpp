@@ -83,10 +83,10 @@ void InputsFPGA::Stop(void) {
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 }
 
-int32_t InputsFPGA::Read(DaqChunk &_chunk, bool& _timedout, const double& _timeout) {
+int32_t InputsFPGA::Read(const uint32_t& _area, DaqMultiChunk &_chunk, bool& _timedout, const double& _timeout) {
 	int32_t read = 0;
 	try {
-		read = theFPGA().ReadPixels(_chunk, _timeout, _timedout);
+		read = theFPGA().ReadPixels(_chunk.GetDataStart(_area), _timeout, _timedout);
 		if ( _timedout ) {
 			DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
 		}

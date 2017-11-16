@@ -5,7 +5,7 @@
 
 // Forward declaration
 namespace scope {
-	class DaqChunk;
+	template<uint32_t NAREAS = 1, class DATA_T = uint16_t> class DaqMultiChunk;
 	namespace parameters {
 		class InputsFPGA;
 	}
@@ -66,13 +66,14 @@ public:
 	virtual void StartAcquisition() { }
 
 	/** Read only pixels from the FPGA FIFO
-	* @param[in, out] _chunk the daq chunk to read into, inside _chunk is information about the area for wich to retrieve, 
+	* @param[in] _area which area of the multichunk to fill data in
+	* @param[in, out] _chunk the daq chunk to read into, inside _chunk is information about 
 	* the number of pixels per channel to read, and the number of channels
 	* @param[in] _timeout time out for reading in seconds
 	* @param[out] _timedout set to true if reading timed out
 	* @return number of read pixels per channel or -1 on error
 	* @pre _channels > 0 && _channels <= 2 */
-	virtual int32_t ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) = 0;
+	virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) = 0;
 
 	/** Stops the acquisition on the FPGA */
 	virtual void StopAcquisition() { }

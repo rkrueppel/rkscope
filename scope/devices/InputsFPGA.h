@@ -5,7 +5,6 @@
 
 // Forward declarations
 namespace scope {
-	class DaqChunk;
 	namespace parameters {
 		class InputsFPGA;
 		class Scope;
@@ -46,7 +45,7 @@ public:
 
 	void Stop() override;
 
-	int32_t Read(DaqChunk &_chunk, bool& _timedout, const double& _timeout) override;
+	int32_t Read(const uint32_t& _area, DaqMultiChunk &_chunk, bool& _timedout, const double& _timeout) override;
 };
 
 }

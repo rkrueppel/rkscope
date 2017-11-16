@@ -153,9 +153,6 @@
     <ClCompile Include="helpers\pixel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="helpers\DaqChunk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\ScopeButton.cpp">
       <Filter>Scope data types</Filter>
     </ClCompile>
@@ -384,9 +381,6 @@
     <ClCompile Include="gui\DAQmxPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="helpers\DaqChunkResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gui\FPGAResonanceScannerPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -469,6 +463,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parameters\Stimulation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqMultiChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -603,9 +603,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helpers\pixel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\DaqChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui\Aero.h">
@@ -869,9 +866,6 @@
     <ClInclude Include="ScopeDefinesExample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="helpers\DaqChunkResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\FPGAResonanceScannerPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -967,6 +961,12 @@
     </ClInclude>
     <ClInclude Include="helpers\ScopeDatatypes.h">
       <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqMultiChunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqMultiChunkResonance.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

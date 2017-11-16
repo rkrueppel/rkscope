@@ -19,7 +19,10 @@ ScopeMultiImage::ScopeMultiImage(const uint32_t& _area, const size_t& _nochannel
 	// Generate the (blank) images for each channel
 	std::generate(channels.begin(), channels.end(), [&]()
 		{ return std::make_shared<ScopeImage<uint16_t>>(lines, linewidth, area); });
+	DBOUT(L"ScopeMultiImage Constructor\n");
 }
+
+ScopeMultiImage::~ScopeMultiImage() { DBOUT(L"ScopeMultiImage Destructor\n"); }
 
 uint16_t ScopeMultiImage::GetPixel(const size_t& _ch, const uint32_t& _x, const uint32_t& _y) const {
 	assert( _ch < nochannels );

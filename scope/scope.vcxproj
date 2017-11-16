@@ -292,7 +292,6 @@
     <ClCompile Include="devices\SwitchResonance.cpp" />
     <ClCompile Include="gui\FPGAResonanceScannerPage.cpp" />
     <ClCompile Include="gui\FrameScanResonancePage.cpp" />
-    <ClCompile Include="helpers\DaqChunkResonance.cpp" />
     <ClCompile Include="devices\fpga\FPGANoiseOutput.cpp" />
     <ClCompile Include="devices\fpga\FPGAPhotonCounter.cpp" />
     <ClCompile Include="devices\xyz\GalilController.cpp" />
@@ -305,6 +304,8 @@
     <ClCompile Include="devices\GaterDAQmx.cpp" />
     <ClCompile Include="gui\BehaviorSettingsPage.cpp" />
     <ClCompile Include="gui\DAQmxPage.cpp" />
+    <ClCompile Include="helpers\DaqMultiChunk.cpp" />
+    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp" />
     <ClCompile Include="helpers\ScopeDatatypes.cpp" />
     <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp" />
     <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp" />
@@ -335,7 +336,6 @@
     <ClCompile Include="controllers\BaseController.cpp" />
     <ClCompile Include="gui\direct2d\D2ChannelRender.cpp" />
     <ClCompile Include="gui\direct2d\D2HistogramRender.cpp" />
-    <ClCompile Include="helpers\DaqChunk.cpp" />
     <ClCompile Include="devices\daqmx\DAQmxTask.cpp" />
     <ClCompile Include="controllers\DaqController.cpp" />
     <ClCompile Include="gui\AboutDlg.cpp" />
@@ -467,7 +467,6 @@
     <ClInclude Include="devices\SwitchResonance.h" />
     <ClInclude Include="gui\FPGAResonanceScannerPage.h" />
     <ClInclude Include="gui\FrameScanResonancePage.h" />
-    <ClInclude Include="helpers\DaqChunkResonance.h" />
     <ClInclude Include="devices\fpga\FPGAPhotonCounter.h" />
     <ClInclude Include="devices\xyz\GalilController.h" />
     <ClInclude Include="devices\xyz\SutterController.h" />
@@ -480,6 +479,8 @@
     <ClInclude Include="devices\GaterDAQmx.h" />
     <ClInclude Include="gui\BehaviorSettingsPage.h" />
     <ClInclude Include="gui\DAQmxPage.h" />
+    <ClInclude Include="helpers\DaqMultiChunk.h" />
+    <ClInclude Include="helpers\DaqMultiChunkResonance.h" />
     <ClInclude Include="helpers\ScopeDatatypes.h" />
     <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />
     <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h" />
@@ -511,7 +512,6 @@
     <ClInclude Include="controllers\BaseController.h" />
     <ClInclude Include="gui\direct2d\D2ChannelRender.h" />
     <ClInclude Include="gui\direct2d\D2HistogramRender.h" />
-    <ClInclude Include="helpers\DaqChunk.h" />
     <ClInclude Include="devices\daqmx\DAQmxTask.h" />
     <ClInclude Include="controllers\DaqController.h" />
     <ClInclude Include="controllers\DisplayController.h" />

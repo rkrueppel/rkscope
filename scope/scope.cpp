@@ -55,7 +55,7 @@ int Run(HINSTANCE hInstance) {
 	if ( founddefault || (dlgret == IDOK) ) {
 		DBOUT(L"Filepath " << filepath.GetString());
 
-		scope::TheScope myscope(1, std::wstring(filepath.GetString()));
+		scope::TheScope myscope(std::wstring(filepath.GetString()));
 		myscope.Version();
 		
 		// Set the loggers folder to the storage folder configured in the xml file

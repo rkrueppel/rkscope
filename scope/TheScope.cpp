@@ -18,22 +18,15 @@ namespace scope {
 		return ThisIsSlaveArea(_a)?0:_a;
 	}
 	
-	TheScope::TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath)
-		: nareas(_nareas)
-		, guiparameters(_nareas)
-		, fpubuttonsvec(_nareas)
-		, scanmodebuttonsvec(_nareas)
-		, counters(_nareas)
-		, daq_to_pipeline(_nareas)
-		, pipeline_to_storage()
-		, pipeline_to_display()
-		, theDaq(_nareas, guiparameters, &daq_to_pipeline)
-		, thePipeline(_nareas, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
-		, theStorage(_nareas, guiparameters, &pipeline_to_storage)
-		, theDisplay(_nareas, guiparameters, &pipeline_to_display)
-		, theFPUs(_nareas, guiparameters.areas, fpubuttonsvec)
-		, theStage()
-		, theController(_nareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
+	TheScope::TheScope(const std::wstring& _initialparameterpath)
+		: nareas(SCOPE_NAREAS)
+		, guiparameters(SCOPE_NAREAS)
+		, theDaq(SCOPE_NBEAM_DAQS, guiparameters, &daq_to_pipeline)
+		, thePipeline(SCOPE_NBEAM_PIPELINES, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
+		, theStorage(SCOPE_NBEAM_STORAGES, guiparameters, &pipeline_to_storage)
+		, theDisplay(SCOPE_NBEAM_DISPLAYS, guiparameters, &pipeline_to_display)
+		, theFPUs(SCOPE_NAREAS, guiparameters.areas, fpubuttonsvec)
+		, theController(SCOPE_NAREAS, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
 	{
 		//Make sure that TheScope is instanciated only once
 		assert(!instanciated);

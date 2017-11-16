@@ -7,7 +7,6 @@
 
 // Forward declarations
 namespace scope {
-	class DaqChunk;
 	namespace parameters {
 		class InputsDAQmx;
 		class Scope;
@@ -46,7 +45,7 @@ public:
 
 	uint32_t StandardChunkSize() const override;
 
-	int32_t Read(DaqChunk& _chunk, bool& _timedout, const double& _timeout) override;
+	int32_t Read(const uint32_t& _area, DaqMultiChunk& _chunk, bool& _timedout, const double& _timeout) override;
 };
 
 }

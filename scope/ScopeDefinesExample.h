@@ -5,7 +5,6 @@ from git) and adapt to your hardware. */
 
 /* Macro definitions for Scope.
 * This allows compile time selection of the number of areas and the specific hardware of the microscope.
-* This approach is simpler than a factory pattern.
 * If you mess stuff up here you will run into severe problems!!!! */
 
 /* Number of areas compiled for */
@@ -23,8 +22,11 @@ from git) and adapt to your hardware. */
 //#define SCOPE_RESONANCE_HARDWARE_MAPPING
 
 /* Do you have an n-beam multi-area setup with one scanner but multiple areas, then define.
-* On an nbeam setup aach area (except the first) is a slave area and has only its FPU movement, Pockels, and fast z axis (ETL). There is only one master area (area 0),
+* On an nbeam setup each area (except the first) is a slave area and has only its FPU movement, Pockels, and fast z axis (ETL). There is only one master area (area 0),
 * the others are slaves.
+* Pixel acquisition is done in one thread only since pixels for all areas are generated in sync.
+* Pixelmapping for all areas is done in one thread only since the lookup vector is by definition identical for all areas.
+* Displaying is done in one thread per area, since every area could have different display properties (e.g. channel colors, overlays etc)
 * @warning in your configuration file, make sure the first area is the master area (set IsSlaveArea to false) and the other are slaves (set IsSlaveArea to true)! */
 //#define SCOPE_NBEAM_SETUP
 
@@ -65,8 +67,8 @@ from git) and adapt to your hardware. */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Default definitions
-#define SCOPE_DAQCHUNK_T						DaqChunk
-#define SCOPE_DAQCHUNKPTR_T						DaqChunkPtr
+#define SCOPE_DAQMULTICHUNK_T					DaqMultiChunk<1>
+#define SCOPE_DAQMULTICHUNKPTR_T				DaqMultiChunkPtr<1>
 #define SCOPE_RESONANCEPIXELMAPPER_T			PixelmapperFrameResonanceHW
 #define SCOPE_MULTIIMAGE_T						ScopeMultiImage
 #define SCOPE_MULTIIMAGEPTR_T					ScopeMultiImagePtr
@@ -79,10 +81,10 @@ from git) and adapt to your hardware. */
 #ifdef SCOPE_USE_RESONANT_GALVO_SCANNER
 	#define SCOPE_SCANNERTYPE					ScannerTypeHelper::Mode::Resonance
 	#ifdef SCOPE_RESONANCE_SOFTWARE_MAPPING
-		#undef SCOPE_DAQCHUNK_T
-		#define SCOPE_DAQCHUNK_T				DaqChunkResonance
-		#undef SCOPE_DAQCHUNKPTR_T
-		#define SCOPE_DAQCHUNKPTR_T				DaqChunkResonancePtr
+		#undef SCOPE_DAQMULTICHUNK_T
+		#define SCOPE_DAQMULTICHUNK_T			DaqMultiChunkResonance<1>
+		#undef SCOPE_DAQMULTICHUNKPTR_T
+		#define SCOPE_DAQMULTICHUNKPTR_T		DaqMultiChunkResonancePtr<1>
 		#undef SCOPE_MULTIIMAGE_T
 		#define SCOPE_MULTIIMAGE_T				ScopeMultiImageResonanceSW
 		#undef SCOPE_MULTIIMAGEPTR_T
@@ -200,8 +202,22 @@ from git) and adapt to your hardware. */
 
 #ifdef SCOPE_NBEAM_SETUP
 	#define SCOPE_NBEAM_SLAVES					(SCOPE_NAREAS-1)
+	#define SCOPE_NBEAM_AREAS					SCOPE_NAREAS
+	#define SCOPE_NBEAM_DAQS					1
+	#define SCOPE_NBEAM_PIPELINES				1
+	#define SCOPE_NBEAM_STORAGES				SCOPE_NAREAS
+	#define SCOPE_NBEAM_DISPLAYS				SCOPE_NAREAS
+	#undef SCOPE_DAQMULTICHUNK_T
+	#define SCOPE_DAQMULTICHUNK_T				DaqMultiChunkResonance<SCOPE_NBEAM_AREAS>
+	#undef SCOPE_DAQMULTICHUNKPTR_T
+	#define SCOPE_DAQMULTICHUNKPTR_T			DaqMultiChunkResonancePtr<SCOPE_NBEAM_AREAS>
 #else
 	#define SCOPE_NBEAM_SLAVES					0
+	#define SCOPE_NBEAM_AREAS					1
+	#define SCOPE_NBEAM_DAQS					SCOPE_NAREAS
+	#define SCOPE_NBEAM_PIPELINES				SCOPE_NAREAS
+	#define SCOPE_NBEAM_STORAGES				SCOPE_NAREAS
+	#define SCOPE_NBEAM_DISPLAYS				SCOPE_NAREAS
 #endif
 
 /* Maximum number of channels supported. You can have more if you add buttons etc etc. to e.g. CChannelFrame */

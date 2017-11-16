@@ -49,6 +49,8 @@ public:
 	/** Initializes and generate blank images for each channel */
 	ScopeMultiImage(const uint32_t& _area = 0, const size_t& _nochannels = 1, const uint32_t& _lines = 256, const uint32_t& _linewidth = 256);
 
+	~ScopeMultiImage();
+
 	/** @name Several accessor methods */
 	/** @{ */
 	uint32_t Area() const { return area; }

@@ -10,8 +10,8 @@
 #include "devices/StimulationVector.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "helpers/ScopeDatatypes.h"
-#include "helpers/DaqChunk.h"
-#include "helpers/DaqChunkResonance.h"
+#include "helpers/DaqMultiChunk.h"
+#include "helpers/DaqMultiChunkResonance.h"
 #include "devices/OutputsDAQmx.h"
 #include "devices/OutputsDAQmxLineClock.h"
 #include "devices/OutputsDAQmxResonance.h"
@@ -25,7 +25,6 @@ namespace scope {
 
 	/** @ingroup ScopeControl
 	* The DaqController controls the data acquisition hardware, both outputs for scanners as well as input from PMTs.
-	* Uses the pimpl pattern to hide the implementation\n
 	* When working with National Instruments DAQmx library:\n
 	* See http://www.ni.com/white-paper/6411/en#toc5 for DAQmx thread-safety\n
 	* => "You can execute two different analog inputs from two different boards from separate threads within the same program,
@@ -35,7 +34,7 @@ namespace scope {
 
 	protected:
 		/** array holding the output queues to the PipelineControllers */
-		std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const output_queues;
+		std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const output_queues;
 
 		/** The outputs (pointers to base class) */
 		std::vector<std::unique_ptr<Outputs>> outputs;
@@ -76,7 +75,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _oqueues);
+		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const _oqueues);
 
 		/** disable copy */
 		DaqController(DaqController& other) = delete;
