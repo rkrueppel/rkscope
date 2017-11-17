@@ -22,7 +22,7 @@ namespace scope {
 
 		public:
 			/** Iterator over the data vector */
-			typedef std::vector<DATA_T>::iterator iterator;
+			typedef typename std::vector<DATA_T>::iterator iterator;
 
 			/** The data vector */
 			std::vector<DATA_T> data;
@@ -66,7 +66,7 @@ namespace scope {
 			/** Downsamples by averaging _factor samples. Replaces every _factor samples by their average.
 			* The chunk does shrink that way and perchannel is adjusted.
 			* @param[in] _factor downsampling factor */
-			virtual void Downsample(const uint32_t& _factor) {
+			void Downsample(const uint32_t& _factor) {
 				assert( (perchannel % _factor) == 0 );		// make sure we have _factor*perchannel=pixelsperchannel
 			
 				if ( _factor == 1 )
@@ -109,7 +109,6 @@ namespace scope {
 	};
 
 	/** A shared pointer to a DaqMultiChunk */
-	template<uint32_t NAREAS = 1, class DATA_T = uint16_t>
-	using DaqMultiChunkPtr = std::shared_ptr<DaqMultiChunk<NAREAS, DATA_T>;
+	template<uint32_t NAREAS = 1, class DATA_T = uint16_t> using DaqMultiChunkPtr = std::shared_ptr<DaqMultiChunk<NAREAS, DATA_T>>;
 
 }

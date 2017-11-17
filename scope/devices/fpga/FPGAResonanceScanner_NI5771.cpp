@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "FPGAResonanceScanner_NI5771.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
-#include "helpers/DaqChunkResonance.h"
+#include "helpers/DaqMultiChunk.h"
+#include "helpers/DaqMultiChunkResonance.h"
 
 namespace scope {
 
@@ -112,7 +112,7 @@ void FPGAResonanceScannerNI5771::StartAcquisition() {
 	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlBool_Acquire, true);
 }
 
-int32_t FPGAResonanceScannerNI5771::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGAResonanceScannerNI5771::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 	
 	// only two channels supported in FPGA vi
@@ -156,7 +156,7 @@ int32_t FPGAResonanceScannerNI5771::ReadPixels(DaqChunk& _chunk, const double& _
 	}
 
 	// Now we need to upcast
-	DaqChunkResonance& _chunkres = dynamic_cast<DaqChunkResonance&>(_chunk);
+	auto& _chunkres = dynamic_cast<DaqMultiChunkResonance<SCOPE_NBEAM_AREAS, uint16_t>&>(_chunk);
 
 	// isolate sync bool from uint32
 	auto itsync = std::begin(_chunkres.resSync);

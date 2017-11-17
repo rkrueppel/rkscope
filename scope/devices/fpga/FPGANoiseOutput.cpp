@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FPGANoiseOutput.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
+#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -89,18 +89,18 @@ void FPGANoiseOutput::StartAcquisition() {
 	status = NiFpga_WriteBool(session, NiFpga_NoiseOutput_PXIe7962R_ControlBool_Acquire, true);
 }
 
-int32_t FPGANoiseOutput::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGANoiseOutput::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 
 	// only two channels and two areas supported in FPGA vi
-	assert( (_chunk.NChannels() <= 2) && (_chunk.Area() <= 1) );
+	assert( (_chunk.NChannels() <= 2) && (_area <= 1) );
 	
 	NiFpga_Status stat = NiFpga_Status_Success;
 
 	// Read each channels fifo
 	for ( uint32_t c = 0 ; c < _chunk.NChannels() ; c++ ) {
 		stat = NiFpga_ReadFifoU16(session
-				, fifos[_chunk.Area() * 2 + c]							// select correct fifo
+				, fifos[_area * 2 + c]							// select correct fifo
 				, &_chunk.data[c * _chunk.PerChannel()]					// offset start in vector for second channel pixels
 				, _chunk.PerChannel()
 				, static_cast<uint32_t>(_timeout * 1000)				// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds

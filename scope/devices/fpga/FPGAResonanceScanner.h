@@ -44,7 +44,7 @@ public:
 	void StopAcquisition()  override;
 	void SetScannerdelay(const uint32_t& _scannerdelay) override;
 
-	int32_t ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) override;
+	int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 	/** Set channel properties as baseline and bitshift */
 	void SetChannelProps();

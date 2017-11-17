@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "FPGAResonanceScanner.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
-#include "helpers/DaqChunkResonance.h"
+#include "helpers/DaqMultiChunk.h"
+#include "helpers/DaqMultiChunkResonance.h"
 
 namespace scope {
 
@@ -92,11 +92,11 @@ void FPGAResonanceScanner::StartAcquisition() {
 	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquire, true);
 }
 
-int32_t FPGAResonanceScanner::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGAResonanceScanner::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 
 	// only two channels and one area supported in FPGA vi
-	assert( (_chunk.NChannels() == 2) && (_chunk.Area() == 0) );
+	assert( (_chunk.NChannels() == 2) && (_area == 0) );
 	
 	// we need enough space
 	assert(_chunk.data.size() >= _chunk.PerChannel() * _chunk.NChannels());
@@ -134,7 +134,7 @@ int32_t FPGAResonanceScanner::ReadPixels(DaqChunk& _chunk, const double& _timeou
 	}
 
 	// We have to upcast here to get access to the resonance sync vector
-	auto chunkres = dynamic_cast<DaqChunkResonance&>(_chunk);
+	auto chunkres = dynamic_cast<DaqMultiChunkResonance<SCOPE_NBEAM_AREAS, uint16_t>&>(_chunk);
 	// Isolate sync uint16/bool from uint32
 	std::transform(std::begin(u32data), std::end(u32data), std::begin(chunkres.resSync), [](const uint32_t& _u32) {
 		return (_u32 >> 31) != 0;

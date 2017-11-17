@@ -45,7 +45,7 @@ public:
 
 	void Stop() override;
 
-	int32_t Read(const uint32_t& _area, DaqMultiChunk &_chunk, bool& _timedout, const double& _timeout) override;
+	int32_t Read(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override;
 };
 
 }

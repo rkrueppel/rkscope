@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "FPGADigitalDemultiplexer.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
+#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -131,7 +131,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
 	}
 
-	int32_t FPGADigitalDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGADigitalDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// only two channels and two areas supported in FPGA vi
@@ -145,7 +145,7 @@ namespace scope {
 		for ( uint32_t c = 0 ; c < 2 ; c++ ) {
 			stat = NiFpga_ReadFifoU16(session
 						, fifos[_area * 2 + c]						// select correct fifo
-						, &(*(_chunk.GetDataStart()+c*_chunk.PerChannel()))				// offset start in vector for second channel pixels
+						, &(*(_chunk.GetDataStart(_area)+c*_chunk.PerChannel()))				// offset start in vector for second channel pixels
 						, _chunk.PerChannel()
 						, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
 						, &remaining);

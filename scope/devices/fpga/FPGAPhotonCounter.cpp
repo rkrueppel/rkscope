@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "FPGAPhotonCounter.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
+#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -100,7 +100,7 @@ void FPGAPhotonCounter::StartAcquisition() {
 	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_PhotonCounterV2_ControlBool_Acquire, true);
 }
 
-int32_t FPGAPhotonCounter::ReadPixels(DaqChunk& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGAPhotonCounter::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 
 	assert(_chunk.NChannels() <= 2 );										// only two channels supported in FPGA vi

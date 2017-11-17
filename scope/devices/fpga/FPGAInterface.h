@@ -2,10 +2,11 @@
 
 #include "helpers/FPGAException.h"
 #include "NiFpga.h"
+#include "ScopeDefines.h"
 
 // Forward declaration
 namespace scope {
-	template<uint32_t NAREAS = 1, class DATA_T = uint16_t> class DaqMultiChunk;
+	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
 	namespace parameters {
 		class InputsFPGA;
 	}
@@ -73,7 +74,7 @@ public:
 	* @param[out] _timedout set to true if reading timed out
 	* @return number of read pixels per channel or -1 on error
 	* @pre _channels > 0 && _channels <= 2 */
-	virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) = 0;
+	virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) = 0;
 
 	/** Stops the acquisition on the FPGA */
 	virtual void StopAcquisition() { }

@@ -4,8 +4,8 @@
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
 #include "TheScopeCounters.h"
-#include "helpers/DaqChunk.h"
-#include "helpers/DaqChunkResonance.h"
+#include "helpers/DaqMultiChunk.h"
+#include "helpers/DaqMultiChunkResonance.h"
 #include "helpers/ScopeMultiImage.h"
 #include "scanmodes/PixelmapperBasic.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
@@ -23,10 +23,10 @@ protected:
 	parameters::Scope& guiparameters;
 	
 	/** Reference to TheScope's counters */
-	ScopeCounters& counters;
+	ScopeCounters<SCOPE_NAREAS>& counters;
 	
 	/** input queue from the DaqController */
-	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const input_queues;
+	std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const input_queues;
 
 	/** output queue to the StorageController */
 	SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const storage_queue;
@@ -57,8 +57,8 @@ public:
 	/** Connects queues and gets parameters */
 	PipelineController(const uint32_t& _nactives
 		, parameters::Scope& _guiparameters
-		, ScopeCounters& _counters
-		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>* const _iqueues
+		, ScopeCounters<SCOPE_NAREAS>& _counters
+		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const _iqueues
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
 		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
 	);

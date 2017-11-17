@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "FPGAAnalogIntegrator.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
+#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -106,7 +106,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// only two channels and one area supported in FPGA vi
@@ -117,8 +117,8 @@ namespace scope {
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
-		std::array<uint32_t> u32data(_chunk.PerChannel());
-		std::array<uint8_t> bitshift(_chunk.NChannels());
+		std::vector<uint32_t> u32data(_chunk.PerChannel());
+		std::vector<uint8_t> bitshift(_chunk.NChannels());
 		bitshift[0] = parameters->BitshiftCh1();
 		bitshift[1] = parameters->BitshiftCh2();
 

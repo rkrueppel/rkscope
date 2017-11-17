@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FPGAInterface.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqChunk.h"
+#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 

@@ -13,7 +13,7 @@
 #include "helpers/ScopeDatatypes.h"
 #include "parameters\Inputs.h"
 #include "parameters\Scope.h"
-#include "helpers\DaqChunk.h"
+#include "helpers\DaqMultiChunk.h"
 #include "helpers\ScopeException.h"
 
 namespace scope {
@@ -83,10 +83,10 @@ void InputsFPGA::Stop(void) {
 	} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 }
 
-int32_t InputsFPGA::Read(const uint32_t& _area, DaqMultiChunk &_chunk, bool& _timedout, const double& _timeout) {
+int32_t InputsFPGA::Read(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>&_chunk, bool& _timedout, const double& _timeout) {
 	int32_t read = 0;
 	try {
-		read = theFPGA().ReadPixels(_chunk.GetDataStart(_area), _timeout, _timedout);
+		read = theFPGA().ReadPixels(_area, _chunk, _timeout, _timedout);
 		if ( _timedout ) {
 			DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
 		}

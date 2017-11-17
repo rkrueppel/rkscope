@@ -26,7 +26,7 @@ namespace scope {
 
 		/** @param[in] _perchannel number of samples the chunk should contain per channel
 		* @param[in] _nchannels number of channels in the chunk (total number of samples is thus NAREAS*_perchannel*_nchannels) */
-		DaqChunkResonance(const uint32_t& _perchannel, const uint32_t& _nchannels)
+		DaqMultiChunkResonance(const uint32_t& _perchannel, const uint32_t& _nchannels)
 			: DaqMultiChunk(_perchannel, _nchannels)
 			, resSync(_perchannel, 0)
 			, lastsyncsig(_nchannels, std::begin(resSync))
@@ -43,6 +43,5 @@ namespace scope {
 	};
 
 	/** A shared pointer to a DaqMultiChunkResonance */
-	template<uint32_t NAREAS = 1, class DATA_T = uint16_t>
-	using DaqMultiChunResonancekPtr = std::shared_ptr<DaqMultiChunkResonance<NAREAS, DATA_T>;
+	template<uint32_t NAREAS = 1, class DATA_T = uint16_t> using DaqMultiChunkResonancePtr = std::shared_ptr<DaqMultiChunkResonance<NAREAS, DATA_T>>;
 }

@@ -68,11 +68,12 @@ namespace scope {
 		return standardchunksize;
 	}
 
-	int32_t InputsDAQmx::Read(const uint32_t& _area, DaqMultiChunk& _chunk, bool& _timedout, const double& _timeout) {
+	int32_t InputsDAQmx::Read(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 		int32_t read = 0;
 		bool timedout = false;
 		try {
-			read = task.ReadU16(&(*_chunk.GetDataStart(_area)), _chunk.PerChannel(), _chunk.NChannels(), timedout, _timeout);
+			auto start = _chunk.GetDataStart(_area);
+			read = task.ReadU16(start, _chunk.PerChannel(), _chunk.NChannels(), timedout, _timeout);
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 		return read;
 	}

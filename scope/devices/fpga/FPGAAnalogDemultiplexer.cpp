@@ -112,7 +112,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// only two channels and two areas supported in FPGA vi
@@ -123,27 +123,27 @@ namespace scope {
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
-		// Make temporary array to hold the U64 data from both channels
-		std::array<uint64_t, _chunk.PerChannel()> u64data;
+		// Make temporary vector to hold the U64 data from both channels
+		std::vector<uint64_t> u64data(_chunk.PerChannel());
 		
 		// Get the desired bitshift for each channel
 		std::array<uint8_t, 2> bitshift;
-		bitshift[0] = (_chunk.Area()==0)?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
-		bitshift[1] = (_chunk.Area()==0)?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
+		bitshift[0] = (_area==0)?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
+		bitshift[1] = (_area==0)?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
 
 		// Sets the desired baseline on the FPGA. Do it here so changes in GUI get transferred to the FPGA quickly.
 		//SetChannelProps();
 
 		// Do the read from the FIFO
 		stat = NiFpga_ReadFifoU64(session
-					, fifos[_chunk.Area()]								// select correct fifo
+					, fifos[_area]								// select correct fifo
 					, u64data.data()
 					, _chunk.PerChannel()
 					, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
 					, &remaining);
 		_timedout = (stat == NiFpga_Status_FifoTimeout);
 
-		DBOUT(L"FPGAAnalogDemultiplexer::ReadPixels area " << _chunk.Area() << L" remaining: " << remaining);
+		DBOUT(L"FPGAAnalogDemultiplexer::ReadPixels area " << _area << L" remaining: " << remaining);
 
 		// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
 		if ( _timedout )

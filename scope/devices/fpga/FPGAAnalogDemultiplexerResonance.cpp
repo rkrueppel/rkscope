@@ -118,17 +118,17 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, DaqMultiChunk& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// We have to upcast here to get access to the resonance sync vector
-		auto chunkres = dynamic_cast<DaqMultiChunkResonance&>(_chunk);
+		auto chunkres = dynamic_cast<DaqMultiChunkResonance<SCOPE_NBEAM_AREAS, uint16_t>&>(_chunk);
 
 		// only two channels and one area supported in FPGA vi
 		assert( (_chunk.NChannels() == 2) && (_area == 0) );
 		
 		// we need enough space
-		assert(_chunk.data.size() >= (_area+1) _chunk.PerChannel() * _chunk.NChannels());
+		assert(_chunk.data.size() >= (_area+1) * _chunk.PerChannel() * _chunk.NChannels());
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
@@ -137,8 +137,8 @@ namespace scope {
 		
 		// Get the desired bitshift for each channel
 		std::vector<uint8_t> bitshift(2);
-		bitshift[0] = (_chunk.Area()==0)?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
-		bitshift[1] = (_chunk.Area()==0)?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
+		bitshift[0] = _area==0?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
+		bitshift[1] = _area==0?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
 
 		// Sets the desired baseline on the FPGA. Do it here so changes in GUI get transferred to the FPGA quickly.
 		//SetChannelProps();
@@ -152,7 +152,7 @@ namespace scope {
 					, &remaining);
 		_timedout = (stat == NiFpga_Status_FifoTimeout);
 
-		DBOUT(L"FPGAAnalogDemultiplexerResonance::ReadPixels area " << _chunk.Area() << L" remaining: " << remaining);
+		DBOUT(L"FPGAAnalogDemultiplexerResonance::ReadPixels area " << _area << L" remaining: " << remaining);
 
 		// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
 		if ( _timedout )

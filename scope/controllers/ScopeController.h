@@ -65,7 +65,7 @@ namespace scope {
 			parameters::Scope ctrlparams;
 			
 			/** Reference to TheScope's counters */
-			ScopeCounters& counters;
+			ScopeCounters<SCOPE_NAREAS>& counters;
 			
 			/** @name References to the dataflow controllers
 			* @{ */
@@ -77,7 +77,7 @@ namespace scope {
 			
 			/** @name References to the queues between the dataflow controller 
 			* @{ */
-			std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& daq_to_pipeline;
+			std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>& daq_to_pipeline;
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_storage;
 			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& pipeline_to_display;
 			/** @} */
@@ -150,12 +150,12 @@ namespace scope {
 		public:
 			ScopeController(const uint32_t& _nareas
 				, parameters::Scope& _guiparameters
-				, ScopeCounters& _counters
+				, ScopeCounters<SCOPE_NAREAS>& _counters
 				, DaqController& _theDaq
 				, PipelineController& _thePipeline
 				, StorageController& _theStorage
 				, DisplayController& _theDisplay
-				, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& _daq_to_pipeline
+				, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>& _daq_to_pipeline
 				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_storage
 				, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_display
 				, SCOPE_XYZCONTROL_T& _theStage
