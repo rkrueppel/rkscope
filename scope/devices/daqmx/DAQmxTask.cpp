@@ -337,14 +337,14 @@ void CDAQmxAnalogInTask::ConfigureBuffer(const uInt32& _sampsperchannel) {
 	DBOUT(L"CDAQmxAnalogInTask::ConfigureBuffer buffer size " << value);
 }
 
-int32 CDAQmxAnalogInTask::ReadU16(std::vector<uint16_t>& _data, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
+int32 CDAQmxAnalogInTask::ReadU16(std::vector<uint16_t>::iterator& _databegin, std::vector<uint16_t>::iterator& _dataend, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
 	int32 readsamples = 0;
 	int32_t status = DAQmxReadBinaryU16(task_handle
 		, _sampsperchan
 		, _timeout
 		, DAQmx_Val_GroupByChannel
-		, _data.data()
-		, static_cast<uInt32>(_data.size())
+		, _databegin
+		, static_cast<uInt32>(std::distance(_databegin, _dataend))
 		, &readsamples
 		, NULL);
 	_timedout = (status == DAQmxErrorOperationTimedOut);
@@ -358,22 +358,22 @@ int32 CDAQmxAnalogInTask::ReadU16(std::vector<uint16_t>& _data, const int32& _sa
 		return readsamples;
 }
 
-int32 CDAQmxAnalogInTask::ReadU16Dummy(std::vector<uint16_t>& _data, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
+int32 CDAQmxAnalogInTask::ReadU16Dummy(std::vector<uint16_t>::iterator& _databegin, std::vector<uint16_t>::iterator& _dataend, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
 	//int32 readsamples = -1;
 	_timedout = false;
 	uint16_t d = 0;
-	std::generate(std::begin(_data), std::end(_data), [&d]() { return d++; } ); // or random: return static_cast<uint16_t>(mtgen());
+	std::generate(_databegin, _dataend, [&d]() { return d++; } ); // or random: return static_cast<uint16_t>(mtgen());
 	return (_sampsperchan*_channels);
 }
 
-int32 CDAQmxAnalogInTask::ReadI16(std::vector<int16_t>& _data, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
+int32 CDAQmxAnalogInTask::ReadI16(std::vector<int16_t>::iterator& _databegin, std::vector<int16_t>::iterator& _dataend, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout) {
 	int32 readsamples = -1;
 	int32_t status = DAQmxReadBinaryI16(task_handle
 		, _sampsperchan
 		, _timeout
 		, DAQmx_Val_GroupByChannel
-		, _data.data()
-		, static_cast<uInt32>(_data.size())
+		, _databegin
+		, static_cast<uInt32>(std::distance(_databegin, _dataend))
 		, &readsamples
 		, NULL);
 	
