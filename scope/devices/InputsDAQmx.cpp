@@ -73,7 +73,7 @@ namespace scope {
 		bool timedout = false;
 		try {
 			auto start = _chunk.GetDataStart(_area);
-			read = task.ReadU16(start, _chunk.PerChannel(), _chunk.NChannels(), timedout, _timeout);
+			read = task.ReadU16(start, start+_chunk.NChannels()*_chunk.PerChannel(), _chunk.PerChannel(), _chunk.NChannels(), timedout, _timeout);
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 		return read;
 	}

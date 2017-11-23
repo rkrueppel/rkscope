@@ -6,18 +6,6 @@ std::atomic<bool> scope::TheScope::instanciated(false);
 
 namespace scope {
 	
-	bool ThisIsSlaveArea(const uint32_t& _a) {
-		#ifdef SCOPE_NBEAM_SETUP
-			return _a != 0;
-		#else
-			return false;
-		#endif
-	}
-
-	uint32_t ThisAreaOrMasterArea(const uint32_t& _a) {
-		return ThisIsSlaveArea(_a)?0:_a;
-	}
-	
 	TheScope::TheScope(const std::wstring& _initialparameterpath)
 		: nareas(SCOPE_NAREAS)
 		, guiparameters(SCOPE_NAREAS)
