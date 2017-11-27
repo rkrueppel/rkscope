@@ -5,22 +5,14 @@ namespace scope {
 
 	DaqController::DaqController(const uint32_t& _nactives
 		, const parameters::Scope& _parameters
-		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const _oqueues
+		, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _oqueues
 	)
 		: BaseController(_nactives)
 		, ctrlparams(_parameters)
 		, output_queues(_oqueues)
 		, stimulation(nullptr)
-		, shutters(_nactives)
-		, switches(_nactives)
-		, chunksizes(_nactives, 16000)
-		, scannervecs(SCOPE_NAREAS)
-		, inputs(SCOPE_NAREAS)
-		, outputs(SCOPE_NAREAS)
-		, online_update_done(SCOPE_NAREAS)
-		, online_update_done_mutexe(SCOPE_NAREAS)
 	{
-
+		chunksizes.fill(16000);
 		uint32_t a = 0;
 		for (auto& sh : shutters)
 			sh.Initialize(ctrlparams.areas[a++].daq.shutterline());
@@ -28,8 +20,8 @@ namespace scope {
 		for (auto& sw : switches)
 			sw.Initialize(ctrlparams.areas[a++].daq.switchresonanceline());
 
-		for (a = 0; a < SCOPE_NAREAS; a++)
-			online_update_done_flag[a] = false;
+		for (auto& f : online_update_done_flag)
+			f = false;
 
 		ZeroGalvoOutputs();
 	}
@@ -125,7 +117,7 @@ namespace scope {
 			else
 				outputs[a] = std::make_unique<SCOPE_OUTPUTS_T>(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
 			
-			inputs[a].reset(new SCOPE_INPUTS_T(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(ctrlparams.areas[a].daq.inputs.get()), ctrlparams));
+			inputs[a] = std::make_unique<SCOPE_INPUTS_T>(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(ctrlparams.areas[a].daq.inputs.get()), ctrlparams));
 		}
 
 		// Calculate and write stimulationvector to device

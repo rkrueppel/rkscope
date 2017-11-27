@@ -27,7 +27,7 @@ public:
 	std::vector<std::unique_ptr<SCOPE_FPUXYCONTROL_T>> theXYStages;
 
 	/** Create XYControls and ETLs and connect buttons. */
-	FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec);
+	FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, FPUButtonsArray& _fpubuttonsvec);
 
 	/** Initialize the FPU's hardware. */
 	void Initialize();

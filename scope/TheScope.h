@@ -48,16 +48,16 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			std::array<FPUButtons, SCOPE_NAREAS> fpubuttonsvec;
+			FPUButtonsArray fpubuttons;
 
 			/** Buttons for switching the scan mode */
-			std::array<ScanModeButtons, SCOPE_NAREAS> scanmodebuttonsvec;
+			ScanModeButtonsArray scanmodebuttons;
 			/** @} */
 			
 			/** The counters and progresses */
 			ScopeCounters<SCOPE_NAREAS> counters;
 			
-			/** queues from the daqs to the pipelines */
+			/** queues from the daqs to the pipeline(s) */
 			std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS> daq_to_pipeline;
 
 			/** queue from the pipelines to the storage */

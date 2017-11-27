@@ -72,7 +72,7 @@ namespace scope {
 			CStackSettingsPage(parameters::Stack& _stackparams
 				, RunButtons& _runbuttons
 				, StackButtons& _stackbuttons
-				, ScopeCounters& _counters
+				, ScopeCounters<SCOPE_NAREAS>& _counters
 				, parameters::SCOPE_XYZCONTROL_T& _stageparams
 				, std::vector<parameters::Area>& _areaparamsvec);
 

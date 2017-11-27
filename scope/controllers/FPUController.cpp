@@ -4,7 +4,7 @@
 
 namespace scope {
 
-FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec)
+FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, FPUButtonsArray& _fpubuttonsvec)
 	: nareas(_nareas)
 	, guiareaparamsvec(_guiareaparamsvec)
 	, stepsizes(_nareas, 0.0)

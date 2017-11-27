@@ -14,7 +14,7 @@ namespace scope {
 		CScanSettingsSheet::CScanSettingsSheet(
 			const uint32_t& _nareas
 			, std::vector<parameters::Area>& _areaparamsvec
-			, std::vector<FPUButtons>& _fpubuttonsvec
+			, FPUButtonsArray& _fpubuttonsvec
 			, const double& _masterfovsizex
 			, const double& _masterfovsizey
 			, parameters::Storage& _storageparams

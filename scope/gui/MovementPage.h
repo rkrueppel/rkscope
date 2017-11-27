@@ -22,7 +22,7 @@ public:
 	enum { IDD = IDD_MOVEMENT_PROPPAGE };
 	
 	CMovementPage(std::vector<parameters::Area>& _areaparamsvec
-		, std::vector<FPUButtons>& _fpubuttonsvec
+		, FPUButtonsArray& _fpubuttonsvec
 		, const double& _masterfovsizex
 		, const double& _masterfovsizey
 		, parameters::SCOPE_XYZCONTROL_T& _stageparams

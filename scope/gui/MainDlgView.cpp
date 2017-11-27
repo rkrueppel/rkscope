@@ -6,12 +6,12 @@ namespace scope {
 
 		CMainDlgView::CMainDlgView(
 			RunButtons& _runbuttons
-			, std::vector<FPUButtons>& _fpubuttonsvec
+			, FPUButtonsArray& _fpubuttonsvec
 			, parameters::Scope& _guiparameters
-			, std::vector<ScanModeButtons>& _scanmodebuttonsvec
+			, ScanModeButtonsArray& _scanmodebuttonsvec
 			, StackButtons& _stackbuttons
 			, ZeroButtons& _zerobuttons
-			, ScopeCounters& _counters
+			, ScopeCounters<SCOPE_NAREAS>& _counters
 		)
 			: m_sheetScanSettings(_guiparameters.nareas(), _guiparameters.areas, _fpubuttonsvec, _guiparameters.masterfovsizex(), _guiparameters.masterfovsizey(), _guiparameters.storage
 				, _guiparameters.stimulation, _guiparameters.stage, _zerobuttons)

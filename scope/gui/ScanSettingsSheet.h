@@ -30,7 +30,7 @@ namespace scope {
 
 			std::vector<parameters::Area>& areaparamsvec;
 			
-			std::vector<FPUButtons>& fpubuttonsvec;
+			FPUButtonsArray& fpubuttonsvec;
 			
 			/** one imaging settings page for each area */
 			std::vector<std::unique_ptr<CNoScanBasePage>> scanpages;
@@ -51,7 +51,7 @@ namespace scope {
 			
 			CScanSettingsSheet(const uint32_t& _nareas
 				, std::vector<parameters::Area>& _areaparamsvec
-				, std::vector<FPUButtons>& _fpubuttonsvec
+				, FPUButtonsArray& _fpubuttonsvec
 				, const double& _masterfovsizex
 				, const double& _masterfovsizey
 				, parameters::Storage& _storageparams

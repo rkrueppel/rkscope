@@ -30,11 +30,11 @@ namespace scope {
 			CBehaviorSettingsPage behavior;
 
 		public:
-			CExperimentSettingsSheet(std::vector<ScanModeButtons>& _scanmodebuttonsvec
+			CExperimentSettingsSheet(ScanModeButtonsArray& _scanmodebuttonsvec
 			, parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
-			, ScopeCounters& _counters
+			, ScopeCounters<SCOPE_NAREAS>& _counters
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, parameters::SCOPE_XYZCONTROL_T& _stageparams

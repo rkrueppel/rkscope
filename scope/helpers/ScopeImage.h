@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pixel.h"
-#include "DaqChunk.h"
+#include "DaqMultiChunk.h"
 #include "ScopeException.h"
 #include "helpers.h"
 

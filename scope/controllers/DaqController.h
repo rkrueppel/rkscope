@@ -34,40 +34,40 @@ namespace scope {
 
 	protected:
 		/** array holding the output queues to the PipelineControllers */
-		std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const output_queues;
+		std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const output_queues;
 
 		/** The outputs (pointers to base class) */
-		std::vector<std::unique_ptr<Outputs>> outputs;
+		std::array<std::unique_ptr<Outputs>, SCOPE_NAREAS> outputs;
 
 		/** The inputs (pointers to base class) */
-		std::vector<std::unique_ptr<Inputs>> inputs;
+		std::array<std::unique_ptr<Inputs>, SCOPE_NAREAS> inputs;
 
 		/** The stimulation output */
 		std::unique_ptr<SCOPE_STIMULATIONS_T> stimulation;
 
 		/** array holding shutter class for every area */
-		std::vector<Shutter> shutters;
+		std::array<Shutter, SCOPE_NAREAS> shutters;
 
 		/** array holding SwitchResonance class for every area */
-		std::vector<SwitchResonance> switches;
+		std::array<SwitchResonance, SCOPE_NAREAS> switches;
 
 		/** The scanner vector for frame scanning */
-		std::vector<ScannerVectorFrameBasicPtr> scannervecs;
+		std::array<ScannerVectorFrameBasicPtr, SCOPE_NAREAS> scannervecs;
 
 		/** stimulation */
 		StimulationVector stimvec;
 
 		/** size of a read chunk in samples per channel */
-		std::vector<uint32_t> chunksizes;
+		std::array<uint32_t, SCOPE_NAREAS> chunksizes;
 
 		/** condition variables to wait for until online updates is done (new frame is completely written to buffer or aborted) */
-		std::vector<std::condition_variable> online_update_done;
+		std::array<std::condition_variable, SCOPE_NAREAS> online_update_done;
 
 		/** bool flag to set after online update is done */
 		std::array<std::atomic<bool>, SCOPE_NAREAS> online_update_done_flag;
 
 		/** mutexe for the condition variables */
-		std::vector<std::mutex> online_update_done_mutexe;
+		std::array<std::mutex, SCOPE_NAREAS> online_update_done_mutexe;
 	
 		parameters::Scope ctrlparams;
 
@@ -75,7 +75,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>>* const _oqueues);
+		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _oqueues);
 
 		/** disable copy */
 		DaqController(DaqController& other) = delete;
