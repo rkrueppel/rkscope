@@ -264,7 +264,7 @@ namespace scope {
 	* @param[in] _from start of the pixel range to be inserted
 	* @param[in] _to end of the pixel range to be inserted
 	* @return image filled until the end? */
-	bool InsertPixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqChunk::iterator& _from, const DaqChunk::iterator& _to);
+	bool InsertPixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqMultiChunk::iterator& _from, const DaqMultiChunk::iterator& _to);
 
 	/** Helper function to insert a pixel range into a ScopeImage and averaging the new pixels with the existing ones (for a running averaging)
 	* If current pixel is an average of e.g. two, i=(i0+i1)/2, multiply the pixel by two, add the current daq pixel and divide by three to get the current average value

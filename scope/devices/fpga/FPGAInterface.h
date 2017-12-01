@@ -6,7 +6,6 @@
 
 // Forward declaration
 namespace scope {
-	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
 	namespace parameters {
 		class InputsFPGA;
 	}
