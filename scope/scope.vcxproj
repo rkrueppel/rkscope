@@ -283,6 +283,7 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config\config.cpp" />
     <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp" />
     <ClCompile Include="devices\fpga\FPGAIO5751.cpp" />
     <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp" />
@@ -450,8 +451,8 @@
     <ClCompile Include="TheScope.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config\config.h" />
     <ClInclude Include="controllers\ScopeControllerModes.h" />
-    <ClInclude Include="controllers\ScopeLogger_p.h" />
     <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h" />
     <ClInclude Include="devices\fpga\FPGAIO5751.h" />
     <ClInclude Include="devices\fpga\FPGAResonanceScanner.h" />

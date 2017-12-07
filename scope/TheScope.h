@@ -1,5 +1,7 @@
 #pragma once
 
+#include "config\config.h"
+
 #include "gui\MainDlgFrame.h"
 #include "helpers\SyncQueues.h"
 #include "helpers\helpers.h"

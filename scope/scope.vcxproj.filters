@@ -40,6 +40,21 @@
     <Filter Include="Devices\daqmx">
       <UniqueIdentifier>{3e7595a4-6084-4ad1-9c0a-b86a2f2c9917}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Devices\Outputs">
+      <UniqueIdentifier>{02efcd28-124f-4400-9243-e00731435b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\Inputs">
+      <UniqueIdentifier>{b0352d15-9e93-4d8b-80d5-d50f4441d082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parameters">
+      <UniqueIdentifier>{eea19ba2-0874-4a4f-8f63-041fb6275944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Controls">
+      <UniqueIdentifier>{45f6596b-4210-496e-9b6d-f4ca8fc324e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scanmodes">
+      <UniqueIdentifier>{d57d9592-9b15-4590-af7c-deefdff4903e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -186,41 +201,17 @@
     <ClCompile Include="gui\direct2d\d2wrap.cpp">
       <Filter>GUI\Direct2D</Filter>
     </ClCompile>
-    <ClCompile Include="devices\daqmx\DAQmxTask.cpp">
-      <Filter>Devices</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\lut.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\PresetNameDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scanmodes\PixelmapperFrameSaw.cpp">
       <Filter>Scope control</Filter>
     </ClCompile>
-    <ClCompile Include="scanmodes\ScannerVectorFrameBasic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\ScannerVectorFrameBiDi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scanmodes\ScannerVectorFrameSaw.cpp">
       <Filter>Scope components</Filter>
     </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperBasic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gui\FrameScanSawPage.cpp">
       <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\controls\ScopeLEDCtrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\xyz\XYControl.cpp">
       <Filter>Scope components</Filter>
@@ -228,124 +219,19 @@
     <ClCompile Include="controllers\DaqController.cpp">
       <Filter>Scope control</Filter>
     </ClCompile>
-    <ClCompile Include="devices\Inputs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\InputsDAQmx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\InputsFPGA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\StimulationsDAQmx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gui\controls\ScopeUpDownCtrl.cpp">
       <Filter>Scope data types</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\controls\ScopeColorComboCtrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\StimulationVector.cpp">
       <Filter>Scope components</Filter>
     </ClCompile>
-    <ClCompile Include="parameters\Framescan.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Devices.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Plane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Scope.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\Outputs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScopeDefines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Base.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Windows.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\GaterDAQmx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\DAQmxPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Storage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Runstates.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\ScopeScanModeButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceBiDi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="devices\SwitchResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\ScopeOverlayResonanceSW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Inputs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Outputs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Daq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helpers\ScopeDatatypes.cpp">
       <Filter>Scope data types</Filter>
     </ClCompile>
     <ClCompile Include="TheScope.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Area.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parameters\Stimulation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\DaqMultiChunk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\fpga\FPGAIO6587.cpp">
@@ -435,21 +321,6 @@
     <ClCompile Include="devices\xyz\XYZControlSutter.cpp">
       <Filter>Devices\XYZ</Filter>
     </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmx.cpp">
-      <Filter>Devices\daqmx</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp">
-      <Filter>Devices\daqmx</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxResonance.cpp">
-      <Filter>Devices\daqmx</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp">
-      <Filter>Devices\daqmx</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxSlave.cpp">
-      <Filter>Devices\daqmx</Filter>
-    </ClCompile>
     <ClCompile Include="gui\BehaviorSettingsPage.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -479,6 +350,153 @@
     </ClCompile>
     <ClCompile Include="gui\ScanModesSettingsPage.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\daqmx\DAQmxTask.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmx.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonance.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxSlave.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Inputs.cpp">
+      <Filter>Devices\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\Inputs.cpp">
+      <Filter>Devices\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\InputsDAQmx.cpp">
+      <Filter>Devices\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\InputsFPGA.cpp">
+      <Filter>Devices\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Outputs.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\Outputs.cpp">
+      <Filter>Devices\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\DAQmxPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Area.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Base.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Daq.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Devices.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Framescan.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Plane.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Runstates.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Scope.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Stimulation.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Storage.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\GaterDAQmx.cpp">
+      <Filter>Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqMultiChunk.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="parameters\Windows.cpp">
+      <Filter>Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PresetNameDlg.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeColorComboCtrl.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeLEDCtrl.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeScanModeButton.cpp">
+      <Filter>Scope control</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeOverlayResonanceSW.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp">
+      <Filter>Scope data types</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\StimulationsDAQmx.cpp">
+      <Filter>Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperBasic.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameBasic.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameBiDi.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceBiDi.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp">
+      <Filter>Scanmodes</Filter>
+    </ClCompile>
+    <ClCompile Include="config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeDefines.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -641,68 +659,26 @@
     <ClInclude Include="gui\direct2d\d2wrap.h">
       <Filter>GUI\Direct2D</Filter>
     </ClInclude>
-    <ClInclude Include="devices\daqmx\DAQmxTask.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Documentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\PresetNameDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scanmodes\PixelmapperFrameSaw.h">
       <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\ScannerVectorFrameBiDi.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scanmodes\ScannerVectorFrameSaw.h">
       <Filter>Scope components</Filter>
     </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperBasic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\FrameScanSawPage.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\controls\ScopeLEDCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="devices\xyz\XYControl.h">
       <Filter>Scope components</Filter>
     </ClInclude>
-    <ClInclude Include="devices\xyz\galil\Galil.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
     <ClInclude Include="controllers\DaqController.h">
       <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\ScopeLogger_p.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\Inputs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\InputsDAQmx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\InputsFPGA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\StimulationsDAQmx.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui\controls\ScopeUpDownCtrl.h">
       <Filter>Scope data types</Filter>
@@ -710,110 +686,14 @@
     <ClInclude Include="gui\ThirdParty\Aero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ThirdParty\ToolbarHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\ThirdParty\ToolTipDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\controls\ScopeColorComboCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\controls\ScopeScrollbarCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="devices\StimulationVector.h">
       <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Framescan.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Devices.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Scope.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\Outputs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\controls\ScopeProgressCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Windows.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\controls\ScopeFOVDiagram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\GaterDAQmx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScopeDefinesExample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Storage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Runstates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\ScopeScanModeButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceBiDi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceHopper.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ScopeDefines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\ScopeControllerModes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\SwitchResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\ScopeOverlayResonanceSW.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Inputs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Outputs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parameters\Daq.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="helpers\ScopeDatatypes.h">
       <Filter>Scope data types</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\DaqMultiChunk.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\DaqMultiChunkResonance.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helpers\FPGAException.h">
       <Filter>Devices\FPGA</Filter>
@@ -905,21 +785,6 @@
     <ClInclude Include="devices\xyz\GalilController.h">
       <Filter>Devices\XYZ</Filter>
     </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmx.h">
-      <Filter>Devices\daqmx</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxLineClock.h">
-      <Filter>Devices\daqmx</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxResonance.h">
-      <Filter>Devices\daqmx</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h">
-      <Filter>Devices\daqmx</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxSlave.h">
-      <Filter>Devices\daqmx</Filter>
-    </ClInclude>
     <ClInclude Include="devices\xyz\XYControlStanda.h">
       <Filter>Devices\XYZ</Filter>
     </ClInclude>
@@ -973,6 +838,159 @@
     </ClInclude>
     <ClInclude Include="gui\ScanModesSettingsPage.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\galil\Galil.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\daqmx\DAQmxTask.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmx.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxLineClock.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonance.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxSlave.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Inputs.h">
+      <Filter>Devices\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\Inputs.h">
+      <Filter>Devices\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\InputsDAQmx.h">
+      <Filter>Devices\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\InputsFPGA.h">
+      <Filter>Devices\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Outputs.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\Outputs.h">
+      <Filter>Devices\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Daq.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Base.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Devices.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Plane.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Scope.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Storage.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\GaterDAQmx.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Framescan.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\StimulationsDAQmx.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\SwitchResonance.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PresetNameDlg.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Runstates.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqMultiChunkResonance.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqMultiChunk.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeColorComboCtrl.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeFOVDiagram.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeLEDCtrl.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeProgressCtrl.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\controls\ScopeScrollbarCtrl.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThirdParty\ToolbarHelper.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThirdParty\ToolTipDialog.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Windows.h">
+      <Filter>Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeScanModeButton.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperBasic.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameBiDi.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceBiDi.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="scanmodes\ScannerVectorFrameResonanceHopper.h">
+      <Filter>Scanmodes</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\ScopeOverlayResonanceSW.h">
+      <Filter>Scope data types</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\ScopeControllerModes.h">
+      <Filter>Scope control</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeDefinesExample.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
