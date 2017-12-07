@@ -25,11 +25,20 @@
     <Filter Include="Scope data types">
       <UniqueIdentifier>{0b2bfbc7-18d7-4add-b5a3-8e98bffb232b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Direct2D">
-      <UniqueIdentifier>{7f41a085-c3f0-4532-aa0d-79b37a20882f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Devices">
       <UniqueIdentifier>{f3be59d8-7862-4617-a640-605ffbab392e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Direct2D">
+      <UniqueIdentifier>{7f41a085-c3f0-4532-aa0d-79b37a20882f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\FPGA">
+      <UniqueIdentifier>{7b1048b0-334a-4d80-9c2a-bdf645ad8d84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\XYZ">
+      <UniqueIdentifier>{0cd2435f-7e02-4cf9-a25d-5ad39c88c2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\daqmx">
+      <UniqueIdentifier>{3e7595a4-6084-4ad1-9c0a-b86a2f2c9917}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,29 +177,17 @@
     <ClCompile Include="gui\controls\ScopeSliderCtrl.cpp">
       <Filter>Scope data types</Filter>
     </ClCompile>
-    <ClCompile Include="devices\fpga\NiFpga.c">
-      <Filter>Devices</Filter>
-    </ClCompile>
     <ClCompile Include="gui\direct2d\D2ChannelRender.cpp">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="gui\direct2d\D2HistogramRender.cpp">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="gui\direct2d\d2wrap.cpp">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="devices\daqmx\DAQmxTask.cpp">
       <Filter>Devices</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\MovementPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\MovementSettingsSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPUControlPage.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helpers\lut.cpp">
       <Filter>Source Files</Filter>
@@ -213,16 +210,7 @@
     <ClCompile Include="scanmodes\PixelmapperBasic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\ScanModesSettingsPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FrameScanBidiPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FrameScanHopperPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\FrameScanSawPage.cpp">
@@ -234,32 +222,11 @@
     <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\XYZControlPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAInterface.cpp">
-      <Filter>Scope components</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAIO6587.cpp">
-      <Filter>Devices</Filter>
-    </ClCompile>
     <ClCompile Include="devices\xyz\XYControl.cpp">
       <Filter>Scope components</Filter>
     </ClCompile>
-    <ClCompile Include="devices\xyz\XYZControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="controllers\DaqController.cpp">
       <Filter>Scope control</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\xyz\XYZControlGalil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\xyz\XYControlStanda.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\xyz\GalilController.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\Inputs.cpp">
       <Filter>Source Files</Filter>
@@ -268,9 +235,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\InputsFPGA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\StimulationsDAQmx.cpp">
@@ -285,17 +249,8 @@
     <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="devices\xyz\SerialConnection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="devices\StimulationVector.cpp">
       <Filter>Scope components</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\xyz\SutterController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\xyz\XYZControlSutter.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parameters\Framescan.cpp">
       <Filter>Source Files</Filter>
@@ -315,55 +270,10 @@
     <ClCompile Include="ScopeDefines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\FPGADigitalDemultiplexerPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGADigitalDemultiplexer.cpp">
-      <Filter>Scope components</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAAnalogIntegrator.cpp">
-      <Filter>Scope components</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAIO5771.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGANoiseOutput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAAnalogIntegratorPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAAnalogDemultiplexerPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGANoiseOutputPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxSlave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="parameters\Base.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\NoScanBasePage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FrameScanBasePage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAPhotonCounterPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAPhotonCounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parameters\Windows.cpp">
@@ -372,19 +282,10 @@
     <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\BehaviorSettingsPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="devices\GaterDAQmx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\DAQmxPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAResonanceScannerPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FrameScanResonancePage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parameters\Storage.cpp">
@@ -394,12 +295,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helpers\ScopeScanModeButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAIO5751.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp">
@@ -420,28 +315,10 @@
     <ClCompile Include="devices\SwitchResonance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAResonanceScanner_NI5771.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\ScopeOverlayResonanceSW.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPGAResonanceScanner_NI5771Page.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parameters\Inputs.cpp">
@@ -470,6 +347,138 @@
     </ClCompile>
     <ClCompile Include="helpers\DaqMultiChunkResonance.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO6587.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\NiFpga.c">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogIntegrator.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGADigitalDemultiplexer.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAInterface.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexer.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAAnalogIntegratorPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGADigitalDemultiplexerPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO5751.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAIO5771.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGANoiseOutput.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGANoiseOutputPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAPhotonCounter.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAPhotonCounterPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\fpga\FPGAResonanceScanner_NI5771.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAResonanceScanner_NI5771Page.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPGAResonanceScannerPage.cpp">
+      <Filter>Devices\FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\GalilController.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\SerialConnection.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\SutterController.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYControlStanda.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControl.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControlGalil.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\XYZControlPage.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\xyz\XYZControlSutter.cpp">
+      <Filter>Devices\XYZ</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmx.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxLineClock.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonance.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxResonanceSlave.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\OutputsDAQmxSlave.cpp">
+      <Filter>Devices\daqmx</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\BehaviorSettingsPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPUControlPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanBasePage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanBidiPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanHopperPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanResonancePage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MovementPage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MovementSettingsSheet.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\NoScanBasePage.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ScanModesSettingsPage.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -623,43 +632,19 @@
     <ClInclude Include="gui\controls\ScopeSliderCtrl.h">
       <Filter>Scope data types</Filter>
     </ClInclude>
-    <ClInclude Include="helpers\FPGAException.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_ClockGenerator.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
     <ClInclude Include="gui\direct2d\D2ChannelRender.h">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClInclude>
     <ClInclude Include="gui\direct2d\D2HistogramRender.h">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClInclude>
     <ClInclude Include="gui\direct2d\d2wrap.h">
-      <Filter>Direct2D</Filter>
+      <Filter>GUI\Direct2D</Filter>
     </ClInclude>
     <ClInclude Include="devices\daqmx\DAQmxTask.h">
       <Filter>Devices</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MovementPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MovementSettingsSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPUControlPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\ScopeController_p.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Documentation.h">
@@ -683,16 +668,7 @@
     <ClInclude Include="scanmodes\PixelmapperBasic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ScanModesSettingsPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FrameScanBidiPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FrameScanHopperPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui\FrameScanSawPage.h">
@@ -704,35 +680,14 @@
     <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\XYZControlPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAInterface.h">
-      <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAIO6587.h">
-      <Filter>Devices</Filter>
-    </ClInclude>
     <ClInclude Include="devices\xyz\XYControl.h">
       <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\XYZControl.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="devices\xyz\galil\Galil.h">
       <Filter>Devices</Filter>
     </ClInclude>
     <ClInclude Include="controllers\DaqController.h">
       <Filter>Scope control</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\XYZControlGalil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\XYControlStanda.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\GalilController.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="controllers\ScopeLogger_p.h">
       <Filter>Header Files</Filter>
@@ -744,9 +699,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="devices\InputsFPGA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="devices\StimulationsDAQmx.h">
@@ -770,17 +722,8 @@
     <ClInclude Include="gui\controls\ScopeScrollbarCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="devices\xyz\SerialConnection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="devices\StimulationVector.h">
       <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\SutterController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\xyz\XYZControlSutter.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameters\Framescan.h">
       <Filter>Header Files</Filter>
@@ -797,55 +740,10 @@
     <ClInclude Include="devices\Outputs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxLineClock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\controls\ScopeProgressCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\FPGADigitalDemultiplexerPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGADigitalDemultiplexer.h">
-      <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAAnalogIntegrator.h">
-      <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAIO5771.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGANoiseOutput.h">
-      <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAAnalogIntegratorPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAAnalogDemultiplexerPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGANoiseOutputPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxSlave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="parameters\Base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\NoScanBasePage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FrameScanBasePage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAPhotonCounterPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAPhotonCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameters\Windows.h">
@@ -854,22 +752,10 @@
     <ClInclude Include="gui\controls\ScopeFOVDiagram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\BehaviorSettingsPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="devices\GaterDAQmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\DAQmxPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ScopeDefinesExample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAResonanceScannerPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FrameScanResonancePage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameters\Storage.h">
@@ -879,12 +765,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helpers\ScopeScanModeButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAIO5751.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAResonanceScanner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h">
@@ -911,43 +791,10 @@
     <ClInclude Include="devices\SwitchResonance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAResonanceScanner_NI5771.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="helpers\ScopeOverlayResonanceSW.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput_PXIe7962R.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771_Resonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_DigitalDemultiplexerV3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\NiFpga_PhotonCounterV2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPGAResonanceScanner_NI5771Page.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameters\Inputs.h">
@@ -967,6 +814,165 @@
     </ClInclude>
     <ClInclude Include="helpers\DaqMultiChunkResonance.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\FPGAException.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO6587.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_ClockGenerator.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogIntegrator.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGADigitalDemultiplexer.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAInterface.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGANoiseOutput.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexer.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAAnalogIntegratorPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGADigitalDemultiplexerPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO5751.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAIO5771.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGANoiseOutputPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAPhotonCounter.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAPhotonCounterPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\FPGAResonanceScanner_NI5771.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAResonanceScanner_NI5771Page.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPGAResonanceScannerPage.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_AnalogIntegrator_NI5771_Resonance.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_DigitalDemultiplexerV3.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_NoiseOutput_PXIe7962R.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\fpga\NiFpga_PhotonCounterV2.h">
+      <Filter>Devices\FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\GalilController.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmx.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxLineClock.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonance.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxResonanceSlave.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\OutputsDAQmxSlave.h">
+      <Filter>Devices\daqmx</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYControlStanda.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControl.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControlGalil.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\XYZControlPage.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\XYZControlSutter.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\SutterController.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\xyz\SerialConnection.h">
+      <Filter>Devices\XYZ</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\DAQmxPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\BehaviorSettingsPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPUControlPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanBasePage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanBidiPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanHopperPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanResonancePage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MovementPage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MovementSettingsSheet.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\NoScanBasePage.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ScanModesSettingsPage.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
