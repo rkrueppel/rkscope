@@ -283,7 +283,8 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="config\config.cpp" />
+    <ClCompile Include="config\config_choices.cpp" />
+    <ClCompile Include="config\config_options.cpp" />
     <ClCompile Include="devices\fpga\FPGAAnalogDemultiplexerResonance.cpp" />
     <ClCompile Include="devices\fpga\FPGAIO5751.cpp" />
     <ClCompile Include="devices\fpga\FPGAResonanceScanner.cpp" />
@@ -451,7 +452,8 @@
     <ClCompile Include="TheScope.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config\config.h" />
+    <ClInclude Include="config\config_choices.h" />
+    <ClInclude Include="config\config_options.h" />
     <ClInclude Include="controllers\ScopeControllerModes.h" />
     <ClInclude Include="devices\fpga\FPGAAnalogDemultiplexerResonance.h" />
     <ClInclude Include="devices\fpga\FPGAIO5751.h" />
@@ -545,6 +547,7 @@
     <ClInclude Include="scanmodes\ScannerVectorFrameResonanceBiDi.h" />
     <ClInclude Include="helpers\ScopeException.h" />
     <ClInclude Include="scanmodes\ScannerVectorFrameResonanceHopper.h" />
+    <ClInclude Include="scope.h" />
     <ClInclude Include="ScopeDatatypes.h" />
     <ClInclude Include="devices\fpga\FPGAInterface.h" />
     <ClInclude Include="devices\fpga\FPGADigitalDemultiplexer.h" />
@@ -616,6 +619,9 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="controllers\StorageController.h" />
     <ClInclude Include="gui\TimeSeriesSettingsPage.h" />
+    <ClInclude Include="TheScope.h" />
+    <ClInclude Include="TheScopeButtons.h" />
+    <ClInclude Include="TheScopeCounters.h" />
     <ClInclude Include="version.h" />
     <ClInclude Include="devices\xyz\XYControl.h" />
     <ClInclude Include="devices\xyz\XYZControl.h" />

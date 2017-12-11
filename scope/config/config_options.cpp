@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "config_options.h"
 #include "devices/Inputs.h"
 #include "devices/InputsDAQmx.h"
 #include "devices/InputsFPGA.h"
@@ -14,3 +15,7 @@
 #include "devices\xyz\XYZControlSutter.h"
 #include "helpers\DaqMultiChunk.h"
 #include "helpers\DaqMultiChunkResonance.h"
+#include "helpers\ScopeMultiImage.h"
+#include "helpers\ScopeMultiImageResonanceSW.h"
+#include "helpers\ScopeOverlay.h"
+#include "helpers\ScopeOverlayResonanceSW.h"

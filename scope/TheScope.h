@@ -1,6 +1,7 @@
 #pragma once
 
-#include "config\config.h"
+#include "config\config_options.h"
+#include "config\config_choices.h"
 
 #include "gui\MainDlgFrame.h"
 #include "helpers\SyncQueues.h"

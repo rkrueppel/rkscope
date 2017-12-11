@@ -19,9 +19,14 @@ namespace scope {
 	class XYZControlSutter;
 	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
 	template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkPtr = std::shared_ptr<DaqMultiChunk<NAREAS, DATA_T>>;
-
 	template<uint32_t NAREAS, class DATA_T>class DaqMultiChunkResonance;
 	template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkResonancePtr = std::shared_ptr<DaqMultiChunkResonance<NAREAS, DATA_T>>;
+	class ScopeMultiImage;
+	class ScopeMultiImageResonanceSW;
+	typedef std::shared_ptr<ScopeMultiImage> ScopeMultiImagePtr;
+	typedef std::shared_ptr<const ScopeMultiImage> ScopeMultiImageCPtr;
+	typedef std::shared_ptr<ScopeMultiImageResonanceSW> ScopeMultiImageResonanceSWPtr;
+	typedef std::shared_ptr<const ScopeMultiImageResonanceSW> ScopeMultiImageResonanceSWCPtr;
 
 	namespace config {
 		enum class ScannerEnum {
@@ -132,15 +137,73 @@ namespace scope {
 		};
 
 		template <DaqMultiChunkEnum>
-		struct DaqMultiChunkSelector {
+		struct DaqMultiChunkTypeSelector {
 			typedef DaqMultiChunk type;
 			typedef DaqMultiChunkPtr type_ptr;
 		};
 
 		template<>
-		struct DaqMultiChunkSelector<DaqMultiChunkEnum::Resonance> {
-			typedef DaqMultiChunkResonance type;
-			typedef DaqMultiChunkResonancePtr type_ptr;
+		struct DaqMultiChunkTypeSelector<DaqMultiChunkEnum::Resonance> {
+			template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkResonance = type;
+			template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkResonancePtr = type_ptr;
+		};
+		
+		enum class StimulationsEnum {
+			DAQmx
+		};
+		
+		template <StimulationEnum>
+		struct StimulationsTypeSelector {
+			typedef StimulationsDAQmx type;
+		};
+		
+		enum class MultiImageEnum {
+			Regular,
+			ResonanceSW
+		};
+		
+		template <MultiImageEnum>
+		struct MultiImageTypeSelector {
+			typedef ScopeMultiImage type;
+			typedef ScopeMultiImagePtr type_ptr;
+			typedef ScopeMultiImageCPtr type_constptr;
+		};
+		
+		template<>
+		struct MultiImageTypeSelector<MultiImageEnum::ResonanceSW> {
+			typedef ScopeMultiImageResonanceSW type;
+			typedef ScopeMultiImageResonanceSWPtr type_ptr;
+			typedef ScopeMultiImageResonanceSWCPtr type_constptr;
+		};
+		
+		enum class OverlayEnum {
+			Regular,
+			ResonanceSW
+		};
+		
+		template <OverlayEnum>
+		struct OverlayTypeSelector {
+			typedef ScopeOverlay type;
+		};
+		
+		template<>
+		struct OverlayTypeSelector<OverlayEnum::ResonanceSW> {
+			typedef ScopeOverlayResonanceSW type;
+		};
+
+		enum class ResonancePixelmapperEnum {
+			Software,
+			Hardware
+		};
+
+		template<ResonancePixelmapperEnum>
+		struct ResonancePixelmapperTypeSelector {
+			typedef PixelmapperFrameResonanceSW type;
+		};
+
+		template<>
+		struct ResonancePixelmapperTypeSelector<ResonancePixelmapperEnum::Hardware> {
+			typdef PixelmapperFrameResonanceHW type;
 		};
 
 		enum class NBeamSetupEnum {
@@ -156,32 +219,13 @@ namespace scope {
 
 		template<uint32_t AREAS>
 		struct NBeamSetupSelector<NBeamSetupEnum::MultiBeam, AREAS> {
-			static_assert(AREAS > 1, "MultiBeamSetup: Zahl der Areas muss größer als 1 sein.");
+			static_assert(AREAS > 1, "MultiBeamSetup: Number of areas has to be bigger than one.");
 			constexpr static uint32_t areas = AREAS;
 			constexpr static uint32_t slaves = AREAS - 1;
 		};
 
 
 
-		constexpr uint32_t config_nareas = 1;
-		constexpr NBeamSetupEnum config_nbeamsetup = NBeamSetupEnum::SingleBeam;
-		constexpr uint32_t config_nslaveareas = NBeamSetupSelector<config_nbeamsetup, config_nareas>::slaves;
-		constexpr ScannerEnum config_scannerselect = ScannerEnum::RegularGalvo;
-		constexpr OutputEnum config_outputselect = OutputEnum::SimpleDAQmx;
-		constexpr InputEnum config_inputselect = InputEnum::DAQmx;
-		constexpr XYStageEnum config_xystageselect = XYStageEnum::None;
-		constexpr ZStageEnum config_zstageselect = ZStageEnum::None;
-		constexpr XYZStageEnum config_xyzstageselect = XYZStageEnum::None;
-		constexpr DaqMultiChunkEnum config_daqmultichunk = DaqMultiChunkEnum::Regular;
-
-		typedef OutputTypeSelector<config_outputselect>::type MyOutputType;
-		typedef OutputTypeSelector<config_outputselect>::type MyOutputZeroType;
-		typedef OutputTypeSelector<config_outputselect>::type_slave MySlaveOutputType;
-		typedef InputTypeSelector<config_inputselect>::type MyInputType;
-		typedef XYStageTypeSelector<config_xystageselect>::type MyXYStageType;
-		typedef ZStageTypeSelector<config_zstageselect>::type MyZStageType;
-		typedef XYZStageTypeSelector<config_xyzstageselect>::type MyXYZStage;
-		typedef DaqMultiChunkSelector<config_daqmultichunk>::type MyDaqMultiChunkType;
-		typedef DaqMultiChunkSelector<config_daqmultichunk>::type_ptr MyDaqMultiChunkPtrType;
+		
 	}
 }

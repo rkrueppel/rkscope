@@ -492,10 +492,13 @@
     <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp">
       <Filter>Scanmodes</Filter>
     </ClCompile>
-    <ClCompile Include="config\config.cpp">
+    <ClCompile Include="ScopeDefines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScopeDefines.cpp">
+    <ClCompile Include="config\config_options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="config\config_choices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -986,10 +989,25 @@
     <ClInclude Include="controllers\ScopeControllerModes.h">
       <Filter>Scope control</Filter>
     </ClInclude>
-    <ClInclude Include="config\config.h">
+    <ClInclude Include="ScopeDefinesExample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScopeDefinesExample.h">
+    <ClInclude Include="config\config_choices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config_options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TheScope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TheScopeButtons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TheScopeCounters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
