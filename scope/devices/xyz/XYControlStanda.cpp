@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "XYControlStanda.h"
-#include "ScopeDefines.h"
 #include "parameters/Devices.h"
 #include "helpers/Helpers.h"
 #include "helpers/ScopeException.h"

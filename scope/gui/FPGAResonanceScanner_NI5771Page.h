@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "controls/ScopeLEDCtrl.h"
 #include "controls/ScopeEditCtrl.h"
 #include "controllers/ScopeController.h"

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "DAQmxTask.h"
 #include "helpers/ScopeException.h"
-#include "ScopeDefines.h"				// to get DAQMX_THROW_EXCEPTION
 #include "helpers/Helpers.h"
 
 namespace DAQmx {

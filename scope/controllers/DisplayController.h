@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "BaseController.h"
+#include "config\config_choices.h"
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
 #include "helpers/ScopeMultiImage.h"
@@ -31,7 +31,7 @@ namespace scope {
 
 		private:
 			/** Input queue with multi images from the PipelineController */
-			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const input_queue;
+			SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const input_queue;
 			
 			/** Vector of CChannelFrame observers */
 			std::vector<std::vector<gui::CChannelFrame*>> channelframes;
@@ -70,7 +70,7 @@ namespace scope {
 
 		public:
 			/** Connect queue and get parameters */
-			DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue);
+			DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _iqueue);
 			
 			~DisplayController();
 

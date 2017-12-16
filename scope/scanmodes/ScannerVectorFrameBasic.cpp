@@ -43,7 +43,7 @@ namespace scope {
 	void ScannerVectorFrameBasic::UpdateVector() {
 	}
 
-	void ScannerVectorFrameBasic::SetParameters(parameters::Daq* const _daqparameters, parameters::ScannerVectorFrameBasic* const _svparameters, parameters::SCOPE_FPUZCONTROL_T* const _zparameters) {
+	void ScannerVectorFrameBasic::SetParameters(parameters::Daq* const _daqparameters, parameters::ScannerVectorFrameBasic* const _svparameters, config::FPUZStageParametersType* const _zparameters) {
 		this->daqparameters = _daqparameters;
 		this->svparameters = _svparameters;
 		this->zparameters = _zparameters;

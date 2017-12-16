@@ -1,6 +1,7 @@
 #pragma once
-#include "ScopeDefines.h"
+
 #include "BaseController.h"
+#include "config\config_choices.h"
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
 #include "TheScopeCounters.h"
@@ -23,16 +24,16 @@ namespace scope {
 		parameters::Scope& guiparameters;
 		
 		/** Reference to TheScope's counters */
-		ScopeCounters<SCOPE_NAREAS>& counters;
+		ScopeCounters<config::nareas>& counters;
 		
 		/** input queue from the DaqController */
-		std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const input_queues;
+		std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const input_queues;
 
 		/** output queue to the StorageController */
-		SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const storage_queue;
+		SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const storage_queue;
 
 		/** output queue to the DisplayController */
-		SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const display_queue;
+		SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const display_queue;
 
 		/** array with the scanner vectors */
 		std::vector<ScannerVectorFrameBasicPtr> scannervecs;
@@ -57,10 +58,10 @@ namespace scope {
 		/** Connects queues and gets parameters */
 		PipelineController(const uint32_t& _nactives
 			, parameters::Scope& _guiparameters
-			, ScopeCounters<SCOPE_NAREAS>& _counters
-			, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _iqueues
-			, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
-			, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
+			, ScopeCounters<config::nareas>& _counters
+			, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _iqueues
+			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
+			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 		);
 			
 		~PipelineController();

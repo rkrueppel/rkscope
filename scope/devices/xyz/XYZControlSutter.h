@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
-
 // Only use this code if we need it
 #ifdef SCOPE_USE_SUTTER_XYZSTAGE
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "helpers/helpers.h"
-#include "ScopeDefines.h"			// to get SCOPE_DIRECT2D_DEBUG
 
 /** @file
 * Parts of the code are modified from Microsoft's Direct2D nbody example: Copyright (c) Microsoft Corporation.  All rights reserved. 

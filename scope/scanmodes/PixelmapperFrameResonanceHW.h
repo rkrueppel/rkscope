@@ -10,16 +10,17 @@ namespace scope {
 
 namespace scope {
 
-/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc */
-class PixelmapperFrameResonanceHW : public PixelmapperBasic {
+	/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc */
+	class PixelmapperFrameResonanceHW
+		: public PixelmapperBasic {
 
-protected:
+	protected:
 
-public:
-	PixelmapperFrameResonanceHW();
+	public:
+		PixelmapperFrameResonanceHW();
 
-	/** Maps a chunk */
-	PixelmapperResult LookupChunk(DaqChunkPtr const _chunk, const uint16_t& _currentavgcount) override;
-};
+		/** Maps a chunk */
+		PixelmapperResult LookupChunk(DaqChunkPtr const _chunk, const uint16_t& _currentavgcount) override;
+	};
 
 }

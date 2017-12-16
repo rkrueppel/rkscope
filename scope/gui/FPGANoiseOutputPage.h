@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "controls/ScopeLEDCtrl.h"
 #include "controllers/ScopeController.h"
 #include "devices/fpga/FPGANoiseOutput.h"

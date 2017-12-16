@@ -492,9 +492,6 @@
     <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp">
       <Filter>Scanmodes</Filter>
     </ClCompile>
-    <ClCompile Include="ScopeDefines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="config\config_options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -691,9 +688,6 @@
     </ClInclude>
     <ClInclude Include="devices\StimulationVector.h">
       <Filter>Scope components</Filter>
-    </ClInclude>
-    <ClInclude Include="ScopeDefines.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helpers\ScopeDatatypes.h">
       <Filter>Scope data types</Filter>
@@ -1008,6 +1002,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parameters\Stimulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,10 +6,10 @@ namespace scope {
 	PipelineController::PipelineController(
 		const uint32_t& _nactives
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<SCOPE_NAREAS>& _counters
-		, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _iqueues
-		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _squeue
-		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _dqueue
+		, ScopeCounters<config::nareas>& _counters
+		, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _iqueues
+		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
+		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 	)
 		: BaseController(_nactives)
 		, guiparameters(_guiparameters)
@@ -43,7 +43,7 @@ namespace scope {
 		// Get some values as locals, avoid the mutexed access to parameters later on (really necessary??)
 		const DaqMode requested_mode = guiparameters.requested_mode();
 		const uint32_t requested_frames = guiparameters.areas[_area].daq.requested_frames();
-		const uint32_t requested_averages = guiparameters.areas[ThisAreaOrMasterArea(_area)].daq.averages();
+		const uint32_t requested_averages = guiparameters.areas[config::MyMaster(_area)].daq.averages();
 		const double totalframepixels = guiparameters.areas[_area].Currentframe().XTotalPixels() * guiparameters.areas[_area].Currentframe().YTotalLines();
 
 		//size_t num_planes = 1;
@@ -51,15 +51,15 @@ namespace scope {
 		//	num_planes = guiparameters.areas[_area].frameresonance.planes.size()?guiparameters.areas[_area].frameresonance.planes.size():1;
 
 		// Make the first multiimage
-		SCOPE_MULTIIMAGEPTR_T current_frame = std::make_shared<SCOPE_MULTIIMAGE_T>(_area
+		auto current_frame = std::make_shared<config::MultiImageType>(_area
 			, guiparameters.areas[_area].daq.inputs->channels()
 			, guiparameters.areas[_area].Currentframe().yres()	// * num_planes
 			, guiparameters.areas[_area].Currentframe().xres());
-		SCOPE_MULTIIMAGEPTR_T next_frame = current_frame; //std::make_shared<ScopeMultiImage>(_area, channels, yres, xres);
+		auto next_frame = current_frame; //std::make_shared<ScopeMultiImage>(_area, channels, yres, xres);
 		current_frame->SetAvgMax(requested_averages);
 		//current_frame->InitializeCurrentLineData(5*guiparameters.areas[_area]->currentframe->XTotalPixels());
 
-		std::unique_ptr<PixelmapperBasic> pixel_mapper(PixelmapperBasic::Factory(SCOPE_SCANNERTYPE, guiparameters.areas[_area].scanmode()));
+		std::unique_ptr<PixelmapperBasic<>> pixel_mapper(PixelmapperBasic::Factory(config::scannerselect, guiparameters.areas[_area].scanmode()));
 		pixel_mapper->SetLookupVector(scannervecs[_area]->GetLookupVector());
 		pixel_mapper->SetParameters(scannervecs[_area]->GetSVParameters());
 		pixel_mapper->SetCurrentFrame(current_frame);
@@ -82,14 +82,14 @@ namespace scope {
 		// Dequeue and pixelmap loop
 		while ( !sc->IsSet() ) {
 			// Dequeue
-			ScopeMessage<SCOPE_DAQCHUNKPTR_T> msg(input_queues->at(_area).Dequeue());
+			ScopeMessage<config::DaqMultiChunkPtrType> msg(input_queues->at(_area).Dequeue());
 
 			// If message has abort tag, break from while loop
 			if ( msg.tag == ScopeMessageTag::abort ) {
 				returnstatus = stopped;
 				break;
 			}
-			SCOPE_DAQCHUNKPTR_T chunk = msg.cargo;
+			auto chunk = msg.cargo;
 
 			// If we oversampled during acquisition, now downsample to pixeltime
 			chunk->Downsample(downsampling);
@@ -107,7 +107,7 @@ namespace scope {
 				current_frame->SetImageNumber(framecount+1);
 
 				// Put current_frame in outgoing message
-				ScopeMessage<SCOPE_MULTIIMAGEPTR_T> outmsg;
+				ScopeMessage<config::MultiImagePtrType> outmsg;
 				outmsg.cargo = current_frame;
 
 				// If one frame is mapped completely...
@@ -121,7 +121,7 @@ namespace scope {
 						current_frame->SetCompleteAvg(true);
 						
 						// the next frame is a copy of the old (allows for continuous updating effect, no black pixels in new frame)
-						next_frame = std::make_shared<SCOPE_MULTIIMAGE_T>(*current_frame);
+						next_frame = std::make_shared<config::MultiImageType>(*current_frame);
 
 						// Enqueue frame for storage
 						storage_queue->Enqueue(outmsg);
@@ -181,7 +181,7 @@ namespace scope {
 		// This sets stop condition
 		BaseController::StopOne(_a);
 		// This enqueues abort message (just to be sure)
-		ScopeMessage<SCOPE_DAQCHUNKPTR_T> stopmsg(ScopeMessageTag::abort, nullptr);
+		ScopeMessage<config::DaqMultiChunkPtrType> stopmsg(ScopeMessageTag::abort, nullptr);
 		input_queues->at(_a).Enqueue(stopmsg);
 	}
 

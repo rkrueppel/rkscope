@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "devices/daqmx/DAQmxTask.h"
 
 // Forward declarations

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "helpers/ScopeDatatypes.h"
 #include "parameters/Area.h"
 #include "devices/xyz/XYControlStanda.h"

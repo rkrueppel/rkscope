@@ -15,7 +15,7 @@ namespace scope {
 		, NiFpga_AnalogIntegrator_NI5771_ControlU16_UserData0
 		, NiFpga_AnalogIntegrator_NI5771_ControlU8_UserData1
 		, NiFpga_AnalogIntegrator_NI5771_ControlBool_UserCommandCommit) {
-		assert(SCOPE_NAREAS == 1);
+		static_assert(config::nareas == 1, "FPGAAnalogIntegrator only supports 1 area.");
 		
 		status = NiFpga_Initialize();
 
@@ -106,7 +106,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// only two channels and one area supported in FPGA vi

@@ -1,11 +1,6 @@
 #pragma once
 
-#include "ScopeDefines.h"
-
-// Forward declarations
-namespace scope {
-	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
-}
+#include "config\config_choices.h"
 
 namespace scope {
 
@@ -43,7 +38,7 @@ namespace scope {
 			* @param[out] _timedout true if read timed out
 			* @param[in] _timeout timeout in seconds after which to return even if not enough samples were read
 			* @return the number of samples per channel actually read */
-			virtual int32_t Read(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, bool& _timedout, const double& _timeout) = 0;
+			virtual int32_t Read(const uint32_t& _area, config::DaqMultiChunkType& _chunk, bool& _timedout, const double& _timeout) = 0;
 	};
 
 }

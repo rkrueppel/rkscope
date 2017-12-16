@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 
 // Only use this code if we need it
 #ifdef SCOPE_USE_GALIL_XYZSTAGE

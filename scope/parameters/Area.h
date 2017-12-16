@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ScopeDefines.h"
+#include "config\config_choices.h"
 #include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeNumber.h"
 #include "helpers/ScopeString.h"
@@ -34,10 +34,10 @@ namespace scope {
 			Daq daq;
 
 			/** the xy stage parameters for this FPU (set type in ScopeDefines.h) */
-			SCOPE_FPUXYCONTROL_T fpuxystage;
+			config::FPUXYStageParametersType fpuxystage;
 
 			/** the fast z stage parameters for this FPU (set type in ScopeDefines.h) */
-			SCOPE_FPUZCONTROL_T fpuzstage;
+			config::FPUZStageParametersType fpuzstage;
 
 			/** the choosen scanner vector type */
 			ScopeValue<ScannerVectorType> scanmode;

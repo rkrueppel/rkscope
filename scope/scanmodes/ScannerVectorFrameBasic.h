@@ -29,7 +29,7 @@ protected:
 	parameters::ScannerVectorFrameBasic* svparameters;
 
 	/** current fast z parameter set */
-	parameters::SCOPE_FPUZCONTROL_T* zparameters;
+	config::FPUZStageParametersType* zparameters;
 
 	/** the actual scanner vector (if fullframevector) with x, y, fast z, Pockels either interleaved (for fullframevector)
 	* or first x,p interleaved and then y,z interleaved (for not fullframevector). */
@@ -54,7 +54,7 @@ public:
 	virtual ~ScannerVectorFrameBasic();
 
 	/** Set current parameters and update vector */
-	virtual void SetParameters(parameters::Daq* const _daqparameters, parameters::ScannerVectorFrameBasic* const _svparameters, parameters::SCOPE_FPUZCONTROL_T* const _zparameters);
+	virtual void SetParameters(parameters::Daq* const _daqparameters, parameters::ScannerVectorFrameBasic* const _svparameters, config::FPUZStageParametersType* const _zparameters);
 
 	/** Set current pockels value and update. Do we need these set methods? Is it not automagically set in AreaParameters?! */
 	virtual void SetPockels(const double& _pockelsval);

@@ -16,7 +16,7 @@ FPGAResonanceScannerNI5771::FPGAResonanceScannerNI5771()
 	, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlU16_UserData0
 	, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlU8_UserData1
 	, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlBool_UserCommandCommit) {
-	assert(SCOPE_NAREAS == 1);
+	static_assert(config::nareas == 1, "FPGAResonanceScannerNI5771 only supports 1 area.");
 	
 	status = NiFpga_Initialize();
 
@@ -112,7 +112,7 @@ void FPGAResonanceScannerNI5771::StartAcquisition() {
 	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlBool_Acquire, true);
 }
 
-int32_t FPGAResonanceScannerNI5771::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGAResonanceScannerNI5771::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 	
 	// only two channels supported in FPGA vi

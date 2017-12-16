@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeNumber.h"
 #include "helpers/ScopeString.h"

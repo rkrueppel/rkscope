@@ -89,7 +89,7 @@ void FPGANoiseOutput::StartAcquisition() {
 	status = NiFpga_WriteBool(session, NiFpga_NoiseOutput_PXIe7962R_ControlBool_Acquire, true);
 }
 
-int32_t FPGANoiseOutput::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGANoiseOutput::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 
 	// only two channels and two areas supported in FPGA vi

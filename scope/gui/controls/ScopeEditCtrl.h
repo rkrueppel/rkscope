@@ -2,7 +2,6 @@
 
 #include "helpers/ScopeValue.h"
 #include "helpers/ScopeString.h"
-#include "ScopeDefines.h"
 
 namespace scope {
 	namespace gui {

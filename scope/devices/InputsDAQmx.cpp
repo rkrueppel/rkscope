@@ -68,7 +68,7 @@ namespace scope {
 		return standardchunksize;
 	}
 
-	int32_t InputsDAQmx::Read(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+	int32_t InputsDAQmx::Read(const uint32_t& _area, config::DaqMultiChunkType& _chunk, bool& _timedout, const double& _timeout) {
 		int32_t read = 0;
 		bool timedout = false;
 		try {

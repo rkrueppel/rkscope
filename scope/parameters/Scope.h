@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "helpers/ScopeDatatypes.h"
 #include "helpers/ScopeNumber.h"
 #include "helpers/ScopeString.h"
@@ -67,7 +66,7 @@ public:
 	Behavior behavior;
 	
 	/** the parameters for the xyz stage (set type in ScopeDefines.h) */
-	SCOPE_XYZCONTROL_T stage;
+	config::XYZStageParametersType stage;
 	
 	/** the StimulationParameters */
 	Stimulation stimulation;

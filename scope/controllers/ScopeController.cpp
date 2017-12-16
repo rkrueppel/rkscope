@@ -7,15 +7,15 @@ namespace scope {
 
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<SCOPE_NAREAS>& _counters
+		, ScopeCounters<config::nareas>& _counters
 		, DaqController& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
 		, DisplayController& _theDisplay
-		, std::vector<SynchronizedQueue<ScopeMessage<SCOPE_DAQCHUNKPTR_T>>>& _daq_to_pipeline
-		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_storage
-		, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>& _pipeline_to_display
-		, SCOPE_XYZCONTROL_T& _theStage
+		, std::vector<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>>& _daq_to_pipeline
+		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>& _pipeline_to_storage
+		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>& _pipeline_to_display
+		, config::XYZStageType& _theStage
 	)
 		: BaseController(1)
 		, nareas(_nareas)

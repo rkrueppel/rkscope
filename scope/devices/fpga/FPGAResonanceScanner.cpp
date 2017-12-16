@@ -8,7 +8,7 @@ namespace scope {
 
 FPGAResonanceScanner::FPGAResonanceScanner()
 	: FPGAIO5751(NiFpga_ResonanceScanner_IndicatorBool_Configured) {
-	assert(SCOPE_NAREAS == 1);
+	static_assert(config::nareas == 1, "FPGAResonanceScanner only supports 1 area.");
 	
 	status = NiFpga_Initialize();
 
@@ -92,7 +92,7 @@ void FPGAResonanceScanner::StartAcquisition() {
 	status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquire, true);
 }
 
-int32_t FPGAResonanceScanner::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+int32_t FPGAResonanceScanner::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 	size_t remaining = 0;
 
 	// only two channels and one area supported in FPGA vi

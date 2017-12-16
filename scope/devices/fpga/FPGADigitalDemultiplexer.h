@@ -2,6 +2,7 @@
 
 #include "FPGAInterface.h"
 #include "FPGAIO6587.h"
+#include "config\config_choices.h"
 #include "NiFpga_DigitalDemultiplexerV3.h"
 
 // Forward declaration
@@ -60,7 +61,7 @@ namespace scope {
 			/** Resets the acquisition */
 			void ResetAcquisition();
 
-			int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
+			int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
 
 			/** Checks the status of the FIFOs on the FPGA */
 			void CheckFPGADiagnosis();
@@ -70,6 +71,6 @@ namespace scope {
 
 			/** Set the counting mode on the FPGA. Count high samples (true) or count pulses/flanks (false). */
 			void SetCountMode(const bool& _mode);
-};
+	};
 
 }

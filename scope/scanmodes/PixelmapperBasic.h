@@ -96,15 +96,11 @@ namespace scope {
 			/** Different flavors of mapping a chunk 
 			* MultiChunks with more than 1 area are for configurations where all areas run in sync with the same parameters (e.g. multi-area with just one galvo-set)
 			* @{ */
-			virtual PixelmapperResult LookupChunk(DaqMultiChunkPtr<SCOPE_NBEAM_AREAS, uint16_t> const _chunk, const uint16_t& _currentavgcount) {
+			virtual PixelmapperResult LookupChunk(config::DaqMultiChunkPtrType const _chunk, const uint16_t& _currentavgcount) {
 				PixelmapperResult result(Nothing);
 				return result;
 			}
-			
-			virtual PixelmapperResult LookupChunk(DaqMultiChunkResonancePtr<SCOPE_NBEAM_AREAS, uint16_t> const _chunk, const uint16_t& _currentavgcount) {
-				PixelmapperResult result(Nothing);
-				return result;
-			}
+
 			/* @} */
 			
 	};

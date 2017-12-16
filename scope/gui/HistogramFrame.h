@@ -1,5 +1,5 @@
 #pragma once
-#include "ScopeDefines.h"
+
 #include "HistogramView.h"
 #include "helpers/ScopeDatatypes.h"
 #include "helpers/Active.h"

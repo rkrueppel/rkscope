@@ -1,5 +1,6 @@
 #pragma once
-#include "ScopeDefines.h"
+
+#include "config\config_choices.h"
 
 /** @file ScopeDatatypes.h In here all declarations for all kinds of datatypes Scope needs.
 * Remember: For a new datatype you have to implement specializations of ScopeValue member functions (see helpers/ScopeValue.cpp) ! */
@@ -310,13 +311,13 @@ namespace scope {
 	/** Describes the scanner vector types that are supported for a given scanner type */
 	class ScannerSupportedVectors {
 		public:
-			/** Returns a vector with all supported scannervectors for a given scannertype. Default scannertype is the one compiled for. */
-			static std::vector<ScannerVectorTypeHelper::Mode> List(const ScannerTypeHelper::Mode& _scannertype = SCOPE_SCANNERTYPE);
+			/** Returns a vector with all supported scannervectors for a given scannertype. Default scannertype is the one compiled for (see config_choices.h). */
+			static std::vector<ScannerVectorTypeHelper::Mode> List(const config::ScannerEnum& _scannertype = config::scannerselect);
 
-			/** Returns true if a given scannervector/scanmode is supported by a given scannertypeDefault scannertype is the one compiled for. */
-			static bool IsSupported(const ScannerVectorTypeHelper::Mode& _scanmode, const ScannerTypeHelper::Mode& _scannertype = SCOPE_SCANNERTYPE);
+			/** Returns true if a given scannervector/scanmode is supported by a given scannertypeDefault scannertype is the one compiled for (see config_choices.h). */
+			static bool IsSupported(const ScannerVectorTypeHelper::Mode& _scanmode, const config::ScannerEnum& _scannertype = config::scannerselect);
 
-			/** Returns true if a given scannervector/scanmode is supported by the builtin/hardcoded (see ScopeDefines.h) scannertype */
+			/** Returns true if a given scannervector/scanmode is supported by the builtin/hardcoded (see config_choices.h) scannertype */
 			static bool IsBuiltinSupported(const ScannerVectorTypeHelper::Mode& _scanmode);
 	};
 

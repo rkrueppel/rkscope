@@ -15,7 +15,7 @@ namespace scope {
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU16_UserData0
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_UserData1
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_UserCommandCommit) {
-		assert(SCOPE_NAREAS <= 2);
+		static_assert(config::nareas <= 2, "FPGAAnalogDemultiplexerResonance only supports 1 or 2 areas.");
 		status = NiFpga_Initialize();
 
 		char* const Bitfile = "devices\\fpga\\" NiFpga_AnalogDemultiplexer_NI5771_Resonance_Bitfile;
@@ -118,7 +118,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// We have to upcast here to get access to the resonance sync vector

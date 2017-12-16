@@ -1,7 +1,6 @@
 #pragma once
 
 #include "helpers/ScopeValue.h"
-#include "ScopeDefines.h"
 
 namespace scope {
 	namespace gui {

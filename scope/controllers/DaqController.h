@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ScopeDefines.h"
 #include "BaseController.h"
+#include "config\config_choices.h"
 #include "helpers/SyncQueues.h"
 #include "devices/Shutter.h"
 #include "devices/SwitchResonance.h"
@@ -34,40 +34,40 @@ namespace scope {
 
 	protected:
 		/** array holding the output queues to the PipelineControllers */
-		std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const output_queues;
+		std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const output_queues;
 
 		/** The outputs (pointers to base class) */
-		std::array<std::unique_ptr<Outputs>, SCOPE_NAREAS> outputs;
+		std::array<std::unique_ptr<Outputs>, config::nareas> outputs;
 
 		/** The inputs (pointers to base class) */
-		std::array<std::unique_ptr<Inputs>, SCOPE_NAREAS> inputs;
+		std::array<std::unique_ptr<Inputs>, config::nareas> inputs;
 
 		/** The stimulation output */
-		std::unique_ptr<SCOPE_STIMULATIONS_T> stimulation;
+		std::unique_ptr<config::StimulationsType> stimulation;
 
 		/** array holding shutter class for every area */
-		std::array<Shutter, SCOPE_NAREAS> shutters;
+		std::array<Shutter, config::nareas> shutters;
 
 		/** array holding SwitchResonance class for every area */
-		std::array<SwitchResonance, SCOPE_NAREAS> switches;
+		std::array<SwitchResonance, config::nareas> switches;
 
 		/** The scanner vector for frame scanning */
-		std::array<ScannerVectorFrameBasicPtr, SCOPE_NAREAS> scannervecs;
+		std::array<ScannerVectorFrameBasicPtr, config::nareas> scannervecs;
 
 		/** stimulation */
 		StimulationVector stimvec;
 
 		/** size of a read chunk in samples per channel */
-		std::array<uint32_t, SCOPE_NAREAS> chunksizes;
+		std::array<uint32_t, config::nareas> chunksizes;
 
 		/** condition variables to wait for until online updates is done (new frame is completely written to buffer or aborted) */
-		std::array<std::condition_variable, SCOPE_NAREAS> online_update_done;
+		std::array<std::condition_variable, config::nareas> online_update_done;
 
 		/** bool flag to set after online update is done */
-		std::array<std::atomic<bool>, SCOPE_NAREAS> online_update_done_flag;
+		std::array<std::atomic<bool>, config::nareas> online_update_done_flag;
 
 		/** mutexe for the condition variables */
-		std::array<std::mutex, SCOPE_NAREAS> online_update_done_mutexe;
+		std::array<std::mutex, config::nareas> online_update_done_mutexe;
 	
 		parameters::Scope ctrlparams;
 
@@ -75,7 +75,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _oqueues);
+		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _oqueues);
 
 		/** disable copy */
 		DaqController(DaqController& other) = delete;

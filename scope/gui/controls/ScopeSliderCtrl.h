@@ -1,7 +1,6 @@
 #pragma once
 
 #include "helpers/ScopeNumber.h"
-#include "ScopeDefines.h"				// to get WM_UPDATECONTROL
 
 namespace scope {
 	namespace gui {

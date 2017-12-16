@@ -1,6 +1,6 @@
 #include "stdafx.h"
+
 #include "ScopeDatatypes.h"
-#include "ScopeDefines.h"
 
 namespace scope {
 
@@ -31,32 +31,32 @@ uint16_t Uint16UpperBoundary(const Uint16Range& r) {
 	}
 }
 
-std::vector<ScannerVectorTypeHelper::Mode> ScannerSupportedVectors::List(const ScannerTypeHelper::Mode& _scannertype) {
+std::vector<ScannerVectorTypeHelper::Mode> ScannerSupportedVectors::List(const config::ScannerEnum& _scannertype) {
 	switch (_scannertype) {
 		default:
-		case ScannerTypeHelper::Mode::Regular:
+		case config::ScannerEnum::RegularGalvo:
 			{ ScannerVectorTypeHelper::Mode ret[] = {ScannerVectorTypeHelper::Mode::Sawtooth, ScannerVectorTypeHelper::Mode::Bidirectional };
 			return std::vector<ScannerVectorTypeHelper::Mode>(ret, ret + sizeof(ret) / sizeof(ret[0]) ); }
-		case ScannerTypeHelper::Mode::Resonance:
+		case config::ScannerEnum::ResonantGalvo:
 			{ ScannerVectorTypeHelper::Mode ret[] = {ScannerVectorTypeHelper::Mode::ResonanceBiDi, ScannerVectorTypeHelper::Mode::ResonanceHopper };
 			return std::vector<ScannerVectorTypeHelper::Mode>(ret, ret + sizeof(ret) / sizeof(ret[0]) ); }
-		case ScannerTypeHelper::Mode::AOD:
+		case config::ScannerEnum::AOD:
 			{ ScannerVectorTypeHelper::Mode ret[] = {ScannerVectorTypeHelper::Mode::Basic};
 			return std::vector<ScannerVectorTypeHelper::Mode>(ret, ret + sizeof(ret) / sizeof(ret[0]) ); }
-		case ScannerTypeHelper::Mode::Fiber:
+		case config::ScannerEnum::Fibre:
 			{ ScannerVectorTypeHelper::Mode ret[] = {ScannerVectorTypeHelper::Mode::Basic};
 			return std::vector<ScannerVectorTypeHelper::Mode>(ret, ret + sizeof(ret) / sizeof(ret[0]) ); }
 	}
 }
 
 
-bool ScannerSupportedVectors::IsSupported(const ScannerVectorTypeHelper::Mode& _scanmode, const ScannerTypeHelper::Mode& _scannertype) {
+bool ScannerSupportedVectors::IsSupported(const ScannerVectorTypeHelper::Mode& _scanmode, const config::ScannerEnum& _scannertype) {
 	auto veclist = ScannerSupportedVectors::List(_scannertype);
 	return (std::end(veclist) != std::find(std::begin(veclist), std::end(veclist), _scanmode));
 }
 
 bool ScannerSupportedVectors::IsBuiltinSupported(const ScannerVectorTypeHelper::Mode& _scanmode) {
-	return IsSupported(_scanmode, SCOPE_SCANNERTYPE);
+	return IsSupported(_scanmode, config::scannerselect);
 }
 
 }

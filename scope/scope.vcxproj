@@ -433,7 +433,6 @@
     <ClCompile Include="devices\InputsFPGA.cpp" />
     <ClCompile Include="gui\controls\ScopeScrollbarCtrl.cpp" />
     <ClCompile Include="devices\xyz\SerialConnection.cpp" />
-    <ClCompile Include="ScopeDefines.cpp" />
     <ClCompile Include="gui\controls\ScopeProgressCtrl.cpp" />
     <ClCompile Include="gui\controls\ScopeFOVDiagram.cpp" />
     <ClCompile Include="helpers\ScopeScanModeButton.cpp" />
@@ -486,9 +485,11 @@
     <ClInclude Include="helpers\ScopeDatatypes.h" />
     <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />
     <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h" />
+    <ClInclude Include="parameters\Area.h" />
     <ClInclude Include="parameters\Daq.h" />
     <ClInclude Include="parameters\Outputs.h" />
     <ClInclude Include="parameters\Runstates.h" />
+    <ClInclude Include="parameters\Stimulation.h" />
     <ClInclude Include="parameters\Storage.h" />
     <ClInclude Include="gui\FPGAResonanceScanner_NI5771Page.h" />
     <ClInclude Include="parameters\Windows.h" />
@@ -607,7 +608,6 @@
     <ClInclude Include="devices\xyz\SerialConnection.h" />
     <ClInclude Include="gui\controls\ScopeProgressCtrl.h" />
     <ClInclude Include="gui\controls\ScopeFOVDiagram.h" />
-    <ClInclude Include="ScopeDefines.h" />
     <ClInclude Include="ScopeDefinesExample.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

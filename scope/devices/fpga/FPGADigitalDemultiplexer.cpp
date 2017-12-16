@@ -15,7 +15,7 @@ namespace scope {
 		, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Commit
 		, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset)
 		, samplingrate(1E9) {
-		assert(SCOPE_NAREAS <= 2);
+		static_assert(config::nareas <= 2, "FPGADigitalDemultiplexer only supports 1 or 2 areas.");
 		status = NiFpga_Initialize();
 
 		char* const Bitfile = "devices\\fpga\\" NiFpga_DigitalDemultiplexerV3_Bitfile;
@@ -131,7 +131,7 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
 	}
 
-	int32_t FPGADigitalDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk<SCOPE_NBEAM_AREAS, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGADigitalDemultiplexer::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
 		// only two channels and two areas supported in FPGA vi
