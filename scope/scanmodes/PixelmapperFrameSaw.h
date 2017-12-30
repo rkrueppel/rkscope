@@ -1,8 +1,5 @@
 #pragma once
 #include "PixelmapperBasic.h"
-#include "helpers/ScopeImage.h"
-#include "helpers/ScopeMultiImage.h"
-#include "helpers/DaqMultiChunk.h"
 #include "helpers/helpers.h"
 
 namespace scope {
@@ -22,9 +19,9 @@ namespace scope {
 	* 	RRRRRRRRRRRRR
 	* 	RRRRRRRRRRRRR
 	* @tparam NAREAS defines how many areas are mapped in parallel (e.g. multiarea configuration with only one scanner-pair) */
-	template<uint32_t NAREAS = 1>
+	template<uint32_t NCHANNELS = 2, uint32_t NAREAS = 1>
 	class PixelmapperFrameSaw
-	 : public PixelmapperBasic<NAREAS> {
+	 : public PixelmapperBasic<NCHANNELS, NAREAS> {
 
 		public:
 			PixelmapperFrameSaw()
@@ -32,7 +29,7 @@ namespace scope {
 			{ }
 
 			/** Maps multi chunks in parallel via one lookup vector */
-			PixelmapperResult LookupChunk(DaqMultiChunkPtr const _chunk, const uint16_t* _currentavgcount) override {
+			PixelmapperResult LookupChunk(DaqMultiChunk<NCHANNELS, NAREAS, uint16_t> const _chunk, const uint16_t* _currentavgcount) override {
 				PixelmapperResult result(Nothing);
 				uint32_t n = 1;
 				const uint32_t multiplier = _currentavgcount;								// currentavgcount = 0: first frame, multiply by 0 -> overwrite last image pixel (for running update of old pixels), see PipelineController
@@ -40,10 +37,10 @@ namespace scope {
 				const uint32_t halfdivisor = std::max<uint32_t>(1, divisor >> 2);			// etc etc
 
 				auto lookit = lastlookup;
-				std::array<DaqChunk::iterator, NAREAS> channelend;
-				std::array<DaqChunk::iterator, NAREAS> chunkit;
+				std::array<DaqChunk<uint16_t>::iterator, NAREAS> channelend;
+				std::array<DaqChunk<uint16_t>::iterator, NAREAS> chunkit;
 				// Go through all channels
-				for ( uint32_t c = 0 ; c < _chunk->NChannels() ; c++ ) {
+				for ( uint32_t c = 0 ; c < NCHANNELS ; c++ ) {
 					std::vector<ScopeImageAccessU16> imagedata;
 					std::vector<std::vector<uint16_t>* const> dataptr;
 					for ( uint32_t a = 0 ; a < NAREAS ; a++ ) {
@@ -52,9 +49,9 @@ namespace scope {
 						dataptr.push_back(imagedata[a].GetData());
 						
 						// Which sample did we map last in this chunk (initially st::begin)
-						chunkit[a] = _chunk->lastmapped[a][c];
+						chunkit[a] = _chunk.lastmapped[a][c];
 						// where does this channel end in the chunk's data vector
-						channelend[a] = std::begin(_chunk->data)+ a*_chunk->PerChannel()*_chunk->NChannels() + (c+1)*_chunk->PerChannel();
+						channelend[a] = _chunk.GetDataStart(a) + (c+1)*_chunk.PerChannel();
 					}
 					
 					// Which pixel did we last look up in the lookup vector

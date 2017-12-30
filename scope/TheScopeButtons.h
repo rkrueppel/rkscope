@@ -16,7 +16,7 @@ namespace scope {
 		/** @} */
 	};
 	
-	typedef std::array<FPUButtons, SCOPE_NAREAS> FPUButtonsArray;
+	typedef std::array<FPUButtons, config::nareas> FPUButtonsArray;
 
 	struct RunButtons {
 		ScopeButton startsingle;
@@ -54,5 +54,5 @@ namespace scope {
 		}
 	};
 	
-	typedef std::array<ScanModeButtons, SCOPE_NAREAS> ScanModeButtonsArray;
+	typedef std::array<ScanModeButtons, config::nareas> ScanModeButtonsArray;
 }

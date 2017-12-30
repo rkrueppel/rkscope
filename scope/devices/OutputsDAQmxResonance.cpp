@@ -31,7 +31,7 @@ OutputsDAQmxResonance::OutputsDAQmxResonance(const uint32_t& _area, const parame
 	double pixelrate = 1/(_params.areas[area].daq.pixeltime()*1E-6);
 	int32_t pixelsperchan = _params.areas[area].Currentframe().TotalPixels();
 	if ( _params.requested_mode() == DaqModeHelper::nframes )
-		pixelsperchan = _params.areas[area].Currentframe().TotalPixels() * _params.areas[area].daq.requested_frames() * _params.areas[ThisAreaOrMasterArea(area)].daq.averages();
+		pixelsperchan = _params.areas[area].Currentframe().TotalPixels() * _params.areas[area].daq.requested_frames() * _params.areas[config::MyMaster(area)].daq.averages();
 
 	// Configure timing (if using ReferenceClock timing ClockString gives "")
 	task.ConfigureSampleTiming(DAQmx::ClockString(_outputparams.daq_timing(), _outputparams.externalclocksource())

@@ -5,7 +5,7 @@ namespace scope {
 	namespace gui {
 
 		CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons
-			, ScopeCounters<SCOPE_NAREAS>& _scopecounters
+			, ScopeCounters<config::nareas>& _scopecounters
 			, parameters::Behavior& _behaviorparameters
 			, std::vector<parameters::Area>& _areaparamsvec
 		)
@@ -31,7 +31,7 @@ namespace scope {
 			planes_list.Attach(GetDlgItem(IDC_PLANES_LIST));
 			planes_list.InsertColumn(0, L"Plane", 0, 40);
 			std::wostringstream stream;
-			for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+			for ( uint32_t a = 0 ; a < config::nareas ; a++ ) {
 				stream.str(L"");
 				stream << L"FastZ " << a+1;
 				planes_list.InsertColumn(1+2*a, stream.str().c_str(), 0, 60);

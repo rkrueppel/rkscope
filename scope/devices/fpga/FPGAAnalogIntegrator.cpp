@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "FPGAAnalogIntegrator.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -15,7 +14,6 @@ namespace scope {
 		, NiFpga_AnalogIntegrator_NI5771_ControlU16_UserData0
 		, NiFpga_AnalogIntegrator_NI5771_ControlU8_UserData1
 		, NiFpga_AnalogIntegrator_NI5771_ControlBool_UserCommandCommit) {
-		static_assert(config::nareas == 1, "FPGAAnalogIntegrator only supports 1 area.");
 		
 		status = NiFpga_Initialize();
 
@@ -106,19 +104,16 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogIntegrator::ReadPixels(DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
-
-		// only two channels and one area supported in FPGA vi
-		assert( (_chunk.NChannels() == 2) && (_area == 0) );
 		
 		// we need enough space
-		assert(_chunk.data.size() >= (_area+1) * _chunk.PerChannel() * _chunk.NChannels());
+		assert(_chunk.data.size() >= 2* _chunk.PerChannel());
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
 		std::vector<uint32_t> u32data(_chunk.PerChannel());
-		std::vector<uint8_t> bitshift(_chunk.NChannels());
+		std::vector<uint8_t> bitshift(2);
 		bitshift[0] = parameters->BitshiftCh1();
 		bitshift[1] = parameters->BitshiftCh2();
 
@@ -141,7 +136,7 @@ namespace scope {
 			// this could throw on error (if we would use FPGAStatus instead of FPGAStatusSafe)
 			status = stat;
 
-			std::transform(std::begin(u32data), std::end(u32data), _chunk.GetDataStart(_area)+c*_chunk.PerChannel(), [&](const uint32_t& u32) {
+			std::transform(std::begin(u32data), std::end(u32data), _chunk.GetDataStart(0)+c*_chunk.PerChannel(), [&](const uint32_t& u32) {
 				return static_cast<uint16_t>(u32 >> bitshift[c]);
 			} );
 

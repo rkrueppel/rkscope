@@ -426,12 +426,6 @@
     <ClCompile Include="devices\GaterDAQmx.cpp">
       <Filter>Devices</Filter>
     </ClCompile>
-    <ClCompile Include="helpers\DaqMultiChunk.cpp">
-      <Filter>Scope data types</Filter>
-    </ClCompile>
-    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp">
-      <Filter>Scope data types</Filter>
-    </ClCompile>
     <ClCompile Include="parameters\Windows.cpp">
       <Filter>Parameters</Filter>
     </ClCompile>
@@ -496,6 +490,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="config\config_choices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\SupportedAreas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\DaqChunks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -914,12 +914,6 @@
     <ClInclude Include="parameters\Runstates.h">
       <Filter>Parameters</Filter>
     </ClInclude>
-    <ClInclude Include="helpers\DaqMultiChunkResonance.h">
-      <Filter>Scope data types</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\DaqMultiChunk.h">
-      <Filter>Scope data types</Filter>
-    </ClInclude>
     <ClInclude Include="gui\controls\ScopeColorComboCtrl.h">
       <Filter>GUI\Controls</Filter>
     </ClInclude>
@@ -1008,6 +1002,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameters\Stimulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\SupportedAreas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\DaqChunks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,6 +13,8 @@ namespace scope {
 	class ZeroOutputsDAQmxResonanceSlave;
 	class InputsDAQmx;
 	class InputsFPGA;
+	template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
+	template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> class DaqMultiChunkResonance;
 	class FPGANoiseOutput;
 	class FPGAPhotonCounter;
 	class FPGADigitalDemultiplexer;
@@ -28,10 +30,6 @@ namespace scope {
 	class XYZControl;
 	class XYZControlGalil;
 	class XYZControlSutter;
-	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunk;
-	template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkPtr = std::shared_ptr<DaqMultiChunk<NAREAS, DATA_T>>;
-	template<uint32_t NAREAS, class DATA_T> class DaqMultiChunkResonance;
-	template<uint32_t NAREAS, class DATA_T> using DaqMultiChunkResonancePtr = std::shared_ptr<DaqMultiChunkResonance<NAREAS, DATA_T>>;
 	class ScopeMultiImage;
 	class ScopeMultiImageResonanceSW;
 	typedef std::shared_ptr<ScopeMultiImage> ScopeMultiImagePtr;
@@ -40,8 +38,8 @@ namespace scope {
 	typedef std::shared_ptr<const ScopeMultiImageResonanceSW> ScopeMultiImageResonanceSWCPtr;
 	class ScopeOverlay;
 	class ScopeOverlayResonanceSW;
-	class PixelmapperFrameResonanceHW;
-	class PixelmapperFrameResonanceSW;
+	template<uint32_t NAREAS> class PixelmapperFrameResonanceHW;
+	template<uint32_t NAREAS> class PixelmapperFrameResonanceSW;
 	
 	namespace parameters {
 		class OutputsDAQmx;
@@ -281,21 +279,21 @@ namespace scope {
 			typedef StimulationsDAQmx type;
 		};
 
-		enum class DaqMultiChunkEnum {
+		enum class DaqChunkEnum {
 			Regular,
 			Resonance
 		};
 
-		template <DaqMultiChunkEnum>
-		struct DaqMultiChunkTypeSelector {
-			template<uint32_t NAREAS, class DATA_T> using type = DaqMultiChunk<NAREAS, DATA_T>;
-			template<uint32_t NAREAS, class DATA_T> using type_ptr = DaqMultiChunkPtr<NAREAS, DATA_T>;
+		template <DaqChunkEnum>
+		struct DaqChunkTypeSelector {
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>;
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>>;
 		};
 
 		template<>
-		struct DaqMultiChunkTypeSelector<DaqMultiChunkEnum::Resonance> {
-			template<uint32_t NAREAS, class DATA_T> using type = DaqMultiChunkResonance<NAREAS, DATA_T>;
-			template<uint32_t NAREAS, class DATA_T> using type_ptr = DaqMultiChunkResonancePtr<NAREAS, DATA_T>;
+		struct DaqChunkTypeSelector<DaqChunkEnum::Resonance> {
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>;
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>>;
 		};
 		
 		enum class MultiImageEnum {
@@ -337,14 +335,14 @@ namespace scope {
 			Software
 		};
 
-		template<ResonancePixelmapperEnum>
+		template<ResonancePixelmapperEnum, uint32_t NAREAS>
 		struct ResonancePixelmapperTypeSelector {
-			typedef PixelmapperFrameResonanceHW type;
+			typedef PixelmapperFrameResonanceHW<NAREAS> type;
 		};
 
-		template<>
-		struct ResonancePixelmapperTypeSelector<ResonancePixelmapperEnum::Software> {
-			typedef PixelmapperFrameResonanceSW type;
+		template<uint32_t NAREAS>
+		struct ResonancePixelmapperTypeSelector<ResonancePixelmapperEnum::Software, NAREAS> {
+			typedef PixelmapperFrameResonanceSW<NAREAS> type;
 		};
 
 		enum class FramevectorFillEnum {

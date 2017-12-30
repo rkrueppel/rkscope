@@ -2,7 +2,6 @@
 
 #include "FPGAInterface.h"
 #include "FPGAIO6587.h"
-#include "config\config_choices.h"
 #include "NiFpga_PhotonCounterV2.h"
 
 // Forward declaration
@@ -18,7 +17,8 @@ namespace scope {
 	* @ingroup ScopeComponentsHardware */
 	class FPGAPhotonCounter :
 		public FPGAInterface,
-		public FPGAIO6587 {
+		public FPGAIO6587,
+		public SupportedAreas<1, 1> {
 
 	protected:
 		/** the parameter set */
@@ -45,7 +45,7 @@ namespace scope {
 		void SetRequestedPixels(const uint32_t& _area, const uint32_t& _reqpixels) override;
 		void StartAcquisition() override;
 		void StopAcquisition() override;
-		int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
+		int32_t ReadPixels(DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 		/** Checks the status of the FIFOs on the FPGA */
 		void CheckFPGADiagnosis();

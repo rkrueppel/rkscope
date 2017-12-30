@@ -306,8 +306,7 @@
     <ClCompile Include="devices\GaterDAQmx.cpp" />
     <ClCompile Include="gui\BehaviorSettingsPage.cpp" />
     <ClCompile Include="gui\DAQmxPage.cpp" />
-    <ClCompile Include="helpers\DaqMultiChunk.cpp" />
-    <ClCompile Include="helpers\DaqMultiChunkResonance.cpp" />
+    <ClCompile Include="helpers\DaqChunks.cpp" />
     <ClCompile Include="helpers\ScopeDatatypes.cpp" />
     <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp" />
     <ClCompile Include="gui\FPGAAnalogDemultiplexerResonancePage.cpp" />
@@ -448,6 +447,7 @@
     <ClCompile Include="gui\TimeSeriesSettingsPage.cpp" />
     <ClCompile Include="devices\xyz\XYControl.cpp" />
     <ClCompile Include="devices\xyz\XYZControl.cpp" />
+    <ClCompile Include="helpers\SupportedAreas.cpp" />
     <ClCompile Include="TheScope.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -480,8 +480,7 @@
     <ClInclude Include="devices\GaterDAQmx.h" />
     <ClInclude Include="gui\BehaviorSettingsPage.h" />
     <ClInclude Include="gui\DAQmxPage.h" />
-    <ClInclude Include="helpers\DaqMultiChunk.h" />
-    <ClInclude Include="helpers\DaqMultiChunkResonance.h" />
+    <ClInclude Include="helpers\DaqChunks.h" />
     <ClInclude Include="helpers\ScopeDatatypes.h" />
     <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />
     <ClInclude Include="gui\FPGAAnalogDemultiplexerResonancePage.h" />
@@ -619,6 +618,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="controllers\StorageController.h" />
     <ClInclude Include="gui\TimeSeriesSettingsPage.h" />
+    <ClInclude Include="helpers\SupportedAreas.h" />
     <ClInclude Include="TheScope.h" />
     <ClInclude Include="TheScopeButtons.h" />
     <ClInclude Include="TheScopeCounters.h" />

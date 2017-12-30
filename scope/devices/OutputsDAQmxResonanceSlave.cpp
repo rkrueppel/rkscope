@@ -24,7 +24,7 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 		, _outputparams.range());
 
 	// Calculate pixelrate and number of pixels to generate
-	double pixelrate = 1/(_params.areas[ThisAreaOrMasterArea(area)].daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
+	double pixelrate = 1/(_params.areas[config::MyMaster(area)].daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
 	
 	// Slave outputs the whole thing (as opposed to a non resonance slave)
 	int32_t pixelsperchan = _params.areas[area].FrameResonance().TotalPixels();

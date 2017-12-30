@@ -16,8 +16,6 @@ class D2ChannelRender;
 namespace scope {
 	class DisplayController;
 	class ColorProps;
-	class SCOPE_MULTIIMAGE_T;
-	typedef std::shared_ptr<const SCOPE_MULTIIMAGE_T> SCOPE_MULTIIMAGECPTR_T;
 }
 
 namespace scope {
@@ -51,7 +49,7 @@ namespace scope {
 			CChannelView view;
 
 			/** currently displayed image */													
-			scope::SCOPE_MULTIIMAGECPTR_T current_frame;
+			config::MultiImageCPtrType current_frame;
 	
 			/** Holds the current frame count etc as string. We need a class member for this since UIUpdateStatus bar runs asynchronously. A local string would get deleted once it is out of scope. */												
 			std::wstring framecountstr;
@@ -83,14 +81,14 @@ namespace scope {
 		protected:
 			/** Worker function which will run in the Active's thread.
 			* Calculates overlay, copies it to a Direct2D bitmap and renders */
-			bool RunLayOverAndRender(StopCondition* const sc, scope::SCOPE_MULTIIMAGECPTR_T const _multi);
+			bool RunLayOverAndRender(StopCondition* const sc, config::MultiImageCPtrType const _multi);
 
 			/** Worker function for all statusbar updates which will run in the Active's thread.
 			* Since UISetText does string buffer delete and new we need to protect it.
 			* Additionally, UIUpdateStatusbar sends a settext message to the statusbar and does not return until the
 			* message is processes. Taken together having a worker function for the Active, ensuring only one
 			* call to UISetText and UIUpdateStatusbar at a time is the most robust solution. (Finally...) */
-			bool RunUpdateStatusbar(StopCondition* const sc, scope::SCOPE_MULTIIMAGECPTR_T const _multi);
+			bool RunUpdateStatusbar(StopCondition* const sc, config::MultiImageCPtrType const _multi);
 
 			/** Updates the scale text with current values from scope_controller::GuiParameters */
 			void UpdateScaleText();
@@ -192,7 +190,7 @@ namespace scope {
 
 			/** Sends the worker function 'RunLayOverAndRender' to the ActiveObject
 			* @param[in] _multi Pointer to the current multi image */
-			virtual void LayOverAndRender(scope::SCOPE_MULTIIMAGECPTR_T const _multi);
+			virtual void LayOverAndRender(config::MultiImageCPtrType const _multi);
 
 			/** Updates scale text. Calls CChannelView::UpdateScale */
 			virtual void UpdateScaleText(const std::wstring& _text);

@@ -2,9 +2,7 @@
 
 #include "helpers/ScopeDatatypes.h"
 #include "parameters/Scope.h"
-#include "helpers/DaqMultiChunk.h"
-#include "helpers/DaqMultiChunkResonance.h"
-#include "helpers/ScopeDatatypes.h"
+#include "helpers/DaqChunks.h"
 #include "helpers/ScopeMultiImage.h"
 
 namespace scope {
@@ -20,7 +18,7 @@ namespace scope {
 
 	/** Parent class for pixel mappers
 	* @tparam NAREAS defines how many areas are mapped in parallel (e.g. multiarea configuration with only one scanner-pair) */
-	template<uint32_t NAREAS = 1>
+	template<uint32_t NCHANNELS = 2, uint32_t NAREAS = 1>
 	class PixelmapperBasic {
 
 		protected:
@@ -54,24 +52,24 @@ namespace scope {
 			virtual ~PixelmapperBasic() { }
 
 			/** A static factor method for pixelmappers */
-			static std::unique_ptr<PixelmapperBasic<NAREAS>> Factory(const ScannerType& _scanner, const ScannerVectorType& _type) {
-				switch ( (ScannerTypeHelper::Mode)_scanner ) {
-					case ScannerTypeHelper::Regular:
+			static std::unique_ptr<PixelmapperBasic<NCHANNELS, NAREAS>> Factory(const config::ScannerEnum _scanner, const ScannerVectorType& _type) {
+				switch ( _scanner ) {
+					case config::ScannerEnum::RegularGalvo:
 						switch ( (ScannerVectorTypeHelper::Mode)_type ) {
-						case ScannerVectorTypeHelper::Bidirectional:
-							return std::unique_ptr<PixelmapperFrameBiDi>(new PixelmapperFrameBiDi());
-						// Not yet implemented
-						//case ScannerVectorTypeHelper::Planehopper:
-						//	return std::unique_ptr<PixelmapperBasic>(new PixelmapperBasic());
+							case ScannerVectorTypeHelper::Bidirectional:
+								return std::unique_ptr<PixelmapperFrameBiDi>(new PixelmapperFrameBiDi());
+							// Not yet implemented
+							//case ScannerVectorTypeHelper::Planehopper:
+							//	return std::unique_ptr<PixelmapperBasic>(new PixelmapperBasic());
 						
-						default:
-							return std::unique_ptr<PixelmapperFrameSaw>(new PixelmapperFrameSaw());
+							default:
+								return std::unique_ptr<PixelmapperFrameSaw>(new PixelmapperFrameSaw());
 						}
 						break;
-					case ScannerTypeHelper::Resonance:
+					case config::ScannerEnum::ResonantGalvo:
 						switch ( (ScannerVectorTypeHelper::Mode)_type ) {
-						case ScannerVectorTypeHelper::ResonanceBiDi:
-							return std::unique_ptr<SCOPE_RESONANCEPIXELMAPPER_T>(new SCOPE_RESONANCEPIXELMAPPER_T());
+							case ScannerVectorTypeHelper::ResonanceBiDi:
+								return std::make_unique<config::ResonancePixelmapperType>();
 						}
 						break;
 				}
@@ -80,6 +78,12 @@ namespace scope {
 			/** Sets pointer to the current frame to be mapped into. */
 			virtual void SetCurrentFrame(const uint32_t& _area, ScopeMultiImagePtr const _current_frame) {
 				current_frames[_area] = _current_frame;
+			}
+
+			virtual void SetCurrentFrames(std::vector<ScopeMultiImagePtr> const _current_frames) {
+				static_assert(_current_frames.size() == NAREAS);
+				for (uint32_t a = 0; a < NAREAS; a++)
+					current_frames[a] = _current_frames[a];
 			}
 
 			/** Set current parameters */
@@ -96,7 +100,7 @@ namespace scope {
 			/** Different flavors of mapping a chunk 
 			* MultiChunks with more than 1 area are for configurations where all areas run in sync with the same parameters (e.g. multi-area with just one galvo-set)
 			* @{ */
-			virtual PixelmapperResult LookupChunk(config::DaqMultiChunkPtrType const _chunk, const uint16_t& _currentavgcount) {
+			virtual PixelmapperResult LookupChunk(const DaqMultiChunk<2, 1, uint16_t>& _chunk, const uint16_t& _currentavgcount) {
 				PixelmapperResult result(Nothing);
 				return result;
 			}

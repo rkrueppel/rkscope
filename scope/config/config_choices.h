@@ -10,6 +10,7 @@ namespace scope {
 		constexpr std::array<bool, nareas> slavearea {{false}}; // e.g. {{false, true}}
 		constexpr uint32_t nmasters = 1; // _counttrue(masterarea);
 		constexpr uint32_t nslaves = 0; // _counttrue(slavearea);
+		constexpr uint32_t areaspermaster = 1; // i.e. the master area itself
 		constexpr NBeamSetupEnum nbeamsetup = NBeamSetupEnum::SingleBeam; // SingleBeam, MultiBeam
 		constexpr ScannerEnum scannerselect = ScannerEnum::RegularGalvo; // RegularGalvo, ResonantGalvo, AOD, Fibre
 		constexpr OutputEnum outputselect = OutputEnum::SimpleDAQmx; // SimpleDAQmx, TwoCardDAQmx, SimpleDAQmx_Resonance
@@ -17,7 +18,7 @@ namespace scope {
 		constexpr FPUXYStageEnum fpuxystageselect = FPUXYStageEnum::None; // None, Standa
 		constexpr FPUZStageEnum fpuzstageselect = FPUZStageEnum::None; // None, ETL
 		constexpr XYZStageEnum xyzstageselect = XYZStageEnum::None; // None, Galil, Sutter
-		constexpr DaqMultiChunkEnum daqmultichunk = DaqMultiChunkEnum::Regular; // Regular, Resonance
+		constexpr DaqChunkEnum daqchunkselect = DaqChunkEnum::Regular; // Regular, Resonance
 		constexpr StimulationsEnum stimulations = StimulationsEnum::DAQmx; // DAQmx
 		constexpr MultiImageEnum multiimage = MultiImageEnum::Regular; // Regular, ResonanceSW
 		constexpr OverlayEnum overlay = OverlayEnum::Regular; // Regular, ResonanceSW
@@ -49,14 +50,12 @@ namespace scope {
 		typedef FPUZStageTypeSelector<fpuzstageselect>::type_parameters FPUZStageParametersType;
 		typedef XYZStageTypeSelector<xyzstageselect>::type XYZStageType;
 		typedef XYZStageTypeSelector<xyzstageselect>::type_parameters XYZStageParametersType;
-		typedef DaqMultiChunkTypeSelector<daqmultichunk>::type<nareas, daqdatatype> DaqMultiChunkType;
-		typedef DaqMultiChunkTypeSelector<daqmultichunk>::type_ptr<nareas, daqdatatype> DaqMultiChunkPtrType;
 		typedef StimulationsTypeSelector<stimulations>::type StimulationsType;
 		typedef MultiImageTypeSelector<multiimage>::type MultiImageType;
 		typedef MultiImageTypeSelector<multiimage>::type_ptr MultiImagePtrType;
 		typedef MultiImageTypeSelector<multiimage>::type_constptr MultiImageCPtrType;
 		typedef OverlayTypeSelector<overlay>::type OverlayType;
-		typedef ResonancePixelmapperTypeSelector<resonancepixelmapper>::type ResonancePixelmapperType;
+		typedef ResonancePixelmapperTypeSelector<resonancepixelmapper, areaspermaster>::type ResonancePixelmapperType;
 		
 		/** @return the masterarea of _a, returns _a if _a is master, assumes area 0 is always a master */
 		constexpr uint32_t MyMaster(const uint32_t& _a) {

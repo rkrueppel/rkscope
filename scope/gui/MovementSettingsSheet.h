@@ -28,7 +28,7 @@ public:
 		, FPUButtonsArray& _fpubuttonsvec
 		, const double& _masterfovsizex
 		, const double& _masterfovsizey
-		, parameters::SCOPE_XYZCONTROL_T& _stageparams
+		, config::XYZStageParametersType& _stageparams
 		, ZeroButtons& _zerobuttons);
 
 	BEGIN_MSG_MAP(CMovementSettingsSheet)	  

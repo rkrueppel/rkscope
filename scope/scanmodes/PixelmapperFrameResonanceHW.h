@@ -10,9 +10,11 @@ namespace scope {
 
 namespace scope {
 
-	/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc */
+	/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc
+	* @tparam NAREAS defines how many areas are mapped in parallel (e.g. multiarea configuration with only one scanner-pair) */
+	template<uint32_t NAREAS = 1>
 	class PixelmapperFrameResonanceHW
-		: public PixelmapperBasic {
+		: public PixelmapperBasic<NAREAS> {
 
 	protected:
 
@@ -20,7 +22,7 @@ namespace scope {
 		PixelmapperFrameResonanceHW();
 
 		/** Maps a chunk */
-		PixelmapperResult LookupChunk(DaqChunkPtr const _chunk, const uint16_t& _currentavgcount) override;
+		PixelmapperResult LookupChunk(DaqChunkPtr const _chunk, const uint16_t& _currentavgcount);
 	};
 
 }

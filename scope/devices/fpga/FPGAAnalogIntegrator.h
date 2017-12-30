@@ -2,7 +2,6 @@
 
 #include "FPGAInterface.h"
 #include "FPGAIO5771.h"
-#include "config\config_choices.h"
 #include "NiFpga_AnalogIntegrator_NI5771.h"
 
 // Forward declaration
@@ -18,7 +17,8 @@ namespace scope {
 	* @ingroup ScopeComponentsHardware */
 	class FPGAAnalogIntegrator :
 		public FPGAInterface,
-		public FPGAIO5771 {
+		public FPGAIO5771,
+		public SupportedAreas<1, 1> {
 
 	protected:
 		/** the parameter set */
@@ -43,7 +43,7 @@ namespace scope {
 		void StartAcquisition() override;
 		void StopAcquisition()  override;
 
-		int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
+		int32_t ReadPixels(DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 		/** Set channel properties as baseline and bitshift */
 		void SetChannelProps();

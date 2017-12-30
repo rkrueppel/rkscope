@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-CXYZControlPage::CXYZControlPage(parameters::SCOPE_XYZCONTROL_T& _stageparams, ZeroButtons& _zerobuttons)
+CXYZControlPage::CXYZControlPage(config::XYZStageParametersType& _stageparams, ZeroButtons& _zerobuttons)
 	: xpos_edit(_stageparams.xpos, true)
 	, ypos_edit(_stageparams.ypos, true)
 	, zpos_edit(_stageparams.zpos, true)

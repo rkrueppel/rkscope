@@ -2,7 +2,6 @@
 
 #include "FPGAInterface.h"
 #include "FPGAIO6587.h"
-#include "config\config_choices.h"
 #include "NiFpga_DigitalDemultiplexerV3.h"
 
 // Forward declaration
@@ -18,7 +17,8 @@ namespace scope {
 	* @ingroup ScopeComponentsHardware */
 	class FPGADigitalDemultiplexer :
 		public FPGAInterface, 
-		public FPGAIO6587 {
+		public FPGAIO6587,
+		public SupportedAreas<2, 2> {
 
 		protected:
 			/** the parameter set */
@@ -61,7 +61,7 @@ namespace scope {
 			/** Resets the acquisition */
 			void ResetAcquisition();
 
-			int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
+			int32_t ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 			/** Checks the status of the FIFOs on the FPGA */
 			void CheckFPGADiagnosis();

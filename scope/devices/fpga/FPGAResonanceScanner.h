@@ -1,13 +1,11 @@
-#pragma once
+ #pragma once
 
 #include "FPGAInterface.h"
 #include "FPGAIO5751.h"
-#include "config\config_choices.h"
 #include "NiFpga_ResonanceScanner.h"
 
 // Forward declaration
 namespace scope {
-	class DaqChunk;
 	namespace parameters {
 		class InputsFPGAResonanceScanner;
 	}
@@ -19,7 +17,8 @@ namespace scope {
 	* @ingroup ScopeComponentsHardware */
 	class FPGAResonanceScanner :
 		public FPGAInterface,
-		public FPGAIO5751 {
+		public FPGAIO5751,
+		public SupportedAreas<1, 1> {
 
 	protected:
 		/** the parameter set */
@@ -45,7 +44,7 @@ namespace scope {
 		void StopAcquisition()  override;
 		void SetScannerdelay(const uint32_t& _scannerdelay) override;
 
-		int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
+		int32_t ReadPixels(DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 		/** Set channel properties as baseline and bitshift */
 		void SetChannelProps();

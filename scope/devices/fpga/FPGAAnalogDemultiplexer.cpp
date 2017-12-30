@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "FPGAAnalogDemultiplexer.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqMultiChunk.h"
 
 namespace scope {
 
@@ -15,7 +14,7 @@ namespace scope {
 		, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU16_UserData0
 		, NiFpga_AnalogDemultiplexerV2_NI5771_ControlU8_UserData1
 		, NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_UserCommandCommit) {
-		static_assert(config::nareas <= 2, "FPGAAnalogDemultiplexer only supports 1 or 2 areas.");
+	
 		status = NiFpga_Initialize();
 
 		char* const Bitfile = "devices\\fpga\\" NiFpga_AnalogDemultiplexerV2_NI5771_Bitfile;
@@ -112,14 +111,11 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexer::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexer::ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
-		// only two channels and two areas supported in FPGA vi
-		assert( (_chunk.NChannels() == 2) && (_area <= 1) );
-		
 		// we need enough space
-		assert(_chunk.data.size() >= (_area+1) * _chunk.PerChannel() * _chunk.NChannels());
+		assert(_chunk.data.size() >= 2 * 2 * _chunk.PerChannel());
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
@@ -127,38 +123,42 @@ namespace scope {
 		std::vector<uint64_t> u64data(_chunk.PerChannel());
 		
 		// Get the desired bitshift for each channel
-		std::array<uint8_t, 2> bitshift;
-		bitshift[0] = (_area==0)?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
-		bitshift[1] = (_area==0)?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
+		std::array<uint8_t, 4> bitshift;
+		bitshift[0] = parameters->BitshiftA1Ch1();
+		bitshift[1] = parameters->BitshiftA1Ch2();
+		bitshift[2] = parameters->BitshiftA2Ch1();
+		bitshift[3] = parameters->BitshiftA2Ch2();
 
 		// Sets the desired baseline on the FPGA. Do it here so changes in GUI get transferred to the FPGA quickly.
 		//SetChannelProps();
 
-		// Do the read from the FIFO
-		stat = NiFpga_ReadFifoU64(session
-					, fifos[_area]								// select correct fifo
-					, u64data.data()
-					, _chunk.PerChannel()
-					, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
-					, &remaining);
-		_timedout = (stat == NiFpga_Status_FifoTimeout);
+		for (uint32_t a = 0; a < 2; a++) {
+			// Do the read from the FIFO
+			stat = NiFpga_ReadFifoU64(session
+				, fifos[a]								// select correct fifo
+				, u64data.data()
+				, _chunk.PerChannel()
+				, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
+				, &remaining);
+			_timedout = (stat == NiFpga_Status_FifoTimeout);
 
-		DBOUT(L"FPGAAnalogDemultiplexer::ReadPixels area " << _area << L" remaining: " << remaining);
+			DBOUT(L"FPGAAnalogDemultiplexer::ReadPixels area " << a << L" remaining: " << remaining);
 
-		// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
-		if ( _timedout )
-			return -1;
-		status = stat;
+			// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
+			if (_timedout)
+				return -1;
+			status = stat;
 
-		// U64 from FIFO has Ch1 in the higher 32 bits, Ch2 in the lower 32 bits
-		auto itch1 = _chunk.GetDataStart(_area);
-		auto itch2 = _chunk.GetDataStart(_area) + _chunk.PerChannel();
-		std::for_each(std::begin(u64data), std::end(u64data), [&](const uint64_t& u64) {
-			*itch1 = static_cast<uint16_t>((u64 >> 32) >> bitshift[0]);			// shift 32 bits to the right to get Ch1, then do bitshift
-			*itch2 = static_cast<uint16_t>((u64 & 0xffff) >> bitshift[1]);		// leave only lower 16 bits to get Ch2, then do bitshift
-			itch1++;
-			itch2++;
-		});
+			// U64 from FIFO has Ch1 in the higher 32 bits, Ch2 in the lower 32 bits
+			auto itch1 = _chunk.GetDataStart(a);
+			auto itch2 = _chunk.GetDataStart(a) + _chunk.PerChannel();
+			std::for_each(std::begin(u64data), std::end(u64data), [&](const uint64_t& u64) {
+				*itch1 = static_cast<uint16_t>((u64 >> 32) >> bitshift[0]);			// shift 32 bits to the right to get Ch1, then do bitshift
+				*itch2 = static_cast<uint16_t>((u64 & 0xffff) >> bitshift[1]);		// leave only lower 16 bits to get Ch2, then do bitshift
+				itch1++;
+				itch2++;
+			});
+		}
 
 		if ( status.Success() )
 			return _chunk.PerChannel();
@@ -209,3 +209,4 @@ namespace scope {
 	}
 
 }
+

@@ -2,7 +2,6 @@
 
 #include "FPGAInterface.h"
 #include "FPGAIO5771.h"
-#include "config\config_choices.h"
 #include "NiFpga_AnalogDemultiplexer_NI5771_Resonance.h"
 
 // Forward declaration
@@ -18,7 +17,8 @@ namespace scope {
 	* @ingroup ScopeComponentsHardware */
 	class FPGAAnalogDemultiplexerResonance :
 		public FPGAInterface, 
-		public FPGAIO5771 {
+		public FPGAIO5771,
+		public SupportedAreas<2, 2> {
 
 		protected:
 			/** the parameter set */
@@ -32,6 +32,9 @@ namespace scope {
 
 			/** samples per pixel for both areas */
 			NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU16 smplsperpixel;
+
+			/** Internatl U64 vector to hold the data for both channels that will be split up in Read. */
+			std::vector<uint64_t> u64data;
 
 		public:
 			/** Load the FPGA bitfile, set the IO module's onboard clock and initialize the acquisition */
@@ -49,7 +52,7 @@ namespace scope {
 			void StartAcquisition() override;
 			void StopAcquisition()  override;
 
-			int32_t ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) override;
+			int32_t ReadPixels(DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 			/** Checks the status of the FIFOs on the FPGA */
 			void CheckFPGADiagnosis();

@@ -16,7 +16,6 @@ namespace parameters {
 			, time(L"", L"Time")
 			, scopecommit(std::wstring(CA2W(STR(LASTGITCOMMIT))), L"ScopeCommit")
 			, comment(L"", L"Comment")
-			, scannertype(SCOPE_SCANNERTYPE, L"Scannertype")
 			, areas(0)
 			, stack(_nareas)
 			, timeseries(_nareas)
@@ -31,11 +30,9 @@ namespace parameters {
 			date.Set(GetCurrentDateString());
 			time.Set(GetCurrentTimeString());
 	
-			scannertype.SetRWState(false);
-	
 			uint32_t a = 0;
 			std::generate_n(std::back_inserter(areas), nareas, [&a, this]() {
-				parameters::Area A(a, false, ThisIsSlaveArea(a)?&areas[0]:nullptr);
+				parameters::Area A(a, false, config::slavearea[a]?&areas[0]:nullptr);
 				a++;
 				return A;
 			});
@@ -63,7 +60,6 @@ namespace parameters {
 			, time(_scope.time)
 			, scopecommit(_scope.scopecommit)
 			, comment(_scope.comment)
-			, scannertype(_scope.scannertype)
 			, areas(_scope.areas)
 			, storage(_scope.storage)
 			, stack(_scope.stack)
@@ -79,12 +75,10 @@ namespace parameters {
 			, run_state(_scope.run_state)
 			, requested_mode(_scope.requested_mode){
 
-			scannertype.SetRWState(false);
-
 			// Fix the pointer to the master area!!!!!
 			uint32_t i = 0;
 			for (auto& ar : areas)
-				ar.SetMasterArea(ThisIsSlaveArea(i++)?&areas[0]:nullptr);
+				ar.SetMasterArea(config::slavearea[i++]?&areas[0]:nullptr);
 		}
 
 		Scope& Scope::operator=(const Scope& _scope) {
@@ -94,13 +88,11 @@ namespace parameters {
 			scopecommit = _scope.scopecommit();
 			comment = _scope.comment();
 
-			ATLASSERT (scannertype() == _scope.scannertype());	// Otherwise something is seriously wrong
-
 			areas = _scope.areas;
 			// Fix the pointer to the master area!!!!!
 			uint32_t i = 0;
 			for (auto& ar : areas)
-				ar.SetMasterArea(ThisIsSlaveArea(i++)?&areas[0]:nullptr);
+				ar.SetMasterArea(config::slavearea[i++]?&areas[0]:nullptr);
 
 			storage = _scope.storage;
 			stack = _scope.stack;
@@ -120,8 +112,8 @@ namespace parameters {
 		}
 
 		void Scope::UpdateTotaltimeFromFrames() {
-			for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-				timeseries.totaltimes[a].Set(1/areas[a].framerate()*areas[ThisAreaOrMasterArea(a)].daq.averages()*timeseries.frames[a](), true, false);
+			for ( uint32_t a = 0 ; a < nareas ; a++ )
+				timeseries.totaltimes[a].Set(1/areas[a].framerate()*areas[config::MyMaster(a)].daq.averages()*timeseries.frames[a](), true, false);
 
 			// Time between repeats (start to start) can be minimally duration of one timeseries (+0.1s for overhead)
 			double maxduration = *std::max_element(std::begin(timeseries.totaltimes), std::end(timeseries.totaltimes));
@@ -131,8 +123,8 @@ namespace parameters {
 		}
 
 		void Scope::UpdateFramesFromTotaltime() {
-			for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ )
-				timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a].framerate()/areas[ThisAreaOrMasterArea(a)].daq.averages()));
+			for ( uint32_t a = 0 ; a < nareas ; a++ )
+				timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*areas[a].framerate()/areas[config::MyMaster(a)].daq.averages()));
 		}
 
 		void Scope::Load(const std::wstring& filename) {
@@ -151,10 +143,6 @@ namespace parameters {
 				time.SetFromPropertyTree(pt.get_child(L"scope"));
 				// Do not load scopecommit
 				comment.SetFromPropertyTree(pt.get_child(L"scope"));
-
-				// Make sure the loaded parameters are for the same scannertype
-				if( pt.get_child(L"scope").get<std::wstring>(L"Scannertype") != scannertype.ToChar() )
-					throw ScopeException("Type of scanner in parameter file does not match the one in scope.exe");
 
 				startinputsfirst.SetFromPropertyTree(pt.get_child(L"scope"));
 				commontrigger.SetFromPropertyTree(pt.get_child(L"scope"));
@@ -194,7 +182,6 @@ namespace parameters {
 				time.AddToPropertyTree(ptroot);
 				scopecommit.AddToPropertyTree(ptroot);
 				comment.AddToPropertyTree(ptroot);
-				scannertype.AddToPropertyTree(ptroot);
 				startinputsfirst.AddToPropertyTree(ptroot);
 				commontrigger.AddToPropertyTree(ptroot);
 				masterfovsizex.AddToPropertyTree(ptroot);

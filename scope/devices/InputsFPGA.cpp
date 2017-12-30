@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "config\config_choices.h"
 #include "InputsFPGA.h"
 #include "fpga\FPGAPhotonCounter.h"
 #include "fpga\FPGADigitalDemultiplexer.h"
@@ -17,8 +18,8 @@
 
 namespace scope {
 
-SCOPE_FPGA_T& theFPGA() {
-	static SCOPE_FPGA_T staticFPGA;
+config::InputFPGAType& theFPGA() {
+	static config::InputFPGAType staticFPGA;
 	return staticFPGA;
 }
 
@@ -33,7 +34,7 @@ InputsFPGA::InputsFPGA(const uint32_t& _area, parameters::InputsFPGA* _inputpara
 		// two more lines/preframelines are required, because in resonance scanner mode some pixels are thrown away at the beginning until the first line is triggered with the sync signal
 		samplesperchan = _params.areas[area].Currentframe().TotalPixels() + _inputparams->preframelines() * _params.areas[area].Currentframe().XTotalPixels();
 		if ( _params.requested_mode() == DaqModeHelper::nframes) {
-			samplesperchan *= _params.areas[area].daq.requested_frames() * _params.areas[ThisAreaOrMasterArea(area)].daq.averages();
+			samplesperchan *= _params.areas[area].daq.requested_frames() * _params.areas[config::MyMaster(area)].daq.averages();
 		}
 
 		DBOUT(L"Requested pixeltime area " << area << L": " << _params.areas[area].daq.pixeltime());

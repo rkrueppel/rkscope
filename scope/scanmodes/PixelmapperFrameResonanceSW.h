@@ -12,27 +12,30 @@ namespace scope {
 
 namespace scope {
 
-/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc */
-class PixelmapperFrameResonanceSW : public PixelmapperBasic {
+/** Maps acquired pixels into an image analysing the resonance scanner sync signal, takes care of return fractions, forth/back lines etc
+* @tparam NAREAS defines how many areas are mapped in parallel (e.g. multiarea configuration with only one scanner-pair) */
+	template<uint32_t NAREAS = 1>
+	class PixelmapperFrameResonanceSW
+		: public PixelmapperBasic<NAREAS> {
 
-protected:
-	/** pointer to the current frame to be mapped into (for SW resonance mapping, different type than the one declared in PixelmapperBasic). */
-	ScopeMultiImageResonanceSWPtr current_frame;
+	protected:
+		/** pointer to the current frame to be mapped into (for SW resonance mapping, different type than the one declared in PixelmapperBasic). */
+		ScopeMultiImageResonanceSWPtr current_frame;
 
-	/** pointer to the current averaged frame to be mapped into */
-	ScopeMultiImageResonanceSWPtr current_averaged_frame;
+		/** pointer to the current averaged frame to be mapped into */
+		ScopeMultiImageResonanceSWPtr current_averaged_frame;
 
-	/** true only for mapping first chunk */
-	bool firstchunk;
+		/** true only for mapping first chunk */
+		bool firstchunk;
 
-public:
-	PixelmapperFrameResonanceSW();
+	public:
+		PixelmapperFrameResonanceSW();
 
-	/** Maps a chunk */
-	PixelmapperResult LookupChunk(DaqChunkResonancePtr const _chunk, const uint16_t& _currentavgcount) override;
+		/** Maps a chunk */
+		PixelmapperResult LookupChunk(DaqChunkResonancePtr const _chunk, const uint16_t& _currentavgcount);
 
-	/** Sets pointer to the current averaged (displayed) frame to be mapped into. */
-	void SetCurrentAveragedFrame(ScopeMultiImageResonanceSWPtr const _current_averaged_frame);
-};
+		/** Sets pointer to the current averaged (displayed) frame to be mapped into. */
+		void SetCurrentAveragedFrame(ScopeMultiImageResonanceSWPtr const _current_averaged_frame);
+	};
 
 }

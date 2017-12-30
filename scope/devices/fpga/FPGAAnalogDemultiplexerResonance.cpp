@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "FPGAAnalogDemultiplexerResonance.h"
 #include "parameters/Inputs.h"
-#include "helpers/DaqMultiChunkResonance.h"
 
 namespace scope {
 
@@ -15,7 +14,7 @@ namespace scope {
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU16_UserData0
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlU8_UserData1
 		, NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_UserCommandCommit) {
-		static_assert(config::nareas <= 2, "FPGAAnalogDemultiplexerResonance only supports 1 or 2 areas.");
+		
 		status = NiFpga_Initialize();
 
 		char* const Bitfile = "devices\\fpga\\" NiFpga_AnalogDemultiplexer_NI5771_Resonance_Bitfile;
@@ -118,65 +117,63 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, config::DaqMultiChunkType& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		size_t remaining = 0;
 
-		// We have to upcast here to get access to the resonance sync vector
-		auto chunkres = dynamic_cast<DaqMultiChunkResonance<SCOPE_NBEAM_AREAS, uint16_t>&>(_chunk);
-
-		// only two channels and one area supported in FPGA vi
-		assert( (_chunk.NChannels() == 2) && (_area == 0) );
-		
 		// we need enough space
-		assert(_chunk.data.size() >= (_area+1) * _chunk.PerChannel() * _chunk.NChannels());
+		assert(_chunk.data.size() >= 2 * 2 * _chunk.PerChannel());
 
 		NiFpga_Status stat = NiFpga_Status_Success;
 
-		// Make temporary vector to hold the U64 data from both channels
-		std::vector<uint64_t> u64data(_chunk.PerChannel());
+		// Resize the vector to hold the U64 data from both channels
+		u64data.resize(_chunk.PerChannel());
 		
 		// Get the desired bitshift for each channel
-		std::vector<uint8_t> bitshift(2);
-		bitshift[0] = _area==0?parameters->BitshiftA1Ch1():parameters->BitshiftA2Ch1();
-		bitshift[1] = _area==0?parameters->BitshiftA1Ch2():parameters->BitshiftA2Ch2();
+		std::array<uint8_t, 4> bitshift;
+		bitshift[0] = parameters->BitshiftA1Ch1();
+		bitshift[1] = parameters->BitshiftA1Ch2();
+		bitshift[2] = parameters->BitshiftA2Ch1();
+		bitshift[3] = parameters->BitshiftA2Ch2();
 
 		// Sets the desired baseline on the FPGA. Do it here so changes in GUI get transferred to the FPGA quickly.
 		//SetChannelProps();
 
-		// Do the read from the FIFO
-		stat = NiFpga_ReadFifoU64(session
-					, fifos[_area]										// select correct fifo
-					, u64data.data()
-					, _chunk.PerChannel()
-					, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
-					, &remaining);
-		_timedout = (stat == NiFpga_Status_FifoTimeout);
+		for (uint32_t a = 0; a < 2; a++) {
+			// Do the read from the FIFO
+			stat = NiFpga_ReadFifoU64(session
+				, fifos[a]										// select correct fifo
+				, u64data.data()
+				, _chunk.PerChannel()
+				, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
+				, &remaining);
+			_timedout = (stat == NiFpga_Status_FifoTimeout);
 
-		DBOUT(L"FPGAAnalogDemultiplexerResonance::ReadPixels area " << _area << L" remaining: " << remaining);
+			DBOUT(L"FPGAAnalogDemultiplexerResonance::ReadPixels area " << a << L" remaining: " << remaining);
 
-		// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
-		if ( _timedout )
-			return -1;
-		status = stat;
+			// avoid throwing exception on time out (since FpgaStatus status could throw on all errors)
+			if (_timedout)
+				return -1;
+			status = stat;
 
-		// U64 from FIFO has Ch1 in the higher 32 bits, Ch2 in the lower 32 bits
-		auto itch1 = chunkres.GetDataStart(_area);
-		auto itch2 = chunkres.GetDataStart(_area) + chunkres.PerChannel();
-		// addition #2 to the fpga code to run Analog Demultiplexing for resonance scanmode (Karlis)
-		auto itsync = std::begin(chunkres.resSync);
-		for( const uint64_t& u64 : u64data) {
-			// *itch1 = static_cast<uint16_t>((u64 >> 32));			// shift 32 bits to the right to get Ch1, then do bitshift
-			// *itch2 = static_cast<uint16_t>((u64 & 0xffff));		// leave only lower 16 bits to get Ch2, then do bitshift
-			*itch1 = static_cast<uint16_t>((u64 >> 32) >> bitshift[0]);			// shift 32 bits to the right to get Ch1, then do bitshift
-			*itch2 = static_cast<uint16_t>((u64 & 0xffff) >> bitshift[1]);		// leave only lower 16 bits to get Ch2, then do bitshift
-			*itsync = (u64 >> 63) != 0;									//  highest bit is sync
-			itch1++;
-			itch2++;
-			itsync++;
+			// U64 from FIFO has Ch1 in the higher 32 bits, Ch2 in the lower 32 bits
+			auto itch1 = _chunk.GetDataStart(a);
+			auto itch2 = _chunk.GetDataStart(a) + _chunk.PerChannel();
+			// addition #2 to the fpga code to run Analog Demultiplexing for resonance scanmode (Karlis)
+			auto itsync = std::begin(_chunk.resSync);
+			for (const uint64_t& u64 : u64data) {
+				// *itch1 = static_cast<uint16_t>((u64 >> 32));						// shift 32 bits to the right to get Ch1, then do bitshift
+				// *itch2 = static_cast<uint16_t>((u64 & 0xffff));					// leave only lower 16 bits to get Ch2, then do bitshift
+				*itch1 = static_cast<uint16_t>((u64 >> 32) >> bitshift[0]);			// shift 32 bits to the right to get Ch1, then do bitshift
+				*itch2 = static_cast<uint16_t>((u64 & 0xffff) >> bitshift[1]);		// leave only lower 16 bits to get Ch2, then do bitshift
+				*itsync = (u64 >> 63) != 0;											//  highest bit is sync
+				itch1++;
+				itch2++;
+				itsync++;
+			}
 		}
 
 		if ( status.Success() )
-			return chunkres.PerChannel();
+			return _chunk.PerChannel();
 		return -1;
 	}
 

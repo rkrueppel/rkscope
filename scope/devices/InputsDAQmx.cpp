@@ -33,7 +33,7 @@ namespace scope {
 		uint32_t pixelsperchan = _params.areas[area].Currentframe().TotalPixels();
 
 		if ( _params.requested_mode() == DaqModeHelper::nframes)
-			pixelsperchan *= _params.areas[area].daq.requested_frames() * _params.areas[ThisAreaOrMasterArea(area)].daq.averages();
+			pixelsperchan *= _params.areas[area].daq.requested_frames() * _params.areas[config::MyMaster(area)].daq.averages();
 
 		requested_samples = oversampling * pixelsperchan;
 
