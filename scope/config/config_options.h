@@ -212,6 +212,23 @@ namespace scope {
 			typedef gui::CFPGAResonanceScannerNI5771Page type_guipage;
 		};
 
+		enum class DaqChunkEnum {
+			Regular,
+			Resonance
+		};
+
+		template <DaqChunkEnum>
+		struct DaqChunkTypeSelector {
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>;
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>>;
+		};
+
+		template<>
+		struct DaqChunkTypeSelector<DaqChunkEnum::Resonance> {
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>;
+			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>>;
+		};
+
 		enum class FPUXYStageEnum {
 			None,
 			Standa
@@ -277,23 +294,6 @@ namespace scope {
 		template <StimulationsEnum>
 		struct StimulationsTypeSelector {
 			typedef StimulationsDAQmx type;
-		};
-
-		enum class DaqChunkEnum {
-			Regular,
-			Resonance
-		};
-
-		template <DaqChunkEnum>
-		struct DaqChunkTypeSelector {
-			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>;
-			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunk<NCHANNELS, NAREAS, DATA_T>>;
-		};
-
-		template<>
-		struct DaqChunkTypeSelector<DaqChunkEnum::Resonance> {
-			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type = DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>;
-			template<uint32_t NCHANNELS, uint32_t NAREAS, class DATA_T> using type_ptr = std::shared_ptr<DaqMultiChunkResonance<NCHANNELS, NAREAS, DATA_T>>;
 		};
 		
 		enum class MultiImageEnum {

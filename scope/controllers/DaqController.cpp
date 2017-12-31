@@ -5,7 +5,7 @@ namespace scope {
 
 	DaqController::DaqController(const uint32_t& _nactives
 		, const parameters::Scope& _parameters
-		, std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS>* const _oqueues
+		, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _oqueues
 	)
 		: BaseController(_nactives)
 		, ctrlparams(_parameters)
@@ -54,7 +54,7 @@ namespace scope {
 			}
 
 			// Create a new chunk...
-			auto chunk = std::make_shared<SCOPE_DAQMULTICHUNK_T>(chunksize, ctrlparams.areas[_area].daq.inputs->channels());
+			auto chunk = std::make_shared<config::DaqChunkType>(chunksize, ctrlparams.areas[_area].daq.inputs->channels());
 
 			// With this loop we can interrupt a thread that is waiting here for a trigger (see FiberMRI program)
 			// or which waits for samples (which never come because of an error)
@@ -67,7 +67,7 @@ namespace scope {
 			} while (timedout && !sc->IsSet());
 			timedout = false;
 
-			ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T> msg;
+			ScopeMessage<config::DaqChunkPtrType> msg;
 			msg.tag = ScopeMessageTag::nothing;
 			msg.cargo = chunk;
 
@@ -109,20 +109,21 @@ namespace scope {
 		DBOUT(L"DaqController:::Start");
 
 		ctrlparams = _params;
+
 		// Reset outputs and inputs (configures tasks etc. inside them)
 		for (uint32_t a = 0; a < nactives; a++) {
 			// Choose output type depending on that area being a slave area
 			if (ctrlparams.areas[a].isslave())
-				outputs[a] = std::make_unique<SCOPE_SLAVEOUTPUTS_T>(a, *dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
+				outputs[a] = std::make_unique<config::SlaveOutputType>(a, *dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
 			else
-				outputs[a] = std::make_unique<SCOPE_OUTPUTS_T>(a, *dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
+				outputs[a] = std::make_unique<config::OutputType>(a, *dynamic_cast<config::OutputParametersType*>(ctrlparams.areas[a].daq.outputs.get()), ctrlparams);
 			
-			inputs[a] = std::make_unique<SCOPE_INPUTS_T>(a, dynamic_cast<parameters::SCOPE_INPUTS_T*>(ctrlparams.areas[a].daq.inputs.get()), ctrlparams));
+			inputs[a] = std::make_unique<config::InputType>(a, dynamic_cast<config::InputParametersType*>(ctrlparams.areas[a].daq.inputs.get()), ctrlparams);
 		}
 
 		// Calculate and write stimulationvector to device
 		if (ctrlparams.stimulation.enable()) {
-			stimulation = std::make_unique<SCOPE_STIMULATIONS_T>(ctrlparams);
+			stimulation = std::make_unique<config::StimulationsType>(ctrlparams);
 			stimvec.SetParameters(ctrlparams.stimulation);
 			stimulation->Write(stimvec.GetVector());
 			stimulation->Start();
@@ -139,8 +140,10 @@ namespace scope {
 			s.Open();
 
 		// Turn the resonance scanner relay on
-		for (auto& s : switches)
-			s.TurnOn();
+		if ( config::scannerselect == config::ScannerEnum::ResonantGalvo)
+			for (auto& s : switches)
+				s.TurnOn();
+
 		// Wait until the synchronization signal is in the steady state
 		//		std::this_thread::sleep_for(std::chrono::milliseconds(600));
 		//		std::this_thread::sleep_for(std::chrono::milliseconds(1500));
@@ -235,9 +238,9 @@ namespace scope {
 		// Do the zero outputs tasks
 		for (const auto& ap : ctrlparams.areas) {
 			if (ap.isslave())
-				SCOPE_ZEROOUTPUTSSLAVE_T zero(*dynamic_cast<parameters::SCOPE_SLAVEOUTPUTS_T*>(ap.daq.outputs.get()));
+				config::SlaveOutputZeroType zero(*dynamic_cast<config::SlaveOutputParametersType*>(ap.daq.outputs.get()));
 			else
-				SCOPE_ZEROOUTPUTS_T zero(*dynamic_cast<parameters::SCOPE_OUTPUTS_T*>(ap.daq.outputs.get()));
+				config::OutputZeroType zero(*dynamic_cast<config::OutputParametersType*>(ap.daq.outputs.get()));
 		}
 	}
 

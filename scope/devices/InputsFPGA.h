@@ -2,7 +2,7 @@
 
 #include "Inputs.h"
 #include "config\config_choices.h"
-#include "fpga\FPGANoiseOutput.h"
+#include "helpers\DaqChunks.h"
 
 // Forward declarations
 namespace scope {
@@ -46,7 +46,35 @@ namespace scope {
 
 		void Stop() override;
 
-		int32_t Read(const uint32_t& _area, config::DaqMultiChunkType& _chunk, bool& _timedout, const double& _timeout) override;
+		template<uint32_t NCHANNELS>
+		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override {
+			int32_t read = 0;
+			try {
+				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);
+				if (_timedout) {
+					DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
+				}
+				DBOUT(L"InputsFPGA::Read area " << area << L" read " << read);
+				theFPGA().CheckFPGADiagnosis();
+			}
+			catch (...) { ScopeExceptionHandler(__FUNCTION__); }
+			return read;
+		}
+
+		template<uint32_t NCHANNELS>
+		int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override {
+			int32_t read = 0;
+			try {
+				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);
+				if (_timedout) {
+					DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
+				}
+				DBOUT(L"InputsFPGA::Read area " << area << L" read " << read);
+				theFPGA().CheckFPGADiagnosis();
+			}
+			catch (...) { ScopeExceptionHandler(__FUNCTION__); }
+			return read;
+		}
 	};
 
 }

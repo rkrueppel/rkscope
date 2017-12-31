@@ -14,11 +14,13 @@ namespace scope {
 		constexpr NBeamSetupEnum nbeamsetup = NBeamSetupEnum::SingleBeam; // SingleBeam, MultiBeam
 		constexpr ScannerEnum scannerselect = ScannerEnum::RegularGalvo; // RegularGalvo, ResonantGalvo, AOD, Fibre
 		constexpr OutputEnum outputselect = OutputEnum::SimpleDAQmx; // SimpleDAQmx, TwoCardDAQmx, SimpleDAQmx_Resonance
+		constexpr uint32_t nchannels = 2;
+		typedef uint16_t daqdatatype;
 		constexpr InputEnum inputselect = InputEnum::DAQmx; //DAQmx, FPGA_NoiseOutput, FPGA_Photoncounter, FPGA_Digitaldemultiplexer, FPGA_Analogintegrator, FPGA_Analogdemultiplexer, FPGA_Resonancescanner, FPGA_ResonancescannerNI5771
+		constexpr DaqChunkEnum daqchunkselect = DaqChunkEnum::Regular; // Regular, Resonance
 		constexpr FPUXYStageEnum fpuxystageselect = FPUXYStageEnum::None; // None, Standa
 		constexpr FPUZStageEnum fpuzstageselect = FPUZStageEnum::None; // None, ETL
 		constexpr XYZStageEnum xyzstageselect = XYZStageEnum::None; // None, Galil, Sutter
-		constexpr DaqChunkEnum daqchunkselect = DaqChunkEnum::Regular; // Regular, Resonance
 		constexpr StimulationsEnum stimulations = StimulationsEnum::DAQmx; // DAQmx
 		constexpr MultiImageEnum multiimage = MultiImageEnum::Regular; // Regular, ResonanceSW
 		constexpr OverlayEnum overlay = OverlayEnum::Regular; // Regular, ResonanceSW
@@ -33,18 +35,23 @@ namespace scope {
 		constexpr uint32_t threads_display = nareas;
 		constexpr uint32_t threads_storage = nareas;
 		
-		/* Maximum number of channels supported. You can have more if you add buttons etc etc. to e.g. CChannelFrame */
+		/* Maximum number of channels supported by Scope. You can have more if you add buttons etc etc. to e.g. CChannelFrame */
 		constexpr uint32_t maxchannels = 4;
 
 		typedef uint16_t daqdatatype;
 		
 		typedef OutputTypeSelector<outputselect>::type OutputType;
 		typedef OutputTypeSelector<outputselect>::type_zero OutputZeroType;
+		typedef OutputTypeSelector<outputselect>::type_parameters OutputParametersType;
 		typedef OutputTypeSelector<outputselect>::type_slave SlaveOutputType;
 		typedef OutputTypeSelector<outputselect>::type_slave_zero SlaveOutputZeroType;
+		typedef OutputTypeSelector<outputselect>::type_slave_parameters SlaveOutputParametersType;
 		typedef InputTypeSelector<inputselect>::type InputType;
+		typedef InputTypeSelector<inputselect>::type_parameters InputParametersType;
 		typedef InputTypeSelector<inputselect>::type_fpga InputFPGAType;
-		typedef FPUXYStageTypeSelector<fpuxystageselect>::type FPUXYStageType;
+		typedef DaqChunkTypeSelector<daqchunkselect>::type<nchannels, nareas, daqdatatype> DaqChunkType;
+		typedef DaqChunkTypeSelector<daqchunkselect>::type_ptr<nchannels, nareas, daqdatatype> DaqChunkPtrType;
+ 		typedef FPUXYStageTypeSelector<fpuxystageselect>::type FPUXYStageType;
 		typedef FPUXYStageTypeSelector<fpuxystageselect>::type_parameters FPUXYStageParametersType;
 		typedef FPUZStageTypeSelector<fpuzstageselect>::type FPUZStageType;
 		typedef FPUZStageTypeSelector<fpuzstageselect>::type_parameters FPUZStageParametersType;

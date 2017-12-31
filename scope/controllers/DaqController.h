@@ -10,8 +10,7 @@
 #include "devices/StimulationVector.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
 #include "helpers/ScopeDatatypes.h"
-#include "helpers/DaqMultiChunk.h"
-#include "helpers/DaqMultiChunkResonance.h"
+#include "helpers/DaqChunks.h"
 #include "devices/OutputsDAQmx.h"
 #include "devices/OutputsDAQmxLineClock.h"
 #include "devices/OutputsDAQmxResonance.h"
@@ -34,12 +33,12 @@ namespace scope {
 
 	protected:
 		/** array holding the output queues to the PipelineControllers */
-		std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const output_queues;
+		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const output_queues;
 
-		/** The outputs (pointers to base class) */
+		/** The outputs. Pointers to base class, since some areas are masters, some slaves) */
 		std::array<std::unique_ptr<Outputs>, config::nareas> outputs;
 
-		/** The inputs (pointers to base class) */
+		/** The inputs. Pointers to base class, since different areas could have different input type (not used yet) */
 		std::array<std::unique_ptr<Inputs>, config::nareas> inputs;
 
 		/** The stimulation output */
@@ -51,7 +50,7 @@ namespace scope {
 		/** array holding SwitchResonance class for every area */
 		std::array<SwitchResonance, config::nareas> switches;
 
-		/** The scanner vector for frame scanning */
+		/** The scanner vector for frame scanning. Pointer to base class, since current scan mode can be changed via GUI. */
 		std::array<ScannerVectorFrameBasicPtr, config::nareas> scannervecs;
 
 		/** stimulation */
@@ -75,7 +74,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _oqueues);
+		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _oqueues);
 
 		/** disable copy */
 		DaqController(DaqController& other) = delete;

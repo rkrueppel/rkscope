@@ -117,7 +117,8 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexer_NI5771_Resonance_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexerResonance::ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0); // Since only two areas are supported read has to start with area 0
 		size_t remaining = 0;
 
 		// we need enough space

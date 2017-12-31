@@ -43,7 +43,8 @@ namespace scope {
 		void StartAcquisition() override;
 		void StopAcquisition()  override;
 
-		int32_t ReadPixels(DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
+		/** @param[in] _area has to be 0 since only one area supported that has to be area 0 */
+		int32_t ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 		/** Set channel properties as baseline and bitshift */
 		void SetChannelProps();

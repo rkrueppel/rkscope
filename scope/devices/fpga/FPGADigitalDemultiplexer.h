@@ -61,7 +61,8 @@ namespace scope {
 			/** Resets the acquisition */
 			void ResetAcquisition();
 
-			int32_t ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
+			/** @param[in] _area has to be 0 since only two areas are supported an read has to start with area 0 */
+			int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 			/** Checks the status of the FIFOs on the FPGA */
 			void CheckFPGADiagnosis();

@@ -130,7 +130,8 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_DigitalDemultiplexerV3_ControlBool_Acq_Reset, false);
 	}
 
-	int32_t FPGADigitalDemultiplexer::ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGADigitalDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0);
 		size_t remaining = 0;
 
 		// we need enough space

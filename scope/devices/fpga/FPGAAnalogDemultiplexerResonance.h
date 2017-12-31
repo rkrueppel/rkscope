@@ -52,7 +52,7 @@ namespace scope {
 			void StartAcquisition() override;
 			void StopAcquisition()  override;
 
-			int32_t ReadPixels(DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
+			int32_t ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 			/** Checks the status of the FIFOs on the FPGA */
 			void CheckFPGADiagnosis();

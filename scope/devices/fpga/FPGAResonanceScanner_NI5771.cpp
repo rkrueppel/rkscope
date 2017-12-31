@@ -109,7 +109,8 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_Resonance_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAResonanceScannerNI5771::ReadPixels(DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAResonanceScannerNI5771::ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0);
 		size_t remaining = 0;
 	
 		// should be always true (because it is handled inside DaqChunk), but better to check anyway...

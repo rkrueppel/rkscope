@@ -87,12 +87,13 @@ namespace scope {
 			virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
 			
 			/** Read only pixels from the FPGA FIFO (from all two areas, two channels). Not implemented in base class FPGAInterface, returns -1 (error).
+			* @param[in] _area area to read from
 			* @param[in, out] _chunk the (two area, e.g. a master and its slave, two channel) daq chunk to read into, inside _chunk is information about
 			* the number of pixels per channel to read
 			* @param[in] _timeout time out for reading in seconds
 			* @param[out] _timedout set to true if reading timed out
 			* @return number of read pixels per channel or -1 on error */
-			virtual int32_t ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
+			virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
 
 			/** Read only pixels from the FPGA FIFO (two areas, starting with the specified area, two channels). Not implemented in base class FPGAInterface, returns -1 (error).
 			* @param[in] _area first area of the two consecutive ones to read from
@@ -104,12 +105,13 @@ namespace scope {
 			virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
 
 			/** Read only pixels from the FPGA FIFO (one area, two channels, plus sync signal). Not implemented in base class FPGAInterface, returns -1 (error).
+			* @param[in] _area area to read from
 			* @param[in, out] _chunk the (one area, two channel, plus sync signale) daq chunk to read into, inside _chunk is information about
 			* the number of pixels per channel to read
 			* @param[in] _timeout time out for reading in seconds
 			* @param[out] _timedout set to true if reading timed out
 			* @return number of read pixels per channel or -1 on error */
-			virtual int32_t ReadPixels(DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
+			virtual int32_t ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout);
 
 			/** Read only pixels from the FPGA FIFO (two areas starting with the specified area, two channels, plus sync signal). Not implemented in base class FPGAInterface, returns -1 (error).
 			* @param[in] _area first area of the two consecutive ones to read from

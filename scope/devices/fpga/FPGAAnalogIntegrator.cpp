@@ -104,7 +104,8 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogIntegrator_NI5771_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAAnalogIntegrator::ReadPixels(DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogIntegrator::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0); // Since only one area is supported this has to be area 0
 		size_t remaining = 0;
 		
 		// we need enough space

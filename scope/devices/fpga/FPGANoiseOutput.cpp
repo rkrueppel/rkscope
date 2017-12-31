@@ -117,7 +117,8 @@ namespace scope {
 		return -1;
 	}
 
-	int32_t FPGANoiseOutput::ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGANoiseOutput::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		asssert(_area == 0);
 		size_t remaining = 0;
 
 		NiFpga_Status stat = NiFpga_Status_Success;

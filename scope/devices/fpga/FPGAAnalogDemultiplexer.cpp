@@ -111,10 +111,11 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_AnalogDemultiplexerV2_NI5771_ControlBool_Acquire, false);
 	}
 
-	int32_t FPGAAnalogDemultiplexer::ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAAnalogDemultiplexer::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0); // Since only two areas are supported read has to start with area 0
 		size_t remaining = 0;
 
-		// we need enough space
+		// we need enough space (should be handled ok in DaqMultiChunk, but better to check before calling FPGA lib with raw read)
 		assert(_chunk.data.size() >= 2 * 2 * _chunk.PerChannel());
 
 		NiFpga_Status stat = NiFpga_Status_Success;

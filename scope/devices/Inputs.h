@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config\config_choices.h"
+#include "helpers\DaqChunks.h"
 
 namespace scope {
 
@@ -33,12 +33,26 @@ namespace scope {
 			virtual uint32_t StandardChunkSize() const { return 128u*128u; }
 
 			/** Reads one chunk of samples for one area.
-			* @param[in] _area which area of the multichunk to fill data in
+			* @tparam NCHANNELS the number of channels to read
 			* @param[in,out] _chunk multichunk to fill with the read data
 			* @param[out] _timedout true if read timed out
 			* @param[in] _timeout timeout in seconds after which to return even if not enough samples were read
 			* @return the number of samples per channel actually read */
-			virtual int32_t Read(const uint32_t& _area, config::DaqMultiChunkType& _chunk, bool& _timedout, const double& _timeout) = 0;
+			template<uint32_t NCHANNELS>
+			virtual int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+				return -1;
+			}
+
+			/** Reads one chunk of samples for two areas (starting with the constructors _area).
+			* @tparam NCHANNELS the number of channels to read
+			* @param[in,out] _chunk multichunk to fill with the read data
+			* @param[out] _timedout true if read timed out
+			* @param[in] _timeout timeout in seconds after which to return even if not enough samples were read
+			* @return the number of samples per channel actually read */
+			template<uint32_t NCHANNELS>
+			virtual int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+				return -1;
+			}
 	};
 
 }

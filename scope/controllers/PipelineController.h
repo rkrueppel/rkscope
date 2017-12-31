@@ -5,8 +5,7 @@
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
 #include "TheScopeCounters.h"
-#include "helpers/DaqMultiChunk.h"
-#include "helpers/DaqMultiChunkResonance.h"
+#include "helpers/DaqChunks.h"
 #include "helpers/ScopeMultiImage.h"
 #include "scanmodes/PixelmapperBasic.h"
 #include "scanmodes/ScannerVectorFrameBasic.h"
@@ -27,7 +26,7 @@ namespace scope {
 		ScopeCounters<config::nareas>& counters;
 		
 		/** input queue from the DaqController */
-		std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const input_queues;
+		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunk>>, config::threads_daq>* const input_queues;
 
 		/** output queue to the StorageController */
 		SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const storage_queue;

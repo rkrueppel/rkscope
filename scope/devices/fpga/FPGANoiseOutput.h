@@ -50,7 +50,8 @@ namespace scope {
 		void StartAcquisition() override;
 		void StopAcquisition() override;
 		int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
-		int32_t ReadPixels(DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
+		/** @param[in] _area has to be zero, since max 2 areas supported a read of two areas has to start with area 0 */
+		int32_t ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) override;
 
 		/** Checks the status of the FIFOs on the FPGA */
 		void CheckFPGADiagnosis();

@@ -89,7 +89,8 @@ namespace scope {
 		status = NiFpga_WriteBool(session, (uint32_t)NiFpga_ResonanceScanner_ControlBool_Acquire, true);
 	}
 
-	int32_t FPGAResonanceScanner::ReadPixels(DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+	int32_t FPGAResonanceScanner::ReadPixels(const uint32_t& _area, DaqMultiChunkResonance<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
+		assert(_area == 0);
 		size_t remaining = 0;
 
 		// we need enough space
