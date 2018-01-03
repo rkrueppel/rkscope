@@ -5,12 +5,12 @@
 namespace scope {
 	
 	namespace config {
-		constexpr uint32_t nareas = 1;
-		constexpr std::array<bool, nareas> masterarea {{true}}; // e.g. {{true, false}}
-		constexpr std::array<bool, nareas> slavearea {{false}}; // e.g. {{false, true}}
-		constexpr uint32_t nmasters = 1; // _counttrue(masterarea);
-		constexpr uint32_t nslaves = 0; // _counttrue(slavearea);
-		constexpr uint32_t areaspermaster = 1; // i.e. the master area itself
+		constexpr uint32_t nmasters = 1;
+		constexpr uint32_t slavespermaster = 0;
+		constexpr uint32_t nslaves = nmasters * slavespermaster;
+		constexpr uint32_t totalareas = nmasters + nslaves;
+		constexpr std::array<uint32_t, nslaves> masterofslave {{}}; // e.g. {{0, 0, 1, 1}}	means two master areas with two slaves each, in total 6 areas
+		
 		constexpr NBeamSetupEnum nbeamsetup = NBeamSetupEnum::SingleBeam; // SingleBeam, MultiBeam
 		constexpr ScannerEnum scannerselect = ScannerEnum::RegularGalvo; // RegularGalvo, ResonantGalvo, AOD, Fibre
 		constexpr OutputEnum outputselect = OutputEnum::SimpleDAQmx; // SimpleDAQmx, TwoCardDAQmx, SimpleDAQmx_Resonance
@@ -30,10 +30,10 @@ namespace scope {
 		constexpr FramevectorFillEnum framevectorfill_slave = FramevectorFillSelector<outputselect>::fill_slave;
 
 		/* Number of threads in the controllers */
-		constexpr uint32_t threads_daq = nmasters;
-		constexpr uint32_t threads_pipeline = nmasters;
-		constexpr uint32_t threads_display = nareas;
-		constexpr uint32_t threads_storage = nareas;
+		constexpr uint32_t threads_daq = nmasters;			// since a master and its slaves are read in together
+		constexpr uint32_t threads_pipeline = nmasters;		// since a master and its slave are pixelmapped together
+		constexpr uint32_t threads_display = totalareas;
+		constexpr uint32_t threads_storage = totalareas;
 		
 		/* Maximum number of channels supported by Scope. You can have more if you add buttons etc etc. to e.g. CChannelFrame */
 		constexpr uint32_t maxchannels = 4;
@@ -49,8 +49,8 @@ namespace scope {
 		typedef InputTypeSelector<inputselect>::type InputType;
 		typedef InputTypeSelector<inputselect>::type_parameters InputParametersType;
 		typedef InputTypeSelector<inputselect>::type_fpga InputFPGAType;
-		typedef DaqChunkTypeSelector<daqchunkselect>::type<nchannels, nareas, daqdatatype> DaqChunkType;
-		typedef DaqChunkTypeSelector<daqchunkselect>::type_ptr<nchannels, nareas, daqdatatype> DaqChunkPtrType;
+		typedef DaqChunkTypeSelector<daqchunkselect>::type<nchannels, slavespermaster+1, daqdatatype> DaqChunkType;
+		typedef DaqChunkTypeSelector<daqchunkselect>::type_ptr<nchannels, slavespermaster+1, daqdatatype> DaqChunkPtrType;
  		typedef FPUXYStageTypeSelector<fpuxystageselect>::type FPUXYStageType;
 		typedef FPUXYStageTypeSelector<fpuxystageselect>::type_parameters FPUXYStageParametersType;
 		typedef FPUZStageTypeSelector<fpuzstageselect>::type FPUZStageType;
@@ -62,14 +62,8 @@ namespace scope {
 		typedef MultiImageTypeSelector<multiimage>::type_ptr MultiImagePtrType;
 		typedef MultiImageTypeSelector<multiimage>::type_constptr MultiImageCPtrType;
 		typedef OverlayTypeSelector<overlay>::type OverlayType;
-		typedef ResonancePixelmapperTypeSelector<resonancepixelmapper, areaspermaster>::type ResonancePixelmapperType;
+		typedef ResonancePixelmapperTypeSelector<resonancepixelmapper, slavespermaster>::type ResonancePixelmapperType;
 		
-		/** @return the masterarea of _a, returns _a if _a is master, assumes area 0 is always a master */
-		constexpr uint32_t MyMaster(const uint32_t& _a) {
-			for ( uint32_t a = _a; a > 0 ; a-- ) 
-				if (masterarea[a]) return a;
-			return 0;
-		}
 
 		/* Macro definitions for debugging Scope */
 		

@@ -7,7 +7,7 @@ namespace scope {
 		public:
 
 			SupportedAreas() {
-				static_assert(config::nareas >= MIN_SUPPORTED && config::nareas <= MAX_SUPPORTED, "Area support does not match configured number of areas.");
+				assert(config::totalareas >= MIN_SUPPORTED && config::totalareas <= MAX_SUPPORTED);
 			}
 	};
 

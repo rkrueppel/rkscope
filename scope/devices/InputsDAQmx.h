@@ -47,7 +47,7 @@ namespace scope {
 		uint32_t StandardChunkSize() const override;
 
 		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override {
+		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 			int32_t read = 0;
 			bool timedout = false;
 			try {

@@ -81,7 +81,7 @@ namespace gui {
 			/** Dialog resource ID, do not forget to overwrite in derived class constructor! */
 			enum { IDD = IDD_FRAMESCAN_SAW_PROPPAGE };
 
-			CFrameScanBasePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
+			CFrameScanBasePage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons);
 
 			/** Disconnect from ScopeController::ReadOnlyWhileScanning */
 			virtual ~CFrameScanBasePage() {};

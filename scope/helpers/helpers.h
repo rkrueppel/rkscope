@@ -58,6 +58,16 @@ std::wstring GetCurrentDateString();
 std::wstring GetCurrentTimeString(const bool& _filenamecompatible = true);
 /** @} */
 
+/** Enum for area types, usefull in cases like std::array<whatever, 2> with 0 for masters and 1 for slaves. */
+enum AreaType {
+	ATMaster = 0,
+	ATSlave = 1
+};
+
+constexpr static uint32_t NAreaTypes = 2;
+
+std::array<std::wstring, NAreaTypes> AreaTypeString{ L"Master", L"Slave" };
+
 /** Tag for ScopeMessage */
 enum class ScopeMessageTag { nothing, abort };
 

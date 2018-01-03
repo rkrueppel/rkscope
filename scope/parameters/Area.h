@@ -17,18 +17,11 @@ namespace scope {
 
 		/** Parameters for a whole area (includes a daq and a fpu)
 		* @ingroup ScopeParameters */
-		class Area
+		class BaseArea
 			: public Base {
 
 		public:
-			/** the number of this area */
 			ScopeNumber<uint32_t> area;
-
-			/** true if this area is a slave area (for an n-beam system) */
-			ScopeNumber<bool> isslave;
-
-			/** const pointer to the master area parameters (provided in the constructor through parametes::Scope) */
-			Area* masterarea;
 
 			/** the DaqParameters for this area */
 			Daq daq;
@@ -41,7 +34,7 @@ namespace scope {
 
 			/** the choosen scanner vector type */
 			ScopeValue<ScannerVectorType> scanmode;
-
+			
 			/** This map contains all ScannerVectors that are supported by the kind of scanner */
 			std::map<ScannerVectorTypeHelper::Mode, std::unique_ptr<ScannerVectorFrameBasic>> scannervectorframesmap;
 
@@ -71,40 +64,28 @@ namespace scope {
 			/** Histogram range for the areas */
 			ScopeNumber<uint32_t> histrange;
 
-			/** @param[in] _area the area number
-			* @param[in] _isslave is this a slave area?
-			* @param[in] _masterarea pointer to the masterarea parameters, or nullptr */
-			Area(const uint32_t& _area = 0, const bool& _isslave = false, Area * const _masterarea = nullptr);
+			/** Default constructor. Fills scannervectorframesmap and initializes connections inside MasterArea. */
+			BaseArea(const uint32_t& _area);
 
 			/** Copy constructor (deep copy because of the pointers in the map) */
-			Area(const Area& _other);
+			BaseArea(const BaseArea& _other);
 
 			/** Assignment (deep copy because of the pointers in the map) */
-			Area& operator=(const Area& v);
+			BaseArea& operator=(const BaseArea& v);
 
 			/** Virtual destructor, just in case we derive a something from Area somtime */
-			virtual ~Area() { }
-
-			/** (Re)set the pointer to the master area e.g. after a copy */
-			void SetMasterArea(Area* const _masterarea);
-
-			/** Copies parts of the ScannerVectorParameters from the master area's. Keeps Pockels and fast z */
-			void CopyFromMasterArea();
+			virtual ~BaseArea() { }
 
 			/** pointer to the current parameters::frame. */
 			ScannerVectorFrameBasic& Currentframe() const;
 
-			/** pointer to the ScannerVectorFrameSaw if implemented or throwing an exception! */
-			ScannerVectorFrameSaw& FrameSaw() const;
+			virtual void GetFrame(ScannerVectorFrameSaw* _svf) const {
+				_svf = dynamic_cast<ScannerVectorFrameSaw*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Sawtooth).get());
+			}
 
-			/** pointer to the ScannerVectorFrameResonance if implemented or throwing an exception! */
-			ScannerVectorFrameResonance& FrameResonance() const;
-
-			/** pointer to the ScannerVectorFrameBiDi if implemented or throwing an exception! */
-			ScannerVectorFrameBiDi& FrameBiDi() const;
-
-			/** pointer to the ScannerVectorFramePlaneHopper if implemented or throwing an exception! */
-			ScannerVectorFramePlaneHopper& FrameHopper() const;
+			virtual void GetFrame(ScannerVectorFrameResonanceHopper* _svf) const {
+				_svf = dynamic_cast<ScannerVectorFrameResonanceHopper*>(scannervectorframesmap.at(ScannerVectorTypeHelper::ResonanceHopper).get());
+			}
 
 			void Load(const wptree& pt) override;
 			void Save(wptree& pt) const override;
@@ -153,6 +134,51 @@ namespace scope {
 
 			/** Calculates the x resolution from the x aspect ratio and the y resolution from the y aspect ratio */
 			virtual void CalculateResolution();
+		};
+
+		class MasterArea
+			: public BaseArea {
+		public:
+			MasterArea(const uint32_t& _masterarea)
+				: BaseArea(_masterarea) {}
+			
+		};
+
+
+		class SlaveArea
+			: public BaseArea {
+
+		public:
+			/** const pointer to the master area parameters (provided in the constructor through parametes::Scope) */
+			MasterArea* masterarea;
+
+			/** @param[in] _area the area number
+			* @param[in] _isslave is this a slave area?
+			* @param[in] _masterarea pointer to the masterarea parameters, or nullptr */
+			SlaveArea(const uint32_t& _slavearea, MasterArea * const _itsmasterarea = nullptr);
+
+			/** Copy constructor (deep copy because of the pointers in the map). Attention: masterarea pointer is not copied! */
+			SlaveArea(const SlaveArea& _other);
+
+			/** Assignment (deep copy because of the pointers in the map). Attention: masterarea pointer is not copied! */
+			SlaveArea& operator=(const SlaveArea& v);
+
+			/** Virtual destructor, just in case we derive a something from Area somtime */
+			virtual ~SlaveArea() { }
+
+			/** (Re)set the pointer to the master area e.g. after a copy */
+			void SetMasterArea(MasterArea* const _masterarea);
+
+			/** Copies parts of the ScannerVectorParameters from the master area's. Keeps Pockels and fast z */
+			void CopyFromMasterArea();
+
+		protected:
+			/** Helper for constructors and assignment to connect internal ScopeValues (as the connections in ScopeValues do not
+			* get copied automatically */
+			virtual void InitializeConnections();
+
+			/** Force update of rates etc. after change of scanmode. scanmode is connected to this. */
+			virtual void ChangeScanMode();
 		};
 
 	}

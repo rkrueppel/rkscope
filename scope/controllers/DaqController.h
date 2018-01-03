@@ -35,38 +35,43 @@ namespace scope {
 		/** array holding the output queues to the PipelineControllers */
 		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const output_queues;
 
-		/** The outputs. Pointers to base class, since some areas are masters, some slaves) */
-		std::array<std::unique_ptr<Outputs>, config::nareas> outputs;
+		/** The outputs for the master areas. */
+		std::array<std::unique_ptr<config::OutputType>, config::nmasters> masteroutputs;
 
-		/** The inputs. Pointers to base class, since different areas could have different input type (not used yet) */
-		std::array<std::unique_ptr<Inputs>, config::nareas> inputs;
+		/** The outputs for the slave areas. */
+		std::array<std::unique_ptr<config::SlaveOutputType>, config::nslaves> slaveoutputs;
+
+		/** The inputs for all master areas (their slaves are read with them together). */
+		std::array<std::unique_ptr<config::InputType>, config::nmasters> inputs;
 
 		/** The stimulation output */
 		std::unique_ptr<config::StimulationsType> stimulation;
 
-		/** array holding shutter class for every area */
-		std::array<Shutter, config::nareas> shutters;
+		/** array holding shutter class for master area */
+		std::array<Shutter, config::nmasters> mastershutters;
 
-		/** array holding SwitchResonance class for every area */
-		std::array<SwitchResonance, config::nareas> switches;
+		std::array<Shutter, config::nslaves> slaveshutters;
+
+		/** array holding SwitchResonance class for every master area */
+		std::array<SwitchResonance, config::nmasters> switches;
 
 		/** The scanner vector for frame scanning. Pointer to base class, since current scan mode can be changed via GUI. */
-		std::array<ScannerVectorFrameBasicPtr, config::nareas> scannervecs;
+		std::array<ScannerVectorFrameBasicPtr, config::totalareas> scannervecs;
 
 		/** stimulation */
 		StimulationVector stimvec;
 
 		/** size of a read chunk in samples per channel */
-		std::array<uint32_t, config::nareas> chunksizes;
+		std::array<uint32_t, config::nmasters> chunksizes;
 
 		/** condition variables to wait for until online updates is done (new frame is completely written to buffer or aborted) */
-		std::array<std::condition_variable, config::nareas> online_update_done;
+		std::array<std::condition_variable, config::nmasters> online_update_done;
 
 		/** bool flag to set after online update is done */
-		std::array<std::atomic<bool>, config::nareas> online_update_done_flag;
+		std::array<std::atomic<bool>, config::nmasters> online_update_done_flag;
 
 		/** mutexe for the condition variables */
-		std::array<std::mutex, config::nareas> online_update_done_mutexe;
+		std::array<std::mutex, config::nmasters> online_update_done_mutexe;
 	
 		parameters::Scope ctrlparams;
 
@@ -97,7 +102,7 @@ namespace scope {
 
 		/** Handles update of parameters during scanning
 		* @post online update is done or aborted */
-		void OnlineParameterUpdate(const parameters::Area& _areaparameters);
+		void OnlineParameterUpdate(const uint32_t& _masterarea, const parameters::MasterArea& _areaparameters);
 
 		/** Does the actual writing to device for an online update */
 		void WorkerOnlineParameterUpdate(const uint32_t _area);
@@ -113,16 +118,18 @@ namespace scope {
 		void SetScannerVector(const uint32_t& _area, ScannerVectorFrameBasicPtr _sv);
 
 		/** Opens/closes the shutter. */
-		void OpenCloseShutter(const uint32_t& _area, const bool& _open);
+		void OpenCloseMasterShutter(const uint32_t& _masterarea, const bool& _open);
+		void OpenCloseSlaveShutter(const uint32_t& _slavearea, const bool& _open);
 
 		/** @return current shutter state */
-		bool GetShutterState(const uint32_t& _area) const;
+		bool GetMasterShutterState(const uint32_t& _masterarea) const;
+		bool GetSlaveShutterState(const uint32_t& _slavearea) const;
 
 		/** Turns the resonance scanner relay on and off. */
-		void TurnOnOffSwitchResonance(const uint32_t& _area, const bool& _on);
+		void TurnOnOffSwitchResonance(const uint32_t& _masterarea, const bool& _on);
 
 		/** @return current resonance scanner relay state */
-		bool GetSwitchResonanceState(const uint32_t& _area) const;
+		bool GetSwitchResonanceState(const uint32_t& _masterarea) const;
 	};
 
 }

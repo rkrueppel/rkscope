@@ -5,8 +5,7 @@
 namespace scope {
 
 	FPGAInterface::FPGAInterface()
-		: SupportedAreas(0, 0)
-		, status(NiFpga_Status_Success)
+		: status(NiFpga_Status_Success)
 		, session(0)
 		, initialized(false) {
 	}
@@ -19,10 +18,6 @@ namespace scope {
 	}
 
 	int32_t FPGAInterface::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 1, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
-		return -1;
-	}
-
-	int32_t FPGAInterface::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
 		return -1;
 	}
 

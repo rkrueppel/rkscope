@@ -118,7 +118,7 @@ namespace scope {
 	}
 
 	int32_t FPGANoiseOutput::ReadPixels(const uint32_t& _area, DaqMultiChunk<2, 2, uint16_t>& _chunk, const double& _timeout, bool& _timedout) {
-		asssert(_area == 0);
+		assert(_area == 0);
 		size_t remaining = 0;
 
 		NiFpga_Status stat = NiFpga_Status_Success;
@@ -128,7 +128,7 @@ namespace scope {
 			for (uint32_t c = 0; c < 2; c++) {
 				stat = NiFpga_ReadFifoU16(session
 					, fifos[a * 2 + c]									// select correct fifo
-					, &_chunk.data[a * 2 * _chunk.PerChannel +  c * 2]	// offset start in vector 
+					, &_chunk.data[a * 2 * _chunk.PerChannel() +  c * 2]	// offset start in vector 
 					, _chunk.PerChannel()
 					, static_cast<uint32_t>(_timeout * 1000)			// FPGA C API takes timeout in milliseconds, to be consistent with DAQmx we have _timeout in seconds
 					, &remaining);

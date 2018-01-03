@@ -26,7 +26,8 @@ namespace scope {
 			/** static to make sure only there is only one instance */
 			static std::atomic<bool> instanciated;
 	
-			const uint32_t nareas;
+			const uint32_t nmasters;
+			const uint32_t nslaves;
 			
 			std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
 			
@@ -51,23 +52,23 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			FPUButtonsArray fpubuttons;
+			std::array<FPUButtons, config::totalareas> fpubuttons;
 
 			/** Buttons for switching the scan mode */
-			ScanModeButtonsArray scanmodebuttons;
+			std::array<ScanModeButtons, config::nmasters> scanmodebuttons;
 			/** @} */
 			
 			/** The counters and progresses */
-			ScopeCounters<SCOPE_NAREAS> counters;
+			ScopeCounters<config::nmasters> counters;
 			
 			/** queues from the daqs to the pipeline(s) */
-			std::array<SynchronizedQueue<ScopeMessage<SCOPE_DAQMULTICHUNKPTR_T>>, SCOPE_NBEAM_DAQS> daq_to_pipeline;
+			std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::nmasters> daq_to_pipeline;
 
 			/** queue from the pipelines to the storage */
-			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_storage;
+			SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>> pipeline_to_storage;
 
 			/** queue from the pipelines to the display */
-			SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>> pipeline_to_display;
+			SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>> pipeline_to_display;
 			
 			/** @name Dataflow controllers
 			* @{ */
@@ -80,14 +81,14 @@ namespace scope {
 			/** @name Hardware controllers
 			* @{ */
 			FPUController theFPUs;
-			SCOPE_XYZCONTROL_T theStage;
+			config::XYZStageType theStage;
 			/** @} */
 			
 			/** The ScopeController */
 			ScopeController theController;
 			
 		public:
-			TheScope(const uint32_t& _nareas, const std::wstring& _initialparameterpath);
+			TheScope(const std::wstring& _initialparameterpath);
 			
 			// Disable copy construction
 			TheScope(const TheScope& _other) = delete;

@@ -47,7 +47,7 @@ namespace scope {
 		void Stop() override;
 
 		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override {
+		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 			int32_t read = 0;
 			try {
 				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);
@@ -62,7 +62,7 @@ namespace scope {
 		}
 
 		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override {
+		int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 			int32_t read = 0;
 			try {
 				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);

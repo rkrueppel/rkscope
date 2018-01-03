@@ -23,10 +23,10 @@ namespace scope {
 		parameters::Scope& guiparameters;
 		
 		/** Reference to TheScope's counters */
-		ScopeCounters<config::nareas>& counters;
+		ScopeCounters<config::nmasters>& counters;
 		
 		/** input queue from the DaqController */
-		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunk>>, config::threads_daq>* const input_queues;
+		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const input_queues;
 
 		/** output queue to the StorageController */
 		SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const storage_queue;
@@ -57,8 +57,8 @@ namespace scope {
 		/** Connects queues and gets parameters */
 		PipelineController(const uint32_t& _nactives
 			, parameters::Scope& _guiparameters
-			, ScopeCounters<config::nareas>& _counters
-			, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _iqueues
+			, ScopeCounters<config::nmasters>& _counters
+			, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _iqueues
 			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
 			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 		);
@@ -68,7 +68,7 @@ namespace scope {
 		void StopOne(const uint32_t& _a) override;
 		
 		/** Handles update of parameters during scanning */
-		void OnlineParameterUpdate(const parameters::Area& _areaparameters);
+		void OnlineParameterUpdate(const parameters::MasterArea& _areaparameters);
 
 		/** Sets the pointers to the scanner vector. Only called on startup. */
 		void SetScannerVector(const uint32_t& _area, ScannerVectorFrameBasicPtr _sv);

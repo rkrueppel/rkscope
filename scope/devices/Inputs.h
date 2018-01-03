@@ -4,12 +4,12 @@
 
 namespace scope {
 
-	/** Wraps hardware connection for signal input from PMTs. */
+	/** Wraps hardware connection for signal input from PMTs. Reads pixel data for its master area and its slaves. */
 	class Inputs {
 
 		protected:
-			/** the area */
-			const uint32_t area;
+			/** the masterarea this input belongs to*/
+			const uint32_t masterarea;
 
 			/** the total number of samples that should be read (in case of nframes mode) otherwise the buffer size (usually one frame) */
 			uint32_t requested_samples;
@@ -39,7 +39,7 @@ namespace scope {
 			* @param[in] _timeout timeout in seconds after which to return even if not enough samples were read
 			* @return the number of samples per channel actually read */
 			template<uint32_t NCHANNELS>
-			virtual int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+			int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 				return -1;
 			}
 
@@ -50,7 +50,7 @@ namespace scope {
 			* @param[in] _timeout timeout in seconds after which to return even if not enough samples were read
 			* @return the number of samples per channel actually read */
 			template<uint32_t NCHANNELS>
-			virtual int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+			int32_t Read(const uint32_t& _masterarea, DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
 				return -1;
 			}
 	};

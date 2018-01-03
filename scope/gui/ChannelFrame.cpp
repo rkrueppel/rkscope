@@ -14,7 +14,7 @@ namespace scope {
 
 		std::array<uint32_t, 4> CChannelFrame::colorcombo_resources = { IDC_COLORCOMBO1, IDC_COLORCOMBO2, IDC_COLORCOMBO3, IDC_COLORCOMBO4 };
 
-		CChannelFrame::CChannelFrame(const uint32_t& _area, parameters::Area& _areaparams, const uint32_t& _channels, DisplayController& _display_controller)
+		CChannelFrame::CChannelFrame(const uint32_t& _area, parameters::BaseArea& _areaparams, const uint32_t& _channels, DisplayController& _display_controller)
 			: area(_area)
 			// ScopeController::GuiParameters.areas[_area]->
 			, areaparams(_areaparams)

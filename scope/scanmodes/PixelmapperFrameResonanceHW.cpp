@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PixelmapperFrameResonanceHW.h"
 #include "parameters\Framescan.h"
-#include "helpers\DaqChunk.h"
+#include "helpers\DaqChunks.h"
 #include "helpers\ScopeImage.h"
 #include "helpers\ScopeMultiImage.h"
 
@@ -11,7 +11,7 @@ PixelmapperFrameResonanceHW::PixelmapperFrameResonanceHW()
 	: PixelmapperBasic(ScannerTypeHelper::Resonance, ScannerVectorTypeHelper::ResonanceBiDi) {
 }
 
-PixelmapperResult PixelmapperFrameResonanceHW::LookupChunk(DaqChunkPtr const _chunk, const uint16_t& _currentavgcount) {
+PixelmapperResult PixelmapperFrameResonanceHW::LookupChunk(DaqMultiChunk<2, 2, uint16_t>& _chunk, const uint16_t& _currentavgcount) {
 	PixelmapperResult result(Nothing);
 
 	return result;

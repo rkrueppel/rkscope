@@ -14,7 +14,7 @@ protected:
 	const uint32_t area;
 
 	/** Pointer to the scope parameters to use for calculations */
-	std::vector<parameters::Area>& areaparamsvec;
+	std::vector<parameters::BaseArea>& areaparamsvec;
 	
 	/** total fov x size for zoom 1 */
 	const double totalfovx;
@@ -28,7 +28,7 @@ protected:
 public:
 	/** @param[in] _area for which area's FOV is this (this area's FOV will be drawn white, the others gray)
 	* @param[in] _params pointer to the parameters to use for FOV calculations */
-	CScopeFOVDiagram(const uint32_t& _area, std::vector<parameters::Area>& _areaparamsvec, const double& _masterfovsizex, const double& _masterfovsizey);
+	CScopeFOVDiagram(const uint32_t& _area, std::vector<parameters::BaseArea>& _areaparamsvec, const double& _masterfovsizex, const double& _masterfovsizey);
 	
 	~CScopeFOVDiagram();
 

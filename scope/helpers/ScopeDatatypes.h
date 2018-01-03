@@ -1,9 +1,20 @@
 #pragma once
-
 #include "config\config_choices.h"
 
 /** @file ScopeDatatypes.h In here all declarations for all kinds of datatypes Scope needs.
 * Remember: For a new datatype you have to implement specializations of ScopeValue member functions (see helpers/ScopeValue.cpp) ! */
+
+namespace scope {
+	namespace parameters {
+		class ScannerVectorFrameBasic;
+		class ScannerVectorFrameSaw;
+		class ScannerVectorFrameBiDi;
+		class ScannerVectorFramePlaneHopper;
+		class ScannerVectorFrameResonance;
+		class ScannerVectorFrameResonanceHopper;
+		class ScannerVectorLine;
+	}
+}
 
 namespace scope {
 
@@ -302,6 +313,48 @@ namespace scope {
 					, L"ResonanceHopper" };
 				return names[_n];
 			}
+	};
+
+	template<ScannerVectorTypeHelper::Mode>
+	class ScannerVectorTypeSelector {
+	public:
+		typedef parameters::ScannerVectorFrameBasic type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::Sawtooth> {
+	public:
+		typedef parameters::ScannerVectorFrameSaw type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::Bidirectional> {
+	public:
+		typedef parameters::ScannerVectorFrameBiDi type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::Planehopper > {
+	public:
+		typedef parameters::ScannerVectorFramePlaneHopper type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::ResonanceBiDi> {
+	public:
+		typedef parameters::ScannerVectorFrameResonance type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::ResonanceHopper> {
+	public:
+		typedef parameters::ScannerVectorFrameResonanceHopper type;
+	};
+
+	template<>
+	class ScannerVectorTypeSelector<ScannerVectorTypeHelper::Mode::LineStraight> {
+	public:
+		typedef parameters::ScannerVectorLine type;
 	};
 
 	/** Describes the scanner vector type */

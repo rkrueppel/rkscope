@@ -76,7 +76,7 @@ namespace scope {
 
 			/** Go through all CChannelFrames and request resize to cope with new image size
 			* @param[in] _ap contains the new x and y resolution of images*/
-			void ResolutionChange(const parameters::Area& _ap);
+			void ResolutionChange(const parameters::BaseArea& _ap);
 
 			/** @name These are called by CChannelFrame and CHistogramFrame
 			* @{ */

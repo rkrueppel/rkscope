@@ -15,8 +15,6 @@ namespace scope {
 		ScopeButton setzero;
 		/** @} */
 	};
-	
-	typedef std::array<FPUButtons, config::nareas> FPUButtonsArray;
 
 	struct RunButtons {
 		ScopeButton startsingle;
@@ -53,6 +51,4 @@ namespace scope {
 			map.emplace(ScannerVectorTypeHelper::Mode::Sawtooth, ScopeScanModeButton(ScannerVectorTypeHelper::Mode::Sawtooth));
 		}
 	};
-	
-	typedef std::array<ScanModeButtons, config::nareas> ScanModeButtonsArray;
 }

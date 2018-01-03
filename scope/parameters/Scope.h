@@ -32,8 +32,11 @@ namespace scope {
 			virtual void UpdateFramesFromTotaltime();
 
 		public:
-			/** no of areas */
-			ScopeNumber<uint32_t> nareas;
+			ScopeValue<uint32_t> nmasters;
+
+			ScopeValue<uint32_t> nslaves;
+
+			std::vector<uint32_t> masterofslaves;
 
 			/** current date */
 			ScopeString date;
@@ -47,8 +50,14 @@ namespace scope {
 			/** a comment, e.g. user name or config description */
 			ScopeString comment;
 	
-			/** holds AreaParameters for all areas. */
-			std::vector<Area> areas;
+			/** holds parameters for all master areas. */
+			std::vector<MasterArea> masterareas;
+
+			/** holds parameters for all slave areas. */
+			std::vector<SlaveArea> slaveareas;
+
+			/** Vector with all areas as pointers to the instances stored in masterareas and slaveareas */
+			std::vector<BaseArea*> allareas;
 	
 			/** the StorageParameters */
 			Storage storage;
@@ -99,7 +108,7 @@ namespace scope {
 			ScopeValue<DaqMode> requested_mode;
 
 		public:
-			Scope(const uint32_t& _nareas);
+			Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, std::vector<uint32_t> _masterofslaves);
 
 			/** Supply copy constructor because of unique_ptr<Area> (does deep copy of Areas) */
 			Scope(const Scope& _scope);

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "ScopeDatatypes.h"
+#include "parameters\Runstates.h"
 
 namespace scope {
 

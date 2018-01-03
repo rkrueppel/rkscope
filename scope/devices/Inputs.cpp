@@ -4,7 +4,7 @@
 namespace scope {
 
 	Inputs::Inputs(const uint32_t& _area)
-		: area(_area) {
+		: masterarea(_area) {
 		requested_samples = 10000;
 	}
 

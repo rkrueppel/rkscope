@@ -18,21 +18,22 @@ namespace scope {
 		* @ingroup ScopeParameters */
 		class Stack : public Base {
 			public:
-				Stack(const uint32_t& _nareas);
+				Stack(const uint32_t& _nmasters, const uint32_t& _nslaves);
 				
-				uint32_t nareas;
+				const uint32_t nmasters;
+				const uint32_t nslaves;
 
-				/** Start plane, measured with the zdevicetype */
-				std::vector<PlaneProperties> startat;
+				/** Start plane, measured with the zdevicetype. 0 are masters, 1 are slaves */
+				std::array<std::vector<PlaneProperties>, NAreaTypes> startat;
 				
-				/** Stop plane, measured with the zdevicetype */
-				std::vector<PlaneProperties> stopat;
+				/** Stop plane, measured with the zdevicetype. 0 are masters, 1 are slaves. */
+				std::array<std::vector<PlaneProperties>, NAreaTypes> stopat;
 				
 				/** Spacing between planes in microns */
 				ScopeNumber<double> spacing;
 
-				/** Vector with properties for every plane */
-				std::vector<std::vector<PlaneProperties>> planes___;
+				/** Vector with properties for every plane. Outer vector is planes, middle array 0 are masters, 1 slaves, inner vector is areas */
+				std::vector<std::array<std::vector<PlaneProperties>, NAreaTypes>> planes;
 				
 				/** type of z device to use */
 				ScopeValue<ZDevice> zdevicetype;
@@ -41,13 +42,13 @@ namespace scope {
 				ScopeNumber<double> overalltime;
 
 				/** total span of z stack */
-				virtual double Range(const uint32_t& _area);
+				virtual double Range(const AreaType& _areatype, const uint32_t& _area);
 				
 				/** distance between planes */
-				virtual double Increment(const uint32_t& _area);
+				virtual double Increment(const AreaType& _areatype, const uint32_t& _area);
 
 				/** space constant for exponential pockels interpolation */
-				virtual double Lambda(const uint32_t& _area);
+				virtual double Lambda(const AreaType& _areatype, const uint32_t& _area);
 
 				void Load(const wptree& pt) override;
 				void Save(wptree& pt) const override;
@@ -65,15 +66,16 @@ namespace scope {
 		* @ingroup ScopeParameters */
 		class Timeseries : public Base {
 			public:
-				Timeseries(const uint32_t& _nareas);
+				Timeseries(const uint32_t& _nmasters, const uint32_t& _nslaves);
 				
-				uint32_t nareas;
+				uint32_t nmasters;
+				uint32_t nslaves;
 
 				/** number of frames in timeseries for each area */
-				std::vector<ScopeNumber<uint32_t>> frames;
+				std::array<std::vector<ScopeNumber<uint32_t>>, NAreaTypes> frames;
 				
 				/** total acquisition time for each area */
-				std::vector<ScopeNumber<double>> totaltimes;
+				std::array<std::vector<ScopeNumber<double>>, NAreaTypes> totaltimes;
 				
 				/** channel name for trigger input */
 				ScopeString triggerchannel;
@@ -94,7 +96,7 @@ namespace scope {
 				ScopeNumber<double> overalltime;
 
 				/** vector with properties for all planes, for alternating planes on repeating timeseries, one for each area */
-				std::vector<std::vector<PlaneProperties>> planes;
+				std::vector<std::array<std::vector<PlaneProperties>, NAreaTypes>> planes;
 
 				void Load(const wptree& pt) override;
 				void Save(wptree& pt) const override;
@@ -109,9 +111,10 @@ namespace scope {
 		* @ingroup ScopeParameters */
 		class Behavior : public Base {
 			public:
-				Behavior(const uint32_t& _nareas);
+				Behavior(const uint32_t& _nmasters, const uint32_t& _nslaves);
 				
-				uint32_t nareas;
+				uint32_t nmasters;
+				uint32_t nslaves;
 
 				/** Which mode to use */
 				ScopeValue<BehaviorMode> mode;
@@ -123,7 +126,7 @@ namespace scope {
 				ScopeNumber<uint32_t> repeats;
 
 				/** vector with properties for all planes, for alternating planes on alternating repeats, one for each area */
-				std::vector<std::vector<PlaneProperties>> planes;
+				std::vector<std::array<std::vector<PlaneProperties>, NAreaTypes>> planes;
 
 				/** The %DAQmx digital line for gating. Acquisition as long as this line is high, stops on low, restarts on next high etc */
 				ScopeString gateline;

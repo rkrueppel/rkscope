@@ -6,8 +6,8 @@ namespace scope {
 	PipelineController::PipelineController(
 		const uint32_t& _nactives
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<config::nareas>& _counters
-		, std::array<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>, config::threads_daq>* const _iqueues
+		, ScopeCounters<config::nmasters>& _counters
+		, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _iqueues
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 	)
@@ -39,24 +39,24 @@ namespace scope {
 		ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 		PixelmapperResult pixelmapper_result(Error);
 
-		const uint32_t downsampling = (guiparameters.areas[_masterarea].daq.inputs->oversampling())?round2ui32(guiparameters.areas[_masterarea].daq.pixeltime() / guiparameters.areas[_masterarea].daq.inputs->MinimumPixeltime()):1;
+		const uint32_t downsampling = (guiparameters.masterareas[_masterarea].daq.inputs->oversampling())?round2ui32(guiparameters.masterareas[_masterarea].daq.pixeltime() / guiparameters.masterareas[_masterarea].daq.inputs->MinimumPixeltime()):1;
 		// Get some values as locals, avoid the mutexed access to parameters later on (really necessary??)
 		const DaqMode requested_mode = guiparameters.requested_mode();
-		const uint32_t requested_frames = guiparameters.areas[_masterarea].daq.requested_frames();
-		const uint32_t requested_averages = guiparameters.areas[config::MyMaster(_masterarea)].daq.averages();
-		const double totalframepixels = guiparameters.areas[_masterarea].Currentframe().XTotalPixels() * guiparameters.areas[_masterarea].Currentframe().YTotalLines();
+		const uint32_t requested_frames = guiparameters.masterareas[_masterarea].daq.requested_frames();
+		const uint32_t requested_averages = guiparameters.masterareas[_masterarea].daq.averages();
+		const double totalframepixels = guiparameters.masterareas[_masterarea].Currentframe().XTotalPixels() * guiparameters.masterareas[_masterarea].Currentframe().YTotalLines();
 
 		//size_t num_planes = 1;
 		//if ( SCOPE_USE_RESONANCESCANNER )
 		//	num_planes = guiparameters.areas[_area].frameresonance.planes.size()?guiparameters.areas[_area].frameresonance.planes.size():1;
 
 		std::vector<config::MultiImagePtrType> current_frames(0);
-		current_frames.reserve(config::areaspermaster);
-		for (uint32_t a = 0; a < config::areaspermaster; a++) {
-			current_frames.push_back(std::make_shared<config::MultiImageType>(_masterarea+a
-				, guiparameters.areas[_masterarea + a].daq.inputs->channels()
-				, guiparameters.areas[_masterarea + a].Currentframe().yres()	// * num_planes
-				, guiparameters.areas[_masterarea + a].Currentframe().xres()));
+		current_frames.reserve(config::slavespermaster+1);
+		for (uint32_t a = 0; a < config::slavespermaster + 1; a++) {
+			current_frames.push_back(std::make_shared<config::MultiImageType>(_masterarea
+				, guiparameters.masterareas[_masterarea].daq.inputs->channels()
+				, guiparameters.masterareas[_masterarea].Currentframe().yres()	// * num_planes
+				, guiparameters.masterareas[_masterarea].Currentframe().xres()));
 		}
 
 		std::vector<config::MultiImagePtrType> next_frames(current_frames);
@@ -66,7 +66,7 @@ namespace scope {
 
 		//current_frame->InitializeCurrentLineData(5*guiparameters.areas[_area]->currentframe->XTotalPixels());
 
-		std::unique_ptr<PixelmapperBasic<>> pixel_mapper(PixelmapperBasic<config::areaspermaster>::Factory(config::scannerselect, guiparameters.areas[_masterarea].scanmode()));
+		std::unique_ptr<PixelmapperBasic<>> pixel_mapper(PixelmapperBasic<1+config::slavespermaster>::Factory(config::scannerselect, guiparameters.masterareas[_masterarea].scanmode()));
 		pixel_mapper->SetLookupVector(scannervecs[_masterarea]->GetLookupVector());
 		pixel_mapper->SetParameters(scannervecs[_masterarea]->GetSVParameters());
 		pixel_mapper->SetCurrentFrames(current_frames);
@@ -198,11 +198,11 @@ namespace scope {
 		// This sets stop condition
 		BaseController::StopOne(_a);
 		// This enqueues abort message (just to be sure)
-		ScopeMessage<config::DaqMultiChunkPtrType> stopmsg(ScopeMessageTag::abort, nullptr);
+		ScopeMessage<config::DaqChunkPtrType> stopmsg(ScopeMessageTag::abort, nullptr);
 		input_queues->at(_a).Enqueue(stopmsg);
 	}
 
-	void PipelineController::OnlineParameterUpdate(const parameters::Area& _areaparameters) {
+	void PipelineController::OnlineParameterUpdate(const parameters::MasterArea& _areaparameters) {
 		const uint32_t area = _areaparameters.area();
 		std::lock_guard<std::mutex> lock(online_update_mutexe[area]);		// lock, thus worker thread waits and we can safely update parameters
 		// update parameters not needed since we have a reference to TheScope's guiparameters

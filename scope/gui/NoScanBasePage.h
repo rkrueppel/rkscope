@@ -75,7 +75,7 @@ public:
 
 	/** We need a pointer to a basic ScannerVector (could be e.g. Saw really) but thus we can connect to (inherited) members */
 	CNoScanBasePage(const uint32_t& _area
-		, parameters::Area& _areaparams
+		, parameters::BaseArea& _areaparams
 		, FPUButtons& _fpubuttons
 	);
 
