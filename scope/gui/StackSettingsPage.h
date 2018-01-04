@@ -23,7 +23,7 @@ namespace scope {
 			
 			parameters::Stack& stackparams;
 			
-			parameters::SCOPE_XYZCONTROL_T& stageparams;
+			config::XYZStageParametersType& stageparams;
 			
 			std::vector<parameters::Area>& areaparamsvec;
 

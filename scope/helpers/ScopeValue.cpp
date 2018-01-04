@@ -17,6 +17,12 @@ void ScopeValue<Uint16Range>::SetFromString(const std::wstring& str) {
 	Set(Uint16Range(str));
 }
 
+/** Specialization for AreaType */
+template<>
+void ScopeValue<AreaType>::SetFromString(const std::wstring& str) {
+	Set(AreaType(str));
+}
+
 /** Specialization for ScannerType */
 template<>
 void ScopeValue<ScannerType>::SetFromString(const std::wstring& str) {
@@ -124,6 +130,12 @@ std::wstring ScopeValue<bool>::ToChar() const {
 /** Specialization for Uint16Range */
 template<>
 std::wstring ScopeValue<Uint16Range>::ToChar() const {
+	return Value().operator std::wstring();
+}
+
+/** Specialization for AreaType */
+template<>
+std::wstring ScopeValue<AreaType>::ToChar() const {
 	return Value().operator std::wstring();
 }
 

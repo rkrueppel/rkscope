@@ -26,14 +26,16 @@ namespace scope {
 			: public CPropertySheetImpl<CScanSettingsSheet> {
 
 		protected:
-			const uint32_t nareas;
-
-			std::vector<parameters::Area>& areaparamsvec;
+			std::vector<parameters::MasterArea>& masterareas;
+			std::vector<parameters::SlaveArea>& slaveareas;
 			
-			FPUButtonsArray& fpubuttonsvec;
+			std::array<FPUButtons, config::nmasters>& masterfpubuttons;
+			std::array<FPUButtons, config::nslaves>& slavefpubuttons;
 			
-			/** one imaging settings page for each area */
-			std::vector<std::unique_ptr<CNoScanBasePage>> scanpages;
+			/** one imaging settings page for each area. Also CNoScanBasePage for master, since they can have all the different scan modes */
+			std::vector<std::unique_ptr<CNoScanBasePage>> masterscanpages;
+			std::vector<std::unique_ptr<CNoScanBasePage>> slavescanpages;
+			
 
 			/** the storage settings page */
 			CStorageSettingsPage storagesettingspage;
@@ -45,18 +47,20 @@ namespace scope {
 			CMovementPage movementpage;
 
 			/** a settings page for DAQmx/FPGA information */
-			SCOPE_INPUTSINFOPAGE_T inputsinfospage;
+			config::InputGuiPageType inputsinfospage;
 
 		public:
 			
-			CScanSettingsSheet(const uint32_t& _nareas
-				, std::vector<parameters::Area>& _areaparamsvec
-				, FPUButtonsArray& _fpubuttonsvec
+			CScanSettingsSheet(
+				std::vector<parameters::MasterArea>& _masterareas
+				, std::vector<parameters::SlaveArea>& _slaveareas
+				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
 				, const double& _masterfovsizex
 				, const double& _masterfovsizey
 				, parameters::Storage& _storageparams
 				, parameters::Stimulation& _stimulationparams
-				, parameters::SCOPE_XYZCONTROL_T& _stageparams
+				, config::XYZStageParametersType& _stageparams
 				, ZeroButtons& _zerobuttons
 			);
 

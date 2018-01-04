@@ -13,7 +13,7 @@ namespace scope {
 			, channels(_channels)
 			, display_controller(_display_controller)
 			, range(_range)
-			, current_frame(std::make_shared<scope::SCOPE_MULTIIMAGE_T>())
+			, current_frame(std::make_shared<config::MultiImageType>())
 			, current_histogram(std::make_shared<scope::ScopeMultiHistogram>(area, channels, 512, range))
 			, lower_limits(channels, 0)
 			, upper_limits(channels, range)
@@ -137,7 +137,7 @@ namespace scope {
 			}
 		}
 
-		void CHistogramView::SetCurrentFrame(scope::SCOPE_MULTIIMAGECPTR_T const _multi, const bool& _loghist) {
+		void CHistogramView::SetCurrentFrame(config::MultiImageCPtrType const _multi, const bool& _loghist) {
 			current_frame = _multi;
 			current_histogram->Calculate(current_frame, _loghist);
 			renderer.SetHistogram(current_histogram);

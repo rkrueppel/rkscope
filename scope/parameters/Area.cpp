@@ -6,8 +6,9 @@ namespace scope {
 
 		using boost::property_tree::wptree;
 	
-		BaseArea::BaseArea(const uint32_t& _area)
-			: area(_area, 0, 100, L"Area")
+		BaseArea::BaseArea(const uint32_t& _area, const AreaType& _at)
+			: areatype(_at)
+			, area(_area, 0, 100, (_at==AreaTypeHelper::Master)?L"MasterArea":L"SlaveArea")
 			, histrange(100, 0, 65535, L"HistRange")
 			, daq(false)
 			, linerate(1, 0, 100000, L"Linerate_Hz")
@@ -31,7 +32,8 @@ namespace scope {
 		}
 
 		BaseArea::BaseArea(const BaseArea& _a)
-			: area(_a.area)
+			: areatype(_a.areatype)
+			, area(_a.area)
 			, daq(_a.daq)
 			, fpuxystage(_a.fpuxystage)
 			, fpuzstage(_a.fpuzstage)
@@ -53,6 +55,7 @@ namespace scope {
 
 		BaseArea& BaseArea::operator=(const BaseArea& _a) {
 			if (this != &_a) {
+				areatype = _a.areatype;
 				area = _a.area;
 				daq = _a.daq;
 				fpuxystage = _a.fpuxystage;
@@ -81,6 +84,7 @@ namespace scope {
 		}
 
 		void BaseArea::Load(const wptree& pt) {
+			areatype.SetFromPropertyTree(pt);
 			area.SetFromPropertyTree(pt);
 			histrange.SetFromPropertyTree(pt);
 			linerate.SetFromPropertyTree(pt);
@@ -105,6 +109,7 @@ namespace scope {
 		}
 
 		void BaseArea::Save(wptree& pt) const {
+			areatype.AddToPropertyTree(pt);
 			area.AddToPropertyTree(pt);
 			histrange.AddToPropertyTree(pt);
 			linerate.AddToPropertyTree(pt);
@@ -236,7 +241,7 @@ namespace scope {
 		}
 
 		SlaveArea::SlaveArea(const uint32_t& _slavearea, MasterArea * const _itsmasterarea)
-			: BaseArea(_slavearea)
+			: BaseArea(_slavearea, AreaTypeHelper::Slave)
 			, masterarea(_itsmasterarea) {
 		}
 

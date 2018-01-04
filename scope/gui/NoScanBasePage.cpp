@@ -4,11 +4,11 @@
 namespace scope {
 	namespace gui {
 
-CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::Area& _areaparams, FPUButtons & _fpubuttons)
+CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::BaseArea& _areaparams, FPUButtons & _fpubuttons)
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
 	, area(_area)
-	, isslave(_areaparams.isslave())
+	, isslave(_areaparams.areatype() == AreaTypeHelper::Slave)
 	, pockels_scroll(_areaparams.Currentframe().pockels, 0.01, 0.1, true, true)
 	, pockels_edit(_areaparams.Currentframe().pockels, true, true)
 	, fastz_scroll(_areaparams.Currentframe().fastz, 5, 50, true, true)
@@ -23,9 +23,7 @@ CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::Area& _area
  	, fpudown_button(_fpubuttons.down) {
 
 	std::wstringstream stream;
-	stream << L"Area " << area+1;
-	if ( isslave )
-		stream << L"S";
+	stream << _areaparams.areatype() << L"Area " << area+1;
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
 }

@@ -52,7 +52,8 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			std::array<FPUButtons, config::totalareas> fpubuttons;
+			std::array<FPUButtons, config::nmasters> masterfpubuttons;
+			std::array<FPUButtons, config::nslaves> slavefpubuttons;
 
 			/** Buttons for switching the scan mode */
 			std::array<ScanModeButtons, config::nmasters> scanmodebuttons;

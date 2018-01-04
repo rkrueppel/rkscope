@@ -4,20 +4,21 @@
 namespace scope {
 	namespace gui {
 		
-		CExperimentSettingsSheet::CExperimentSettingsSheet(ScanModeButtonsArray& _scanmodebuttonsvec
+		CExperimentSettingsSheet::CExperimentSettingsSheet(std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
 			, parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
-			, ScopeCounters<SCOPE_NAREAS>& _counters
+			, ScopeCounters<config::nmasters>& _counters
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
-			, parameters::SCOPE_XYZCONTROL_T& _stageparams
-			, std::vector<parameters::Area>& _areaparamsvec
+			, config::XYZStageParametersType& _stageparams
+			, std::vector<parameters::MasterArea>& _masterareas
+			, std::vector<parameters::SlaveArea>& _slaveareas
 		)
 			: scanmode(_scanmodebuttonsvec)
-			, stack(_stackparams, _runbuttons, _stackbuttons, _counters, _stageparams, _areaparamsvec)
-			, timeseries(_timeseriesparams, _runbuttons, _counters, _areaparamsvec)
-			, behavior(_runbuttons, _counters, _behaviorparams, _areaparamsvec)
+			, stack(_stackparams, _runbuttons, _stackbuttons, _counters, _stageparams, _masterareas, _slaveareas)
+			, timeseries(_timeseriesparams, _runbuttons, _counters, _masterareas, _slaveareas)
+			, behavior(_runbuttons, _counters, _behaviorparams, _masterareas, _slaveareas)
 		{
 			
 		}

@@ -8,8 +8,8 @@ namespace scope {
 			parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
-			, ScopeCounters<SCOPE_NAREAS>& _counters
-			, parameters::SCOPE_XYZCONTROL_T& _stageparams
+			, ScopeCounters<config::nmasters>& _counters
+			, config::XYZStageParametersType& _stageparams
 			, std::vector<parameters::Area>& _areaparamsvec
 		)
 			: initialized(false)

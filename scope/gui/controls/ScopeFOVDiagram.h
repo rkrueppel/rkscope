@@ -13,8 +13,11 @@ protected:
 	/** the area of this FPU */
 	const uint32_t area;
 
+	const AreaTypeHelper::Mode areatype;
+
 	/** Pointer to the scope parameters to use for calculations */
-	std::vector<parameters::BaseArea>& areaparamsvec;
+	std::vector<parameters::MasterArea>& masterareas;
+	std::vector<parameters::SlaveArea>& slaveareas;
 	
 	/** total fov x size for zoom 1 */
 	const double totalfovx;
@@ -28,7 +31,7 @@ protected:
 public:
 	/** @param[in] _area for which area's FOV is this (this area's FOV will be drawn white, the others gray)
 	* @param[in] _params pointer to the parameters to use for FOV calculations */
-	CScopeFOVDiagram(const uint32_t& _area, std::vector<parameters::BaseArea>& _areaparamsvec, const double& _masterfovsizex, const double& _masterfovsizey);
+	CScopeFOVDiagram(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, std::vector<parameters::MasterArea>& _masterareas, std::vector<parameters::SlaveArea>& _slaveareas, const double& _masterfovsizex, const double& _masterfovsizey);
 	
 	~CScopeFOVDiagram();
 

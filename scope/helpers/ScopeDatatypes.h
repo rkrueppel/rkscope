@@ -86,6 +86,34 @@ namespace scope {
 			/** @} */
 	};
 
+	/** Describes area types, usefull in cases like std::array<whatever, 2> with 0 for masters and 1 for slaves. */
+	class AreaTypeHelper {
+	public:
+		/** The different types of scanners */
+		enum Mode {
+			Master,
+			Slave
+		};
+
+		/** Number of enumerators */
+		static const uint32_t S = 2;
+
+		/** @return name of enumerator */
+		static std::wstring NameOf(const uint32_t& _n) {
+			static std::array<std::wstring, S> names =
+			{ L"Master"
+				, L"Slave" };
+			return names[_n];
+		}
+	};
+
+	/** Describes the type of area */
+	typedef ScopeDatatypeBase<AreaTypeHelper> AreaType;
+
+	/**  Easy number of area types */
+	constexpr static uint32_t NAreaTypes = AreaTypeHelper::S;
+
+
 	/** The type of z control device that is used for a stack. FastT could be ETL or piezo */
 	class ZDeviceHelper {
 	public:

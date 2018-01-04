@@ -8,7 +8,7 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
 	, hoppervecparams(_areaparams.FrameHopper())
 {
@@ -40,20 +40,20 @@ BOOL CFrameScanHopperPage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) {
 void CFrameScanHopperPage::UpdatePlanesList() {
 	planes_list.DeleteAllItems();
 	CString tmp;
-	for ( uint32_t p = 0 ; p < hoppervecparams.planes.size() ; p++ ) {
+	for ( uint32_t p = 0 ; p < hoppervecparams->planes.size() ; p++ ) {
 		planes_list.InsertItem(p, L"Slice", 0);
 		tmp.Format(L"%d", p);
 		planes_list.SetItemText(p, 0, tmp);							// Slice no
-		tmp.Format(L"%.1f", hoppervecparams.planes[p].position());
+		tmp.Format(L"%.1f", hoppervecparams->planes[p].position());
 		planes_list.SetItemText(p, 1, tmp);							// fast z position
-		tmp.Format(L"%.2f", hoppervecparams.planes[p].pockels());
+		tmp.Format(L"%.2f", hoppervecparams->planes[p].pockels());
 		planes_list.SetItemText(p, 2, tmp);							// pockels
 	}
 }
 
 LRESULT CFrameScanHopperPage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled) {
-	parameters::PlaneProperties plane(hoppervecparams.fastz(), hoppervecparams.pockels());
-	hoppervecparams.planes.push_back(plane);
+	parameters::PlaneProperties plane(hoppervecparams->fastz(), hoppervecparams->pockels());
+	hoppervecparams->planes.push_back(plane);
 
 	UpdatePlanesList();
 
@@ -66,7 +66,7 @@ LRESULT CFrameScanHopperPage::OnDeletePlane(WORD wNotifyCode, WORD wID, HWND hWn
 		return 0;
 
 	// Delete the selected plane from the vector
-	hoppervecparams.planes.erase(sel + std::begin(hoppervecparams.planes));
+	hoppervecparams->planes.erase(sel + std::begin(hoppervecparams->planes));
 	UpdatePlanesList();
 
 	return 0;

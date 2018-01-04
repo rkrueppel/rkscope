@@ -8,10 +8,8 @@
 
 // Forward declarations
 namespace scope {
-class SCOPE_MULTIIMAGE_T;
-typedef std::shared_ptr<const SCOPE_MULTIIMAGE_T> SCOPE_MULTIIMAGECPTR_T;
-class ScopeMultiHistogram;
-typedef std::shared_ptr<ScopeMultiHistogram> ScopeMultiHistogramPtr;
+	class ScopeMultiHistogram;
+	typedef std::shared_ptr<ScopeMultiHistogram> ScopeMultiHistogramPtr;
 }
 
 namespace scope {
@@ -38,7 +36,7 @@ namespace scope {
 				uint16_t range;
 
 				/** image corresponding to the currently displayed histogram */
-				SCOPE_MULTIIMAGECPTR_T current_frame;
+				config::MultiImageCPtrType current_frame;
 
 				/** currently displayed histogram */
 				ScopeMultiHistogramPtr current_histogram;
@@ -126,7 +124,7 @@ namespace scope {
 				void FullRange();
 				
 				/** Sets the current frame and calculates its histogram (either with regular count or with logarithmic counts) */
-				void SetCurrentFrame(SCOPE_MULTIIMAGECPTR_T const _multi, const bool& _loghisto);
+				void SetCurrentFrame(config::MultiImageCPtrType const _multi, const bool& _loghisto);
 
 				/** Render histogram and limit bars */
 				uint16_t LowerLimit(const uint32_t& _ch) const { return lower_limits[_ch]; }

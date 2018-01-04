@@ -16,7 +16,7 @@ class CFrameScanHopperPage
 	: public CFrameScanBasePage {
 
 protected:
-	parameters::ScannerVectorFramePlaneHopper& hoppervecparams;
+	parameters::ScannerVectorFramePlaneHopper* hoppervecparams;
 
 	/** list box for all planes */
 	CListViewCtrl planes_list;
@@ -27,7 +27,7 @@ public:
 	/** create the edit objects (e.g. ScopeEditImpl) and tie them to the global variables (ScopeValues)
 	* set connect back to true -> on change of ScopeValue (e.g. by ScopeController) the dialog control will
 	* be updated accordingly */
-	CFrameScanHopperPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
+	CFrameScanHopperPage(const uint32_t& _area, parameters:: BaseArea& _areaparams, FPUButtons& _fpubuttons);
 
 	BEGIN_MSG_MAP(CFrameScanHopperPage)
 		COMMAND_HANDLER(IDC_ADDPLANE_BUTTON, BN_CLICKED, OnAddPlane)

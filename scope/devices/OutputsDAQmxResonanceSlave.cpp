@@ -13,7 +13,7 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
 	//size_t num_planes = (_params.areas[area]->FrameResonance().planes.size())?_params.areas[area]->FrameResonance().planes.size():1;
-	parameters::ScannerVectorFrameResonanceHopper* svecres = nullptr;
+	parameters::ScannerVectorFrameResonance* svecres = nullptr;
 	_params.slaveareas[area].GetFrame(svecres);
 	size_t num_planes = (svecres->planes.size()) ? svecres->planes.size() : 1;
 

@@ -8,13 +8,13 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-	, svresonanceparams(_areaparams.FrameResonance())
-	, ycutoff_edit(_areaparams.FrameResonance().ycutoff, true, true)
-	, yretrace_edit(_areaparams.FrameResonance().yretrace, true, true)
-	, waitstorage_edit(_areaparams.FrameResonance().waitafterenqueuestorage, true, true)
-	, waitdisplay_edit(_areaparams.FrameResonance().waitafterenqueuedisplay, true, true)
+	, svresonanceparams(*_areaparams.FrameResonance())
+	, ycutoff_edit(_areaparams.FrameResonance()->ycutoff, true, true)
+	, yretrace_edit(_areaparams.FrameResonance()->yretrace, true, true)
+	, waitstorage_edit(_areaparams.FrameResonance()->waitafterenqueuestorage, true, true)
+	, waitdisplay_edit(_areaparams.FrameResonance()->waitafterenqueuedisplay, true, true)
 {
 
 	zoom_scroll.SetSmallIncrement(1);

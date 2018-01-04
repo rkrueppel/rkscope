@@ -5,8 +5,10 @@ namespace scope {
 	namespace gui {
 
 CMovementSettingsSheet::CMovementSettingsSheet(
-	std::vector<parameters::Area>& _areaparamsvec
-	, FPUButtonsArray& _fpubuttonsvec
+	std::vector<parameters::MasterArea>& _masterareas
+	, std::vector<parameters::SlaveArea>& _slaveareas
+	, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+	, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
 	, const double& _masterfovsizex
 	, const double& _masterfovsizey
 	, config::XYZStageParametersType& _stageparams
@@ -14,8 +16,10 @@ CMovementSettingsSheet::CMovementSettingsSheet(
 )
 	: xyzcontrolpage(_stageparams, _zerobuttons)
 {
-	for (uint32_t a = 0; a < _areaparamsvec.size() ; a++) 
-		fpupages.emplace_back(a, _areaparamsvec, _fpubuttonsvec[a], _masterfovsizex, _masterfovsizey);
+	for (uint32_t a = 0; a < _masterareas.size() ; a++) 
+		fpupages.emplace_back(a, AreaTypeHelper::Master, _masterareas, _slaveareas, _masterfpubuttons[a], _masterfovsizex, _masterfovsizey);
+	for (uint32_t a = 0; a < _slaveareas.size(); a++)
+		fpupages.emplace_back(a, AreaTypeHelper::Slave, _masterareas, _slaveareas, _slavefpubuttons[a], _masterfovsizex, _masterfovsizey);
 }
 
 HWND CMovementSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {

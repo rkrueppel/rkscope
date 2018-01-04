@@ -8,12 +8,12 @@
 namespace scope {
 	namespace gui {
 
-		CFrameScanSawPage::CFrameScanSawPage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons)
+		CFrameScanSawPage::CFrameScanSawPage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
 			: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-			, xcutoff_edit(_areaparams.FrameSaw().xcutoff, true, true)
-			, ycutoff_edit(_areaparams.FrameSaw().ycutoff, true, true)
-			, xretrace_edit(_areaparams.FrameSaw().xretrace, true, true)
-			, yretrace_edit(_areaparams.FrameSaw().yretrace, true, true) {
+			, xcutoff_edit(_areaparams.FrameSaw()->xcutoff, true, true)
+			, ycutoff_edit(_areaparams.FrameSaw()->ycutoff, true, true)
+			, xretrace_edit(_areaparams.FrameSaw()->xretrace, true, true)
+			, yretrace_edit(_areaparams.FrameSaw()->yretrace, true, true) {
 
 			// Overwrite base class enum { IDD = ... }
 			// Use different dialog resources depending if this area is a slave area (only Pockels and ETL sliders) or a master area (full control complement)

@@ -21,7 +21,10 @@ namespace scope {
 			: public Base {
 
 		public:
+			ScopeValue<AreaType> areatype;
+			
 			ScopeNumber<uint32_t> area;
+			
 
 			/** the DaqParameters for this area */
 			Daq daq;
@@ -65,7 +68,7 @@ namespace scope {
 			ScopeNumber<uint32_t> histrange;
 
 			/** Default constructor. Fills scannervectorframesmap and initializes connections inside MasterArea. */
-			BaseArea(const uint32_t& _area);
+			BaseArea(const uint32_t& _area, const AreaType& _at);
 
 			/** Copy constructor (deep copy because of the pointers in the map) */
 			BaseArea(const BaseArea& _other);
@@ -83,9 +86,33 @@ namespace scope {
 				_svf = dynamic_cast<ScannerVectorFrameSaw*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Sawtooth).get());
 			}
 
-			virtual void GetFrame(ScannerVectorFrameResonanceHopper* _svf) const {
-				_svf = dynamic_cast<ScannerVectorFrameResonanceHopper*>(scannervectorframesmap.at(ScannerVectorTypeHelper::ResonanceHopper).get());
+			virtual void GetFrame(ScannerVectorFrameBiDi* _svf) const {
+				_svf = dynamic_cast<ScannerVectorFrameBiDi*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Bidirectional).get());
 			}
+
+			virtual void GetFrame(ScannerVectorFrameResonance* _svf) const {
+				_svf = dynamic_cast<ScannerVectorFrameResonance*>(scannervectorframesmap.at(ScannerVectorTypeHelper::ResonanceBiDi).get());
+			}
+			virtual void GetFrame(ScannerVectorFramePlaneHopper* _svf) const {
+				_svf = dynamic_cast<ScannerVectorFramePlaneHopper*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Planehopper).get());
+			}
+
+			virtual ScannerVectorFrameSaw* FrameSaw() const {
+				return dynamic_cast<ScannerVectorFrameSaw*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Sawtooth).get());
+			}
+
+			virtual ScannerVectorFrameBiDi* FrameBiDi() const {
+				return dynamic_cast<ScannerVectorFrameBiDi*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Bidirectional).get());
+			}
+
+			virtual ScannerVectorFrameResonance*  FrameResonance() const {
+				return dynamic_cast<ScannerVectorFrameResonance*>(scannervectorframesmap.at(ScannerVectorTypeHelper::ResonanceBiDi).get());
+			}
+
+			virtual ScannerVectorFramePlaneHopper* FrameHopper() const {
+				return dynamic_cast<ScannerVectorFramePlaneHopper*>(scannervectorframesmap.at(ScannerVectorTypeHelper::Planehopper).get());
+			}
+
 
 			void Load(const wptree& pt) override;
 			void Save(wptree& pt) const override;
@@ -140,10 +167,8 @@ namespace scope {
 			: public BaseArea {
 		public:
 			MasterArea(const uint32_t& _masterarea)
-				: BaseArea(_masterarea) {}
-			
+				: BaseArea(_masterarea, AreaTypeHelper::Master) {}
 		};
-
 
 		class SlaveArea
 			: public BaseArea {

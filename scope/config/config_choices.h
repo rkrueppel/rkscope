@@ -49,6 +49,7 @@ namespace scope {
 		typedef InputTypeSelector<inputselect>::type InputType;
 		typedef InputTypeSelector<inputselect>::type_parameters InputParametersType;
 		typedef InputTypeSelector<inputselect>::type_fpga InputFPGAType;
+		typedef InputTypeSelector<inputselect>::type_guipage InputGuiPageType;
 		typedef DaqChunkTypeSelector<daqchunkselect>::type<nchannels, slavespermaster+1, daqdatatype> DaqChunkType;
 		typedef DaqChunkTypeSelector<daqchunkselect>::type_ptr<nchannels, slavespermaster+1, daqdatatype> DaqChunkPtrType;
  		typedef FPUXYStageTypeSelector<fpuxystageselect>::type FPUXYStageType;

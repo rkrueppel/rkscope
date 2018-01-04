@@ -24,8 +24,10 @@ protected:
 public:
 	/** Creates the CFPUControlPages */
 	CMovementSettingsSheet(
-		std::vector<parameters::Area>& _areaparamsvec
-		, FPUButtonsArray& _fpubuttonsvec
+		std::vector<parameters::MasterArea>& _masterareas
+		, std::vector<parameters::SlaveArea>& _slaveareas
+		, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+		, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
 		, const double& _masterfovsizex
 		, const double& _masterfovsizey
 		, config::XYZStageParametersType& _stageparams
