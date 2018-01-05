@@ -39,7 +39,14 @@ namespace scope {
 		public:
 			enum { IDD = IDD_MAINDIALOG };
 
-			CMainDlgView(RunButtons& _runbuttons, FPUButtonsArray& _fpubuttonsvec, parameters::Scope& _guiparameters, ScanModeButtonsArray& _scanmodebuttonsvec, StackButtons& _stackbuttons, ZeroButtons& _zerobuttons, ScopeCounters<SCOPE_NAREAS>& _counters);
+			CMainDlgView(RunButtons& _runbuttons
+				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+				, parameters::Scope& _guiparameters
+				, std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
+				, StackButtons& _stackbuttons
+				, ZeroButtons& _zerobuttons
+				, ScopeCounters<config::nmasters>& _counters);
 			~CMainDlgView();
 			
 			BEGIN_MSG_MAP(CScopeView)

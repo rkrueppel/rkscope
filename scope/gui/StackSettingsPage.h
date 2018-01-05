@@ -25,7 +25,8 @@ namespace scope {
 			
 			config::XYZStageParametersType& stageparams;
 			
-			std::vector<parameters::Area>& areaparamsvec;
+			std::vector<parameters::MasterArea>& masterareas;
+			std::vector<parameters::SlaveArea>& slaveareas;
 
 			/** to start stack scan */
 			CScopeButtonCtrl start_stack_button;
@@ -72,9 +73,10 @@ namespace scope {
 			CStackSettingsPage(parameters::Stack& _stackparams
 				, RunButtons& _runbuttons
 				, StackButtons& _stackbuttons
-				, ScopeCounters<SCOPE_NAREAS>& _counters
-				, parameters::SCOPE_XYZCONTROL_T& _stageparams
-				, std::vector<parameters::Area>& _areaparamsvec);
+				, ScopeCounters<config::nmasters>& _counters
+				, config::XYZStageParametersType& _stageparams
+				, std::vector<parameters::MasterArea>& _masterareas
+				, std::vector<parameters::SlaveArea>& _slaveareas);
 
 			BEGIN_MSG_MAP_EX(CStackSettingsPage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

@@ -4,18 +4,18 @@
 namespace scope {
 	namespace gui {
 
-		CMainDlgView::CMainDlgView(
-			RunButtons& _runbuttons
-			, FPUButtonsArray& _fpubuttonsvec
-			, parameters::Scope& _guiparameters
-			, ScanModeButtonsArray& _scanmodebuttonsvec
-			, StackButtons& _stackbuttons
-			, ZeroButtons& _zerobuttons
-			, ScopeCounters<SCOPE_NAREAS>& _counters
+		CMainDlgView::CMainDlgView(RunButtons& _runbuttons
+				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+				, parameters::Scope& _guiparameters
+				, std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
+				, StackButtons& _stackbuttons
+				, ZeroButtons& _zerobuttons
+				, ScopeCounters<config::nmasters>& _counters
 		)
-			: m_sheetScanSettings(_guiparameters.nareas(), _guiparameters.areas, _fpubuttonsvec, _guiparameters.masterfovsizex(), _guiparameters.masterfovsizey(), _guiparameters.storage
+			: m_sheetScanSettings(_guiparameters.masterareas, _guiparameters.slaveareas, _masterfpubuttons, _slavefpubuttons, _guiparameters.masterfovsizex(), _guiparameters.masterfovsizey(), _guiparameters.storage
 				, _guiparameters.stimulation, _guiparameters.stage, _zerobuttons)
-			, m_sheetExperimentSettings(_scanmodebuttonsvec, _guiparameters.stack, _runbuttons, _stackbuttons, _counters, _guiparameters.timeseries, _guiparameters.behavior, _guiparameters.stage, _guiparameters.areas)
+			, m_sheetExperimentSettings(_scanmodebuttonsvec, _guiparameters.stack, _runbuttons, _stackbuttons, _counters, _guiparameters.timeseries, _guiparameters.behavior, _guiparameters.stage, _guiparameters.masterareas, _guiparameters.slaveareas)
 			, m_ScanSingleButton(_runbuttons.startsingle)
 			, m_ScanLiveButton(_runbuttons.startlive)
 			, m_StopButton(_runbuttons.stop)

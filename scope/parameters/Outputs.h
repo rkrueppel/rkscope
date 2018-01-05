@@ -26,7 +26,7 @@ public:
 	virtual std::unique_ptr<Outputs> Clone() const = 0;
 
 	/** Factory method to generate parameter sets for different scan types and put them into a ScannerVectorFrameBasic pointer. */
-	static std::unique_ptr<Outputs> Factory(const OutputsType& _type);
+	//static std::unique_ptr<Outputs> Factory(const OutputsType& _type);
 
 	/** Output range of the DAC to use for all outputs. E.g. NI-6259 supports only +-10 or +-5V output range (or external reference). Choose e.g. 5 for +-5V range. */
 	ScopeNumber<double> range;

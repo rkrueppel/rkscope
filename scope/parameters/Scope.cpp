@@ -18,9 +18,6 @@ namespace parameters {
 			, time(L"", L"Time")
 			, scopecommit(std::wstring(CA2W(STR(LASTGITCOMMIT))), L"ScopeCommit")
 			, comment(L"", L"Comment")
-			, masterareas(0)
-			, slaveareas(0)
-			, allareas(0)
 			, stack(nmasters, nslaves)
 			, timeseries(nmasters, nslaves)
 			, behavior(nmasters, nslaves)
@@ -35,46 +32,26 @@ namespace parameters {
 			time.Set(GetCurrentTimeString());
 			
 			uint32_t a = 0;
-			std::generate_n(std::back_inserter(masterareas), nmasters, [&a, this]() {
-				parameters::MasterArea A(a);
+			for (uint32_t m = 0; m < config::nmasters; m++) {
+				allareas.push_back(std::make_unique<MasterArea>(a));
 				a++;
-				return A;
-			});
-
-			a = 0;
-			std::generate_n(std::back_inserter(slaveareas), nslaves, [&a, this]() {
-				parameters::SlaveArea A(a, &masterareas[masterofslaves[a]]);
-				a++;
-				return A;
-			});
-			a = 0;
-			std::generate_n(std::back_inserter(allareas), nmasters, [&a, this]() {
-				return &masterareas[a];
-			});
-			a = 0;
-			std::generate_n(std::back_inserter(allareas), nslaves, [&a, this]() {
-				return &slaveareas[a];
-			});
-	
-			for(auto& ar : masterareas) {
-				ar.framerate.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-				ar.daq.averages.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-				ar.histrange.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+				for (uint32_t s = 0; s < config::slavespermaster; s++) {
+					allareas.push_back(std::make_unique<SlaveArea>(a, allareas.end()));
+					a++;
+				}
 			}
 
-			for (auto& ar : slaveareas) {
-				ar.framerate.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-				ar.daq.averages.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
-				ar.histrange.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+			for(auto& ar : allareas) {
+				ar->framerate.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+				ar->daq.averages.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+				ar->histrange.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
 			}
 	
-			for (auto& at : timeseries.frames )
-				for (auto& fr : at)
-					fr.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
+			for (auto& fr : timeseries.frames )
+				fr.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
 	
-			for (auto& at : timeseries.totaltimes )
-				for (auto& tt : at )
-					tt.ConnectOther(std::bind(&Scope::UpdateFramesFromTotaltime, this));
+			for (auto& tt : timeseries.totaltimes )
+				tt.ConnectOther(std::bind(&Scope::UpdateFramesFromTotaltime, this));
 
 			timeseries.repeats.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
 			timeseries.betweenrepeats.ConnectOther(std::bind(&Scope::UpdateTotaltimeFromFrames, this));
@@ -89,9 +66,7 @@ namespace parameters {
 			, time(_scope.time)
 			, scopecommit(_scope.scopecommit)
 			, comment(_scope.comment)
-			, masterareas(_scope.masterareas)
-			, slaveareas(_scope.slaveareas)
-			, allareas(0)
+			, allareas(_scope.allareas)
 			, storage(_scope.storage)
 			, stack(_scope.stack)
 			, timeseries(_scope.timeseries)
@@ -106,18 +81,12 @@ namespace parameters {
 			, run_state(_scope.run_state)
 			, requested_mode(_scope.requested_mode){
 
-			uint32_t a = 0;
-			std::generate_n(std::back_inserter(allareas), nmasters, [&a, this]() {
-				return &masterareas[a];
-			});
-			a = 0;
-			std::generate_n(std::back_inserter(allareas), nslaves, [&a, this]() {
-				return &slaveareas[a];
-			});
-
 			// Fix the pointer to the master area!!!!!
-			for(uint32_t a = 0; a < nslaves ; a++ )
-				slaveareas[a].SetMasterArea(&masterareas[masterofslaves[a]]);
+			for (uint32_t a = 0; a < allareas.size(); a++) {
+				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[config::masterofslave[a]].get()));
+			}
+
 		}
 
 		Scope& Scope::operator=(const Scope& _scope) {
@@ -129,21 +98,13 @@ namespace parameters {
 			scopecommit = _scope.scopecommit();
 			comment = _scope.comment();
 
-			masterareas = _scope.masterareas;
-			slaveareas = _scope.slaveareas;
-			allareas.clear();
-			uint32_t a = 0;
-			std::generate_n(std::back_inserter(allareas), nmasters, [&a, this]() {
-				return &masterareas[a];
-			});
-			a = 0;
-			std::generate_n(std::back_inserter(allareas), nslaves, [&a, this]() {
-				return &slaveareas[a];
-			});
+			allareas = _scope.allareas;
 
 			// Fix the pointer to the master area!!!!!
-			for (uint32_t a = 0; a < nslaves; a++)
-				slaveareas[a].SetMasterArea(&masterareas[masterofslaves[a]]);
+			for (uint32_t a = 0; a < allareas.size(); a++) {
+				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[config::masterofslave[a]].get()));
+			}
 
 			storage = _scope.storage;
 			stack = _scope.stack;
@@ -163,24 +124,19 @@ namespace parameters {
 		}
 
 		void Scope::UpdateTotaltimeFromFrames() {
-			for ( uint32_t a = 0 ; a < nmasters ; a++ )
-				timeseries.totaltimes[ATMaster][a].Set(1/masterareas[a].framerate()*masterareas[a].daq.averages()*timeseries.frames[ATMaster][a](), true, false);
-
-			for (uint32_t a = 0; a < nslaves; a++)
-				timeseries.totaltimes[ATSlave][a].Set(1 / slaveareas[a].framerate()*slaveareas[a].daq.averages()*timeseries.frames[ATSlave][a](), true, false);
+			for ( uint32_t a = 0 ; a < allareas.size() ; a++ )
+				timeseries.totaltimes[a].Set(1/allareas[a]->framerate()*allareas[a]->daq.averages()*timeseries.frames[a](), true, false);
 
 			// Time between repeats (start to start) can be minimally duration of one timeseries (+0.1s for overhead)
-			double maxduration = *std::max_element(std::begin(timeseries.totaltimes[ATMaster]), std::end(timeseries.totaltimes[ATMaster]));
+			double maxduration = *std::max_element(std::begin(timeseries.totaltimes), std::end(timeseries.totaltimes));
 			timeseries.betweenrepeats.SetWithLimits(timeseries.betweenrepeats(), maxduration + 0.1, timeseries.betweenrepeats.ul());
 
-			timeseries.overalltime = timeseries.totaltimes[ATMaster][0]() * timeseries.repeats() + (timeseries.repeats()-1) * timeseries.betweenrepeats();
+			timeseries.overalltime = timeseries.totaltimes[0]() * timeseries.repeats() + (timeseries.repeats()-1) * timeseries.betweenrepeats();
 		}
 
 		void Scope::UpdateFramesFromTotaltime() {
-			for ( uint32_t a = 0 ; a < nmasters ; a++ )
-				timeseries.frames[ATMaster][a].Set(round2ui32(timeseries.totaltimes[ATMaster][a]()*masterareas[a].framerate()/masterareas[a].daq.averages()));
-			for (uint32_t a = 0; a < nslaves; a++)
-				timeseries.frames[ATSlave][a].Set(round2ui32(timeseries.totaltimes[ATSlave][a]()*slaveareas[a].framerate() / slaveareas[a].daq.averages()));
+			for ( uint32_t a = 0 ; a < allareas.size() ; a++ )
+				timeseries.frames[a].Set(round2ui32(timeseries.totaltimes[a]()*allareas[a]->framerate()/allareas[a]->daq.averages()));
 		}
 
 		void Scope::Load(const std::wstring& filename) {
@@ -214,12 +170,8 @@ namespace parameters {
 				stimulation.Load(pt.get_child(L"scope.stimulation"));
 				frames.Load(pt.get_child(L"scope.frames"));
 				uint32_t i = 0;
-				for (auto& ma : masterareas)
-					ma.Load(pt.get_child(boost::str(boost::wformat(L"scope.masterarea%d") % i++)));
-
-				i = 0;
-				for (auto& sa : slaveareas)
-					sa.Load(pt.get_child(boost::str(boost::wformat(L"scope.slavearea%d") % i++)));
+				for (auto& ar : allareas)
+					ar->Load(pt.get_child(boost::str(boost::wformat(L"scope.area%d") % i++)));
 			}
 			catch (...) { ScopeExceptionHandler(__FUNCTION__, true, true); }
 		}
@@ -227,8 +179,7 @@ namespace parameters {
 		void Scope::Save(const std::wstring& filename) const {
 			wptree pt;
 			wptree ptroot;
-			std::vector<wptree> ptmasterareas(masterareas.size());
-			std::vector<wptree> ptslaveareas(slaveareas.size());
+			std::vector<wptree> ptallareas(allareas.size());
 			wptree ptstorage;
 			wptree ptstack;
 			wptree pttimeseries;
@@ -250,13 +201,9 @@ namespace parameters {
 				masterfovsizex.AddToPropertyTree(ptroot);
 				masterfovsizey.AddToPropertyTree(ptroot);
 				pt.add_child(L"scope", ptroot);
-				for ( uint32_t a = 0 ; a < masterareas.size() ; a++ ) {
-					masterareas[a].Save(ptmasterareas[a]);
-					pt.add_child(boost::str(boost::wformat(L"scope.masterarea%d") % a), ptmasterareas[a]);
-				}
-				for (uint32_t a = 0; a < slaveareas.size(); a++) {
-					slaveareas[a].Save(ptslaveareas[a]);
-					pt.add_child(boost::str(boost::wformat(L"scope.slavearea%d") % a), ptslaveareas[a]);
+				for ( uint32_t a = 0 ; a < allareas.size() ; a++ ) {
+					allareas[a]->Save(ptallareas[a]);
+					pt.add_child(boost::str(boost::wformat(L"scope.area%d") % a), ptallareas[a]);
 				}
 				storage.Save(ptstorage);
 				pt.add_child(L"scope.storage", ptstorage);
@@ -284,10 +231,8 @@ namespace parameters {
 		}
 
 		void Scope::SetReadOnlyWhileScanning(const RunState& _runstate) {
-			for ( auto& ar : masterareas )
-				ar.SetReadOnlyWhileScanning(_runstate);
-			for (auto& ar : slaveareas)
-				ar.SetReadOnlyWhileScanning(_runstate);
+			for ( auto& ar : allareas )
+				ar->SetReadOnlyWhileScanning(_runstate);
 			storage.SetReadOnlyWhileScanning(_runstate);
 			stack.SetReadOnlyWhileScanning(_runstate);
 			timeseries.SetReadOnlyWhileScanning(_runstate);

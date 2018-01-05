@@ -29,8 +29,8 @@ namespace scope {
 			, slavefpubuttons(_slavefpubuttons)
 			, storagesettingspage(_storageparams)
 			, stimulationsettingspage(_stimulationparams)
-			, movementpage(_areaparamsvec, _fpubuttonsvec, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
-			, inputsinfospage(*dynamic_cast<config::InputParametersType*>(_areaparamsvec[0].daq.inputs.get()))
+			, movementpage(_masterareas, _slaveareas, _masterfpubuttons, _slavefpubuttons, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
+			, inputsinfospage(*dynamic_cast<config::InputParametersType*>(_masterareas[0].daq.inputs.get()))
 		{
 			int32_t a = -1;
 			std::generate_n(std::back_inserter(masterscanpages), masterareas.size(), [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
@@ -41,8 +41,7 @@ namespace scope {
 			std::generate_n(std::back_inserter(slavescanpages), slaveareas.size(), [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
 				a++;
 				return std::make_unique<CNoScanBasePage>(a, slaveareas[a], slavefpubuttons[a]);
-			}
-			
+			});
 		}
 
 		HWND CScanSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {

@@ -9,7 +9,7 @@ namespace scope {
 		constexpr uint32_t slavespermaster = 0;
 		constexpr uint32_t nslaves = nmasters * slavespermaster;
 		constexpr uint32_t totalareas = nmasters + nslaves;
-		constexpr std::array<uint32_t, nslaves> masterofslave {{}}; // e.g. {{0, 0, 1, 1}}	means two master areas with two slaves each, in total 6 areas
+		static const std::vector<uint32_t> masterofslave {{}}; // e.g. {{0, 0, 1, 1}}	means two master areas with two slaves each, in total 6 areas
 		
 		constexpr NBeamSetupEnum nbeamsetup = NBeamSetupEnum::SingleBeam; // SingleBeam, MultiBeam
 		constexpr ScannerEnum scannerselect = ScannerEnum::RegularGalvo; // RegularGalvo, ResonantGalvo, AOD, Fibre

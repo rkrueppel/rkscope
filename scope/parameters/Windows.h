@@ -19,6 +19,9 @@ public:
 	/** For which area that window is */
 	ScopeNumber<uint32_t> area;
 
+	/** Which area type is it */
+	ScopeValue<AreaType> areatype;
+
 	/** top coordinate */
 	ScopeNumber<uint32_t> top;
 
@@ -50,7 +53,7 @@ public:
 	WindowCollection(void);
 
 	/** Add a window to the collection */
-	void AddWindow(const std::wstring& _type, const uint32_t& _area, HWND _hwnd);
+	void AddWindow(const std::wstring& _type, const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, HWND _hwnd);
 
 	void Load(const wptree& pt) override;
 	void Save(wptree& pt) const override;

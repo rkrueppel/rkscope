@@ -25,7 +25,6 @@ namespace scope {
 			
 			ScopeNumber<uint32_t> area;
 			
-
 			/** the DaqParameters for this area */
 			Daq daq;
 
@@ -166,8 +165,8 @@ namespace scope {
 		class MasterArea
 			: public BaseArea {
 		public:
-			MasterArea(const uint32_t& _masterarea)
-				: BaseArea(_masterarea, AreaTypeHelper::Master) {}
+			MasterArea(const uint32_t& _area)
+				: BaseArea(_area, AreaTypeHelper::Master) {}
 		};
 
 		class SlaveArea
@@ -180,7 +179,7 @@ namespace scope {
 			/** @param[in] _area the area number
 			* @param[in] _isslave is this a slave area?
 			* @param[in] _masterarea pointer to the masterarea parameters, or nullptr */
-			SlaveArea(const uint32_t& _slavearea, MasterArea * const _itsmasterarea = nullptr);
+			SlaveArea(const uint32_t& _area, MasterArea * const _itsmasterarea = nullptr);
 
 			/** Copy constructor (deep copy because of the pointers in the map). Attention: masterarea pointer is not copied! */
 			SlaveArea(const SlaveArea& _other);

@@ -24,7 +24,7 @@ public:
 	virtual std::unique_ptr<Inputs> Clone() const = 0;
 
 	/** Factory method to generate parameter sets for different scan types and put them into a ScannerVectorFrameBasic pointer. */
-	static std::unique_ptr<Inputs> Factory(const InputsType& _type);
+	//static std::unique_ptr<Inputs> Factory(const config::InputEnum& _type);
 
 	/** number of channels to acquire */
 	ScopeNumber<uint32_t> channels;

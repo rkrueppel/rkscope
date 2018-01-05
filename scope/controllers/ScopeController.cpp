@@ -7,12 +7,12 @@ namespace scope {
 
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<config::nareas>& _counters
+		, ScopeCounters<config::nmasters>& _counters
 		, DaqController& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
 		, DisplayController& _theDisplay
-		, std::vector<SynchronizedQueue<ScopeMessage<config::DaqMultiChunkPtrType>>>& _daq_to_pipeline
+		, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>& _daq_to_pipeline
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>& _pipeline_to_storage
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>& _pipeline_to_display
 		, config::XYZStageType& _theStage

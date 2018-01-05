@@ -42,14 +42,14 @@ namespace scope {
 
 			/** @param[in] _perchannel number of samples the chunk should contain per channel */
 			DaqMultiChunk(const uint32_t& _perchannel)
-				: DaqChunk(NAREAS * _perchannel * NCHANNELS, NAREAS*NCHANNELS)
+				: DaqChunk<DATA_T>(NAREAS * _perchannel * NCHANNELS, NAREAS*NCHANNELS)
 				, perchannel(_perchannel)
-				, lastmapped(std::vector(NCHANNELS))
 			{
 				// Reset lastmapped
+				lastmapped.fill(std::vector<iterator>(NCHANNELS));
 				for (uint32_t a = 0; a < NAREAS; a++) {
-					for (uint32_t c = 0; < NCHANNELS; c++) {
-						lastmapped[a*NCHANNELS + c] = std::begin(data) + a * (NCHANNELS*perchannel) + c * perchannel;
+					for (uint32_t c = 0; c < NCHANNELS; c++) {
+						lastmapped[a][c] = std::begin(data) + a * (NCHANNELS*perchannel) + c * perchannel;
 					}
 				}
 			}

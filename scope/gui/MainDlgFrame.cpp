@@ -19,11 +19,12 @@ namespace scope {
 			, scope::DisplayController& _display_controller
 			, scope::parameters::Scope& _guiparameters
 			, RunButtons& _runbuttons
-			, FPUButtonsArray& _fpubuttonsvec
-			, ScanModeButtonsArray& _scanmodebuttonsvec
+			, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
+			, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+			, std::array<ScanModeButtons, config::nmasters>& _scanmodebuttons
 			, StackButtons& _stackbuttons
 			, ZeroButtons& _zerobuttons
-			, ScopeCounters<SCOPE_NAREAS>& _counters
+			, ScopeCounters<config::nmasters>& _counters
 		)
 			: firstpaint(true)
 			, scope_controller(_scope_controller)
@@ -31,30 +32,42 @@ namespace scope {
 			, display_controller(_display_controller)
 			, currentconfigfile(L"")
 			, guiparameters(_guiparameters)
-			, m_dlgView(_runbuttons, _fpubuttonsvec, _guiparameters, _scanmodebuttonsvec, _stackbuttons, _zerobuttons, _counters)
+			, m_dlgView(_runbuttons, _masterfpubuttons, _slavefpubuttons, _guiparameters, _scanmodebuttons, _stackbuttons, _zerobuttons, _counters)
 		{
 		}
 
 
-		void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const RECT& _rect) {
+		void CMainDlgFrame::NewChannelFrame(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, const RECT& _rect) {
 			RECT rect(_rect);					// We need non-const here
 			
-			CChannelFrame* pChild = new CChannelFrame(_area, guiparameters.areas[_area], guiparameters.areas[_area].daq.inputs->channels(), display_controller);
+			CChannelFrame* pChild = nullptr;
+			if (_areatype == AreaTypeHelper::Master)
+				pChild = new CChannelFrame(_area, guiparameters.masterareas[_area], guiparameters.masterareas[_area].daq.inputs->channels(), display_controller);
+			else
+				pChild = new CChannelFrame(_area, guiparameters.slaveareas[_area], guiparameters.slaveareas[_area].daq.inputs->channels(), display_controller);
 			// set the CMainDlgFrame as parent, so the childs receives WM_DESTROY when the parent gets destroyed (correct cleanup this way!!)
-			pChild->CreateEx(m_hWnd, rect);
-			pChild->ShowWindow(SW_SHOWDEFAULT);
+			if (pChild != nullptr) {
+				pChild->CreateEx(m_hWnd, rect);
+				pChild->ShowWindow(SW_SHOWDEFAULT);
+			}
 		}
 
-		void CMainDlgFrame::NewHistogramFrame(const uint32_t& _area, const RECT& _rect) {
+		void CMainDlgFrame::NewHistogramFrame(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, const RECT& _rect) {
 			// Do not open histogram we alread have a histogram for that area (since calculation is done inside an Active
 			// in CHistogramFrame this would mean twice the same calculation etc
 			if ( !display_controller.HistogramAlreadyAttached(_area) ) {
 				RECT rect(_rect);					// We need non-const here
 				
-				CHistogramFrame* pChild = new CHistogramFrame(_area, guiparameters.areas[_area].daq.inputs->channels(), (uint16_t)guiparameters.areas[_area].histrange, display_controller);
+				CHistogramFrame* pChild = nullptr;
+				if (_areatype == AreaTypeHelper::Master)
+					pChild = new CHistogramFrame(_area, guiparameters.masterareas[_area].daq.inputs->channels(), (uint16_t)guiparameters.masterareas[_area].histrange, display_controller);
+				else
+					pChild = new CHistogramFrame(_area, guiparameters.slaveareas[_area].daq.inputs->channels(), (uint16_t)guiparameters.slaveareas[_area].histrange, display_controller);
 				// set the CMainDlgFrame as parent, so the childs get destroyed when the parent gets WM_DESTROY (correct cleanup this way!!)
-				pChild->CreateEx(m_hWnd, rect);
-				pChild->ShowWindow(SW_SHOWDEFAULT);
+				if (pChild != nullptr) {
+					pChild->CreateEx(m_hWnd, rect);
+					pChild->ShowWindow(SW_SHOWDEFAULT);
+				}
 			}
 		}
 
@@ -76,9 +89,9 @@ namespace scope {
 				rect.bottom = w.bottom;
 				rect.right = w.right;
 				if ( w.type() == L"CChannelFrame" )
-					NewChannelFrame(w.area, rect);
+					NewChannelFrame(w.area, w.areatype(), rect);
 				if ( w.type() == L"CHistogramFrame" )
-					NewHistogramFrame(w.area, rect);
+					NewHistogramFrame(w.area, w.areatype(), rect);
 				if ( w.type() == L"CLogFrame" )
 					NewLogFrame(rect);
 			}
@@ -98,7 +111,7 @@ namespace scope {
 			UISetText(0, str2.c_str());
 
 			// Update shutter status in menu
-			UISetCheck(ID_TOOLS_SHUTTEROPEN, daq_controller.GetShutterState(0));
+			UISetCheck(ID_TOOLS_SHUTTEROPEN, daq_controller.GetMasterShutterState(0));
 
 			UIUpdateStatusBar();
 			UIUpdateToolBar();
@@ -111,19 +124,24 @@ namespace scope {
 		}
 
 		void CMainDlgFrame::PrepareToolBarMenu(UINT nMenuID, HMENU hMenu) {
-			static_assert(SCOPE_NAREAS <= 4, "No resource IDs defined for more than 4 areas, but easy to do if you need it");
+			static_assert(config::totalareas <= 4, "No resource IDs defined for more than 4 areas, but easy to do if you need it");
 
 			if (nMenuID == IDR_NEWCHANNEL_MENU) {
 				CMenuHandle menu(hMenu);
-				for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+				for ( uint32_t a = 0 ; a < config::nmasters ; a++ ) {
 					std::wostringstream stream;
-					stream << L"Area " << a+1;
+					stream << L"MasterArea " << a+1;
 					menu.InsertMenu(0, MF_STRING, viewareas_ids[a], stream.str().c_str());
+				}
+				for (uint32_t a = 0; a < config::nslaves; a++) {
+					std::wostringstream stream;
+					stream << L"SlaveArea " << a + 1;
+					menu.InsertMenu(0, MF_STRING, viewareas_ids[config::nmasters + a], stream.str().c_str());
 				}
 			}
 			if (nMenuID == IDR_NEWHISTOGRAM_MENU) {
 				CMenuHandle menu(hMenu);
-				for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+				for ( uint32_t a = 0 ; a < config::totalareas ; a++ ) {
 					std::wostringstream stream;
 					stream << L"Area " << a+1;
 					// Disable the menu entry if we alread have a histogram for that area (since calculation is done inside an Active
@@ -275,7 +293,11 @@ namespace scope {
 				area = std::distance(std::begin(viewareas_ids), ait);
 
 			const RECT rect = { 330, 5, 586, 261 };
-			NewChannelFrame(area, rect);
+			// First in viewareas_ids come the masters, then the slaves
+			if ( area > config::nmasters)
+				NewChannelFrame(area-config::nmasters, AreaTypeHelper::Slave, rect);
+			else
+				NewChannelFrame(area , AreaTypeHelper::Master, rect);
 
 			return 0;
 		}
@@ -289,7 +311,11 @@ namespace scope {
 
 			// with this CHistogramView/D2HistogramRender will be 512 pixel wide
 			RECT rect = { 330, 5, 330+532, 5+350 };
-			NewHistogramFrame(area, rect);
+			// First in histogramareas_ids come the masters, then the slaves
+			if (area > config::nmasters)
+				NewHistogramFrame(area - config::nmasters, AreaTypeHelper::Slave, rect);
+			else
+				NewHistogramFrame(area, AreaTypeHelper::Master, rect);
 
 			return 0;
 		}
@@ -309,14 +335,14 @@ namespace scope {
 			static bool bOpen = false;
 			bOpen = !bOpen;
 			UISetCheck(ID_TOOLS_SHUTTEROPEN, bOpen);
-			daq_controller.OpenCloseShutter(0, bOpen);
+			daq_controller.OpenCloseMasterShutter(0, bOpen);
 			return 0;
 		}
 
 		LRESULT CMainDlgFrame::OnSaveWindowPositions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
 			// This gets parameters::Windows of CChannelFrames and CHistogramFrames that are attached to the display controller
 			guiparameters.frames = display_controller.GetWindowCollection();
-			guiparameters.frames.AddWindow(L"CLogFrame", 0, ScopeLogger::GetInstance().GetLogFrameWindow());
+			guiparameters.frames.AddWindow(L"CLogFrame", 0, AreaTypeHelper::Slave, ScopeLogger::GetInstance().GetLogFrameWindow());
 			
 			return 0;
 		}
@@ -386,7 +412,7 @@ namespace scope {
 				dlg.GetFilePath(filepath);
 				DBOUT(L"Filepath " << filepath.GetString());
 				// These are initialized via the default constructor
-				scope::parameters::Scope defparams(guiparameters.nareas());
+				scope::parameters::Scope defparams(config::nmasters, config::nslaves, config::masterofslave);
 				defparams.Save(std::wstring(filepath.GetString()));
 			}
 			return 0;

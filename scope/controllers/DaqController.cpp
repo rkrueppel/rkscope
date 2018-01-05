@@ -16,7 +16,7 @@ namespace scope {
 		, stimulation(nullptr)
 	{
 		chunksizes.fill(16000);
-		uint32_t a = 0;
+		
 		for (uint32_t a = 0; a < mastershutters.size(); a++) {
 			mastershutters[a].Initialize(ctrlparams.masterareas[a].daq.shutterline());
 			switches[a].Initialize(ctrlparams.masterareas[a].daq.switchresonanceline());

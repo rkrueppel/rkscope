@@ -4,14 +4,14 @@
 
 namespace scope {
 
-FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::Area>& _guiareaparamsvec, FPUButtonsArray& _fpubuttonsvec)
+FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::BaseArea>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec)
 	: nareas(_nareas)
 	, guiareaparamsvec(_guiareaparamsvec)
 	, stepsizes(_nareas, 0.0)
 {
 	//theXYStages.reserve(nareas);
 	for ( uint32_t a = 0 ; a < _nareas ; a++ ) {
-		theXYStages.emplace_back(std::make_unique<SCOPE_FPUXYCONTROL_T>(guiareaparamsvec[a].fpuxystage));
+		theXYStages.emplace_back(std::make_unique<config::FPUXYStageType>(guiareaparamsvec[a].fpuxystage));
 		
 		stepsizes[a] = guiareaparamsvec[a].fpuxystage.buttonstepsize();
 		

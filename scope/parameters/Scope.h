@@ -49,15 +49,9 @@ namespace scope {
 	
 			/** a comment, e.g. user name or config description */
 			ScopeString comment;
-	
-			/** holds parameters for all master areas. */
-			std::vector<MasterArea> masterareas;
 
-			/** holds parameters for all slave areas. */
-			std::vector<SlaveArea> slaveareas;
-
-			/** Vector with all areas as pointers to the instances stored in masterareas and slaveareas */
-			std::vector<BaseArea*> allareas;
+			/** Vector with all areas. Ordering is: master 0, its slaves, master 1, its slaves etc. */
+			std::vector<std::unique_ptr<BaseArea>> allareas;
 	
 			/** the StorageParameters */
 			Storage storage;

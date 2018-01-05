@@ -3,7 +3,7 @@
 
 namespace scope {
 
-bool InsertPixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqChunk::iterator& _from, const DaqChunk::iterator& _to) {
+bool InsertPixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqChunk<uint16_t>::iterator& _from, const DaqChunk<uint16_t>::iterator& _to) {
 	bool retval = false;
 	// Important: this locks the ScopeImage mutex for write access to the data !!
 	ScopeImageAccessU16 imagedata(*_img);
@@ -21,7 +21,7 @@ bool InsertPixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& 
 	return retval;
 }
 
-bool InsertAndAveragePixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqChunk::iterator _from, const DaqChunk::iterator _to, const uint16_t& _currentavgcount) {
+bool InsertAndAveragePixels(ScopeImageU16Ptr const _img, std::vector<uint16_t>::iterator& _where, const DaqChunk<uint16_t>::iterator _from, const DaqChunk<uint16_t>::iterator _to, const uint16_t& _currentavgcount) {
 	assert(_currentavgcount < UINT16_MAX>>1);			// since worst case daqch=65535, i=65535, _multiplier=65535 (=> 65535/2)
 
 	bool retval = false;

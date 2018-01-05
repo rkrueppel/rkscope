@@ -27,7 +27,8 @@ namespace scope {
 			parameters::Timeseries& timeseriesparams;
 			
 			/** Reference to TheScope's gui parameter's Area parameters vector */
-			std::vector<parameters::Area>& areaparamsvec;
+			std::vector<parameters::MasterArea>& masterareas;
+			std::vector<parameters::SlaveArea>& slaveareas;
 
 			/** start timeseries scanning */
 			CScopeButtonCtrl start_timeseries_button;
@@ -74,7 +75,7 @@ namespace scope {
 		public:
 			enum { IDD = IDD_TIMESERIES_PROPPAGE };
 
-			CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters<SCOPE_NAREAS>& _counters, std::vector<parameters::Area>& _areaparamsvec);
+			CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _counters, std::vector<parameters::MasterArea>& _masterareas, std::vector<parameters::SlaveArea>& _slaveareas);
 
 			BEGIN_MSG_MAP_EX(CTimeSeriesSettingsPage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

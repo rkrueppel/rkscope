@@ -22,7 +22,7 @@ protected:
 	parameters::ScannerVectorFrameResonance& svresonanceparams;
 
 public:
-	CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::Area& _areaparams, FPUButtons& _fpubuttons);
+	CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::SlaveArea& _areaparams, FPUButtons& _fpubuttons);
 
 	// Only needed if we add handlers here (see e.g. CFrameScanHopperPage)
 	BEGIN_MSG_MAP(CFrameScanResonanceSlavePage)

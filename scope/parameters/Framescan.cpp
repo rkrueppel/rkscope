@@ -674,7 +674,7 @@ namespace parameters {
 				while (true) {
 					const wptree planetree = pt.get_child(boost::str(boost::wformat(L"plane%d") % p));
 					// Load single area planes
-					for ( uint32_t a = 0 ; a < SCOPE_NAREAS ; a++ ) {
+					for ( uint32_t a = 0 ; a < config::totalareas ; a++ ) {
 						PlaneProperties plane;
 						plane.Load(planetree.get_child(boost::str(boost::wformat(L"area%d") % a)));
 					}

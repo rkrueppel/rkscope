@@ -4,7 +4,7 @@
 
 namespace scope {
 
-	DisplayController::DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<SCOPE_MULTIIMAGEPTR_T>>* const _iqueue)
+	DisplayController::DisplayController(const uint32_t& _nactives, const parameters::Scope& _parameters, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _iqueue)
 		: BaseController(_nactives)
 		, input_queue(_iqueue)
 		, channelframes(_nactives)
@@ -29,7 +29,7 @@ namespace scope {
 	ControllerReturnStatus DisplayController::Run(StopCondition* const sc, const uint32_t& _area) {
 		DBOUT(L"DisplayController::Run beginning\n");
 		uint32_t area = 0;
-		SCOPE_MULTIIMAGEPTR_T current_frame;
+		config::MultiImagePtrType current_frame;
 		size_t num_planes = 1;
 		
 		ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
@@ -42,8 +42,8 @@ namespace scope {
 		// Initialize (deferred) locks
 		std::vector<std::unique_lock<std::mutex>> channelframes_locks(nactives);
 		std::vector<std::unique_lock<std::mutex>> histogramframes_locks(nactives);
-		for ( uint32_t a = 0 ; a < nactives ; a++ ) {
-			requested_frames[a] = ctrlparams.areas[a].daq.requested_frames();
+		for ( uint32_t a = 0 ; a < ctrlparams.allareas.size() ; a++ ) {
+			requested_frames[a] = ctrlparams.allareas[a]->daq.requested_frames();
 			channelframes_locks[a] = std::unique_lock<std::mutex>(channelframes_mutexe[a],std::defer_lock);
 			histogramframes_locks[a] = std::unique_lock<std::mutex>(histogramframes_mutexe[a],std::defer_lock);
 		}
@@ -54,7 +54,7 @@ namespace scope {
 		// Dequeue and distribute loop
 		while ( !sc->IsSet() ) {
 			// Dequeue
-			ScopeMessage<SCOPE_MULTIIMAGEPTR_T> msg(input_queue->Dequeue());
+			ScopeMessage<config::MultiImagePtrType> msg(input_queue->Dequeue());
 
 			// If message has abort tag, break from while loop
 			if ( msg.tag == ScopeMessageTag::abort ) {
@@ -124,16 +124,16 @@ namespace scope {
 
 	void DisplayController::StopOne(const uint32_t& _a) {
 		BaseController::StopOne(_a);
-		ScopeMessage<SCOPE_MULTIIMAGEPTR_T> stopmsg(ScopeMessageTag::abort, nullptr);
+		ScopeMessage<config::MultiImagePtrType> stopmsg(ScopeMessageTag::abort, nullptr);
 		input_queue->Enqueue(stopmsg);
 	}
 
 
-	void DisplayController::ResolutionChange(const parameters::Area& _ap) {
-		ctrlparams.areas[_ap.area()] = _ap;			// Update so that we have the current resolution in here
+	void DisplayController::ResolutionChange(const parameters::BaseArea& _ap) {
+		*ctrlparams.allareas[_ap.area()] = _ap;			// Update so that we have the current resolution in here
 		// Clear the queue, so we don't have frames with the (now) wrong resolution
 		input_queue->Clear();
-		DBOUT(L"DisplayController::ResolutionChange to " << ctrlparams.areas[_ap.area()].Currentframe().xres() << L" " << ctrlparams.areas[_ap.area()].Currentframe().yres());
+		DBOUT(L"DisplayController::ResolutionChange to " << ctrlparams.allareas[_ap.area()]->Currentframe().xres() << L" " << ctrlparams.allareas[_ap.area()]->Currentframe().yres());
 	}
 
 	void DisplayController::SetHistogramLimits(const uint32_t& _area, const uint32_t& _channel, const uint16_t& _lower, const uint16_t& _upper) {
@@ -192,14 +192,14 @@ namespace scope {
 			{
 				std::lock_guard<std::mutex> lock(histogramframes_mutexe[a]);
 				for ( const auto& h : histogramframes[a] ) {
-					wndcoll.AddWindow(L"CHistogramFrame", a, h->m_hWnd);
+					wndcoll.AddWindow(L"CHistogramFrame", a, AreaTypeHelper::Slave, h->m_hWnd);
 				}
 			}
 
 			{
 				std::lock_guard<std::mutex> lock(channelframes_mutexe[a]);
 				for ( const auto& c : channelframes[a] ) {
-					wndcoll.AddWindow(L"CChannelFrame", a, c->m_hWnd);
+					wndcoll.AddWindow(L"CChannelFrame", a, AreaTypeHelper::Slave, c->m_hWnd);
 				}
 			}
 		}

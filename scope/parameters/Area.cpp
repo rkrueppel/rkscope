@@ -284,7 +284,7 @@ namespace scope {
 		}
 
 		void SlaveArea::InitializeConnections() {
-			scanmode.ConnectOther(std::bind(&BaseArea::ChangeScanMode, this));
+			scanmode.ConnectOther(std::bind(&SlaveArea::ChangeScanMode, this));
 
 			// A slave area gets these from the master area. These connection go in the collector so they get disconnected when this
 			// area is destructed
