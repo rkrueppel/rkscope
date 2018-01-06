@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 		
-		CExperimentSettingsSheet::CExperimentSettingsSheet(std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
+		CExperimentSettingsSheet::CExperimentSettingsSheet(std::vector<ScanModeButtons>& _scanmodebuttons
 			, parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
@@ -12,13 +12,12 @@ namespace scope {
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, config::XYZStageParametersType& _stageparams
-			, std::vector<parameters::MasterArea>& _masterareas
-			, std::vector<parameters::SlaveArea>& _slaveareas
+			, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
 		)
-			: scanmode(_scanmodebuttonsvec)
-			, stack(_stackparams, _runbuttons, _stackbuttons, _counters, _stageparams, _masterareas, _slaveareas)
-			, timeseries(_timeseriesparams, _runbuttons, _counters, _masterareas, _slaveareas)
-			, behavior(_runbuttons, _counters, _behaviorparams, _masterareas, _slaveareas)
+			: scanmode(_scanmodebuttons)
+			, stack(_stackparams, _runbuttons, _stackbuttons, _counters, _stageparams, _allareas)
+			, timeseries(_timeseriesparams, _runbuttons, _counters, _allareas)
+			, behavior(_runbuttons, _counters, _behaviorparams, _allareas)
 		{
 			
 		}

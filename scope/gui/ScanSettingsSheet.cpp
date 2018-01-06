@@ -12,10 +12,8 @@ namespace scope {
 	namespace gui {
 
 		CScanSettingsSheet::CScanSettingsSheet(
-			std::vector<parameters::MasterArea>& _masterareas
-			, std::vector<parameters::SlaveArea>& _slaveareas
-			, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-			, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+			std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
+			, std::vector<FPUButtons>& _fpubuttons
 			, const double& _masterfovsizex
 			, const double& _masterfovsizey
 			, parameters::Storage& _storageparams
@@ -23,34 +21,29 @@ namespace scope {
 			, config::XYZStageParametersType& _stageparams
 			, ZeroButtons& _zerobuttons
 		)
-			: masterareas(_masterareas)
-			, slaveareas(_slaveareas)
-			, masterfpubuttons(_masterfpubuttons)
-			, slavefpubuttons(_slavefpubuttons)
+			: allareas(_allareas)
+			, fpubuttons(_fpubuttons)
 			, storagesettingspage(_storageparams)
 			, stimulationsettingspage(_stimulationparams)
-			, movementpage(_masterareas, _slaveareas, _masterfpubuttons, _slavefpubuttons, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
-			, inputsinfospage(*dynamic_cast<config::InputParametersType*>(_masterareas[0].daq.inputs.get()))
+			, movementpage(_allareas, _fpubuttons, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
+			, inputsinfospage(*dynamic_cast<config::InputParametersType*>(_allareas[0]->daq.inputs.get()))
 		{
 			int32_t a = -1;
-			std::generate_n(std::back_inserter(masterscanpages), masterareas.size(), [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
+			std::generate_n(std::back_inserter(scanpages), allareas.size(), [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
 				a++;
-				return std::make_unique<CFrameScanSawPage>(a, masterareas[a], masterfpubuttons[a]);
-			});
-			a = -1;
-			std::generate_n(std::back_inserter(slavescanpages), slaveareas.size(), [&a, this]() -> std::unique_ptr<CNoScanBasePage> {
-				a++;
-				return std::make_unique<CNoScanBasePage>(a, slaveareas[a], slavefpubuttons[a]);
+				if ( allareas[a]->areatype() == AreaTypeHelper::Master)
+					return std::make_unique<CFrameScanSawPage>(a, allareas[a].get(), fpubuttons[a]);
+				else
+					return std::make_unique<CNoScanBasePage>(a, allareas[a].get(), fpubuttons[a]);
 			});
 		}
 
 		HWND CScanSettingsSheet::Create(const HWND hWndParent, const int nStartPage, const CRect & rc) {
 			ATLASSERT(m_hWnd == NULL);
 
-			for ( auto& fsp : masterscanpages )
+			for ( auto& fsp : scanpages )
 				AddPage(*fsp);
-			for (auto& fsp : slavescanpages)
-				AddPage(*fsp);
+
 			AddPage(storagesettingspage);
 			AddPage(stimulationsettingspage);
 			AddPage(movementpage);
@@ -112,69 +105,45 @@ namespace scope {
 		void CScanSettingsSheet::ChangeScanmode(const uint32_t& _area, const ScannerVectorType& _type) {
 			_CleanUpPages(); // Remove all pages from the sheet
 
-			for ( uint32_t a = 0 ; a < masterscanpages.size() ; a++ ) {
+			for ( uint32_t a = 0 ; a < scanpages.size() ; a++ ) {
 				// Do NOT use different dialog sheet for Resonance Scanner slave area! (Master/Slave is handled  inside CFrameScanResonancePage)
 				// If slave area, use different dialog sheet for Resonance scanner
-				/*if(scope_controller.GuiParameters.areas[a]->isslave()) {
+				if(allareas[a]->areatype() == AreaTypeHelper::Slave) {
 					if((_type.t == ScannerVectorTypeHelper::ResonanceBiDi) || (_type.t == ScannerVectorTypeHelper::ResonanceHopper))
-						scanpages[a].reset(new CFrameScanResonanceSlavePage(a));
+						scanpages[a] = std::make_unique<CFrameScanResonanceSlavePage>(a, dynamic_cast<parameters::SlaveArea*>(allareas[a].get()), fpubuttons[a]);
 					else {
 						//if ( SCOPE_USE_RESONANCESCANNER )
 						//	scanpages[a].reset(new CNoScanBasePage(a, scope_controller.GuiParameters.areas[a]->frameresonance));
 						//else
-							scanpages[a].reset(new CNoScanBasePage(a, scope_controller.GuiParameters.areas[a]->FrameSaw()));
+						scanpages[a] = std::make_unique<CNoScanBasePage>(a, allareas[a].get(), fpubuttons[a]);
 					}
-				}*/
-				//else { // for Master area
+				}
+				else { // for Master area
 					switch( _type.t ) {
 						case ScannerVectorTypeHelper::Sawtooth:
-							masterscanpages[a] = std::make_unique<CFrameScanSawPage>(a, masterareas[a], masterfpubuttons[a]);
+							scanpages[a] = std::make_unique<CFrameScanSawPage>(a, allareas[a].get(), fpubuttons[a]);
 							break;
 						case ScannerVectorTypeHelper::Bidirectional:
-							masterscanpages[a] = std::make_unique<CFrameScanBidiPage>(a, masterareas[a], masterfpubuttons[a]);
+							scanpages[a] = std::make_unique<CFrameScanBidiPage>(a, allareas[a].get(), fpubuttons[a]);
 							break;
 						case ScannerVectorTypeHelper::Planehopper:
-							masterscanpages[a] = std::make_unique<CFrameScanHopperPage>(a, masterareas[a], masterfpubuttons[a]);
+							scanpages[a] = std::make_unique<CFrameScanHopperPage>(a, allareas[a].get(), fpubuttons[a]);
 							break;
 						case ScannerVectorTypeHelper::ResonanceBiDi:
-							masterscanpages[a] = std::make_unique<CFrameScanResonancePage>(a, masterareas[a], masterfpubuttons[a]);
+							scanpages[a] = std::make_unique<CFrameScanResonancePage>(a, allareas[a].get(), fpubuttons[a]);
 							break;
 						case ScannerVectorTypeHelper::ResonanceHopper:
-							masterscanpages[a] = std::make_unique<CFrameScanResonancePage>(a, masterareas[a], masterfpubuttons[a]);
+							scanpages[a] = std::make_unique<CFrameScanResonancePage>(a, allareas[a].get(), fpubuttons[a]);
 							break;
 						}
-				//}
-				AddPage(*masterscanpages[a]);
-			}
-
-			for (uint32_t a = 0; a < masterscanpages.size(); a++) {
-				switch (_type.t) {
-				case ScannerVectorTypeHelper::Sawtooth:
-					masterscanpages[a] = std::make_unique<CFrameScanSawPage>(a, masterareas[a], masterfpubuttons[a]);
-					break;
-				case ScannerVectorTypeHelper::Bidirectional:
-					masterscanpages[a] = std::make_unique<CFrameScanBidiPage>(a, masterareas[a], masterfpubuttons[a]);
-					break;
-				case ScannerVectorTypeHelper::Planehopper:
-					masterscanpages[a] = std::make_unique<CFrameScanHopperPage>(a, masterareas[a], masterfpubuttons[a]);
-					break;
-				case ScannerVectorTypeHelper::ResonanceBiDi:
-					masterscanpages[a] = std::make_unique<CFrameScanResonancePage>(a, masterareas[a], masterfpubuttons[a]);
-					break;
-				case ScannerVectorTypeHelper::ResonanceHopper:
-					masterscanpages[a] = std::make_unique<CFrameScanResonancePage>(a, masterareas[a], masterfpubuttons[a]);
-					break;
 				}
-				AddPage(*slavescanpages[a]);
+				AddPage(*scanpages[a]);
 			}
-
 			SetActivePage(_area);
 		}
 
 		void CScanSettingsSheet::SetReadOnlyWhileScanning(const bool& _ro) {
-			for(auto& sp : masterscanpages)
-				sp->SetReadOnlyWhileScanning(_ro);
-			for (auto& sp : slavescanpages)
+			for(auto& sp : scanpages)
 				sp->SetReadOnlyWhileScanning(_ro);
 		}
 

@@ -25,17 +25,17 @@ namespace scope {
 
 		// Calculate pixelrate/samplerate if oversampling and number of pixels/samples to acquire
 		// Note: Coercion to pixelrates supported by the device is already done in parameters::InputsDAQmx
-		double pixelrate = 1/(_params.masterareas[_area].daq.pixeltime()*1E-6);
+		double pixelrate = 1/(_params.allareas[_area]->daq.pixeltime()*1E-6);
 		double inputrate = pixelrate;
 		if ( _inputparams->oversampling() )
 			inputrate = 1/(_inputparams->MinimumPixeltime()*1E-6);
 
 		uint32_t oversampling = round2ui32(inputrate/pixelrate);
 
-		uint32_t pixelsperchan = _params.masterareas[_area].Currentframe().TotalPixels();
+		uint32_t pixelsperchan = _params.allareas[_area]->Currentframe().TotalPixels();
 
 		if ( _params.requested_mode() == DaqModeHelper::nframes)
-			pixelsperchan *= _params.masterareas[_area].daq.requested_frames() * _params.masterareas[_area].daq.averages();
+			pixelsperchan *= _params.allareas[_area]->daq.requested_frames() * _params.allareas[_area]->daq.averages();
 
 		requested_samples = oversampling * pixelsperchan;
 
@@ -50,7 +50,7 @@ namespace scope {
 		task.ConfigureDigStartTrigger(commontrig, DAQmx_Val_Rising);
 
 		// Size of data chunks to readm should be between 64^2 and 128^2
-		standardchunksize = oversampling * std::max(64u*64u, std::min(_params.masterareas[_area].Currentframe().TotalPixels() >> 2, 128u*128u));
+		standardchunksize = oversampling * std::max(64u*64u, std::min(_params.allareas[_area]->Currentframe().TotalPixels() >> 2, 128u*128u));
 	}
 
 	InputsDAQmx::~InputsDAQmx() {

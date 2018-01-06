@@ -30,7 +30,7 @@ namespace scope {
 			CBehaviorSettingsPage behavior;
 
 		public:
-			CExperimentSettingsSheet(std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
+			CExperimentSettingsSheet(std::vector<ScanModeButtons>& _scanmodebuttons
 			, parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
@@ -38,8 +38,7 @@ namespace scope {
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, config::XYZStageParametersType& _stageparams
-			, std::vector<parameters::MasterArea>& _masterareas
-			, std::vector<parameters::SlaveArea>& _slaveareas);
+			, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
 
 			BEGIN_MSG_MAP(CUserSettingsSheet)	  
 				NOTIFY_CODE_HANDLER(TCN_SELCHANGE, OnSelChange)

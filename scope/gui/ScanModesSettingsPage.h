@@ -12,7 +12,7 @@ namespace scope {
 			public CPropertyPageImpl<CScanModesSettingsPage> {
 
 		protected:
-			std::array<ScanModeButtons, config::nmasters>& scanmodebuttonsvec;
+			std::vector<ScanModeButtons>& scanmodebuttons;
 
 			/** List of all areas, selection updates radio buttons */
 			CListBox areas_list;
@@ -40,7 +40,7 @@ namespace scope {
 				REFLECT_NOTIFICATIONS()
 			END_MSG_MAP()
 
-			CScanModesSettingsPage(std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec);
+			CScanModesSettingsPage(std::vector<ScanModeButtons>& _scanmodebuttons);
 
 			/** @name Called via Win32 messages
 			* @{ */

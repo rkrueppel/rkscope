@@ -21,10 +21,8 @@ protected:
 public:
 	enum { IDD = IDD_MOVEMENT_PROPPAGE };
 	
-	CMovementPage(std::vector<parameters::MasterArea>& _masterareas
-		, std::vector<parameters::SlaveArea>& _slaveareas
-		, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-		, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+	CMovementPage(std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
+		, std::vector<FPUButtons>& _fpubuttons
 		, const double& _masterfovsizex
 		, const double& _masterfovsizey
 		, config::XYZStageParametersType& _stageparams

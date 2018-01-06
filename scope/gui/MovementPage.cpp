@@ -6,16 +6,14 @@ namespace scope {
 	namespace gui {
 		
 		CMovementPage::CMovementPage(
-			std::vector<parameters::MasterArea>& _masterareas
-			, std::vector<parameters::SlaveArea>& _slaveareas
-			, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-			, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+			std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
+			, std::vector<FPUButtons>& _fpubuttons
 			, const double& _masterfovsizex
 			, const double& _masterfovsizey
 			, config::XYZStageParametersType& _stageparams
 			, ZeroButtons& _zerobuttons
 		)
-			: settings_sheet(_masterareas, _slaveareas, _masterfpubuttons, _slavefpubuttons, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
+			: settings_sheet(_allareas, _fpubuttons, _masterfovsizex, _masterfovsizey, _stageparams, _zerobuttons)
 		{
 			
 		}

@@ -7,15 +7,13 @@ namespace scope {
 		CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons
 			, ScopeCounters<config::nmasters>& _scopecounters
 			, parameters::Behavior& _behaviorparameters
-			, std::vector<parameters::MasterArea>& _masterareas
-			, std::vector<parameters::SlaveArea>& _slaveareas
+			, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
 		)
 			: CToolTipDialog(TTS_NOPREFIX)
 			, initialized(false)
 			, start_behavior_button(_runbuttons.startbehavior)
 			, behaviorparameters(_behaviorparameters)
-			, masterareas(_masterareas)
-			, slaveareas(_slaveareas)
+			, allareas(_allareas)
 			, framecount_edit(_scopecounters.framecounter[0])
 			, totaltime_edit(_scopecounters.totaltime)
 			, trialcount_edit(_scopecounters.trialcounter) {
@@ -33,22 +31,15 @@ namespace scope {
 			planes_list.Attach(GetDlgItem(IDC_PLANES_LIST));
 			planes_list.InsertColumn(0, L"Plane", 0, 40);
 			std::wostringstream stream;
-			for ( uint32_t a = 0 ; a < masterareas.size() ; a++ ) {
+			for ( uint32_t a = 0 ; a < allareas.size() ; a++ ) {
 				stream.str(L"");
-				stream << L"FastZ MA" << a+1;
+				stream << L"FastZ A" << a+1;
 				planes_list.InsertColumn(1+2*a, stream.str().c_str(), 0, 60);
 				stream.str(L"");
-				stream << L"Pockels MA" << a+1;
+				stream << L"Pockels A" << a+1;
 				planes_list.InsertColumn(2+2*a, stream.str().c_str(), 0, 60);
 			}
-			for (uint32_t a =  0; a < slaveareas.size(); a++) {
-				stream.str(L"");
-				stream << L"FastZ SA" << a + 1;
-				planes_list.InsertColumn(masterareas.size()+1 + 2 * a, stream.str().c_str(), 0, 60);
-				stream.str(L"");
-				stream << L"Pockels SA" << a + 1;
-				planes_list.InsertColumn(masterareas.size()+2 + 2 * a, stream.str().c_str(), 0, 60);
-			}
+
 			UpdatePlanesList();
 
 			initialized = true;
@@ -61,13 +52,13 @@ namespace scope {
 			DBOUT(L"CBehaviorSettingsPage::OnAddPlane");
 
 			// Get plane information for every area and add to timeseries plane vectors
-			std::array<std::vector<parameters::PlaneProperties>, NAreaTypes> planes;
-			for (uint32_t at = 0; at < NAreaTypes; at++) {
-				for (uint32_t a = 0; a < ((at==AreaTypeHelper::Master)?masterareas.size():slaveareas.size()); a++) {
-					planes[at][a].position = (at==AreaTypeHelper::Master)?masterareas[a].Currentframe().fastz():slaveareas[a].Currentframe().fastz();;
-					planes[at][a].pockels = (at==AreaTypeHelper::Master)?masterareas[a].Currentframe().pockels():slaveareas[a].Currentframe().pockels();
-				}
+			std::vector<parameters::PlaneProperties> planes;
+			
+			for (uint32_t a = 0; a < allareas.size(); a++) {
+				planes[a].position = allareas[a]->Currentframe().fastz();
+				planes[a].pockels = allareas[a]->Currentframe().pockels();
 			}
+			
 			behaviorparameters.planes.push_back(planes);
 
 			UpdatePlanesList();
@@ -90,7 +81,7 @@ namespace scope {
 			std::wostringstream stream;
 			planes_list.DeleteAllItems();
 			// Iterate over planes
-			for ( const auto& pat : behaviorparameters.planes ) {
+			for ( const auto& pa : behaviorparameters.planes ) {
 				stream.str(L"");
 				stream << L"Plane " << n;
 				planes_list.InsertItem(n, stream.str().c_str(), NULL);
@@ -99,18 +90,17 @@ namespace scope {
 				planes_list.SetItemText(n, 0, stream.str().c_str());			// plane no
 				uint32_t a = 0;
 				// iterate over area types
-				for (const auto& pa : pat) {
-					// Iterate over all areas in each plane
-					for (const auto& p : pa) {						// for each area fastz position and pockels
-						stream.str(L"");
-						stream << std::setprecision(1) << p.position();
-						planes_list.SetItemText(n, 2 * a + 1, stream.str().c_str());
-						stream.str(L"");
-						stream << std::setprecision(2) << p.pockels();
-						planes_list.SetItemText(n, 2 * a + 2, stream.str().c_str());
-						a++;
-					}
+				// Iterate over all areas in each plane
+				for (const auto& p : pa) {						// for each area fastz position and pockels
+					stream.str(L"");
+					stream << std::setprecision(1) << p.position();
+					planes_list.SetItemText(n, 2 * a + 1, stream.str().c_str());
+					stream.str(L"");
+					stream << std::setprecision(2) << p.pockels();
+					planes_list.SetItemText(n, 2 * a + 2, stream.str().c_str());
+					a++;
 				}
+				
 				n++;
 			}
 		}

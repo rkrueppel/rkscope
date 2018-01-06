@@ -30,18 +30,18 @@ namespace scope {
 
 			uint32_t samplesperchan = 0;
 			// two more lines/preframelines are required, because in resonance scanner mode some pixels are thrown away at the beginning until the first line is triggered with the sync signal
-			samplesperchan = _params.masterareas[_area].Currentframe().TotalPixels() + _inputparams->preframelines() * _params.masterareas[_area].Currentframe().XTotalPixels();
+			samplesperchan = _params.allareas[_area]->Currentframe().TotalPixels() + _inputparams->preframelines() * _params.allareas[_area]->Currentframe().XTotalPixels();
 			if ( _params.requested_mode() == DaqModeHelper::nframes) {
-				samplesperchan *= _params.masterareas[_area].daq.requested_frames() * _params.masterareas[_area].daq.averages();
+				samplesperchan *= _params.allareas[_area]->daq.requested_frames() * _params.allareas[_area]->daq.averages();
 			}
 
-			DBOUT(L"Requested pixeltime area " << _area << L": " << _params.masterareas[_area].daq.pixeltime());
-			pt = theFPGA().SetPixeltime(_area, _params.masterareas[_area].daq.pixeltime());
+			DBOUT(L"Requested pixeltime area " << _area << L": " << _params.allareas[_area]->daq.pixeltime());
+			pt = theFPGA().SetPixeltime(_area, _params.allareas[_area]->daq.pixeltime());
 			DBOUT(L"Real pixeltime area " << _area << L": " << pt);
 			laserpulsesperpixel = pt * 1E-6 * 80E6;
 			DBOUT(L"Laser pulses per pixel " << laserpulsesperpixel);
 
-			_params.masterareas[_area].daq.pixeltime = pt;
+			_params.allareas[_area]->daq.pixeltime = pt;
 			DBOUT(L"Requested pixels " << samplesperchan);
 			theFPGA().SetRequestedPixels(_area, samplesperchan);
 			requested_samples = samplesperchan;
@@ -59,7 +59,7 @@ namespace scope {
 			//	DAQmxDisconnectTerms("/PXI-6259_0/PXI_Trig1", "/PXI-6259_0/PFI0");
 			// }
 
-			theFPGA().SetScannerdelay(_params.masterareas[_area].daq.ScannerDelaySamples(false));
+			theFPGA().SetScannerdelay(_params.allareas[_area]->daq.ScannerDelaySamples(false));
 
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 	}

@@ -32,9 +32,7 @@ namespace scope {
 			virtual void UpdateFramesFromTotaltime();
 
 		public:
-			ScopeValue<uint32_t> nmasters;
-
-			ScopeValue<uint32_t> nslaves;
+			ScopeValue<uint32_t> nareas;
 
 			std::vector<uint32_t> masterofslaves;
 

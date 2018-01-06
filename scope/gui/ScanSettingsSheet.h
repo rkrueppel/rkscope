@@ -26,15 +26,12 @@ namespace scope {
 			: public CPropertySheetImpl<CScanSettingsSheet> {
 
 		protected:
-			std::vector<parameters::MasterArea>& masterareas;
-			std::vector<parameters::SlaveArea>& slaveareas;
+			std::vector<std::unique_ptr<parameters::BaseArea>>& allareas;
 			
-			std::array<FPUButtons, config::nmasters>& masterfpubuttons;
-			std::array<FPUButtons, config::nslaves>& slavefpubuttons;
+			std::vector<FPUButtons>& fpubuttons;
 			
-			/** one imaging settings page for each area. Also CNoScanBasePage for master, since they can have all the different scan modes */
-			std::vector<std::unique_ptr<CNoScanBasePage>> masterscanpages;
-			std::vector<std::unique_ptr<CNoScanBasePage>> slavescanpages;
+			/** one imaging settings page for each area. */
+			std::vector<std::unique_ptr<CNoScanBasePage>> scanpages;
 			
 
 			/** the storage settings page */
@@ -52,10 +49,8 @@ namespace scope {
 		public:
 			
 			CScanSettingsSheet(
-				std::vector<parameters::MasterArea>& _masterareas
-				, std::vector<parameters::SlaveArea>& _slaveareas
-				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+				std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
+				, std::vector<FPUButtons>& _fpubuttons
 				, const double& _masterfovsizex
 				, const double& _masterfovsizey
 				, parameters::Storage& _storageparams

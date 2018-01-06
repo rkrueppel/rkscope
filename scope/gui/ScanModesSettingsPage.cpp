@@ -5,14 +5,14 @@
 namespace scope {
 	namespace gui {
 
-		CScanModesSettingsPage::CScanModesSettingsPage(std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec)
-			: scanmodebuttonsvec(_scanmodebuttonsvec)
-			, framesaw_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Sawtooth))
-			, framebidi_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Bidirectional))
-			, framehopper_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::Planehopper))
-			, frameresonancebidi_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::ResonanceBiDi))
-			, frameresonancehopper_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::ResonanceHopper))
-			, linestraight_radio(_scanmodebuttonsvec[0].map.at(ScannerVectorTypeHelper::LineStraight)) {
+		CScanModesSettingsPage::CScanModesSettingsPage(std::vector<ScanModeButtons>& _scanmodebuttons)
+			: scanmodebuttons(_scanmodebuttons)
+			, framesaw_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::Sawtooth))
+			, framebidi_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::Bidirectional))
+			, framehopper_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::Planehopper))
+			, frameresonancebidi_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::ResonanceBiDi))
+			, frameresonancehopper_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::ResonanceHopper))
+			, linestraight_radio(scanmodebuttons[0].map.at(ScannerVectorTypeHelper::LineStraight)) {
 			// start with buttons connected to area 0
 		}
 
@@ -34,7 +34,7 @@ namespace scope {
 			linestraight_radio.Enable(ScannerSupportedVectors::IsBuiltinSupported(ScannerVectorTypeHelper::LineStraight));
 
 			// Add areas to list box and select area 0
-			for ( uint32_t a = 0 ; a < scanmodebuttonsvec.size() ; a++ ) {
+			for ( uint32_t a = 0 ; a < scanmodebuttons.size() ; a++ ) {
 				std::wostringstream stream;
 				stream << L"Area " << a+1;
 				areas_list.AddString(stream.str().c_str());
@@ -53,7 +53,7 @@ namespace scope {
 			if ( sel == LB_ERR )
 				return 0;
 	
-			assert( (sel >= 0) && ((uint32_t)sel < scanmodebuttonsvec.size()) );
+			assert( (sel >= 0) && ((uint32_t)sel < scanmodebuttons.size()) );
 
 			// Disconnect from old areas ScanMode buttons
 			framesaw_radio.Disconnect();
@@ -64,17 +64,17 @@ namespace scope {
 			linestraight_radio.Disconnect();
 
 			// Connect to selected area's ScanMode buttons and uncheck all
-			framesaw_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Sawtooth));
+			framesaw_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::Sawtooth));
 			framesaw_radio.SetCheck(BST_UNCHECKED);
-			framebidi_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Bidirectional));
+			framebidi_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::Bidirectional));
 			framebidi_radio.SetCheck(BST_UNCHECKED);
-			framehopper_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::Planehopper));
+			framehopper_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::Planehopper));
 			framehopper_radio.SetCheck(BST_UNCHECKED);
-			frameresonancebidi_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::ResonanceBiDi));
+			frameresonancebidi_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::ResonanceBiDi));
 			frameresonancebidi_radio.SetCheck(BST_UNCHECKED);
-			frameresonancehopper_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::ResonanceHopper));
+			frameresonancehopper_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::ResonanceHopper));
 			frameresonancehopper_radio.SetCheck(BST_UNCHECKED);
-			linestraight_radio.Connect(scanmodebuttonsvec[sel].map.at(ScannerVectorTypeHelper::LineStraight));
+			linestraight_radio.Connect(scanmodebuttons[sel].map.at(ScannerVectorTypeHelper::LineStraight));
 			linestraight_radio.SetCheck(BST_UNCHECKED);
 
 			SetChecks(sel);

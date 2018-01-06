@@ -11,16 +11,15 @@ namespace parameters {
 
 
 		Scope::Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, std::vector<uint32_t> _masterofslaves)
-			: nmasters(_nmasters, L"NoMasters")
-			, nslaves(_nslaves, L"NoSlaves")
+			: nareas(_nmasters+_nslaves, L"NoAreas")
 			, masterofslaves(_masterofslaves)
 			, date(L"", L"Date")
 			, time(L"", L"Time")
 			, scopecommit(std::wstring(CA2W(STR(LASTGITCOMMIT))), L"ScopeCommit")
 			, comment(L"", L"Comment")
-			, stack(nmasters, nslaves)
-			, timeseries(nmasters, nslaves)
-			, behavior(nmasters, nslaves)
+			, stack(nareas)
+			, timeseries(nareas)
+			, behavior(nareas)
 			, startinputsfirst(false, false, true, L"StartInputsFirst")
 			, commontrigger(L"/PXI-6259_0/ao/StartTrigger", L"CommonMasterTrigger")
 			, masterfovsizex(3000.0, 1.0, 20000.0, L"MasterFOVSizeX_um")
@@ -32,11 +31,11 @@ namespace parameters {
 			time.Set(GetCurrentTimeString());
 			
 			uint32_t a = 0;
-			for (uint32_t m = 0; m < config::nmasters; m++) {
+			for (uint32_t m = 0; m < _nmasters; m++) {
 				allareas.push_back(std::make_unique<MasterArea>(a));
 				a++;
-				for (uint32_t s = 0; s < config::slavespermaster; s++) {
-					allareas.push_back(std::make_unique<SlaveArea>(a, allareas.end()));
+				for (uint32_t s = 0; s < _nslaves; s++) {
+					allareas.push_back(std::make_unique<SlaveArea>(a, dynamic_cast<parameters::MasterArea*>((*allareas.end()).get())));
 					a++;
 				}
 			}
@@ -59,14 +58,13 @@ namespace parameters {
 		}
 
 		Scope::Scope(const Scope& _scope)
-			: nmasters(_scope.nmasters)
-			, nslaves(_scope.nslaves)
+			: nareas(_scope.nareas)
 			, masterofslaves(_scope.masterofslaves)
 			, date(_scope.date)
 			, time(_scope.time)
 			, scopecommit(_scope.scopecommit)
 			, comment(_scope.comment)
-			, allareas(_scope.allareas)
+			, allareas(0)
 			, storage(_scope.storage)
 			, stack(_scope.stack)
 			, timeseries(_scope.timeseries)
@@ -81,29 +79,41 @@ namespace parameters {
 			, run_state(_scope.run_state)
 			, requested_mode(_scope.requested_mode){
 
+			for (uint32_t a = 0; a < _scope.allareas.size(); a++) {
+				if ( _scope.allareas[a]->areatype() == AreaTypeHelper::Master)
+					allareas.push_back(std::make_unique<parameters::MasterArea>(*dynamic_cast<MasterArea*>(_scope.allareas[a].get())));
+				else
+					allareas.push_back(std::make_unique<parameters::SlaveArea>(*dynamic_cast<SlaveArea*>(_scope.allareas[a].get())));
+			}
+
 			// Fix the pointer to the master area!!!!!
 			for (uint32_t a = 0; a < allareas.size(); a++) {
 				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
-					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[config::masterofslave[a]].get()));
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[masterofslaves[a]].get()));
 			}
 
 		}
 
 		Scope& Scope::operator=(const Scope& _scope) {
-			nmasters = _scope.nmasters();
-			nslaves = _scope.nslaves();
+			nareas = _scope.nareas();
 			masterofslaves = _scope.masterofslaves;
 			date = _scope.date();
 			time = _scope.time();
 			scopecommit = _scope.scopecommit();
 			comment = _scope.comment();
 
-			allareas = _scope.allareas;
+			allareas.clear();
+			for (uint32_t a = 0; a < _scope.allareas.size(); a++) {
+				if (_scope.allareas[a]->areatype() == AreaTypeHelper::Master)
+					allareas.push_back(std::make_unique<parameters::MasterArea>(*dynamic_cast<MasterArea*>(_scope.allareas[a].get())));
+				else
+					allareas.push_back(std::make_unique<parameters::SlaveArea>(*dynamic_cast<SlaveArea*>(_scope.allareas[a].get())));
+			}
 
 			// Fix the pointer to the master area!!!!!
 			for (uint32_t a = 0; a < allareas.size(); a++) {
 				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
-					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[config::masterofslave[a]].get()));
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[masterofslaves[a]].get()));
 			}
 
 			storage = _scope.storage;
@@ -150,8 +160,7 @@ namespace parameters {
 
 				CW2A tmp(filename.c_str());
 				read_xml(std::string(tmp), pt, 0, utf8_locale);
-				nmasters.SetFromPropertyTree(pt.get_child(L"scope"));
-				nslaves.SetFromPropertyTree(pt.get_child(L"scope"));
+				nareas.SetFromPropertyTree(pt.get_child(L"scope"));
 				date.SetFromPropertyTree(pt.get_child(L"scope"));
 				time.SetFromPropertyTree(pt.get_child(L"scope"));
 				// Do not load scopecommit
@@ -190,8 +199,7 @@ namespace parameters {
 			wptree ptframes;
 
 			try {
-				nmasters.AddToPropertyTree(ptroot);
-				nslaves.AddToPropertyTree(ptroot);
+				nareas.AddToPropertyTree(ptroot);
 				date.AddToPropertyTree(ptroot);
 				time.AddToPropertyTree(ptroot);
 				scopecommit.AddToPropertyTree(ptroot);

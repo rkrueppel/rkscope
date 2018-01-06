@@ -14,7 +14,7 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 	int32_t samplingtype = (_params.requested_mode()==DaqModeHelper::continuous)?DAQmx_Val_ContSamps:DAQmx_Val_FiniteSamps;
 	//size_t num_planes = (_params.areas[area]->FrameResonance().planes.size())?_params.areas[area]->FrameResonance().planes.size():1;
 	parameters::ScannerVectorFrameResonance* svecres = nullptr;
-	_params.slaveareas[area].GetFrame(svecres);
+	_params.allareas[area]->GetFrame(svecres);
 	size_t num_planes = (svecres->planes.size()) ? svecres->planes.size() : 1;
 
 	std::wstring commontrig = _params.commontrigger();
@@ -26,13 +26,14 @@ OutputsDAQmxResonanceSlave::OutputsDAQmxResonanceSlave(const uint32_t& _area, co
 		, _outputparams.range());
 
 	// Calculate pixelrate and number of pixels to generate
-	double pixelrate = 1/(_params.masterareas[config::masterofslave[area]].daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
+	assert(_params.allareas[area]->areatype() == AreaTypeHelper::Slave);
+	double pixelrate = 1/(dynamic_cast<parameters::SlaveArea*>(_params.allareas[area].get())->masterarea->daq.pixeltime()*1E-6); // Pixelrate/Pixeltime to be the same as Master area
 	
 	// Slave outputs the whole thing (as opposed to a non resonance slave)
 	int32_t pixelsperchan = svecres->TotalPixels();
 	
 	if ( _params.requested_mode() == DaqModeHelper::nframes )
-		pixelsperchan = svecres->TotalPixels() * _params.slaveareas[area].daq.requested_frames();
+		pixelsperchan = svecres->TotalPixels() * _params.allareas[area]->daq.requested_frames();
 
 	// Configure timing (if using ReferenceClock timing ClockString gives "")
 	zpout_task.ConfigureSampleTiming(DAQmx::ClockString(_outputparams.timing(), _outputparams.externalclocksource())

@@ -34,7 +34,7 @@ namespace scope {
 			/** area for this CChannelFrame */
 			const uint32_t area;
 	
-			scope::parameters::BaseArea& areaparams;
+			scope::parameters::BaseArea* areaparams;
 	
 			/** number of channels in this area */												
 			const uint32_t channels;
@@ -104,7 +104,7 @@ namespace scope {
 	
 			/** Initialize everything
 			* @param[in] _area which the CChannelFrame is for */
-			CChannelFrame(const uint32_t& _area, parameters::BaseArea& _areaparams, const uint32_t& _channels, DisplayController& _display_controller);
+			CChannelFrame(const uint32_t& _area, parameters::BaseArea* _areaparams, const uint32_t& _channels, DisplayController& _display_controller);
 
 			/** Detach if not yet happened and quit */
 			~CChannelFrame();

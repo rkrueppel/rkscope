@@ -8,13 +8,13 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanResonancePage::CFrameScanResonancePage(const uint32_t& _area, parameters::BaseArea* _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-	, svresonanceparams(*_areaparams.FrameResonance())
-	, ycutoff_edit(_areaparams.FrameResonance()->ycutoff, true, true)
-	, yretrace_edit(_areaparams.FrameResonance()->yretrace, true, true)
-	, waitstorage_edit(_areaparams.FrameResonance()->waitafterenqueuestorage, true, true)
-	, waitdisplay_edit(_areaparams.FrameResonance()->waitafterenqueuedisplay, true, true)
+	, svresonanceparams(_areaparams->FrameResonance())
+	, ycutoff_edit(_areaparams->FrameResonance()->ycutoff, true, true)
+	, yretrace_edit(_areaparams->FrameResonance()->yretrace, true, true)
+	, waitstorage_edit(_areaparams->FrameResonance()->waitafterenqueuestorage, true, true)
+	, waitdisplay_edit(_areaparams->FrameResonance()->waitafterenqueuedisplay, true, true)
 {
 
 	zoom_scroll.SetSmallIncrement(1);
@@ -45,14 +45,14 @@ BOOL CFrameScanResonancePage::OnInitDialog(CWindow wndFocus, LPARAM lInitParam) 
 	planes_list.InsertColumn(1, L"FastZ", 0, 60);
 	planes_list.InsertColumn(2, L"Pockels", 0, 60);
 
-	if(!svresonanceparams.planes.empty())
-		svresonanceparams.planes.pop_back();
+	if(!svresonanceparams->planes.empty())
+		svresonanceparams->planes.pop_back();
 
 	// On initialization, set the first plane with the default FastZ  and Pockels values
 	parameters::PlaneProperties planes;
-	planes.position = svresonanceparams.fastz;
-	planes.pockels = svresonanceparams.pockels;
-	svresonanceparams.planes.push_back(planes);
+	planes.position = svresonanceparams->fastz;
+	planes.pockels = svresonanceparams->pockels;
+	svresonanceparams->planes.push_back(planes);
 	UpdatePlanesList();
 
 	SetMsgHandled(true);
@@ -63,9 +63,9 @@ LRESULT CFrameScanResonancePage::OnAddPlane(WORD wNotifyCode, WORD wID, HWND hWn
 	DBOUT(L"CFrameScanResonancePage::OnAddPlane");
 
 	parameters::PlaneProperties planes;
-	planes.position = svresonanceparams.fastz;
-	planes.pockels = svresonanceparams.pockels;
-	svresonanceparams.planes.push_back(planes);
+	planes.position = svresonanceparams->fastz;
+	planes.pockels = svresonanceparams->pockels;
+	svresonanceparams->planes.push_back(planes);
 	UpdatePlanesList();
 	return 0;
 }
@@ -76,7 +76,7 @@ LRESULT CFrameScanResonancePage::OnDeletePlane(WORD wNotifyCode, WORD wID, HWND 
 		return 0;
 
 	// Delete the selected plane from the vector
-	svresonanceparams.planes.erase(sel + std::begin(svresonanceparams.planes));
+	svresonanceparams->planes.erase(sel + std::begin(svresonanceparams->planes));
 	UpdatePlanesList();
 	return 0;
 }
@@ -87,22 +87,22 @@ LRESULT CFrameScanResonancePage::OnEditPlane(WORD wNotifyCode, WORD wID, HWND hW
 		return 0;
 	// Get the current plane values
 	parameters::PlaneProperties planes;
-	planes.position = svresonanceparams.fastz;
-	planes.pockels = svresonanceparams.pockels;
+	planes.position = svresonanceparams->fastz;
+	planes.pockels = svresonanceparams->pockels;
 	// Update the selected plane
-	svresonanceparams.planes.at(sel) = planes;
+	svresonanceparams->planes.at(sel) = planes;
 	//scope_controller.UpdateResonancePlanes(area);
 	UpdatePlanesList();
 	return 0;
 }
 
 LRESULT CFrameScanResonancePage::OnResetPlane(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled) {
-	svresonanceparams.planes.clear();
+	svresonanceparams->planes.clear();
 	// Add the default plane
 	parameters::PlaneProperties planes;
-	planes.position = svresonanceparams.fastz;
-	planes.pockels = svresonanceparams.pockels;
-	svresonanceparams.planes.push_back(planes);
+	planes.position = svresonanceparams->fastz;
+	planes.pockels = svresonanceparams->pockels;
+	svresonanceparams->planes.push_back(planes);
 
 	UpdatePlanesList();
 	return 0;
@@ -113,23 +113,23 @@ LRESULT CFrameScanResonancePage::OnPlanesSelect(int idCtrl, LPNMHDR pNMHDR, BOOL
 	if ( sel == -1 )
 		return 0;
 	parameters::PlaneProperties planes;
-	planes = svresonanceparams.planes.at(sel);
-	svresonanceparams.fastz = planes.position;
-	svresonanceparams.pockels = planes.pockels;
+	planes = svresonanceparams->planes.at(sel);
+	svresonanceparams->fastz = planes.position;
+	svresonanceparams->pockels = planes.pockels;
 	return 0;
 }
 
 void CFrameScanResonancePage::UpdatePlanesList() {
 	planes_list.DeleteAllItems();
 	CString tmp;
-	for ( uint32_t p = 0 ; p < svresonanceparams.planes.size() ; p++ ) {
+	for ( uint32_t p = 0 ; p < svresonanceparams->planes.size() ; p++ ) {
 		tmp.Format(L"Plane %d", p);
 		planes_list.InsertItem(p, tmp, NULL);
 		tmp.Format(L"%d", p);
 		planes_list.SetItemText(p, 0, tmp);			// plane no
-		tmp.Format(L"%.1f", svresonanceparams.planes[p].position());
+		tmp.Format(L"%.1f", svresonanceparams->planes[p].position());
 		planes_list.SetItemText(p, 1, tmp);			// fast z position
-		tmp.Format(L"%.2f", svresonanceparams.planes[p].pockels());
+		tmp.Format(L"%.2f", svresonanceparams->planes[p].pockels());
 		planes_list.SetItemText(p, 2, tmp);			// pockels
 	}
 }

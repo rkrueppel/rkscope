@@ -13,20 +13,18 @@ namespace scope {
 class FPUController {
 
 private:
-	const uint32_t nareas;
-	
 	/** step size for a relative movement */
 	std::vector<double> stepsizes;
 	
 	/** Reference to TheScope's gui parameters */
-	std::vector<parameters::BaseArea>& guiareaparamsvec;
+	std::vector<std::unique_ptr<parameters::BaseArea>>& guiareaparamsvec;
 
 public:
 	/** for xy movement of FPU stages */
 	std::vector<std::unique_ptr<config::FPUXYStageType>> theXYStages;
 
 	/** Create XYControls and ETLs and connect buttons. */
-	FPUController(const uint32_t& _nareas, std::vector<parameters::BaseArea>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec);
+	FPUController(std::vector<std::unique_ptr<parameters::BaseArea>>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec);
 
 	/** Initialize the FPU's hardware. */
 	void Initialize();

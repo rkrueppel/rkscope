@@ -34,8 +34,7 @@ namespace scope {
 			parameters::Behavior& behaviorparameters;
 			
 			/** Reference to TheScope's gui parameter's Area parameters vector */
-			std::vector<parameters::MasterArea>& masterareas;
-			std::vector<parameters::SlaveArea>& slaveareas;
+			std::vector<std::unique_ptr<parameters::BaseArea>>& allareas;
 
 			/** list box for all planes */
 			CListViewCtrl planes_list;
@@ -58,7 +57,7 @@ namespace scope {
 		public:
 			enum { IDD = IDD_BEHAVIOR_PROPPAGE };
 
-			CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _scopecounters, parameters::Behavior& _behaviorparameters, std::vector<parameters::MasterArea>& _masterareas, std::vector<parameters::SlaveArea>& _slaveareas);
+			CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _scopecounters, parameters::Behavior& _behaviorparameters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
 
 			BEGIN_MSG_MAP_EX(CBehaviorSettingsPage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

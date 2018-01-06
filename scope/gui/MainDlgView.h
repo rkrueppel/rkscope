@@ -40,10 +40,9 @@ namespace scope {
 			enum { IDD = IDD_MAINDIALOG };
 
 			CMainDlgView(RunButtons& _runbuttons
-				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
+				, std::vector<FPUButtons>& _fpubuttons
 				, parameters::Scope& _guiparameters
-				, std::array<ScanModeButtons, config::nmasters>& _scanmodebuttonsvec
+				, std::vector<ScanModeButtons>& _scanmodebuttons
 				, StackButtons& _stackbuttons
 				, ZeroButtons& _zerobuttons
 				, ScopeCounters<config::nmasters>& _counters);

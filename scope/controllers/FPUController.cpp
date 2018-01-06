@@ -4,19 +4,18 @@
 
 namespace scope {
 
-FPUController::FPUController(const uint32_t& _nareas, std::vector<parameters::BaseArea>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec)
-	: nareas(_nareas)
-	, guiareaparamsvec(_guiareaparamsvec)
-	, stepsizes(_nareas, 0.0)
+FPUController::FPUController(std::vector<std::unique_ptr<parameters::BaseArea>>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec)
+	: guiareaparamsvec(_guiareaparamsvec)
+	, stepsizes(guiareaparamsvec.size(), 0.0)
 {
 	//theXYStages.reserve(nareas);
-	for ( uint32_t a = 0 ; a < _nareas ; a++ ) {
-		theXYStages.emplace_back(std::make_unique<config::FPUXYStageType>(guiareaparamsvec[a].fpuxystage));
+	for ( uint32_t a = 0 ; a < guiareaparamsvec.size() ; a++ ) {
+		theXYStages.emplace_back(std::make_unique<config::FPUXYStageType>(guiareaparamsvec[a]->fpuxystage));
 		
-		stepsizes[a] = guiareaparamsvec[a].fpuxystage.buttonstepsize();
+		stepsizes[a] = guiareaparamsvec[a]->fpuxystage.buttonstepsize();
 		
-		guiareaparamsvec[a].fpuxystage.xpos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
-		guiareaparamsvec[a].fpuxystage.ypos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
+		guiareaparamsvec[a]->fpuxystage.xpos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
+		guiareaparamsvec[a]->fpuxystage.ypos.ConnectOther(std::bind(&FPUController::MoveAbsolute, this, a));
 
 		_fpubuttonsvec[a].left.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(left)));
 		_fpubuttonsvec[a].right.Connect(std::bind(&FPUController::MoveRelative, this, a, FPUMoveDirection(right)));
@@ -35,8 +34,8 @@ void FPUController::Initialize() {
 
 void FPUController::MoveAbsolute(const uint32_t& _area) {
 	DBOUT(L"FPUController::MoveAbsolute");
-	const double newx = guiareaparamsvec[_area].fpuxystage.xpos();
-	const double newy = guiareaparamsvec[_area].fpuxystage.ypos();
+	const double newx = guiareaparamsvec[_area]->fpuxystage.xpos();
+	const double newy = guiareaparamsvec[_area]->fpuxystage.ypos();
 	theXYStages[_area]->MoveAbsolute(newx, newy);
 }
 

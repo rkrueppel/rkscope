@@ -57,10 +57,10 @@ namespace scope {
 
 		protected:
 			/** Opens a new CChannelFrame */
-			void NewChannelFrame(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, const RECT& _rect);
+			void NewChannelFrame(const uint32_t& _area, const RECT& _rect);
 			
 			/** Opens a new CHistogramFrame */
-			void NewHistogramFrame(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, const RECT& _rect);
+			void NewHistogramFrame(const uint32_t& _area, const RECT& _rect);
 
 			/** Opens a CLogFrame */
 			void NewLogFrame(const RECT& _rect);
@@ -78,9 +78,8 @@ namespace scope {
 				, scope::DisplayController& _display_controller
 				, scope::parameters::Scope& _guiparameters
 				, RunButtons& _runbuttons
-				, std::array<FPUButtons, config::nmasters>& _masterfpubuttons
-				, std::array<FPUButtons, config::nslaves>& _slavefpubuttons
-				, std::array<ScanModeButtons, config::nmasters>& _scanmodebuttons
+				, std::vector<FPUButtons>& _fpubuttons
+				, std::vector<ScanModeButtons>& _scanmodebuttons
 				, StackButtons& _stackbuttons
 				, ZeroButtons& _zerobuttons
 				, ScopeCounters<config::nmasters>& _counters);

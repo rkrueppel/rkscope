@@ -4,15 +4,15 @@
 namespace scope {
 	namespace gui {
 
-CFPUControlPage::CFPUControlPage(const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, std::vector<parameters::MasterArea>& _masterareas, std::vector<parameters::SlaveArea>& _slaveareas, FPUButtons& _fpubuttons, const double& _masterfovsizex, const double& _masterfovsizey)
-	: areaparams((_areatype==AreaTypeHelper::Master)?(parameters::BaseArea&)_masterareas[_area]:(parameters::BaseArea&)_slaveareas[_area])
+CFPUControlPage::CFPUControlPage(const uint32_t& _area, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas, FPUButtons& _fpubuttons, const double& _masterfovsizex, const double& _masterfovsizey)
+	: areaparams(_allareas[_area].get())
 	, strtitle(L"")
-	, xpos_edit(areaparams.fpuxystage.xpos, true)
-	, ypos_edit(areaparams.fpuxystage.ypos, true)
-	, etlcalibrationfile_edit(areaparams.fpuzstage.calibrationfile, true)
+	, xpos_edit(areaparams->fpuxystage.xpos, true)
+	, ypos_edit(areaparams->fpuxystage.ypos, true)
+	, etlcalibrationfile_edit(areaparams->fpuzstage.calibrationfile, true)
 	, setxyzero_button(_fpubuttons.setzero)
-	, fpustageinfos_edit(areaparams.fpuxystage.stageinfo, true)
-	, diagram(_area, _areatype, _masterareas, _slaveareas, _masterfovsizex, _masterfovsizey) {
+	, fpustageinfos_edit(areaparams->fpuxystage.stageinfo, true)
+	, diagram(_area, _allareas, _masterfovsizex, _masterfovsizey) {
 	std::wstringstream stream;
 	stream << L"Area " << _area+1;
 	strtitle = stream.str();
@@ -45,7 +45,7 @@ LRESULT CFPUControlPage::OnCalibrationFileButton(WORD wNotifyCode, WORD wID, HWN
 		dlg.GetFilePath(filepath);
 		std::wstring strfilepath(filepath.GetString());
 		DBOUT(L"Fast Z calibration file loaded from " << strfilepath);
-		areaparams.fpuzstage.LoadCalibration(strfilepath);
+		areaparams->fpuzstage.LoadCalibration(strfilepath);
 	}
 	return 0;
 }

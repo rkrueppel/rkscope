@@ -8,9 +8,9 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanResonanceSlavePage::CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::SlaveArea& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanResonanceSlavePage::CFrameScanResonanceSlavePage(const uint32_t& _area, parameters::SlaveArea* _areaparams, FPUButtons& _fpubuttons)
 	: CNoScanBasePage(_area, _areaparams, _fpubuttons)
-	, svresonanceparams(_areaparams.FrameResonance())
+	, svresonanceparams(_areaparams->FrameResonance())
 {
 
 		m_psp.pszTemplate = MAKEINTRESOURCE(IDD_FRAMESCAN_RESONANCE_SLAVE_PROPPAGE);

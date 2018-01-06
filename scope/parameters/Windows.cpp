@@ -7,7 +7,6 @@ namespace scope {
 		Window::Window(void)
 			: type(L"None", L"WindowType")
 			, area(0, 0, 1024, L"Area")
-			, areatype(AreaTypeHelper::Master, L"Areatype")
 			, top(0, 0, 10000, L"Top")
 			, left(0, 0, 10000, L"Left")
 			, bottom(100, 0, 10000, L"Bottom")
@@ -17,7 +16,6 @@ namespace scope {
 		void Window::Load(const wptree& pt) {
 			type.SetFromPropertyTree(pt);
 			area.SetFromPropertyTree(pt);
-			areatype.SetFromPropertyTree(pt);
 			top.SetFromPropertyTree(pt);
 			left.SetFromPropertyTree(pt);
 			bottom.SetFromPropertyTree(pt);
@@ -27,7 +25,6 @@ namespace scope {
 		void Window::Save(wptree& pt) const {
 			type.AddToPropertyTree(pt);
 			area.AddToPropertyTree(pt);
-			areatype.AddToPropertyTree(pt);
 			top.AddToPropertyTree(pt);
 			left.AddToPropertyTree(pt);
 			bottom.AddToPropertyTree(pt);
@@ -38,11 +35,10 @@ namespace scope {
 			: collection(0) {
 		}
 
-		void WindowCollection::AddWindow(const std::wstring& _type, const uint32_t& _area, const AreaTypeHelper::Mode& _areatype, HWND _hwnd) {
+		void WindowCollection::AddWindow(const std::wstring& _type, const uint32_t& _area, HWND _hwnd) {
 			Window wnd;
 			wnd.type = _type;
 			wnd.area = _area;
-			wnd.areatype = _areatype;
 			RECT rect;
 			GetWindowRect(_hwnd, &rect);
 			wnd.top = rect.top;

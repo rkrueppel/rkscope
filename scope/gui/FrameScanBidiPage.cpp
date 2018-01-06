@@ -8,11 +8,11 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanBidiPage::CFrameScanBidiPage(const uint32_t& _area, parameters::BaseArea* _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-	, xturn_edit(_areaparams.FrameBiDi()->xturnfraction, true, true)
-	, ycutoff_edit(_areaparams.FrameBiDi()->ycutoff, true, true)
-	, yretrace_edit(_areaparams.FrameBiDi()->yretrace, true, true) {
+	, xturn_edit(_areaparams->FrameBiDi()->xturnfraction, true, true)
+	, ycutoff_edit(_areaparams->FrameBiDi()->ycutoff, true, true)
+	, yretrace_edit(_areaparams->FrameBiDi()->yretrace, true, true) {
 
 	// Overwrite base class enum { IDD = ... }
 	// Use different dialog resources depending if this area is a slave area (only Pockels and ETL sliders) or a master area (full control complement)

@@ -4,26 +4,26 @@
 namespace scope {
 	namespace gui {
 
-CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::BaseArea& _areaparams, FPUButtons & _fpubuttons)
+CNoScanBasePage::CNoScanBasePage(const uint32_t & _area, parameters::BaseArea* _areaparams, FPUButtons & _fpubuttons)
 	: CToolTipDialog(TTS_NOPREFIX)
 	, initialized(false)
 	, area(_area)
-	, isslave(_areaparams.areatype() == AreaTypeHelper::Slave)
-	, pockels_scroll(_areaparams.Currentframe().pockels, 0.01, 0.1, true, true)
-	, pockels_edit(_areaparams.Currentframe().pockels, true, true)
-	, fastz_scroll(_areaparams.Currentframe().fastz, 5, 50, true, true)
-	, fastz_edit(_areaparams.Currentframe().fastz, true, true)
-	, pixeltime_edit(_areaparams.daq.pixeltime, true, true)
-	, pixeltime_scroll(_areaparams.daq.pixeltime, _areaparams.daq.inputs->MinimumPixeltime(), _areaparams.daq.inputs->MinimumPixeltime(), true, true)
-	, fpux_edit(_areaparams.fpuxystage.xpos, true, true)
-	, fpuy_edit(_areaparams.fpuxystage.ypos, true, true)
+	, isslave(_areaparams->areatype() == AreaTypeHelper::Slave)
+	, pockels_scroll(_areaparams->Currentframe().pockels, 0.01, 0.1, true, true)
+	, pockels_edit(_areaparams->Currentframe().pockels, true, true)
+	, fastz_scroll(_areaparams->Currentframe().fastz, 5, 50, true, true)
+	, fastz_edit(_areaparams->Currentframe().fastz, true, true)
+	, pixeltime_edit(_areaparams->daq.pixeltime, true, true)
+	, pixeltime_scroll(_areaparams->daq.pixeltime, _areaparams->daq.inputs->MinimumPixeltime(), _areaparams->daq.inputs->MinimumPixeltime(), true, true)
+	, fpux_edit(_areaparams->fpuxystage.xpos, true, true)
+	, fpuy_edit(_areaparams->fpuxystage.ypos, true, true)
 	, fpuleft_button(_fpubuttons.left)
 	, fpuright_button(_fpubuttons.right)
 	, fpuup_button(_fpubuttons.up)
  	, fpudown_button(_fpubuttons.down) {
 
 	std::wstringstream stream;
-	stream << _areaparams.areatype() << L"Area " << area+1;
+	stream << L"Area " << area+1;
 	strtitle = stream.str();
 	SetTitle(strtitle.c_str());			// Be careful, do not assign a local variable (since SetTitle takes only the pointer, which will become invalid for a local variable)
 }

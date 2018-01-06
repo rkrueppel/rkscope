@@ -28,10 +28,10 @@ OutputsDAQmxResonance::OutputsDAQmxResonance(const uint32_t& _area, const parame
 	taskResonanceZoom.CreateDOChannel(_outputparams.zoomchannelstring());
 
 	// Calculate pixelrate and number of pixels to generate
-	double pixelrate = 1/(_params.masterareas[area].daq.pixeltime()*1E-6);
-	int32_t pixelsperchan = _params.masterareas[area].Currentframe().TotalPixels();
+	double pixelrate = 1/(_params.allareas[area]->daq.pixeltime()*1E-6);
+	int32_t pixelsperchan = _params.allareas[area]->Currentframe().TotalPixels();
 	if ( _params.requested_mode() == DaqModeHelper::nframes )
-		pixelsperchan = _params.masterareas[area].Currentframe().TotalPixels() * _params.masterareas[area].daq.requested_frames() * _params.masterareas[area].daq.averages();
+		pixelsperchan = _params.allareas[area]->Currentframe().TotalPixels() * _params.allareas[area]->daq.requested_frames() * _params.allareas[area]->daq.averages();
 
 	// Configure timing (if using ReferenceClock timing ClockString gives "")
 	task.ConfigureSampleTiming(DAQmx::ClockString(_outputparams.daq_timing(), _outputparams.externalclocksource())
@@ -45,7 +45,7 @@ OutputsDAQmxResonance::OutputsDAQmxResonance(const uint32_t& _area, const parame
 	if ( DaqTimingHelper::Mode::ReferenceClock ==_outputparams.daq_timing() )
 		task.ConfigureReferenceClock(_outputparams.referenceclocksource(), _outputparams.referenceclockrate());
 
-	task.ConfigureBuffer( _params.masterareas[area].Currentframe().YTotalLines() / 2);
+	task.ConfigureBuffer( _params.allareas[area]->Currentframe().YTotalLines() / 2);
 
 	// Regenerate frame samples if we are in nframes mode
 	if ( _params.requested_mode() == DaqModeHelper::nframes )

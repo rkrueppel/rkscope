@@ -8,9 +8,9 @@
 namespace scope {
 	namespace gui {
 
-CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, parameters::BaseArea& _areaparams, FPUButtons& _fpubuttons)
+CFrameScanHopperPage::CFrameScanHopperPage(const uint32_t& _area, parameters::BaseArea* _areaparams, FPUButtons& _fpubuttons)
 	: CFrameScanBasePage(_area, _areaparams, _fpubuttons)
-	, hoppervecparams(_areaparams.FrameHopper())
+	, hoppervecparams(_areaparams->FrameHopper())
 {
 	// Overwrite base class enum { IDD = ... }
 	// Use different dialog resources depending if this area is a slave area (only Pockels and ETL sliders) or a master area (full control complement)
