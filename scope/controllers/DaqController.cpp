@@ -3,28 +3,37 @@
 
 namespace scope {
 
-	DaqController::DaqController(const uint32_t& _nactives
+	DaqController::DaqController(const uint32_t& _nmasters
+		, const uint32_t& _nslaves
+		, const uint32_t& _slavespermaster
+		, const std::vector<uint32_t>& _mastersinallareas
 		, const parameters::Scope& _parameters
-		, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _oqueues
+		, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _oqueues
 	)
-		: BaseController(_nactives)
+		: BaseController(_nmasters)
+		, nmasters(_nmasters)
+		, nslaves(_nslaves)
+		, slavespermaster(_slavespermaster)
+		, mastersinallareas(_mastersinallareas)
 		, ctrlparams(_parameters)
 		, output_queues(_oqueues)
-		, masteroutputs()
-		, slaveoutputs()
-		, inputs()
+		, masteroutputs(nmasters)
+		, slaveoutputs(nslaves)
+		, inputs(nmasters)
 		, stimulation(nullptr)
-	{
-		chunksizes.fill(16000);
-		
-		for (uint32_t a = 0; a < mastershutters.size(); a++) {
-			mastershutters[a].Initialize(ctrlparams.masterareas[a].daq.shutterline());
-			switches[a].Initialize(ctrlparams.masterareas[a].daq.switchresonanceline());
+		, shutters(nmasters + nslaves)
+		, switches(nmasters + nslaves)
+		, scannervecs(nmasters + nslaves)
+		, chunksizes(nmasters + nslaves, 16000)
+		, online_update_done(nmasters + nslaves)
+		, online_update_done_flag(nmasters + nslaves)
+		, online_update_done_mutexe(nmasters + nslaves)
+	{		
+		for (uint32_t a = 0; a < shutters.size(); a++) {
+			shutters[a].Initialize(ctrlparams.allareas[a]->daq.shutterline());
+			switches[a].Initialize(ctrlparams.allareas[a]->daq.switchresonanceline());
 			online_update_done_flag[a] = false;
 		}
-
-		for ( uint32_t a = 0 ; a < slaveshutters.size() ; a++)
-			slaveshutters[a].Initialize(ctrlparams.slaveareas[a].daq.shutterline());
 
 		ZeroGalvoOutputs();
 	}
@@ -92,19 +101,17 @@ namespace scope {
 
 		// Force abort of online update
 		masteroutputs[_masterarea]->AbortWrite();
-		for (uint32_t s = _masterarea * config::slavespermaster; s < (_masterarea + 1)*config::slavespermaster; s++)
+		for (uint32_t s = _masterarea * slavespermaster; s < (_masterarea + 1)*slavespermaster; s++)
 			slaveoutputs[s]->AbortWrite();
 
 		masteroutputs[_masterarea]->Stop();
-		for (uint32_t s = _masterarea * config::slavespermaster; s < (_masterarea + 1)*config::slavespermaster; s++)
+		for (uint32_t s = _masterarea * slavespermaster; s < (_masterarea + 1)*slavespermaster; s++)
 			slaveoutputs[s]->Stop();
 
 		inputs[_masterarea]->Stop();
 
 		// Close the shutters
-		for (auto& s : mastershutters)
-			s.Close();
-		for (auto& s : slaveshutters)
+		for (auto& s : shutters)
 			s.Close();
 
 		// Turn the resonance scanner relay off
@@ -121,12 +128,15 @@ namespace scope {
 		ctrlparams = _params;
 
 		// Reset outputs and inputs (configures tasks etc. inside them)
-		for ( uint32_t a = 0 ; a < config::nmasters ; a++ ) {
-			masteroutputs[a] = std::make_unique<config::OutputType>(a, *dynamic_cast<config::OutputParametersType*>(ctrlparams.masterareas[a].daq.outputs.get()), ctrlparams);
-			inputs[a] = std::make_unique<config::InputType>(a, dynamic_cast<config::InputParametersType*>(ctrlparams.masterareas[a].daq.inputs.get()), ctrlparams);
+		for ( uint32_t ma = 0 ; ma < nmasters ; ma++ ) {
+			masteroutputs[ma] = std::make_unique<config::OutputType>(ma, *dynamic_cast<config::OutputParametersType*>(ctrlparams.allareas[mastersinallareas[ma]]->daq.outputs.get()), ctrlparams);
+			inputs[ma] = std::make_unique<config::InputType>(ma, dynamic_cast<config::InputParametersType*>(ctrlparams.allareas[mastersinallareas[ma]]->daq.inputs.get()), ctrlparams);
+
+			for (uint32_t sa = ma * slavespermaster; sa < (ma + 1) * slavespermaster; sa++) {
+				uint32_t slaveinallareas = mastersinallareas[ma] + sa - (ma * slavespermaster);
+				slaveoutputs[sa] = std::make_unique<config::SlaveOutputType>(sa, *dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.allareas[slaveinallareas]->daq.outputs.get()), ctrlparams);
+			}
 		}
-		for ( uint32_t a = 0 ; a < config::nslaves ; a++ ) 
-			slaveoutputs[a] = std::make_unique<config::SlaveOutputType>(a, *dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.masterareas[a].daq.outputs.get()), ctrlparams);
 
 		// Calculate and write stimulationvector to device
 		if (ctrlparams.stimulation.enable()) {
@@ -139,13 +149,18 @@ namespace scope {
 			stimulation.reset(nullptr);
 
 		// Write scannervectors to devices
-		for (uint32_t a = 0; a < config::nmasters; a++)
-			masteroutputs[a]->Write(*scannervecs[a]->GetInterleavedVector(), 1);
+		for (uint32_t ma = 0; ma < nmasters; ma++) {
+			masteroutputs[ma]->Write(*scannervecs[mastersinallareas[ma]]->GetInterleavedVector(), 1);
+
+			for (uint32_t sa = ma * slavespermaster; sa < (ma + 1) * slavespermaster; sa++) {
+				uint32_t slaveinallareas = mastersinallareas[ma] + sa - (ma * slavespermaster);
+				slaveoutputs[sa]->Write(*scannervecs[slaveinallareas]->GetInterleavedVector(), 1);
+			}
+		}
+
 
 		// Open shutters
-		for (auto& s : slaveshutters)
-			s.Open();
-		for (auto& s : mastershutters)
+		for (auto& s : shutters)
 			s.Open();
 
 		// Turn the resonance scanner relay on
@@ -160,17 +175,17 @@ namespace scope {
 		// Define lambdas for starting all inputs and all outputs
 		// always area 0 last, so it (e.g. its /ao/StartTrigger) can serve as common master trigger for everything else
 		std::function<void(void)> start_inputs = [&]() {
-			for (uint32_t a = 1; a < config::nmasters; a++)
+			for (uint32_t a = 1; a < nmasters; a++)
 				inputs[a]->Start();
 			inputs[0]->Start();
 		};
 		std::function<void(void)> start_masteroutputs = [&]() {
-			for (uint32_t a = 1; a < config::nmasters; a++)
+			for (uint32_t a = 1; a < nmasters; a++)
 				masteroutputs[a]->Start();
 			masteroutputs[0]->Start();
 		};
 		std::function<void(void)> start_slaveoutputs = [&]() {
-			for (uint32_t a = 1; a < config::nslaves; a++)
+			for (uint32_t a = 1; a < nslaves; a++)
 				slaveoutputs[a]->Start();
 			slaveoutputs[0]->Start();
 		};
@@ -188,7 +203,7 @@ namespace scope {
 		}
 
 		// Let "Run" run asynchronously
-		for (uint32_t a = 0; a < config::nmasters; a++) {
+		for (uint32_t a = 0; a < nmasters; a++) {
 			// Reset the stop condition
 			stops[a].Set(false);
 			// Get the async's future
@@ -196,46 +211,46 @@ namespace scope {
 		}
 	}
 
-	void DaqController::OnlineParameterUpdate(const uint32_t& _masterarea, const parameters::MasterArea& _areaparameters) {
+	void DaqController::OnlineParameterUpdate(const uint32_t& _area, const parameters::BaseArea& _areaparameters) {
 
 		// update parameters
-		ctrlparams.masterareas[_masterarea] = _areaparameters;
-		// Note: scannervector was updated already from ScopeControllerImpl
+		ctrlparams.allareas[_area] = _areaparameters;
+		// Note: scannervector was updated already from ScopeController
 
 		// Lock now so starting an async Worker is only possible if a putative previous wait on that lock finished
-		std::unique_lock<std::mutex> lock(online_update_done_mutexe[_masterarea]);
+		std::unique_lock<std::mutex> lock(online_update_done_mutexe[_area]);
 
 		// If we are scanning live do async online update. Always catch the async future since the futures destructor waits (see http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3451.pdf)
 		if (ctrlparams.requested_mode() == DaqModeHelper::continuous)
-			auto f = std::async(std::bind(&DaqController::WorkerOnlineParameterUpdate, this, _masterarea));
+			auto f = std::async(std::bind(&DaqController::WorkerOnlineParameterUpdate, this, _area));
 
 		// wait until online update is done or aborted in async WorkerOnlineParameterUpdate
-		while (!online_update_done_flag[_masterarea])
-			online_update_done[_masterarea].wait(lock);
+		while (!online_update_done_flag[_area])
+			online_update_done[_area].wait(lock);
 	}
 
-	void DaqController::WorkerOnlineParameterUpdate(const uint32_t _masterarea) {
+	void DaqController::WorkerOnlineParameterUpdate(const uint32_t _area) {
 		DBOUT(L"WorkerOnlineParameterUpdate starting");
-		auto scannervec = scannervecs[_masterarea]->GetInterleavedVector();
+		auto scannervec = scannervecs[_area]->GetInterleavedVector();
 
 		// Number of blocks => around 4 blocks per second frame time
-		uint32_t blocks = round2ui32(4.0 * ctrlparams.masterareas[_masterarea].FrameTime());
+		uint32_t blocks = round2ui32(4.0 * ctrlparams.allareas[_area].FrameTime());
 
 		DBOUT(L"WorkerOnlineParameterUpdate blocks" << blocks);
-		online_update_done_flag[_masterarea] = false;
+		online_update_done_flag[_area] = false;
 
 		// If we call outputs[_area]->AbortWrite this Write exits prematurely
 		masteroutputs[_masterarea]->Write(*scannervec, blocks);
 
 		// when update is done, signal the waiting condition_variable in OnlineParameterUpdate
-		online_update_done_flag[_masterarea] = true;
-		online_update_done[_masterarea].notify_all();
+		online_update_done_flag[_area] = true;
+		online_update_done[_area].notify_all();
 		DBOUT(L"WorkerOnlineParameterUpdate ended");
 	}
 
-	void DaqController::AbortOnlineParameterUpdate(const uint32_t& _masterarea) {
+	void DaqController::AbortOnlineParameterUpdate(const uint32_t& _area) {
 		// Abort the output on its next block write. Note, the Write is inside lock
-		masteroutputs[_masterarea]->AbortWrite();
+		masteroutputs[_area]->AbortWrite();
 	}
 
 	void DaqController::ZeroGalvoOutputs() {
@@ -266,20 +281,12 @@ namespace scope {
 		scannervecs[_masterarea] = _sv;
 	}
 
-	void DaqController::OpenCloseMasterShutter(const uint32_t& _masterarea, const bool& _open) {
-		mastershutters[_masterarea].Set(_open);
+	void DaqController::OpenCloseShutter(const uint32_t& _area, const bool& _open) {
+		shutters[_area].Set(_open);
 	}
 
-	void DaqController::OpenCloseSlaveShutter(const uint32_t& _slavearea, const bool& _open) {
-		slaveshutters[_slavearea].Set(_open);
-	}
-
-	bool DaqController::GetMasterShutterState(const uint32_t& _masterarea) const {
-		return mastershutters[_masterarea].GetState();
-	}
-
-	bool DaqController::GetSlaveShutterState(const uint32_t& _slavearea) const {
-		return slaveshutters[_slavearea].GetState();
+	bool DaqController::GetShutterState(const uint32_t& _area) const {
+		return shutters[_area].GetState();
 	}
 
 	void DaqController::TurnOnOffSwitchResonance(const uint32_t& _masterarea, const bool& _on) {
@@ -287,8 +294,8 @@ namespace scope {
 			s.Set(_on);
 	}
 
-	bool DaqController::GetSwitchResonanceState(const uint32_t& _masterarea) const {
-		return switches[_masterarea].GetState();
+	bool DaqController::GetSwitchResonanceState(const uint32_t& _area) const {
+		return switches[_area].GetState();
 	}
 
 }

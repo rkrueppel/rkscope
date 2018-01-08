@@ -32,46 +32,54 @@ namespace scope {
 		: public BaseController {
 
 	protected:
+		const uint32_t nmasters;
+
+		const uint32_t nslaves;
+
+		/** How many slave areas per master area */
+		const uint32_t slavespermaster;
+
+		/* Indexes of the master areas in a vector of all areas. E.g. allareas 0:master0, 1:slave0, 2:master1, 3:slave1 => mastersinallareas {{0,2}} */
+		const std::vector<uint32_t> mastersinallareas;
+
 		/** array holding the output queues to the PipelineControllers */
-		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const output_queues;
+		std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const output_queues;
 
 		/** The outputs for the master areas. */
-		std::array<std::unique_ptr<config::OutputType>, config::nmasters> masteroutputs;
+		std::vector<std::unique_ptr<config::OutputType>> masteroutputs;
 
 		/** The outputs for the slave areas. */
-		std::array<std::unique_ptr<config::SlaveOutputType>, config::nslaves> slaveoutputs;
+		std::vector<std::unique_ptr<config::SlaveOutputType>> slaveoutputs;
 
 		/** The inputs for all master areas (their slaves are read with them together). */
-		std::array<std::unique_ptr<config::InputType>, config::nmasters> inputs;
+		std::vector<std::unique_ptr<config::InputType>> inputs;
 
 		/** The stimulation output */
 		std::unique_ptr<config::StimulationsType> stimulation;
 
-		/** array holding shutter class for master area */
-		std::array<Shutter, config::nmasters> mastershutters;
+		/** shutters */
+		std::vector<Shutter> shutters;
 
-		std::array<Shutter, config::nslaves> slaveshutters;
-
-		/** array holding SwitchResonance class for every master area */
-		std::array<SwitchResonance, config::nmasters> switches;
+		/** vector holding SwitchResonance class */
+		std::vector<SwitchResonance> switches;
 
 		/** The scanner vector for frame scanning. Pointer to base class, since current scan mode can be changed via GUI. */
-		std::array<ScannerVectorFrameBasicPtr, config::totalareas> scannervecs;
+		std::vector<ScannerVectorFrameBasicPtr> scannervecs;
 
 		/** stimulation */
 		StimulationVector stimvec;
 
 		/** size of a read chunk in samples per channel */
-		std::array<uint32_t, config::nmasters> chunksizes;
+		std::vector<uint32_t> chunksizes;
 
 		/** condition variables to wait for until online updates is done (new frame is completely written to buffer or aborted) */
-		std::array<std::condition_variable, config::nmasters> online_update_done;
+		std::vector<std::condition_variable> online_update_done;
 
 		/** bool flag to set after online update is done */
-		std::array<std::atomic<bool>, config::nmasters> online_update_done_flag;
+		std::vector<std::atomic<bool>> online_update_done_flag;
 
 		/** mutexe for the condition variables */
-		std::array<std::mutex, config::nmasters> online_update_done_mutexe;
+		std::vector<std::mutex> online_update_done_mutexe;
 	
 		parameters::Scope ctrlparams;
 
@@ -79,7 +87,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nactives, const parameters::Scope& _parameters, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _oqueues);
+		DaqController(const uint32_t& _nmasters, const uint32_t& _nslaves, const uint32_t& _slavespermaster, const std::vector<uint32_t>& _mastersinallareas, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _oqueues);
 
 		/** disable copy */
 		DaqController(DaqController& other) = delete;
@@ -102,7 +110,7 @@ namespace scope {
 
 		/** Handles update of parameters during scanning
 		* @post online update is done or aborted */
-		void OnlineParameterUpdate(const uint32_t& _masterarea, const parameters::MasterArea& _areaparameters);
+		void OnlineParameterUpdate(const uint32_t& _area, const parameters::BaseArea& _areaparameters);
 
 		/** Does the actual writing to device for an online update */
 		void WorkerOnlineParameterUpdate(const uint32_t _area);
@@ -118,18 +126,16 @@ namespace scope {
 		void SetScannerVector(const uint32_t& _area, ScannerVectorFrameBasicPtr _sv);
 
 		/** Opens/closes the shutter. */
-		void OpenCloseMasterShutter(const uint32_t& _masterarea, const bool& _open);
-		void OpenCloseSlaveShutter(const uint32_t& _slavearea, const bool& _open);
+		void OpenCloseShutter(const uint32_t& _area, const bool& _open);
 
 		/** @return current shutter state */
-		bool GetMasterShutterState(const uint32_t& _masterarea) const;
-		bool GetSlaveShutterState(const uint32_t& _slavearea) const;
+		bool GetShutterState(const uint32_t& _area) const;
 
 		/** Turns the resonance scanner relay on and off. */
-		void TurnOnOffSwitchResonance(const uint32_t& _masterarea, const bool& _on);
+		void TurnOnOffSwitchResonance(const uint32_t& _area, const bool& _on);
 
 		/** @return current resonance scanner relay state */
-		bool GetSwitchResonanceState(const uint32_t& _masterarea) const;
+		bool GetSwitchResonanceState(const uint32_t& _area) const;
 	};
 
 }
