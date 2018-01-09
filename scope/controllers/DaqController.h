@@ -46,13 +46,10 @@ namespace scope {
 		std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const output_queues;
 
 		/** The outputs for the master areas. */
-		std::vector<std::unique_ptr<config::OutputType>> masteroutputs;
-
-		/** The outputs for the slave areas. */
-		std::vector<std::unique_ptr<config::SlaveOutputType>> slaveoutputs;
+		std::vector<std::unique_ptr<Outputs>> outputs;
 
 		/** The inputs for all master areas (their slaves are read with them together). */
-		std::vector<std::unique_ptr<config::InputType>> inputs;
+		std::vector<std::unique_ptr<Inputs>> inputs;
 
 		/** The stimulation output */
 		std::unique_ptr<config::StimulationsType> stimulation;

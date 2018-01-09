@@ -3,6 +3,7 @@
 
 namespace scope {
 
+	/* One thread for each master */
 	DaqController::DaqController(const uint32_t& _nmasters
 		, const uint32_t& _nslaves
 		, const uint32_t& _slavespermaster
@@ -17,24 +18,21 @@ namespace scope {
 		, mastersinallareas(_mastersinallareas)
 		, ctrlparams(_parameters)
 		, output_queues(_oqueues)
-		, masteroutputs(nmasters)
-		, slaveoutputs(nslaves)
-		, inputs(nmasters)
+		, outputs(0)
+		, inputs(0)
 		, stimulation(nullptr)
 		, shutters(nmasters + nslaves)
 		, switches(nmasters + nslaves)
 		, scannervecs(nmasters + nslaves)
 		, chunksizes(nmasters + nslaves, 16000)
 		, online_update_done(nmasters + nslaves)
-		, online_update_done_flag(nmasters + nslaves)
+		, online_update_done_flag(nmasters + nslaves, false)
 		, online_update_done_mutexe(nmasters + nslaves)
-	{		
+	{
 		for (uint32_t a = 0; a < shutters.size(); a++) {
 			shutters[a].Initialize(ctrlparams.allareas[a]->daq.shutterline());
-			switches[a].Initialize(ctrlparams.allareas[a]->daq.switchresonanceline());
-			online_update_done_flag[a] = false;
+			switches[a].Initialize(ctrlparams.allareas[a]->daq.switchresonanceline());	
 		}
-
 		ZeroGalvoOutputs();
 	}
 
@@ -100,13 +98,13 @@ namespace scope {
 		}
 
 		// Force abort of online update
-		masteroutputs[_masterarea]->AbortWrite();
-		for (uint32_t s = _masterarea * slavespermaster; s < (_masterarea + 1)*slavespermaster; s++)
-			slaveoutputs[s]->AbortWrite();
+		outputs[mastersinallareas[_masterarea]]->AbortWrite();
+		for (uint32_t sa = 0; sa < slavespermaster; sa++)
+			outputs[mastersinallareas[_masterarea]+1+sa]->AbortWrite();
 
-		masteroutputs[_masterarea]->Stop();
-		for (uint32_t s = _masterarea * slavespermaster; s < (_masterarea + 1)*slavespermaster; s++)
-			slaveoutputs[s]->Stop();
+		outputs[_masterarea]->Stop();
+		for (uint32_t sa = 0; sa < slavespermaster; sa++)
+			outputs[mastersinallareas[_masterarea] + 1 + sa]->Stop();
 
 		inputs[_masterarea]->Stop();
 
@@ -128,13 +126,16 @@ namespace scope {
 		ctrlparams = _params;
 
 		// Reset outputs and inputs (configures tasks etc. inside them)
-		for ( uint32_t ma = 0 ; ma < nmasters ; ma++ ) {
-			masteroutputs[ma] = std::make_unique<config::OutputType>(ma, *dynamic_cast<config::OutputParametersType*>(ctrlparams.allareas[mastersinallareas[ma]]->daq.outputs.get()), ctrlparams);
-			inputs[ma] = std::make_unique<config::InputType>(ma, dynamic_cast<config::InputParametersType*>(ctrlparams.allareas[mastersinallareas[ma]]->daq.inputs.get()), ctrlparams);
-
-			for (uint32_t sa = ma * slavespermaster; sa < (ma + 1) * slavespermaster; sa++) {
-				uint32_t slaveinallareas = mastersinallareas[ma] + sa - (ma * slavespermaster);
-				slaveoutputs[sa] = std::make_unique<config::SlaveOutputType>(sa, *dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.allareas[slaveinallareas]->daq.outputs.get()), ctrlparams);
+		outputs.clear();
+		inputs.clear();
+		uint32_t a = 0;
+		for (uint32_t ma = 0; ma < nmasters; ma++ ) {
+			outputs.push_back(std::make_unique<config::OutputType>(a, *dynamic_cast<config::OutputParametersType*>(ctrlparams.allareas[a]->daq.outputs.get()), ctrlparams));
+			inputs.push_back(std::make_unique<config::InputType>(a, dynamic_cast<config::InputParametersType*>(ctrlparams.allareas[a]->daq.inputs.get()), ctrlparams));
+			a++;
+			for (uint32_t sa = 0; sa < slavespermaster; sa++) {
+				outputs.push_back(std::make_unique<config::SlaveOutputType>(a, *dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.allareas[a]->daq.outputs.get()), ctrlparams));
+				a++;
 			}
 		}
 
@@ -150,11 +151,9 @@ namespace scope {
 
 		// Write scannervectors to devices
 		for (uint32_t ma = 0; ma < nmasters; ma++) {
-			masteroutputs[ma]->Write(*scannervecs[mastersinallareas[ma]]->GetInterleavedVector(), 1);
-
-			for (uint32_t sa = ma * slavespermaster; sa < (ma + 1) * slavespermaster; sa++) {
-				uint32_t slaveinallareas = mastersinallareas[ma] + sa - (ma * slavespermaster);
-				slaveoutputs[sa]->Write(*scannervecs[slaveinallareas]->GetInterleavedVector(), 1);
+			outputs[mastersinallareas[ma]]->Write(*scannervecs[mastersinallareas[ma]]->GetInterleavedVector(), 1);
+			for (uint32_t sa = 0; sa < slavespermaster; sa++) {
+				outputs[mastersinallareas[ma]+1+sa]->Write(*scannervecs[mastersinallareas[ma] + 1 + sa]->GetInterleavedVector(), 1);
 			}
 		}
 
@@ -175,46 +174,40 @@ namespace scope {
 		// Define lambdas for starting all inputs and all outputs
 		// always area 0 last, so it (e.g. its /ao/StartTrigger) can serve as common master trigger for everything else
 		std::function<void(void)> start_inputs = [&]() {
-			for (uint32_t a = 1; a < nmasters; a++)
+			for (uint32_t a = 1; a < inputs.size(); a++)
 				inputs[a]->Start();
 			inputs[0]->Start();
 		};
-		std::function<void(void)> start_masteroutputs = [&]() {
-			for (uint32_t a = 1; a < nmasters; a++)
-				masteroutputs[a]->Start();
-			masteroutputs[0]->Start();
-		};
-		std::function<void(void)> start_slaveoutputs = [&]() {
-			for (uint32_t a = 1; a < nslaves; a++)
-				slaveoutputs[a]->Start();
-			slaveoutputs[0]->Start();
+		std::function<void(void)> start_outputs = [&]() {
+			for (uint32_t a = 1; a < outputs.size(); a++)
+				outputs[a]->Start();
+			outputs[0]->Start();
 		};
 
-		// start inputs or outputs first
+
+		// start inputs or outputs first, depends on the triggering configuration you chose for the NI cards
 		if (ctrlparams.startinputsfirst()) {
 			start_inputs();
-			start_slaveoutputs();
-			start_masteroutputs();
+			start_outputs();
 		}
 		else {
-			start_slaveoutputs();
-			start_masteroutputs();
+			start_outputs();
 			start_inputs();
 		}
 
-		// Let "Run" run asynchronously
-		for (uint32_t a = 0; a < nmasters; a++) {
+		// Let "Run" run asynchronously, one thread for each master!
+		for (uint32_t ma = 0; ma < nmasters; ma++) {
 			// Reset the stop condition
-			stops[a].Set(false);
+			stops[ma].Set(false);
 			// Get the async's future
-			futures[a] = std::async(std::bind(&DaqController::Run, this, &stops[a], a));
+			futures[ma] = std::async(std::bind(&DaqController::Run, this, &stops[ma], ma));
 		}
 	}
 
 	void DaqController::OnlineParameterUpdate(const uint32_t& _area, const parameters::BaseArea& _areaparameters) {
 
 		// update parameters
-		ctrlparams.allareas[_area] = _areaparameters;
+		*ctrlparams.allareas[_area].get() = _areaparameters;
 		// Note: scannervector was updated already from ScopeController
 
 		// Lock now so starting an async Worker is only possible if a putative previous wait on that lock finished
@@ -234,13 +227,14 @@ namespace scope {
 		auto scannervec = scannervecs[_area]->GetInterleavedVector();
 
 		// Number of blocks => around 4 blocks per second frame time
-		uint32_t blocks = round2ui32(4.0 * ctrlparams.allareas[_area].FrameTime());
+		uint32_t blocks = round2ui32(4.0 * ctrlparams.allareas[_area]->FrameTime());
 
 		DBOUT(L"WorkerOnlineParameterUpdate blocks" << blocks);
 		online_update_done_flag[_area] = false;
 
 		// If we call outputs[_area]->AbortWrite this Write exits prematurely
-		masteroutputs[_masterarea]->Write(*scannervec, blocks);
+		if ( ctrlparams.allareas[_area]->areatype() == AreaTypeHelper::Master)
+			masteroutputs[]->Write(*scannervec, blocks);
 
 		// when update is done, signal the waiting condition_variable in OnlineParameterUpdate
 		online_update_done_flag[_area] = true;
@@ -270,11 +264,12 @@ namespace scope {
 		stimulation.reset(nullptr);
 
 		// Do the zero outputs tasks
-		for (const auto& ma : ctrlparams.masterareas)
-			config::OutputZeroType zero(*dynamic_cast<config::OutputParametersType*>(ma.daq.outputs.get()));
-
-		for (const auto& sa : ctrlparams.slaveareas)
-			config::SlaveOutputZeroType zero(*dynamic_cast<config::SlaveOutputParametersType*>(sa.daq.outputs.get()));
+		for (uint32_t a = 0; a < ctrlparams.allareas.size(); a++ ) {
+			if (ctrlparams.allareas[a]->areatype() == AreaTypeHelper::Master)
+				config::OutputZeroType zero(*dynamic_cast<config::OutputParametersType*>(ctrlparams.allareas[a].get()->daq.outputs.get()));
+			else
+				config::SlaveOutputZeroType zero(*dynamic_cast<config::SlaveOutputParametersType*>(ctrlparams.allareas[a]->daq.outputs.get()));
+		}
 	}
 
 	void DaqController::SetScannerVector(const uint32_t& _masterarea, ScannerVectorFrameBasicPtr _sv) {
