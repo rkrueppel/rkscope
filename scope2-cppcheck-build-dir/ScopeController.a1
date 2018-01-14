@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3750077909">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.h" line="35"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.h" line="55"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.h" line="58"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="LogRun" lineNumber="46"/>
+    <functiondecl functionName="StartAllControllers" lineNumber="71"/>
+    <functiondecl functionName="StopAllControllers" lineNumber="79"/>
+    <functiondecl functionName="WaitForAllControllers" lineNumber="104"/>
+    <functiondecl functionName="ClearAllQueues" lineNumber="111"/>
+    <functiondecl functionName="SetScannerVectorParameters" lineNumber="118"/>
+    <functiondecl functionName="RunLive" lineNumber="124"/>
+    <functiondecl functionName="RunSingle" lineNumber="132"/>
+    <functiondecl functionName="RunStack" lineNumber="142"/>
+    <functiondecl functionName="RunTimeseries" lineNumber="215"/>
+    <functiondecl functionName="RunBehavior" lineNumber="260"/>
+    <functiondecl functionName="ClearAfterStop" lineNumber="301"/>
+    <functiondecl functionName="StartLive" lineNumber="310"/>
+    <functiondecl functionName="StartStack" lineNumber="324"/>
+    <functiondecl functionName="StartSingle" lineNumber="337"/>
+    <functiondecl functionName="StartTimeseries" lineNumber="350"/>
+    <functiondecl functionName="StartBehavior" lineNumber="369"/>
+    <functiondecl functionName="Stop" lineNumber="382"/>
+    <functiondecl functionName="OnlineUpdate" lineNumber="408"/>
+    <functioncall functionName="AbortOnlineParameterUpdate"/>
+    <functioncall functionName="BaseController"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ClearAfterStop"/>
+    <functioncall functionName="ClearAllQueues"/>
+    <functioncall functionName="ControllerReturnStatus"/>
+    <functioncall functionName="CurrentXPosition"/>
+    <functioncall functionName="CurrentYPosition"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DaqController"/>
+    <functioncall functionName="DisplayController"/>
+    <functioncall functionName="GetCurrentDateString"/>
+    <functioncall functionName="GetCurrentTimeString"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="LogRun"/>
+    <functioncall functionName="MoveAbsolute"/>
+    <functioncall functionName="OnlineParameterUpdate"/>
+    <functioncall functionName="ResolutionChange"/>
+    <functioncall functionName="RunBehavior"/>
+    <functioncall functionName="RunLive"/>
+    <functioncall functionName="RunSingle"/>
+    <functioncall functionName="RunStack"/>
+    <functioncall functionName="RunTimeseries"/>
+    <functioncall functionName="RunningBehavior"/>
+    <functioncall functionName="RunningContinuous"/>
+    <functioncall functionName="RunningSingle"/>
+    <functioncall functionName="RunningStack"/>
+    <functioncall functionName="RunningTimeseries"/>
+    <functioncall functionName="ScopeController"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="ScopeLogger"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetParameters"/>
+    <functioncall functionName="SetScannerVectorParameters"/>
+    <functioncall functionName="SetWithLimits"/>
+    <functioncall functionName="Start"/>
+    <functioncall functionName="StartAllControllers"/>
+    <functioncall functionName="StopAll"/>
+    <functioncall functionName="StopAllControllers"/>
+    <functioncall functionName="Stopped"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="WaitFor"/>
+    <functioncall functionName="WaitForAll"/>
+    <functioncall functionName="WaitForAllControllers"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_counters"/>
+    <functioncall functionName="_daq_to_pipeline"/>
+    <functioncall functionName="_guiparameters"/>
+    <functioncall functionName="_nareas"/>
+    <functioncall functionName="_pipeline_to_display"/>
+    <functioncall functionName="_pipeline_to_storage"/>
+    <functioncall functionName="_theDaq"/>
+    <functioncall functionName="_theDisplay"/>
+    <functioncall functionName="_thePipeline"/>
+    <functioncall functionName="_theStage"/>
+    <functioncall functionName="_theStorage"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="areas"/>
+    <functioncall functionName="async"/>
+    <functioncall functionName="autosave"/>
+    <functioncall functionName="betweenrepeats"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="continuous"/>
+    <functioncall functionName="counters"/>
+    <functioncall functionName="ctrlparams"/>
+    <functioncall functionName="daq"/>
+    <functioncall functionName="daq_to_pipeline"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="fpuzstage"/>
+    <functioncall functionName="framescannervecs"/>
+    <functioncall functionName="gateline"/>
+    <functioncall functionName="gater"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="guiparameters"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="log_error"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="nareas"/>
+    <functioncall functionName="nframes"/>
+    <functioncall functionName="notify_one"/>
+    <functioncall functionName="onlineupdate_running"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="p"/>
+    <functioncall functionName="pipeline_to_display"/>
+    <functioncall functionName="pipeline_to_storage"/>
+    <functioncall functionName="pockels"/>
+    <functioncall functionName="position"/>
+    <functioncall functionName="repeat_abort"/>
+    <functioncall functionName="repeats"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="run_state"/>
+    <functioncall functionName="savelive"/>
+    <functioncall functionName="sc"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="starttime"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="t"/>
+    <functioncall functionName="theDaq"/>
+    <functioncall functionName="theDisplay"/>
+    <functioncall functionName="thePipeline"/>
+    <functioncall functionName="theStage"/>
+    <functioncall functionName="theStorage"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="timeGetTime"/>
+    <functioncall functionName="trials"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unlimited_repeats"/>
+    <functioncall functionName="valid"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="wait_for"/>
+    <functioncall functionName="waitbetweenrepeats_mutex"/>
+    <functioncall functionName="waittime"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xoffset"/>
+    <functioncall functionName="yoffset"/>
+    <functioncall functionName="zdevicetype"/>
+  </FileInfo>
+</analyzerinfo>

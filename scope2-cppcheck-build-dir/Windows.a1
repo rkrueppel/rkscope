@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2197172221">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="16"/>
+    <functiondecl functionName="Save" lineNumber="25"/>
+    <functiondecl functionName="AddWindow" lineNumber="38"/>
+    <functiondecl functionName="Load" lineNumber="51"/>
+    <functiondecl functionName="Save" lineNumber="63"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="GetWindowRect"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="Window"/>
+    <functioncall functionName="WindowCollection"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_hwnd"/>
+    <functioncall functionName="_type"/>
+    <functioncall functionName="add_child"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="bottom"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="collection"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="get_child"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="rect"/>
+    <functioncall functionName="right"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="top"/>
+    <functioncall functionName="type"/>
+    <functioncall functionName="w"/>
+    <functioncall functionName="wformat"/>
+    <functioncall functionName="wnd"/>
+    <functioncall functionName="wt"/>
+  </FileInfo>
+</analyzerinfo>

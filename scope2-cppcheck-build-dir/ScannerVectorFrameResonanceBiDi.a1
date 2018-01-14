@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="928773375">
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cutofflines&apos; is assigned a value that is never used." verbose="Variable &apos;cutofflines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="80"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;scanlines&apos; is assigned a value that is never used." verbose="Variable &apos;scanlines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="81"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." verbose="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="84"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cp_init&apos; is assigned a value that is never used." verbose="Variable &apos;cp_init&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="122"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameResonanceBiDi&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameResonanceBiDi&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.h" line="30"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="UpdateVector" lineNumber="10"/>
+    <functiondecl functionName="FillY" lineNumber="34"/>
+    <functiondecl functionName="FillZ" lineNumber="78"/>
+    <functiondecl functionName="FillP" lineNumber="103"/>
+    <functioncall functionName="FillP"/>
+    <functioncall functionName="FillY"/>
+    <functioncall functionName="FillZ"/>
+    <functioncall functionName="PositionToVoltage"/>
+    <functioncall functionName="ResonanceBiDi"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameResonanceBiDi"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YRetraceLines"/>
+    <functioncall functionName="YScanLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_filltype"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="cp"/>
+    <functioncall functionName="cy"/>
+    <functioncall functionName="cz"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="fastz"/>
+    <functioncall functionName="filltype"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="maxoutputscanner"/>
+    <functioncall functionName="minoutputscanner"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pockels"/>
+    <functioncall functionName="pockelsdev"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="scaletodevice"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="xaspectratio"/>
+    <functioncall functionName="yaspectratio"/>
+    <functioncall functionName="yoffset"/>
+    <functioncall functionName="yscanlines"/>
+    <functioncall functionName="z1"/>
+    <functioncall functionName="zoom"/>
+  </FileInfo>
+</analyzerinfo>

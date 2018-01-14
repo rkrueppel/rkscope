@@ -40,7 +40,7 @@ namespace scope {
 
 			scope::ScopeController& scope_controller;
 
-			scope::DaqController& daq_controller;
+			config::DaqControllerType& daq_controller;
 			
 			scope::DisplayController& display_controller;
 			
@@ -74,7 +74,7 @@ namespace scope {
 
 			CMainDlgFrame(
 				scope::ScopeController& _scope_controller
-				, scope::DaqController& _daq_controller
+				, config::DaqControllerType& _daq_controller
 				, scope::DisplayController& _display_controller
 				, scope::parameters::Scope& _guiparameters
 				, RunButtons& _runbuttons

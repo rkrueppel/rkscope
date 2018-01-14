@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2072221470">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\helpers.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\helpers.h" line="102"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;_DEBUG&apos; was not checked because its code equals another one." verbose="The configuration &apos;_DEBUG&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\helpers.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="GetCurrentDateString" lineNumber="4"/>
+    <functiondecl functionName="GetCurrentTimeString" lineNumber="12"/>
+    <functioncall functionName="GetLocalTime"/>
+    <functioncall functionName="Release"/>
+    <functioncall functionName="Scaler"/>
+    <functioncall functionName="ScopeMessage"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_cargo"/>
+    <functioncall functionName="_filenamecompatible"/>
+    <functioncall functionName="_init"/>
+    <functioncall functionName="_maxin"/>
+    <functioncall functionName="_minin"/>
+    <functioncall functionName="_tag"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="abort"/>
+    <functioncall functionName="abs"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="cargo"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="maxin"/>
+    <functioncall functionName="maxout"/>
+    <functioncall functionName="minin"/>
+    <functioncall functionName="minout"/>
+    <functioncall functionName="nothing"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="rangerelation"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="round2"/>
+    <functioncall functionName="setfill"/>
+    <functioncall functionName="setw"/>
+    <functioncall functionName="st"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="store"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="tag"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="wDay"/>
+    <functioncall functionName="wSecond"/>
+  </FileInfo>
+</analyzerinfo>

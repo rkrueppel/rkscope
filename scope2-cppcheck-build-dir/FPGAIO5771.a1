@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1168133278">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="WaitForIdle" lineNumber="27"/>
+    <functiondecl functionName="SetClockSource" lineNumber="41"/>
+    <functiondecl functionName="CheckIOModule" lineNumber="92"/>
+    <functioncall functionName="FPGAException"/>
+    <functioncall functionName="FPGAIO5771"/>
+    <functioncall functionName="NiFpga_ReadBool"/>
+    <functioncall functionName="NiFpga_ReadU8"/>
+    <functioncall functionName="NiFpga_WriteBool"/>
+    <functioncall functionName="NiFpga_WriteU16"/>
+    <functioncall functionName="NiFpga_WriteU8"/>
+    <functioncall functionName="WaitForIdle"/>
+    <functioncall functionName="_clock_source"/>
+    <functioncall functionName="_configured"/>
+    <functioncall functionName="_pll_locked"/>
+    <functioncall functionName="_session"/>
+    <functioncall functionName="_user_command_commit"/>
+    <functioncall functionName="_user_command_control"/>
+    <functioncall functionName="_user_command_idle"/>
+    <functioncall functionName="_user_command_status"/>
+    <functioncall functionName="_user_data_0_control"/>
+    <functioncall functionName="_user_data_1_control"/>
+    <functioncall functionName="_user_error"/>
+    <functioncall functionName="configured"/>
+    <functioncall functionName="configured_indicator"/>
+    <functioncall functionName="err"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="idle"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="locked"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="pll_locked_indicator"/>
+    <functioncall functionName="seconds"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="user_command_commit_control"/>
+    <functioncall functionName="user_command_control"/>
+    <functioncall functionName="user_command_idle_indicator"/>
+    <functioncall functionName="user_command_status_indicator"/>
+    <functioncall functionName="user_data_0_control"/>
+    <functioncall functionName="user_data_1_control"/>
+    <functioncall functionName="user_error_indicator"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

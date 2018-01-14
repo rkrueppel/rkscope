@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="909959807">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.h" line="13"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\helpers.h" line="102"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;FPGAException&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;FPGAException&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\FPGAException.h" line="14"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;FPGAStatusT&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;FPGAStatusT&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\FPGAException.h" line="96"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="ScopeExceptionHandler" lineNumber="8"/>
+    <functiondecl functionName="__ScopeExceptionHandlerHelper" lineNumber="55"/>
+    <functiondecl functionName="__ScopeExceptionHandlerHelperW" lineNumber="68"/>
+    <functiondecl functionName="ScopeExceptionHandler" lineNumber="8"/>
+    <functiondecl functionName="__ScopeExceptionHandlerHelper" lineNumber="55"/>
+    <functiondecl functionName="__ScopeExceptionHandlerHelperW" lineNumber="68"/>
+    <functioncall functionName="ATLTRACE2"/>
+    <functioncall functionName="Assign"/>
+    <functioncall functionName="CA2W"/>
+    <functioncall functionName="CW2A"/>
+    <functioncall functionName="Check"/>
+    <functioncall functionName="Description"/>
+    <functioncall functionName="FPGAException"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="GetString"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="MB_TOPMOST"/>
+    <functioncall functionName="MessageBoxA"/>
+    <functioncall functionName="MessageBoxW"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="NiFpga_IsError"/>
+    <functioncall functionName="NiFpga_Status_Success"/>
+    <functioncall functionName="Release"/>
+    <functioncall functionName="Scaler"/>
+    <functioncall functionName="ScopeMessage"/>
+    <functioncall functionName="Source"/>
+    <functioncall functionName="__ScopeExceptionHandlerHelper"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_cargo"/>
+    <functioncall functionName="_init"/>
+    <functioncall functionName="_log"/>
+    <functioncall functionName="_maxin"/>
+    <functioncall functionName="_minin"/>
+    <functioncall functionName="_msg"/>
+    <functioncall functionName="_rethrow"/>
+    <functioncall functionName="_showmessagebox"/>
+    <functioncall functionName="_st"/>
+    <functioncall functionName="_status"/>
+    <functioncall functionName="_tag"/>
+    <functioncall functionName="_trace"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="abort"/>
+    <functioncall functionName="abs"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="cargo"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="dump"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="fpga_message"/>
+    <functioncall functionName="fpga_status"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="log_error"/>
+    <functioncall functionName="maxin"/>
+    <functioncall functionName="maxout"/>
+    <functioncall functionName="minin"/>
+    <functioncall functionName="minout"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="nothing"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="operatorNiFpga_Status"/>
+    <functioncall functionName="path"/>
+    <functioncall functionName="rangerelation"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="round2"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="status"/>
+    <functioncall functionName="store"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="string"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="tag"/>
+    <functioncall functionName="throw"/>
+    <functioncall functionName="to_string"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="what"/>
+    <functioncall functionName="wstring"/>
+  </FileInfo>
+</analyzerinfo>

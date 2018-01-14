@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2120127036">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;framearea&apos; can be reduced." verbose="The scope of the variable &apos;framearea&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" line="29"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;reqEqual&apos; can be reduced." verbose="The scope of the variable &apos;reqEqual&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" line="56"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;framecountEqual&apos; can be reduced." verbose="The scope of the variable &apos;framecountEqual&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" line="56"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.h" line="35"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.h" line="55"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\StorageController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.h" line="58"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="StopOne" lineNumber="20"/>
+    <functiondecl functionName="Run" lineNumber="26"/>
+    <functiondecl functionName="CreateFolder" lineNumber="134"/>
+    <functiondecl functionName="InitializeEncoders" lineNumber="167"/>
+    <functiondecl functionName="FixTIFFTags" lineNumber="183"/>
+    <functioncall functionName="ATLTRACE"/>
+    <functioncall functionName="Area"/>
+    <functioncall functionName="BaseController"/>
+    <functioncall functionName="CREATE_NO_WINDOW"/>
+    <functioncall functionName="Channels"/>
+    <functioncall functionName="CloseHandle"/>
+    <functioncall functionName="ControllerReturnStatus"/>
+    <functioncall functionName="CreateFolder"/>
+    <functioncall functionName="CreateProcess"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Dequeue"/>
+    <functioncall functionName="Enqueue"/>
+    <functioncall functionName="FALSE"/>
+    <functioncall functionName="FixTIFFTags"/>
+    <functioncall functionName="Framecount"/>
+    <functioncall functionName="GetCurrentDirectory"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="InitializeEncoders"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Lines"/>
+    <functioncall functionName="Linewidth"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="NewFrame"/>
+    <functioncall functionName="SHCreateDirectoryEx"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="ScopeLogger"/>
+    <functioncall functionName="ScopeMultiImageEncoder"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="StopAll"/>
+    <functioncall functionName="StopOne"/>
+    <functioncall functionName="StorageController"/>
+    <functioncall functionName="WaitForAll"/>
+    <functioncall functionName="WaitForSingleObject"/>
+    <functioncall functionName="WriteFrame"/>
+    <functioncall functionName="ZeroMemory"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_ctrlparams"/>
+    <functioncall functionName="_dosave"/>
+    <functioncall functionName="_iqueue"/>
+    <functioncall functionName="_nactives"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="abort"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="autosave"/>
+    <functioncall functionName="basename"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="buff"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="cargo"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="cmdstr"/>
+    <functioncall functionName="compresstiff"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="ctrlparams"/>
+    <functioncall functionName="current_frames"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="date"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="dosave"/>
+    <functioncall functionName="encoders"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="filenames"/>
+    <functioncall functionName="finished"/>
+    <functioncall functionName="folder"/>
+    <functioncall functionName="foldername"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="framearea"/>
+    <functioncall functionName="framecountEqual"/>
+    <functioncall functionName="generate"/>
+    <functioncall functionName="hProcess"/>
+    <functioncall functionName="hThread"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="input_queue"/>
+    <functioncall functionName="log_error"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="micronperpixelx"/>
+    <functioncall functionName="micronperpixely"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="nactives"/>
+    <functioncall functionName="none"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pi"/>
+    <functioncall functionName="requested_frames"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="reset"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="returnstatus"/>
+    <functioncall functionName="run_state"/>
+    <functioncall functionName="runcounter"/>
+    <functioncall functionName="runmode"/>
+    <functioncall functionName="savelive"/>
+    <functioncall functionName="saveparameters"/>
+    <functioncall functionName="setfill"/>
+    <functioncall functionName="setw"/>
+    <functioncall functionName="si"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="spacing"/>
+    <functioncall functionName="stopmsg"/>
+    <functioncall functionName="stopped"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="t"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="totalframecount"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="usetifftags"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="wincmd"/>
+  </FileInfo>
+</analyzerinfo>

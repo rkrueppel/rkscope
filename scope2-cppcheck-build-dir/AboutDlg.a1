@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="511846863">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCloseCmd" lineNumber="13"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="CAboutDlg"/>
+    <functioncall functionName="COMMAND_ID_HANDLER"/>
+    <functioncall functionName="CenterWindow"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EndDialog"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="IDCANCEL"/>
+    <functioncall functionName="IDD_ABOUTBOX"/>
+    <functioncall functionName="IDOK"/>
+    <functioncall functionName="LPARAM"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="OnCloseCmd"/>
+    <functioncall functionName="OnInitDialog"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="WM_INITDIALOG"/>
+    <functioncall functionName="WORD"/>
+    <functioncall functionName="WPARAM"/>
+    <functioncall functionName="wID"/>
+  </FileInfo>
+</analyzerinfo>

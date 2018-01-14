@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3089787904">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="AttachToDlgItem" lineNumber="25"/>
+    <functiondecl functionName="OnScroll" lineNumber="35"/>
+    <functiondecl functionName="OnKeyDown" lineNumber="52"/>
+    <functiondecl functionName="OnKeyUp" lineNumber="64"/>
+    <functiondecl functionName="OnUpdateControl" lineNumber="72"/>
+    <functiondecl functionName="UpdateControl" lineNumber="78"/>
+    <functiondecl functionName="SetState" lineNumber="82"/>
+    <functiondecl functionName="SetSmallIncrement" lineNumber="87"/>
+    <functioncall functionName="CScopeScrollbarCtrl"/>
+    <functioncall functionName="ConnectGUI"/>
+    <functioncall functionName="ConnectState"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="DefWindowProc"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_OCM_HSCROLL"/>
+    <functioncall functionName="MSG_OCM_VSCROLL"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKeyUp"/>
+    <functioncall functionName="OnScroll"/>
+    <functioncall functionName="OnUpdateControl"/>
+    <functioncall functionName="PostMessage"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetScrollPos"/>
+    <functioncall functionName="SetScrollRange"/>
+    <functioncall functionName="SetState"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="TRUE"/>
+    <functioncall functionName="UpdateControl"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KEYUP"/>
+    <functioncall functionName="WM_NEXTDLGCTL"/>
+    <functioncall functionName="WM_UPDATECONTROL"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_connectback"/>
+    <functioncall functionName="_connectcontrolstate"/>
+    <functioncall functionName="_largeincrement"/>
+    <functioncall functionName="_scopenum"/>
+    <functioncall functionName="_smallincrement"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="incr"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="largeincrement"/>
+    <functioncall functionName="ll"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="nPos"/>
+    <functioncall functionName="round2i32"/>
+    <functioncall functionName="scopenum"/>
+    <functioncall functionName="shiftstate"/>
+    <functioncall functionName="smallincrement"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uMsg"/>
+    <functioncall functionName="ul"/>
+    <functioncall functionName="wParam"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3774662735">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeButton&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeButton&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeButton.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeButton.h" line="30"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Name" lineNumber="22"/>
+    <functiondecl functionName="Enable" lineNumber="26"/>
+    <functiondecl functionName="Click" lineNumber="31"/>
+    <functioncall functionName="ScopeButton"/>
+    <functioncall functionName="_name"/>
+    <functioncall functionName="bool"/>
+    <functioncall functionName="connect"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="enabled"/>
+    <functioncall functionName="m_changesig"/>
+    <functioncall functionName="m_ctrlstatesig"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="slot"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

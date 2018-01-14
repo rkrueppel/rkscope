@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3995778690">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one." verbose="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\gui\AreaChooseDlg.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCloseCmd" lineNumber="26"/>
+    <functioncall functionName="Attach"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="CAreaChooseDlg"/>
+    <functioncall functionName="COMMAND_ID_HANDLER"/>
+    <functioncall functionName="CenterWindow"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="EndDialog"/>
+    <functioncall functionName="FALSE"/>
+    <functioncall functionName="GetDlgItem"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="LPARAM"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="OnCloseCmd"/>
+    <functioncall functionName="OnInitDialog"/>
+    <functioncall functionName="SetFocus"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="WM_INITDIALOG"/>
+    <functioncall functionName="WORD"/>
+    <functioncall functionName="WPARAM"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="ret"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="wID"/>
+  </FileInfo>
+</analyzerinfo>

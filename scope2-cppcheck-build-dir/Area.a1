@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2034830680">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="85"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="89"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="93"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="96"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Daq.h" line="26"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;MasterArea&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;MasterArea&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="168"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Currentframe" lineNumber="82"/>
+    <functiondecl functionName="Load" lineNumber="86"/>
+    <functiondecl functionName="Save" lineNumber="111"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="143"/>
+    <functiondecl functionName="SaveToPreset" lineNumber="153"/>
+    <functiondecl functionName="LoadFromPreset" lineNumber="157"/>
+    <functiondecl functionName="DeletePreset" lineNumber="161"/>
+    <functiondecl functionName="FrameTime" lineNumber="165"/>
+    <functiondecl functionName="LineTime" lineNumber="169"/>
+    <functiondecl functionName="TotalPixelsAllChannels" lineNumber="173"/>
+    <functiondecl functionName="XOffsetInMicron" lineNumber="177"/>
+    <functiondecl functionName="YOffsetInMicron" lineNumber="182"/>
+    <functiondecl functionName="InitializeConnections" lineNumber="187"/>
+    <functiondecl functionName="ChangeScanMode" lineNumber="204"/>
+    <functiondecl functionName="UpdateRates" lineNumber="209"/>
+    <functiondecl functionName="UpdateFastZCalibration" lineNumber="215"/>
+    <functiondecl functionName="CalculateMicronPerPixel" lineNumber="223"/>
+    <functiondecl functionName="CalculateResolution" lineNumber="229"/>
+    <functiondecl functionName="SetMasterArea" lineNumber="263"/>
+    <functiondecl functionName="CopyFromMasterArea" lineNumber="271"/>
+    <functiondecl functionName="InitializeConnections" lineNumber="286"/>
+    <functiondecl functionName="ChangeScanMode" lineNumber="305"/>
+    <functioncall functionName="AIOverRange"/>
+    <functioncall functionName="Acquiring"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="BaseArea"/>
+    <functioncall functionName="Bidirectional"/>
+    <functioncall functionName="CalculateMicronPerPixel"/>
+    <functioncall functionName="CalculateResolution"/>
+    <functioncall functionName="ChangeScanMode"/>
+    <functioncall functionName="ConnectCopyTrigger"/>
+    <functioncall functionName="ConnectMicronPerPixelUpdate"/>
+    <functioncall functionName="ConnectOther"/>
+    <functioncall functionName="ConnectRateUpdate"/>
+    <functioncall functionName="ConnectResolutionUpdate"/>
+    <functioncall functionName="CopyFromMasterArea"/>
+    <functioncall functionName="CountingMode"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Daq"/>
+    <functioncall functionName="DeletePreset"/>
+    <functioncall functionName="Diagnosis"/>
+    <functioncall functionName="Factory"/>
+    <functioncall functionName="FrameTime"/>
+    <functioncall functionName="InitializeConnections"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="InputsFPGA"/>
+    <functioncall functionName="InputsFPGAAnalogDemultiplexer"/>
+    <functioncall functionName="InputsFPGAAnalogIntegrator"/>
+    <functioncall functionName="InputsFPGADigitalDemultiplexer"/>
+    <functioncall functionName="InputsFPGAIO5751"/>
+    <functioncall functionName="InputsFPGAIO5771"/>
+    <functioncall functionName="InputsFPGAIO6587"/>
+    <functioncall functionName="InputsFPGANoiseOutput"/>
+    <functioncall functionName="InputsFPGAPhotonCounter"/>
+    <functioncall functionName="InputsFPGAResonanceScanner"/>
+    <functioncall functionName="InterloopOverflow"/>
+    <functioncall functionName="InterloopTimeout"/>
+    <functioncall functionName="LineStraight"/>
+    <functioncall functionName="LineTime"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="LoadFromPreset"/>
+    <functioncall functionName="Master"/>
+    <functioncall functionName="MeasuredLaserFreq"/>
+    <functioncall functionName="NameOf"/>
+    <functioncall functionName="OutputsDAQmx"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="OutputsDAQmxResonanceSlave"/>
+    <functioncall functionName="OutputsDAQmxSlave"/>
+    <functioncall functionName="PlaneProperties"/>
+    <functioncall functionName="Planehopper"/>
+    <functioncall functionName="Preset"/>
+    <functioncall functionName="ResonanceBiDi"/>
+    <functioncall functionName="ResonanceHopper"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="SaveToPreset"/>
+    <functioncall functionName="Sawtooth"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameBiDi"/>
+    <functioncall functionName="ScannerVectorFramePlaneHopper"/>
+    <functioncall functionName="ScannerVectorFrameResonance"/>
+    <functioncall functionName="ScannerVectorFrameResonanceHopper"/>
+    <functioncall functionName="ScannerVectorFrameSaw"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetLimits"/>
+    <functioncall functionName="SetRWState"/>
+    <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="Slave"/>
+    <functioncall functionName="SlaveArea"/>
+    <functioncall functionName="ToHostOverflowA1"/>
+    <functioncall functionName="ToHostOverflowA1Ch1"/>
+    <functioncall functionName="ToHostOverflowA1Ch2"/>
+    <functioncall functionName="ToHostOverflowA2"/>
+    <functioncall functionName="ToHostOverflowA2Ch1"/>
+    <functioncall functionName="ToHostOverflowA2Ch2"/>
+    <functioncall functionName="ToHostOverflowCh1"/>
+    <functioncall functionName="ToHostOverflowCh2"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="TotalPixelsOneFrame"/>
+    <functioncall functionName="UpdateFastZCalibration"/>
+    <functioncall functionName="UpdateRates"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="XCutoffPixels"/>
+    <functioncall functionName="XImagePixels"/>
+    <functioncall functionName="XRetracePixels"/>
+    <functioncall functionName="XTotalPixels"/>
+    <functioncall functionName="XTurnPixels"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YImageLines"/>
+    <functioncall functionName="YRetraceLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_at"/>
+    <functioncall functionName="_itsmasterarea"/>
+    <functioncall functionName="_masterarea"/>
+    <functioncall functionName="_name"/>
+    <functioncall functionName="_o"/>
+    <functioncall functionName="_runstate"/>
+    <functioncall functionName="_slavearea"/>
+    <functioncall functionName="add_child"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="areatype"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="basemicronperpixelx"/>
+    <functioncall functionName="basemicronperpixely"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="ceil"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="daq"/>
+    <functioncall functionName="daqmxversion"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="emplace"/>
+    <functioncall functionName="empty"/>
+    <functioncall functionName="enabler"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="first"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="fpuxystage"/>
+    <functioncall functionName="fpuzstage"/>
+    <functioncall functionName="framerate"/>
+    <functioncall functionName="frametime"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="get_child"/>
+    <functioncall functionName="histrange"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="linerate"/>
+    <functioncall functionName="make_pair"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="masterarea"/>
+    <functioncall functionName="micronperpixelx"/>
+    <functioncall functionName="micronperpixely"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="operator="/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pixeltime"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="ptdaq"/>
+    <functioncall functionName="ptfpuxystage"/>
+    <functioncall functionName="ptfpuzstage"/>
+    <functioncall functionName="ptsv"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="scanmode"/>
+    <functioncall functionName="scannervectorframesmap"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="xaspectratio"/>
+    <functioncall functionName="xaspectratioboundary"/>
+    <functioncall functionName="xcutoff"/>
+    <functioncall functionName="xoffset"/>
+    <functioncall functionName="xres"/>
+    <functioncall functionName="xretrace"/>
+    <functioncall functionName="xturnfraction"/>
+    <functioncall functionName="yaspectratio"/>
+    <functioncall functionName="yaspectratioboundary"/>
+    <functioncall functionName="ycutoff"/>
+    <functioncall functionName="yoffset"/>
+    <functioncall functionName="yres"/>
+    <functioncall functionName="yretrace"/>
+    <functioncall functionName="zoom"/>
+  </FileInfo>
+</analyzerinfo>

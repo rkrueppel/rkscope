@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3288327861">
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="CScopeUpDownCtrl"/>
+    <functioncall functionName="ConnectState"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="LPNMUPDOWN"/>
+    <functioncall functionName="MSG_OCM_NOTIFY"/>
+    <functioncall functionName="OnUpDown"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="UpdateValue"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_connectcontrolstate"/>
+    <functioncall functionName="_increment"/>
+    <functioncall functionName="_scopeval"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="incdec"/>
+    <functioncall functionName="increment"/>
+    <functioncall functionName="pnmh"/>
+    <functioncall functionName="scopeval"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

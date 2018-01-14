@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1699858062">
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.cpp" line="30"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;message&apos; should be passed by reference." verbose="Parameter &apos;message&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\ScopeLogger.cpp" line="35"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="GetInstance" lineNumber="25"/>
+    <functiondecl functionName="WriteToConsole" lineNumber="30"/>
+    <functiondecl functionName="WriteToLogbox" lineNumber="35"/>
+    <functiondecl functionName="FlushLogbox" lineNumber="56"/>
+    <functiondecl functionName="SetLoggingTypes" lineNumber="70"/>
+    <functiondecl functionName="SetFilepath" lineNumber="76"/>
+    <functiondecl functionName="Log" lineNumber="91"/>
+    <functiondecl functionName="AttachLogFrame" lineNumber="102"/>
+    <functiondecl functionName="GetLogFrameWindow" lineNumber="107"/>
+    <functiondecl functionName="HasLogFrame" lineNumber="114"/>
+    <functiondecl functionName="GetUserLoggings" lineNumber="118"/>
+    <functiondecl functionName="DetachLogFrame" lineNumber="124"/>
+    <functiondecl functionName="Shutdown" lineNumber="129"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="FlushLogbox"/>
+    <functioncall functionName="GetCurrentDateString"/>
+    <functioncall functionName="GetCurrentTimeString"/>
+    <functioncall functionName="GetLocalTime"/>
+    <functioncall functionName="GetLogText"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="Quit"/>
+    <functioncall functionName="ReplaceLogText"/>
+    <functioncall functionName="ScopeLogger"/>
+    <functioncall functionName="Send"/>
+    <functioncall functionName="WriteToConsole"/>
+    <functioncall functionName="WriteToLogbox"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_logframe"/>
+    <functioncall functionName="bad"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="close"/>
+    <functioncall functionName="console_message"/>
+    <functioncall functionName="consolem"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="file_messages"/>
+    <functioncall functionName="file_path"/>
+    <functioncall functionName="filem"/>
+    <functioncall functionName="filepath_set"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="invalid_argument"/>
+    <functioncall functionName="is_open"/>
+    <functioncall functionName="length"/>
+    <functioncall functionName="log_all"/>
+    <functioncall functionName="log_error"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="logbookentries"/>
+    <functioncall functionName="logbooktext"/>
+    <functioncall functionName="logframe"/>
+    <functioncall functionName="logframe_message"/>
+    <functioncall functionName="logframem"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="msgtype"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="sc"/>
+    <functioncall functionName="setfill"/>
+    <functioncall functionName="setw"/>
+    <functioncall functionName="st"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="substr"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="trunc"/>
+  </FileInfo>
+</analyzerinfo>

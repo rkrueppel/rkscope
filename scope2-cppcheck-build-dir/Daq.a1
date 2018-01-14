@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3803075124">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Daq.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Daq.h" line="26"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="ScannerDelaySamples" lineNumber="70"/>
+    <functiondecl functionName="Load" lineNumber="77"/>
+    <functiondecl functionName="Save" lineNumber="91"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="107"/>
+    <functiondecl functionName="CoercePixeltime" lineNumber="134"/>
+    <functioncall functionName="AIOverRange"/>
+    <functioncall functionName="Acquiring"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="Clone"/>
+    <functioncall functionName="CoercePixeltime"/>
+    <functioncall functionName="CoercedPixeltime"/>
+    <functioncall functionName="ConnectOther"/>
+    <functioncall functionName="CountingMode"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Daq"/>
+    <functioncall functionName="Diagnosis"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="InputsFPGA"/>
+    <functioncall functionName="InputsFPGAAnalogDemultiplexer"/>
+    <functioncall functionName="InputsFPGAAnalogIntegrator"/>
+    <functioncall functionName="InputsFPGADigitalDemultiplexer"/>
+    <functioncall functionName="InputsFPGAIO5751"/>
+    <functioncall functionName="InputsFPGAIO5771"/>
+    <functioncall functionName="InputsFPGAIO6587"/>
+    <functioncall functionName="InputsFPGANoiseOutput"/>
+    <functioncall functionName="InputsFPGAPhotonCounter"/>
+    <functioncall functionName="InputsFPGAResonanceScanner"/>
+    <functioncall functionName="InterloopOverflow"/>
+    <functioncall functionName="InterloopTimeout"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="MeasuredLaserFreq"/>
+    <functioncall functionName="MinimumPixeltime"/>
+    <functioncall functionName="OutputsDAQmx"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="OutputsDAQmxResonanceSlave"/>
+    <functioncall functionName="OutputsDAQmxSlave"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetLimits"/>
+    <functioncall functionName="SetRWState"/>
+    <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="ToHostOverflowA1"/>
+    <functioncall functionName="ToHostOverflowA1Ch1"/>
+    <functioncall functionName="ToHostOverflowA1Ch2"/>
+    <functioncall functionName="ToHostOverflowA2"/>
+    <functioncall functionName="ToHostOverflowA2Ch1"/>
+    <functioncall functionName="ToHostOverflowA2Ch2"/>
+    <functioncall functionName="ToHostOverflowCh1"/>
+    <functioncall functionName="ToHostOverflowCh2"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_isslave"/>
+    <functioncall functionName="_pt"/>
+    <functioncall functionName="_runstate"/>
+    <functioncall functionName="add_child"/>
+    <functioncall functionName="averages"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="daqmxversion"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="epsilon"/>
+    <functioncall functionName="fabs"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="get_child"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="inputs"/>
+    <functioncall functionName="inputtime"/>
+    <functioncall functionName="isslave"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="outputs"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="oversampling"/>
+    <functioncall functionName="pixeltime"/>
+    <functioncall functionName="ptinputs"/>
+    <functioncall functionName="ptoutputs"/>
+    <functioncall functionName="requested_frames"/>
+    <functioncall functionName="resonance_frequency"/>
+    <functioncall functionName="round2i32"/>
+    <functioncall functionName="scannerdelay"/>
+    <functioncall functionName="shutterline"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="switchresonanceline"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="ul"/>
+    <functioncall functionName="unique_ptr"/>
+  </FileInfo>
+</analyzerinfo>

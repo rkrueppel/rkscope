@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3967599584">
+        <error id="preprocessorErrorDirective" severity="error" msg="#error Aero. h requires the Windows Template Library 8.0" verbose="#error Aero. h requires the Windows Template Library 8.0">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\gui\ThirdParty\Aero.h" line="11"/>
+        </error>
+</analyzerinfo>

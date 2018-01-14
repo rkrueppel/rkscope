@@ -342,7 +342,7 @@ int32 CDAQmxAnalogInTask::ReadU16(std::vector<uint16_t>::iterator& _databegin, s
 		, _sampsperchan
 		, _timeout
 		, DAQmx_Val_GroupByChannel
-		, _databegin
+		, &(*_databegin)
 		, static_cast<uInt32>(std::distance(_databegin, _dataend))
 		, &readsamples
 		, NULL);
@@ -371,7 +371,7 @@ int32 CDAQmxAnalogInTask::ReadI16(std::vector<int16_t>::iterator& _databegin, st
 		, _sampsperchan
 		, _timeout
 		, DAQmx_Val_GroupByChannel
-		, _databegin
+		, &(*_databegin)
 		, static_cast<uInt32>(std::distance(_databegin, _dataend))
 		, &readsamples
 		, NULL);

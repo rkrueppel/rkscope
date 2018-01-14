@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1083117117">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2ChannelRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="DiscardDeviceResources" lineNumber="20"/>
+    <functiondecl functionName="Create" lineNumber="26"/>
+    <functiondecl functionName="Resize" lineNumber="36"/>
+    <functiondecl functionName="ResizeBitmap" lineNumber="42"/>
+    <functiondecl functionName="Render" lineNumber="49"/>
+    <functiondecl functionName="UpdateScaleText" lineNumber="73"/>
+    <functiondecl functionName="DiscardDeviceResources" lineNumber="20"/>
+    <functiondecl functionName="Create" lineNumber="26"/>
+    <functiondecl functionName="Resize" lineNumber="36"/>
+    <functiondecl functionName="ResizeBitmap" lineNumber="42"/>
+    <functiondecl functionName="Render" lineNumber="49"/>
+    <functiondecl functionName="UpdateScaleText" lineNumber="73"/>
+    <functioncall functionName="BeginDraw"/>
+    <functioncall functionName="CheckWindowState"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ColorF"/>
+    <functioncall functionName="CreateBitmap"/>
+    <functioncall functionName="CreateSolidColorBrush"/>
+    <functioncall functionName="CreateTextFormat"/>
+    <functioncall functionName="D2ChannelRender"/>
+    <functioncall functionName="D2D1CreateFactory"/>
+    <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="DiscardDeviceResources"/>
+    <functioncall functionName="DrawBitmap"/>
+    <functioncall functionName="DrawText"/>
+    <functioncall functionName="EndDraw"/>
+    <functioncall functionName="Flush"/>
+    <functioncall functionName="GetDesktopDpi"/>
+    <functioncall functionName="GetSize"/>
+    <functioncall functionName="HRESULT"/>
+    <functioncall functionName="Identity"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="Point2F"/>
+    <functioncall functionName="RectF"/>
+    <functioncall functionName="Red"/>
+    <functioncall functionName="RenderTarget"/>
+    <functioncall functionName="Resize"/>
+    <functioncall functionName="SCOPE_DIRECT2D_DEBUG"/>
+    <functioncall functionName="SUCCEEDED"/>
+    <functioncall functionName="S_OK"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="SetTransform"/>
+    <functioncall functionName="SizeU"/>
+    <functioncall functionName="White"/>
+    <functioncall functionName="X"/>
+    <functioncall functionName="Y"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_hwnd"/>
+    <functioncall functionName="_text"/>
+    <functioncall functionName="_xres"/>
+    <functioncall functionName="_yres"/>
+    <functioncall functionName="bitmap"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="height"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="hwnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="options"/>
+    <functioncall functionName="pd2d_factory"/>
+    <functioncall functionName="policy_class"/>
+    <functioncall functionName="render_target"/>
+    <functioncall functionName="reset"/>
+    <functioncall functionName="scaleX"/>
+    <functioncall functionName="scaleY"/>
+    <functioncall functionName="scaletext"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="text_brush"/>
+    <functioncall functionName="text_format"/>
+    <functioncall functionName="width"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="99079858">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="19"/>
+    <functiondecl functionName="Save" lineNumber="29"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="39"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetRWState"/>
+    <functioncall functionName="Stimulation"/>
+    <functioncall functionName="channel"/>
+    <functioncall functionName="duration"/>
+    <functioncall functionName="enable"/>
+    <functioncall functionName="enabler"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="offtime"/>
+    <functioncall functionName="onset"/>
+    <functioncall functionName="ontime"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="timingsource"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

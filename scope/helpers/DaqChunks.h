@@ -7,13 +7,13 @@ namespace scope {
 	class DaqChunk {
 		public:
 			/** Iterator over the data vector */
-			typedef typename std::vector<DATA_T>::iterator iterator;
+			typedef typename std::vector<DATA_T>::iterator dataiterator;
 
 			/** The data vector */
 			std::vector<DATA_T> data;
 
 			/** Iterators to positions that were last mapped. Order could be area first, channel second A0C0A0C1A1C0A1C1 and so on. */
-			std::vector<iterator> lastmapped;
+			std::vector<dataiterator> lastmapped;
 
 			DaqChunk(const uint32_t& _datasize, const uint32_t& _lastmappedsize)
 				: data(_datasize, (DATA_T)0)
@@ -38,7 +38,7 @@ namespace scope {
 
 		public:
 			/** Iterators to positions that was last mapped. Outer array is areas, inner vector is channels. */
-			std::array<std::vector<iterator>, NAREAS> lastmapped;
+			std::array<std::vector<dataiterator>, NAREAS> lastmapped;
 
 			/** @param[in] _perchannel number of samples the chunk should contain per channel */
 			DaqMultiChunk(const uint32_t& _perchannel)
@@ -46,7 +46,7 @@ namespace scope {
 				, perchannel(_perchannel)
 			{
 				// Reset lastmapped
-				lastmapped.fill(std::vector<iterator>(NCHANNELS));
+				lastmapped.fill(std::vector<dataiterator>(NCHANNELS));
 				for (uint32_t a = 0; a < NAREAS; a++) {
 					for (uint32_t c = 0; c < NCHANNELS; c++) {
 						lastmapped[a][c] = std::begin(data) + a * (NCHANNELS*perchannel) + c * perchannel;
@@ -57,14 +57,14 @@ namespace scope {
 			/** @name Several accessor methods
 			* @{ */
 			uint32_t PerChannel() const { return perchannel; }
-			iterator GetLastMapped(const uint32_t& _area, const uint32_t& _channel) const { return lastmapped[_area][_channel]; }
+			dataiterator GetLastMapped(const uint32_t& _area, const uint32_t& _channel) const { return lastmapped[_area][_channel]; }
 			/* @ret Where does _area start in the data vector */
-			iterator GetDataStart(const uint32_t& _area) { return data.begin() + _area * NCHANNELS * perchannel; }
+			dataiterator GetDataStart(const uint32_t& _area) { return data.begin() + _area * NCHANNELS * perchannel; }
 			/** @} */
-
+			
 			/** @name Mutator methods
 			* @{ */
-			void SetLastMapped(const uint32_t& _area, const uint32_t& _channel, const iterator& _last) { lastmapped[_area][_channel] = _last; }
+			void SetLastMapped(const uint32_t& _area, const uint32_t& _channel, const dataiterator& _last) { lastmapped[_area][_channel] = _last; }
 			/** @} */
 
 			/** Downsamples by averaging _factor samples. Replaces every _factor samples by their average.
@@ -98,8 +98,8 @@ namespace scope {
 
 				// Reset lastmapped
 				for (uint32_t a = 0; a < NAREAS; a++) {
-					for (uint32_t c = 0; < NCHANNELS; c++) {
-						lastmapped[a*NCHANNELS+c] = std::begin(data) + a * (NCHANNELS*perchannel) + c * perchannel;
+					for (uint32_t c = 0; c < NCHANNELS; c++) {
+						lastmapped[a][c] = std::begin(data) + a * (NCHANNELS*perchannel) + c * perchannel;
 					}
 				}
 			}

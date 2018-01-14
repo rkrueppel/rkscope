@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2500676550">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="InitializeColors" lineNumber="19"/>
+    <functioncall functionName="CBEIF_SELECTEDIMAGE"/>
+    <functioncall functionName="CScopeColorComboCtrl"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="GetLength"/>
+    <functioncall functionName="IDB_COLORCOMBO"/>
+    <functioncall functionName="ILC_COLOR24"/>
+    <functioncall functionName="InsertItem"/>
+    <functioncall functionName="IsNull"/>
+    <functioncall functionName="LPCWSTR"/>
+    <functioncall functionName="LPWSTR"/>
+    <functioncall functionName="MAKEINTRESOURCE"/>
+    <functioncall functionName="SetImageList"/>
+    <functioncall functionName="cbi"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="imagelist"/>
+    <functioncall functionName="size"/>
+  </FileInfo>
+</analyzerinfo>

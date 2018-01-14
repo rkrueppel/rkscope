@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="485388417">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="28"/>
+    <functiondecl functionName="MoveAbsolute" lineNumber="35"/>
+    <functiondecl functionName="MoveRelative" lineNumber="42"/>
+    <functiondecl functionName="SetXYZero" lineNumber="59"/>
+    <functioncall functionName="Connect"/>
+    <functioncall functionName="ConnectOther"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="FPUController"/>
+    <functioncall functionName="FPUMoveDirection"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="MB_TOPMOST"/>
+    <functioncall functionName="MessageBox"/>
+    <functioncall functionName="MoveAbsolute"/>
+    <functioncall functionName="MoveRelative"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="SetXYZero"/>
+    <functioncall functionName="SetZero"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_dir"/>
+    <functioncall functionName="_guiareaparamsvec"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="buttonstepsize"/>
+    <functioncall functionName="down"/>
+    <functioncall functionName="emplace_back"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="fpuxystage"/>
+    <functioncall functionName="guiareaparamsvec"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="newx"/>
+    <functioncall functionName="newy"/>
+    <functioncall functionName="right"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="stepsizes"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="theXYStages"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="up"/>
+    <functioncall functionName="xpos"/>
+    <functioncall functionName="ypos"/>
+  </FileInfo>
+</analyzerinfo>

@@ -8,7 +8,7 @@ namespace scope {
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
 		, ScopeCounters<config::nmasters>& _counters
-		, DaqController& _theDaq
+		, config::DaqControllerType& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
 		, DisplayController& _theDisplay
@@ -118,7 +118,7 @@ namespace scope {
 	void ScopeController::SetScannerVectorParameters() {
 		DBOUT(L"ScopeControllerImpl::SetScannerVectorParameters");
 		for (uint32_t a = 0; a < nareas; a++)
-			framescannervecs[a]->SetParameters(&ctrlparams.areas[a].daq, &ctrlparams.areas[a].Currentframe(), &ctrlparams.areas[a].fpuzstage);
+			framescannervecs[a]->SetParameters(&ctrlparams.allareas[a]->daq, &ctrlparams.allareas[a]->Currentframe(), &ctrlparams.allareas[a]->fpuzstage);
 	}
 
 	ControllerReturnStatus ScopeController::RunLive(StopCondition* const sc) {
@@ -145,8 +145,8 @@ namespace scope {
 		SetScannerVectorParameters();
 
 		// We do the same number of planes in each area (if fast z and not that many planes in range in one area, Pockels was set to zero in parameters::stack::UpdatePlanes)
-		for (auto& a : ctrlparams.areas)
-			a.daq.requested_frames = ctrlparams.stack.planes___.size();
+		for (auto& a : ctrlparams.allareas)
+			a->daq.requested_frames = ctrlparams.stack.planes.size();
 
 		// StorageController and DisplayController saves/displays the number of slices in each area
 		theStorage.Start();
@@ -154,34 +154,34 @@ namespace scope {
 
 		// At every slice Daq and PipelineController expect 1 frame (they calculate averages themselves)
 		//  do not manipulate guiparameters here, otherwise we have a problem on restarting the stack
-		for (auto& ap : ctrlparams.areas)
-			ap.daq.requested_frames = 1;
+		for (auto& ap : ctrlparams.allareas)
+			ap->daq.requested_frames = 1;
 
 		// Set scale for the progress indicator
-		counters.planecounter.SetWithLimits(0, 0, ctrlparams.stack.planes___.size());
+		counters.planecounter.SetWithLimits(0, 0, ctrlparams.stack.planes.size());
 
 		// Go through all the precalculated planes
-		for (uint32_t p = 0; p < ctrlparams.stack.planes___.size(); p++) {
+		for (uint32_t p = 0; p < ctrlparams.stack.planes.size(); p++) {
 
 			// Move to precalculated position (stage position is the same for all areas, no of slices thus also the same)
 			if (ctrlparams.stack.zdevicetype().t == ZDeviceHelper::ZStage) {
-				theStage.MoveAbsolute(theStage.CurrentXPosition(), theStage.CurrentYPosition(), ctrlparams.stack.planes___[p][0].position());
+				theStage.MoveAbsolute(theStage.CurrentXPosition(), theStage.CurrentYPosition(), ctrlparams.stack.planes[p][0].position());
 				// Wait one second for movement to complete
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			else if (ctrlparams.stack.zdevicetype().t == ZDeviceHelper::FastZ) {
 				for (uint32_t a = 0; a < nareas; a++) {
-					ctrlparams.areas[a].Currentframe().fastz = ctrlparams.stack.planes___[p][a].position();
+					ctrlparams.allareas[a]->Currentframe().fastz = ctrlparams.stack.planes[p][a].position();
 					// Also change guiparameters so the users sees what is happening during stacking
-					guiparameters.areas[a].Currentframe().fastz = ctrlparams.stack.planes___[p][a].position();
+					guiparameters.allareas[a]->Currentframe().fastz = ctrlparams.stack.planes[p][a].position();
 				}
 			}
 
 			// Set pockels to precalculated value
 			for (uint32_t a = 0; a < nareas; a++) {
-				ctrlparams.areas[a].Currentframe().pockels = ctrlparams.stack.planes___[p][a].pockels();
+				ctrlparams.allareas[a]->Currentframe().pockels = ctrlparams.stack.planes[p][a].pockels();
 				// Also change guiparameters so the users sees what is happening during stacking
-				guiparameters.areas[a].Currentframe().pockels = ctrlparams.stack.planes___[p][a].pockels();
+				guiparameters.allareas[a]->Currentframe().pockels = ctrlparams.stack.planes[p][a].pockels();
 			}
 
 			// Calculate scanner vectors
@@ -242,7 +242,7 @@ namespace scope {
 			// Alternate planes if planes defined
 			if (ctrlparams.timeseries.planes.size() != 0) {
 				for (uint32_t a = 0; a < nareas; a++)
-					ctrlparams.areas[a].Currentframe().fastz = ctrlparams.timeseries.planes[t % ctrlparams.timeseries.planes.size()][a].position();
+					ctrlparams.allareas[a]->Currentframe().fastz = ctrlparams.timeseries.planes[t % ctrlparams.timeseries.planes.size()][a].position();
 				SetScannerVectorParameters();
 			}
 
@@ -357,7 +357,7 @@ namespace scope {
 			guiparameters.date.Set(GetCurrentDateString());
 			guiparameters.time.Set(GetCurrentTimeString());
 			for (uint32_t a = 0; a < nareas; a++)
-				guiparameters.areas[a].daq.requested_frames = guiparameters.timeseries.frames[a]();
+				guiparameters.allareas[a]->daq.requested_frames = guiparameters.timeseries.frames[a]();
 			
 			ctrlparams = guiparameters;
 			//SetGuiCtrlState();
@@ -429,17 +429,24 @@ namespace scope {
 				DBOUT(L"ScopeController::UpdateAreaParametersFromGui starting new online update");
 				onlineupdate_running = true;
 				try {
-					ctrlparams.areas[_area] = guiparameters.areas[_area];
-					DBOUT(L"ScopeController::UpdateAreaParametersFromGui guioffset " << guiparameters.areas[_area].Currentframe().xoffset() << L" " << guiparameters.areas[_area].Currentframe().yoffset());
+					if ( guiparameters.allareas[_area]->areatype() == AreaTypeHelper::Master)
+						ctrlparams.allareas[_area] = std::make_unique<parameters::MasterArea>(*dynamic_cast<parameters::MasterArea*>(guiparameters.allareas[_area].get()));
+					else {
+						ctrlparams.allareas[_area] = std::make_unique<parameters::SlaveArea>(*dynamic_cast<parameters::SlaveArea*>(guiparameters.allareas[_area].get()));
+						auto themaster = dynamic_cast<parameters::SlaveArea*>(guiparameters.allareas[_area].get())->masterarea->area();
+						dynamic_cast<parameters::SlaveArea*>(ctrlparams.allareas[_area].get())->SetMasterArea(dynamic_cast<parameters::MasterArea*>(ctrlparams.allareas[themaster].get()));
+					}
+
+					DBOUT(L"ScopeController::UpdateAreaParametersFromGui guioffset " << guiparameters.allareas[_area]->Currentframe().xoffset() << L" " << guiparameters.allareas[_area]->Currentframe().yoffset());
 					// This is the expensive step, the recalculation of the scannervector
-					framescannervecs[_area]->SetParameters(&ctrlparams.areas[_area].daq, &ctrlparams.areas[_area].Currentframe(), &ctrlparams.areas[_area].fpuzstage);
+					framescannervecs[_area]->SetParameters(&ctrlparams.allareas[_area]->daq, &ctrlparams.allareas[_area]->Currentframe(), &ctrlparams.allareas[_area]->fpuzstage);
 
 					// Fix for online pockel cell update: somehow in this function the currentframe is always framesaw, so I added an if statement to go straight for frameresonance parameters in the resonance scanmode (Karlis)
 					//framescannervecs[_area]->SetParameters(&parameters.areas[_area]->daq, SCOPE_USE_RESONANCESCANNER?&parameters.areas[_area]->frameresonance:parameters.areas[_area]->currentframe, &parameters.areas[_area]->fpuzstage);
 					// This returns only after the updated scannervec is written to the device buffer or the whole update write is aborted
-					theDaq.OnlineParameterUpdate(ctrlparams.areas[_area]);
+					theDaq.OnlineParameterUpdate(_area, *ctrlparams.allareas[_area].get());
 
-					theDisplay.ResolutionChange(ctrlparams.areas[_area]);
+					theDisplay.ResolutionChange(*ctrlparams.allareas[_area].get());
 				}
 				catch (...) {
 					ScopeExceptionHandler(__FUNCTION__);

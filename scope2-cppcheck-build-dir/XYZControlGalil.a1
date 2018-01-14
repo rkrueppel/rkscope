@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="748460099">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;GalilController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;GalilController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlGalil.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.h" line="36"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="23"/>
+    <functiondecl functionName="UpdatePositionValues" lineNumber="54"/>
+    <functiondecl functionName="CurrentXPosition" lineNumber="63"/>
+    <functiondecl functionName="CurrentYPosition" lineNumber="73"/>
+    <functiondecl functionName="CurrentZPosition" lineNumber="83"/>
+    <functiondecl functionName="SetZeroXAxis" lineNumber="93"/>
+    <functiondecl functionName="SetZeroYAxis" lineNumber="101"/>
+    <functiondecl functionName="SetZeroZAxis" lineNumber="109"/>
+    <functiondecl functionName="MoveRelative" lineNumber="117"/>
+    <functiondecl functionName="MoveAbsolute" lineNumber="134"/>
+    <functioncall functionName="Command"/>
+    <functioncall functionName="CommandValue"/>
+    <functioncall functionName="Connection"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="GalilController"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="LibraryVersion"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetZero"/>
+    <functioncall functionName="StopPolling"/>
+    <functioncall functionName="UpdatePositionValues"/>
+    <functioncall functionName="XYZControl"/>
+    <functioncall functionName="XYZControlGalil"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_params"/>
+    <functioncall functionName="_xabs"/>
+    <functioncall functionName="_xrel"/>
+    <functioncall functionName="_yabs"/>
+    <functioncall functionName="_yrel"/>
+    <functioncall functionName="_zabs"/>
+    <functioncall functionName="_zrel"/>
+    <functioncall functionName="abs"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="comstring"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="gc"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pos"/>
+    <functioncall functionName="round2i32"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="xcountspermicron"/>
+    <functioncall functionName="ycountspermicron"/>
+    <functioncall functionName="zcountspermicron"/>
+  </FileInfo>
+</analyzerinfo>

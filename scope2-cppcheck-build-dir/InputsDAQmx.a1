@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3800765699">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;timedout&apos; can be reduced." verbose="The scope of the variable &apos;timedout&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\InputsDAQmx.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\InputsDAQmx.h" line="52"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Inputs&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Inputs&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\InputsDAQmx.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\Inputs.h" line="19"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Start" lineNumber="61"/>
+    <functiondecl functionName="Stop" lineNumber="65"/>
+    <functiondecl functionName="StandardChunkSize" lineNumber="69"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ClockString"/>
+    <functioncall functionName="ConfigureDigStartTrigger"/>
+    <functioncall functionName="ConfigureReferenceClock"/>
+    <functioncall functionName="ConfigureSampleTiming"/>
+    <functioncall functionName="CreateAIVoltageChannel"/>
+    <functioncall functionName="CreateTask"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DAQmx_Val_Cfg_Default"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_FiniteSamps"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="GetDataStart"/>
+    <functioncall functionName="Inputs"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="MinimumPixeltime"/>
+    <functioncall functionName="NCHANNELS"/>
+    <functioncall functionName="PerChannel"/>
+    <functioncall functionName="ReadU16"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="Start"/>
+    <functioncall functionName="Stop"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_timeout"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="averages"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="channelsstring"/>
+    <functioncall functionName="commontrig"/>
+    <functioncall functionName="commontrigger"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="daq_timing"/>
+    <functioncall functionName="externalclocksource"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="inputrate"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="min"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="oversampling"/>
+    <functioncall functionName="pixelrate"/>
+    <functioncall functionName="pixeltime"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="referenceclockrate"/>
+    <functioncall functionName="referenceclocksource"/>
+    <functioncall functionName="requested_frames"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="requested_samples"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="samplingtype"/>
+    <functioncall functionName="start"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="timedout"/>
+  </FileInfo>
+</analyzerinfo>

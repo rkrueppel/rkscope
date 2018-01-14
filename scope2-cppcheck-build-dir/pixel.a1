@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1179536316">
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\pixel.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\pixel.h" line="60"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="A"/>
+    <functioncall functionName="B"/>
+    <functioncall functionName="BGRA8Pixel"/>
+    <functioncall functionName="G"/>
+    <functioncall functionName="R"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="l"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="to8"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="vB"/>
+    <functioncall functionName="vG"/>
+    <functioncall functionName="vR"/>
+    <functioncall functionName="val"/>
+  </FileInfo>
+</analyzerinfo>

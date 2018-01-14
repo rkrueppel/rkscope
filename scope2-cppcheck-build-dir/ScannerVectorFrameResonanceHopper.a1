@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1357137131">
+        <error id="unreadVariable" severity="style" msg="Variable &apos;yminzoomed&apos; is assigned a value that is never used." verbose="Variable &apos;yminzoomed&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="64"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ymaxzoomed&apos; is assigned a value that is never used." verbose="Variable &apos;ymaxzoomed&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="65"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;yscanslope&apos; is assigned a value that is never used." verbose="Variable &apos;yscanslope&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="68"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;yretraceslope&apos; is assigned a value that is never used." verbose="Variable &apos;yretraceslope&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="69"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;yscanlines&apos; is assigned a value that is never used." verbose="Variable &apos;yscanlines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="70"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ytotallines&apos; is assigned a value that is never used." verbose="Variable &apos;ytotallines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="71"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cutofflines&apos; is assigned a value that is never used." verbose="Variable &apos;cutofflines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="94"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;scanlines&apos; is assigned a value that is never used." verbose="Variable &apos;scanlines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="95"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;totallines&apos; is assigned a value that is never used." verbose="Variable &apos;totallines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="96"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." verbose="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="98"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cz&apos; is assigned a value that is never used." verbose="Variable &apos;cz&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="105"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;step_size&apos; is assigned a value that is never used." verbose="Variable &apos;step_size&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="105"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cutofflines&apos; is assigned a value that is never used." verbose="Variable &apos;cutofflines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="147"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;scanlines&apos; is assigned a value that is never used." verbose="Variable &apos;scanlines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="148"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;totallines&apos; is assigned a value that is never used." verbose="Variable &apos;totallines&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="149"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." verbose="Variable &apos;fastzoutdev&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="151"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;pockelsdev&apos; is assigned a value that is never used." verbose="Variable &apos;pockelsdev&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="152"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;cz&apos; is assigned a value that is never used." verbose="Variable &apos;cz&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="160"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;step_size&apos; is assigned a value that is never used." verbose="Variable &apos;step_size&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="160"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameResonanceHopper&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameResonanceHopper&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.h" line="29"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="UpdateVector" lineNumber="12"/>
+    <functiondecl functionName="FillY" lineNumber="39"/>
+    <functiondecl functionName="FillZ" lineNumber="89"/>
+    <functiondecl functionName="FillP" lineNumber="142"/>
+    <functioncall functionName="FillP"/>
+    <functioncall functionName="FillY"/>
+    <functioncall functionName="FillZ"/>
+    <functioncall functionName="PositionToVoltage"/>
+    <functioncall functionName="ResonanceHopper"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameResonanceHopper"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YRetraceLines"/>
+    <functioncall functionName="YScanLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_filltype"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="fastz"/>
+    <functioncall functionName="filltype"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="maxoutputscanner"/>
+    <functioncall functionName="minoutputscanner"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pockels"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="scaletodevice"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="xaspectratio"/>
+    <functioncall functionName="yaspectratio"/>
+    <functioncall functionName="yoffset"/>
+    <functioncall functionName="zoom"/>
+  </FileInfo>
+</analyzerinfo>

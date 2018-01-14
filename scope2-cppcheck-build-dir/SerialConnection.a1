@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3205861150">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Send" lineNumber="52"/>
+    <functiondecl functionName="Receive" lineNumber="59"/>
+    <functioncall functionName="CBR_9600"/>
+    <functioncall functionName="ClearCommError"/>
+    <functioncall functionName="CloseHandle"/>
+    <functioncall functionName="CreateFile"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DCB"/>
+    <functioncall functionName="GENERIC_WRITE"/>
+    <functioncall functionName="GetCommState"/>
+    <functioncall functionName="NOPARITY"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="ONESTOPBIT"/>
+    <functioncall functionName="OPEN_EXISTING"/>
+    <functioncall functionName="ReadFile"/>
+    <functioncall functionName="SecureZeroMemory"/>
+    <functioncall functionName="SerialConnection"/>
+    <functioncall functionName="SetCommState"/>
+    <functioncall functionName="WriteFile"/>
+    <functioncall functionName="_baud"/>
+    <functioncall functionName="_bytesize"/>
+    <functioncall functionName="_parity"/>
+    <functioncall functionName="_stopbits"/>
+    <functioncall functionName="_toread"/>
+    <functioncall functionName="_waitfor"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="cbInQue"/>
+    <functioncall functionName="comstat"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="dcb"/>
+    <functioncall functionName="errors"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hCom"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="initialized"/>
+    <functioncall functionName="length"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="read"/>
+    <functioncall functionName="readbytes"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="status"/>
+    <functioncall functionName="written"/>
+  </FileInfo>
+</analyzerinfo>

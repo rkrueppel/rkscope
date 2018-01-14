@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="515406679">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="UpdateControl" lineNumber="43"/>
+    <functiondecl functionName="AttachToDlgItem" lineNumber="50"/>
+    <functiondecl functionName="DoPaint" lineNumber="58"/>
+    <functiondecl functionName="SetTrue" lineNumber="66"/>
+    <functiondecl functionName="SetFalse" lineNumber="77"/>
+    <functioncall functionName="AddIcon"/>
+    <functioncall functionName="COLOR_BTNFACE"/>
+    <functioncall functionName="CScopeLEDCtrl"/>
+    <functioncall functionName="ConnectGUI"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="DoPaint"/>
+    <functioncall functionName="FillRect"/>
+    <functioncall functionName="GetClientRect"/>
+    <functioncall functionName="HBRUSH"/>
+    <functioncall functionName="IDI_LED_GREEN"/>
+    <functioncall functionName="IDI_LED_RED"/>
+    <functioncall functionName="IDI_LED_WARNING"/>
+    <functioncall functionName="ILC_COLOR32"/>
+    <functioncall functionName="Invalidate"/>
+    <functioncall functionName="IsNull"/>
+    <functioncall functionName="IsWindow"/>
+    <functioncall functionName="LoadIconWithScaleDown"/>
+    <functioncall functionName="SetFalse"/>
+    <functioncall functionName="SetImageList"/>
+    <functioncall functionName="SetImages"/>
+    <functioncall functionName="SetTrue"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="UpdateControl"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="_scopebool"/>
+    <functioncall functionName="_style"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="dc"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="icon"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="imagegreen"/>
+    <functioncall functionName="imagered"/>
+    <functioncall functionName="imagewarning"/>
+    <functioncall functionName="rc"/>
+    <functioncall functionName="scopebool"/>
+    <functioncall functionName="style"/>
+    <functioncall functionName="this"/>
+  </FileInfo>
+</analyzerinfo>

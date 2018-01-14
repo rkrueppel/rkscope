@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="668347690">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="16"/>
+    <functiondecl functionName="Save" lineNumber="21"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="PlaneProperties"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="_position"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pockels"/>
+    <functioncall functionName="position"/>
+    <functioncall functionName="pt"/>
+  </FileInfo>
+</analyzerinfo>

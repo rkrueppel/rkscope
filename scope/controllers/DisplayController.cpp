@@ -192,14 +192,14 @@ namespace scope {
 			{
 				std::lock_guard<std::mutex> lock(histogramframes_mutexe[a]);
 				for ( const auto& h : histogramframes[a] ) {
-					wndcoll.AddWindow(L"CHistogramFrame", a, AreaTypeHelper::Slave, h->m_hWnd);
+					wndcoll.AddWindow(L"CHistogramFrame", a, h->m_hWnd);
 				}
 			}
 
 			{
 				std::lock_guard<std::mutex> lock(channelframes_mutexe[a]);
 				for ( const auto& c : channelframes[a] ) {
-					wndcoll.AddWindow(L"CChannelFrame", a, AreaTypeHelper::Slave, c->m_hWnd);
+					wndcoll.AddWindow(L"CChannelFrame", a, c->m_hWnd);
 				}
 			}
 		}

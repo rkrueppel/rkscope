@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3272012690">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeValueBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeValueBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValueBase.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValueBase.h" line="36"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="GetRWState"/>
+    <functioncall functionName="Name"/>
+    <functioncall functionName="ScopeValueBase"/>
+    <functioncall functionName="_name"/>
+    <functioncall functionName="_state"/>
+    <functioncall functionName="bool"/>
+    <functioncall functionName="connect"/>
+    <functioncall functionName="disconnect_all_slots"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="readwrite"/>
+    <functioncall functionName="slot"/>
+    <functioncall functionName="statesig"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1701045593">
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\lut.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\pixel.h" line="60"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="A"/>
+    <functioncall functionName="B"/>
+    <functioncall functionName="BGRA8Pixel"/>
+    <functioncall functionName="Blue"/>
+    <functioncall functionName="Color"/>
+    <functioncall functionName="ColorProps"/>
+    <functioncall functionName="G"/>
+    <functioncall functionName="Gray"/>
+    <functioncall functionName="Green"/>
+    <functioncall functionName="LBound"/>
+    <functioncall functionName="Limits"/>
+    <functioncall functionName="LowerLimit"/>
+    <functioncall functionName="None"/>
+    <functioncall functionName="R"/>
+    <functioncall functionName="Rainbow"/>
+    <functioncall functionName="Red"/>
+    <functioncall functionName="UpperLimit"/>
+    <functioncall functionName="Yellow"/>
+    <functioncall functionName="_col"/>
+    <functioncall functionName="_ll"/>
+    <functioncall functionName="_ul"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="col"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="double"/>
+    <functioncall functionName="f"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="gray"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="l"/>
+    <functioncall functionName="ll"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="operatorColorEnum"/>
+    <functioncall functionName="pixelcolor"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="scaler"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="tmp8"/>
+    <functioncall functionName="to8"/>
+    <functioncall functionName="to8hist_mod"/>
+    <functioncall functionName="to8hist_mod2"/>
+    <functioncall functionName="u"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="ul"/>
+    <functioncall functionName="vB"/>
+    <functioncall functionName="vG"/>
+    <functioncall functionName="vR"/>
+    <functioncall functionName="val"/>
+  </FileInfo>
+</analyzerinfo>

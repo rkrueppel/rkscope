@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3413843338">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;FPGAIO5751&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;FPGAIO5751&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\fpga\FPGAIO5751.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\fpga\FPGAIO5751.h" line="23"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="SetClockSource" lineNumber="11"/>
+    <functiondecl functionName="CheckIOModule" lineNumber="42"/>
+    <functioncall functionName="FPGAException"/>
+    <functioncall functionName="FPGAIO5751"/>
+    <functioncall functionName="NiFpga_ReadBool"/>
+    <functioncall functionName="_configured"/>
+    <functioncall functionName="_session"/>
+    <functioncall functionName="configured"/>
+    <functioncall functionName="configured_indicator"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

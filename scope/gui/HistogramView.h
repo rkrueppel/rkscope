@@ -6,12 +6,6 @@
 #include "controllers\DisplayController.h"
 #include "resource.h"
 
-// Forward declarations
-namespace scope {
-	class ScopeMultiHistogram;
-	typedef std::shared_ptr<ScopeMultiHistogram> ScopeMultiHistogramPtr;
-}
-
 namespace scope {
 	namespace gui {
 

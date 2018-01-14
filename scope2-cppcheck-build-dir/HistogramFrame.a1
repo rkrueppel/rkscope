@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2140678554">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\HistogramFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\HistogramFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\ThirdParty\ToolbarHelper.h" line="29"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnFinalMessage" lineNumber="38"/>
+    <functiondecl functionName="RunUpdateStatusbar" lineNumber="42"/>
+    <functiondecl functionName="OnCreate" lineNumber="53"/>
+    <functiondecl functionName="OnDestroy" lineNumber="102"/>
+    <functiondecl functionName="OnIdle" lineNumber="109"/>
+    <functiondecl functionName="OnOptimize" lineNumber="115"/>
+    <functiondecl functionName="OnFullRange" lineNumber="120"/>
+    <functiondecl functionName="OnLogHistogram" lineNumber="125"/>
+    <functiondecl functionName="OnUpdateHistogramLimits" lineNumber="130"/>
+    <functiondecl functionName="UpdateStatus" lineNumber="135"/>
+    <functiondecl functionName="HistoGramAndRender" lineNumber="140"/>
+    <functiondecl functionName="OnFinalMessage" lineNumber="38"/>
+    <functiondecl functionName="RunUpdateStatusbar" lineNumber="42"/>
+    <functiondecl functionName="OnCreate" lineNumber="53"/>
+    <functiondecl functionName="OnDestroy" lineNumber="102"/>
+    <functiondecl functionName="OnIdle" lineNumber="109"/>
+    <functiondecl functionName="OnOptimize" lineNumber="115"/>
+    <functiondecl functionName="OnFullRange" lineNumber="120"/>
+    <functiondecl functionName="OnLogHistogram" lineNumber="125"/>
+    <functiondecl functionName="OnUpdateHistogramLimits" lineNumber="130"/>
+    <functiondecl functionName="UpdateStatus" lineNumber="135"/>
+    <functiondecl functionName="HistoGramAndRender" lineNumber="140"/>
+    <functioncall functionName="ATLASSERT"/>
+    <functioncall functionName="ATL_IDS_IDLEMESSAGE"/>
+    <functioncall functionName="ATL_SIMPLE_REBAR_STYLE"/>
+    <functioncall functionName="Add"/>
+    <functioncall functionName="AddSimpleReBarBand"/>
+    <functioncall functionName="AddStrings"/>
+    <functioncall functionName="AddToolbarButtonText"/>
+    <functioncall functionName="AtlLoadString"/>
+    <functioncall functionName="AttachFrame"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="BEGIN_UPDATE_UI_MAP"/>
+    <functioncall functionName="BN_CLICKED"/>
+    <functioncall functionName="CBES_EX_TEXTENDELLIPSIS"/>
+    <functioncall functionName="CBN_SELCHANGE"/>
+    <functioncall functionName="CBS_DROPDOWNLIST"/>
+    <functioncall functionName="CChannelView"/>
+    <functioncall functionName="CDCHandle"/>
+    <functioncall functionName="CHAIN_CLIENT_COMMANDS"/>
+    <functioncall functionName="CHAIN_MSG_MAP"/>
+    <functioncall functionName="CHistogramFrame"/>
+    <functioncall functionName="COMMAND_CODE_HANDLER"/>
+    <functioncall functionName="COMMAND_ID_HANDLER_EX"/>
+    <functioncall functionName="CS_VREDRAW"/>
+    <functioncall functionName="CScopeButtonCtrl"/>
+    <functioncall functionName="CSize"/>
+    <functioncall functionName="CToolBarHelper &lt; CHistogramFrame &gt;"/>
+    <functioncall functionName="CWindow"/>
+    <functioncall functionName="CheckButton"/>
+    <functioncall functionName="ColorF"/>
+    <functioncall functionName="CommandToIndex"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="CreateComboFont"/>
+    <functioncall functionName="CreateFontIndirect"/>
+    <functioncall functionName="CreateSimpleReBar"/>
+    <functioncall functionName="CreateSimpleToolBarCtrl"/>
+    <functioncall functionName="D2D1CreateFactory"/>
+    <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2HistogramRender"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DECLARE_FRAME_WND_CLASS"/>
+    <functioncall functionName="DECLARE_WND_CLASS_EX"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="DeleteButton"/>
+    <functioncall functionName="DetachFrame"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="END_UPDATE_UI_MAP"/>
+    <functioncall functionName="FALSE"/>
+    <functioncall functionName="FullRange"/>
+    <functioncall functionName="GetButton"/>
+    <functioncall functionName="GetButtonInfo"/>
+    <functioncall functionName="GetClientRect"/>
+    <functioncall functionName="GetComboFontSize"/>
+    <functioncall functionName="GetCurSel"/>
+    <functioncall functionName="GetDesktopDpi"/>
+    <functioncall functionName="GetExtendedStyle"/>
+    <functioncall functionName="GetImageNumber"/>
+    <functioncall functionName="GetItemData"/>
+    <functioncall functionName="GetItemRect"/>
+    <functioncall functionName="GetLBText"/>
+    <functioncall functionName="GetSubMenu"/>
+    <functioncall functionName="GetTextMetrics"/>
+    <functioncall functionName="GetWindowRect"/>
+    <functioncall functionName="HMENU"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="HWND_DESKTOP"/>
+    <functioncall functionName="Height"/>
+    <functioncall functionName="IDC_CH1BUTTON"/>
+    <functioncall functionName="IDC_CH2BUTTON"/>
+    <functioncall functionName="IDC_CH3BUTTON"/>
+    <functioncall functionName="IDC_CH4BUTTON"/>
+    <functioncall functionName="IDC_FULLRANGE"/>
+    <functioncall functionName="IDC_LOGHISTOGRAM"/>
+    <functioncall functionName="IDC_OPTIMIZE"/>
+    <functioncall functionName="IDPANE_HISTOGRAMLIMITS"/>
+    <functioncall functionName="IDPANE_STATUS"/>
+    <functioncall functionName="IDR_HISTOGRAM"/>
+    <functioncall functionName="IDR_HISTOGRAMFRAME"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="InsertButton"/>
+    <functioncall functionName="Invalidate"/>
+    <functioncall functionName="LoadMenu"/>
+    <functioncall functionName="LoadString"/>
+    <functioncall functionName="Lookup"/>
+    <functioncall functionName="LowerLimit"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_WM_CREATE"/>
+    <functioncall functionName="MSG_WM_DESTROY"/>
+    <functioncall functionName="MSG_WM_DISPLAYCHANGE"/>
+    <functioncall functionName="MSG_WM_ERASEBKGND"/>
+    <functioncall functionName="MSG_WM_LBUTTONDOWN"/>
+    <functioncall functionName="MSG_WM_LBUTTONUP"/>
+    <functioncall functionName="MSG_WM_MOUSEMOVE"/>
+    <functioncall functionName="MSG_WM_PAINT"/>
+    <functioncall functionName="MSG_WM_SHOWWINDOW"/>
+    <functioncall functionName="MSG_WM_SIZE"/>
+    <functioncall functionName="MapWindowPoints"/>
+    <functioncall functionName="MoveWindow"/>
+    <functioncall functionName="NONCLIENTMETRICS"/>
+    <functioncall functionName="NOTIFY_CODE_HANDLER"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnClicked"/>
+    <functioncall functionName="OnCreate"/>
+    <functioncall functionName="OnDestroy"/>
+    <functioncall functionName="OnDisplayChange"/>
+    <functioncall functionName="OnEraseBkgnd"/>
+    <functioncall functionName="OnFullRange"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKeyUp"/>
+    <functioncall functionName="OnLButtonDown"/>
+    <functioncall functionName="OnLButtonUp"/>
+    <functioncall functionName="OnLogHistogram"/>
+    <functioncall functionName="OnMouseMove"/>
+    <functioncall functionName="OnOptimize"/>
+    <functioncall functionName="OnPaint"/>
+    <functioncall functionName="OnSelChangeToolBarCombo"/>
+    <functioncall functionName="OnShowWindow"/>
+    <functioncall functionName="OnSize"/>
+    <functioncall functionName="OnToolBarCombo"/>
+    <functioncall functionName="OnToolbarDropDown"/>
+    <functioncall functionName="OnUpdateHistogramLimits"/>
+    <functioncall functionName="Optimize"/>
+    <functioncall functionName="Point2F"/>
+    <functioncall functionName="PrepareToolBarMenu"/>
+    <functioncall functionName="Quit"/>
+    <functioncall functionName="REFLECTED_COMMAND_CODE_HANDLER_EX"/>
+    <functioncall functionName="RunUpdateStatusbar"/>
+    <functioncall functionName="SCOPE_DIRECT2D_DEBUG"/>
+    <functioncall functionName="SPI_GETNONCLIENTMETRICS"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="ScreenToClient"/>
+    <functioncall functionName="SelectFont"/>
+    <functioncall functionName="Send"/>
+    <functioncall functionName="SetButtonInfo"/>
+    <functioncall functionName="SetCurrentFrame"/>
+    <functioncall functionName="SetExtendedStyle"/>
+    <functioncall functionName="SetFocus"/>
+    <functioncall functionName="SetFont"/>
+    <functioncall functionName="SetMenu"/>
+    <functioncall functionName="SetPanes"/>
+    <functioncall functionName="SetParent"/>
+    <functioncall functionName="SetWindowText"/>
+    <functioncall functionName="Size"/>
+    <functioncall functionName="SystemParametersInfo"/>
+    <functioncall functionName="TBBUTTON"/>
+    <functioncall functionName="TBBUTTONINFO"/>
+    <functioncall functionName="TBIF_STYLE"/>
+    <functioncall functionName="TBN_DROPDOWN"/>
+    <functioncall functionName="TBSTYLE_EX_DRAWDDARROWS"/>
+    <functioncall functionName="TBSTYLE_LIST"/>
+    <functioncall functionName="TPM_VERTICAL"/>
+    <functioncall functionName="TrackPopupMenu"/>
+    <functioncall functionName="UIAddStatusBar"/>
+    <functioncall functionName="UIAddToolBar"/>
+    <functioncall functionName="UIEnable"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="UISetText"/>
+    <functioncall functionName="UIUpdateStatusBar"/>
+    <functioncall functionName="UIUpdateToolBar"/>
+    <functioncall functionName="UPDATE_ELEMENT"/>
+    <functioncall functionName="UPDUI_STATUSBAR"/>
+    <functioncall functionName="UPDUI_TOOLBAR"/>
+    <functioncall functionName="UpdateLayout"/>
+    <functioncall functionName="UpperLimit"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KEYUP"/>
+    <functioncall functionName="WM_UPDATEHISTOLIMITS"/>
+    <functioncall functionName="WORD"/>
+    <functioncall functionName="WS_CLIPCHILDREN"/>
+    <functioncall functionName="WS_CLIPSIBLINGS"/>
+    <functioncall functionName="WS_EX_CLIENTEDGE"/>
+    <functioncall functionName="White"/>
+    <functioncall functionName="Width"/>
+    <functioncall functionName="X"/>
+    <functioncall functionName="Y"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_ch"/>
+    <functioncall functionName="_channels"/>
+    <functioncall functionName="_display_controller"/>
+    <functioncall functionName="_multi"/>
+    <functioncall functionName="_range"/>
+    <functioncall functionName="_rs"/>
+    <functioncall functionName="_tcschr"/>
+    <functioncall functionName="_tcsrchr"/>
+    <functioncall functionName="anPanes"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="attached"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="bottom"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="cbSize"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="client_rect"/>
+    <functioncall functionName="combo"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="cx"/>
+    <functioncall functionName="cy"/>
+    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="dc"/>
+    <functioncall functionName="display_controller"/>
+    <functioncall functionName="dwComboStyle"/>
+    <functioncall functionName="dwInitialMask"/>
+    <functioncall functionName="dwItemData"/>
+    <functioncall functionName="dwStyle"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fontOld"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="framecount"/>
+    <functioncall functionName="hWndCtl"/>
+    <functioncall functionName="hWndToolBar"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="hwndFrom"/>
+    <functioncall functionName="iItem"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="lfMenuFont"/>
+    <functioncall functionName="limitsstr"/>
+    <functioncall functionName="loghist"/>
+    <functioncall functionName="lpsz"/>
+    <functioncall functionName="m_fontCombo"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="m_hWndStatusBar"/>
+    <functioncall functionName="memset"/>
+    <functioncall functionName="menuPopup"/>
+    <functioncall functionName="nButtonID"/>
+    <functioncall functionName="nID"/>
+    <functioncall functionName="nIndex"/>
+    <functioncall functionName="nMenuID"/>
+    <functioncall functionName="nSel"/>
+    <functioncall functionName="nStringID"/>
+    <functioncall functionName="ncm"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="options"/>
+    <functioncall functionName="pd2d_factory"/>
+    <functioncall functionName="pnmh"/>
+    <functioncall functionName="policy_class"/>
+    <functioncall functionName="psz"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="rc"/>
+    <functioncall functionName="rect"/>
+    <functioncall functionName="rectCombo"/>
+    <functioncall functionName="rectToolBar"/>
+    <functioncall functionName="reinterpret_cast"/>
+    <functioncall functionName="scaleX"/>
+    <functioncall functionName="scaleY"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="statusstr"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="strItemText"/>
+    <functioncall functionName="sz"/>
+    <functioncall functionName="tb"/>
+    <functioncall functionName="tbi"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="tm"/>
+    <functioncall functionName="tmAveCharWidth"/>
+    <functioncall functionName="tmExternalLeading"/>
+    <functioncall functionName="toolbar"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="view"/>
+    <functioncall functionName="wID"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>

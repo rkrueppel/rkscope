@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3473590181">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;area&apos; can be reduced." verbose="The scope of the variable &apos;area&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DisplayController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DisplayController.cpp" line="31"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Run" lineNumber="29"/>
+    <functiondecl functionName="UpdateStatusInFrames" lineNumber="114"/>
+    <functiondecl functionName="StopOne" lineNumber="125"/>
+    <functiondecl functionName="ResolutionChange" lineNumber="132"/>
+    <functiondecl functionName="SetHistogramLimits" lineNumber="139"/>
+    <functiondecl functionName="AttachFrame" lineNumber="145"/>
+    <functiondecl functionName="DetachFrame" lineNumber="152"/>
+    <functiondecl functionName="AttachFrame" lineNumber="164"/>
+    <functiondecl functionName="HistogramAlreadyAttached" lineNumber="171"/>
+    <functiondecl functionName="DetachFrame" lineNumber="176"/>
+    <functiondecl functionName="GetWindowCollection" lineNumber="188"/>
+    <functioncall functionName="AddWindow"/>
+    <functioncall functionName="Area"/>
+    <functioncall functionName="BaseController"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ControllerReturnStatus"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Dequeue"/>
+    <functioncall functionName="DisplayController"/>
+    <functioncall functionName="Enqueue"/>
+    <functioncall functionName="HistoGramAndRender"/>
+    <functioncall functionName="IsCompleteAvg"/>
+    <functioncall functionName="IsCompleteFrame"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="LayOverAndRender"/>
+    <functioncall functionName="OnMultSize"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetHistogramLimits"/>
+    <functioncall functionName="StopAll"/>
+    <functioncall functionName="StopOne"/>
+    <functioncall functionName="Stopped"/>
+    <functioncall functionName="UpdateStatus"/>
+    <functioncall functionName="UpdateStatusInFrames"/>
+    <functioncall functionName="WaitForAll"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_ap"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_cframe"/>
+    <functioncall functionName="_channel"/>
+    <functioncall functionName="_hframe"/>
+    <functioncall functionName="_iqueue"/>
+    <functioncall functionName="_lower"/>
+    <functioncall functionName="_nactives"/>
+    <functioncall functionName="_parameters"/>
+    <functioncall functionName="_rs"/>
+    <functioncall functionName="_upper"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="abort"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="cargo"/>
+    <functioncall functionName="channelframes"/>
+    <functioncall functionName="channelframes_locks"/>
+    <functioncall functionName="channelframes_mutexe"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="ctrlparams"/>
+    <functioncall functionName="current_frame"/>
+    <functioncall functionName="defer_lock"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="equal"/>
+    <functioncall functionName="erase"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="fill"/>
+    <functioncall functionName="find_if"/>
+    <functioncall functionName="finished"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="found"/>
+    <functioncall functionName="framecounts"/>
+    <functioncall functionName="histogramframes"/>
+    <functioncall functionName="histogramframes_locks"/>
+    <functioncall functionName="histogramframes_mutexe"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="input_queue"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="lockc"/>
+    <functioncall functionName="lockh"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="nactives"/>
+    <functioncall functionName="none"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="num_planes"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="requested_frames"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="returnstatus"/>
+    <functioncall functionName="run_state"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="stopmsg"/>
+    <functioncall functionName="stopped"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_lock"/>
+    <functioncall functionName="unlock"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xres"/>
+    <functioncall functionName="yres"/>
+  </FileInfo>
+</analyzerinfo>

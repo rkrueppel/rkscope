@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="97259848">
+        <error id="preprocessorErrorDirective" severity="error" msg="#error Unsupported architecture." verbose="#error Unsupported architecture.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\fpga\NiFpga.h" line="68"/>
+        </error>
+</analyzerinfo>

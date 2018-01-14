@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B88360FD-1096-4016-961D-F64CD4E5F34C}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -398,11 +398,7 @@
     <ClCompile Include="parameters\Inputs.cpp" />
     <ClCompile Include="parameters\Base.cpp" />
     <ClCompile Include="parameters\Plane.cpp" />
-    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp" />
     <ClCompile Include="scanmodes\PixelmapperBasic.cpp" />
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp" />
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp" />
-    <ClCompile Include="scanmodes\PixelmapperFrameSaw.cpp" />
     <ClCompile Include="scanmodes\ScannerVectorFrameResonanceHopper.cpp" />
     <ClCompile Include="scanmodes\ScannerVectorFrameSaw.cpp" />
     <ClCompile Include="scanmodes\ScannerVectorFramePlaneHopper.cpp" />
@@ -535,11 +531,8 @@
     <ClInclude Include="parameters\Inputs.h" />
     <ClInclude Include="parameters\Base.h" />
     <ClInclude Include="parameters\Plane.h" />
-    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="scanmodes\PixelmapperBasic.h" />
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h" />
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h" />
     <ClInclude Include="scanmodes\ScannerVectorFramePlaneHopper.h" />
     <ClInclude Include="scanmodes\ScannerVectorFrameBiDi.h" />
     <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h" />

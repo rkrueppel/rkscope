@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2295473397">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="21"/>
+    <functiondecl functionName="Save" lineNumber="28"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="35"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="86"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="93"/>
+    <functiondecl functionName="Load" lineNumber="102"/>
+    <functiondecl functionName="Save" lineNumber="114"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="126"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="134"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="138"/>
+    <functiondecl functionName="Load" lineNumber="142"/>
+    <functiondecl functionName="Save" lineNumber="146"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="150"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="158"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="162"/>
+    <functiondecl functionName="Load" lineNumber="167"/>
+    <functiondecl functionName="Save" lineNumber="172"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="177"/>
+    <functiondecl functionName="Load" lineNumber="186"/>
+    <functiondecl functionName="Save" lineNumber="191"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="196"/>
+    <functiondecl functionName="Load" lineNumber="204"/>
+    <functiondecl functionName="Save" lineNumber="209"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="214"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="225"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="229"/>
+    <functiondecl functionName="Load" lineNumber="234"/>
+    <functiondecl functionName="Save" lineNumber="242"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="250"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="261"/>
+    <functiondecl functionName="MaximumPixeltime" lineNumber="265"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="269"/>
+    <functiondecl functionName="Load" lineNumber="274"/>
+    <functiondecl functionName="Save" lineNumber="281"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="288"/>
+    <functiondecl functionName="Load" lineNumber="300"/>
+    <functiondecl functionName="Save" lineNumber="308"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="316"/>
+    <functiondecl functionName="Load" lineNumber="326"/>
+    <functiondecl functionName="Save" lineNumber="332"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="338"/>
+    <functiondecl functionName="Load" lineNumber="348"/>
+    <functiondecl functionName="Save" lineNumber="354"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="360"/>
+    <functioncall functionName="AIOverRange"/>
+    <functioncall functionName="Acquiring"/>
+    <functioncall functionName="AcquisitionClockRate"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="BaselineCh1"/>
+    <functioncall functionName="BaselineCh2"/>
+    <functioncall functionName="BitshiftA1Ch1"/>
+    <functioncall functionName="BitshiftA1Ch2"/>
+    <functioncall functionName="BitshiftA2Ch1"/>
+    <functioncall functionName="BitshiftA2Ch2"/>
+    <functioncall functionName="BitshiftCh1"/>
+    <functioncall functionName="BitshiftCh2"/>
+    <functioncall functionName="CountingMode"/>
+    <functioncall functionName="CutoffCh1"/>
+    <functioncall functionName="CutoffCh2"/>
+    <functioncall functionName="DAQmxGetSysNIDAQMajorVersion"/>
+    <functioncall functionName="DAQmxGetSysNIDAQMinorVersion"/>
+    <functioncall functionName="DAQmxGetSysNIDAQUpdateVersion"/>
+    <functioncall functionName="DAQmx_Val_AI"/>
+    <functioncall functionName="Diagnosis"/>
+    <functioncall functionName="Inputs"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="InputsFPGA"/>
+    <functioncall functionName="InputsFPGAAnalogDemultiplexer"/>
+    <functioncall functionName="InputsFPGAAnalogIntegrator"/>
+    <functioncall functionName="InputsFPGADigitalDemultiplexer"/>
+    <functioncall functionName="InputsFPGAIO5751"/>
+    <functioncall functionName="InputsFPGAIO5771"/>
+    <functioncall functionName="InputsFPGAIO6587"/>
+    <functioncall functionName="InputsFPGANoiseOutput"/>
+    <functioncall functionName="InputsFPGAPhotonCounter"/>
+    <functioncall functionName="InputsFPGAResonanceScanner"/>
+    <functioncall functionName="InterloopOverflow"/>
+    <functioncall functionName="InterloopTimeout"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="MeasuredLaserFreq"/>
+    <functioncall functionName="MinimumPixeltime"/>
+    <functioncall functionName="NonSimultaneousSampling"/>
+    <functioncall functionName="PredictSampleRate"/>
+    <functioncall functionName="ReferenceClock"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="ToHostOverflowA1"/>
+    <functioncall functionName="ToHostOverflowA1Ch1"/>
+    <functioncall functionName="ToHostOverflowA1Ch2"/>
+    <functioncall functionName="ToHostOverflowA2"/>
+    <functioncall functionName="ToHostOverflowA2Ch1"/>
+    <functioncall functionName="ToHostOverflowA2Ch2"/>
+    <functioncall functionName="ToHostOverflowCh1"/>
+    <functioncall functionName="ToHostOverflowCh2"/>
+    <functioncall functionName="_pixeltime"/>
+    <functioncall functionName="_pt"/>
+    <functioncall functionName="_runstate"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="channelsstring"/>
+    <functioncall functionName="countmode"/>
+    <functioncall functionName="daq_timing"/>
+    <functioncall functionName="daqmxversion"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="externalclocksource"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="full"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="maxchannels"/>
+    <functioncall functionName="maxrateaggregate"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="oversampling"/>
+    <functioncall functionName="preframelines"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="rangetype"/>
+    <functioncall functionName="referenceclockrate"/>
+    <functioncall functionName="referenceclocksource"/>
+    <functioncall functionName="sampling"/>
+    <functioncall functionName="samplingrate"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+  </FileInfo>
+</analyzerinfo>

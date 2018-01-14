@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <builddir>scope2-cppcheck-build-dir</builddir>
+    <analyze-all-vs-configs>true</analyze-all-vs-configs>
+    <includedir>
+        <dir name="C:/Program Files/Windows Template Library/Include/"/>
+    </includedir>
+    <paths>
+        <dir name="scope"/>
+    </paths>
+</project>

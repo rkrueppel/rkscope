@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3877635626">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="UpdateVector" lineNumber="10"/>
+    <functioncall functionName="StimulationVector"/>
+    <functioncall functionName="_parameters"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="duration"/>
+    <functioncall functionName="durationsamples"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="fill_n"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="it"/>
+    <functioncall functionName="offsamples"/>
+    <functioncall functionName="offtime"/>
+    <functioncall functionName="onsamples"/>
+    <functioncall functionName="onset"/>
+    <functioncall functionName="onsetsamples"/>
+    <functioncall functionName="ontime"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="round2ui8"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="vecptr"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

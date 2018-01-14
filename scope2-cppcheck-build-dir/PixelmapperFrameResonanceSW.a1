@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2104618654">
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_current_frames&apos; should be passed by reference." verbose="Parameter &apos;_current_frames&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperBasic.h" line="83"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_chunk&apos; should be passed by reference." verbose="Parameter &apos;_chunk&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="16"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="76"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="95"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="112"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="131"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="LookupChunk" lineNumber="16"/>
+    <functiondecl functionName="SetCurrentAveragedFrame" lineNumber="180"/>
+    <functioncall functionName="Area"/>
+    <functioncall functionName="CurrentLineData"/>
+    <functioncall functionName="EndOfChunk"/>
+    <functioncall functionName="Factory"/>
+    <functioncall functionName="FrameComplete"/>
+    <functioncall functionName="GetChannel"/>
+    <functioncall functionName="GetData"/>
+    <functioncall functionName="LastForthline"/>
+    <functioncall functionName="LastImagePos"/>
+    <functioncall functionName="LastL"/>
+    <functioncall functionName="LastX"/>
+    <functioncall functionName="Mode"/>
+    <functioncall functionName="NChannels"/>
+    <functioncall functionName="Nothing"/>
+    <functioncall functionName="PerChannel"/>
+    <functioncall functionName="PixelmapperBasic"/>
+    <functioncall functionName="PixelmapperFrameBiDi"/>
+    <functioncall functionName="PixelmapperFrameResonanceSW"/>
+    <functioncall functionName="PixelmapperFrameSaw"/>
+    <functioncall functionName="PixelmapperResult"/>
+    <functioncall functionName="Resonance"/>
+    <functioncall functionName="ResonanceBiDi"/>
+    <functioncall functionName="SetLastForthline"/>
+    <functioncall functionName="SetLastImagepos"/>
+    <functioncall functionName="SetLastL"/>
+    <functioncall functionName="SetLastMapped"/>
+    <functioncall functionName="SetLastSyncSig"/>
+    <functioncall functionName="SetLastX"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="XImagePixels"/>
+    <functioncall functionName="XTotalPixels"/>
+    <functioncall functionName="XTurnPixelsLeft"/>
+    <functioncall functionName="XTurnPixelsRight"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YImageLines"/>
+    <functioncall functionName="YScanLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_current_averaged_frame"/>
+    <functioncall functionName="_current_frame"/>
+    <functioncall functionName="_currentavgcount"/>
+    <functioncall functionName="_lookup"/>
+    <functioncall functionName="_scanner"/>
+    <functioncall functionName="_svparameters"/>
+    <functioncall functionName="_type"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="averageddataptr"/>
+    <functioncall functionName="averagedimagedata"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="chunkit"/>
+    <functioncall functionName="current_frames"/>
+    <functioncall functionName="cutofflines"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="dataptr"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="firstchunk"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="forthline"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="imagedata"/>
+    <functioncall functionName="imagepos"/>
+    <functioncall functionName="l"/>
+    <functioncall functionName="lookup"/>
+    <functioncall functionName="lx"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="operator[]"/>
+    <functioncall functionName="release"/>
+    <functioncall functionName="result"/>
+    <functioncall functionName="scanlines"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_assert"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="syncit"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="type"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xturnpixelsright"/>
+    <functioncall functionName="ytotallines"/>
+  </FileInfo>
+</analyzerinfo>

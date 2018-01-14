@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="575092521">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControlStanda.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="36"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControlStanda.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="38"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControlStanda.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="41"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="InitAxis" lineNumber="68"/>
+    <functiondecl functionName="TurnOffAndSaveToFlash" lineNumber="83"/>
+    <functiondecl functionName="StartPolling" lineNumber="103"/>
+    <functiondecl functionName="UpdatePositionValues" lineNumber="120"/>
+    <functiondecl functionName="SetZero" lineNumber="130"/>
+    <functiondecl functionName="MoveRelative" lineNumber="140"/>
+    <functiondecl functionName="MoveAbsolute" lineNumber="154"/>
+    <functiondecl functionName="CheckError" lineNumber="167"/>
+    <functiondecl functionName="GetParameters" lineNumber="175"/>
+    <functiondecl functionName="GetMode" lineNumber="193"/>
+    <functiondecl functionName="GetState" lineNumber="214"/>
+    <functiondecl functionName="GetStartParameters" lineNumber="232"/>
+    <functioncall functionName="BTimeoutR"/>
+    <functioncall functionName="CW_CCW"/>
+    <functioncall functionName="CheckError"/>
+    <functioncall functionName="CurPos"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="EncoderEn"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="GetMode"/>
+    <functioncall functionName="GetParameters"/>
+    <functioncall functionName="GetStartParameters"/>
+    <functioncall functionName="InitAxis"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="MaxLoft"/>
+    <functioncall functionName="NOD"/>
+    <functioncall functionName="ResetD"/>
+    <functioncall functionName="ResetRT"/>
+    <functioncall functionName="RotTrOp"/>
+    <functioncall functionName="SDivisor"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="StopPolling"/>
+    <functioncall functionName="SynOUTP"/>
+    <functioncall functionName="SyncINOp"/>
+    <functioncall functionName="TRUE"/>
+    <functioncall functionName="USMC_Close"/>
+    <functioncall functionName="USMC_GetLastErr"/>
+    <functioncall functionName="USMC_GetMode"/>
+    <functioncall functionName="USMC_GetParameters"/>
+    <functioncall functionName="USMC_GetStartParameters"/>
+    <functioncall functionName="USMC_GetState"/>
+    <functioncall functionName="USMC_Init"/>
+    <functioncall functionName="USMC_SaveParametersToFlash"/>
+    <functioncall functionName="USMC_SetCurrentPosition"/>
+    <functioncall functionName="USMC_SetMode"/>
+    <functioncall functionName="USMC_SetParameters"/>
+    <functioncall functionName="USMC_Start"/>
+    <functioncall functionName="UpdatePositionValues"/>
+    <functioncall functionName="WSyncIN"/>
+    <functioncall functionName="XYControl"/>
+    <functioncall functionName="XYControlStanda"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_device"/>
+    <functioncall functionName="_params"/>
+    <functioncall functionName="_xabs"/>
+    <functioncall functionName="_xrel"/>
+    <functioncall functionName="_yabs"/>
+    <functioncall functionName="_yrel"/>
+    <functioncall functionName="async"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="d"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="devices"/>
+    <functioncall functionName="devicex"/>
+    <functioncall functionName="devicey"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="initialized"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="micron"/>
+    <functioncall functionName="microsteps_per_micron"/>
+    <functioncall functionName="microstepspermicron"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="mode"/>
+    <functioncall functionName="msg2"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="perrorstring"/>
+    <functioncall functionName="pollinterval"/>
+    <functioncall functionName="prms"/>
+    <functioncall functionName="round"/>
+    <functioncall functionName="round2i32"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="speed"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="stprms"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="throw"/>
+    <functioncall functionName="tmp"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="wstring"/>
+  </FileInfo>
+</analyzerinfo>

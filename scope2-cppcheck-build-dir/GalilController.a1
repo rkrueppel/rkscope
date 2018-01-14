@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1696684173">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;GalilController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;GalilController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.h" line="36"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.cpp" line="0"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.cpp" line="0"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&apos; was not checked because its code equals another one." verbose="The configuration &apos;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\GalilController.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="LibraryVersion" lineNumber="17"/>
+    <functiondecl functionName="Connection" lineNumber="23"/>
+    <functiondecl functionName="SetTimeout" lineNumber="29"/>
+    <functiondecl functionName="Command" lineNumber="33"/>
+    <functiondecl functionName="CommandValue" lineNumber="42"/>
+    <functiondecl functionName="Ctrl" lineNumber="48"/>
+    <functiondecl functionName="CreateInstance" lineNumber="55"/>
+    <functioncall functionName="CA2W"/>
+    <functioncall functionName="CW2A"/>
+    <functioncall functionName="CreateInstance"/>
+    <functioncall functionName="Ctrl"/>
+    <functioncall functionName="Galil"/>
+    <functioncall functionName="GalilController"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_comstring"/>
+    <functioncall functionName="_instance"/>
+    <functioncall functionName="_milliseconds"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="cmd"/>
+    <functioncall functionName="command"/>
+    <functioncall functionName="commandValue"/>
+    <functioncall functionName="comstring"/>
+    <functioncall functionName="connection"/>
+    <functioncall functionName="cret"/>
+    <functioncall functionName="cstr"/>
+    <functioncall functionName="libraryVersion"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="ret"/>
+    <functioncall functionName="stdcomstring"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="tmp"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

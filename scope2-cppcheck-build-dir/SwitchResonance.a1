@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2069314590">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="18"/>
+    <functiondecl functionName="TurnOn" lineNumber="26"/>
+    <functiondecl functionName="TurnOff" lineNumber="33"/>
+    <functiondecl functionName="Set" lineNumber="40"/>
+    <functioncall functionName="CreateDOChannel"/>
+    <functioncall functionName="CreateTask"/>
+    <functioncall functionName="DAQmx_Val_Cfg_Default"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_GroupByChannel"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="DAQmx_Val_Volts"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="SwitchResonance"/>
+    <functioncall functionName="TurnOff"/>
+    <functioncall functionName="TurnOn"/>
+    <functioncall functionName="WriteDigitalLines"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_on"/>
+    <functioncall functionName="_outputline"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="offdata"/>
+    <functioncall functionName="ondata"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

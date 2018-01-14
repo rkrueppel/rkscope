@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3383071901">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\StorageSettingsPage.h" line="38"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CStimulationSettingsPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CStimulationSettingsPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\StimulationSettingsPage.h" line="41"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CDAQmxPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CDAQmxPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\DAQmxPage.h" line="24"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CFPGAPhotonCounterPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CFPGAPhotonCounterPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGAPhotonCounterPage.h" line="39"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CFPGADigitalDemultiplexerPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CFPGADigitalDemultiplexerPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGADigitalDemultiplexerPage.h" line="36"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CFPGAAnalogIntegratorPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CFPGAAnalogIntegratorPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGAAnalogIntegratorPage.h" line="47"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CFPGAResonanceScannerPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CFPGAResonanceScannerPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGAResonanceScannerPage.h" line="47"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CFPGAResonanceScannerNI5771Page&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CFPGAResonanceScannerNI5771Page&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGAResonanceScanner_NI5771Page.h" line="47"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnInitDialog" lineNumber="30"/>
+    <functiondecl functionName="ChangeScanMode" lineNumber="60"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="64"/>
+    <functioncall functionName="AttachToDlgItem"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="BEGIN_MSG_MAP_EX"/>
+    <functioncall functionName="BN_CLICKED"/>
+    <functioncall functionName="CBehaviorSettingsPage"/>
+    <functioncall functionName="CDAQmxPage"/>
+    <functioncall functionName="CFPGAAnalogDemultiplexerPage"/>
+    <functioncall functionName="CFPGAAnalogDemultiplexerResonancePage"/>
+    <functioncall functionName="CFPGAAnalogIntegratorPage"/>
+    <functioncall functionName="CFPGADigitalDemultiplexerPage"/>
+    <functioncall functionName="CFPGAPhotonCounterPage"/>
+    <functioncall functionName="CFPGAResonanceScannerNI5771Page"/>
+    <functioncall functionName="CFPGAResonanceScannerPage"/>
+    <functioncall functionName="CFPUControlPage"/>
+    <functioncall functionName="CHAIN_MSG_MAP"/>
+    <functioncall functionName="CHAIN_MSG_MAP_ALT"/>
+    <functioncall functionName="CMainDlgView"/>
+    <functioncall functionName="CMovementPage"/>
+    <functioncall functionName="CMovementSettingsSheet"/>
+    <functioncall functionName="CNoScanBasePage"/>
+    <functioncall functionName="COMMAND_HANDLER"/>
+    <functioncall functionName="CScanModesSettingsPage"/>
+    <functioncall functionName="CScanSettingsSheet"/>
+    <functioncall functionName="CScopeButtonCtrl"/>
+    <functioncall functionName="CScopeCheckBoxCtrl"/>
+    <functioncall functionName="CScopeEditCtrl"/>
+    <functioncall functionName="CScopeFOVDiagram"/>
+    <functioncall functionName="CScopeProgressCtrl"/>
+    <functioncall functionName="CScopeScrollbarCtrl"/>
+    <functioncall functionName="CScopeSliderCtrl"/>
+    <functioncall functionName="CScopeUpDownCtrl"/>
+    <functioncall functionName="CScopeView"/>
+    <functioncall functionName="CStackSettingsPage"/>
+    <functioncall functionName="CStimulationSettingsPage"/>
+    <functioncall functionName="CStorageSettingsPage"/>
+    <functioncall functionName="CTimeSeriesSettingsPage"/>
+    <functioncall functionName="CUserSettingsSheet"/>
+    <functioncall functionName="CXYZControlPage"/>
+    <functioncall functionName="ChangeScanMode"/>
+    <functioncall functionName="ConnectGUI"/>
+    <functioncall functionName="ConnectState"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="DefWindowProc"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="FALSE"/>
+    <functioncall functionName="GetDlgItem"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="GetWindowRect"/>
+    <functioncall functionName="GetWindowText"/>
+    <functioncall functionName="GetWindowTextLength"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="IDC_ADDPLANE_BUTTON"/>
+    <functioncall functionName="IDC_AREAS_LIST"/>
+    <functioncall functionName="IDC_CALIBRATIONFILE_BUTTON"/>
+    <functioncall functionName="IDC_COUNTHIGH_RADIO"/>
+    <functioncall functionName="IDC_COUNTPULSES_RADIO"/>
+    <functioncall functionName="IDC_DELETEPLANE_BUTTON"/>
+    <functioncall functionName="IDC_ETL_RADIO"/>
+    <functioncall functionName="IDC_EXPERIMENTSETTINGS_HOLDER"/>
+    <functioncall functionName="IDC_FOLDER_BUTTON"/>
+    <functioncall functionName="IDC_QUIT"/>
+    <functioncall functionName="IDC_RECALC_BUTTON"/>
+    <functioncall functionName="IDC_SCANSETTINGS_HOLDER"/>
+    <functioncall functionName="IDC_SCAN_SINGLE"/>
+    <functioncall functionName="IDC_ZSTAGE_RADIO"/>
+    <functioncall functionName="IDD_BEHAVIOR_PROPPAGE"/>
+    <functioncall functionName="IDD_DAQMX_PROPPAGE"/>
+    <functioncall functionName="IDD_FPGAANALOGDEMULTIPLEXER_PROPPAGE"/>
+    <functioncall functionName="IDD_FPGAANALOGINTEGRATOR_PROPPAGE"/>
+    <functioncall functionName="IDD_FPGADIGITALDEMULTIPLEXER_PROPPAGE"/>
+    <functioncall functionName="IDD_FPGAPHOTONCOUNTER_PROPPAGE"/>
+    <functioncall functionName="IDD_FPGARESONANCESCANNER_PROPPAGE"/>
+    <functioncall functionName="IDD_FPUCONTROL_PROPPAGE"/>
+    <functioncall functionName="IDD_MAINDIALOG"/>
+    <functioncall functionName="IDD_MOVEMENT_PROPPAGE"/>
+    <functioncall functionName="IDD_NOSCAN_PROPPAGE"/>
+    <functioncall functionName="IDD_SCANMODES_PROPPAGE"/>
+    <functioncall functionName="IDD_STACK_PROPPAGE"/>
+    <functioncall functionName="IDD_STIMULATION_PROPPAGE"/>
+    <functioncall functionName="IDD_STORAGE_PROPPAGE"/>
+    <functioncall functionName="IDD_TIMESERIES_PROPPAGE"/>
+    <functioncall functionName="IDD_XYZCONTROL_PROPPAGE"/>
+    <functioncall functionName="ID_SCAN_CONT"/>
+    <functioncall functionName="ID_STOP"/>
+    <functioncall functionName="LBN_SELCHANGE"/>
+    <functioncall functionName="LPNMUPDOWN"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_OCM_COMMAND"/>
+    <functioncall functionName="MSG_OCM_HSCROLL"/>
+    <functioncall functionName="MSG_OCM_NOTIFY"/>
+    <functioncall functionName="MSG_OCM_VSCROLL"/>
+    <functioncall functionName="MSG_WM_INITDIALOG"/>
+    <functioncall functionName="NOTIFY_CODE_HANDLER"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnAddPlane"/>
+    <functioncall functionName="OnAreaChange"/>
+    <functioncall functionName="OnCalibrationFileButton"/>
+    <functioncall functionName="OnChar"/>
+    <functioncall functionName="OnClicked"/>
+    <functioncall functionName="OnCountModeChange"/>
+    <functioncall functionName="OnDeletePlane"/>
+    <functioncall functionName="OnFolderButton"/>
+    <functioncall functionName="OnInitDialog"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKeyUp"/>
+    <functioncall functionName="OnKillFocus"/>
+    <functioncall functionName="OnRecalcButton"/>
+    <functioncall functionName="OnReflectedCommand"/>
+    <functioncall functionName="OnScroll"/>
+    <functioncall functionName="OnSelChange"/>
+    <functioncall functionName="OnUpDown"/>
+    <functioncall functionName="OnUpdateControl"/>
+    <functioncall functionName="OnZControlRadio"/>
+    <functioncall functionName="PostMessage"/>
+    <functioncall functionName="REFLECTED_COMMAND_CODE_HANDLER_EX"/>
+    <functioncall functionName="REFLECT_NOTIFICATIONS"/>
+    <functioncall functionName="ScreenToClient"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetFromString"/>
+    <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="SetWindowText"/>
+    <functioncall functionName="ShowWindow"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="TCN_SELCHANGE"/>
+    <functioncall functionName="ToChar"/>
+    <functioncall functionName="UpdateControl"/>
+    <functioncall functionName="UpdateValue"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="WM_CHAR"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KEYUP"/>
+    <functioncall functionName="WM_KILLFOCUS"/>
+    <functioncall functionName="WM_NEXTDLGCTL"/>
+    <functioncall functionName="WM_UPDATECONTROL"/>
+    <functioncall functionName="WORD"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_connectback"/>
+    <functioncall functionName="_connectcontrolstate"/>
+    <functioncall functionName="_counters"/>
+    <functioncall functionName="_fpubuttons"/>
+    <functioncall functionName="_increment"/>
+    <functioncall functionName="_mode"/>
+    <functioncall functionName="_ro"/>
+    <functioncall functionName="_runbuttons"/>
+    <functioncall functionName="_scanmodebuttons"/>
+    <functioncall functionName="_scopeval"/>
+    <functioncall functionName="_stackbuttons"/>
+    <functioncall functionName="_zerobuttons"/>
+    <functioncall functionName="allareas"/>
+    <functioncall functionName="behavior"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="buff"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="hWndPlaceHolder"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="incdec"/>
+    <functioncall functionName="increment"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="length"/>
+    <functioncall functionName="m_QuitButton"/>
+    <functioncall functionName="m_ScanLiveButton"/>
+    <functioncall functionName="m_ScanSingleButton"/>
+    <functioncall functionName="m_StopButton"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="m_sheetExperimentSettings"/>
+    <functioncall functionName="m_sheetScanSettings"/>
+    <functioncall functionName="masterfovsizex"/>
+    <functioncall functionName="masterfovsizey"/>
+    <functioncall functionName="pMsg"/>
+    <functioncall functionName="pnmh"/>
+    <functioncall functionName="quit"/>
+    <functioncall functionName="rc"/>
+    <functioncall functionName="scope_val"/>
+    <functioncall functionName="scopeval"/>
+    <functioncall functionName="shiftstate"/>
+    <functioncall functionName="stack"/>
+    <functioncall functionName="stage"/>
+    <functioncall functionName="startlive"/>
+    <functioncall functionName="startsingle"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="stimulation"/>
+    <functioncall functionName="stop"/>
+    <functioncall functionName="storage"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="timeseries"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uMsg"/>
+    <functioncall functionName="wParam"/>
+  </FileInfo>
+</analyzerinfo>

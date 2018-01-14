@@ -1,14 +1,13 @@
 #pragma once
 
-#include "BaseController.h"
-#include "config\config_choices.h"
+#include "controllers/BaseController.h"
+#include "config/config_choices.h"
 #include "helpers/SyncQueues.h"
 #include "parameters/Scope.h"
 #include "helpers/ScopeMultiImage.h"
 #include "helpers/ScopeMultiImageResonanceSW.h"
 #include "helpers/ScopeDatatypes.h"
 #include "gui/ChannelFrame.h"
-#include "ScopeLogger.h"
 
 namespace scope {
 	namespace gui {

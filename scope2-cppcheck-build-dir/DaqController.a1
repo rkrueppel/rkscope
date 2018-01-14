@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1985603001">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;currentlyread&apos; can be reduced." verbose="The scope of the variable &apos;currentlyread&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" line="55"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.h" line="35"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Run" lineNumber="47"/>
+    <functiondecl functionName="Start" lineNumber="123"/>
+    <functiondecl functionName="OnlineParameterUpdate" lineNumber="207"/>
+    <functiondecl functionName="WorkerOnlineParameterUpdate" lineNumber="225"/>
+    <functiondecl functionName="AbortOnlineParameterUpdate" lineNumber="244"/>
+    <functiondecl functionName="ZeroGalvoOutputs" lineNumber="249"/>
+    <functiondecl functionName="SetScannerVector" lineNumber="270"/>
+    <functiondecl functionName="OpenCloseShutter" lineNumber="274"/>
+    <functiondecl functionName="GetShutterState" lineNumber="278"/>
+    <functiondecl functionName="TurnOnOffSwitchResonance" lineNumber="282"/>
+    <functiondecl functionName="GetSwitchResonanceState" lineNumber="287"/>
+    <functioncall functionName="ATLTRACE"/>
+    <functioncall functionName="AbortWrite"/>
+    <functioncall functionName="BaseController"/>
+    <functioncall functionName="Close"/>
+    <functioncall functionName="ControllerReturnStatus"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DaqController"/>
+    <functioncall functionName="Enqueue"/>
+    <functioncall functionName="FrameTime"/>
+    <functioncall functionName="GetInterleavedVector"/>
+    <functioncall functionName="GetState"/>
+    <functioncall functionName="GetVector"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Open"/>
+    <functioncall functionName="Read"/>
+    <functioncall functionName="RequestedSamples"/>
+    <functioncall functionName="Run"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetParameters"/>
+    <functioncall functionName="StandardChunkSize"/>
+    <functioncall functionName="Start"/>
+    <functioncall functionName="Stop"/>
+    <functioncall functionName="StopAll"/>
+    <functioncall functionName="TurnOff"/>
+    <functioncall functionName="TurnOn"/>
+    <functioncall functionName="WaitForAll"/>
+    <functioncall functionName="WorkerOnlineParameterUpdate"/>
+    <functioncall functionName="Write"/>
+    <functioncall functionName="ZeroGalvoOutputs"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_areaparameters"/>
+    <functioncall functionName="_masterarea"/>
+    <functioncall functionName="_mastersinallareas"/>
+    <functioncall functionName="_nmasters"/>
+    <functioncall functionName="_nslaves"/>
+    <functioncall functionName="_on"/>
+    <functioncall functionName="_open"/>
+    <functioncall functionName="_oqueues"/>
+    <functioncall functionName="_parameters"/>
+    <functioncall functionName="_params"/>
+    <functioncall functionName="_slavespermaster"/>
+    <functioncall functionName="_sv"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="areatype"/>
+    <functioncall functionName="async"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="blocks"/>
+    <functioncall functionName="chunk"/>
+    <functioncall functionName="chunksize"/>
+    <functioncall functionName="chunksizes"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="ctrlparams"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="enable"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="finished"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="inputs"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="ma"/>
+    <functioncall functionName="make_shared"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="mastersinallareas"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="nmasters"/>
+    <functioncall functionName="none"/>
+    <functioncall functionName="nothing"/>
+    <functioncall functionName="notify_all"/>
+    <functioncall functionName="nslaves"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="online_update_done"/>
+    <functioncall functionName="online_update_done_flag"/>
+    <functioncall functionName="online_update_done_mutexe"/>
+    <functioncall functionName="output_queues"/>
+    <functioncall functionName="outputs"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="readsamples"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="reset"/>
+    <functioncall functionName="returnstatus"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="sa"/>
+    <functioncall functionName="scannervecs"/>
+    <functioncall functionName="shutterline"/>
+    <functioncall functionName="shutters"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="slavespermaster"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="start_inputs"/>
+    <functioncall functionName="start_outputs"/>
+    <functioncall functionName="startinputsfirst"/>
+    <functioncall functionName="stimulation"/>
+    <functioncall functionName="switches"/>
+    <functioncall functionName="switchresonanceline"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="timedout"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="void"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="zero"/>
+  </FileInfo>
+</analyzerinfo>

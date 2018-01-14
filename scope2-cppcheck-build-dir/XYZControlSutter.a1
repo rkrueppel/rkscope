@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="4272638301">
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" line="119"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" line="161"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" line="176"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\SutterController.h" line="17"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="18"/>
+    <functiondecl functionName="BytesToInt16" lineNumber="44"/>
+    <functiondecl functionName="Int16ToBytes" lineNumber="55"/>
+    <functiondecl functionName="BytesToInt32" lineNumber="64"/>
+    <functiondecl functionName="Int32ToBytes" lineNumber="77"/>
+    <functiondecl functionName="UpdateStatus" lineNumber="88"/>
+    <functiondecl functionName="SetVelocity" lineNumber="97"/>
+    <functiondecl functionName="UpdatePositionValues" lineNumber="124"/>
+    <functiondecl functionName="SetZero" lineNumber="139"/>
+    <functiondecl functionName="MoveRelative" lineNumber="146"/>
+    <functiondecl functionName="MoveAbsolute" lineNumber="168"/>
+    <functioncall functionName="BytesToInt16"/>
+    <functioncall functionName="BytesToInt32"/>
+    <functioncall functionName="CBR_9600"/>
+    <functioncall functionName="Command"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="Int16ToBytes"/>
+    <functioncall functionName="Int32ToBytes"/>
+    <functioncall functionName="Log"/>
+    <functioncall functionName="NOPARITY"/>
+    <functioncall functionName="ONESTOPBIT"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetZero"/>
+    <functioncall functionName="StopPolling"/>
+    <functioncall functionName="SutterController"/>
+    <functioncall functionName="UpdatePositionValues"/>
+    <functioncall functionName="UpdateStatus"/>
+    <functioncall functionName="XYZControl"/>
+    <functioncall functionName="XYZControlSutter"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_from"/>
+    <functioncall functionName="_i"/>
+    <functioncall functionName="_params"/>
+    <functioncall functionName="_vel"/>
+    <functioncall functionName="_xrel"/>
+    <functioncall functionName="_yrel"/>
+    <functioncall functionName="_zrel"/>
+    <functioncall functionName="append"/>
+    <functioncall functionName="bytevec"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="cmd"/>
+    <functioncall functionName="comstring"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="devvel"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="highres"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="intval"/>
+    <functioncall functionName="log_info"/>
+    <functioncall functionName="microstepspermicron"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="reinterpret_cast"/>
+    <functioncall functionName="ret"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="sc"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+    <functioncall functionName="z"/>
+  </FileInfo>
+</analyzerinfo>

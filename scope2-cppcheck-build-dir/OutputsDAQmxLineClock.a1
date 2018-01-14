@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3449453229">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\Outputs.h" line="17"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ZeroOutputsDAQmxLineClock&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ZeroOutputsDAQmxLineClock&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.h" line="53"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Start" lineNumber="71"/>
+    <functiondecl functionName="Stop" lineNumber="77"/>
+    <functiondecl functionName="Write" lineNumber="82"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ClockString"/>
+    <functioncall functionName="ConfigureBuffer"/>
+    <functioncall functionName="ConfigureDigStartTrigger"/>
+    <functioncall functionName="ConfigureReferenceClock"/>
+    <functioncall functionName="ConfigureSampleTiming"/>
+    <functioncall functionName="CreateAOVoltageChannel"/>
+    <functioncall functionName="CreateTask"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_GroupByScanNumber"/>
+    <functioncall functionName="DAQmx_Val_OnBrdMemEmpty"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Outputs"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="SetDataTransferCondition"/>
+    <functioncall functionName="SetRegeneration"/>
+    <functioncall functionName="SetWriteOffset"/>
+    <functioncall functionName="Start"/>
+    <functioncall functionName="Stop"/>
+    <functioncall functionName="WaitUntilDone"/>
+    <functioncall functionName="WriteAnalogI16"/>
+    <functioncall functionName="XTotalPixels"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="ZeroOutputsDAQmxLineClock"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_blocks"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="commontrig"/>
+    <functioncall functionName="commontrigger"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int16"/>
+    <functioncall functionName="lastyblocksize"/>
+    <functioncall functionName="line_externalclocksource"/>
+    <functioncall functionName="line_referenceclockrate"/>
+    <functioncall functionName="line_referenceclocksource"/>
+    <functioncall functionName="line_timing"/>
+    <functioncall functionName="linerate"/>
+    <functioncall functionName="make_shared"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pixel_externalclocksource"/>
+    <functioncall functionName="pixel_referenceclockrate"/>
+    <functioncall functionName="pixel_referenceclocksource"/>
+    <functioncall functionName="pixel_timing"/>
+    <functioncall functionName="pixelrate"/>
+    <functioncall functionName="pixeltime"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="triggerchannel"/>
+    <functioncall functionName="triggered"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="xpclockstring"/>
+    <functioncall functionName="xpout"/>
+    <functioncall functionName="yblocksize"/>
+    <functioncall functionName="yzclockstring"/>
+    <functioncall functionName="yzout"/>
+  </FileInfo>
+</analyzerinfo>

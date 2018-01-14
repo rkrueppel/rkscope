@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3782541391">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;CPresetNameDlg&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CPresetNameDlg&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\PresetNameDlg.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\PresetNameDlg.h" line="22"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_name&apos; should be passed by reference." verbose="Parameter &apos;_name&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\PresetNameDlg.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\PresetNameDlg.cpp" line="8"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one." verbose="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\gui\PresetNameDlg.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCloseCmd" lineNumber="21"/>
+    <functioncall functionName="Attach"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="COMMAND_ID_HANDLER"/>
+    <functioncall functionName="CPresetNameDlg"/>
+    <functioncall functionName="CenterWindow"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EndDialog"/>
+    <functioncall functionName="GetDlgItem"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="GetWindowText"/>
+    <functioncall functionName="GetWindowTextLength"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="IDCANCEL"/>
+    <functioncall functionName="IDOK"/>
+    <functioncall functionName="LPARAM"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="OnCloseCmd"/>
+    <functioncall functionName="OnInitDialog"/>
+    <functioncall functionName="SetFocus"/>
+    <functioncall functionName="SetSel"/>
+    <functioncall functionName="SetWindowText"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="WM_INITDIALOG"/>
+    <functioncall functionName="WORD"/>
+    <functioncall functionName="WPARAM"/>
+    <functioncall functionName="_name"/>
+    <functioncall functionName="assign"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="buff"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="length"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="ret"/>
+  </FileInfo>
+</analyzerinfo>

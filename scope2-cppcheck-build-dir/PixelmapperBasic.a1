@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="197502780">
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_current_frames&apos; should be passed by reference." verbose="Parameter &apos;_current_frames&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperBasic.h" line="83"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="Factory"/>
+    <functioncall functionName="Mode"/>
+    <functioncall functionName="Nothing"/>
+    <functioncall functionName="PixelmapperFrameBiDi"/>
+    <functioncall functionName="PixelmapperFrameSaw"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_current_frame"/>
+    <functioncall functionName="_lookup"/>
+    <functioncall functionName="_scanner"/>
+    <functioncall functionName="_svparameters"/>
+    <functioncall functionName="_type"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="current_frames"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="lookup"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="release"/>
+    <functioncall functionName="result"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_assert"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="type"/>
+    <functioncall functionName="unique_ptr"/>
+  </FileInfo>
+</analyzerinfo>

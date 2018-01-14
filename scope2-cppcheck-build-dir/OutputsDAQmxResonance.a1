@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="537054968">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxResonance.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\Outputs.h" line="17"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ZeroOutputsDAQmxResonance&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ZeroOutputsDAQmxResonance&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxResonance.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxResonance.h" line="62"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Start" lineNumber="72"/>
+    <functiondecl functionName="Stop" lineNumber="77"/>
+    <functiondecl functionName="Write" lineNumber="83"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ClockString"/>
+    <functioncall functionName="ConfigureBuffer"/>
+    <functioncall functionName="ConfigureDigStartTrigger"/>
+    <functioncall functionName="ConfigureReferenceClock"/>
+    <functioncall functionName="ConfigureSampleTiming"/>
+    <functioncall functionName="CreateAOVoltageChannel"/>
+    <functioncall functionName="CreateDOChannel"/>
+    <functioncall functionName="CreateTask"/>
+    <functioncall functionName="Currentframe"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_Falling"/>
+    <functioncall functionName="DAQmx_Val_FiniteSamps"/>
+    <functioncall functionName="DAQmx_Val_GroupByScanNumber"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="DAQmx_Val_SampleClock"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="ExportSignal"/>
+    <functioncall functionName="Outputs"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="SetRegeneration"/>
+    <functioncall functionName="SetWriteOffset"/>
+    <functioncall functionName="Start"/>
+    <functioncall functionName="Stop"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="WaitUntilDone"/>
+    <functioncall functionName="WriteAnalogI16"/>
+    <functioncall functionName="WriteDigitalLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="ZeroOutputsDAQmxResonance"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_blocks"/>
+    <functioncall functionName="_reszoomfactor"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="averages"/>
+    <functioncall functionName="blocksize"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="channelsstring"/>
+    <functioncall functionName="commontrig"/>
+    <functioncall functionName="commontrigger"/>
+    <functioncall functionName="daq_timing"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="digitalValue"/>
+    <functioncall functionName="exportpixelclockterminal"/>
+    <functioncall functionName="externalclocksource"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int16"/>
+    <functioncall functionName="lastblocksize"/>
+    <functioncall functionName="make_shared"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pixelrate"/>
+    <functioncall functionName="pixelsperchan"/>
+    <functioncall functionName="pixeltime"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="referenceclockrate"/>
+    <functioncall functionName="referenceclocksource"/>
+    <functioncall functionName="requested_frames"/>
+    <functioncall functionName="requested_mode"/>
+    <functioncall functionName="samplingtype"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="triggerchannel"/>
+    <functioncall functionName="triggered"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="zoomchannelstring"/>
+  </FileInfo>
+</analyzerinfo>

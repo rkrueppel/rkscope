@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2609153120">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;acc&apos; can be reduced." verbose="The scope of the variable &apos;acc&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\DaqChunks.h" line="78"/>
+        </error>
+        <error id="duplInheritedMember" severity="warning" msg="The class &apos;DaqMultiChunk&apos; defines member variable with name &apos;lastmapped&apos; also defined in its parent class &apos;DaqChunk&apos;." verbose="The class &apos;DaqMultiChunk&apos; defines member variable with name &apos;lastmapped&apos; also defined in its parent class &apos;DaqChunk&apos;." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\DaqChunks.h" line="16"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\DaqChunks.h" line="41"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;BGRA8Pixel&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\pixel.h" line="60"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;DaqMultiChunk&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;DaqMultiChunk&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\DaqChunks.h" line="44"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;DaqMultiChunkResonance&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;DaqMultiChunkResonance&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\DaqChunks.h" line="138"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.h" line="13"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;StopCondition&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\helpers.h" line="102"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeImageAccess&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeImageAccess&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="202"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeImageConstAccess&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeImageConstAccess&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="235"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_newimg&apos; should be passed by reference." verbose="Parameter &apos;_newimg&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImage.h" line="93"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_img&apos; should be passed by reference." verbose="Parameter &apos;_img&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="267"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_img&apos; should be passed by reference." verbose="Parameter &apos;_img&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="279"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_from&apos; should be passed by reference." verbose="Parameter &apos;_from&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="279"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_to&apos; should be passed by reference." verbose="Parameter &apos;_to&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeImage.h" line="279"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_multiimage&apos; should be passed by reference." verbose="Parameter &apos;_multiimage&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" line="112"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_multiimage&apos; should be passed by reference." verbose="Parameter &apos;_multiimage&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" line="170"/>
+        </error>
+        <error id="purgedConfiguration" severity="information" msg="The configuration &apos;_DEBUG&apos; was not checked because its code equals another one." verbose="The configuration &apos;_DEBUG&apos; was not checked because its code equals another one.">
+            <location file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeMultiImageEncoder.cpp" line="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="40"/>
+    <functiondecl functionName="NewFrame" lineNumber="55"/>
+    <functiondecl functionName="WriteMetadata" lineNumber="83"/>
+    <functiondecl functionName="WriteFrame" lineNumber="112"/>
+    <functiondecl functionName="WriteFrameNewPart" lineNumber="170"/>
+    <functioncall functionName="A"/>
+    <functioncall functionName="Assign"/>
+    <functioncall functionName="B"/>
+    <functioncall functionName="BGRA8Pixel"/>
+    <functioncall functionName="CLSCTX_INPROC_SERVER"/>
+    <functioncall functionName="CLSID_WICImagingFactory"/>
+    <functioncall functionName="COINIT_MULTITHREADED"/>
+    <functioncall functionName="Channels"/>
+    <functioncall functionName="Check"/>
+    <functioncall functionName="CoCreateInstance"/>
+    <functioncall functionName="CoInitializeEx"/>
+    <functioncall functionName="CoUninitialize"/>
+    <functioncall functionName="Commit"/>
+    <functioncall functionName="CreateEncoder"/>
+    <functioncall functionName="CreateNewFrame"/>
+    <functioncall functionName="CreateStream"/>
+    <functioncall functionName="DATA_T"/>
+    <functioncall functionName="DaqChunk"/>
+    <functioncall functionName="DaqMultiChunk"/>
+    <functioncall functionName="DaqMultiChunkResonance"/>
+    <functioncall functionName="E_FAIL"/>
+    <functioncall functionName="FAILED"/>
+    <functioncall functionName="G"/>
+    <functioncall functionName="GENERIC_WRITE"/>
+    <functioncall functionName="GUID_ContainerFormatTiff"/>
+    <functioncall functionName="GUID_WICPixelFormat16bppGray"/>
+    <functioncall functionName="GetChannel"/>
+    <functioncall functionName="GetConstData"/>
+    <functioncall functionName="GetData"/>
+    <functioncall functionName="GetDataConst"/>
+    <functioncall functionName="GetPointer"/>
+    <functioncall functionName="GetTickCount64"/>
+    <functioncall functionName="IID_IWICImagingFactory"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="InitializeFromFilename"/>
+    <functioncall functionName="IsEqualGUID"/>
+    <functioncall functionName="Lines"/>
+    <functioncall functionName="Linewidth"/>
+    <functioncall functionName="NAREAS"/>
+    <functioncall functionName="NCHANNELS"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="Newpart"/>
+    <functioncall functionName="R"/>
+    <functioncall functionName="Release"/>
+    <functioncall functionName="ReleaseData"/>
+    <functioncall functionName="ReleaseDataConst"/>
+    <functioncall functionName="S_OK"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="Scaler"/>
+    <functioncall functionName="ScopeImage"/>
+    <functioncall functionName="ScopeMessage"/>
+    <functioncall functionName="ScopeMultiImageEncoder"/>
+    <functioncall functionName="SetPixelFormat"/>
+    <functioncall functionName="SetSize"/>
+    <functioncall functionName="T"/>
+    <functioncall functionName="VT_UI1"/>
+    <functioncall functionName="VariantInit"/>
+    <functioncall functionName="WICBitmapEncoderNoCache"/>
+    <functioncall functionName="WICTiffCompressionNone"/>
+    <functioncall functionName="WICTiffCompressionZIP"/>
+    <functioncall functionName="Write"/>
+    <functioncall functionName="WriteMetadata"/>
+    <functioncall functionName="WritePixels"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_cargo"/>
+    <functioncall functionName="_channel"/>
+    <functioncall functionName="_channels"/>
+    <functioncall functionName="_column"/>
+    <functioncall functionName="_complete"/>
+    <functioncall functionName="_complete_avg"/>
+    <functioncall functionName="_complete_frame"/>
+    <functioncall functionName="_compresstiff"/>
+    <functioncall functionName="_datasize"/>
+    <functioncall functionName="_dosave"/>
+    <functioncall functionName="_factor"/>
+    <functioncall functionName="_function"/>
+    <functioncall functionName="_hr"/>
+    <functioncall functionName="_image"/>
+    <functioncall functionName="_imagenumber"/>
+    <functioncall functionName="_init"/>
+    <functioncall functionName="_last"/>
+    <functioncall functionName="_lastmappedsize"/>
+    <functioncall functionName="_lines"/>
+    <functioncall functionName="_linewidth"/>
+    <functioncall functionName="_maxin"/>
+    <functioncall functionName="_minin"/>
+    <functioncall functionName="_percent"/>
+    <functioncall functionName="_perchannel"/>
+    <functioncall functionName="_si"/>
+    <functioncall functionName="_tag"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="abort"/>
+    <functioncall functionName="abs"/>
+    <functioncall functionName="acc"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="cargo"/>
+    <functioncall functionName="cbBufferSize"/>
+    <functioncall functionName="cbStride"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="complete_avg"/>
+    <functioncall functionName="complete_frame"/>
+    <functioncall functionName="compresstiff"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="dosave"/>
+    <functioncall functionName="elem"/>
+    <functioncall functionName="encoders"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="factory"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fill"/>
+    <functioncall functionName="first"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="formatGUID"/>
+    <functioncall functionName="framecount"/>
+    <functioncall functionName="frameencoders"/>
+    <functioncall functionName="function"/>
+    <functioncall functionName="generate"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="hresult_exception"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="image"/>
+    <functioncall functionName="imagedata"/>
+    <functioncall functionName="inserter"/>
+    <functioncall functionName="l"/>
+    <functioncall functionName="lastmapped"/>
+    <functioncall functionName="lastsyncsig"/>
+    <functioncall functionName="lines"/>
+    <functioncall functionName="linewidth"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="make_pair"/>
+    <functioncall functionName="maxin"/>
+    <functioncall functionName="maxout"/>
+    <functioncall functionName="minin"/>
+    <functioncall functionName="minout"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="mt"/>
+    <functioncall functionName="newpart"/>
+    <functioncall functionName="nothing"/>
+    <functioncall functionName="notify_all"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="operatorHRESULT"/>
+    <functioncall functionName="option"/>
+    <functioncall functionName="pData"/>
+    <functioncall functionName="pPropertybag"/>
+    <functioncall functionName="pair"/>
+    <functioncall functionName="percent_complete"/>
+    <functioncall functionName="perchannel"/>
+    <functioncall functionName="pixelmutex"/>
+    <functioncall functionName="rangerelation"/>
+    <functioncall functionName="reading_access"/>
+    <functioncall functionName="reinterpret_cast"/>
+    <functioncall functionName="release"/>
+    <functioncall functionName="resSync"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="round2"/>
+    <functioncall functionName="round2ui16"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="seed"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="store"/>
+    <functioncall functionName="strcpy_s"/>
+    <functioncall functionName="streams"/>
+    <functioncall functionName="tag"/>
+    <functioncall functionName="to8"/>
+    <functioncall functionName="transform"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="unlock"/>
+    <functioncall functionName="vB"/>
+    <functioncall functionName="vG"/>
+    <functioncall functionName="vR"/>
+    <functioncall functionName="val"/>
+    <functioncall functionName="varValue"/>
+    <functioncall functionName="vector"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

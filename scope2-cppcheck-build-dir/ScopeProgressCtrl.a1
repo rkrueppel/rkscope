@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="4083021745">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="AttachToDlgItem" lineNumber="19"/>
+    <functiondecl functionName="OnUpdateControl" lineNumber="29"/>
+    <functiondecl functionName="UpdateControl" lineNumber="35"/>
+    <functioncall functionName="CScopeProgressCtrl"/>
+    <functioncall functionName="ConnectGUI"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnUpdateControl"/>
+    <functioncall functionName="PostMessage"/>
+    <functioncall functionName="SetPos"/>
+    <functioncall functionName="SetRange"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="UpdateControl"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="WM_UPDATECONTROL"/>
+    <functioncall functionName="_scopenum"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="ll"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="round2i32"/>
+    <functioncall functionName="scopenum"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="ul"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,6 +1,7 @@
 #pragma once
 
 namespace scope {
+	template<uint32_t NMASTERS, uint32_t NSLAVES, uint32_t SLAVESPERMASTER, const std::vector<uint32_t>* MASTERSINALLAREAS> class DaqController;
 	class OutputsDAQmx;
 	class ZeroOutputsDAQmx;
 	class OutputsDAQmxSlave;
@@ -38,8 +39,8 @@ namespace scope {
 	typedef std::shared_ptr<const ScopeMultiImageResonanceSW> ScopeMultiImageResonanceSWCPtr;
 	class ScopeOverlay;
 	class ScopeOverlayResonanceSW;
-	template<uint32_t NAREAS> class PixelmapperFrameResonanceHW;
-	template<uint32_t NAREAS> class PixelmapperFrameResonanceSW;
+	template<uint32_t, uint32_t> class PixelmapperFrameResonanceHW;
+	template<uint32_t, uint32_t> class PixelmapperFrameResonanceSW;
 	
 	namespace parameters {
 		class OutputsDAQmx;
@@ -335,14 +336,14 @@ namespace scope {
 			Software
 		};
 
-		template<ResonancePixelmapperEnum, uint32_t NAREAS>
+		template<ResonancePixelmapperEnum, uint32_t NCHANNELS, uint32_t NAREAS>
 		struct ResonancePixelmapperTypeSelector {
-			typedef PixelmapperFrameResonanceHW<NAREAS> type;
+			typedef PixelmapperFrameResonanceHW<NCHANNELS, NAREAS> type;
 		};
 
-		template<uint32_t NAREAS>
-		struct ResonancePixelmapperTypeSelector<ResonancePixelmapperEnum::Software, NAREAS> {
-			typedef PixelmapperFrameResonanceSW<NAREAS> type;
+		template<uint32_t NCHANNELS, uint32_t NAREAS>
+		struct ResonancePixelmapperTypeSelector<ResonancePixelmapperEnum::Software, NCHANNELS, NAREAS> {
+			typedef PixelmapperFrameResonanceSW<NCHANNELS, NAREAS> type;
 		};
 
 		enum class FramevectorFillEnum {

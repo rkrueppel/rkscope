@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1939679799">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;x&apos; can be reduced." verbose="The scope of the variable &apos;x&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameSaw.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameSaw.cpp" line="117"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameSaw&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameSaw&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameSaw.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameSaw.h" line="47"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="UpdateVector" lineNumber="15"/>
+    <functiondecl functionName="FillLookup" lineNumber="58"/>
+    <functiondecl functionName="FillX" lineNumber="87"/>
+    <functiondecl functionName="FillY" lineNumber="135"/>
+    <functiondecl functionName="FillZ" lineNumber="185"/>
+    <functiondecl functionName="FillP" lineNumber="208"/>
+    <functiondecl functionName="FillXP" lineNumber="273"/>
+    <functiondecl functionName="FillYZ" lineNumber="357"/>
+    <functiondecl functionName="FillZP" lineNumber="410"/>
+    <functiondecl functionName="RotateP" lineNumber="437"/>
+    <functiondecl functionName="UpdateVector" lineNumber="15"/>
+    <functiondecl functionName="FillLookup" lineNumber="58"/>
+    <functiondecl functionName="FillX" lineNumber="87"/>
+    <functiondecl functionName="FillY" lineNumber="135"/>
+    <functiondecl functionName="FillZ" lineNumber="185"/>
+    <functiondecl functionName="FillP" lineNumber="208"/>
+    <functiondecl functionName="FillXP" lineNumber="273"/>
+    <functiondecl functionName="FillYZ" lineNumber="357"/>
+    <functiondecl functionName="FillZP" lineNumber="410"/>
+    <functiondecl functionName="RotateP" lineNumber="437"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="FillLookup"/>
+    <functioncall functionName="FillP"/>
+    <functioncall functionName="FillX"/>
+    <functioncall functionName="FillXP"/>
+    <functioncall functionName="FillY"/>
+    <functioncall functionName="FillYZ"/>
+    <functioncall functionName="FillZ"/>
+    <functioncall functionName="PositionToVoltage"/>
+    <functioncall functionName="QuadPart"/>
+    <functioncall functionName="QueryPerformanceCounter"/>
+    <functioncall functionName="QueryPerformanceFrequency"/>
+    <functioncall functionName="Sawtooth"/>
+    <functioncall functionName="ScannerDelaySamples"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameSaw"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="XCutoffPixels"/>
+    <functioncall functionName="XImagePixels"/>
+    <functioncall functionName="XRetracePixels"/>
+    <functioncall functionName="XScanPixels"/>
+    <functioncall functionName="XTotalPixels"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YImageLines"/>
+    <functioncall functionName="YRetraceLines"/>
+    <functioncall functionName="YScanLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_filltype"/>
+    <functioncall functionName="_interleavedfactor"/>
+    <functioncall functionName="_pstart"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="countfreq"/>
+    <functioncall functionName="countspost"/>
+    <functioncall functionName="countspre"/>
+    <functioncall functionName="cp"/>
+    <functioncall functionName="cp_init"/>
+    <functioncall functionName="cx"/>
+    <functioncall functionName="cy"/>
+    <functioncall functionName="cz"/>
+    <functioncall functionName="cz_init"/>
+    <functioncall functionName="datapos"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fastz"/>
+    <functioncall functionName="fastzoutdev"/>
+    <functioncall functionName="filltype"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="framesamples"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="linesamples"/>
+    <functioncall functionName="ll"/>
+    <functioncall functionName="lookup_rotation"/>
+    <functioncall functionName="maxoutputpockels"/>
+    <functioncall functionName="maxoutputscanner"/>
+    <functioncall functionName="minoutputpockels"/>
+    <functioncall functionName="minoutputscanner"/>
+    <functioncall functionName="operator[]"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="p"/>
+    <functioncall functionName="pockels"/>
+    <functioncall functionName="pockels_rotation"/>
+    <functioncall functionName="pockelsoutval"/>
+    <functioncall functionName="pr"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="rangezoomed"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="rotate"/>
+    <functioncall functionName="scaletodevice"/>
+    <functioncall functionName="scaletodevicez"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="step_size"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="swap"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="ul"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xaspectratio"/>
+    <functioncall functionName="xcutoffsamples"/>
+    <functioncall functionName="ximagesamples"/>
+    <functioncall functionName="xoffset"/>
+    <functioncall functionName="xscansamples"/>
+    <functioncall functionName="xtotalsamples"/>
+    <functioncall functionName="yaspectratio"/>
+    <functioncall functionName="yimagesamples"/>
+    <functioncall functionName="yoffset"/>
+    <functioncall functionName="yscanlinesamples"/>
+    <functioncall functionName="ytotalsamples"/>
+    <functioncall functionName="zoom"/>
+  </FileInfo>
+</analyzerinfo>

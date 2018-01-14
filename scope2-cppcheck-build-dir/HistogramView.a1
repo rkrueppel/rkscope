@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1517721516">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\HistogramView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnFinalMessage" lineNumber="27"/>
+    <functiondecl functionName="OnLButtonDown" lineNumber="30"/>
+    <functiondecl functionName="OnLButtonUp" lineNumber="45"/>
+    <functiondecl functionName="OnMouseMove" lineNumber="51"/>
+    <functiondecl functionName="OnShowWindow" lineNumber="74"/>
+    <functiondecl functionName="OnPaint" lineNumber="84"/>
+    <functiondecl functionName="OnSize" lineNumber="92"/>
+    <functiondecl functionName="OnDisplayChange" lineNumber="98"/>
+    <functiondecl functionName="Optimize" lineNumber="102"/>
+    <functiondecl functionName="FullRange" lineNumber="114"/>
+    <functiondecl functionName="SetLimits" lineNumber="125"/>
+    <functiondecl functionName="SetCurrentFrame" lineNumber="140"/>
+    <functiondecl functionName="OnFinalMessage" lineNumber="27"/>
+    <functiondecl functionName="OnLButtonDown" lineNumber="30"/>
+    <functiondecl functionName="OnLButtonUp" lineNumber="45"/>
+    <functiondecl functionName="OnMouseMove" lineNumber="51"/>
+    <functiondecl functionName="OnShowWindow" lineNumber="74"/>
+    <functiondecl functionName="OnPaint" lineNumber="84"/>
+    <functiondecl functionName="OnSize" lineNumber="92"/>
+    <functiondecl functionName="OnDisplayChange" lineNumber="98"/>
+    <functiondecl functionName="Optimize" lineNumber="102"/>
+    <functiondecl functionName="FullRange" lineNumber="114"/>
+    <functiondecl functionName="SetLimits" lineNumber="125"/>
+    <functiondecl functionName="SetCurrentFrame" lineNumber="140"/>
+    <functioncall functionName="ATLASSERT"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="BN_CLICKED"/>
+    <functioncall functionName="BeginPaint"/>
+    <functioncall functionName="CChannelView"/>
+    <functioncall functionName="CDCHandle"/>
+    <functioncall functionName="CHistogramView"/>
+    <functioncall functionName="CS_VREDRAW"/>
+    <functioncall functionName="CScopeButtonCtrl"/>
+    <functioncall functionName="CSize"/>
+    <functioncall functionName="Calculate"/>
+    <functioncall functionName="ClickedAt"/>
+    <functioncall functionName="ColorF"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="D2D1CreateFactory"/>
+    <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2HistogramRender"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DECLARE_WND_CLASS_EX"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EndPaint"/>
+    <functioncall functionName="FirstCountPositions"/>
+    <functioncall functionName="GetDesktopDpi"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="Invalidate"/>
+    <functioncall functionName="LastCountPositions"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_WM_DISPLAYCHANGE"/>
+    <functioncall functionName="MSG_WM_ERASEBKGND"/>
+    <functioncall functionName="MSG_WM_LBUTTONDOWN"/>
+    <functioncall functionName="MSG_WM_LBUTTONUP"/>
+    <functioncall functionName="MSG_WM_MOUSEMOVE"/>
+    <functioncall functionName="MSG_WM_PAINT"/>
+    <functioncall functionName="MSG_WM_SHOWWINDOW"/>
+    <functioncall functionName="MSG_WM_SIZE"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnClicked"/>
+    <functioncall functionName="OnDisplayChange"/>
+    <functioncall functionName="OnEraseBkgnd"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKeyUp"/>
+    <functioncall functionName="OnLButtonDown"/>
+    <functioncall functionName="OnLButtonUp"/>
+    <functioncall functionName="OnMouseMove"/>
+    <functioncall functionName="OnPaint"/>
+    <functioncall functionName="OnShowWindow"/>
+    <functioncall functionName="OnSize"/>
+    <functioncall functionName="Point2F"/>
+    <functioncall functionName="REFLECTED_COMMAND_CODE_HANDLER_EX"/>
+    <functioncall functionName="Render"/>
+    <functioncall functionName="SCOPE_DIRECT2D_DEBUG"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="SendMessage"/>
+    <functioncall functionName="SetHistogram"/>
+    <functioncall functionName="SetHistogramLimits"/>
+    <functioncall functionName="SetLimits"/>
+    <functioncall functionName="SetLowerLimitPosition"/>
+    <functioncall functionName="SetUpperLimitPosition"/>
+    <functioncall functionName="Size"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="UpdateRange"/>
+    <functioncall functionName="ValidateRect"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KEYUP"/>
+    <functioncall functionName="WM_UPDATEHISTOLIMITS"/>
+    <functioncall functionName="White"/>
+    <functioncall functionName="X"/>
+    <functioncall functionName="Y"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_ch"/>
+    <functioncall functionName="_channels"/>
+    <functioncall functionName="_display_controller"/>
+    <functioncall functionName="_loghist"/>
+    <functioncall functionName="_multi"/>
+    <functioncall functionName="_range"/>
+    <functioncall functionName="_size"/>
+    <functioncall functionName="area"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="assign"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="ch"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="current_frame"/>
+    <functioncall functionName="current_histogram"/>
+    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="display_controller"/>
+    <functioncall functionName="dragginglower"/>
+    <functioncall functionName="draggingupper"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="llpos"/>
+    <functioncall functionName="lower_limits"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="min"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="options"/>
+    <functioncall functionName="pMsg"/>
+    <functioncall functionName="paint"/>
+    <functioncall functionName="pd2d_factory"/>
+    <functioncall functionName="point"/>
+    <functioncall functionName="policy_class"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="renderer"/>
+    <functioncall functionName="round2ui16"/>
+    <functioncall functionName="scaleX"/>
+    <functioncall functionName="scaleY"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="ulpos"/>
+    <functioncall functionName="uplo"/>
+    <functioncall functionName="upper_limits"/>
+    <functioncall functionName="width"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>

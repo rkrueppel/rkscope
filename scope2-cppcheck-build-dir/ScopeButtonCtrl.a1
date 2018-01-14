@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3079164509">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="AttachToDlgItem" lineNumber="22"/>
+    <functiondecl functionName="Connect" lineNumber="30"/>
+    <functiondecl functionName="Disconnect" lineNumber="40"/>
+    <functiondecl functionName="OnKeyDown" lineNumber="44"/>
+    <functiondecl functionName="OnKeyUp" lineNumber="56"/>
+    <functiondecl functionName="OnClicked" lineNumber="64"/>
+    <functiondecl functionName="Enable" lineNumber="68"/>
+    <functioncall functionName="BN_CLICKED"/>
+    <functioncall functionName="CScopeButtonCtrl"/>
+    <functioncall functionName="Click"/>
+    <functioncall functionName="ConnectControlState"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="DefWindowProc"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="Enable"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="Enabled"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="OnClicked"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKeyUp"/>
+    <functioncall functionName="PostMessage"/>
+    <functioncall functionName="REFLECTED_COMMAND_CODE_HANDLER_EX"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KEYUP"/>
+    <functioncall functionName="WM_NEXTDLGCTL"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_butt"/>
+    <functioncall functionName="_connectcontrolstate"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="scope_button"/>
+    <functioncall functionName="shiftstate"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uMsg"/>
+    <functioncall functionName="wParam"/>
+  </FileInfo>
+</analyzerinfo>

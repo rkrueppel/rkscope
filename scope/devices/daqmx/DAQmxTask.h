@@ -325,7 +325,7 @@ namespace DAQmx {
 			* @warning size of _data has to be at least _sampsperchan*_channels
 			* @warning time out error does never throw an exception
 			* @exception scope::ScopeException on error during read, except time out error */
-			int32 ReadI16(std::vector<uint16_t>::iterator& _databegin, std::vector<uint16_t>::iterator& _dataend, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout = 2);
+			int32 ReadI16(std::vector<int16_t>::iterator& _databegin, std::vector<int16_t>::iterator& _dataend, const int32& _sampsperchan, const uint32_t& _channels,  bool& _timedout, const float64& _timeout = 2);
 	};
 
 	/** Wraps a DAQmx Counter Output task. */

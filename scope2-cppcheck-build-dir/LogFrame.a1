@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2578061325">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCreate" lineNumber="21"/>
+    <functiondecl functionName="OnDestroy" lineNumber="31"/>
+    <functiondecl functionName="PreTranslateMessage" lineNumber="37"/>
+    <functiondecl functionName="AppendLogText" lineNumber="44"/>
+    <functiondecl functionName="ReplaceLogText" lineNumber="51"/>
+    <functiondecl functionName="GetLogText" lineNumber="60"/>
+    <functioncall functionName="AppendText"/>
+    <functioncall functionName="AttachLogFrame"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="CHAIN_CLIENT_COMMANDS"/>
+    <functioncall functionName="CHAIN_MSG_MAP"/>
+    <functioncall functionName="CHAIN_MSG_MAP_ALT"/>
+    <functioncall functionName="CLogFrame"/>
+    <functioncall functionName="CLogView"/>
+    <functioncall functionName="CRichEditCtrl"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="DetachLogFrame"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="ES_SAVESEL"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="GetSel"/>
+    <functioncall functionName="GetWindowText"/>
+    <functioncall functionName="GetWindowTextLength"/>
+    <functioncall functionName="GetWndClassName"/>
+    <functioncall functionName="HWND"/>
+    <functioncall functionName="IDR_LOGBOOK"/>
+    <functioncall functionName="Invalidate"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_WM_CREATE"/>
+    <functioncall functionName="MSG_WM_DESTROY"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnChar"/>
+    <functioncall functionName="OnCreate"/>
+    <functioncall functionName="OnDestroy"/>
+    <functioncall functionName="PreTranslateMessage"/>
+    <functioncall functionName="SetSel"/>
+    <functioncall functionName="SetWindowText"/>
+    <functioncall functionName="WM_CHAR"/>
+    <functioncall functionName="attached"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="buffer"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="pMsg"/>
+    <functioncall functionName="rcDefault"/>
+    <functioncall functionName="start"/>
+    <functioncall functionName="textlen"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="wstring"/>
+  </FileInfo>
+</analyzerinfo>

@@ -26,7 +26,9 @@ bool GaterDAQmx::WaitFor(const bool& _waitforhigh) {
 
 	// Try repeatedly to read for 200ms, as long as the read from the task times out or until the Stop condition is set
 	while ( timeout ) {
-		task.ReadU16(readvec.begin(), readvec.end(), 1, 1, timeout, 120);
+		auto b = std::begin(readvec);
+		auto e = std::end(readvec);
+		task.ReadU16(b, e, 1, 1, timeout, 120);
 		if ( sc->IsSet() ) {
 			DBOUT(L"GaterDAQmx::WaitFor StopCondition set");
 			return false;

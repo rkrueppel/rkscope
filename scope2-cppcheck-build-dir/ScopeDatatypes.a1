@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3497870788">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.h" line="60"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.h" line="64"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Uint16LowerBoundary" lineNumber="8"/>
+    <functiondecl functionName="Uint16UpperBoundary" lineNumber="21"/>
+    <functiondecl functionName="List" lineNumber="35"/>
+    <functiondecl functionName="IsSupported" lineNumber="54"/>
+    <functiondecl functionName="IsBuiltinSupported" lineNumber="59"/>
+    <functioncall functionName="AOD"/>
+    <functioncall functionName="Basic"/>
+    <functioncall functionName="Bidirectional"/>
+    <functioncall functionName="External"/>
+    <functioncall functionName="FastZ"/>
+    <functioncall functionName="Fiber"/>
+    <functioncall functionName="FullframeXYZP"/>
+    <functioncall functionName="Gated"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="InputsFPGA"/>
+    <functioncall functionName="InputsFPGAAnalogDemultiplexer"/>
+    <functioncall functionName="InputsFPGAAnalogIntegrator"/>
+    <functioncall functionName="InputsFPGADigitalDemultiplexer"/>
+    <functioncall functionName="InputsFPGAIO5751"/>
+    <functioncall functionName="InputsFPGAIO5771"/>
+    <functioncall functionName="InputsFPGAIO6587"/>
+    <functioncall functionName="InputsFPGAPhotonCounter"/>
+    <functioncall functionName="InputsFPGAResonanceScanner"/>
+    <functioncall functionName="IsSupported"/>
+    <functioncall functionName="LineStraight"/>
+    <functioncall functionName="LineXPColumnYZ"/>
+    <functioncall functionName="LineZP"/>
+    <functioncall functionName="List"/>
+    <functioncall functionName="Master"/>
+    <functioncall functionName="Mode"/>
+    <functioncall functionName="NameOf"/>
+    <functioncall functionName="NonSimultaneousSampling"/>
+    <functioncall functionName="OnboardClock"/>
+    <functioncall functionName="OutputsDAQmx"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="OutputsDAQmxSlave"/>
+    <functioncall functionName="Planehopper"/>
+    <functioncall functionName="ReferenceClock"/>
+    <functioncall functionName="Regular"/>
+    <functioncall functionName="Resonance"/>
+    <functioncall functionName="ResonanceBiDi"/>
+    <functioncall functionName="ResonanceHopper"/>
+    <functioncall functionName="RunningBehavior"/>
+    <functioncall functionName="RunningContinuous"/>
+    <functioncall functionName="RunningSingle"/>
+    <functioncall functionName="RunningStack"/>
+    <functioncall functionName="RunningTimeseries"/>
+    <functioncall functionName="S"/>
+    <functioncall functionName="Sawtooth"/>
+    <functioncall functionName="ScopeDatatypeBase"/>
+    <functioncall functionName="SimultaneousSampling"/>
+    <functioncall functionName="Slave"/>
+    <functioncall functionName="Stopped"/>
+    <functioncall functionName="ZStage"/>
+    <functioncall functionName="_n"/>
+    <functioncall functionName="_scanmode"/>
+    <functioncall functionName="_scannertype"/>
+    <functioncall functionName="_sdb"/>
+    <functioncall functionName="_t"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="continuous"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="down"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="find"/>
+    <functioncall functionName="first4096"/>
+    <functioncall functionName="firsthalf"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="full"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="nframes"/>
+    <functioncall functionName="operator=="/>
+    <functioncall functionName="operatorstd::wstring"/>
+    <functioncall functionName="operatortypenameT::Mode"/>
+    <functioncall functionName="operatoruint32_t"/>
+    <functioncall functionName="public:"/>
+    <functioncall functionName="ret"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="right"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="scannerselect"/>
+    <functioncall functionName="secondhalf"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="t"/>
+    <functioncall functionName="up"/>
+    <functioncall functionName="veclist"/>
+    <functioncall functionName="vector"/>
+  </FileInfo>
+</analyzerinfo>

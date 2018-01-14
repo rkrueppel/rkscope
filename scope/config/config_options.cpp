@@ -30,5 +30,4 @@
 #include "helpers\ScopeMultiImageResonanceSW.h"
 #include "helpers\ScopeOverlay.h"
 #include "helpers\ScopeOverlayResonanceSW.h"
-#include "scanmodes\PixelmapperFrameResonanceHW.h"
-#include "scanmodes\PixelmapperFrameResonanceSW.h"
+#include "scanmodes\PixelmapperBasic.h"

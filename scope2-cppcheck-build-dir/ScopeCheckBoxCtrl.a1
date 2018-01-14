@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2064835911">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="AttachToDlgItem" lineNumber="22"/>
+    <functiondecl functionName="OnReflectedCommand" lineNumber="31"/>
+    <functiondecl functionName="OnKeyDown" lineNumber="37"/>
+    <functiondecl functionName="OnKeyUp" lineNumber="51"/>
+    <functiondecl functionName="OnKillFocus" lineNumber="59"/>
+    <functiondecl functionName="OnUpdateControl" lineNumber="64"/>
+    <functiondecl functionName="UpdateControl" lineNumber="73"/>
+    <functiondecl functionName="UpdateValue" lineNumber="77"/>
+    <functiondecl functionName="SetState" lineNumber="85"/>
+    <functioncall functionName="BST_CHECKED"/>
+    <functioncall functionName="BST_UNCHECKED"/>
+    <functioncall functionName="CScopeCheckBoxCtrl"/>
+    <functioncall functionName="ConnectGUI"/>
+    <functioncall functionName="ConnectState"/>
+    <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
+    <functioncall functionName="DefWindowProc"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EnableWindow"/>
+    <functioncall functionName="GetCheck"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_OCM_COMMAND"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnKeyDown"/>
+    <functioncall functionName="OnKillFocus"/>
+    <functioncall functionName="OnReflectedCommand"/>
+    <functioncall functionName="OnUpdateControl"/>
+    <functioncall functionName="PostMessage"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetCheck"/>
+    <functioncall functionName="SetState"/>
+    <functioncall functionName="SubclassWindow"/>
+    <functioncall functionName="UpdateControl"/>
+    <functioncall functionName="UpdateValue"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="WM_KEYDOWN"/>
+    <functioncall functionName="WM_KILLFOCUS"/>
+    <functioncall functionName="WM_NEXTDLGCTL"/>
+    <functioncall functionName="WM_UPDATECONTROL"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_connectback"/>
+    <functioncall functionName="_connectcontrolstate"/>
+    <functioncall functionName="_scopeval"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="created"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="hWnd"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="scope_val"/>
+    <functioncall functionName="shiftstate"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uMsg"/>
+    <functioncall functionName="val"/>
+    <functioncall functionName="wParam"/>
+  </FileInfo>
+</analyzerinfo>

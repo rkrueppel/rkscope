@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1745345534">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="CreateSolidColorBrush" lineNumber="47"/>
+    <functiondecl functionName="CreateBitmap" lineNumber="52"/>
+    <functiondecl functionName="CreateTextFormat" lineNumber="79"/>
+    <functiondecl functionName="CreateRectangleGeometry" lineNumber="96"/>
+    <functiondecl functionName="BeginDraw" lineNumber="101"/>
+    <functiondecl functionName="CheckWindowState" lineNumber="105"/>
+    <functiondecl functionName="SetTransform" lineNumber="109"/>
+    <functiondecl functionName="ClearWindow" lineNumber="113"/>
+    <functiondecl functionName="Clear" lineNumber="118"/>
+    <functiondecl functionName="DrawBitmap" lineNumber="123"/>
+    <functiondecl functionName="DrawLine" lineNumber="131"/>
+    <functiondecl functionName="DrawText" lineNumber="135"/>
+    <functiondecl functionName="FillRectangle" lineNumber="143"/>
+    <functiondecl functionName="GetSize" lineNumber="147"/>
+    <functiondecl functionName="EndDraw" lineNumber="151"/>
+    <functiondecl functionName="Resize" lineNumber="155"/>
+    <functiondecl functionName="Flush" lineNumber="159"/>
+    <functiondecl functionName="CreateSolidColorBrush" lineNumber="47"/>
+    <functiondecl functionName="CreateBitmap" lineNumber="52"/>
+    <functiondecl functionName="CreateTextFormat" lineNumber="79"/>
+    <functiondecl functionName="CreateRectangleGeometry" lineNumber="96"/>
+    <functiondecl functionName="BeginDraw" lineNumber="101"/>
+    <functiondecl functionName="CheckWindowState" lineNumber="105"/>
+    <functiondecl functionName="SetTransform" lineNumber="109"/>
+    <functiondecl functionName="ClearWindow" lineNumber="113"/>
+    <functiondecl functionName="Clear" lineNumber="118"/>
+    <functiondecl functionName="DrawBitmap" lineNumber="123"/>
+    <functiondecl functionName="DrawLine" lineNumber="131"/>
+    <functiondecl functionName="DrawText" lineNumber="135"/>
+    <functiondecl functionName="FillRectangle" lineNumber="143"/>
+    <functiondecl functionName="GetSize" lineNumber="147"/>
+    <functiondecl functionName="EndDraw" lineNumber="151"/>
+    <functiondecl functionName="Resize" lineNumber="155"/>
+    <functiondecl functionName="Flush" lineNumber="159"/>
+    <functioncall functionName="ATLASSERT"/>
+    <functioncall functionName="BeginDraw"/>
+    <functioncall functionName="BitmapProperties"/>
+    <functioncall functionName="CheckWindowState"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ColorF"/>
+    <functioncall functionName="CreateBitmap"/>
+    <functioncall functionName="CreateHwndRenderTarget"/>
+    <functioncall functionName="CreateRectangleGeometry"/>
+    <functioncall functionName="CreateSolidColorBrush"/>
+    <functioncall functionName="CreateTextFormat"/>
+    <functioncall functionName="D2D1CreateFactory"/>
+    <functioncall functionName="D2D1_ALPHA_MODE_IGNORE"/>
+    <functioncall functionName="D2D1_ANTIALIAS_MODE_PER_PRIMITIVE"/>
+    <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_PRESENT_OPTIONS_IMMEDIATELY"/>
+    <functioncall functionName="D2D1_RENDER_TARGET_TYPE_DEFAULT"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="DWRITE_FACTORY_TYPE_SHARED"/>
+    <functioncall functionName="DWRITE_FONT_STRETCH_NORMAL"/>
+    <functioncall functionName="DWRITE_FONT_STYLE_NORMAL"/>
+    <functioncall functionName="DWRITE_FONT_WEIGHT_REGULAR"/>
+    <functioncall functionName="DWRITE_TEXT_ALIGNMENT_LEADING"/>
+    <functioncall functionName="DWriteCreateFactory"/>
+    <functioncall functionName="DXGI_FORMAT_B8G8R8A8_UNORM"/>
+    <functioncall functionName="DrawBitmap"/>
+    <functioncall functionName="DrawLine"/>
+    <functioncall functionName="DrawText"/>
+    <functioncall functionName="EndDraw"/>
+    <functioncall functionName="FillRectangle"/>
+    <functioncall functionName="Flush"/>
+    <functioncall functionName="GetClientRect"/>
+    <functioncall functionName="GetDesktopDpi"/>
+    <functioncall functionName="GetLength"/>
+    <functioncall functionName="GetPixelSize"/>
+    <functioncall functionName="GetSize"/>
+    <functioncall functionName="GetString"/>
+    <functioncall functionName="HResult"/>
+    <functioncall functionName="HwndRenderTargetProperties"/>
+    <functioncall functionName="IDWriteFactory"/>
+    <functioncall functionName="Identity"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="PixelFormat"/>
+    <functioncall functionName="Point2F"/>
+    <functioncall functionName="RectF"/>
+    <functioncall functionName="RenderTarget"/>
+    <functioncall functionName="RenderTargetProperties"/>
+    <functioncall functionName="Resize"/>
+    <functioncall functionName="SCOPE_DIRECT2D_DEBUG"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="SetAntialiasMode"/>
+    <functioncall functionName="SetTextAlignment"/>
+    <functioncall functionName="SetTransform"/>
+    <functioncall functionName="SizeU"/>
+    <functioncall functionName="White"/>
+    <functioncall functionName="X"/>
+    <functioncall functionName="Y"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="__uuidof"/>
+    <functioncall functionName="_bitmap"/>
+    <functioncall functionName="_brush"/>
+    <functioncall functionName="_clearColor"/>
+    <functioncall functionName="_color"/>
+    <functioncall functionName="_hwnd"/>
+    <functioncall functionName="_layoutRect"/>
+    <functioncall functionName="_mode"/>
+    <functioncall functionName="_pixelSize"/>
+    <functioncall functionName="_point0"/>
+    <functioncall functionName="_point1"/>
+    <functioncall functionName="_rect"/>
+    <functioncall functionName="_rectangle"/>
+    <functioncall functionName="_rectangleGeometry"/>
+    <functioncall functionName="_strokeWidth"/>
+    <functioncall functionName="_text_format"/>
+    <functioncall functionName="_transform"/>
+    <functioncall functionName="_xres"/>
+    <functioncall functionName="_yres"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="dwrite_factory"/>
+    <functioncall functionName="e"/>
+    <functioncall functionName="height"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="options"/>
+    <functioncall functionName="pd2d_factory"/>
+    <functioncall functionName="pixelformat"/>
+    <functioncall functionName="policy_class"/>
+    <functioncall functionName="rc"/>
+    <functioncall functionName="reinterpret_cast"/>
+    <functioncall functionName="scaleX"/>
+    <functioncall functionName="scaleY"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="systemdpi_x"/>
+    <functioncall functionName="systemdpi_y"/>
+    <functioncall functionName="target"/>
+    <functioncall functionName="targetProperties"/>
+    <functioncall functionName="top"/>
+    <functioncall functionName="width"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>

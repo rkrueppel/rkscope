@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1561024349">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCreate" lineNumber="8"/>
+    <functiondecl functionName="PreTranslateMessage" lineNumber="13"/>
+    <functiondecl functionName="OnPaint" lineNumber="18"/>
+    <functiondecl functionName="OnSize" lineNumber="26"/>
+    <functiondecl functionName="OnDisplayChange" lineNumber="31"/>
+    <functiondecl functionName="OnMouseMove" lineNumber="35"/>
+    <functiondecl functionName="GetRendererSize" lineNumber="41"/>
+    <functiondecl functionName="Render" lineNumber="45"/>
+    <functiondecl functionName="ResizeContent" lineNumber="49"/>
+    <functiondecl functionName="GetBitmap" lineNumber="53"/>
+    <functiondecl functionName="UpdateScaleText" lineNumber="57"/>
+    <functiondecl functionName="OnCreate" lineNumber="8"/>
+    <functiondecl functionName="PreTranslateMessage" lineNumber="13"/>
+    <functiondecl functionName="OnPaint" lineNumber="18"/>
+    <functiondecl functionName="OnSize" lineNumber="26"/>
+    <functiondecl functionName="OnDisplayChange" lineNumber="31"/>
+    <functiondecl functionName="OnMouseMove" lineNumber="35"/>
+    <functiondecl functionName="GetRendererSize" lineNumber="41"/>
+    <functiondecl functionName="Render" lineNumber="45"/>
+    <functiondecl functionName="ResizeContent" lineNumber="49"/>
+    <functiondecl functionName="GetBitmap" lineNumber="53"/>
+    <functiondecl functionName="UpdateScaleText" lineNumber="57"/>
+    <functioncall functionName="ATLASSERT"/>
+    <functioncall functionName="BeginPaint"/>
+    <functioncall functionName="Bitmap"/>
+    <functioncall functionName="CChannelView"/>
+    <functioncall functionName="CDCHandle"/>
+    <functioncall functionName="CS_VREDRAW"/>
+    <functioncall functionName="CSize"/>
+    <functioncall functionName="ColorF"/>
+    <functioncall functionName="Create"/>
+    <functioncall functionName="D2D1CreateFactory"/>
+    <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="DECLARE_WND_CLASS_EX"/>
+    <functioncall functionName="DrawBitmap"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="EndPaint"/>
+    <functioncall functionName="FALSE"/>
+    <functioncall functionName="GetDesktopDpi"/>
+    <functioncall functionName="GetParent"/>
+    <functioncall functionName="GetSize"/>
+    <functioncall functionName="Initialize"/>
+    <functioncall functionName="Invalidate"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_WM_CREATE"/>
+    <functioncall functionName="MSG_WM_DISPLAYCHANGE"/>
+    <functioncall functionName="MSG_WM_ERASEBKGND"/>
+    <functioncall functionName="MSG_WM_PAINT"/>
+    <functioncall functionName="MSG_WM_SIZE"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnCreate"/>
+    <functioncall functionName="OnDisplayChange"/>
+    <functioncall functionName="OnEraseBkgnd"/>
+    <functioncall functionName="OnMouseMove"/>
+    <functioncall functionName="OnPaint"/>
+    <functioncall functionName="OnSize"/>
+    <functioncall functionName="Point2F"/>
+    <functioncall functionName="Render"/>
+    <functioncall functionName="Resize"/>
+    <functioncall functionName="ResizeBitmap"/>
+    <functioncall functionName="SCOPE_DIRECT2D_DEBUG"/>
+    <functioncall functionName="SafeRelease"/>
+    <functioncall functionName="SendMessage"/>
+    <functioncall functionName="UINT"/>
+    <functioncall functionName="UpdateScaleText"/>
+    <functioncall functionName="ValidateRect"/>
+    <functioncall functionName="WM_MOUSEMOVE"/>
+    <functioncall functionName="WM_UPDATEMOUSEPIXEL"/>
+    <functioncall functionName="White"/>
+    <functioncall functionName="X"/>
+    <functioncall functionName="Y"/>
+    <functioncall functionName="_text"/>
+    <functioncall functionName="_xres"/>
+    <functioncall functionName="_yres"/>
+    <functioncall functionName="bitmap"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="cx"/>
+    <functioncall functionName="cy"/>
+    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="hr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="options"/>
+    <functioncall functionName="pMsg"/>
+    <functioncall functionName="paint"/>
+    <functioncall functionName="pd2d_factory"/>
+    <functioncall functionName="policy_class"/>
+    <functioncall functionName="scaleX"/>
+    <functioncall functionName="scaleY"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="wParam"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>

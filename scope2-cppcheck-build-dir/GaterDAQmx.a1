@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1776567133">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="WaitFor" lineNumber="13"/>
+    <functioncall functionName="ConfigureDigStartTrigger"/>
+    <functioncall functionName="ConfigureSampleTiming"/>
+    <functioncall functionName="CreateAIVoltageChannel"/>
+    <functioncall functionName="CreateTask"/>
+    <functioncall functionName="DAQmx_Val_Cfg_Default"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_Falling"/>
+    <functioncall functionName="DAQmx_Val_GroupByChannel"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="DAQmx_Val_Volts"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="GaterDAQmx"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="ReadU16"/>
+    <functioncall functionName="_gateline"/>
+    <functioncall functionName="_sc"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="gateline"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="readvec"/>
+    <functioncall functionName="sc"/>
+    <functioncall functionName="timeout"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

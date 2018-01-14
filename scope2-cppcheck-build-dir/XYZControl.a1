@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="568701490">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Initialize" lineNumber="16"/>
+    <functiondecl functionName="StartPolling" lineNumber="29"/>
+    <functiondecl functionName="StopPolling" lineNumber="39"/>
+    <functiondecl functionName="UpdatePositionValues" lineNumber="45"/>
+    <functiondecl functionName="SetZero" lineNumber="49"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetZeroXAxis"/>
+    <functioncall functionName="SetZeroYAxis"/>
+    <functioncall functionName="SetZeroZAxis"/>
+    <functioncall functionName="StartPolling"/>
+    <functioncall functionName="StopPolling"/>
+    <functioncall functionName="UpdatePositionValues"/>
+    <functioncall functionName="XYZControl"/>
+    <functioncall functionName="async"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="initialized"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="pollinterval"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="valid"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xpos"/>
+    <functioncall functionName="ypos"/>
+    <functioncall functionName="zpos"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3771088801">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\SutterController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\SutterController.h" line="17"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Ctrl" lineNumber="17"/>
+    <functiondecl functionName="CheckError" lineNumber="21"/>
+    <functiondecl functionName="Command" lineNumber="27"/>
+    <functiondecl functionName="CreateInstance" lineNumber="41"/>
+    <functioncall functionName="CBR_9600"/>
+    <functioncall functionName="CheckError"/>
+    <functioncall functionName="CreateInstance"/>
+    <functioncall functionName="Ctrl"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="NOPARITY"/>
+    <functioncall functionName="ONESTOPBIT"/>
+    <functioncall functionName="Receive"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="Send"/>
+    <functioncall functionName="SerialConnection"/>
+    <functioncall functionName="SutterController"/>
+    <functioncall functionName="_answerbytes"/>
+    <functioncall functionName="_cmd"/>
+    <functioncall functionName="_comstring"/>
+    <functioncall functionName="back"/>
+    <functioncall functionName="comstring"/>
+    <functioncall functionName="connection"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="realcomstring"/>
+    <functioncall functionName="received"/>
+    <functioncall functionName="vector"/>
+  </FileInfo>
+</analyzerinfo>

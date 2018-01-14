@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3102646123">
+        <error id="syntaxError" severity="error" msg="Invalid number of character &apos;(&apos; when no macros are defined." verbose="Invalid number of character &apos;(&apos; when no macros are defined.">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameSaw.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\PixelmapperFrameSaw.h" line="48"/>
+        </error>
+</analyzerinfo>

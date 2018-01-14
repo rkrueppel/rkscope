@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="686685153">
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="clear"/>
+    <functioncall functionName="elem"/>
+    <functioncall functionName="empty"/>
+    <functioncall functionName="front"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="mut"/>
+    <functioncall functionName="notify_one"/>
+    <functioncall functionName="pop_front"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="timeout"/>
+    <functioncall functionName="tmp"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="wait_for"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

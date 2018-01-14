@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="282411893">
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetRWState"/>
+    <functioncall functionName="Storage"/>
+    <functioncall functionName="autosave"/>
+    <functioncall functionName="basename"/>
+    <functioncall functionName="compresstiff"/>
+    <functioncall functionName="enabler"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="folder"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="savelive"/>
+    <functioncall functionName="saveparameters"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="usetifftags"/>
+  </FileInfo>
+</analyzerinfo>

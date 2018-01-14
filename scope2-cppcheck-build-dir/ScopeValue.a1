@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2120032749">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeValueBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeValueBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValue.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValueBase.h" line="36"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeException&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValue.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeException.h" line="13"/>
+        </error>
+        <error id="copyCtorAndEqOperator" severity="warning" msg="The class &apos;ScopeValue&apos; has &apos;operator=&apos; but lack of &apos;copy constructor&apos;." verbose="The class &apos;ScopeValue&apos; has &apos;operator=&apos; but lack of &apos;copy constructor&apos;.">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValue.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeValue.h" line="11"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="SetFromString" lineNumber="10"/>
+    <functiondecl functionName="ToChar" lineNumber="126"/>
+    <functioncall functionName="AreaType"/>
+    <functioncall functionName="BehaviorMode"/>
+    <functioncall functionName="CoerceValue"/>
+    <functioncall functionName="DaqMode"/>
+    <functioncall functionName="DaqSampling"/>
+    <functioncall functionName="DaqTiming"/>
+    <functioncall functionName="GetRWState"/>
+    <functioncall functionName="Name"/>
+    <functioncall functionName="RunState"/>
+    <functioncall functionName="ScannerType"/>
+    <functioncall functionName="ScannerVectorType"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="ScopeValueBase"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="SetFromString"/>
+    <functioncall functionName="T"/>
+    <functioncall functionName="ToChar"/>
+    <functioncall functionName="Uint16Range"/>
+    <functioncall functionName="Value"/>
+    <functioncall functionName="ZDevice"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_callguisignal"/>
+    <functioncall functionName="_callothersignal"/>
+    <functioncall functionName="_name"/>
+    <functioncall functionName="_state"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="_value"/>
+    <functioncall functionName="add"/>
+    <functioncall functionName="bool"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="changesiggui"/>
+    <functioncall functionName="changesigother"/>
+    <functioncall functionName="connect"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="disconnect_all_slots"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="mutex"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="operator="/>
+    <functioncall functionName="operatorT"/>
+    <functioncall functionName="operatorstd::wstring"/>
+    <functioncall functionName="readwrite"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="slot"/>
+    <functioncall functionName="statesig"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="tmp"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="v"/>
+    <functioncall functionName="value"/>
+    <functioncall functionName="wstringstream"/>
+  </FileInfo>
+</analyzerinfo>

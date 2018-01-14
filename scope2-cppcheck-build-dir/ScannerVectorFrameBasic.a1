@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1520682685">
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &apos;newrot&apos; is less than zero." verbose="The unsigned variable &apos;newrot&apos; will never be negative so it is either pointless or an error to check if it is." cwe="570">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" line="72"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameSaw&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameSaw&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameSaw.h" line="47"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameBiDi&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameBiDi&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBiDi.h" line="34"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFramePlaneHopper&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFramePlaneHopper&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFramePlaneHopper.h" line="17"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameResonanceBiDi&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameResonanceBiDi&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.h" line="30"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScannerVectorFrameResonanceHopper&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScannerVectorFrameResonanceHopper&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.h" line="29"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Factory" lineNumber="27"/>
+    <functiondecl functionName="UpdateVector" lineNumber="43"/>
+    <functiondecl functionName="SetParameters" lineNumber="46"/>
+    <functiondecl functionName="SetPockels" lineNumber="53"/>
+    <functiondecl functionName="SetZoom" lineNumber="58"/>
+    <functiondecl functionName="SetFastZ" lineNumber="63"/>
+    <functiondecl functionName="SetScannderdelay" lineNumber="68"/>
+    <functiondecl functionName="GetInterleavedVector" lineNumber="77"/>
+    <functiondecl functionName="GetLookupVector" lineNumber="81"/>
+    <functiondecl functionName="GetSVParameters" lineNumber="85"/>
+    <functioncall functionName="Factory"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameBiDi"/>
+    <functioncall functionName="ScannerVectorFramePlaneHopper"/>
+    <functioncall functionName="ScannerVectorFrameResonanceBiDi"/>
+    <functioncall functionName="ScannerVectorFrameResonanceHopper"/>
+    <functioncall functionName="ScannerVectorFrameSaw"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="TotalPixels"/>
+    <functioncall functionName="UpdateVector"/>
+    <functioncall functionName="_daqparameters"/>
+    <functioncall functionName="_fastz"/>
+    <functioncall functionName="_filltype"/>
+    <functioncall functionName="_pockelsval"/>
+    <functioncall functionName="_scannerdelaysamples"/>
+    <functioncall functionName="_svparameters"/>
+    <functioncall functionName="_type"/>
+    <functioncall functionName="_zoom"/>
+    <functioncall functionName="_zparameters"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="daqparameters"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="filltype"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lookup_rotation"/>
+    <functioncall functionName="newrot"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="release"/>
+    <functioncall functionName="rotate"/>
+    <functioncall functionName="svparameters"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="t"/>
+    <functioncall functionName="type"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="vector"/>
+    <functioncall functionName="zparameters"/>
+  </FileInfo>
+</analyzerinfo>

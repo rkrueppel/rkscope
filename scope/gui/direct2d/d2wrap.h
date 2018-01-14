@@ -1,5 +1,6 @@
 #pragma once
 #include "helpers/helpers.h"
+#include "config\config_choices.h"
 
 /** @file
 * Parts of the code are modified from Microsoft's Direct2D nbody example: Copyright (c) Microsoft Corporation.  All rights reserved. 

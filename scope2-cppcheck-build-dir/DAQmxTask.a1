@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1619138872">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="CheckError" lineNumber="8"/>
+    <functiondecl functionName="PredictSampleRate" lineNumber="22"/>
+    <functiondecl functionName="CoerceSampleRates" lineNumber="36"/>
+    <functiondecl functionName="ClockString" lineNumber="45"/>
+    <functiondecl functionName="CreateTask" lineNumber="90"/>
+    <functiondecl functionName="Created" lineNumber="95"/>
+    <functiondecl functionName="ConfigureImplicitTiming" lineNumber="99"/>
+    <functiondecl functionName="ConfigureSampleTiming" lineNumber="108"/>
+    <functiondecl functionName="ConfigureReferenceClock" lineNumber="127"/>
+    <functiondecl functionName="ConfigureDigStartTrigger" lineNumber="133"/>
+    <functiondecl functionName="Start" lineNumber="144"/>
+    <functiondecl functionName="Stop" lineNumber="148"/>
+    <functiondecl functionName="Clear" lineNumber="152"/>
+    <functiondecl functionName="IsTaskDone" lineNumber="156"/>
+    <functiondecl functionName="WaitUntilDone" lineNumber="162"/>
+    <functiondecl functionName="ExportSignal" lineNumber="166"/>
+    <functiondecl functionName="SetWriteOffset" lineNumber="171"/>
+    <functiondecl functionName="SetRegeneration" lineNumber="176"/>
+    <functiondecl functionName="CreateAOVoltageChannel" lineNumber="181"/>
+    <functiondecl functionName="ConfigureBuffer" lineNumber="200"/>
+    <functiondecl functionName="ConfigureOnboardBuffer" lineNumber="210"/>
+    <functiondecl functionName="UseOnlyOnboardMemory" lineNumber="218"/>
+    <functiondecl functionName="SetIdleOutputBehaviour" lineNumber="223"/>
+    <functiondecl functionName="SetDataTransferCondition" lineNumber="228"/>
+    <functiondecl functionName="SetDataTransferMode" lineNumber="233"/>
+    <functiondecl functionName="WriteAnalog" lineNumber="238"/>
+    <functiondecl functionName="WriteAnalogScalar" lineNumber="250"/>
+    <functiondecl functionName="WriteAnalogI16" lineNumber="257"/>
+    <functiondecl functionName="CreateDOChannel" lineNumber="269"/>
+    <functiondecl functionName="WriteDigitalU8" lineNumber="283"/>
+    <functiondecl functionName="WriteDigitalLines" lineNumber="295"/>
+    <functiondecl functionName="CreateAIVoltageChannel" lineNumber="311"/>
+    <functiondecl functionName="ConfigureBuffer" lineNumber="332"/>
+    <functiondecl functionName="ReadU16" lineNumber="339"/>
+    <functiondecl functionName="ReadU16Dummy" lineNumber="360"/>
+    <functiondecl functionName="CreateCOChannel" lineNumber="394"/>
+    <functioncall functionName="CDAQmxAnalogInTask"/>
+    <functioncall functionName="CDAQmxTask"/>
+    <functioncall functionName="CheckError"/>
+    <functioncall functionName="DAQMX_THROW_EXCEPTION"/>
+    <functioncall functionName="DAQmxCfgDigEdgeStartTrig"/>
+    <functioncall functionName="DAQmxCfgImplicitTiming"/>
+    <functioncall functionName="DAQmxCfgInputBuffer"/>
+    <functioncall functionName="DAQmxCfgOutputBuffer"/>
+    <functioncall functionName="DAQmxCfgSampClkTiming"/>
+    <functioncall functionName="DAQmxClearTask"/>
+    <functioncall functionName="DAQmxCreateAIVoltageChan"/>
+    <functioncall functionName="DAQmxCreateAOVoltageChan"/>
+    <functioncall functionName="DAQmxCreateCOPulseChanTime"/>
+    <functioncall functionName="DAQmxCreateDOChan"/>
+    <functioncall functionName="DAQmxCreateTask"/>
+    <functioncall functionName="DAQmxExportSignal"/>
+    <functioncall functionName="DAQmxFailed"/>
+    <functioncall functionName="DAQmxGetBufOutputOnbrdBufSize"/>
+    <functioncall functionName="DAQmxGetBufferAttribute"/>
+    <functioncall functionName="DAQmxGetErrorString"/>
+    <functioncall functionName="DAQmxGetExtendedErrorInfo"/>
+    <functioncall functionName="DAQmxIsTaskDone"/>
+    <functioncall functionName="DAQmxReadBinaryI16"/>
+    <functioncall functionName="DAQmxReadBinaryU16"/>
+    <functioncall functionName="DAQmxSetAODataXferMech"/>
+    <functioncall functionName="DAQmxSetAODataXferReqCond"/>
+    <functioncall functionName="DAQmxSetAOIdleOutputBehavior"/>
+    <functioncall functionName="DAQmxSetAOUseOnlyOnBrdMem"/>
+    <functioncall functionName="DAQmxSetBufOutputOnbrdBufSize"/>
+    <functioncall functionName="DAQmxSetTimingAttribute"/>
+    <functioncall functionName="DAQmxSetWriteAttribute"/>
+    <functioncall functionName="DAQmxStartTask"/>
+    <functioncall functionName="DAQmxStopTask"/>
+    <functioncall functionName="DAQmxWaitUntilTaskDone"/>
+    <functioncall functionName="DAQmxWriteAnalogF64"/>
+    <functioncall functionName="DAQmxWriteAnalogScalarF64"/>
+    <functioncall functionName="DAQmxWriteBinaryI16"/>
+    <functioncall functionName="DAQmxWriteDigitalLines"/>
+    <functioncall functionName="DAQmxWriteDigitalU8"/>
+    <functioncall functionName="DAQmx_Buf_Input_BufSize"/>
+    <functioncall functionName="DAQmx_Buf_Output_BufSize"/>
+    <functioncall functionName="DAQmx_RefClk_Rate"/>
+    <functioncall functionName="DAQmx_RefClk_Src"/>
+    <functioncall functionName="DAQmx_Val_AI"/>
+    <functioncall functionName="DAQmx_Val_AO"/>
+    <functioncall functionName="DAQmx_Val_AllowRegen"/>
+    <functioncall functionName="DAQmx_Val_Cfg_Default"/>
+    <functioncall functionName="DAQmx_Val_ChanPerLine"/>
+    <functioncall functionName="DAQmx_Val_ContSamps"/>
+    <functioncall functionName="DAQmx_Val_DoNotAllowRegen"/>
+    <functioncall functionName="DAQmx_Val_FirstSample"/>
+    <functioncall functionName="DAQmx_Val_GroupByChannel"/>
+    <functioncall functionName="DAQmx_Val_Rising"/>
+    <functioncall functionName="DAQmx_Val_Seconds"/>
+    <functioncall functionName="DAQmx_Val_Volts"/>
+    <functioncall functionName="DAQmx_Write_Offset"/>
+    <functioncall functionName="DAQmx_Write_RegenMode"/>
+    <functioncall functionName="DAQmx_Write_RelativeTo"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="LPCSTR"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="PredictSampleRate"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="_actedge"/>
+    <functioncall functionName="_autostart"/>
+    <functioncall functionName="_behav"/>
+    <functioncall functionName="_cond"/>
+    <functioncall functionName="_data"/>
+    <functioncall functionName="_databegin"/>
+    <functioncall functionName="_dataend"/>
+    <functioncall functionName="_desiredrate"/>
+    <functioncall functionName="_hightime"/>
+    <functioncall functionName="_idlestate"/>
+    <functioncall functionName="_initdelay"/>
+    <functioncall functionName="_layout"/>
+    <functioncall functionName="_lowtime"/>
+    <functioncall functionName="_maxval"/>
+    <functioncall functionName="_minval"/>
+    <functioncall functionName="_mode"/>
+    <functioncall functionName="_nochannels"/>
+    <functioncall functionName="_nochannelsin"/>
+    <functioncall functionName="_nochannelsout"/>
+    <functioncall functionName="_rate"/>
+    <functioncall functionName="_refclockrate"/>
+    <functioncall functionName="_samplesperchan"/>
+    <functioncall functionName="_samplingtype"/>
+    <functioncall functionName="_sampsperchan"/>
+    <functioncall functionName="_sampsperchannel"/>
+    <functioncall functionName="_signal"/>
+    <functioncall functionName="_terminalconfig"/>
+    <functioncall functionName="_timedout"/>
+    <functioncall functionName="_timeout"/>
+    <functioncall functionName="_timing"/>
+    <functioncall functionName="_trigedge"/>
+    <functioncall functionName="_units"/>
+    <functioncall functionName="_value"/>
+    <functioncall functionName="_waittime"/>
+    <functioncall functionName="abs"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="bufsize"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="char_channel"/>
+    <functioncall functionName="char_channelname"/>
+    <functioncall functionName="char_counter"/>
+    <functioncall functionName="char_customscalename"/>
+    <functioncall functionName="char_devicechannel"/>
+    <functioncall functionName="char_devicelines"/>
+    <functioncall functionName="char_devices"/>
+    <functioncall functionName="char_name"/>
+    <functioncall functionName="char_src"/>
+    <functioncall functionName="char_terminal"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="d"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="distance"/>
+    <functioncall functionName="divider"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="generate"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="isdone"/>
+    <functioncall functionName="maxval"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="minval"/>
+    <functioncall functionName="mode"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="perrorstring"/>
+    <functioncall functionName="posreltofirst"/>
+    <functioncall functionName="rate1"/>
+    <functioncall functionName="rate2"/>
+    <functioncall functionName="readsamples"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="seed"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="status"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="task_handle"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uint32_t"/>
+    <functioncall functionName="units"/>
+    <functioncall functionName="value"/>
+    <functioncall functionName="writtensamples"/>
+  </FileInfo>
+</analyzerinfo>

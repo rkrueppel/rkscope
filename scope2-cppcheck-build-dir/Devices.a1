@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1382806686">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="85"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="89"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="93"/>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="96"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Daq&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Daq.h" line="26"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;MasterArea&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;MasterArea&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="168"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Stack&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Stack&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Runstates.h" line="41"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Timeseries&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Timeseries&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Runstates.h" line="68"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Behavior&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Behavior&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Devices.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Runstates.h" line="112"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="19"/>
+    <functiondecl functionName="Save" lineNumber="26"/>
+    <functiondecl functionName="Load" lineNumber="40"/>
+    <functiondecl functionName="Save" lineNumber="48"/>
+    <functiondecl functionName="Load" lineNumber="61"/>
+    <functiondecl functionName="Save" lineNumber="67"/>
+    <functiondecl functionName="LoadCalibration" lineNumber="80"/>
+    <functiondecl functionName="PositionToVoltage" lineNumber="98"/>
+    <functiondecl functionName="Load" lineNumber="122"/>
+    <functiondecl functionName="Save" lineNumber="130"/>
+    <functiondecl functionName="Load" lineNumber="140"/>
+    <functiondecl functionName="Save" lineNumber="144"/>
+    <functiondecl functionName="Load" lineNumber="156"/>
+    <functiondecl functionName="Save" lineNumber="163"/>
+    <functiondecl functionName="Load" lineNumber="175"/>
+    <functiondecl functionName="Save" lineNumber="180"/>
+    <functiondecl functionName="Load" lineNumber="192"/>
+    <functiondecl functionName="Save" lineNumber="200"/>
+    <functioncall functionName="AIOverRange"/>
+    <functioncall functionName="Acquiring"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="BaseArea"/>
+    <functioncall functionName="Bidirectional"/>
+    <functioncall functionName="CountingMode"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="Daq"/>
+    <functioncall functionName="Diagnosis"/>
+    <functioncall functionName="FastZControl"/>
+    <functioncall functionName="FastZControlETL"/>
+    <functioncall functionName="InputsDAQmx"/>
+    <functioncall functionName="InputsFPGA"/>
+    <functioncall functionName="InputsFPGAAnalogDemultiplexer"/>
+    <functioncall functionName="InputsFPGAAnalogIntegrator"/>
+    <functioncall functionName="InputsFPGADigitalDemultiplexer"/>
+    <functioncall functionName="InputsFPGAIO5751"/>
+    <functioncall functionName="InputsFPGAIO5771"/>
+    <functioncall functionName="InputsFPGAIO6587"/>
+    <functioncall functionName="InputsFPGANoiseOutput"/>
+    <functioncall functionName="InputsFPGAPhotonCounter"/>
+    <functioncall functionName="InputsFPGAResonanceScanner"/>
+    <functioncall functionName="InterloopOverflow"/>
+    <functioncall functionName="InterloopTimeout"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="LoadCalibration"/>
+    <functioncall functionName="Master"/>
+    <functioncall functionName="MeasuredLaserFreq"/>
+    <functioncall functionName="OutputsDAQmx"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="OutputsDAQmxResonanceSlave"/>
+    <functioncall functionName="OutputsDAQmxSlave"/>
+    <functioncall functionName="PlaneProperties"/>
+    <functioncall functionName="Planehopper"/>
+    <functioncall functionName="Preset"/>
+    <functioncall functionName="ResonanceBiDi"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="Sawtooth"/>
+    <functioncall functionName="ScannerVectorFrameBasic"/>
+    <functioncall functionName="ScannerVectorFrameBiDi"/>
+    <functioncall functionName="ScannerVectorFramePlaneHopper"/>
+    <functioncall functionName="ScannerVectorFrameResonance"/>
+    <functioncall functionName="ScannerVectorFrameResonanceHopper"/>
+    <functioncall functionName="ScannerVectorFrameSaw"/>
+    <functioncall functionName="Scope"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SlaveArea"/>
+    <functioncall functionName="Stack"/>
+    <functioncall functionName="ToHostOverflowA1"/>
+    <functioncall functionName="ToHostOverflowA1Ch1"/>
+    <functioncall functionName="ToHostOverflowA1Ch2"/>
+    <functioncall functionName="ToHostOverflowA2"/>
+    <functioncall functionName="ToHostOverflowA2Ch1"/>
+    <functioncall functionName="ToHostOverflowA2Ch2"/>
+    <functioncall functionName="ToHostOverflowCh1"/>
+    <functioncall functionName="ToHostOverflowCh2"/>
+    <functioncall functionName="TotalPixelsOneFrame"/>
+    <functioncall functionName="Window"/>
+    <functioncall functionName="WindowCollection"/>
+    <functioncall functionName="XCutoffPixels"/>
+    <functioncall functionName="XImagePixels"/>
+    <functioncall functionName="XRetracePixels"/>
+    <functioncall functionName="XTotalPixels"/>
+    <functioncall functionName="XTurnPixels"/>
+    <functioncall functionName="XYControl"/>
+    <functioncall functionName="XYControlGalil"/>
+    <functioncall functionName="XYControlStanda"/>
+    <functioncall functionName="XYZControl"/>
+    <functioncall functionName="XYZControlGalil"/>
+    <functioncall functionName="XYZControlSutter"/>
+    <functioncall functionName="YCutoffLines"/>
+    <functioncall functionName="YImageLines"/>
+    <functioncall functionName="YRetraceLines"/>
+    <functioncall functionName="YTotalLines"/>
+    <functioncall functionName="_area"/>
+    <functioncall functionName="_filepath"/>
+    <functioncall functionName="_o"/>
+    <functioncall functionName="_positionum"/>
+    <functioncall functionName="at"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="buttonstepsize"/>
+    <functioncall functionName="calibrationfile"/>
+    <functioncall functionName="ceil"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="comstring"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="countspermicron"/>
+    <functioncall functionName="daqmxversion"/>
+    <functioncall functionName="devicex"/>
+    <functioncall functionName="devicey"/>
+    <functioncall functionName="divider"/>
+    <functioncall functionName="dynamic_cast"/>
+    <functioncall functionName="emplace"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="file"/>
+    <functioncall functionName="find"/>
+    <functioncall functionName="first"/>
+    <functioncall functionName="floor"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="good"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="key"/>
+    <functioncall functionName="lower"/>
+    <functioncall functionName="make_unique"/>
+    <functioncall functionName="maxoutput"/>
+    <functioncall functionName="microstepspermicron"/>
+    <functioncall functionName="minoutput"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pair"/>
+    <functioncall functionName="pollinterval"/>
+    <functioncall functionName="pt"/>
+    <functioncall functionName="round2ui32"/>
+    <functioncall functionName="second"/>
+    <functioncall functionName="speed"/>
+    <functioncall functionName="stageinfo"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="upper_bound"/>
+    <functioncall functionName="value"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="xcountspermicron"/>
+    <functioncall functionName="xcutoff"/>
+    <functioncall functionName="xpos"/>
+    <functioncall functionName="xres"/>
+    <functioncall functionName="xretrace"/>
+    <functioncall functionName="xturnfraction"/>
+    <functioncall functionName="ycountspermicron"/>
+    <functioncall functionName="ycutoff"/>
+    <functioncall functionName="ypos"/>
+    <functioncall functionName="yres"/>
+    <functioncall functionName="yretrace"/>
+    <functioncall functionName="zcountspermicron"/>
+    <functioncall functionName="zpos"/>
+  </FileInfo>
+</analyzerinfo>

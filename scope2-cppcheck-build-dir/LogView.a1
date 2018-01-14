@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3299023391">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="OnCreate" lineNumber="13"/>
+    <functiondecl functionName="OnChar" lineNumber="26"/>
+    <functiondecl functionName="SaveFile" lineNumber="37"/>
+    <functiondecl functionName="StreamWriteCallback" lineNumber="55"/>
+    <functioncall functionName="BEGIN_MSG_MAP"/>
+    <functioncall functionName="CHAIN_MSG_MAP_ALT"/>
+    <functioncall functionName="CLogView"/>
+    <functioncall functionName="CREATE_ALWAYS"/>
+    <functioncall functionName="CRichEditCtrl"/>
+    <functioncall functionName="CloseHandle"/>
+    <functioncall functionName="CreateFile"/>
+    <functioncall functionName="CreateFontIndirect"/>
+    <functioncall functionName="DWORD"/>
+    <functioncall functionName="DefWindowProc"/>
+    <functioncall functionName="END_MSG_MAP"/>
+    <functioncall functionName="ES_SAVESEL"/>
+    <functioncall functionName="FILE_FLAG_SEQUENTIAL_SCAN"/>
+    <functioncall functionName="FW_NORMAL"/>
+    <functioncall functionName="GENERIC_WRITE"/>
+    <functioncall functionName="GetInstance"/>
+    <functioncall functionName="GetUserLoggings"/>
+    <functioncall functionName="GetWndClassName"/>
+    <functioncall functionName="HANDLE"/>
+    <functioncall functionName="LF_FACESIZE"/>
+    <functioncall functionName="LPDWORD"/>
+    <functioncall functionName="LimitText"/>
+    <functioncall functionName="MESSAGE_HANDLER"/>
+    <functioncall functionName="MSG_WM_CREATE"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="OnChar"/>
+    <functioncall functionName="OnCreate"/>
+    <functioncall functionName="SF_TEXT"/>
+    <functioncall functionName="SetFont"/>
+    <functioncall functionName="SetHeight"/>
+    <functioncall functionName="StreamOut"/>
+    <functioncall functionName="StreamWriteCallback"/>
+    <functioncall functionName="WM_CHAR"/>
+    <functioncall functionName="WriteFile"/>
+    <functioncall functionName="_ASSERTE"/>
+    <functioncall functionName="cb"/>
+    <functioncall functionName="dwCookie"/>
+    <functioncall functionName="dwError"/>
+    <functioncall functionName="es"/>
+    <functioncall functionName="font"/>
+    <functioncall functionName="hFile"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lParam"/>
+    <functioncall functionName="lf"/>
+    <functioncall functionName="lfFaceName"/>
+    <functioncall functionName="lpstrFilePath"/>
+    <functioncall functionName="pMsg"/>
+    <functioncall functionName="pbBuff"/>
+    <functioncall functionName="pcb"/>
+    <functioncall functionName="strcpy_x"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="uMsg"/>
+    <functioncall functionName="wParam"/>
+  </FileInfo>
+</analyzerinfo>

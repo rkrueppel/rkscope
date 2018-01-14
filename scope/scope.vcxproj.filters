@@ -462,15 +462,6 @@
     <ClCompile Include="scanmodes\PixelmapperBasic.cpp">
       <Filter>Scanmodes</Filter>
     </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameBiDi.cpp">
-      <Filter>Scanmodes</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceHW.cpp">
-      <Filter>Scanmodes</Filter>
-    </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameResonanceSW.cpp">
-      <Filter>Scanmodes</Filter>
-    </ClCompile>
     <ClCompile Include="scanmodes\ScannerVectorFrameBasic.cpp">
       <Filter>Scanmodes</Filter>
     </ClCompile>
@@ -942,15 +933,6 @@
       <Filter>Scope control</Filter>
     </ClInclude>
     <ClInclude Include="scanmodes\PixelmapperBasic.h">
-      <Filter>Scanmodes</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameBiDi.h">
-      <Filter>Scanmodes</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceHW.h">
-      <Filter>Scanmodes</Filter>
-    </ClInclude>
-    <ClInclude Include="scanmodes\PixelmapperFrameResonanceSW.h">
       <Filter>Scanmodes</Filter>
     </ClInclude>
     <ClInclude Include="scanmodes\ScannerVectorFrameBasic.h">

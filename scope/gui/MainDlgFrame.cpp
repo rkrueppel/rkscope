@@ -15,7 +15,7 @@ namespace scope {
 
 		CMainDlgFrame::CMainDlgFrame(
 			scope::ScopeController& _scope_controller
-			, scope::DaqController& _daq_controller
+			, config::DaqControllerType& _daq_controller
 			, scope::DisplayController& _display_controller
 			, scope::parameters::Scope& _guiparameters
 			, RunButtons& _runbuttons
@@ -100,7 +100,7 @@ namespace scope {
 			UISetText(0, str2.c_str());
 
 			// Update shutter status in menu
-			UISetCheck(ID_TOOLS_SHUTTEROPEN, daq_controller.GetMasterShutterState(0));
+			UISetCheck(ID_TOOLS_SHUTTEROPEN, daq_controller.GetShutterState(0));
 
 			UIUpdateStatusBar();
 			UIUpdateToolBar();
@@ -311,7 +311,7 @@ namespace scope {
 			static bool bOpen = false;
 			bOpen = !bOpen;
 			UISetCheck(ID_TOOLS_SHUTTEROPEN, bOpen);
-			daq_controller.OpenCloseMasterShutter(0, bOpen);
+			daq_controller.OpenCloseShutter(0, bOpen);
 			return 0;
 		}
 

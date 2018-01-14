@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3102701351">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Load" lineNumber="22"/>
+    <functiondecl functionName="Save" lineNumber="30"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="38"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="67"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="71"/>
+    <functiondecl functionName="Load" lineNumber="75"/>
+    <functiondecl functionName="Save" lineNumber="86"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="97"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="115"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="119"/>
+    <functiondecl functionName="Load" lineNumber="123"/>
+    <functiondecl functionName="Save" lineNumber="138"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="153"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="168"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="172"/>
+    <functiondecl functionName="Load" lineNumber="176"/>
+    <functiondecl functionName="Save" lineNumber="186"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="196"/>
+    <functiondecl functionName="CoercedPixeltime" lineNumber="212"/>
+    <functiondecl functionName="MinimumPixeltime" lineNumber="216"/>
+    <functiondecl functionName="Load" lineNumber="220"/>
+    <functiondecl functionName="Save" lineNumber="232"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="244"/>
+    <functiondecl functionName="Load" lineNumber="254"/>
+    <functiondecl functionName="Save" lineNumber="258"/>
+    <functiondecl functionName="SetReadOnlyWhileScanning" lineNumber="262"/>
+    <functioncall functionName="AddToPropertyTree"/>
+    <functioncall functionName="DAQmx_Val_AO"/>
+    <functioncall functionName="External"/>
+    <functioncall functionName="Load"/>
+    <functioncall functionName="MinimumPixeltime"/>
+    <functioncall functionName="OnboardClock"/>
+    <functioncall functionName="Outputs"/>
+    <functioncall functionName="OutputsDAQmx"/>
+    <functioncall functionName="OutputsDAQmxLineClock"/>
+    <functioncall functionName="OutputsDAQmxResonance"/>
+    <functioncall functionName="OutputsDAQmxResonanceSlave"/>
+    <functioncall functionName="OutputsDAQmxSlave"/>
+    <functioncall functionName="PredictSampleRate"/>
+    <functioncall functionName="ReferenceClock"/>
+    <functioncall functionName="Save"/>
+    <functioncall functionName="SetFromPropertyTree"/>
+    <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="_pixeltime"/>
+    <functioncall functionName="_pt"/>
+    <functioncall functionName="_runstate"/>
+    <functioncall functionName="channelsstring"/>
+    <functioncall functionName="daq_timing"/>
+    <functioncall functionName="exportpixelclockterminal"/>
+    <functioncall functionName="externalclocksource"/>
+    <functioncall functionName="line_externalclocksource"/>
+    <functioncall functionName="line_referenceclockrate"/>
+    <functioncall functionName="line_referenceclocksource"/>
+    <functioncall functionName="line_timing"/>
+    <functioncall functionName="max"/>
+    <functioncall functionName="maxoutputpockels"/>
+    <functioncall functionName="maxoutputscanner"/>
+    <functioncall functionName="minimumpixeltime"/>
+    <functioncall functionName="minoutputpockels"/>
+    <functioncall functionName="minoutputscanner"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="pixel_externalclocksource"/>
+    <functioncall functionName="pixel_referenceclockrate"/>
+    <functioncall functionName="pixel_referenceclocksource"/>
+    <functioncall functionName="pixel_timing"/>
+    <functioncall functionName="range"/>
+    <functioncall functionName="referenceclockrate"/>
+    <functioncall functionName="referenceclocksource"/>
+    <functioncall functionName="timing"/>
+    <functioncall functionName="unique_ptr"/>
+    <functioncall functionName="xpout"/>
+    <functioncall functionName="yzout"/>
+    <functioncall functionName="zoomchannelstring"/>
+    <functioncall functionName="zpout"/>
+  </FileInfo>
+</analyzerinfo>

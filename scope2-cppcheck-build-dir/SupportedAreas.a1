@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2904661701">
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="assert"/>
+  </FileInfo>
+</analyzerinfo>

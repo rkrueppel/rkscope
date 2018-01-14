@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="574287316">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.h" line="35"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Start" lineNumber="14"/>
+    <functiondecl functionName="StopOne" lineNumber="23"/>
+    <functiondecl functionName="StopAll" lineNumber="28"/>
+    <functiondecl functionName="WaitForOne" lineNumber="34"/>
+    <functiondecl functionName="WaitForAll" lineNumber="58"/>
+    <functioncall functionName="ATLASSERT"/>
+    <functioncall functionName="BaseController"/>
+    <functioncall functionName="ControllerReturnStatus"/>
+    <functioncall functionName="DBOUT"/>
+    <functioncall functionName="IsSet"/>
+    <functioncall functionName="Run"/>
+    <functioncall functionName="ScopeException"/>
+    <functioncall functionName="ScopeExceptionHandler"/>
+    <functioncall functionName="Set"/>
+    <functioncall functionName="StopOne"/>
+    <functioncall functionName="WaitForOne"/>
+    <functioncall functionName="__FUNCTION__"/>
+    <functioncall functionName="_a"/>
+    <functioncall functionName="_nactives"/>
+    <functioncall functionName="_wait_time"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="async"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="delete"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="futures"/>
+    <functioncall functionName="get"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="nactives"/>
+    <functioncall functionName="none"/>
+    <functioncall functionName="ready"/>
+    <functioncall functionName="sleep_for"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="stops"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="totalresult"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="valid"/>
+    <functioncall functionName="wait"/>
+    <functioncall functionName="wait_for"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>
