@@ -7,14 +7,15 @@ std::atomic<bool> scope::TheScope::instanciated(false);
 namespace scope {
 	
 	TheScope::TheScope(const std::wstring& _initialparameterpath)
-		: nareas(config::totalareas)
+		: nmasters(config::nmasters)
+		, nslaves(config::nslaves)
 		, guiparameters(config::totalareas)
 		, theDaq(config::threads_daq, guiparameters, &daq_to_pipeline)
 		, thePipeline(config::threads_pipeline, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
 		, theStorage(config::threads_storage, guiparameters, &pipeline_to_storage)
 		, theDisplay(config::threads_display, guiparameters, &pipeline_to_display)
-		, theFPUs(config::totalareas, guiparameters.areas, fpubuttonsvec)
-		, theController(SCOPE_NAREAS, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
+		, theFPUs(config::totalareas, config::totalareas, fpubuttons)
+		, theController(config::totalareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
 	{
 		//Make sure that TheScope is instanciated only once
 		assert(!instanciated);

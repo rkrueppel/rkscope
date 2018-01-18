@@ -52,8 +52,7 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			std::array<FPUButtons, config::nmasters> masterfpubuttons;
-			std::array<FPUButtons, config::nslaves> slavefpubuttons;
+			std::array<FPUButtons, config::totalareas> fpubuttons;
 
 			/** Buttons for switching the scan mode */
 			std::array<ScanModeButtons, config::nmasters> scanmodebuttons;
@@ -73,7 +72,7 @@ namespace scope {
 			
 			/** @name Dataflow controllers
 			* @{ */
-			DaqController theDaq;
+			DaqController<config::nmasters, config::nslaves, config::slavespermaster, &config::mastersinallareas> theDaq;
 			PipelineController thePipeline;
 			StorageController theStorage;
 			DisplayController theDisplay;
