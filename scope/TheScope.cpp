@@ -7,14 +7,16 @@ std::atomic<bool> scope::TheScope::instanciated(false);
 namespace scope {
 	
 	TheScope::TheScope(const std::wstring& _initialparameterpath)
-		: nmasters(config::nmasters)
-		, nslaves(config::nslaves)
+		: nareas(config::totalareas)
 		, guiparameters(config::totalareas)
-		, theDaq(config::threads_daq, guiparameters, &daq_to_pipeline)
+		, counters(nareas)
+		, fpubuttons(nareas)
+		, scanmodebuttons(config::nmasters)
+		, theDaq(config::nmasters, config::nslaves, config::slavespermaster, guiparameters, &daq_to_pipeline)
 		, thePipeline(config::threads_pipeline, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
 		, theStorage(config::threads_storage, guiparameters, &pipeline_to_storage)
 		, theDisplay(config::threads_display, guiparameters, &pipeline_to_display)
-		, theFPUs(config::totalareas, config::totalareas, fpubuttons)
+		, theFPUs(config::totalareas, guiparameters.allareas, fpubuttons)
 		, theController(config::totalareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
 	{
 		//Make sure that TheScope is instanciated only once
@@ -48,43 +50,29 @@ namespace scope {
 		
 		zerobuttons.galvos.Connect(std::bind(&TheScope::ZeroGalvoOutputs, this));
 		
-		for (uint32_t a = 0; a < config::nmasters; a++) {
+		for (uint32_t a = 0; a < config::totalareas; a++) {
 			// Initially choose the first supported scannervector in the list
-			SetScanMode(a, *ScannerSupportedVectors::List().begin());
+			!!SetScanMode(a, *ScannerSupportedVectors::List().begin());
 
 			// Connect the buttons for scan mode switching (if a master area) to TheScope::SetScanMode
-			for (auto& b : scanmodebuttons[a].map)
+			!!for (auto& b : scanmodebuttons[a].map)
 				b.second.Connect(std::bind(&TheScope::SetScanMode, this, a, b.first));
 
 			// Connect update functions in TheScope to update functions inside the ScannerVectors
-			for (auto& sv : guiparameters.masterareas[a].scannervectorframesmap) {
+			for (auto& sv : guiparameters.allareas[a]->scannervectorframesmap) {
 				sv.second->ConnectOnlineUpdate(std::bind(&ScopeController::OnlineUpdate, &theController, a));
 				sv.second->ConnectResolutionChange(std::bind(&TheScope::ResolutionChange, this, a));
 			}
 			
 			// Connect update functions in TheScope to some parameters outside the ScannerVectors
-			guiparameters.masterareas[a].daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-			guiparameters.masterareas[a].daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-			guiparameters.masterareas[a].histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+			guiparameters.allareas[a]->daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+			guiparameters.allareas[a]->daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
+			guiparameters.allareas[a]->histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
 			//guiparameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
 
 			// Connect FPU XY movements inside the FPUController!!
 		}
-		for (uint32_t a = 0; a < config::nslaves; a++) {
-			// Connect update functions in TheScope to update functions inside the ScannerVectors
-			for (auto& sv : guiparameters.slaveareas[a].scannervectorframesmap) {
-				sv.second->ConnectOnlineUpdate(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-				sv.second->ConnectResolutionChange(std::bind(&TheScope::ResolutionChange, this, a));
-			}
 
-			// Connect update functions in TheScope to some parameters outside the ScannerVectors
-			guiparameters.slaveareas[a].daq.pixeltime.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-			guiparameters.slaveareas[a].daq.scannerdelay.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-			guiparameters.slaveareas[a].histrange.ConnectOther(std::bind(&ScopeController::OnlineUpdate, &theController, a));
-			//guiparameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
-
-			// Connect FPU XY movements inside the FPUController!!
-		}
 
 	}
 	

@@ -26,8 +26,7 @@ namespace scope {
 			/** static to make sure only there is only one instance */
 			static std::atomic<bool> instanciated;
 	
-			const uint32_t nmasters;
-			const uint32_t nslaves;
+			const uint32_t nareas;
 			
 			std::unique_ptr<scope::gui::CMainDlgFrame> wndmain;
 			
@@ -52,14 +51,14 @@ namespace scope {
 			ZeroButtons zerobuttons;
 
 			/** Buttons for FPU nudge */
-			std::array<FPUButtons, config::totalareas> fpubuttons;
+			std::vector<FPUButtons> fpubuttons;
 
 			/** Buttons for switching the scan mode */
-			std::array<ScanModeButtons, config::nmasters> scanmodebuttons;
+			std::vector<ScanModeButtons> scanmodebuttons;
 			/** @} */
 			
 			/** The counters and progresses */
-			ScopeCounters<config::nmasters> counters;
+			ScopeCounters counters;
 			
 			/** queues from the daqs to the pipeline(s) */
 			std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::nmasters> daq_to_pipeline;
@@ -72,7 +71,7 @@ namespace scope {
 			
 			/** @name Dataflow controllers
 			* @{ */
-			DaqController<config::nmasters, config::nslaves, config::slavespermaster, &config::mastersinallareas> theDaq;
+			DaqController theDaq;
 			PipelineController thePipeline;
 			StorageController theStorage;
 			DisplayController theDisplay;

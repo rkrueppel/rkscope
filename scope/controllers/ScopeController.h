@@ -40,19 +40,19 @@ namespace scope {
 
 namespace scope {
 
-/** @defgroup ScopeControl Controller classes
-* Classes controlling various aspects of data acquisition, generation, handling, displaying, storing, ...
-* All classes derive from BaseController, i.e. they have one or more threads inside and run their stuff inside these. */
+	/** @defgroup ScopeControl Controller classes
+	* Classes controlling various aspects of data acquisition, generation, handling, displaying, storing, ...
+	* All classes derive from BaseController, i.e. they have one or more threads inside and run their stuff inside these. */
 
-/** @defgroup ScopeComponentsHardware Scope hardware component classes
-* Classes that model various hardware devices and parts of the microscope. */
+	/** @defgroup ScopeComponentsHardware Scope hardware component classes
+	* Classes that model various hardware devices and parts of the microscope. */
 
-/** @ingroup ScopeControl
-* Main controller of microscope hardware and acquisition, also interface to the GUI.
-* Implements: Singleton, ActiveObject, Pimpl
-* @warning The singleton is not completely threadsafe but we do not really need this,
-* since call of ScopeController.instance().version() in main (there only one thread exists yet)
-* ensures safe initialization. */
+	/** @ingroup ScopeControl
+	* Main controller of microscope hardware and acquisition, also interface to the GUI.
+	* Implements: Singleton, ActiveObject, Pimpl
+	* @warning The singleton is not completely threadsafe but we do not really need this,
+	* since call of ScopeController.instance().version() in main (there only one thread exists yet)
+	* ensures safe initialization. */
 	class ScopeController
 	: public BaseController {
 
@@ -66,7 +66,7 @@ namespace scope {
 			parameters::Scope ctrlparams;
 			
 			/** Reference to TheScope's counters */
-			ScopeCounters<config::nmasters>& counters;
+			ScopeCounters& counters;
 			
 			/** @name References to the dataflow controllers
 			* @{ */

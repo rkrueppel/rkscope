@@ -7,7 +7,7 @@ namespace scope {
 
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<config::nmasters>& _counters
+		, ScopeCounters& _counters
 		, config::DaqControllerType& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
@@ -429,6 +429,7 @@ namespace scope {
 				DBOUT(L"ScopeController::UpdateAreaParametersFromGui starting new online update");
 				onlineupdate_running = true;
 				try {
+					// Copy the updated parameters from guiparameters to ctrlparameters
 					if ( guiparameters.allareas[_area]->areatype() == AreaTypeHelper::Master)
 						ctrlparams.allareas[_area] = std::make_unique<parameters::MasterArea>(*dynamic_cast<parameters::MasterArea*>(guiparameters.allareas[_area].get()));
 					else {
