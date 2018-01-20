@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3288327861">
+<analyzerinfo checksum="4172728924">
   <FileInfo check="CheckUnusedFunctions">
     <functioncall functionName="CScopeUpDownCtrl"/>
     <functioncall functionName="ConnectState"/>

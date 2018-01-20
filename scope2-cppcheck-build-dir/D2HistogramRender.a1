@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1517467145">
+<analyzerinfo checksum="3962556162">
         <error id="variableScope" severity="style" msg="The scope of the variable &apos;multiplier&apos; can be reduced." verbose="The scope of the variable &apos;multiplier&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" line="65"/>
         </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
         <error id="passedByValue" severity="performance" msg="Function parameter &apos;_hist&apos; should be passed by reference." verbose="Parameter &apos;_hist&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2HistogramRender.cpp" line="8"/>
@@ -39,6 +39,7 @@
     <functioncall functionName="D2D1CreateFactory"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
     <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="D2HistogramRender"/>
     <functioncall functionName="DBOUT"/>
     <functioncall functionName="DiscardDeviceResources"/>
@@ -89,7 +90,7 @@
     <functioncall functionName="const"/>
     <functioncall functionName="cx"/>
     <functioncall functionName="cy"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="false"/>
     <functioncall functionName="for"/>
     <functioncall functionName="hist"/>
@@ -108,7 +109,6 @@
     <functioncall functionName="options"/>
     <functioncall functionName="pd2d_factory"/>
     <functioncall functionName="point"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="pos"/>
     <functioncall functionName="r"/>
     <functioncall functionName="rect"/>

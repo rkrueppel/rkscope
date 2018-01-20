@@ -7,13 +7,13 @@ namespace scope {
 	/** Keeps the counters used by TheScope together. */
 	struct ScopeCounters {
 		/** Updated from PipelineController::Run */
-		std::vector<ScopeNumber<double>, NAREAS> singleframeprogress;
+		std::vector<ScopeNumber<double>> singleframeprogress;
 
 		/** Updated from ScopeController::RunStack, connected to progress indicator in CStackSettingsPage */
 		ScopeNumber<double> planecounter;
 
 		/** Updated from PipelineController::Run, connected to progress indicator in CTimeSeriesSettingsPage or edit control in CBehaviorSettingsPage */
-		std::vector<ScopeNumber<double>, NAREAS> framecounter;
+		std::vector<ScopeNumber<double>> framecounter;
 
 		/** Updated from ScopeController::RunTimeseries, connected to progress indicator in CTimeSeriesSettingsPage */
 		ScopeNumber<double> repeatcounter;
@@ -33,8 +33,8 @@ namespace scope {
 			, totaltime(0.0, 0.0, 10000.0, L"TrialCounter")
 		{
 			for ( uint32_t a = 0 ; a < _nareas ; a++) {
-				singleframeprogress.push_back(ScopeNumber<double>(0.0, 0.0, 1.0, L"SingleFrameProgress");
-				framecounter.push_back(ScopeNumber<double>(0.0, 0.0, 1000000, L"FrameCounter")
+				singleframeprogress.push_back(ScopeNumber<double>(0.0, 0.0, 1.0, L"SingleFrameProgress"));
+				framecounter.push_back(ScopeNumber<double>(0.0, 0.0, 1000000, L"FrameCounter"));
 			}
 		}
 	};

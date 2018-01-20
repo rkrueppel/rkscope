@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="511846863">
+<analyzerinfo checksum="220405802">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="OnCloseCmd" lineNumber="13"/>
     <functioncall functionName="BEGIN_MSG_MAP"/>

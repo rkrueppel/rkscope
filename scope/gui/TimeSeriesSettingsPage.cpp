@@ -4,7 +4,7 @@
 namespace scope {
 	namespace gui {
 
-		CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _counters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas)
+		CTimeSeriesSettingsPage::CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas)
 			: CToolTipDialog(TTS_NOPREFIX)
 			, initialized(false)
 			, timeseriesparams(_timeseriesparams)

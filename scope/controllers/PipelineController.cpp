@@ -6,8 +6,8 @@ namespace scope {
 	PipelineController::PipelineController(
 		const uint32_t& _nactives
 		, parameters::Scope& _guiparameters
-		, ScopeCounters<config::nmasters>& _counters
-		, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _iqueues
+		, ScopeCounters& _counters
+		, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _iqueues
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
 		, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 	)

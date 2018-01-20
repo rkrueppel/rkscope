@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3100538129">
+<analyzerinfo checksum="1753726672">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="UpdateDiagram" lineNumber="35"/>
     <functiondecl functionName="DrawItem" lineNumber="40"/>

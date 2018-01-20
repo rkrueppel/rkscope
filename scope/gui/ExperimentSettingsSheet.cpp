@@ -8,7 +8,7 @@ namespace scope {
 			, parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
-			, ScopeCounters<config::nmasters>& _counters
+			, ScopeCounters& _counters
 			, parameters::Timeseries& _timeseriesparams
 			, parameters::Behavior& _behaviorparams
 			, config::XYZStageParametersType& _stageparams

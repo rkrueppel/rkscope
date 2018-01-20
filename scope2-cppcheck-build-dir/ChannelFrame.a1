@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1128478003">
+<analyzerinfo checksum="612732590">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\ThirdParty\ToolbarHelper.h" line="29"/>
@@ -82,6 +82,7 @@
     <functioncall functionName="D2D1CreateFactory"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
     <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="DBOUT"/>
     <functioncall functionName="DECLARE_FRAME_WND_CLASS"/>
     <functioncall functionName="DECLARE_WND_CLASS_EX"/>
@@ -274,7 +275,7 @@
     <functioncall functionName="current_frame"/>
     <functioncall functionName="cx"/>
     <functioncall functionName="cy"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="dc"/>
     <functioncall functionName="dips"/>
     <functioncall functionName="display_controller"/>
@@ -325,7 +326,6 @@
     <functioncall functionName="overlay"/>
     <functioncall functionName="pd2d_factory"/>
     <functioncall functionName="pnmh"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="psz"/>
     <functioncall functionName="pt"/>
     <functioncall functionName="rc"/>

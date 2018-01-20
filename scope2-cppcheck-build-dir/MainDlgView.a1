@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3383071901">
+<analyzerinfo checksum="2015021219">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\StorageSettingsPage.h" line="38"/>
         </error>
@@ -53,7 +53,6 @@
     <functioncall functionName="CScanSettingsSheet"/>
     <functioncall functionName="CScopeButtonCtrl"/>
     <functioncall functionName="CScopeCheckBoxCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CScopeFOVDiagram"/>
     <functioncall functionName="CScopeProgressCtrl"/>
     <functioncall functionName="CScopeScrollbarCtrl"/>
@@ -151,6 +150,7 @@
     <functioncall functionName="Set"/>
     <functioncall functionName="SetFromString"/>
     <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="ShowWindow"/>
     <functioncall functionName="SubclassWindow"/>
@@ -210,6 +210,10 @@
     <functioncall functionName="pnmh"/>
     <functioncall functionName="quit"/>
     <functioncall functionName="rc"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; std :: wstring &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint32_t &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint8_t &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="scopeval"/>
     <functioncall functionName="shiftstate"/>

@@ -137,10 +137,6 @@ Stimulation.a1::C:/Users/rolan/source/repos/rkscope2/scope/parameters/Stimulatio
 Storage.a1::C:/Users/rolan/source/repos/rkscope2/scope/parameters/Storage.cpp
 Windows.a1::C:/Users/rolan/source/repos/rkscope2/scope/parameters/Windows.cpp
 PixelmapperBasic.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/PixelmapperBasic.cpp
-PixelmapperFrameBiDi.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/PixelmapperFrameBiDi.cpp
-PixelmapperFrameResonanceHW.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/PixelmapperFrameResonanceHW.cpp
-PixelmapperFrameResonanceSW.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/PixelmapperFrameResonanceSW.cpp
-PixelmapperFrameSaw.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/PixelmapperFrameSaw.cpp
 ScannerVectorFrameBasic.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/ScannerVectorFrameBasic.cpp
 ScannerVectorFrameBiDi.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/ScannerVectorFrameBiDi.cpp
 ScannerVectorFramePlaneHopper.a1::C:/Users/rolan/source/repos/rkscope2/scope/scanmodes/ScannerVectorFramePlaneHopper.cpp

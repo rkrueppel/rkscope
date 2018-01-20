@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1168133278">
+<analyzerinfo checksum="546912886">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="WaitForIdle" lineNumber="27"/>
     <functiondecl functionName="SetClockSource" lineNumber="41"/>

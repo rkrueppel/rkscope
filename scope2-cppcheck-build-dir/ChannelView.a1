@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1561024349">
+<analyzerinfo checksum="3354596276">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ChannelView.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="OnCreate" lineNumber="8"/>
@@ -38,6 +38,7 @@
     <functioncall functionName="D2D1CreateFactory"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
     <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="DECLARE_WND_CLASS_EX"/>
     <functioncall functionName="DrawBitmap"/>
     <functioncall functionName="END_MSG_MAP"/>
@@ -83,7 +84,7 @@
     <functioncall functionName="const"/>
     <functioncall functionName="cx"/>
     <functioncall functionName="cy"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="hr"/>
     <functioncall functionName="if"/>
     <functioncall functionName="lParam"/>
@@ -93,7 +94,6 @@
     <functioncall functionName="pMsg"/>
     <functioncall functionName="paint"/>
     <functioncall functionName="pd2d_factory"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="scaleX"/>
     <functioncall functionName="scaleY"/>
     <functioncall functionName="static_cast"/>

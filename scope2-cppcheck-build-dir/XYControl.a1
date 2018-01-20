@@ -1,13 +1,7 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1699860539">
+<analyzerinfo checksum="1205233613">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="36"/>
-        </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="38"/>
-        </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;XYControl&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYControl.h" line="41"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="Initialize" lineNumber="29"/>

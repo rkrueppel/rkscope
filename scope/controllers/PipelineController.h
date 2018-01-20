@@ -23,10 +23,10 @@ namespace scope {
 		parameters::Scope& guiparameters;
 		
 		/** Reference to TheScope's counters */
-		ScopeCounters<config::nmasters>& counters;
+		ScopeCounters& counters;
 		
 		/** input queue from the DaqController */
-		std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const input_queues;
+		std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const input_queues;
 
 		/** output queue to the StorageController */
 		SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const storage_queue;
@@ -57,8 +57,8 @@ namespace scope {
 		/** Connects queues and gets parameters */
 		PipelineController(const uint32_t& _nactives
 			, parameters::Scope& _guiparameters
-			, ScopeCounters<config::nmasters>& _counters
-			, std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::threads_daq>* const _iqueues
+			, ScopeCounters& _counters
+			, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _iqueues
 			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _squeue
 			, SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>>* const _dqueue
 		);

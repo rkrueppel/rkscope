@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3449453229">
+<analyzerinfo checksum="3067393720">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmxLineClock is not safe. When calling OutputsDAQmxLineClock::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmxLineClock is not safe. When calling OutputsDAQmxLineClock::Write(), if parameter _blocks is 0 that leads to division by zero.">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.cpp" line="85"/>
+        </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Outputs&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\OutputsDAQmxLineClock.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\Outputs.h" line="17"/>
         </error>

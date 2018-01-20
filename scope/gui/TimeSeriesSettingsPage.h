@@ -74,7 +74,7 @@ namespace scope {
 		public:
 			enum { IDD = IDD_TIMESERIES_PROPPAGE };
 
-			CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _counters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
+			CTimeSeriesSettingsPage(parameters::Timeseries& _timeseriesparams, RunButtons& _runbuttons, ScopeCounters& _counters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
 
 			BEGIN_MSG_MAP_EX(CTimeSeriesSettingsPage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

@@ -5,7 +5,7 @@ namespace scope {
 	namespace gui {
 
 		CBehaviorSettingsPage::CBehaviorSettingsPage(RunButtons& _runbuttons
-			, ScopeCounters<config::nmasters>& _scopecounters
+			, ScopeCounters& _scopecounters
 			, parameters::Behavior& _behaviorparameters
 			, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
 		)

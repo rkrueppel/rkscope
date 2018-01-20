@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2069314590">
+<analyzerinfo checksum="2464011721">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="Initialize" lineNumber="18"/>
     <functiondecl functionName="TurnOn" lineNumber="26"/>

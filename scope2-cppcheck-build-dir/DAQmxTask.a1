@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1619138872">
+<analyzerinfo checksum="2760350035">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="CheckError" lineNumber="8"/>
     <functiondecl functionName="PredictSampleRate" lineNumber="22"/>
@@ -36,6 +36,7 @@
     <functiondecl functionName="ConfigureBuffer" lineNumber="332"/>
     <functiondecl functionName="ReadU16" lineNumber="339"/>
     <functiondecl functionName="ReadU16Dummy" lineNumber="360"/>
+    <functiondecl functionName="ReadI16" lineNumber="368"/>
     <functiondecl functionName="CreateCOChannel" lineNumber="394"/>
     <functioncall functionName="CDAQmxAnalogInTask"/>
     <functioncall functionName="CDAQmxTask"/>

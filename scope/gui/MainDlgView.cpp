@@ -10,7 +10,7 @@ namespace scope {
 				, std::vector<ScanModeButtons>& _scanmodebuttons
 				, StackButtons& _stackbuttons
 				, ZeroButtons& _zerobuttons
-				, ScopeCounters<config::nmasters>& _counters
+				, ScopeCounters& _counters
 		)
 			: m_sheetScanSettings(_guiparameters.allareas, _fpubuttons, _guiparameters.masterfovsizex(), _guiparameters.masterfovsizey(), _guiparameters.storage
 				, _guiparameters.stimulation, _guiparameters.stage, _zerobuttons)

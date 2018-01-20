@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3771088801">
+<analyzerinfo checksum="1242733299">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;SutterController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\SutterController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\SutterController.h" line="17"/>
         </error>

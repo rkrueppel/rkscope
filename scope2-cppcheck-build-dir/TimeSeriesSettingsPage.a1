@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1031101994">
+<analyzerinfo checksum="1049009077">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="OnAddPlane" lineNumber="57"/>
     <functiondecl functionName="OnDeletePlane" lineNumber="74"/>
@@ -13,7 +13,6 @@
     <functioncall functionName="COMMAND_HANDLER"/>
     <functioncall functionName="CScopeButtonCtrl"/>
     <functioncall functionName="CScopeCheckBoxCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CScopeProgressCtrl"/>
     <functioncall functionName="CTimeSeriesSettingsPage"/>
     <functioncall functionName="CToolTipDialog"/>
@@ -68,6 +67,7 @@
     <functioncall functionName="SetFromString"/>
     <functioncall functionName="SetItemText"/>
     <functioncall functionName="SetMsgHandled"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="SubclassWindow"/>
     <functioncall functionName="TTS_NOPREFIX"/>
@@ -128,6 +128,8 @@
     <functioncall functionName="repeats"/>
     <functioncall functionName="repeats_edit"/>
     <functioncall functionName="repeats_progress"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint32_t &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="shiftstate"/>
     <functioncall functionName="size"/>

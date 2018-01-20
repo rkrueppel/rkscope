@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2387697977">
+<analyzerinfo checksum="1922900420">
   <FileInfo check="CheckUnusedFunctions">
     <functioncall functionName="AOD"/>
     <functioncall functionName="AREAS"/>
@@ -20,6 +20,7 @@
     <functioncall functionName="LineZP"/>
     <functioncall functionName="MultiBeam"/>
     <functioncall functionName="NAREAS"/>
+    <functioncall functionName="NCHANNELS"/>
     <functioncall functionName="None"/>
     <functioncall functionName="Regular"/>
     <functioncall functionName="RegularGalvo"/>

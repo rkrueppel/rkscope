@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3995778690">
+<analyzerinfo checksum="790307130">
         <error id="purgedConfiguration" severity="information" msg="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one." verbose="The configuration &apos;APSTUDIO_INVOKED&apos; was not checked because its code equals another one.">
             <location file="C:\Users\rolan\source\repos\rkscope2\scope\gui\AreaChooseDlg.cpp" line="0"/>
         </error>

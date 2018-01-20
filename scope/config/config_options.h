@@ -1,7 +1,7 @@
 #pragma once
 
 namespace scope {
-	template<uint32_t NMASTERS, uint32_t NSLAVES, uint32_t SLAVESPERMASTER, const std::vector<uint32_t>* MASTERSINALLAREAS> class DaqController;
+	class DaqController;
 	class OutputsDAQmx;
 	class ZeroOutputsDAQmx;
 	class OutputsDAQmxSlave;

@@ -70,7 +70,7 @@ namespace scope {
 			
 			/** @name References to the dataflow controllers
 			* @{ */
-			config::DaqControllerType& theDaq;
+			DaqController& theDaq;
 			PipelineController& thePipeline;
 			StorageController& theStorage;
 			DisplayController& theDisplay;
@@ -151,8 +151,8 @@ namespace scope {
 		public:
 			ScopeController(const uint32_t& _nareas
 				, parameters::Scope& _guiparameters
-				, ScopeCounters<config::nmasters>& _counters
-				, config::DaqControllerType& _theDaq
+				, ScopeCounters& _counters
+				, DaqController& _theDaq
 				, PipelineController& _thePipeline
 				, StorageController& _theStorage
 				, DisplayController& _theDisplay

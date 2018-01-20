@@ -10,7 +10,7 @@ namespace parameters {
 		using namespace boost::property_tree;
 
 
-		Scope::Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, std::vector<uint32_t> _masterofslaves)
+		Scope::Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, const std::vector<uint32_t>& _masterofslaves)
 			: nareas(_nmasters+_nslaves, L"NoAreas")
 			, masterofslaves(_masterofslaves)
 			, date(L"", L"Date")

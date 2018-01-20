@@ -81,7 +81,7 @@ namespace scope {
 		/** Sets the output queues, generates initial ScannerVectors and initializes the shutters and the resonance scanner switches
 		* @param[in] _oqueues output queues
 		* @param[in] _parameters initial ScopeParameters set */
-		DaqController(const uint32_t& _nmasters, const uint32_t& _nslaves, const uint32_t& _slavespermaster, const std::vector<const uint32_t> _mastersinallareas, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _oqueues);
+		DaqController(const uint32_t& _nmasters, const uint32_t& _nslaves, const uint32_t& _slavespermaster, const parameters::Scope& _parameters, std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>>* const _oqueues);
 		
 		/** disable copy */
 		DaqController(DaqController& other) = delete;

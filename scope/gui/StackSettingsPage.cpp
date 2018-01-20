@@ -8,7 +8,7 @@ namespace scope {
 			parameters::Stack& _stackparams
 			, RunButtons& _runbuttons
 			, StackButtons& _stackbuttons
-			, ScopeCounters<config::nmasters>& _counters
+			, ScopeCounters& _counters
 			, config::XYZStageParametersType& _stageparams
 			, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas
 		)

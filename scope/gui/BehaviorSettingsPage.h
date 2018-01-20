@@ -57,7 +57,7 @@ namespace scope {
 		public:
 			enum { IDD = IDD_BEHAVIOR_PROPPAGE };
 
-			CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeCounters<config::nmasters>& _scopecounters, parameters::Behavior& _behaviorparameters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
+			CBehaviorSettingsPage(RunButtons& _runbuttons, ScopeCounters& _scopecounters, parameters::Behavior& _behaviorparameters, std::vector<std::unique_ptr<parameters::BaseArea>>& _allareas);
 
 			BEGIN_MSG_MAP_EX(CBehaviorSettingsPage)	
 				MSG_WM_INITDIALOG(OnInitDialog);

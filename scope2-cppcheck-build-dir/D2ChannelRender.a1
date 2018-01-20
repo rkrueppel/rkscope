@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1083117117">
+<analyzerinfo checksum="314563967">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2ChannelRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\D2ChannelRender.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="DiscardDeviceResources" lineNumber="20"/>
@@ -27,6 +27,7 @@
     <functioncall functionName="D2D1CreateFactory"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
     <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="DiscardDeviceResources"/>
     <functioncall functionName="DrawBitmap"/>
     <functioncall functionName="DrawText"/>
@@ -60,7 +61,7 @@
     <functioncall functionName="bitmap"/>
     <functioncall functionName="c_str"/>
     <functioncall functionName="const"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="height"/>
     <functioncall functionName="hr"/>
     <functioncall functionName="hwnd"/>
@@ -70,7 +71,6 @@
     <functioncall functionName="nullptr"/>
     <functioncall functionName="options"/>
     <functioncall functionName="pd2d_factory"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="render_target"/>
     <functioncall functionName="reset"/>
     <functioncall functionName="scaleX"/>

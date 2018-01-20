@@ -19,3 +19,10 @@ cppcheck-warning:6
 cppcheck-style:147
 cppcheck-performance:30
 cppcheck-portability:0
+[19.01.2018]
+1516388783603
+cppcheck-error:0
+cppcheck-warning:5
+cppcheck-style:148
+cppcheck-performance:25
+cppcheck-portability:1

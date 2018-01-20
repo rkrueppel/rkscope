@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="281414578">
+<analyzerinfo checksum="2534969954">
         <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MovementSettingsSheet.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\MovementSettingsSheet.cpp" line="56"/>
         </error>
@@ -18,7 +18,6 @@
     <functioncall functionName="CMovementSettingsSheet"/>
     <functioncall functionName="COMMAND_HANDLER"/>
     <functioncall functionName="CScopeButtonCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CScopeFOVDiagram"/>
     <functioncall functionName="CXYZControlPage"/>
     <functioncall functionName="ConnectGUI"/>
@@ -67,6 +66,7 @@
     <functioncall functionName="SWP_NOACTIVATE"/>
     <functioncall functionName="SetActivePage"/>
     <functioncall functionName="SetFromString"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowPos"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="SubclassWindow"/>
@@ -119,6 +119,8 @@
     <functioncall functionName="nStartPage"/>
     <functioncall functionName="pTemplate"/>
     <functioncall functionName="pnmHdr"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; std :: wstring &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="shiftstate"/>
     <functioncall functionName="size"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1520682685">
+<analyzerinfo checksum="1566551188">
         <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &apos;newrot&apos; is less than zero." verbose="The unsigned variable &apos;newrot&apos; will never be negative so it is either pointless or an error to check if it is." cwe="570">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameBasic.cpp" line="72"/>
         </error>

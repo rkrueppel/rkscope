@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1776567133">
+<analyzerinfo checksum="3282228818">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="WaitFor" lineNumber="13"/>
     <functioncall functionName="ConfigureDigStartTrigger"/>
@@ -18,8 +18,10 @@
     <functioncall functionName="ReadU16"/>
     <functioncall functionName="_gateline"/>
     <functioncall functionName="_sc"/>
+    <functioncall functionName="b"/>
     <functioncall functionName="begin"/>
     <functioncall functionName="const"/>
+    <functioncall functionName="e"/>
     <functioncall functionName="end"/>
     <functioncall functionName="false"/>
     <functioncall functionName="gateline"/>

@@ -1,23 +1,26 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1985603001">
+<analyzerinfo checksum="3862395559">
         <error id="variableScope" severity="style" msg="The scope of the variable &apos;currentlyread&apos; can be reduced." verbose="The scope of the variable &apos;currentlyread&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" line="55"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" line="50"/>
         </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;BaseController&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\BaseController.h" line="35"/>
         </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;_mastersinallareas&apos; should be passed by reference." verbose="Parameter &apos;_mastersinallareas&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\controllers\DaqController.h" line="84"/>
+        </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="Run" lineNumber="47"/>
-    <functiondecl functionName="Start" lineNumber="123"/>
-    <functiondecl functionName="OnlineParameterUpdate" lineNumber="207"/>
+    <functiondecl functionName="Run" lineNumber="42"/>
+    <functiondecl functionName="Start" lineNumber="119"/>
+    <functiondecl functionName="OnlineParameterUpdate" lineNumber="208"/>
     <functiondecl functionName="WorkerOnlineParameterUpdate" lineNumber="225"/>
-    <functiondecl functionName="AbortOnlineParameterUpdate" lineNumber="244"/>
-    <functiondecl functionName="ZeroGalvoOutputs" lineNumber="249"/>
-    <functiondecl functionName="SetScannerVector" lineNumber="270"/>
-    <functiondecl functionName="OpenCloseShutter" lineNumber="274"/>
-    <functiondecl functionName="GetShutterState" lineNumber="278"/>
-    <functiondecl functionName="TurnOnOffSwitchResonance" lineNumber="282"/>
-    <functiondecl functionName="GetSwitchResonanceState" lineNumber="287"/>
+    <functiondecl functionName="AbortOnlineParameterUpdate" lineNumber="246"/>
+    <functiondecl functionName="ZeroGalvoOutputs" lineNumber="251"/>
+    <functiondecl functionName="SetScannerVector" lineNumber="272"/>
+    <functiondecl functionName="OpenCloseShutter" lineNumber="276"/>
+    <functiondecl functionName="GetShutterState" lineNumber="280"/>
+    <functiondecl functionName="TurnOnOffSwitchResonance" lineNumber="284"/>
+    <functiondecl functionName="GetSwitchResonanceState" lineNumber="289"/>
     <functioncall functionName="ATLTRACE"/>
     <functioncall functionName="AbortWrite"/>
     <functioncall functionName="BaseController"/>
@@ -51,7 +54,6 @@
     <functioncall functionName="_area"/>
     <functioncall functionName="_areaparameters"/>
     <functioncall functionName="_masterarea"/>
-    <functioncall functionName="_mastersinallareas"/>
     <functioncall functionName="_nmasters"/>
     <functioncall functionName="_nslaves"/>
     <functioncall functionName="_on"/>
@@ -87,7 +89,7 @@
     <functioncall functionName="ma"/>
     <functioncall functionName="make_shared"/>
     <functioncall functionName="make_unique"/>
-    <functioncall functionName="mastersinallareas"/>
+    <functioncall functionName="masterareainallareas"/>
     <functioncall functionName="milliseconds"/>
     <functioncall functionName="msg"/>
     <functioncall functionName="nmasters"/>
@@ -96,7 +98,6 @@
     <functioncall functionName="notify_all"/>
     <functioncall functionName="nslaves"/>
     <functioncall functionName="nullptr"/>
-    <functioncall functionName="online_update_done"/>
     <functioncall functionName="online_update_done_flag"/>
     <functioncall functionName="online_update_done_mutexe"/>
     <functioncall functionName="output_queues"/>

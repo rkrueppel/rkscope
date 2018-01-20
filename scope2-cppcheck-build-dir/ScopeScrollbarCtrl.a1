@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3089787904">
+<analyzerinfo checksum="1028593235">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="AttachToDlgItem" lineNumber="25"/>
     <functiondecl functionName="OnScroll" lineNumber="35"/>

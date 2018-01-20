@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3497870788">
-        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+<analyzerinfo checksum="2345618932">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;scope :: ScopeDatatypeBase &lt; Uint16RangeHelper &gt;&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;scope :: ScopeDatatypeBase &lt; Uint16RangeHelper &gt;&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.h" line="60"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;ScopeDatatypeBase&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;scope :: ScopeDatatypeBase &lt; Uint16RangeHelper &gt;&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;scope :: ScopeDatatypeBase &lt; Uint16RangeHelper &gt;&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\helpers\ScopeDatatypes.h" line="64"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
@@ -57,7 +57,6 @@
     <functioncall functionName="RunningTimeseries"/>
     <functioncall functionName="S"/>
     <functioncall functionName="Sawtooth"/>
-    <functioncall functionName="ScopeDatatypeBase"/>
     <functioncall functionName="SimultaneousSampling"/>
     <functioncall functionName="Slave"/>
     <functioncall functionName="Stopped"/>
@@ -91,6 +90,7 @@
     <functioncall functionName="right"/>
     <functioncall functionName="s"/>
     <functioncall functionName="scannerselect"/>
+    <functioncall functionName="scope :: ScopeDatatypeBase &lt; Uint16RangeHelper &gt;"/>
     <functioncall functionName="secondhalf"/>
     <functioncall functionName="sizeof"/>
     <functioncall functionName="static_cast"/>

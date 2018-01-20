@@ -45,7 +45,7 @@ namespace scope {
 				, std::vector<ScanModeButtons>& _scanmodebuttons
 				, StackButtons& _stackbuttons
 				, ZeroButtons& _zerobuttons
-				, ScopeCounters<config::nmasters>& _counters);
+				, ScopeCounters& _counters);
 			~CMainDlgView();
 			
 			BEGIN_MSG_MAP(CScopeView)

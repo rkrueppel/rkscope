@@ -8,15 +8,16 @@ namespace scope {
 	
 	TheScope::TheScope(const std::wstring& _initialparameterpath)
 		: nareas(config::totalareas)
-		, guiparameters(config::totalareas)
+		, guiparameters(config::nmasters, config::nslaves, config::masterofslave)
 		, counters(nareas)
 		, fpubuttons(nareas)
 		, scanmodebuttons(config::nmasters)
+		, daq_to_pipeline(config::nmasters)
 		, theDaq(config::nmasters, config::nslaves, config::slavespermaster, guiparameters, &daq_to_pipeline)
 		, thePipeline(config::threads_pipeline, guiparameters, counters, &daq_to_pipeline, &pipeline_to_storage, &pipeline_to_display)
 		, theStorage(config::threads_storage, guiparameters, &pipeline_to_storage)
 		, theDisplay(config::threads_display, guiparameters, &pipeline_to_display)
-		, theFPUs(config::totalareas, guiparameters.allareas, fpubuttons)
+		, theFPUs(guiparameters.allareas, fpubuttons)
 		, theController(config::totalareas, guiparameters, counters, theDaq, thePipeline, theStorage, theDisplay, daq_to_pipeline, pipeline_to_storage, pipeline_to_display, theStage)
 	{
 		//Make sure that TheScope is instanciated only once
@@ -110,9 +111,9 @@ namespace scope {
 				guiparameters.stack.startat[a].position = theStage.CurrentZPosition();
 			// If fast z then each area can have different positions
 			else
-				guiparameters.stack.startat[a].position = guiparameters.areas[a].Currentframe().fastz();
+				guiparameters.stack.startat[a].position = guiparameters.allareas[a]->Currentframe().fastz();
 
-			guiparameters.stack.startat[a].pockels = guiparameters.areas[a].Currentframe().pockels();
+			guiparameters.stack.startat[a].pockels = guiparameters.allareas[a]->Currentframe().pockels();
 		}
 	}
 
@@ -123,9 +124,9 @@ namespace scope {
 				guiparameters.stack.stopat[a].position = theStage.CurrentZPosition();
 			// If fast z then each area can have different positions
 			else
-				guiparameters.stack.stopat[a].position = guiparameters.areas[a].Currentframe().fastz();
+				guiparameters.stack.stopat[a].position = guiparameters.allareas[a]->Currentframe().fastz();
 
-			guiparameters.stack.stopat[a].pockels = guiparameters.areas[a].Currentframe().pockels();
+			guiparameters.stack.stopat[a].pockels = guiparameters.allareas[a]->Currentframe().pockels();
 		}
 	}
 	
@@ -158,7 +159,7 @@ namespace scope {
 	}
 	
 	void TheScope::SetFPUButtonsState(const bool& state) {
-		for (auto& b : fpubuttonsvec) {
+		for (auto& b : fpubuttons) {
 			b.left.Enable(state);
 			b.right.Enable(state);
 			b.up.Enable(state);
@@ -187,36 +188,41 @@ namespace scope {
 				b.second.Enable
 		*/	
 			
-		for (uint32_t a = 0; a < nareas; a++) {
-			// Only enable scan mode buttons for master area and only if the mode is supported by builtin scanners
-			if (!ThisIsSlaveArea(a)) {
-				for (auto& b : scanmodebuttonsvec[a].map)
-					b.second.Enable(buttonenabler && ScannerSupportedVectors::IsBuiltinSupported(b.first));
-			}
-			// Disable slave area's scan mode buttons
-			else {
-				for (auto& b : scanmodebuttonsvec[a].map)
-					b.second.Enable(false);
-			}
-		}
+		// Only enable scan mode buttons for master area and only if the mode is supported by builtin scanners
+		for ( auto& ar : scanmodebuttons )
+			for (auto& b : ar.map)
+				b.second.Enable(buttonenabler && ScannerSupportedVectors::IsBuiltinSupported(b.first));
+
 		// Leave these enabled during live scanning
 		stackbuttons.starthere.Enable(buttonenabler || (guiparameters.run_state() == RunStateHelper::Mode::RunningContinuous));
 		stackbuttons.stophere.Enable(buttonenabler || (guiparameters.run_state() == RunStateHelper::Mode::RunningContinuous));
 	}
 	
 	void TheScope::ResolutionChange(const uint32_t& _area) {
-		theDisplay.ResolutionChange(guiparameters.areas[_area]);
+		theDisplay.ResolutionChange(*guiparameters.allareas[_area]);
 	}
 	
 	void TheScope::SetScanMode(const uint32_t& _area, const ScannerVectorType& _mode) {
 		// Make sure the choosen mode/scannervector is supported by the built-in scannertype
 		if (ScannerSupportedVectors::IsBuiltinSupported(_mode)) {
 			// Triggers update of areas.currentframe (connected to areas.ChangeScanMode)
-			guiparameters.areas[_area].scanmode = _mode;
+			guiparameters.allareas[_area]->scanmode = _mode;
 			//parameters = guiparameters;
 			// Get fresh ScannerVector for that scan mode
-			ScannerVectorFillType filltype = (guiparameters.areas[_area].isslave()) ? SCOPE_SLAVEFRAMEVECTORFILL : SCOPE_MASTERFRAMEVECTORFILL;
-			theController.framescannervecs[_area] = ScannerVectorFrameBasic::Factory(guiparameters.areas[_area].scanmode(), filltype);
+			config::FramevectorFillEnum ft = (guiparameters.allareas[_area]->areatype() == AreaTypeHelper::Slave) ? config::framevectorfill_slave : config::framevectorfill_master;
+			ScannerVectorFillType filltype;
+			switch (ft) {
+			case config::FramevectorFillEnum::FullframeXYZP:
+				filltype = ScannerVectorFillTypeHelper::FullframeXYZP;
+				break;
+			case config::FramevectorFillEnum::LineXPColumnYZ:
+				filltype = ScannerVectorFillTypeHelper::LineXPColumnYZ;
+				break;
+			case config::FramevectorFillEnum::LineZP:
+				filltype = ScannerVectorFillTypeHelper::LineZP;
+				break;
+			}
+			theController.framescannervecs[_area] = ScannerVectorFrameBasic::Factory(guiparameters.allareas[_area]->scanmode(), filltype);
 			theDaq.SetScannerVector(_area, theController.framescannervecs[_area]);
 			thePipeline.SetScannerVector(_area, theController.framescannervecs[_area]);
 			

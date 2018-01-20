@@ -100,7 +100,7 @@ namespace scope {
 			ScopeValue<DaqMode> requested_mode;
 
 		public:
-			Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, std::vector<uint32_t> _masterofslaves);
+			Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, const std::vector<uint32_t>& _masterofslaves);
 
 			/** Supply copy constructor because of unique_ptr<Area> (does deep copy of Areas) */
 			Scope(const Scope& _scope);

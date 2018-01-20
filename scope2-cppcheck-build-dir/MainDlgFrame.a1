@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3408536190">
+<analyzerinfo checksum="1368179313">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CStorageSettingsPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\StorageSettingsPage.h" line="38"/>
         </error>
@@ -25,7 +25,7 @@
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\FPGAResonanceScanner_NI5771Page.h" line="47"/>
         </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CTBButtonInfo&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\MainDlgFrame.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\ThirdParty\ToolbarHelper.h" line="29"/>
@@ -113,7 +113,6 @@
     <functioncall functionName="CScanSettingsSheet"/>
     <functioncall functionName="CScopeButtonCtrl"/>
     <functioncall functionName="CScopeCheckBoxCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CScopeFOVDiagram"/>
     <functioncall functionName="CScopeProgressCtrl"/>
     <functioncall functionName="CScopeScrollbarCtrl"/>
@@ -145,6 +144,7 @@
     <functioncall functionName="CreateSimpleToolBarCtrl"/>
     <functioncall functionName="D2D1CreateFactory"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="D2HistogramRender"/>
     <functioncall functionName="DBOUT"/>
     <functioncall functionName="DECLARE_FRAME_WND_CLASS"/>
@@ -180,12 +180,12 @@
     <functioncall functionName="GetItemRect"/>
     <functioncall functionName="GetLBText"/>
     <functioncall functionName="GetLogFrameWindow"/>
-    <functioncall functionName="GetMasterShutterState"/>
     <functioncall functionName="GetMenu"/>
     <functioncall functionName="GetMessageLoop"/>
     <functioncall functionName="GetParent"/>
     <functioncall functionName="GetProcessMemoryInfo"/>
     <functioncall functionName="GetPtr"/>
+    <functioncall functionName="GetShutterState"/>
     <functioncall functionName="GetSize"/>
     <functioncall functionName="GetString"/>
     <functioncall functionName="GetSubMenu"/>
@@ -368,7 +368,7 @@
     <functioncall functionName="OnUpdateMousePixel"/>
     <functioncall functionName="OnZControlRadio"/>
     <functioncall functionName="OnZeroGalvoOutputs"/>
-    <functioncall functionName="OpenCloseMasterShutter"/>
+    <functioncall functionName="OpenCloseShutter"/>
     <functioncall functionName="OpenProcess"/>
     <functioncall functionName="PROCESS_VM_READ"/>
     <functioncall functionName="Point2F"/>
@@ -405,6 +405,7 @@
     <functioncall functionName="SetPanes"/>
     <functioncall functionName="SetParent"/>
     <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetTimer"/>
     <functioncall functionName="SetTitle"/>
     <functioncall functionName="SetWindowPos"/>
@@ -501,7 +502,7 @@
     <functioncall functionName="currentconfigfile"/>
     <functioncall functionName="cx"/>
     <functioncall functionName="cy"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="daq_controller"/>
     <functioncall functionName="data"/>
     <functioncall functionName="dc"/>
@@ -566,7 +567,6 @@
     <functioncall functionName="pd2d_factory"/>
     <functioncall functionName="pmc"/>
     <functioncall functionName="pnmh"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="proc"/>
     <functioncall functionName="psiFolder"/>
     <functioncall functionName="psz"/>
@@ -581,6 +581,10 @@
     <functioncall functionName="run_state"/>
     <functioncall functionName="scaleX"/>
     <functioncall functionName="scaleY"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; std :: wstring &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint32_t &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint8_t &gt;"/>
     <functioncall functionName="scope_controller"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="scopeval"/>

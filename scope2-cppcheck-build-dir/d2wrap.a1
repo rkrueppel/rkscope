@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1745345534">
+<analyzerinfo checksum="3925010049">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;RenderTarget&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
-            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="94"/>
+            <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="CreateSolidColorBrush" lineNumber="47"/>
@@ -54,6 +54,7 @@
     <functioncall functionName="D2D1_ANTIALIAS_MODE_PER_PRIMITIVE"/>
     <functioncall functionName="D2D1_BITMAP_INTERPOLATION_MODE_LINEAR"/>
     <functioncall functionName="D2D1_DEBUG_LEVEL_INFORMATION"/>
+    <functioncall functionName="D2D1_FACTORY_TYPE_MULTI_THREADED"/>
     <functioncall functionName="D2D1_PRESENT_OPTIONS_IMMEDIATELY"/>
     <functioncall functionName="D2D1_RENDER_TARGET_TYPE_DEFAULT"/>
     <functioncall functionName="DBOUT"/>
@@ -120,7 +121,7 @@
     <functioncall functionName="assert"/>
     <functioncall functionName="catch"/>
     <functioncall functionName="const"/>
-    <functioncall functionName="d2dfactory"/>
+    <functioncall functionName="d2d :: d2dfactory &lt; D2D1_FACTORY_TYPE_MULTI_THREADED &gt;"/>
     <functioncall functionName="dwrite_factory"/>
     <functioncall functionName="e"/>
     <functioncall functionName="height"/>
@@ -131,7 +132,6 @@
     <functioncall functionName="options"/>
     <functioncall functionName="pd2d_factory"/>
     <functioncall functionName="pixelformat"/>
-    <functioncall functionName="policy_class"/>
     <functioncall functionName="rc"/>
     <functioncall functionName="reinterpret_cast"/>
     <functioncall functionName="scaleX"/>

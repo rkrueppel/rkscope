@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="699201511">
+<analyzerinfo checksum="2459103822">
         <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\ExperimentSettingsSheet.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\ExperimentSettingsSheet.cpp" line="64"/>
         </error>
@@ -21,7 +21,6 @@
     <functioncall functionName="CScanModesSettingsPage"/>
     <functioncall functionName="CScopeButtonCtrl"/>
     <functioncall functionName="CScopeCheckBoxCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CScopeProgressCtrl"/>
     <functioncall functionName="CStackSettingsPage"/>
     <functioncall functionName="CTimeSeriesSettingsPage"/>
@@ -87,6 +86,7 @@
     <functioncall functionName="SetActivePage"/>
     <functioncall functionName="SetFromString"/>
     <functioncall functionName="SetReadOnlyWhileScanning"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowPos"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="SubclassWindow"/>
@@ -142,6 +142,8 @@
     <functioncall functionName="pTemplate"/>
     <functioncall functionName="pnmHdr"/>
     <functioncall functionName="scanmode"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; uint32_t &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="shiftstate"/>
     <functioncall functionName="stack"/>

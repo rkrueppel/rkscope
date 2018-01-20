@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2879138266">
+<analyzerinfo checksum="762232093">
         <error id="noExplicitConstructor" severity="style" msg="Class &apos;CDAQmxPage&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;CDAQmxPage&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\gui\DAQmxPage.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\gui\DAQmxPage.h" line="24"/>
         </error>
@@ -7,7 +7,6 @@
     <functioncall functionName="AttachToDlgItem"/>
     <functioncall functionName="BEGIN_MSG_MAP"/>
     <functioncall functionName="CDAQmxPage"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="ConnectGUI"/>
     <functioncall functionName="ConnectState"/>
     <functioncall functionName="DEFAULT_REFLECTION_HANDLER"/>
@@ -32,6 +31,7 @@
     <functioncall functionName="PostMessage"/>
     <functioncall functionName="REFLECT_NOTIFICATIONS"/>
     <functioncall functionName="SetFromString"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="SubclassWindow"/>
     <functioncall functionName="ToChar"/>
@@ -62,6 +62,7 @@
     <functioncall functionName="lParam"/>
     <functioncall functionName="length"/>
     <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; std :: wstring &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="shiftstate"/>
     <functioncall functionName="state"/>

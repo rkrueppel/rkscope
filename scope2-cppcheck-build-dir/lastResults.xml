@@ -1,618 +1,614 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <results version="2">
-    <cppcheck version="1.81"/>
+    <cppcheck version="1.82"/>
     <errors>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;BaseController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;BaseController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;BaseController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;BaseController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\controllers\BaseController.h" line="35"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;currentlyread&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;currentlyread&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
-            <location file="scope\controllers\DaqController.cpp" line="55"/>
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;currentlyread&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;currentlyread&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
+            <location file="scope\controllers\DaqController.cpp" line="50"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;GetShutterState&amp;#039; is never used." verbose="The function &amp;#039;GetShutterState&amp;#039; is never used." sinceDate="10.01.2018">
-            <location file="scope\controllers\DaqController.cpp" line="278"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;GetSwitchResonanceState&amp;#039; is never used." verbose="The function &amp;#039;GetSwitchResonanceState&amp;#039; is never used." sinceDate="19.01.2018">
+            <location file="scope\controllers\DaqController.cpp" line="289"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;GetSwitchResonanceState&amp;#039; is never used." verbose="The function &amp;#039;GetSwitchResonanceState&amp;#039; is never used." sinceDate="10.01.2018">
-            <location file="scope\controllers\DaqController.cpp" line="287"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TurnOnOffSwitchResonance&amp;#039; is never used." verbose="The function &amp;#039;TurnOnOffSwitchResonance&amp;#039; is never used." sinceDate="19.01.2018">
+            <location file="scope\controllers\DaqController.cpp" line="284"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OpenCloseShutter&amp;#039; is never used." verbose="The function &amp;#039;OpenCloseShutter&amp;#039; is never used." sinceDate="10.01.2018">
-            <location file="scope\controllers\DaqController.cpp" line="274"/>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_mastersinallareas&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_mastersinallareas&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
+            <location file="scope\controllers\DaqController.h" line="84"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TurnOnOffSwitchResonance&amp;#039; is never used." verbose="The function &amp;#039;TurnOnOffSwitchResonance&amp;#039; is never used." sinceDate="10.01.2018">
-            <location file="scope\controllers\DaqController.cpp" line="282"/>
-        </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;area&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;area&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;area&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;area&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\controllers\DisplayController.cpp" line="31"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.h" line="55"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.h" line="58"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.cpp" line="30"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;message&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;message&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.cpp" line="35"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetFilepath&amp;#039; is never used." verbose="The function &amp;#039;SetFilepath&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetFilepath&amp;#039; is never used." verbose="The function &amp;#039;SetFilepath&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.cpp" line="76"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetLoggingTypes&amp;#039; is never used." verbose="The function &amp;#039;SetLoggingTypes&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetLoggingTypes&amp;#039; is never used." verbose="The function &amp;#039;SetLoggingTypes&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.cpp" line="70"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Shutdown&amp;#039; is never used." verbose="The function &amp;#039;Shutdown&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Shutdown&amp;#039; is never used." verbose="The function &amp;#039;Shutdown&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeLogger.cpp" line="129"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;framearea&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;framearea&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;framearea&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;framearea&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\controllers\StorageController.cpp" line="29"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;reqEqual&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;reqEqual&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;reqEqual&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;reqEqual&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\controllers\StorageController.cpp" line="56"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;framecountEqual&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;framecountEqual&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;framecountEqual&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;framecountEqual&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\controllers\StorageController.cpp" line="56"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Inputs&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Inputs&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Inputs&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Inputs&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\Inputs.h" line="19"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;timedout&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;timedout&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;timedout&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;timedout&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\devices\InputsDAQmx.h" line="52"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Outputs&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Outputs&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Outputs&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Outputs&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\Outputs.h" line="17"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmx is not safe. When calling OutputsDAQmx::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmx is not safe. When calling OutputsDAQmx::Write(), if parameter _blocks is 0 that leads to division by zero." sinceDate="19.01.2018">
+            <location file="scope\devices\OutputsDAQmx.cpp" line="80"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\OutputsDAQmx.h" line="58"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxLineClock&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxLineClock&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmxLineClock is not safe. When calling OutputsDAQmxLineClock::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmxLineClock is not safe. When calling OutputsDAQmxLineClock::Write(), if parameter _blocks is 0 that leads to division by zero." sinceDate="19.01.2018">
+            <location file="scope\devices\OutputsDAQmxLineClock.cpp" line="85"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxLineClock&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxLineClock&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\OutputsDAQmxLineClock.h" line="53"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxResonance&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxResonance&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmxResonance is not safe. When calling OutputsDAQmxResonance::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmxResonance is not safe. When calling OutputsDAQmxResonance::Write(), if parameter _blocks is 0 that leads to division by zero." sinceDate="19.01.2018">
+            <location file="scope\devices\OutputsDAQmxResonance.cpp" line="87"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxResonance&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxResonance&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\OutputsDAQmxResonance.h" line="62"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxResonanceSlave&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxResonanceSlave&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmxResonanceSlave is not safe. When calling OutputsDAQmxResonanceSlave::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmxResonanceSlave is not safe. When calling OutputsDAQmxResonanceSlave::Write(), if parameter _blocks is 0 that leads to division by zero." sinceDate="19.01.2018">
+            <location file="scope\devices\OutputsDAQmxResonanceSlave.cpp" line="76"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxResonanceSlave&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxResonanceSlave&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\OutputsDAQmxResonanceSlave.h" line="44"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxSlave&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxSlave&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="unsafeClassDivZero" severity="style" msg="Public interface of OutputsDAQmxSlave is not safe. When calling OutputsDAQmxSlave::Write(), if parameter _blocks is 0 that leads to division by zero." verbose="Public interface of OutputsDAQmxSlave is not safe. When calling OutputsDAQmxSlave::Write(), if parameter _blocks is 0 that leads to division by zero." sinceDate="19.01.2018">
+            <location file="scope\devices\OutputsDAQmxSlave.cpp" line="72"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ZeroOutputsDAQmxSlave&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ZeroOutputsDAQmxSlave&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\OutputsDAQmxSlave.h" line="43"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;StimulationsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;StimulationsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;StimulationsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;StimulationsDAQmx&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\StimulationsDAQmx.h" line="24"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_stimvec&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_stimvec&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_stimvec&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_stimvec&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\devices\StimulationsDAQmx.cpp" line="34"/>
         </error>
-        <error id="AssignmentAddressToInteger" severity="portability" msg="Assigning a pointer to an integer is not portable." verbose="Assigning a pointer to an integer (int/long/etc) is not portable across different platforms and compilers. For example in 32-bit Windows and linux they are same width, but in 64-bit Windows and linux they are of different width. In worst case you end up assigning 64-bit address to 32-bit integer. The safe way is to store addresses only in pointer types (or typedefs like uintptr_t)." sinceDate="10.01.2018">
+        <error id="AssignmentAddressToInteger" severity="portability" msg="Assigning a pointer to an integer is not portable." verbose="Assigning a pointer to an integer (int/long/etc) is not portable across different platforms and compilers. For example in 32-bit Windows and linux they are same width, but in 64-bit Windows and linux they are of different width. In worst case you end up assigning 64-bit address to 32-bit integer. The safe way is to store addresses only in pointer types (or typedefs like uintptr_t)." sinceDate="19.01.2018">
             <location file="scope\devices\ZoomResonance.cpp" line="31"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAIO5751&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAIO5751&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAIO5751&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAIO5751&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\fpga\FPGAIO5751.h" line="23"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;GalilController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;GalilController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;GalilController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;GalilController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\GalilController.h" line="36"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\GalilController.cpp" line="0"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\GalilController.cpp" line="0"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\GalilController.cpp" line="0"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetTimeout&amp;#039; is never used." verbose="The function &amp;#039;SetTimeout&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetTimeout&amp;#039; is never used." verbose="The function &amp;#039;SetTimeout&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\GalilController.cpp" line="29"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;SutterController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;SutterController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;SutterController&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;SutterController&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\SutterController.h" line="17"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYControl.h" line="36"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
-            <location file="scope\devices\xyz\XYControl.h" line="38"/>
-        </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;XYControl&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
-            <location file="scope\devices\xyz\XYControl.h" line="41"/>
-        </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_DEBUG;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;SCOPE_USE_GALIL_XYZSTAGE;_WIN64&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlGalil.cpp" line="0"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CurrentZPosition&amp;#039; is never used." verbose="The function &amp;#039;CurrentZPosition&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CurrentZPosition&amp;#039; is never used." verbose="The function &amp;#039;CurrentZPosition&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlGalil.cpp" line="83"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlSutter.cpp" line="119"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlSutter.cpp" line="161"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ret&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlSutter.cpp" line="176"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetVelocity&amp;#039; is never used." verbose="The function &amp;#039;SetVelocity&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetVelocity&amp;#039; is never used." verbose="The function &amp;#039;SetVelocity&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYZControlSutter.cpp" line="97"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\gui\AreaChooseDlg.cpp" line="0"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;RenderTarget&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;RenderTarget&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
-            <location file="scope\gui\direct2d\d2wrap.h" line="94"/>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;RenderTarget&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;RenderTarget&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
+            <location file="scope\gui\direct2d\d2wrap.h" line="95"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CTBButtonInfo&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CTBButtonInfo&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CTBButtonInfo&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CTBButtonInfo&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\ThirdParty\ToolbarHelper.h" line="29"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CDAQmxPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CDAQmxPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CDAQmxPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CDAQmxPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\DAQmxPage.h" line="24"/>
         </error>
-        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="10.01.2018">
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="19.01.2018">
             <location file="scope\gui\ExperimentSettingsSheet.cpp" line="64"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAAnalogIntegratorPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAAnalogIntegratorPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAAnalogIntegratorPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAAnalogIntegratorPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGAAnalogIntegratorPage.h" line="47"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGADigitalDemultiplexerPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGADigitalDemultiplexerPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGADigitalDemultiplexerPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGADigitalDemultiplexerPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGADigitalDemultiplexerPage.h" line="36"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGANoiseOutputPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGANoiseOutputPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGANoiseOutputPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGANoiseOutputPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGANoiseOutputPage.h" line="30"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAPhotonCounterPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAPhotonCounterPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAPhotonCounterPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAPhotonCounterPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGAPhotonCounterPage.h" line="39"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAResonanceScannerPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAResonanceScannerPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAResonanceScannerPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAResonanceScannerPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGAResonanceScannerPage.h" line="47"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAResonanceScannerNI5771Page&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAResonanceScannerNI5771Page&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CFPGAResonanceScannerNI5771Page&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CFPGAResonanceScannerNI5771Page&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\FPGAResonanceScanner_NI5771Page.h" line="47"/>
         </error>
-        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;strtitle&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;strtitle&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="10.01.2018">
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;strtitle&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;strtitle&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="19.01.2018">
             <location file="scope\gui\FPUControlPage.cpp" line="18"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CPresetNameDlg&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CPresetNameDlg&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CPresetNameDlg&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CPresetNameDlg&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\PresetNameDlg.h" line="22"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CStorageSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CStorageSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CStorageSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CStorageSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\StorageSettingsPage.h" line="38"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CStimulationSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CStimulationSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;CStimulationSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;CStimulationSettingsPage&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\gui\StimulationSettingsPage.h" line="41"/>
         </error>
-        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="10.01.2018">
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="19.01.2018">
             <location file="scope\gui\MovementSettingsSheet.cpp" line="56"/>
         </error>
-        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;strtitle&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;strtitle&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="10.01.2018">
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;strtitle&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;strtitle&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="19.01.2018">
             <location file="scope\gui\NoScanBasePage.cpp" line="27"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_name&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_name&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_name&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_name&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\gui\PresetNameDlg.cpp" line="8"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;APSTUDIO_INVOKED&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\gui\PresetNameDlg.cpp" line="0"/>
         </error>
-        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="10.01.2018">
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected. See also: https://www.securecoding.cert.org/confluence/display/cplusplus/EXP05-CPP.+Do+not+use+C-style+casts." sinceDate="19.01.2018">
             <location file="scope\gui\ScanSettingsSheet.cpp" line="82"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ChangeScanmode&amp;#039; is never used." verbose="The function &amp;#039;ChangeScanmode&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ChangeScanmode&amp;#039; is never used." verbose="The function &amp;#039;ChangeScanmode&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\ScanSettingsSheet.cpp" line="105"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;multiplier&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;multiplier&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;multiplier&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;multiplier&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\gui\direct2d\D2HistogramRender.cpp" line="65"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_hist&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_hist&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_hist&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_hist&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\gui\direct2d\D2HistogramRender.cpp" line="8"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_hist&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_hist&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_hist&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_hist&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\gui\direct2d\D2HistogramRender.cpp" line="49"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;StopCondition&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;StopCondition&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;StopCondition&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;StopCondition&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\helpers.h" line="102"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeButton&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeButton&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="ConfigurationNotChecked" severity="information" msg="Skipping configuration &amp;#039;max&amp;#039; since the value of &amp;#039;max&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." verbose="Skipping configuration &amp;#039;max&amp;#039; since the value of &amp;#039;max&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." sinceDate="19.01.2018">
+            <location file="scope\helpers\helpers.h" line="118"/>
+        </error>
+        <error id="ConfigurationNotChecked" severity="information" msg="Skipping configuration &amp;#039;max&amp;#039; since the value of &amp;#039;max&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." verbose="Skipping configuration &amp;#039;max&amp;#039; since the value of &amp;#039;max&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." sinceDate="19.01.2018">
+            <location file="scope\helpers\helpers.h" line="120"/>
+        </error>
+        <error id="ConfigurationNotChecked" severity="information" msg="Skipping configuration &amp;#039;min&amp;#039; since the value of &amp;#039;min&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." verbose="Skipping configuration &amp;#039;min&amp;#039; since the value of &amp;#039;min&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." sinceDate="19.01.2018">
+            <location file="scope\helpers\helpers.h" line="119"/>
+        </error>
+        <error id="ConfigurationNotChecked" severity="information" msg="Skipping configuration &amp;#039;min&amp;#039; since the value of &amp;#039;min&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." verbose="Skipping configuration &amp;#039;min&amp;#039; since the value of &amp;#039;min&amp;#039; is unknown. Use -D if you want to check it. You can use -U to skip it explicitly." sinceDate="19.01.2018">
+            <location file="scope\helpers\helpers.h" line="120"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeButton&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeButton&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeButton.h" line="30"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeDatatypeBase&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeDatatypeBase&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;scope :: ScopeDatatypeBase &amp;lt; Uint16RangeHelper &amp;gt;&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;scope :: ScopeDatatypeBase &amp;lt; Uint16RangeHelper &amp;gt;&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeDatatypes.h" line="60"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeDatatypeBase&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeDatatypeBase&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;scope :: ScopeDatatypeBase &amp;lt; Uint16RangeHelper &amp;gt;&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;scope :: ScopeDatatypeBase &amp;lt; Uint16RangeHelper &amp;gt;&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeDatatypes.h" line="64"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeException&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeException&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeException&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeException&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeException.h" line="13"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAException&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAException&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAException&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAException&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\FPGAException.h" line="14"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAStatusT&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAStatusT&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;FPGAStatusT&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;FPGAStatusT&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\FPGAException.h" line="96"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;acc&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;acc&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;acc&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;acc&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\helpers\DaqChunks.h" line="78"/>
         </error>
-        <error id="duplInheritedMember" severity="warning" msg="The class &amp;#039;DaqMultiChunk&amp;#039; defines member variable with name &amp;#039;lastmapped&amp;#039; also defined in its parent class &amp;#039;DaqChunk&amp;#039;." verbose="The class &amp;#039;DaqMultiChunk&amp;#039; defines member variable with name &amp;#039;lastmapped&amp;#039; also defined in its parent class &amp;#039;DaqChunk&amp;#039;." sinceDate="10.01.2018">
-            <location file="scope\helpers\DaqChunks.h" line="41" info=""/>
-            <location file="scope\helpers\DaqChunks.h" line="16" info=""/>
-        </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;DaqMultiChunk&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;DaqMultiChunk&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;DaqMultiChunk&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;DaqMultiChunk&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\DaqChunks.h" line="44"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;DaqMultiChunkResonance&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;DaqMultiChunkResonance&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;DaqMultiChunkResonance&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;DaqMultiChunkResonance&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\DaqChunks.h" line="138"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Struct &amp;#039;BGRA8Pixel&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Struct &amp;#039;BGRA8Pixel&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Struct &amp;#039;BGRA8Pixel&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Struct &amp;#039;BGRA8Pixel&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\pixel.h" line="60"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeImageAccess&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeImageAccess&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeImageAccess&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeImageAccess&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.h" line="202"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeImageConstAccess&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeImageConstAccess&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeImageConstAccess&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeImageConstAccess&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.h" line="235"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_img&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_img&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_img&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_img&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.h" line="267"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_img&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_img&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_img&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_img&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.h" line="279"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_from&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_from&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\helpers\ScopeImage.h" line="279"/>
-        </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_to&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_to&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\helpers\ScopeImage.h" line="279"/>
-        </error>
-        <error id="copyCtorAndEqOperator" severity="warning" msg="The class &amp;#039;ScopeHistogram&amp;#039; has &amp;#039;copy constructor&amp;#039; but lack of &amp;#039;operator=&amp;#039;." verbose="The class &amp;#039;ScopeHistogram&amp;#039; has &amp;#039;copy constructor&amp;#039; but lack of &amp;#039;operator=&amp;#039;." sinceDate="10.01.2018">
+        <error id="copyCtorAndEqOperator" severity="warning" msg="The class &amp;#039;ScopeHistogram&amp;#039; has &amp;#039;copy constructor&amp;#039; but lack of &amp;#039;operator=&amp;#039;." verbose="The class &amp;#039;ScopeHistogram&amp;#039; has &amp;#039;copy constructor&amp;#039; but lack of &amp;#039;operator=&amp;#039;." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeHistogram.h" line="9"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeHistogram.cpp" line="0"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_from&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_from&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\helpers\ScopeImage.cpp" line="24"/>
-        </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_to&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_to&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\helpers\ScopeImage.cpp" line="24"/>
-        </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.cpp" line="0"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;InsertAndAveragePixels&amp;#039; is never used." verbose="The function &amp;#039;InsertAndAveragePixels&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;InsertAndAveragePixels&amp;#039; is never used." verbose="The function &amp;#039;InsertAndAveragePixels&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.cpp" line="24"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;InsertPixels&amp;#039; is never used." verbose="The function &amp;#039;InsertPixels&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;InsertPixels&amp;#039; is never used." verbose="The function &amp;#039;InsertPixels&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeImage.cpp" line="6"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_newimg&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_newimg&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_newimg&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_newimg&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImage.h" line="93"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiHistogram.cpp" line="16"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiHistogram.cpp" line="0"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_newimg&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_newimg&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_newimg&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_newimg&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImage.cpp" line="44"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;GetPixel&amp;#039; is never used." verbose="The function &amp;#039;GetPixel&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;GetPixel&amp;#039; is never used." verbose="The function &amp;#039;GetPixel&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImage.cpp" line="27"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetChannel&amp;#039; is never used." verbose="The function &amp;#039;SetChannel&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetChannel&amp;#039; is never used." verbose="The function &amp;#039;SetChannel&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImage.cpp" line="44"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multiimage&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multiimage&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multiimage&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multiimage&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImageEncoder.cpp" line="112"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multiimage&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multiimage&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multiimage&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multiimage&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImageEncoder.cpp" line="170"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImageEncoder.cpp" line="0"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteFrameNewPart&amp;#039; is never used." verbose="The function &amp;#039;WriteFrameNewPart&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteFrameNewPart&amp;#039; is never used." verbose="The function &amp;#039;WriteFrameNewPart&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImageEncoder.cpp" line="170"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeMultiImageResonanceSW.cpp" line="0"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeValueBase&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeValueBase&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeValueBase&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeValueBase&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeValueBase.h" line="36"/>
         </error>
-        <error id="copyCtorAndEqOperator" severity="warning" msg="The class &amp;#039;ScopeValue&amp;#039; has &amp;#039;operator=&amp;#039; but lack of &amp;#039;copy constructor&amp;#039;." verbose="The class &amp;#039;ScopeValue&amp;#039; has &amp;#039;operator=&amp;#039; but lack of &amp;#039;copy constructor&amp;#039;." sinceDate="10.01.2018">
+        <error id="copyCtorAndEqOperator" severity="warning" msg="The class &amp;#039;ScopeValue&amp;#039; has &amp;#039;operator=&amp;#039; but lack of &amp;#039;copy constructor&amp;#039;." verbose="The class &amp;#039;ScopeValue&amp;#039; has &amp;#039;operator=&amp;#039; but lack of &amp;#039;copy constructor&amp;#039;." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeValue.h" line="11"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeOverlay.cpp" line="18"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeOverlay.cpp" line="0"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeOverlay.h" line="41"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_multi&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_multi&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeOverlayResonanceSW.cpp" line="15"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeOverlayResonanceSW.cpp" line="0"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeScanModeButton&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeScanModeButton&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScopeScanModeButton&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScopeScanModeButton&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeScanModeButton.h" line="14"/>
         </error>
-        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="10.01.2018">
+        <error id="purgedConfiguration" severity="information" msg="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." verbose="The configuration &amp;#039;_DEBUG&amp;#039; was not checked because its code equals another one." sinceDate="19.01.2018">
             <location file="scope\helpers\helpers.cpp" line="0"/>
         </error>
-        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="10.01.2018">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="19.01.2018">
             <location file="scope\parameters\Area.h" line="85"/>
         </error>
-        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="10.01.2018">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="19.01.2018">
             <location file="scope\parameters\Area.h" line="89"/>
         </error>
-        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="10.01.2018">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="19.01.2018">
             <location file="scope\parameters\Area.h" line="93"/>
         </error>
-        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="10.01.2018">
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" sinceDate="19.01.2018">
             <location file="scope\parameters\Area.h" line="96"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;MasterArea&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;MasterArea&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;MasterArea&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;MasterArea&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\parameters\Area.h" line="168"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Daq&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Daq&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Daq&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Daq&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\parameters\Daq.h" line="26"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Stack&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Stack&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Stack&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Stack&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\parameters\Runstates.h" line="41"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Timeseries&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Timeseries&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Timeseries&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Timeseries&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\parameters\Runstates.h" line="68"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Behavior&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Behavior&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;Behavior&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;Behavior&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\parameters\Runstates.h" line="112"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_current_frames&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_current_frames&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperBasic.h" line="83"/>
+        <error id="AssignmentAddressToInteger" severity="portability" msg="Assigning a pointer to an integer is not portable." verbose="Assigning a pointer to an integer (int/long/etc) is not portable across different platforms and compilers. For example in 32-bit Windows and linux they are same width, but in 64-bit Windows and linux they are of different width. In worst case you end up assigning 64-bit address to 32-bit integer. The safe way is to store addresses only in pointer types (or typedefs like uintptr_t)." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="212"/>
         </error>
-        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameBiDi.cpp" line="35"/>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_current_frames&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_current_frames&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="89"/>
         </error>
-        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;_chunk&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;_chunk&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="16"/>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="366"/>
         </error>
-        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="76"/>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="385"/>
         </error>
-        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="95"/>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="402"/>
         </error>
-        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="112"/>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="19.01.2018">
+            <location file="scope\scanmodes\PixelmapperBasic.h" line="421"/>
         </error>
-        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="131"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetCurrentAveragedFrame&amp;#039; is never used." verbose="The function &amp;#039;SetCurrentAveragedFrame&amp;#039; is never used." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameResonanceSW.cpp" line="180"/>
-        </error>
-        <error id="syntaxError" severity="error" msg="Invalid number of character &amp;#039;(&amp;#039; when no macros are defined." verbose="Invalid number of character &amp;#039;(&amp;#039; when no macros are defined." sinceDate="10.01.2018">
-            <location file="scope\scanmodes\PixelmapperFrameSaw.h" line="48"/>
-        </error>
-        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;newrot&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;newrot&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="10.01.2018">
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;newrot&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;newrot&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBasic.cpp" line="72"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetFastZ&amp;#039; is never used." verbose="The function &amp;#039;SetFastZ&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetFastZ&amp;#039; is never used." verbose="The function &amp;#039;SetFastZ&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBasic.cpp" line="63"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetPockels&amp;#039; is never used." verbose="The function &amp;#039;SetPockels&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetPockels&amp;#039; is never used." verbose="The function &amp;#039;SetPockels&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBasic.cpp" line="53"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetScannderdelay&amp;#039; is never used." verbose="The function &amp;#039;SetScannderdelay&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetScannderdelay&amp;#039; is never used." verbose="The function &amp;#039;SetScannderdelay&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBasic.cpp" line="68"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetZoom&amp;#039; is never used." verbose="The function &amp;#039;SetZoom&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetZoom&amp;#039; is never used." verbose="The function &amp;#039;SetZoom&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBasic.cpp" line="58"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameSaw&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameSaw&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameSaw&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameSaw&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameSaw.h" line="47"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameBiDi&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameBiDi&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameBiDi&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameBiDi&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBiDi.h" line="34"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFramePlaneHopper&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFramePlaneHopper&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFramePlaneHopper&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFramePlaneHopper&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFramePlaneHopper.h" line="17"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameResonanceBiDi&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameResonanceBiDi&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameResonanceBiDi&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameResonanceBiDi&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceBiDi.h" line="30"/>
         </error>
-        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameResonanceHopper&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameResonanceHopper&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="10.01.2018">
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;ScannerVectorFrameResonanceHopper&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;ScannerVectorFrameResonanceHopper&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.h" line="29"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;x&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;x&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;x&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;x&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameBiDi.cpp" line="89"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="80"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="81"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="84"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cp_init&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cp_init&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cp_init&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cp_init&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="122"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yminzoomed&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yminzoomed&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yminzoomed&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yminzoomed&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="64"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ymaxzoomed&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ymaxzoomed&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ymaxzoomed&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ymaxzoomed&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="65"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yscanslope&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yscanslope&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yscanslope&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yscanslope&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="68"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yretraceslope&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yretraceslope&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yretraceslope&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yretraceslope&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="69"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yscanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yscanlines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;yscanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;yscanlines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="70"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ytotallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ytotallines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;ytotallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;ytotallines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="71"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="94"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="95"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="96"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="98"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="105"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="105"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cutofflines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="147"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;scanlines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="148"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;totallines&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="149"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;fastzoutdev&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="151"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;pockelsdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;pockelsdev&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;pockelsdev&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;pockelsdev&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="152"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;cz&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="160"/>
         </error>
-        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." sinceDate="10.01.2018">
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;step_size&amp;#039; is assigned a value that is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="160"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;x&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;x&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here\012        for (int n = 0; n &amp;lt; 10; ++n) {\012            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here\012            do_something(&amp;amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="10.01.2018">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;x&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;x&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameSaw.cpp" line="117"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;FillZP&amp;#039; is never used." verbose="The function &amp;#039;FillZP&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;FillZP&amp;#039; is never used." verbose="The function &amp;#039;FillZP&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameSaw.cpp" line="410"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;RotateP&amp;#039; is never used." verbose="The function &amp;#039;RotateP&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;RotateP&amp;#039; is never used." verbose="The function &amp;#039;RotateP&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\scanmodes\ScannerVectorFrameSaw.cpp" line="437"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;AppendLogText&amp;#039; is never used." verbose="The function &amp;#039;AppendLogText&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;AppendLogText&amp;#039; is never used." verbose="The function &amp;#039;AppendLogText&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\LogFrame.cpp" line="44"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CheckIOModule&amp;#039; is never used." verbose="The function &amp;#039;CheckIOModule&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CheckIOModule&amp;#039; is never used." verbose="The function &amp;#039;CheckIOModule&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\fpga\FPGAIO5771.cpp" line="92"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetClockSource&amp;#039; is never used." verbose="The function &amp;#039;SetClockSource&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetClockSource&amp;#039; is never used." verbose="The function &amp;#039;SetClockSource&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\fpga\FPGAIO5771.cpp" line="41"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ClearWindow&amp;#039; is never used." verbose="The function &amp;#039;ClearWindow&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ClearWindow&amp;#039; is never used." verbose="The function &amp;#039;ClearWindow&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\direct2d\d2wrap.cpp" line="113"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CoerceSampleRates&amp;#039; is never used." verbose="The function &amp;#039;CoerceSampleRates&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CoerceSampleRates&amp;#039; is never used." verbose="The function &amp;#039;CoerceSampleRates&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="36"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConfigureImplicitTiming&amp;#039; is never used." verbose="The function &amp;#039;ConfigureImplicitTiming&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConfigureImplicitTiming&amp;#039; is never used." verbose="The function &amp;#039;ConfigureImplicitTiming&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="99"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConfigureOnboardBuffer&amp;#039; is never used." verbose="The function &amp;#039;ConfigureOnboardBuffer&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConfigureOnboardBuffer&amp;#039; is never used." verbose="The function &amp;#039;ConfigureOnboardBuffer&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="210"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CreateCOChannel&amp;#039; is never used." verbose="The function &amp;#039;CreateCOChannel&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;CreateCOChannel&amp;#039; is never used." verbose="The function &amp;#039;CreateCOChannel&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="394"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Created&amp;#039; is never used." verbose="The function &amp;#039;Created&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Created&amp;#039; is never used." verbose="The function &amp;#039;Created&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="95"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;IsTaskDone&amp;#039; is never used." verbose="The function &amp;#039;IsTaskDone&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;IsTaskDone&amp;#039; is never used." verbose="The function &amp;#039;IsTaskDone&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="156"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ReadU16Dummy&amp;#039; is never used." verbose="The function &amp;#039;ReadU16Dummy&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ReadI16&amp;#039; is never used." verbose="The function &amp;#039;ReadI16&amp;#039; is never used." sinceDate="19.01.2018">
+            <location file="scope\devices\daqmx\DAQmxTask.cpp" line="368"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ReadU16Dummy&amp;#039; is never used." verbose="The function &amp;#039;ReadU16Dummy&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="360"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetDataTransferMode&amp;#039; is never used." verbose="The function &amp;#039;SetDataTransferMode&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetDataTransferMode&amp;#039; is never used." verbose="The function &amp;#039;SetDataTransferMode&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="233"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetIdleOutputBehaviour&amp;#039; is never used." verbose="The function &amp;#039;SetIdleOutputBehaviour&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetIdleOutputBehaviour&amp;#039; is never used." verbose="The function &amp;#039;SetIdleOutputBehaviour&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="223"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;UseOnlyOnboardMemory&amp;#039; is never used." verbose="The function &amp;#039;UseOnlyOnboardMemory&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;UseOnlyOnboardMemory&amp;#039; is never used." verbose="The function &amp;#039;UseOnlyOnboardMemory&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="218"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteAnalog&amp;#039; is never used." verbose="The function &amp;#039;WriteAnalog&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteAnalog&amp;#039; is never used." verbose="The function &amp;#039;WriteAnalog&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="238"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteAnalogScalar&amp;#039; is never used." verbose="The function &amp;#039;WriteAnalogScalar&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteAnalogScalar&amp;#039; is never used." verbose="The function &amp;#039;WriteAnalogScalar&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\daqmx\DAQmxTask.cpp" line="250"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConnectResolutionChange&amp;#039; is never used." verbose="The function &amp;#039;ConnectResolutionChange&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ConnectResolutionChange&amp;#039; is never used." verbose="The function &amp;#039;ConnectResolutionChange&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\parameters\Framescan.cpp" line="210"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;DrawItem&amp;#039; is never used." verbose="The function &amp;#039;DrawItem&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;DrawItem&amp;#039; is never used." verbose="The function &amp;#039;DrawItem&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\controls\ScopeFOVDiagram.cpp" line="40"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;MaximumPixeltime&amp;#039; is never used." verbose="The function &amp;#039;MaximumPixeltime&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;MaximumPixeltime&amp;#039; is never used." verbose="The function &amp;#039;MaximumPixeltime&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\parameters\Inputs.cpp" line="265"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnFinalMessage&amp;#039; is never used." verbose="The function &amp;#039;OnFinalMessage&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnFinalMessage&amp;#039; is never used." verbose="The function &amp;#039;OnFinalMessage&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\HistogramView.cpp" line="27"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnIdle&amp;#039; is never used." verbose="The function &amp;#039;OnIdle&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnIdle&amp;#039; is never used." verbose="The function &amp;#039;OnIdle&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\MainDlgFrame.cpp" line="95"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnlineUpdate&amp;#039; is never used." verbose="The function &amp;#039;OnlineUpdate&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;OnlineUpdate&amp;#039; is never used." verbose="The function &amp;#039;OnlineUpdate&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="408"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartBehavior&amp;#039; is never used." verbose="The function &amp;#039;StartBehavior&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartBehavior&amp;#039; is never used." verbose="The function &amp;#039;StartBehavior&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="369"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartLive&amp;#039; is never used." verbose="The function &amp;#039;StartLive&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartLive&amp;#039; is never used." verbose="The function &amp;#039;StartLive&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="310"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartSingle&amp;#039; is never used." verbose="The function &amp;#039;StartSingle&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartSingle&amp;#039; is never used." verbose="The function &amp;#039;StartSingle&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="337"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartStack&amp;#039; is never used." verbose="The function &amp;#039;StartStack&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartStack&amp;#039; is never used." verbose="The function &amp;#039;StartStack&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="324"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartTimeseries&amp;#039; is never used." verbose="The function &amp;#039;StartTimeseries&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;StartTimeseries&amp;#039; is never used." verbose="The function &amp;#039;StartTimeseries&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\ScopeController.cpp" line="350"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SaveFile&amp;#039; is never used." verbose="The function &amp;#039;SaveFile&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SaveFile&amp;#039; is never used." verbose="The function &amp;#039;SaveFile&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\gui\LogView.cpp" line="37"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetScannerVector&amp;#039; is never used." verbose="The function &amp;#039;SetScannerVector&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;SetScannerVector&amp;#039; is never used." verbose="The function &amp;#039;SetScannerVector&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\controllers\PipelineController.cpp" line="213"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TotalPixelsAllChannels&amp;#039; is never used." verbose="The function &amp;#039;TotalPixelsAllChannels&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TotalPixelsAllChannels&amp;#039; is never used." verbose="The function &amp;#039;TotalPixelsAllChannels&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\parameters\Area.cpp" line="173"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TurnOffAndSaveToFlash&amp;#039; is never used." verbose="The function &amp;#039;TurnOffAndSaveToFlash&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;TurnOffAndSaveToFlash&amp;#039; is never used." verbose="The function &amp;#039;TurnOffAndSaveToFlash&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\devices\xyz\XYControlStanda.cpp" line="83"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Uint16LowerBoundary&amp;#039; is never used." verbose="The function &amp;#039;Uint16LowerBoundary&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Uint16LowerBoundary&amp;#039; is never used." verbose="The function &amp;#039;Uint16LowerBoundary&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeDatatypes.cpp" line="8"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Uint16UpperBoundary&amp;#039; is never used." verbose="The function &amp;#039;Uint16UpperBoundary&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;Uint16UpperBoundary&amp;#039; is never used." verbose="The function &amp;#039;Uint16UpperBoundary&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeDatatypes.cpp" line="21"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;__ScopeExceptionHandlerHelperW&amp;#039; is never used." verbose="The function &amp;#039;__ScopeExceptionHandlerHelperW&amp;#039; is never used." sinceDate="10.01.2018">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;__ScopeExceptionHandlerHelperW&amp;#039; is never used." verbose="The function &amp;#039;__ScopeExceptionHandlerHelperW&amp;#039; is never used." sinceDate="19.01.2018">
             <location file="scope\helpers\ScopeException.cpp" line="68"/>
         </error>
     </errors>

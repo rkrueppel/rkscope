@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2506267590">
+<analyzerinfo checksum="1441007861">
   <FileInfo check="CheckUnusedFunctions">
     <functioncall functionName="connection_collector"/>
     <functioncall functionName="disconnect"/>

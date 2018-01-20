@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1357137131">
+<analyzerinfo checksum="739716993">
         <error id="unreadVariable" severity="style" msg="Variable &apos;yminzoomed&apos; is assigned a value that is never used." verbose="Variable &apos;yminzoomed&apos; is assigned a value that is never used." cwe="563">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceHopper.cpp" line="64"/>
         </error>

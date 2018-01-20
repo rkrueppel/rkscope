@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="1865867144">
+<analyzerinfo checksum="3564968087">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="OnInitDialog" lineNumber="19"/>
     <functiondecl functionName="OnAreaChange" lineNumber="50"/>

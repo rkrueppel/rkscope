@@ -8,7 +8,7 @@ namespace scope {
 	ScopeController::ScopeController(const uint32_t& _nareas
 		, parameters::Scope& _guiparameters
 		, ScopeCounters& _counters
-		, config::DaqControllerType& _theDaq
+		, DaqController& _theDaq
 		, PipelineController& _thePipeline
 		, StorageController& _theStorage
 		, DisplayController& _theDisplay

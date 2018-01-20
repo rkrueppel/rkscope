@@ -15,7 +15,7 @@ namespace scope {
 
 		CMainDlgFrame::CMainDlgFrame(
 			scope::ScopeController& _scope_controller
-			, config::DaqControllerType& _daq_controller
+			, scope::DaqController& _daq_controller
 			, scope::DisplayController& _display_controller
 			, scope::parameters::Scope& _guiparameters
 			, RunButtons& _runbuttons
@@ -23,7 +23,7 @@ namespace scope {
 			, std::vector<ScanModeButtons>& _scanmodebuttons
 			, StackButtons& _stackbuttons
 			, ZeroButtons& _zerobuttons
-			, ScopeCounters<config::nmasters>& _counters
+			, ScopeCounters& _counters
 		)
 			: firstpaint(true)
 			, scope_controller(_scope_controller)

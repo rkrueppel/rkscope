@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="3215772872">
+<analyzerinfo checksum="1251415734">
   <FileInfo check="CheckUnusedFunctions">
     <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="ConnectGUI"/>

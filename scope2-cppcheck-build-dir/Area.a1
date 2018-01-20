@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2034830680">
+<analyzerinfo checksum="3011121486">
         <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\parameters\Area.h" line="85"/>
         </error>

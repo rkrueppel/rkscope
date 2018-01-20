@@ -39,7 +39,7 @@ namespace scope {
 		DBOUT(L"DaqController::~DaqControllerImpl");
 	}
 
-	ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_t& _masterarea) override {
+	ControllerReturnStatus DaqController::Run(StopCondition* const sc, const uint32_t& _masterarea) {
 		DBOUT(L"DaqController::Run masterarea " << _masterarea << L" beginning");
 		ControllerReturnStatus returnstatus(ControllerReturnStatus::none);
 
@@ -149,7 +149,7 @@ namespace scope {
 			stimulation.reset(nullptr);
 
 		// Write scannervectors to devices
-		uint32_t a = 0;
+		a = 0;
 		for (uint32_t ma = 0; ma < nmasters; ma++) {
 			outputs[a]->Write(*scannervecs[a]->GetInterleavedVector(), 1);
 			a++;
@@ -211,7 +211,7 @@ namespace scope {
 		// Note: scannervector was updated already from ScopeController
 
 		// Lock now so starting an async Worker is only possible if a putative previous wait on that lock finished
-		std::unique_lock<std::mutex> lock(online_update_done_mutexe);
+		std::unique_lock<std::mutex> lock(online_update_done_mutex);
 
 		// If we are scanning live do async online update. Always catch the async future since the futures destructor waits (see http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3451.pdf)
 		if (ctrlparams.requested_mode() == DaqModeHelper::continuous)

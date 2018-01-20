@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2283420063">
+<analyzerinfo checksum="910343370">
   <FileInfo check="CheckUnusedFunctions">
     <functioncall functionName="AttachToDlgItem"/>
     <functioncall functionName="BEGIN_MSG_MAP_EX"/>
     <functioncall functionName="BN_CLICKED"/>
     <functioncall functionName="CScopeButtonCtrl"/>
-    <functioncall functionName="CScopeEditCtrl"/>
     <functioncall functionName="CXYZControlPage"/>
     <functioncall functionName="ConnectGUI"/>
     <functioncall functionName="ConnectState"/>
@@ -37,6 +36,7 @@
     <functioncall functionName="REFLECT_NOTIFICATIONS"/>
     <functioncall functionName="SetFromString"/>
     <functioncall functionName="SetMsgHandled"/>
+    <functioncall functionName="SetState"/>
     <functioncall functionName="SetWindowText"/>
     <functioncall functionName="SubclassWindow"/>
     <functioncall functionName="ToChar"/>
@@ -65,6 +65,7 @@
     <functioncall functionName="lParam"/>
     <functioncall functionName="length"/>
     <functioncall functionName="m_hWnd"/>
+    <functioncall functionName="scope :: gui :: CScopeEditCtrl &lt; double &gt;"/>
     <functioncall functionName="scope_val"/>
     <functioncall functionName="setzero_button"/>
     <functioncall functionName="shiftstate"/>

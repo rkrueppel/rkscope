@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="4272638301">
+<analyzerinfo checksum="891276883">
         <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\devices\xyz\XYZControlSutter.cpp" line="119"/>
         </error>

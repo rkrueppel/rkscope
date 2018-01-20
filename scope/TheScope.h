@@ -61,7 +61,7 @@ namespace scope {
 			ScopeCounters counters;
 			
 			/** queues from the daqs to the pipeline(s) */
-			std::array<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>, config::nmasters> daq_to_pipeline;
+			std::vector<SynchronizedQueue<ScopeMessage<config::DaqChunkPtrType>>> daq_to_pipeline;
 
 			/** queue from the pipelines to the storage */
 			SynchronizedQueue<ScopeMessage<config::MultiImagePtrType>> pipeline_to_storage;

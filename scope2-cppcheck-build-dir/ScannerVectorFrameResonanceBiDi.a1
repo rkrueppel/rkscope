@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="928773375">
+<analyzerinfo checksum="2223207035">
         <error id="unreadVariable" severity="style" msg="Variable &apos;cutofflines&apos; is assigned a value that is never used." verbose="Variable &apos;cutofflines&apos; is assigned a value that is never used." cwe="563">
             <location file0="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" file="C:\Users\rolan\source\repos\rkscope2\scope\scanmodes\ScannerVectorFrameResonanceBiDi.cpp" line="80"/>
         </error>

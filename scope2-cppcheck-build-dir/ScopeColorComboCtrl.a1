@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo checksum="2500676550">
+<analyzerinfo checksum="3841186814">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="InitializeColors" lineNumber="19"/>
     <functioncall functionName="CBEIF_SELECTEDIMAGE"/>
