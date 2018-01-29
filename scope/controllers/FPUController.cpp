@@ -6,7 +6,7 @@ namespace scope {
 
 	FPUController::FPUController(std::vector<std::unique_ptr<parameters::BaseArea>>& _guiareaparamsvec, std::vector<FPUButtons>& _fpubuttonsvec)
 		: guiareaparamsvec(_guiareaparamsvec)
-		, stepsizes(guiareaparamsvec.size(), 0.0)
+		, stepsizes(_guiareaparamsvec.size(), 0.0)
 	{
 		//theXYStages.reserve(nareas);
 		for ( uint32_t a = 0 ; a < guiareaparamsvec.size() ; a++ ) {

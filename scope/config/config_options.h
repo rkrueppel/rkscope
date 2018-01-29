@@ -363,21 +363,5 @@ namespace scope {
 			static constexpr FramevectorFillEnum fill_master = FramevectorFillEnum::LineXPColumnYZ;
 		};
 
-		template<long unsigned int SIZE>
-		constexpr uint32_t _counttrue(const std::array<bool, SIZE>& _ar) {
-			uint32_t n = 0;
-			for(auto& a : _ar)
-				if ( a ) n++;
-			return n;
-		}
-		
-		template<long unsigned int SIZE>
-		constexpr bool _msareaconflict(const std::array<bool, SIZE>& _arm, const std::array<bool, SIZE>& _ars) {
-			for ( uint32_t i = 0 ; i < SIZE ; i++) {
-				if ( !(_arm[i] ^ _ars[i]) )
-					return true;
-			}
-			return false;
-		}
 	}
 }

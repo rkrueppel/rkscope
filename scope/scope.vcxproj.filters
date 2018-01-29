@@ -204,9 +204,6 @@
     <ClCompile Include="helpers\lut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scanmodes\PixelmapperFrameSaw.cpp">
-      <Filter>Scope control</Filter>
-    </ClCompile>
     <ClCompile Include="scanmodes\ScannerVectorFrameSaw.cpp">
       <Filter>Scope components</Filter>
     </ClCompile>
@@ -488,6 +485,9 @@
     </ClCompile>
     <ClCompile Include="helpers\DaqChunks.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FrameScanResonanceSlavePage.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -991,6 +991,9 @@
     </ClInclude>
     <ClInclude Include="helpers\DaqChunks.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FrameScanResonanceSlavePage.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

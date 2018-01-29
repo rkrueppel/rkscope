@@ -34,7 +34,8 @@ namespace scope {
 		public:
 			ScopeValue<uint32_t> nareas;
 
-			std::vector<uint32_t> masterofslaves;
+			uint32_t nmasters;
+			uint32_t nslaves;
 
 			/** current date */
 			ScopeString date;
@@ -100,7 +101,7 @@ namespace scope {
 			ScopeValue<DaqMode> requested_mode;
 
 		public:
-			Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, const std::vector<uint32_t>& _masterofslaves);
+			Scope(const uint32_t& _nmasters, const uint32_t& _nslaves);
 
 			/** Supply copy constructor because of unique_ptr<Area> (does deep copy of Areas) */
 			Scope(const Scope& _scope);

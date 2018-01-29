@@ -306,6 +306,7 @@
     <ClCompile Include="devices\GaterDAQmx.cpp" />
     <ClCompile Include="gui\BehaviorSettingsPage.cpp" />
     <ClCompile Include="gui\DAQmxPage.cpp" />
+    <ClCompile Include="gui\FrameScanResonanceSlavePage.cpp" />
     <ClCompile Include="helpers\DaqChunks.cpp" />
     <ClCompile Include="helpers\ScopeDatatypes.cpp" />
     <ClCompile Include="helpers\ScopeMultiImageResonanceSW.cpp" />
@@ -476,6 +477,7 @@
     <ClInclude Include="devices\GaterDAQmx.h" />
     <ClInclude Include="gui\BehaviorSettingsPage.h" />
     <ClInclude Include="gui\DAQmxPage.h" />
+    <ClInclude Include="gui\FrameScanResonanceSlavePage.h" />
     <ClInclude Include="helpers\DaqChunks.h" />
     <ClInclude Include="helpers\ScopeDatatypes.h" />
     <ClInclude Include="helpers\ScopeMultiImageResonanceSW.h" />

@@ -8,7 +8,7 @@ namespace scope {
 	
 	TheScope::TheScope(const std::wstring& _initialparameterpath)
 		: nareas(config::totalareas)
-		, guiparameters(config::nmasters, config::nslaves, config::masterofslave)
+		, guiparameters(config::nmasters, config::nslaves)
 		, counters(nareas)
 		, fpubuttons(nareas)
 		, scanmodebuttons(config::nmasters)
@@ -53,11 +53,7 @@ namespace scope {
 		
 		for (uint32_t a = 0; a < config::totalareas; a++) {
 			// Initially choose the first supported scannervector in the list
-			!!SetScanMode(a, *ScannerSupportedVectors::List().begin());
-
-			// Connect the buttons for scan mode switching (if a master area) to TheScope::SetScanMode
-			!!for (auto& b : scanmodebuttons[a].map)
-				b.second.Connect(std::bind(&TheScope::SetScanMode, this, a, b.first));
+			SetScanMode(a, *ScannerSupportedVectors::List().begin());
 
 			// Connect update functions in TheScope to update functions inside the ScannerVectors
 			for (auto& sv : guiparameters.allareas[a]->scannervectorframesmap) {
@@ -72,6 +68,14 @@ namespace scope {
 			//guiparameters.areas[a]->frameresonance.yres.ConnectOther(std::bind(&ResolutionChange, this, a));
 
 			// Connect FPU XY movements inside the FPUController!!
+		}
+
+		// Connect the buttons for scan mode switching (if a master area) to TheScope::SetScanMode
+		uint32_t ma = 0;
+		for (auto& bv : scanmodebuttons) {
+			for (auto& b : bv.map)
+				b.second.Connect(std::bind(&TheScope::SetScanMode, this, ma * (config::slavespermaster + 1), b.first));
+			ma++;
 		}
 
 

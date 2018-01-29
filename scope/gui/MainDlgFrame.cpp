@@ -388,7 +388,7 @@ namespace scope {
 				dlg.GetFilePath(filepath);
 				DBOUT(L"Filepath " << filepath.GetString());
 				// These are initialized via the default constructor
-				scope::parameters::Scope defparams(config::nmasters, config::nslaves, config::masterofslave);
+				scope::parameters::Scope defparams(config::nmasters, config::nslaves);
 				defparams.Save(std::wstring(filepath.GetString()));
 			}
 			return 0;

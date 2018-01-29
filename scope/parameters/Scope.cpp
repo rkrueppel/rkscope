@@ -10,9 +10,10 @@ namespace parameters {
 		using namespace boost::property_tree;
 
 
-		Scope::Scope(const uint32_t& _nmasters, const uint32_t& _nslaves, const std::vector<uint32_t>& _masterofslaves)
+		Scope::Scope(const uint32_t& _nmasters, const uint32_t& _nslaves)
 			: nareas(_nmasters+_nslaves, L"NoAreas")
-			, masterofslaves(_masterofslaves)
+			, nmasters(_nmasters)
+			, nslaves(_nslaves)
 			, date(L"", L"Date")
 			, time(L"", L"Time")
 			, scopecommit(std::wstring(CA2W(STR(LASTGITCOMMIT))), L"ScopeCommit")
@@ -31,10 +32,10 @@ namespace parameters {
 			time.Set(GetCurrentTimeString());
 			
 			uint32_t a = 0;
-			for (uint32_t m = 0; m < _nmasters; m++) {
+			for (uint32_t m = 0; m < nmasters; m++) {
 				allareas.push_back(std::make_unique<MasterArea>(a));
 				a++;
-				for (uint32_t s = 0; s < _nslaves; s++) {
+				for (uint32_t s = 0; s < nslaves; s++) {
 					allareas.push_back(std::make_unique<SlaveArea>(a, dynamic_cast<parameters::MasterArea*>((*allareas.end()).get())));
 					a++;
 				}
@@ -59,7 +60,8 @@ namespace parameters {
 
 		Scope::Scope(const Scope& _scope)
 			: nareas(_scope.nareas)
-			, masterofslaves(_scope.masterofslaves)
+			, nmasters(_scope.nmasters)
+			, nslaves(_scope.nslaves)
 			, date(_scope.date)
 			, time(_scope.time)
 			, scopecommit(_scope.scopecommit)
@@ -87,16 +89,20 @@ namespace parameters {
 			}
 
 			// Fix the pointer to the master area!!!!!
+			uint32_t ma = 0;
 			for (uint32_t a = 0; a < allareas.size(); a++) {
+				if (allareas[a]->areatype() == AreaTypeHelper::Master)
+					ma = a;
 				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
-					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[masterofslaves[a]].get()));
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[ma].get()));
 			}
 
 		}
 
 		Scope& Scope::operator=(const Scope& _scope) {
 			nareas = _scope.nareas();
-			masterofslaves = _scope.masterofslaves;
+			nmasters = _scope.nmasters;
+			nslaves = _scope.nslaves;
 			date = _scope.date();
 			time = _scope.time();
 			scopecommit = _scope.scopecommit();
@@ -111,9 +117,12 @@ namespace parameters {
 			}
 
 			// Fix the pointer to the master area!!!!!
+			uint32_t ma = 0;
 			for (uint32_t a = 0; a < allareas.size(); a++) {
+				if (allareas[a]->areatype() == AreaTypeHelper::Master)
+					ma = a;
 				if (allareas[a]->areatype() == AreaTypeHelper::Slave)
-					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[masterofslaves[a]].get()));
+					dynamic_cast<SlaveArea*>(allareas[a].get())->SetMasterArea(dynamic_cast<MasterArea*>(allareas[ma].get()));
 			}
 
 			storage = _scope.storage;

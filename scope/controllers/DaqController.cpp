@@ -93,7 +93,7 @@ namespace scope {
 		}
 
 		// Force abort of online update
-		const uint32_t masterareainallareas = _masterarea * slavespermaster + 1;
+		const uint32_t masterareainallareas = _masterarea * (slavespermaster + 1);
 		outputs[masterareainallareas]->AbortWrite();
 		for (uint32_t sa = 0; sa < slavespermaster; sa++)
 			outputs[masterareainallareas + 1 + sa]->AbortWrite();
@@ -201,7 +201,7 @@ namespace scope {
 			// Reset the stop condition
 			stops[ma].Set(false);
 			// Get the async's future
-			futures[ma] = std::async(std::bind(&DaqController::Run, this, &stops[ma], a));
+			futures[ma] = std::async(std::bind(&DaqController::Run, this, &stops[ma], ma));
 		}
 	}
 

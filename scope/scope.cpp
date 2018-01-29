@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "resource.h"
+#include "config\config_choices.h"
 #include "TheScope.h"
 #include "controllers/ScopeLogger.h"
 #include "version.h"
@@ -94,11 +95,11 @@ int Run(HINSTANCE hInstance) {
 
 		// Crashes without GetDesktopWindow (see here: http://comments.gmane.org/gmane.comp.windows.wtl/16780), CMainDlgFrame is probably not a top level window?!
 		if (IDOK == dlg.DoModal(::GetDesktopWindow())) {
-			CString filepath;
+			
 			dlg.GetFilePath(filepath);
 			DBOUT(L"Filepath " << filepath.GetString());
 			// These are initialized via the default constructor
-			scope::parameters::Scope defparams(SCOPE_NAREAS);
+			scope::parameters::Scope defparams(scope::config::nmasters, scope::config::nslaves);
 			defparams.Save(std::wstring(filepath.GetString()));
 		}
 	}
