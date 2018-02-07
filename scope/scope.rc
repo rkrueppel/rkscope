@@ -27,6 +27,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_LED_WARNING         ICON                    "res\\Annotate_Warning.ico"
+
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -46,15 +47,25 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\scope.ico"
+
 IDI_ARROWUP             ICON                    "res\\arrowup.ico"
+
 IDI_ARROWDOWN           ICON                    "res\\arrowdown.ico"
+
 IDI_ARROWLEFT           ICON                    "res\\arrowleft.ico"
+
 IDI_ARROWRIGHT          ICON                    "res\\arrowright.ico"
+
 IDR_LOGBOOK             ICON                    "res\\logbook.ico"
+
 IDR_CHANNELFRAME        ICON                    "res\\view.ico"
+
 IDR_HISTOGRAM           ICON                    "res\\histogram.ico"
+
 IDI_LED_GREEN           ICON                    "res\\Annotate_Default.ico"
+
 IDI_LED_RED             ICON                    "res\\Annotate_Error.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -94,9 +105,13 @@ END
 //
 
 IDR_CHANNELFRAME        BITMAP                  "res\\toolbar_channelframe.bmp"
+
 IDR_MAINFRAME           BITMAP                  "res\\toolbar_mainframe.bmp"
+
 IDR_HISTOGRAMFRAME      BITMAP                  "res\\toolbar_histogramframe.bmp"
+
 IDB_COLORCOMBO          BITMAP                  "res\\colorcombo.bmp"
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -181,16 +196,16 @@ BEGIN
     LTEXT           "Scope uses several pieces of software:\nBoost C++ libraries, Boost Software License\nWTL Toolbar Helper (c) 2006 by Rob Caldecott, Code Project Open License\nCToolTipDialog class (c) 2003 by Alain Rist, Code Project Open License",IDC_STATIC,7,82,233,44
 END
 
-IDD_MAINDIALOG DIALOGEX 0, 0, 283, 499
+IDD_MAINDIALOG DIALOGEX 0, 0, 283, 471
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "Live Scan",ID_SCAN_CONT,6,460,50,14
-    PUSHBUTTON      "Stop",ID_STOP,60,460,50,14
+    DEFPUSHBUTTON   "Live Scan",ID_SCAN_CONT,7,437,50,14
+    PUSHBUTTON      "Stop",ID_STOP,111,438,50,14
     LTEXT           "Static",IDC_SCANSETTINGS_HOLDER,7,6,269,276,WS_BORDER
-    PUSHBUTTON      "Quit",IDC_QUIT,126,460,50,14
-    PUSHBUTTON      "Single Scan",IDC_SCAN_SINGLE,6,479,50,14
-    LTEXT           "Static",IDC_EXPERIMENTSETTINGS_HOLDER,7,282,269,176,WS_BORDER
+    PUSHBUTTON      "Quit",IDC_QUIT,164,437,50,14
+    PUSHBUTTON      "Single Scan",IDC_SCAN_SINGLE,59,438,50,14
+    LTEXT           "Static",IDC_EXPERIMENTSETTINGS_HOLDER,7,282,269,149,WS_BORDER
 END
 
 IDD_FRAMESCAN_SAW_PROPPAGE DIALOGEX 0, 0, 227, 258
@@ -875,7 +890,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 276
         TOPMARGIN, 7
-        BOTTOMMARGIN, 481
+        BOTTOMMARGIN, 453
     END
 
     IDD_FRAMESCAN_SAW_PROPPAGE, DIALOG
@@ -1127,6 +1142,17 @@ BEGIN
     BEGIN
         VALUE "Translation", 0x409, 1200
     END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_MAINDIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
 END
 
 

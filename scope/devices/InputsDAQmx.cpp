@@ -70,4 +70,16 @@ namespace scope {
 		return standardchunksize;
 	}
 
+	int32_t InputsDAQmx::Read(DaqMultiChunk<2, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+		int32_t read = 0;
+		bool timedout = false;
+		try {
+			auto start = _chunk.GetDataStart(0);
+			auto end = start + 2 * _chunk.PerChannel();
+			read = task.ReadU16(start, end, _chunk.PerChannel(), 2, timedout, _timeout);
+		}
+		catch (...) { ScopeExceptionHandler(__FUNCTION__); }
+		return read;
+	}
+
 }

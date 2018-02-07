@@ -46,17 +46,7 @@ namespace scope {
 
 		uint32_t StandardChunkSize() const override;
 
-		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
-			int32_t read = 0;
-			bool timedout = false;
-			try {
-				auto start = _chunk.GetDataStart(0);
-				read = task.ReadU16(start, start + NCHANNELS * _chunk.PerChannel(), _chunk.PerChannel(), NCHANNELS, timedout, _timeout);
-			}
-			catch (...) { ScopeExceptionHandler(__FUNCTION__); }
-			return read;
-		}
+		int32_t Read(DaqMultiChunk<2, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override;
 	};
 
 }

@@ -81,5 +81,33 @@ namespace scope {
 		} catch (...) { ScopeExceptionHandler(__FUNCTION__); }
 	}
 
+	int32_t InputsFPGA::Read(DaqMultiChunk<2, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+		int32_t read = 0;
+		try {
+			read = theFPGA().ReadPixels(masterarea, _chunk, _timeout, _timedout);
+			if (_timedout) {
+				DBOUT(L"InputsFPGA::Read area " << masterarea << L" timed out");
+			}
+			DBOUT(L"InputsFPGA::Read area " << masterarea << L" read " << read);
+			theFPGA().CheckFPGADiagnosis();
+		}
+		catch (...) { ScopeExceptionHandler(__FUNCTION__); }
+		return read;
+	}
+
+	int32_t InputsFPGA::Read(DaqMultiChunk<2, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
+		int32_t read = 0;
+		try {
+			read = theFPGA().ReadPixels(masterarea, _chunk, _timeout, _timedout);
+			if (_timedout) {
+				DBOUT(L"InputsFPGA::Read area " << masterarea << L" timed out");
+			}
+			DBOUT(L"InputsFPGA::Read area " << masterarea << L" read " << read);
+			theFPGA().CheckFPGADiagnosis();
+		}
+		catch (...) { ScopeExceptionHandler(__FUNCTION__); }
+		return read;
+	}
+
 }
 

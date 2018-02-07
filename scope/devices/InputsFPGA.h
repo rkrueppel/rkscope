@@ -46,35 +46,9 @@ namespace scope {
 
 		void Stop() override;
 
-		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
-			int32_t read = 0;
-			try {
-				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);
-				if (_timedout) {
-					DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
-				}
-				DBOUT(L"InputsFPGA::Read area " << area << L" read " << read);
-				theFPGA().CheckFPGADiagnosis();
-			}
-			catch (...) { ScopeExceptionHandler(__FUNCTION__); }
-			return read;
-		}
+		int32_t Read(DaqMultiChunk<2, 1, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override;
 
-		template<uint32_t NCHANNELS>
-		int32_t Read(DaqMultiChunk<NCHANNELS, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) {
-			int32_t read = 0;
-			try {
-				read = theFPGA().ReadPixels(area, _chunk, _timeout, _timedout);
-				if (_timedout) {
-					DBOUT(L"InputsFPGA::Read area " << area << L" timed out");
-				}
-				DBOUT(L"InputsFPGA::Read area " << area << L" read " << read);
-				theFPGA().CheckFPGADiagnosis();
-			}
-			catch (...) { ScopeExceptionHandler(__FUNCTION__); }
-			return read;
-		}
+		int32_t Read(DaqMultiChunk<2, 2, uint16_t>& _chunk, bool& _timedout, const double& _timeout) override;
 	};
 
 }

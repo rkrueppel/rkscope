@@ -147,7 +147,7 @@ struct Scaler {
 { \
 std::wostringstream os_; \
 os_ << s << std::endl; \
-ATLTRACE2( os_.str().c_str() ); \
+OutputDebugString( os_.str().c_str() ); \
 }
 #else
 #define DBOUT(s)
